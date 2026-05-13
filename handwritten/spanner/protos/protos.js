@@ -79788,6 +79788,39 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.spanner.v1.Spanner|fetchCacheUpdate}.
+                     * @memberof google.spanner.v1.Spanner
+                     * @typedef FetchCacheUpdateCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.spanner.v1.CacheUpdate} [response] CacheUpdate
+                     */
+    
+                    /**
+                     * Calls FetchCacheUpdate.
+                     * @function fetchCacheUpdate
+                     * @memberof google.spanner.v1.Spanner
+                     * @instance
+                     * @param {google.spanner.v1.IFetchCacheUpdateRequest} request FetchCacheUpdateRequest message or plain object
+                     * @param {google.spanner.v1.Spanner.FetchCacheUpdateCallback} callback Node-style callback called with the error, if any, and CacheUpdate
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Spanner.prototype.fetchCacheUpdate = function fetchCacheUpdate(request, callback) {
+                        return this.rpcCall(fetchCacheUpdate, $root.google.spanner.v1.FetchCacheUpdateRequest, $root.google.spanner.v1.CacheUpdate, request, callback);
+                    }, "name", { value: "FetchCacheUpdate" });
+    
+                    /**
+                     * Calls FetchCacheUpdate.
+                     * @function fetchCacheUpdate
+                     * @memberof google.spanner.v1.Spanner
+                     * @instance
+                     * @param {google.spanner.v1.IFetchCacheUpdateRequest} request FetchCacheUpdateRequest message or plain object
+                     * @returns {Promise<google.spanner.v1.CacheUpdate>} Promise
+                     * @variation 2
+                     */
+    
                     return Spanner;
                 })();
     
@@ -87769,6 +87802,7 @@
                      * @property {google.spanner.v1.ITransactionOptions|null} [options] BeginTransactionRequest options
                      * @property {google.spanner.v1.IRequestOptions|null} [requestOptions] BeginTransactionRequest requestOptions
                      * @property {google.spanner.v1.IMutation|null} [mutationKey] BeginTransactionRequest mutationKey
+                     * @property {google.spanner.v1.IRoutingHint|null} [routingHint] BeginTransactionRequest routingHint
                      */
     
                     /**
@@ -87819,6 +87853,14 @@
                     BeginTransactionRequest.prototype.mutationKey = null;
     
                     /**
+                     * BeginTransactionRequest routingHint.
+                     * @member {google.spanner.v1.IRoutingHint|null|undefined} routingHint
+                     * @memberof google.spanner.v1.BeginTransactionRequest
+                     * @instance
+                     */
+                    BeginTransactionRequest.prototype.routingHint = null;
+    
+                    /**
                      * Creates a new BeginTransactionRequest instance using the specified properties.
                      * @function create
                      * @memberof google.spanner.v1.BeginTransactionRequest
@@ -87850,6 +87892,8 @@
                             $root.google.spanner.v1.RequestOptions.encode(message.requestOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         if (message.mutationKey != null && Object.hasOwnProperty.call(message, "mutationKey"))
                             $root.google.spanner.v1.Mutation.encode(message.mutationKey, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.routingHint != null && Object.hasOwnProperty.call(message, "routingHint"))
+                            $root.google.spanner.v1.RoutingHint.encode(message.routingHint, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -87904,6 +87948,10 @@
                                 }
                             case 4: {
                                     message.mutationKey = $root.google.spanner.v1.Mutation.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 5: {
+                                    message.routingHint = $root.google.spanner.v1.RoutingHint.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -87963,6 +88011,11 @@
                             if (error)
                                 return "mutationKey." + error;
                         }
+                        if (message.routingHint != null && message.hasOwnProperty("routingHint")) {
+                            var error = $root.google.spanner.v1.RoutingHint.verify(message.routingHint, long + 1);
+                            if (error)
+                                return "routingHint." + error;
+                        }
                         return null;
                     };
     
@@ -87999,6 +88052,11 @@
                                 throw TypeError(".google.spanner.v1.BeginTransactionRequest.mutationKey: object expected");
                             message.mutationKey = $root.google.spanner.v1.Mutation.fromObject(object.mutationKey, long + 1);
                         }
+                        if (object.routingHint != null) {
+                            if (typeof object.routingHint !== "object")
+                                throw TypeError(".google.spanner.v1.BeginTransactionRequest.routingHint: object expected");
+                            message.routingHint = $root.google.spanner.v1.RoutingHint.fromObject(object.routingHint, long + 1);
+                        }
                         return message;
                     };
     
@@ -88020,6 +88078,7 @@
                             object.options = null;
                             object.requestOptions = null;
                             object.mutationKey = null;
+                            object.routingHint = null;
                         }
                         if (message.session != null && message.hasOwnProperty("session"))
                             object.session = message.session;
@@ -88029,6 +88088,8 @@
                             object.requestOptions = $root.google.spanner.v1.RequestOptions.toObject(message.requestOptions, options);
                         if (message.mutationKey != null && message.hasOwnProperty("mutationKey"))
                             object.mutationKey = $root.google.spanner.v1.Mutation.toObject(message.mutationKey, options);
+                        if (message.routingHint != null && message.hasOwnProperty("routingHint"))
+                            object.routingHint = $root.google.spanner.v1.RoutingHint.toObject(message.routingHint, options);
                         return object;
                     };
     
@@ -88075,6 +88136,7 @@
                      * @property {google.protobuf.IDuration|null} [maxCommitDelay] CommitRequest maxCommitDelay
                      * @property {google.spanner.v1.IRequestOptions|null} [requestOptions] CommitRequest requestOptions
                      * @property {google.spanner.v1.IMultiplexedSessionPrecommitToken|null} [precommitToken] CommitRequest precommitToken
+                     * @property {google.spanner.v1.IRoutingHint|null} [routingHint] CommitRequest routingHint
                      */
     
                     /**
@@ -88157,6 +88219,14 @@
                      */
                     CommitRequest.prototype.precommitToken = null;
     
+                    /**
+                     * CommitRequest routingHint.
+                     * @member {google.spanner.v1.IRoutingHint|null|undefined} routingHint
+                     * @memberof google.spanner.v1.CommitRequest
+                     * @instance
+                     */
+                    CommitRequest.prototype.routingHint = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -88212,6 +88282,8 @@
                             $root.google.protobuf.Duration.encode(message.maxCommitDelay, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         if (message.precommitToken != null && Object.hasOwnProperty.call(message, "precommitToken"))
                             $root.google.spanner.v1.MultiplexedSessionPrecommitToken.encode(message.precommitToken, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                        if (message.routingHint != null && Object.hasOwnProperty.call(message, "routingHint"))
+                            $root.google.spanner.v1.RoutingHint.encode(message.routingHint, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         return writer;
                     };
     
@@ -88284,6 +88356,10 @@
                                 }
                             case 9: {
                                     message.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 10: {
+                                    message.routingHint = $root.google.spanner.v1.RoutingHint.decode(reader, reader.uint32(), undefined, long + 1);
                                     break;
                                 }
                             default:
@@ -88371,6 +88447,11 @@
                             if (error)
                                 return "precommitToken." + error;
                         }
+                        if (message.routingHint != null && message.hasOwnProperty("routingHint")) {
+                            var error = $root.google.spanner.v1.RoutingHint.verify(message.routingHint, long + 1);
+                            if (error)
+                                return "routingHint." + error;
+                        }
                         return null;
                     };
     
@@ -88429,6 +88510,11 @@
                                 throw TypeError(".google.spanner.v1.CommitRequest.precommitToken: object expected");
                             message.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.fromObject(object.precommitToken, long + 1);
                         }
+                        if (object.routingHint != null) {
+                            if (typeof object.routingHint !== "object")
+                                throw TypeError(".google.spanner.v1.CommitRequest.routingHint: object expected");
+                            message.routingHint = $root.google.spanner.v1.RoutingHint.fromObject(object.routingHint, long + 1);
+                        }
                         return message;
                     };
     
@@ -88453,6 +88539,7 @@
                             object.requestOptions = null;
                             object.maxCommitDelay = null;
                             object.precommitToken = null;
+                            object.routingHint = null;
                         }
                         if (message.session != null && message.hasOwnProperty("session"))
                             object.session = message.session;
@@ -88479,6 +88566,8 @@
                             object.maxCommitDelay = $root.google.protobuf.Duration.toObject(message.maxCommitDelay, options);
                         if (message.precommitToken != null && message.hasOwnProperty("precommitToken"))
                             object.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.toObject(message.precommitToken, options);
+                        if (message.routingHint != null && message.hasOwnProperty("routingHint"))
+                            object.routingHint = $root.google.spanner.v1.RoutingHint.toObject(message.routingHint, options);
                         return object;
                     };
     
@@ -89612,6 +89701,270 @@
                     return BatchWriteResponse;
                 })();
     
+                v1.FetchCacheUpdateRequest = (function() {
+    
+                    /**
+                     * Properties of a FetchCacheUpdateRequest.
+                     * @memberof google.spanner.v1
+                     * @interface IFetchCacheUpdateRequest
+                     * @property {string|null} [database] FetchCacheUpdateRequest database
+                     * @property {number|null} [maxRecipeCount] FetchCacheUpdateRequest maxRecipeCount
+                     * @property {number|null} [maxRangeCount] FetchCacheUpdateRequest maxRangeCount
+                     */
+    
+                    /**
+                     * Constructs a new FetchCacheUpdateRequest.
+                     * @memberof google.spanner.v1
+                     * @classdesc Represents a FetchCacheUpdateRequest.
+                     * @implements IFetchCacheUpdateRequest
+                     * @constructor
+                     * @param {google.spanner.v1.IFetchCacheUpdateRequest=} [properties] Properties to set
+                     */
+                    function FetchCacheUpdateRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FetchCacheUpdateRequest database.
+                     * @member {string} database
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @instance
+                     */
+                    FetchCacheUpdateRequest.prototype.database = "";
+    
+                    /**
+                     * FetchCacheUpdateRequest maxRecipeCount.
+                     * @member {number} maxRecipeCount
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @instance
+                     */
+                    FetchCacheUpdateRequest.prototype.maxRecipeCount = 0;
+    
+                    /**
+                     * FetchCacheUpdateRequest maxRangeCount.
+                     * @member {number} maxRangeCount
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @instance
+                     */
+                    FetchCacheUpdateRequest.prototype.maxRangeCount = 0;
+    
+                    /**
+                     * Creates a new FetchCacheUpdateRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {google.spanner.v1.IFetchCacheUpdateRequest=} [properties] Properties to set
+                     * @returns {google.spanner.v1.FetchCacheUpdateRequest} FetchCacheUpdateRequest instance
+                     */
+                    FetchCacheUpdateRequest.create = function create(properties) {
+                        return new FetchCacheUpdateRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FetchCacheUpdateRequest message. Does not implicitly {@link google.spanner.v1.FetchCacheUpdateRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {google.spanner.v1.IFetchCacheUpdateRequest} message FetchCacheUpdateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FetchCacheUpdateRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
+                        if (message.maxRecipeCount != null && Object.hasOwnProperty.call(message, "maxRecipeCount"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxRecipeCount);
+                        if (message.maxRangeCount != null && Object.hasOwnProperty.call(message, "maxRangeCount"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxRangeCount);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FetchCacheUpdateRequest message, length delimited. Does not implicitly {@link google.spanner.v1.FetchCacheUpdateRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {google.spanner.v1.IFetchCacheUpdateRequest} message FetchCacheUpdateRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FetchCacheUpdateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FetchCacheUpdateRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.spanner.v1.FetchCacheUpdateRequest} FetchCacheUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FetchCacheUpdateRequest.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.FetchCacheUpdateRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.database = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.maxRecipeCount = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.maxRangeCount = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FetchCacheUpdateRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.spanner.v1.FetchCacheUpdateRequest} FetchCacheUpdateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FetchCacheUpdateRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FetchCacheUpdateRequest message.
+                     * @function verify
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FetchCacheUpdateRequest.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.database != null && message.hasOwnProperty("database"))
+                            if (!$util.isString(message.database))
+                                return "database: string expected";
+                        if (message.maxRecipeCount != null && message.hasOwnProperty("maxRecipeCount"))
+                            if (!$util.isInteger(message.maxRecipeCount))
+                                return "maxRecipeCount: integer expected";
+                        if (message.maxRangeCount != null && message.hasOwnProperty("maxRangeCount"))
+                            if (!$util.isInteger(message.maxRangeCount))
+                                return "maxRangeCount: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FetchCacheUpdateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.spanner.v1.FetchCacheUpdateRequest} FetchCacheUpdateRequest
+                     */
+                    FetchCacheUpdateRequest.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.spanner.v1.FetchCacheUpdateRequest)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.spanner.v1.FetchCacheUpdateRequest();
+                        if (object.database != null)
+                            message.database = String(object.database);
+                        if (object.maxRecipeCount != null)
+                            message.maxRecipeCount = object.maxRecipeCount | 0;
+                        if (object.maxRangeCount != null)
+                            message.maxRangeCount = object.maxRangeCount | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FetchCacheUpdateRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {google.spanner.v1.FetchCacheUpdateRequest} message FetchCacheUpdateRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FetchCacheUpdateRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.database = "";
+                            object.maxRecipeCount = 0;
+                            object.maxRangeCount = 0;
+                        }
+                        if (message.database != null && message.hasOwnProperty("database"))
+                            object.database = message.database;
+                        if (message.maxRecipeCount != null && message.hasOwnProperty("maxRecipeCount"))
+                            object.maxRecipeCount = message.maxRecipeCount;
+                        if (message.maxRangeCount != null && message.hasOwnProperty("maxRangeCount"))
+                            object.maxRangeCount = message.maxRangeCount;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FetchCacheUpdateRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FetchCacheUpdateRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FetchCacheUpdateRequest
+                     * @function getTypeUrl
+                     * @memberof google.spanner.v1.FetchCacheUpdateRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FetchCacheUpdateRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.spanner.v1.FetchCacheUpdateRequest";
+                    };
+    
+                    return FetchCacheUpdateRequest;
+                })();
+    
                 v1.CommitResponse = (function() {
     
                     /**
@@ -89622,6 +89975,9 @@
                      * @property {google.spanner.v1.CommitResponse.ICommitStats|null} [commitStats] CommitResponse commitStats
                      * @property {google.spanner.v1.IMultiplexedSessionPrecommitToken|null} [precommitToken] CommitResponse precommitToken
                      * @property {google.protobuf.ITimestamp|null} [snapshotTimestamp] CommitResponse snapshotTimestamp
+                     * @property {google.spanner.v1.ICacheUpdate|null} [cacheUpdate] CommitResponse cacheUpdate
+                     * @property {google.spanner.v1.TransactionOptions.IsolationLevel|null} [isolationLevel] CommitResponse isolationLevel
+                     * @property {google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode|null} [readLockMode] CommitResponse readLockMode
                      */
     
                     /**
@@ -89671,6 +90027,30 @@
                      */
                     CommitResponse.prototype.snapshotTimestamp = null;
     
+                    /**
+                     * CommitResponse cacheUpdate.
+                     * @member {google.spanner.v1.ICacheUpdate|null|undefined} cacheUpdate
+                     * @memberof google.spanner.v1.CommitResponse
+                     * @instance
+                     */
+                    CommitResponse.prototype.cacheUpdate = null;
+    
+                    /**
+                     * CommitResponse isolationLevel.
+                     * @member {google.spanner.v1.TransactionOptions.IsolationLevel} isolationLevel
+                     * @memberof google.spanner.v1.CommitResponse
+                     * @instance
+                     */
+                    CommitResponse.prototype.isolationLevel = 0;
+    
+                    /**
+                     * CommitResponse readLockMode.
+                     * @member {google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode} readLockMode
+                     * @memberof google.spanner.v1.CommitResponse
+                     * @instance
+                     */
+                    CommitResponse.prototype.readLockMode = 0;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -89717,6 +90097,12 @@
                             $root.google.spanner.v1.MultiplexedSessionPrecommitToken.encode(message.precommitToken, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         if (message.snapshotTimestamp != null && Object.hasOwnProperty.call(message, "snapshotTimestamp"))
                             $root.google.protobuf.Timestamp.encode(message.snapshotTimestamp, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        if (message.cacheUpdate != null && Object.hasOwnProperty.call(message, "cacheUpdate"))
+                            $root.google.spanner.v1.CacheUpdate.encode(message.cacheUpdate, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        if (message.isolationLevel != null && Object.hasOwnProperty.call(message, "isolationLevel"))
+                            writer.uint32(/* id 7, wireType 0 =*/56).int32(message.isolationLevel);
+                        if (message.readLockMode != null && Object.hasOwnProperty.call(message, "readLockMode"))
+                            writer.uint32(/* id 8, wireType 0 =*/64).int32(message.readLockMode);
                         return writer;
                     };
     
@@ -89771,6 +90157,18 @@
                                 }
                             case 5: {
                                     message.snapshotTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 6: {
+                                    message.cacheUpdate = $root.google.spanner.v1.CacheUpdate.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 7: {
+                                    message.isolationLevel = reader.int32();
+                                    break;
+                                }
+                            case 8: {
+                                    message.readLockMode = reader.int32();
                                     break;
                                 }
                             default:
@@ -89836,6 +90234,29 @@
                             if (error)
                                 return "snapshotTimestamp." + error;
                         }
+                        if (message.cacheUpdate != null && message.hasOwnProperty("cacheUpdate")) {
+                            var error = $root.google.spanner.v1.CacheUpdate.verify(message.cacheUpdate, long + 1);
+                            if (error)
+                                return "cacheUpdate." + error;
+                        }
+                        if (message.isolationLevel != null && message.hasOwnProperty("isolationLevel"))
+                            switch (message.isolationLevel) {
+                            default:
+                                return "isolationLevel: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.readLockMode != null && message.hasOwnProperty("readLockMode"))
+                            switch (message.readLockMode) {
+                            default:
+                                return "readLockMode: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
                         return null;
                     };
     
@@ -89875,6 +90296,51 @@
                                 throw TypeError(".google.spanner.v1.CommitResponse.snapshotTimestamp: object expected");
                             message.snapshotTimestamp = $root.google.protobuf.Timestamp.fromObject(object.snapshotTimestamp, long + 1);
                         }
+                        if (object.cacheUpdate != null) {
+                            if (typeof object.cacheUpdate !== "object")
+                                throw TypeError(".google.spanner.v1.CommitResponse.cacheUpdate: object expected");
+                            message.cacheUpdate = $root.google.spanner.v1.CacheUpdate.fromObject(object.cacheUpdate, long + 1);
+                        }
+                        switch (object.isolationLevel) {
+                        default:
+                            if (typeof object.isolationLevel === "number") {
+                                message.isolationLevel = object.isolationLevel;
+                                break;
+                            }
+                            break;
+                        case "ISOLATION_LEVEL_UNSPECIFIED":
+                        case 0:
+                            message.isolationLevel = 0;
+                            break;
+                        case "SERIALIZABLE":
+                        case 1:
+                            message.isolationLevel = 1;
+                            break;
+                        case "REPEATABLE_READ":
+                        case 2:
+                            message.isolationLevel = 2;
+                            break;
+                        }
+                        switch (object.readLockMode) {
+                        default:
+                            if (typeof object.readLockMode === "number") {
+                                message.readLockMode = object.readLockMode;
+                                break;
+                            }
+                            break;
+                        case "READ_LOCK_MODE_UNSPECIFIED":
+                        case 0:
+                            message.readLockMode = 0;
+                            break;
+                        case "PESSIMISTIC":
+                        case 1:
+                            message.readLockMode = 1;
+                            break;
+                        case "OPTIMISTIC":
+                        case 2:
+                            message.readLockMode = 2;
+                            break;
+                        }
                         return message;
                     };
     
@@ -89895,6 +90361,9 @@
                             object.commitTimestamp = null;
                             object.commitStats = null;
                             object.snapshotTimestamp = null;
+                            object.cacheUpdate = null;
+                            object.isolationLevel = options.enums === String ? "ISOLATION_LEVEL_UNSPECIFIED" : 0;
+                            object.readLockMode = options.enums === String ? "READ_LOCK_MODE_UNSPECIFIED" : 0;
                         }
                         if (message.commitTimestamp != null && message.hasOwnProperty("commitTimestamp"))
                             object.commitTimestamp = $root.google.protobuf.Timestamp.toObject(message.commitTimestamp, options);
@@ -89907,6 +90376,12 @@
                         }
                         if (message.snapshotTimestamp != null && message.hasOwnProperty("snapshotTimestamp"))
                             object.snapshotTimestamp = $root.google.protobuf.Timestamp.toObject(message.snapshotTimestamp, options);
+                        if (message.cacheUpdate != null && message.hasOwnProperty("cacheUpdate"))
+                            object.cacheUpdate = $root.google.spanner.v1.CacheUpdate.toObject(message.cacheUpdate, options);
+                        if (message.isolationLevel != null && message.hasOwnProperty("isolationLevel"))
+                            object.isolationLevel = options.enums === String ? $root.google.spanner.v1.TransactionOptions.IsolationLevel[message.isolationLevel] === undefined ? message.isolationLevel : $root.google.spanner.v1.TransactionOptions.IsolationLevel[message.isolationLevel] : message.isolationLevel;
+                        if (message.readLockMode != null && message.hasOwnProperty("readLockMode"))
+                            object.readLockMode = options.enums === String ? $root.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode[message.readLockMode] === undefined ? message.readLockMode : $root.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode[message.readLockMode] : message.readLockMode;
                         return object;
                     };
     
@@ -90168,2786 +90643,6 @@
                     })();
     
                     return CommitResponse;
-                })();
-    
-                v1.TransactionOptions = (function() {
-    
-                    /**
-                     * Properties of a TransactionOptions.
-                     * @memberof google.spanner.v1
-                     * @interface ITransactionOptions
-                     * @property {google.spanner.v1.TransactionOptions.IReadWrite|null} [readWrite] TransactionOptions readWrite
-                     * @property {google.spanner.v1.TransactionOptions.IPartitionedDml|null} [partitionedDml] TransactionOptions partitionedDml
-                     * @property {google.spanner.v1.TransactionOptions.IReadOnly|null} [readOnly] TransactionOptions readOnly
-                     * @property {boolean|null} [excludeTxnFromChangeStreams] TransactionOptions excludeTxnFromChangeStreams
-                     * @property {google.spanner.v1.TransactionOptions.IsolationLevel|null} [isolationLevel] TransactionOptions isolationLevel
-                     */
-    
-                    /**
-                     * Constructs a new TransactionOptions.
-                     * @memberof google.spanner.v1
-                     * @classdesc Represents a TransactionOptions.
-                     * @implements ITransactionOptions
-                     * @constructor
-                     * @param {google.spanner.v1.ITransactionOptions=} [properties] Properties to set
-                     */
-                    function TransactionOptions(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * TransactionOptions readWrite.
-                     * @member {google.spanner.v1.TransactionOptions.IReadWrite|null|undefined} readWrite
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @instance
-                     */
-                    TransactionOptions.prototype.readWrite = null;
-    
-                    /**
-                     * TransactionOptions partitionedDml.
-                     * @member {google.spanner.v1.TransactionOptions.IPartitionedDml|null|undefined} partitionedDml
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @instance
-                     */
-                    TransactionOptions.prototype.partitionedDml = null;
-    
-                    /**
-                     * TransactionOptions readOnly.
-                     * @member {google.spanner.v1.TransactionOptions.IReadOnly|null|undefined} readOnly
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @instance
-                     */
-                    TransactionOptions.prototype.readOnly = null;
-    
-                    /**
-                     * TransactionOptions excludeTxnFromChangeStreams.
-                     * @member {boolean} excludeTxnFromChangeStreams
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @instance
-                     */
-                    TransactionOptions.prototype.excludeTxnFromChangeStreams = false;
-    
-                    /**
-                     * TransactionOptions isolationLevel.
-                     * @member {google.spanner.v1.TransactionOptions.IsolationLevel} isolationLevel
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @instance
-                     */
-                    TransactionOptions.prototype.isolationLevel = 0;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * TransactionOptions mode.
-                     * @member {"readWrite"|"partitionedDml"|"readOnly"|undefined} mode
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @instance
-                     */
-                    Object.defineProperty(TransactionOptions.prototype, "mode", {
-                        get: $util.oneOfGetter($oneOfFields = ["readWrite", "partitionedDml", "readOnly"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new TransactionOptions instance using the specified properties.
-                     * @function create
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {google.spanner.v1.ITransactionOptions=} [properties] Properties to set
-                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions instance
-                     */
-                    TransactionOptions.create = function create(properties) {
-                        return new TransactionOptions(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified TransactionOptions message. Does not implicitly {@link google.spanner.v1.TransactionOptions.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {google.spanner.v1.ITransactionOptions} message TransactionOptions message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TransactionOptions.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.readWrite != null && Object.hasOwnProperty.call(message, "readWrite"))
-                            $root.google.spanner.v1.TransactionOptions.ReadWrite.encode(message.readWrite, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.readOnly != null && Object.hasOwnProperty.call(message, "readOnly"))
-                            $root.google.spanner.v1.TransactionOptions.ReadOnly.encode(message.readOnly, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.partitionedDml != null && Object.hasOwnProperty.call(message, "partitionedDml"))
-                            $root.google.spanner.v1.TransactionOptions.PartitionedDml.encode(message.partitionedDml, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        if (message.excludeTxnFromChangeStreams != null && Object.hasOwnProperty.call(message, "excludeTxnFromChangeStreams"))
-                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.excludeTxnFromChangeStreams);
-                        if (message.isolationLevel != null && Object.hasOwnProperty.call(message, "isolationLevel"))
-                            writer.uint32(/* id 6, wireType 0 =*/48).int32(message.isolationLevel);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified TransactionOptions message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {google.spanner.v1.ITransactionOptions} message TransactionOptions message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TransactionOptions.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a TransactionOptions message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TransactionOptions.decode = function decode(reader, length, error, long) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $Reader.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.readWrite = $root.google.spanner.v1.TransactionOptions.ReadWrite.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 3: {
-                                    message.partitionedDml = $root.google.spanner.v1.TransactionOptions.PartitionedDml.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 2: {
-                                    message.readOnly = $root.google.spanner.v1.TransactionOptions.ReadOnly.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 5: {
-                                    message.excludeTxnFromChangeStreams = reader.bool();
-                                    break;
-                                }
-                            case 6: {
-                                    message.isolationLevel = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7, long);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a TransactionOptions message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TransactionOptions.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a TransactionOptions message.
-                     * @function verify
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    TransactionOptions.verify = function verify(message, long) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            return "maximum nesting depth exceeded";
-                        var properties = {};
-                        if (message.readWrite != null && message.hasOwnProperty("readWrite")) {
-                            properties.mode = 1;
-                            {
-                                var error = $root.google.spanner.v1.TransactionOptions.ReadWrite.verify(message.readWrite, long + 1);
-                                if (error)
-                                    return "readWrite." + error;
-                            }
-                        }
-                        if (message.partitionedDml != null && message.hasOwnProperty("partitionedDml")) {
-                            if (properties.mode === 1)
-                                return "mode: multiple values";
-                            properties.mode = 1;
-                            {
-                                var error = $root.google.spanner.v1.TransactionOptions.PartitionedDml.verify(message.partitionedDml, long + 1);
-                                if (error)
-                                    return "partitionedDml." + error;
-                            }
-                        }
-                        if (message.readOnly != null && message.hasOwnProperty("readOnly")) {
-                            if (properties.mode === 1)
-                                return "mode: multiple values";
-                            properties.mode = 1;
-                            {
-                                var error = $root.google.spanner.v1.TransactionOptions.ReadOnly.verify(message.readOnly, long + 1);
-                                if (error)
-                                    return "readOnly." + error;
-                            }
-                        }
-                        if (message.excludeTxnFromChangeStreams != null && message.hasOwnProperty("excludeTxnFromChangeStreams"))
-                            if (typeof message.excludeTxnFromChangeStreams !== "boolean")
-                                return "excludeTxnFromChangeStreams: boolean expected";
-                        if (message.isolationLevel != null && message.hasOwnProperty("isolationLevel"))
-                            switch (message.isolationLevel) {
-                            default:
-                                return "isolationLevel: enum value expected";
-                            case 0:
-                            case 1:
-                            case 2:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a TransactionOptions message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions
-                     */
-                    TransactionOptions.fromObject = function fromObject(object, long) {
-                        if (object instanceof $root.google.spanner.v1.TransactionOptions)
-                            return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var message = new $root.google.spanner.v1.TransactionOptions();
-                        if (object.readWrite != null) {
-                            if (typeof object.readWrite !== "object")
-                                throw TypeError(".google.spanner.v1.TransactionOptions.readWrite: object expected");
-                            message.readWrite = $root.google.spanner.v1.TransactionOptions.ReadWrite.fromObject(object.readWrite, long + 1);
-                        }
-                        if (object.partitionedDml != null) {
-                            if (typeof object.partitionedDml !== "object")
-                                throw TypeError(".google.spanner.v1.TransactionOptions.partitionedDml: object expected");
-                            message.partitionedDml = $root.google.spanner.v1.TransactionOptions.PartitionedDml.fromObject(object.partitionedDml, long + 1);
-                        }
-                        if (object.readOnly != null) {
-                            if (typeof object.readOnly !== "object")
-                                throw TypeError(".google.spanner.v1.TransactionOptions.readOnly: object expected");
-                            message.readOnly = $root.google.spanner.v1.TransactionOptions.ReadOnly.fromObject(object.readOnly, long + 1);
-                        }
-                        if (object.excludeTxnFromChangeStreams != null)
-                            message.excludeTxnFromChangeStreams = Boolean(object.excludeTxnFromChangeStreams);
-                        switch (object.isolationLevel) {
-                        default:
-                            if (typeof object.isolationLevel === "number") {
-                                message.isolationLevel = object.isolationLevel;
-                                break;
-                            }
-                            break;
-                        case "ISOLATION_LEVEL_UNSPECIFIED":
-                        case 0:
-                            message.isolationLevel = 0;
-                            break;
-                        case "SERIALIZABLE":
-                        case 1:
-                            message.isolationLevel = 1;
-                            break;
-                        case "REPEATABLE_READ":
-                        case 2:
-                            message.isolationLevel = 2;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a TransactionOptions message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {google.spanner.v1.TransactionOptions} message TransactionOptions
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    TransactionOptions.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.excludeTxnFromChangeStreams = false;
-                            object.isolationLevel = options.enums === String ? "ISOLATION_LEVEL_UNSPECIFIED" : 0;
-                        }
-                        if (message.readWrite != null && message.hasOwnProperty("readWrite")) {
-                            object.readWrite = $root.google.spanner.v1.TransactionOptions.ReadWrite.toObject(message.readWrite, options);
-                            if (options.oneofs)
-                                object.mode = "readWrite";
-                        }
-                        if (message.readOnly != null && message.hasOwnProperty("readOnly")) {
-                            object.readOnly = $root.google.spanner.v1.TransactionOptions.ReadOnly.toObject(message.readOnly, options);
-                            if (options.oneofs)
-                                object.mode = "readOnly";
-                        }
-                        if (message.partitionedDml != null && message.hasOwnProperty("partitionedDml")) {
-                            object.partitionedDml = $root.google.spanner.v1.TransactionOptions.PartitionedDml.toObject(message.partitionedDml, options);
-                            if (options.oneofs)
-                                object.mode = "partitionedDml";
-                        }
-                        if (message.excludeTxnFromChangeStreams != null && message.hasOwnProperty("excludeTxnFromChangeStreams"))
-                            object.excludeTxnFromChangeStreams = message.excludeTxnFromChangeStreams;
-                        if (message.isolationLevel != null && message.hasOwnProperty("isolationLevel"))
-                            object.isolationLevel = options.enums === String ? $root.google.spanner.v1.TransactionOptions.IsolationLevel[message.isolationLevel] === undefined ? message.isolationLevel : $root.google.spanner.v1.TransactionOptions.IsolationLevel[message.isolationLevel] : message.isolationLevel;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this TransactionOptions to JSON.
-                     * @function toJSON
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    TransactionOptions.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for TransactionOptions
-                     * @function getTypeUrl
-                     * @memberof google.spanner.v1.TransactionOptions
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    TransactionOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.spanner.v1.TransactionOptions";
-                    };
-    
-                    TransactionOptions.ReadWrite = (function() {
-    
-                        /**
-                         * Properties of a ReadWrite.
-                         * @memberof google.spanner.v1.TransactionOptions
-                         * @interface IReadWrite
-                         * @property {google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode|null} [readLockMode] ReadWrite readLockMode
-                         * @property {Uint8Array|null} [multiplexedSessionPreviousTransactionId] ReadWrite multiplexedSessionPreviousTransactionId
-                         */
-    
-                        /**
-                         * Constructs a new ReadWrite.
-                         * @memberof google.spanner.v1.TransactionOptions
-                         * @classdesc Represents a ReadWrite.
-                         * @implements IReadWrite
-                         * @constructor
-                         * @param {google.spanner.v1.TransactionOptions.IReadWrite=} [properties] Properties to set
-                         */
-                        function ReadWrite(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ReadWrite readLockMode.
-                         * @member {google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode} readLockMode
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @instance
-                         */
-                        ReadWrite.prototype.readLockMode = 0;
-    
-                        /**
-                         * ReadWrite multiplexedSessionPreviousTransactionId.
-                         * @member {Uint8Array} multiplexedSessionPreviousTransactionId
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @instance
-                         */
-                        ReadWrite.prototype.multiplexedSessionPreviousTransactionId = $util.newBuffer([]);
-    
-                        /**
-                         * Creates a new ReadWrite instance using the specified properties.
-                         * @function create
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IReadWrite=} [properties] Properties to set
-                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite instance
-                         */
-                        ReadWrite.create = function create(properties) {
-                            return new ReadWrite(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ReadWrite message. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadWrite.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IReadWrite} message ReadWrite message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ReadWrite.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.readLockMode != null && Object.hasOwnProperty.call(message, "readLockMode"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.readLockMode);
-                            if (message.multiplexedSessionPreviousTransactionId != null && Object.hasOwnProperty.call(message, "multiplexedSessionPreviousTransactionId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.multiplexedSessionPreviousTransactionId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ReadWrite message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadWrite.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IReadWrite} message ReadWrite message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ReadWrite.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ReadWrite message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ReadWrite.decode = function decode(reader, length, error, long) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $Reader.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions.ReadWrite();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.readLockMode = reader.int32();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.multiplexedSessionPreviousTransactionId = reader.bytes();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7, long);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ReadWrite message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ReadWrite.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ReadWrite message.
-                         * @function verify
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ReadWrite.verify = function verify(message, long) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                return "maximum nesting depth exceeded";
-                            if (message.readLockMode != null && message.hasOwnProperty("readLockMode"))
-                                switch (message.readLockMode) {
-                                default:
-                                    return "readLockMode: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            if (message.multiplexedSessionPreviousTransactionId != null && message.hasOwnProperty("multiplexedSessionPreviousTransactionId"))
-                                if (!(message.multiplexedSessionPreviousTransactionId && typeof message.multiplexedSessionPreviousTransactionId.length === "number" || $util.isString(message.multiplexedSessionPreviousTransactionId)))
-                                    return "multiplexedSessionPreviousTransactionId: buffer expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ReadWrite message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite
-                         */
-                        ReadWrite.fromObject = function fromObject(object, long) {
-                            if (object instanceof $root.google.spanner.v1.TransactionOptions.ReadWrite)
-                                return object;
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            var message = new $root.google.spanner.v1.TransactionOptions.ReadWrite();
-                            switch (object.readLockMode) {
-                            default:
-                                if (typeof object.readLockMode === "number") {
-                                    message.readLockMode = object.readLockMode;
-                                    break;
-                                }
-                                break;
-                            case "READ_LOCK_MODE_UNSPECIFIED":
-                            case 0:
-                                message.readLockMode = 0;
-                                break;
-                            case "PESSIMISTIC":
-                            case 1:
-                                message.readLockMode = 1;
-                                break;
-                            case "OPTIMISTIC":
-                            case 2:
-                                message.readLockMode = 2;
-                                break;
-                            }
-                            if (object.multiplexedSessionPreviousTransactionId != null)
-                                if (typeof object.multiplexedSessionPreviousTransactionId === "string")
-                                    $util.base64.decode(object.multiplexedSessionPreviousTransactionId, message.multiplexedSessionPreviousTransactionId = $util.newBuffer($util.base64.length(object.multiplexedSessionPreviousTransactionId)), 0);
-                                else if (object.multiplexedSessionPreviousTransactionId.length >= 0)
-                                    message.multiplexedSessionPreviousTransactionId = object.multiplexedSessionPreviousTransactionId;
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ReadWrite message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.ReadWrite} message ReadWrite
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ReadWrite.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.readLockMode = options.enums === String ? "READ_LOCK_MODE_UNSPECIFIED" : 0;
-                                if (options.bytes === String)
-                                    object.multiplexedSessionPreviousTransactionId = "";
-                                else {
-                                    object.multiplexedSessionPreviousTransactionId = [];
-                                    if (options.bytes !== Array)
-                                        object.multiplexedSessionPreviousTransactionId = $util.newBuffer(object.multiplexedSessionPreviousTransactionId);
-                                }
-                            }
-                            if (message.readLockMode != null && message.hasOwnProperty("readLockMode"))
-                                object.readLockMode = options.enums === String ? $root.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode[message.readLockMode] === undefined ? message.readLockMode : $root.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode[message.readLockMode] : message.readLockMode;
-                            if (message.multiplexedSessionPreviousTransactionId != null && message.hasOwnProperty("multiplexedSessionPreviousTransactionId"))
-                                object.multiplexedSessionPreviousTransactionId = options.bytes === String ? $util.base64.encode(message.multiplexedSessionPreviousTransactionId, 0, message.multiplexedSessionPreviousTransactionId.length) : options.bytes === Array ? Array.prototype.slice.call(message.multiplexedSessionPreviousTransactionId) : message.multiplexedSessionPreviousTransactionId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ReadWrite to JSON.
-                         * @function toJSON
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ReadWrite.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ReadWrite
-                         * @function getTypeUrl
-                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ReadWrite.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.spanner.v1.TransactionOptions.ReadWrite";
-                        };
-    
-                        /**
-                         * ReadLockMode enum.
-                         * @name google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode
-                         * @enum {number}
-                         * @property {number} READ_LOCK_MODE_UNSPECIFIED=0 READ_LOCK_MODE_UNSPECIFIED value
-                         * @property {number} PESSIMISTIC=1 PESSIMISTIC value
-                         * @property {number} OPTIMISTIC=2 OPTIMISTIC value
-                         */
-                        ReadWrite.ReadLockMode = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "READ_LOCK_MODE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "PESSIMISTIC"] = 1;
-                            values[valuesById[2] = "OPTIMISTIC"] = 2;
-                            return values;
-                        })();
-    
-                        return ReadWrite;
-                    })();
-    
-                    TransactionOptions.PartitionedDml = (function() {
-    
-                        /**
-                         * Properties of a PartitionedDml.
-                         * @memberof google.spanner.v1.TransactionOptions
-                         * @interface IPartitionedDml
-                         */
-    
-                        /**
-                         * Constructs a new PartitionedDml.
-                         * @memberof google.spanner.v1.TransactionOptions
-                         * @classdesc Represents a PartitionedDml.
-                         * @implements IPartitionedDml
-                         * @constructor
-                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml=} [properties] Properties to set
-                         */
-                        function PartitionedDml(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Creates a new PartitionedDml instance using the specified properties.
-                         * @function create
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml=} [properties] Properties to set
-                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml instance
-                         */
-                        PartitionedDml.create = function create(properties) {
-                            return new PartitionedDml(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified PartitionedDml message. Does not implicitly {@link google.spanner.v1.TransactionOptions.PartitionedDml.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml} message PartitionedDml message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PartitionedDml.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified PartitionedDml message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.PartitionedDml.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml} message PartitionedDml message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PartitionedDml.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a PartitionedDml message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PartitionedDml.decode = function decode(reader, length, error, long) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $Reader.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions.PartitionedDml();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                default:
-                                    reader.skipType(tag & 7, long);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a PartitionedDml message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PartitionedDml.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a PartitionedDml message.
-                         * @function verify
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        PartitionedDml.verify = function verify(message, long) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                return "maximum nesting depth exceeded";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a PartitionedDml message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml
-                         */
-                        PartitionedDml.fromObject = function fromObject(object, long) {
-                            if (object instanceof $root.google.spanner.v1.TransactionOptions.PartitionedDml)
-                                return object;
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            return new $root.google.spanner.v1.TransactionOptions.PartitionedDml();
-                        };
-    
-                        /**
-                         * Creates a plain object from a PartitionedDml message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.PartitionedDml} message PartitionedDml
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        PartitionedDml.toObject = function toObject() {
-                            return {};
-                        };
-    
-                        /**
-                         * Converts this PartitionedDml to JSON.
-                         * @function toJSON
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        PartitionedDml.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for PartitionedDml
-                         * @function getTypeUrl
-                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        PartitionedDml.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.spanner.v1.TransactionOptions.PartitionedDml";
-                        };
-    
-                        return PartitionedDml;
-                    })();
-    
-                    TransactionOptions.ReadOnly = (function() {
-    
-                        /**
-                         * Properties of a ReadOnly.
-                         * @memberof google.spanner.v1.TransactionOptions
-                         * @interface IReadOnly
-                         * @property {boolean|null} [strong] ReadOnly strong
-                         * @property {google.protobuf.ITimestamp|null} [minReadTimestamp] ReadOnly minReadTimestamp
-                         * @property {google.protobuf.IDuration|null} [maxStaleness] ReadOnly maxStaleness
-                         * @property {google.protobuf.ITimestamp|null} [readTimestamp] ReadOnly readTimestamp
-                         * @property {google.protobuf.IDuration|null} [exactStaleness] ReadOnly exactStaleness
-                         * @property {boolean|null} [returnReadTimestamp] ReadOnly returnReadTimestamp
-                         */
-    
-                        /**
-                         * Constructs a new ReadOnly.
-                         * @memberof google.spanner.v1.TransactionOptions
-                         * @classdesc Represents a ReadOnly.
-                         * @implements IReadOnly
-                         * @constructor
-                         * @param {google.spanner.v1.TransactionOptions.IReadOnly=} [properties] Properties to set
-                         */
-                        function ReadOnly(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ReadOnly strong.
-                         * @member {boolean|null|undefined} strong
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         */
-                        ReadOnly.prototype.strong = null;
-    
-                        /**
-                         * ReadOnly minReadTimestamp.
-                         * @member {google.protobuf.ITimestamp|null|undefined} minReadTimestamp
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         */
-                        ReadOnly.prototype.minReadTimestamp = null;
-    
-                        /**
-                         * ReadOnly maxStaleness.
-                         * @member {google.protobuf.IDuration|null|undefined} maxStaleness
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         */
-                        ReadOnly.prototype.maxStaleness = null;
-    
-                        /**
-                         * ReadOnly readTimestamp.
-                         * @member {google.protobuf.ITimestamp|null|undefined} readTimestamp
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         */
-                        ReadOnly.prototype.readTimestamp = null;
-    
-                        /**
-                         * ReadOnly exactStaleness.
-                         * @member {google.protobuf.IDuration|null|undefined} exactStaleness
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         */
-                        ReadOnly.prototype.exactStaleness = null;
-    
-                        /**
-                         * ReadOnly returnReadTimestamp.
-                         * @member {boolean} returnReadTimestamp
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         */
-                        ReadOnly.prototype.returnReadTimestamp = false;
-    
-                        // OneOf field names bound to virtual getters and setters
-                        var $oneOfFields;
-    
-                        /**
-                         * ReadOnly timestampBound.
-                         * @member {"strong"|"minReadTimestamp"|"maxStaleness"|"readTimestamp"|"exactStaleness"|undefined} timestampBound
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         */
-                        Object.defineProperty(ReadOnly.prototype, "timestampBound", {
-                            get: $util.oneOfGetter($oneOfFields = ["strong", "minReadTimestamp", "maxStaleness", "readTimestamp", "exactStaleness"]),
-                            set: $util.oneOfSetter($oneOfFields)
-                        });
-    
-                        /**
-                         * Creates a new ReadOnly instance using the specified properties.
-                         * @function create
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IReadOnly=} [properties] Properties to set
-                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly instance
-                         */
-                        ReadOnly.create = function create(properties) {
-                            return new ReadOnly(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ReadOnly message. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadOnly.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IReadOnly} message ReadOnly message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ReadOnly.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.strong != null && Object.hasOwnProperty.call(message, "strong"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.strong);
-                            if (message.minReadTimestamp != null && Object.hasOwnProperty.call(message, "minReadTimestamp"))
-                                $root.google.protobuf.Timestamp.encode(message.minReadTimestamp, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.maxStaleness != null && Object.hasOwnProperty.call(message, "maxStaleness"))
-                                $root.google.protobuf.Duration.encode(message.maxStaleness, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            if (message.readTimestamp != null && Object.hasOwnProperty.call(message, "readTimestamp"))
-                                $root.google.protobuf.Timestamp.encode(message.readTimestamp, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                            if (message.exactStaleness != null && Object.hasOwnProperty.call(message, "exactStaleness"))
-                                $root.google.protobuf.Duration.encode(message.exactStaleness, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.returnReadTimestamp != null && Object.hasOwnProperty.call(message, "returnReadTimestamp"))
-                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.returnReadTimestamp);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ReadOnly message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadOnly.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.IReadOnly} message ReadOnly message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ReadOnly.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ReadOnly message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ReadOnly.decode = function decode(reader, length, error, long) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $Reader.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions.ReadOnly();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.strong = reader.bool();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.minReadTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
-                                        break;
-                                    }
-                                case 3: {
-                                        message.maxStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
-                                        break;
-                                    }
-                                case 4: {
-                                        message.readTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
-                                        break;
-                                    }
-                                case 5: {
-                                        message.exactStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
-                                        break;
-                                    }
-                                case 6: {
-                                        message.returnReadTimestamp = reader.bool();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7, long);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ReadOnly message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ReadOnly.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ReadOnly message.
-                         * @function verify
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ReadOnly.verify = function verify(message, long) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                return "maximum nesting depth exceeded";
-                            var properties = {};
-                            if (message.strong != null && message.hasOwnProperty("strong")) {
-                                properties.timestampBound = 1;
-                                if (typeof message.strong !== "boolean")
-                                    return "strong: boolean expected";
-                            }
-                            if (message.minReadTimestamp != null && message.hasOwnProperty("minReadTimestamp")) {
-                                if (properties.timestampBound === 1)
-                                    return "timestampBound: multiple values";
-                                properties.timestampBound = 1;
-                                {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.minReadTimestamp, long + 1);
-                                    if (error)
-                                        return "minReadTimestamp." + error;
-                                }
-                            }
-                            if (message.maxStaleness != null && message.hasOwnProperty("maxStaleness")) {
-                                if (properties.timestampBound === 1)
-                                    return "timestampBound: multiple values";
-                                properties.timestampBound = 1;
-                                {
-                                    var error = $root.google.protobuf.Duration.verify(message.maxStaleness, long + 1);
-                                    if (error)
-                                        return "maxStaleness." + error;
-                                }
-                            }
-                            if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp")) {
-                                if (properties.timestampBound === 1)
-                                    return "timestampBound: multiple values";
-                                properties.timestampBound = 1;
-                                {
-                                    var error = $root.google.protobuf.Timestamp.verify(message.readTimestamp, long + 1);
-                                    if (error)
-                                        return "readTimestamp." + error;
-                                }
-                            }
-                            if (message.exactStaleness != null && message.hasOwnProperty("exactStaleness")) {
-                                if (properties.timestampBound === 1)
-                                    return "timestampBound: multiple values";
-                                properties.timestampBound = 1;
-                                {
-                                    var error = $root.google.protobuf.Duration.verify(message.exactStaleness, long + 1);
-                                    if (error)
-                                        return "exactStaleness." + error;
-                                }
-                            }
-                            if (message.returnReadTimestamp != null && message.hasOwnProperty("returnReadTimestamp"))
-                                if (typeof message.returnReadTimestamp !== "boolean")
-                                    return "returnReadTimestamp: boolean expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ReadOnly message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly
-                         */
-                        ReadOnly.fromObject = function fromObject(object, long) {
-                            if (object instanceof $root.google.spanner.v1.TransactionOptions.ReadOnly)
-                                return object;
-                            if (long === undefined)
-                                long = 0;
-                            if (long > $util.recursionLimit)
-                                throw Error("maximum nesting depth exceeded");
-                            var message = new $root.google.spanner.v1.TransactionOptions.ReadOnly();
-                            if (object.strong != null)
-                                message.strong = Boolean(object.strong);
-                            if (object.minReadTimestamp != null) {
-                                if (typeof object.minReadTimestamp !== "object")
-                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.minReadTimestamp: object expected");
-                                message.minReadTimestamp = $root.google.protobuf.Timestamp.fromObject(object.minReadTimestamp, long + 1);
-                            }
-                            if (object.maxStaleness != null) {
-                                if (typeof object.maxStaleness !== "object")
-                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.maxStaleness: object expected");
-                                message.maxStaleness = $root.google.protobuf.Duration.fromObject(object.maxStaleness, long + 1);
-                            }
-                            if (object.readTimestamp != null) {
-                                if (typeof object.readTimestamp !== "object")
-                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.readTimestamp: object expected");
-                                message.readTimestamp = $root.google.protobuf.Timestamp.fromObject(object.readTimestamp, long + 1);
-                            }
-                            if (object.exactStaleness != null) {
-                                if (typeof object.exactStaleness !== "object")
-                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.exactStaleness: object expected");
-                                message.exactStaleness = $root.google.protobuf.Duration.fromObject(object.exactStaleness, long + 1);
-                            }
-                            if (object.returnReadTimestamp != null)
-                                message.returnReadTimestamp = Boolean(object.returnReadTimestamp);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ReadOnly message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {google.spanner.v1.TransactionOptions.ReadOnly} message ReadOnly
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ReadOnly.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.returnReadTimestamp = false;
-                            if (message.strong != null && message.hasOwnProperty("strong")) {
-                                object.strong = message.strong;
-                                if (options.oneofs)
-                                    object.timestampBound = "strong";
-                            }
-                            if (message.minReadTimestamp != null && message.hasOwnProperty("minReadTimestamp")) {
-                                object.minReadTimestamp = $root.google.protobuf.Timestamp.toObject(message.minReadTimestamp, options);
-                                if (options.oneofs)
-                                    object.timestampBound = "minReadTimestamp";
-                            }
-                            if (message.maxStaleness != null && message.hasOwnProperty("maxStaleness")) {
-                                object.maxStaleness = $root.google.protobuf.Duration.toObject(message.maxStaleness, options);
-                                if (options.oneofs)
-                                    object.timestampBound = "maxStaleness";
-                            }
-                            if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp")) {
-                                object.readTimestamp = $root.google.protobuf.Timestamp.toObject(message.readTimestamp, options);
-                                if (options.oneofs)
-                                    object.timestampBound = "readTimestamp";
-                            }
-                            if (message.exactStaleness != null && message.hasOwnProperty("exactStaleness")) {
-                                object.exactStaleness = $root.google.protobuf.Duration.toObject(message.exactStaleness, options);
-                                if (options.oneofs)
-                                    object.timestampBound = "exactStaleness";
-                            }
-                            if (message.returnReadTimestamp != null && message.hasOwnProperty("returnReadTimestamp"))
-                                object.returnReadTimestamp = message.returnReadTimestamp;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ReadOnly to JSON.
-                         * @function toJSON
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ReadOnly.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ReadOnly
-                         * @function getTypeUrl
-                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ReadOnly.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.spanner.v1.TransactionOptions.ReadOnly";
-                        };
-    
-                        return ReadOnly;
-                    })();
-    
-                    /**
-                     * IsolationLevel enum.
-                     * @name google.spanner.v1.TransactionOptions.IsolationLevel
-                     * @enum {number}
-                     * @property {number} ISOLATION_LEVEL_UNSPECIFIED=0 ISOLATION_LEVEL_UNSPECIFIED value
-                     * @property {number} SERIALIZABLE=1 SERIALIZABLE value
-                     * @property {number} REPEATABLE_READ=2 REPEATABLE_READ value
-                     */
-                    TransactionOptions.IsolationLevel = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "ISOLATION_LEVEL_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "SERIALIZABLE"] = 1;
-                        values[valuesById[2] = "REPEATABLE_READ"] = 2;
-                        return values;
-                    })();
-    
-                    return TransactionOptions;
-                })();
-    
-                v1.Transaction = (function() {
-    
-                    /**
-                     * Properties of a Transaction.
-                     * @memberof google.spanner.v1
-                     * @interface ITransaction
-                     * @property {Uint8Array|null} [id] Transaction id
-                     * @property {google.protobuf.ITimestamp|null} [readTimestamp] Transaction readTimestamp
-                     * @property {google.spanner.v1.IMultiplexedSessionPrecommitToken|null} [precommitToken] Transaction precommitToken
-                     */
-    
-                    /**
-                     * Constructs a new Transaction.
-                     * @memberof google.spanner.v1
-                     * @classdesc Represents a Transaction.
-                     * @implements ITransaction
-                     * @constructor
-                     * @param {google.spanner.v1.ITransaction=} [properties] Properties to set
-                     */
-                    function Transaction(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Transaction id.
-                     * @member {Uint8Array} id
-                     * @memberof google.spanner.v1.Transaction
-                     * @instance
-                     */
-                    Transaction.prototype.id = $util.newBuffer([]);
-    
-                    /**
-                     * Transaction readTimestamp.
-                     * @member {google.protobuf.ITimestamp|null|undefined} readTimestamp
-                     * @memberof google.spanner.v1.Transaction
-                     * @instance
-                     */
-                    Transaction.prototype.readTimestamp = null;
-    
-                    /**
-                     * Transaction precommitToken.
-                     * @member {google.spanner.v1.IMultiplexedSessionPrecommitToken|null|undefined} precommitToken
-                     * @memberof google.spanner.v1.Transaction
-                     * @instance
-                     */
-                    Transaction.prototype.precommitToken = null;
-    
-                    /**
-                     * Creates a new Transaction instance using the specified properties.
-                     * @function create
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {google.spanner.v1.ITransaction=} [properties] Properties to set
-                     * @returns {google.spanner.v1.Transaction} Transaction instance
-                     */
-                    Transaction.create = function create(properties) {
-                        return new Transaction(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified Transaction message. Does not implicitly {@link google.spanner.v1.Transaction.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {google.spanner.v1.ITransaction} message Transaction message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Transaction.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.id);
-                        if (message.readTimestamp != null && Object.hasOwnProperty.call(message, "readTimestamp"))
-                            $root.google.protobuf.Timestamp.encode(message.readTimestamp, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.precommitToken != null && Object.hasOwnProperty.call(message, "precommitToken"))
-                            $root.google.spanner.v1.MultiplexedSessionPrecommitToken.encode(message.precommitToken, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified Transaction message, length delimited. Does not implicitly {@link google.spanner.v1.Transaction.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {google.spanner.v1.ITransaction} message Transaction message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    Transaction.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a Transaction message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.spanner.v1.Transaction} Transaction
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Transaction.decode = function decode(reader, length, error, long) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $Reader.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.Transaction();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.id = reader.bytes();
-                                    break;
-                                }
-                            case 2: {
-                                    message.readTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 3: {
-                                    message.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7, long);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a Transaction message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.spanner.v1.Transaction} Transaction
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    Transaction.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a Transaction message.
-                     * @function verify
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    Transaction.verify = function verify(message, long) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            return "maximum nesting depth exceeded";
-                        if (message.id != null && message.hasOwnProperty("id"))
-                            if (!(message.id && typeof message.id.length === "number" || $util.isString(message.id)))
-                                return "id: buffer expected";
-                        if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp")) {
-                            var error = $root.google.protobuf.Timestamp.verify(message.readTimestamp, long + 1);
-                            if (error)
-                                return "readTimestamp." + error;
-                        }
-                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken")) {
-                            var error = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.verify(message.precommitToken, long + 1);
-                            if (error)
-                                return "precommitToken." + error;
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a Transaction message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.spanner.v1.Transaction} Transaction
-                     */
-                    Transaction.fromObject = function fromObject(object, long) {
-                        if (object instanceof $root.google.spanner.v1.Transaction)
-                            return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var message = new $root.google.spanner.v1.Transaction();
-                        if (object.id != null)
-                            if (typeof object.id === "string")
-                                $util.base64.decode(object.id, message.id = $util.newBuffer($util.base64.length(object.id)), 0);
-                            else if (object.id.length >= 0)
-                                message.id = object.id;
-                        if (object.readTimestamp != null) {
-                            if (typeof object.readTimestamp !== "object")
-                                throw TypeError(".google.spanner.v1.Transaction.readTimestamp: object expected");
-                            message.readTimestamp = $root.google.protobuf.Timestamp.fromObject(object.readTimestamp, long + 1);
-                        }
-                        if (object.precommitToken != null) {
-                            if (typeof object.precommitToken !== "object")
-                                throw TypeError(".google.spanner.v1.Transaction.precommitToken: object expected");
-                            message.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.fromObject(object.precommitToken, long + 1);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a Transaction message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {google.spanner.v1.Transaction} message Transaction
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    Transaction.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            if (options.bytes === String)
-                                object.id = "";
-                            else {
-                                object.id = [];
-                                if (options.bytes !== Array)
-                                    object.id = $util.newBuffer(object.id);
-                            }
-                            object.readTimestamp = null;
-                            object.precommitToken = null;
-                        }
-                        if (message.id != null && message.hasOwnProperty("id"))
-                            object.id = options.bytes === String ? $util.base64.encode(message.id, 0, message.id.length) : options.bytes === Array ? Array.prototype.slice.call(message.id) : message.id;
-                        if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp"))
-                            object.readTimestamp = $root.google.protobuf.Timestamp.toObject(message.readTimestamp, options);
-                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken"))
-                            object.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.toObject(message.precommitToken, options);
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this Transaction to JSON.
-                     * @function toJSON
-                     * @memberof google.spanner.v1.Transaction
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    Transaction.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for Transaction
-                     * @function getTypeUrl
-                     * @memberof google.spanner.v1.Transaction
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    Transaction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.spanner.v1.Transaction";
-                    };
-    
-                    return Transaction;
-                })();
-    
-                v1.TransactionSelector = (function() {
-    
-                    /**
-                     * Properties of a TransactionSelector.
-                     * @memberof google.spanner.v1
-                     * @interface ITransactionSelector
-                     * @property {google.spanner.v1.ITransactionOptions|null} [singleUse] TransactionSelector singleUse
-                     * @property {Uint8Array|null} [id] TransactionSelector id
-                     * @property {google.spanner.v1.ITransactionOptions|null} [begin] TransactionSelector begin
-                     */
-    
-                    /**
-                     * Constructs a new TransactionSelector.
-                     * @memberof google.spanner.v1
-                     * @classdesc Represents a TransactionSelector.
-                     * @implements ITransactionSelector
-                     * @constructor
-                     * @param {google.spanner.v1.ITransactionSelector=} [properties] Properties to set
-                     */
-                    function TransactionSelector(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * TransactionSelector singleUse.
-                     * @member {google.spanner.v1.ITransactionOptions|null|undefined} singleUse
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @instance
-                     */
-                    TransactionSelector.prototype.singleUse = null;
-    
-                    /**
-                     * TransactionSelector id.
-                     * @member {Uint8Array|null|undefined} id
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @instance
-                     */
-                    TransactionSelector.prototype.id = null;
-    
-                    /**
-                     * TransactionSelector begin.
-                     * @member {google.spanner.v1.ITransactionOptions|null|undefined} begin
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @instance
-                     */
-                    TransactionSelector.prototype.begin = null;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * TransactionSelector selector.
-                     * @member {"singleUse"|"id"|"begin"|undefined} selector
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @instance
-                     */
-                    Object.defineProperty(TransactionSelector.prototype, "selector", {
-                        get: $util.oneOfGetter($oneOfFields = ["singleUse", "id", "begin"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new TransactionSelector instance using the specified properties.
-                     * @function create
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {google.spanner.v1.ITransactionSelector=} [properties] Properties to set
-                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector instance
-                     */
-                    TransactionSelector.create = function create(properties) {
-                        return new TransactionSelector(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified TransactionSelector message. Does not implicitly {@link google.spanner.v1.TransactionSelector.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {google.spanner.v1.ITransactionSelector} message TransactionSelector message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TransactionSelector.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.singleUse != null && Object.hasOwnProperty.call(message, "singleUse"))
-                            $root.google.spanner.v1.TransactionOptions.encode(message.singleUse, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                            writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.id);
-                        if (message.begin != null && Object.hasOwnProperty.call(message, "begin"))
-                            $root.google.spanner.v1.TransactionOptions.encode(message.begin, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified TransactionSelector message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionSelector.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {google.spanner.v1.ITransactionSelector} message TransactionSelector message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    TransactionSelector.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a TransactionSelector message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TransactionSelector.decode = function decode(reader, length, error, long) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $Reader.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionSelector();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.singleUse = $root.google.spanner.v1.TransactionOptions.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 2: {
-                                    message.id = reader.bytes();
-                                    break;
-                                }
-                            case 3: {
-                                    message.begin = $root.google.spanner.v1.TransactionOptions.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7, long);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a TransactionSelector message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    TransactionSelector.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a TransactionSelector message.
-                     * @function verify
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    TransactionSelector.verify = function verify(message, long) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            return "maximum nesting depth exceeded";
-                        var properties = {};
-                        if (message.singleUse != null && message.hasOwnProperty("singleUse")) {
-                            properties.selector = 1;
-                            {
-                                var error = $root.google.spanner.v1.TransactionOptions.verify(message.singleUse, long + 1);
-                                if (error)
-                                    return "singleUse." + error;
-                            }
-                        }
-                        if (message.id != null && message.hasOwnProperty("id")) {
-                            if (properties.selector === 1)
-                                return "selector: multiple values";
-                            properties.selector = 1;
-                            if (!(message.id && typeof message.id.length === "number" || $util.isString(message.id)))
-                                return "id: buffer expected";
-                        }
-                        if (message.begin != null && message.hasOwnProperty("begin")) {
-                            if (properties.selector === 1)
-                                return "selector: multiple values";
-                            properties.selector = 1;
-                            {
-                                var error = $root.google.spanner.v1.TransactionOptions.verify(message.begin, long + 1);
-                                if (error)
-                                    return "begin." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a TransactionSelector message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector
-                     */
-                    TransactionSelector.fromObject = function fromObject(object, long) {
-                        if (object instanceof $root.google.spanner.v1.TransactionSelector)
-                            return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var message = new $root.google.spanner.v1.TransactionSelector();
-                        if (object.singleUse != null) {
-                            if (typeof object.singleUse !== "object")
-                                throw TypeError(".google.spanner.v1.TransactionSelector.singleUse: object expected");
-                            message.singleUse = $root.google.spanner.v1.TransactionOptions.fromObject(object.singleUse, long + 1);
-                        }
-                        if (object.id != null)
-                            if (typeof object.id === "string")
-                                $util.base64.decode(object.id, message.id = $util.newBuffer($util.base64.length(object.id)), 0);
-                            else if (object.id.length >= 0)
-                                message.id = object.id;
-                        if (object.begin != null) {
-                            if (typeof object.begin !== "object")
-                                throw TypeError(".google.spanner.v1.TransactionSelector.begin: object expected");
-                            message.begin = $root.google.spanner.v1.TransactionOptions.fromObject(object.begin, long + 1);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a TransactionSelector message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {google.spanner.v1.TransactionSelector} message TransactionSelector
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    TransactionSelector.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (message.singleUse != null && message.hasOwnProperty("singleUse")) {
-                            object.singleUse = $root.google.spanner.v1.TransactionOptions.toObject(message.singleUse, options);
-                            if (options.oneofs)
-                                object.selector = "singleUse";
-                        }
-                        if (message.id != null && message.hasOwnProperty("id")) {
-                            object.id = options.bytes === String ? $util.base64.encode(message.id, 0, message.id.length) : options.bytes === Array ? Array.prototype.slice.call(message.id) : message.id;
-                            if (options.oneofs)
-                                object.selector = "id";
-                        }
-                        if (message.begin != null && message.hasOwnProperty("begin")) {
-                            object.begin = $root.google.spanner.v1.TransactionOptions.toObject(message.begin, options);
-                            if (options.oneofs)
-                                object.selector = "begin";
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this TransactionSelector to JSON.
-                     * @function toJSON
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    TransactionSelector.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for TransactionSelector
-                     * @function getTypeUrl
-                     * @memberof google.spanner.v1.TransactionSelector
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    TransactionSelector.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.spanner.v1.TransactionSelector";
-                    };
-    
-                    return TransactionSelector;
-                })();
-    
-                v1.MultiplexedSessionPrecommitToken = (function() {
-    
-                    /**
-                     * Properties of a MultiplexedSessionPrecommitToken.
-                     * @memberof google.spanner.v1
-                     * @interface IMultiplexedSessionPrecommitToken
-                     * @property {Uint8Array|null} [precommitToken] MultiplexedSessionPrecommitToken precommitToken
-                     * @property {number|null} [seqNum] MultiplexedSessionPrecommitToken seqNum
-                     */
-    
-                    /**
-                     * Constructs a new MultiplexedSessionPrecommitToken.
-                     * @memberof google.spanner.v1
-                     * @classdesc Represents a MultiplexedSessionPrecommitToken.
-                     * @implements IMultiplexedSessionPrecommitToken
-                     * @constructor
-                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken=} [properties] Properties to set
-                     */
-                    function MultiplexedSessionPrecommitToken(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * MultiplexedSessionPrecommitToken precommitToken.
-                     * @member {Uint8Array} precommitToken
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @instance
-                     */
-                    MultiplexedSessionPrecommitToken.prototype.precommitToken = $util.newBuffer([]);
-    
-                    /**
-                     * MultiplexedSessionPrecommitToken seqNum.
-                     * @member {number} seqNum
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @instance
-                     */
-                    MultiplexedSessionPrecommitToken.prototype.seqNum = 0;
-    
-                    /**
-                     * Creates a new MultiplexedSessionPrecommitToken instance using the specified properties.
-                     * @function create
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken=} [properties] Properties to set
-                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken instance
-                     */
-                    MultiplexedSessionPrecommitToken.create = function create(properties) {
-                        return new MultiplexedSessionPrecommitToken(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified MultiplexedSessionPrecommitToken message. Does not implicitly {@link google.spanner.v1.MultiplexedSessionPrecommitToken.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken} message MultiplexedSessionPrecommitToken message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    MultiplexedSessionPrecommitToken.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.precommitToken != null && Object.hasOwnProperty.call(message, "precommitToken"))
-                            writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.precommitToken);
-                        if (message.seqNum != null && Object.hasOwnProperty.call(message, "seqNum"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.seqNum);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified MultiplexedSessionPrecommitToken message, length delimited. Does not implicitly {@link google.spanner.v1.MultiplexedSessionPrecommitToken.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken} message MultiplexedSessionPrecommitToken message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    MultiplexedSessionPrecommitToken.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a MultiplexedSessionPrecommitToken message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    MultiplexedSessionPrecommitToken.decode = function decode(reader, length, error, long) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $Reader.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.MultiplexedSessionPrecommitToken();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.precommitToken = reader.bytes();
-                                    break;
-                                }
-                            case 2: {
-                                    message.seqNum = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7, long);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a MultiplexedSessionPrecommitToken message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    MultiplexedSessionPrecommitToken.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a MultiplexedSessionPrecommitToken message.
-                     * @function verify
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    MultiplexedSessionPrecommitToken.verify = function verify(message, long) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            return "maximum nesting depth exceeded";
-                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken"))
-                            if (!(message.precommitToken && typeof message.precommitToken.length === "number" || $util.isString(message.precommitToken)))
-                                return "precommitToken: buffer expected";
-                        if (message.seqNum != null && message.hasOwnProperty("seqNum"))
-                            if (!$util.isInteger(message.seqNum))
-                                return "seqNum: integer expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a MultiplexedSessionPrecommitToken message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken
-                     */
-                    MultiplexedSessionPrecommitToken.fromObject = function fromObject(object, long) {
-                        if (object instanceof $root.google.spanner.v1.MultiplexedSessionPrecommitToken)
-                            return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var message = new $root.google.spanner.v1.MultiplexedSessionPrecommitToken();
-                        if (object.precommitToken != null)
-                            if (typeof object.precommitToken === "string")
-                                $util.base64.decode(object.precommitToken, message.precommitToken = $util.newBuffer($util.base64.length(object.precommitToken)), 0);
-                            else if (object.precommitToken.length >= 0)
-                                message.precommitToken = object.precommitToken;
-                        if (object.seqNum != null)
-                            message.seqNum = object.seqNum | 0;
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a MultiplexedSessionPrecommitToken message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {google.spanner.v1.MultiplexedSessionPrecommitToken} message MultiplexedSessionPrecommitToken
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    MultiplexedSessionPrecommitToken.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            if (options.bytes === String)
-                                object.precommitToken = "";
-                            else {
-                                object.precommitToken = [];
-                                if (options.bytes !== Array)
-                                    object.precommitToken = $util.newBuffer(object.precommitToken);
-                            }
-                            object.seqNum = 0;
-                        }
-                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken"))
-                            object.precommitToken = options.bytes === String ? $util.base64.encode(message.precommitToken, 0, message.precommitToken.length) : options.bytes === Array ? Array.prototype.slice.call(message.precommitToken) : message.precommitToken;
-                        if (message.seqNum != null && message.hasOwnProperty("seqNum"))
-                            object.seqNum = message.seqNum;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this MultiplexedSessionPrecommitToken to JSON.
-                     * @function toJSON
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    MultiplexedSessionPrecommitToken.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for MultiplexedSessionPrecommitToken
-                     * @function getTypeUrl
-                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    MultiplexedSessionPrecommitToken.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.spanner.v1.MultiplexedSessionPrecommitToken";
-                    };
-    
-                    return MultiplexedSessionPrecommitToken;
-                })();
-    
-                v1.KeyRange = (function() {
-    
-                    /**
-                     * Properties of a KeyRange.
-                     * @memberof google.spanner.v1
-                     * @interface IKeyRange
-                     * @property {google.protobuf.IListValue|null} [startClosed] KeyRange startClosed
-                     * @property {google.protobuf.IListValue|null} [startOpen] KeyRange startOpen
-                     * @property {google.protobuf.IListValue|null} [endClosed] KeyRange endClosed
-                     * @property {google.protobuf.IListValue|null} [endOpen] KeyRange endOpen
-                     */
-    
-                    /**
-                     * Constructs a new KeyRange.
-                     * @memberof google.spanner.v1
-                     * @classdesc Represents a KeyRange.
-                     * @implements IKeyRange
-                     * @constructor
-                     * @param {google.spanner.v1.IKeyRange=} [properties] Properties to set
-                     */
-                    function KeyRange(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * KeyRange startClosed.
-                     * @member {google.protobuf.IListValue|null|undefined} startClosed
-                     * @memberof google.spanner.v1.KeyRange
-                     * @instance
-                     */
-                    KeyRange.prototype.startClosed = null;
-    
-                    /**
-                     * KeyRange startOpen.
-                     * @member {google.protobuf.IListValue|null|undefined} startOpen
-                     * @memberof google.spanner.v1.KeyRange
-                     * @instance
-                     */
-                    KeyRange.prototype.startOpen = null;
-    
-                    /**
-                     * KeyRange endClosed.
-                     * @member {google.protobuf.IListValue|null|undefined} endClosed
-                     * @memberof google.spanner.v1.KeyRange
-                     * @instance
-                     */
-                    KeyRange.prototype.endClosed = null;
-    
-                    /**
-                     * KeyRange endOpen.
-                     * @member {google.protobuf.IListValue|null|undefined} endOpen
-                     * @memberof google.spanner.v1.KeyRange
-                     * @instance
-                     */
-                    KeyRange.prototype.endOpen = null;
-    
-                    // OneOf field names bound to virtual getters and setters
-                    var $oneOfFields;
-    
-                    /**
-                     * KeyRange startKeyType.
-                     * @member {"startClosed"|"startOpen"|undefined} startKeyType
-                     * @memberof google.spanner.v1.KeyRange
-                     * @instance
-                     */
-                    Object.defineProperty(KeyRange.prototype, "startKeyType", {
-                        get: $util.oneOfGetter($oneOfFields = ["startClosed", "startOpen"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * KeyRange endKeyType.
-                     * @member {"endClosed"|"endOpen"|undefined} endKeyType
-                     * @memberof google.spanner.v1.KeyRange
-                     * @instance
-                     */
-                    Object.defineProperty(KeyRange.prototype, "endKeyType", {
-                        get: $util.oneOfGetter($oneOfFields = ["endClosed", "endOpen"]),
-                        set: $util.oneOfSetter($oneOfFields)
-                    });
-    
-                    /**
-                     * Creates a new KeyRange instance using the specified properties.
-                     * @function create
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {google.spanner.v1.IKeyRange=} [properties] Properties to set
-                     * @returns {google.spanner.v1.KeyRange} KeyRange instance
-                     */
-                    KeyRange.create = function create(properties) {
-                        return new KeyRange(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified KeyRange message. Does not implicitly {@link google.spanner.v1.KeyRange.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {google.spanner.v1.IKeyRange} message KeyRange message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    KeyRange.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.startClosed != null && Object.hasOwnProperty.call(message, "startClosed"))
-                            $root.google.protobuf.ListValue.encode(message.startClosed, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.startOpen != null && Object.hasOwnProperty.call(message, "startOpen"))
-                            $root.google.protobuf.ListValue.encode(message.startOpen, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.endClosed != null && Object.hasOwnProperty.call(message, "endClosed"))
-                            $root.google.protobuf.ListValue.encode(message.endClosed, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                        if (message.endOpen != null && Object.hasOwnProperty.call(message, "endOpen"))
-                            $root.google.protobuf.ListValue.encode(message.endOpen, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified KeyRange message, length delimited. Does not implicitly {@link google.spanner.v1.KeyRange.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {google.spanner.v1.IKeyRange} message KeyRange message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    KeyRange.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a KeyRange message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.spanner.v1.KeyRange} KeyRange
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    KeyRange.decode = function decode(reader, length, error, long) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $Reader.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.KeyRange();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.startClosed = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 2: {
-                                    message.startOpen = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 3: {
-                                    message.endClosed = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            case 4: {
-                                    message.endOpen = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7, long);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a KeyRange message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.spanner.v1.KeyRange} KeyRange
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    KeyRange.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a KeyRange message.
-                     * @function verify
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    KeyRange.verify = function verify(message, long) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            return "maximum nesting depth exceeded";
-                        var properties = {};
-                        if (message.startClosed != null && message.hasOwnProperty("startClosed")) {
-                            properties.startKeyType = 1;
-                            {
-                                var error = $root.google.protobuf.ListValue.verify(message.startClosed, long + 1);
-                                if (error)
-                                    return "startClosed." + error;
-                            }
-                        }
-                        if (message.startOpen != null && message.hasOwnProperty("startOpen")) {
-                            if (properties.startKeyType === 1)
-                                return "startKeyType: multiple values";
-                            properties.startKeyType = 1;
-                            {
-                                var error = $root.google.protobuf.ListValue.verify(message.startOpen, long + 1);
-                                if (error)
-                                    return "startOpen." + error;
-                            }
-                        }
-                        if (message.endClosed != null && message.hasOwnProperty("endClosed")) {
-                            properties.endKeyType = 1;
-                            {
-                                var error = $root.google.protobuf.ListValue.verify(message.endClosed, long + 1);
-                                if (error)
-                                    return "endClosed." + error;
-                            }
-                        }
-                        if (message.endOpen != null && message.hasOwnProperty("endOpen")) {
-                            if (properties.endKeyType === 1)
-                                return "endKeyType: multiple values";
-                            properties.endKeyType = 1;
-                            {
-                                var error = $root.google.protobuf.ListValue.verify(message.endOpen, long + 1);
-                                if (error)
-                                    return "endOpen." + error;
-                            }
-                        }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a KeyRange message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.spanner.v1.KeyRange} KeyRange
-                     */
-                    KeyRange.fromObject = function fromObject(object, long) {
-                        if (object instanceof $root.google.spanner.v1.KeyRange)
-                            return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var message = new $root.google.spanner.v1.KeyRange();
-                        if (object.startClosed != null) {
-                            if (typeof object.startClosed !== "object")
-                                throw TypeError(".google.spanner.v1.KeyRange.startClosed: object expected");
-                            message.startClosed = $root.google.protobuf.ListValue.fromObject(object.startClosed, long + 1);
-                        }
-                        if (object.startOpen != null) {
-                            if (typeof object.startOpen !== "object")
-                                throw TypeError(".google.spanner.v1.KeyRange.startOpen: object expected");
-                            message.startOpen = $root.google.protobuf.ListValue.fromObject(object.startOpen, long + 1);
-                        }
-                        if (object.endClosed != null) {
-                            if (typeof object.endClosed !== "object")
-                                throw TypeError(".google.spanner.v1.KeyRange.endClosed: object expected");
-                            message.endClosed = $root.google.protobuf.ListValue.fromObject(object.endClosed, long + 1);
-                        }
-                        if (object.endOpen != null) {
-                            if (typeof object.endOpen !== "object")
-                                throw TypeError(".google.spanner.v1.KeyRange.endOpen: object expected");
-                            message.endOpen = $root.google.protobuf.ListValue.fromObject(object.endOpen, long + 1);
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a KeyRange message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {google.spanner.v1.KeyRange} message KeyRange
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    KeyRange.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (message.startClosed != null && message.hasOwnProperty("startClosed")) {
-                            object.startClosed = $root.google.protobuf.ListValue.toObject(message.startClosed, options);
-                            if (options.oneofs)
-                                object.startKeyType = "startClosed";
-                        }
-                        if (message.startOpen != null && message.hasOwnProperty("startOpen")) {
-                            object.startOpen = $root.google.protobuf.ListValue.toObject(message.startOpen, options);
-                            if (options.oneofs)
-                                object.startKeyType = "startOpen";
-                        }
-                        if (message.endClosed != null && message.hasOwnProperty("endClosed")) {
-                            object.endClosed = $root.google.protobuf.ListValue.toObject(message.endClosed, options);
-                            if (options.oneofs)
-                                object.endKeyType = "endClosed";
-                        }
-                        if (message.endOpen != null && message.hasOwnProperty("endOpen")) {
-                            object.endOpen = $root.google.protobuf.ListValue.toObject(message.endOpen, options);
-                            if (options.oneofs)
-                                object.endKeyType = "endOpen";
-                        }
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this KeyRange to JSON.
-                     * @function toJSON
-                     * @memberof google.spanner.v1.KeyRange
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    KeyRange.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for KeyRange
-                     * @function getTypeUrl
-                     * @memberof google.spanner.v1.KeyRange
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    KeyRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.spanner.v1.KeyRange";
-                    };
-    
-                    return KeyRange;
-                })();
-    
-                v1.KeySet = (function() {
-    
-                    /**
-                     * Properties of a KeySet.
-                     * @memberof google.spanner.v1
-                     * @interface IKeySet
-                     * @property {Array.<google.protobuf.IListValue>|null} [keys] KeySet keys
-                     * @property {Array.<google.spanner.v1.IKeyRange>|null} [ranges] KeySet ranges
-                     * @property {boolean|null} [all] KeySet all
-                     */
-    
-                    /**
-                     * Constructs a new KeySet.
-                     * @memberof google.spanner.v1
-                     * @classdesc Represents a KeySet.
-                     * @implements IKeySet
-                     * @constructor
-                     * @param {google.spanner.v1.IKeySet=} [properties] Properties to set
-                     */
-                    function KeySet(properties) {
-                        this.keys = [];
-                        this.ranges = [];
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * KeySet keys.
-                     * @member {Array.<google.protobuf.IListValue>} keys
-                     * @memberof google.spanner.v1.KeySet
-                     * @instance
-                     */
-                    KeySet.prototype.keys = $util.emptyArray;
-    
-                    /**
-                     * KeySet ranges.
-                     * @member {Array.<google.spanner.v1.IKeyRange>} ranges
-                     * @memberof google.spanner.v1.KeySet
-                     * @instance
-                     */
-                    KeySet.prototype.ranges = $util.emptyArray;
-    
-                    /**
-                     * KeySet all.
-                     * @member {boolean} all
-                     * @memberof google.spanner.v1.KeySet
-                     * @instance
-                     */
-                    KeySet.prototype.all = false;
-    
-                    /**
-                     * Creates a new KeySet instance using the specified properties.
-                     * @function create
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {google.spanner.v1.IKeySet=} [properties] Properties to set
-                     * @returns {google.spanner.v1.KeySet} KeySet instance
-                     */
-                    KeySet.create = function create(properties) {
-                        return new KeySet(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified KeySet message. Does not implicitly {@link google.spanner.v1.KeySet.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {google.spanner.v1.IKeySet} message KeySet message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    KeySet.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.keys != null && message.keys.length)
-                            for (var i = 0; i < message.keys.length; ++i)
-                                $root.google.protobuf.ListValue.encode(message.keys[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                        if (message.ranges != null && message.ranges.length)
-                            for (var i = 0; i < message.ranges.length; ++i)
-                                $root.google.spanner.v1.KeyRange.encode(message.ranges[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                        if (message.all != null && Object.hasOwnProperty.call(message, "all"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.all);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified KeySet message, length delimited. Does not implicitly {@link google.spanner.v1.KeySet.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {google.spanner.v1.IKeySet} message KeySet message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    KeySet.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a KeySet message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.spanner.v1.KeySet} KeySet
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    KeySet.decode = function decode(reader, length, error, long) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $Reader.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.KeySet();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    if (!(message.keys && message.keys.length))
-                                        message.keys = [];
-                                    message.keys.push($root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1));
-                                    break;
-                                }
-                            case 2: {
-                                    if (!(message.ranges && message.ranges.length))
-                                        message.ranges = [];
-                                    message.ranges.push($root.google.spanner.v1.KeyRange.decode(reader, reader.uint32(), undefined, long + 1));
-                                    break;
-                                }
-                            case 3: {
-                                    message.all = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7, long);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a KeySet message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.spanner.v1.KeySet} KeySet
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    KeySet.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a KeySet message.
-                     * @function verify
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    KeySet.verify = function verify(message, long) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            return "maximum nesting depth exceeded";
-                        if (message.keys != null && message.hasOwnProperty("keys")) {
-                            if (!Array.isArray(message.keys))
-                                return "keys: array expected";
-                            for (var i = 0; i < message.keys.length; ++i) {
-                                var error = $root.google.protobuf.ListValue.verify(message.keys[i], long + 1);
-                                if (error)
-                                    return "keys." + error;
-                            }
-                        }
-                        if (message.ranges != null && message.hasOwnProperty("ranges")) {
-                            if (!Array.isArray(message.ranges))
-                                return "ranges: array expected";
-                            for (var i = 0; i < message.ranges.length; ++i) {
-                                var error = $root.google.spanner.v1.KeyRange.verify(message.ranges[i], long + 1);
-                                if (error)
-                                    return "ranges." + error;
-                            }
-                        }
-                        if (message.all != null && message.hasOwnProperty("all"))
-                            if (typeof message.all !== "boolean")
-                                return "all: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a KeySet message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.spanner.v1.KeySet} KeySet
-                     */
-                    KeySet.fromObject = function fromObject(object, long) {
-                        if (object instanceof $root.google.spanner.v1.KeySet)
-                            return object;
-                        if (long === undefined)
-                            long = 0;
-                        if (long > $util.recursionLimit)
-                            throw Error("maximum nesting depth exceeded");
-                        var message = new $root.google.spanner.v1.KeySet();
-                        if (object.keys) {
-                            if (!Array.isArray(object.keys))
-                                throw TypeError(".google.spanner.v1.KeySet.keys: array expected");
-                            message.keys = [];
-                            for (var i = 0; i < object.keys.length; ++i) {
-                                if (typeof object.keys[i] !== "object")
-                                    throw TypeError(".google.spanner.v1.KeySet.keys: object expected");
-                                message.keys[i] = $root.google.protobuf.ListValue.fromObject(object.keys[i], long + 1);
-                            }
-                        }
-                        if (object.ranges) {
-                            if (!Array.isArray(object.ranges))
-                                throw TypeError(".google.spanner.v1.KeySet.ranges: array expected");
-                            message.ranges = [];
-                            for (var i = 0; i < object.ranges.length; ++i) {
-                                if (typeof object.ranges[i] !== "object")
-                                    throw TypeError(".google.spanner.v1.KeySet.ranges: object expected");
-                                message.ranges[i] = $root.google.spanner.v1.KeyRange.fromObject(object.ranges[i], long + 1);
-                            }
-                        }
-                        if (object.all != null)
-                            message.all = Boolean(object.all);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a KeySet message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {google.spanner.v1.KeySet} message KeySet
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    KeySet.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.arrays || options.defaults) {
-                            object.keys = [];
-                            object.ranges = [];
-                        }
-                        if (options.defaults)
-                            object.all = false;
-                        if (message.keys && message.keys.length) {
-                            object.keys = [];
-                            for (var j = 0; j < message.keys.length; ++j)
-                                object.keys[j] = $root.google.protobuf.ListValue.toObject(message.keys[j], options);
-                        }
-                        if (message.ranges && message.ranges.length) {
-                            object.ranges = [];
-                            for (var j = 0; j < message.ranges.length; ++j)
-                                object.ranges[j] = $root.google.spanner.v1.KeyRange.toObject(message.ranges[j], options);
-                        }
-                        if (message.all != null && message.hasOwnProperty("all"))
-                            object.all = message.all;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this KeySet to JSON.
-                     * @function toJSON
-                     * @memberof google.spanner.v1.KeySet
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    KeySet.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for KeySet
-                     * @function getTypeUrl
-                     * @memberof google.spanner.v1.KeySet
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    KeySet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.spanner.v1.KeySet";
-                    };
-    
-                    return KeySet;
                 })();
     
                 v1.Range = (function() {
@@ -97363,6 +95058,2814 @@
                     values[valuesById[3] = "PG_JSONB"] = 3;
                     values[valuesById[4] = "PG_OID"] = 4;
                     return values;
+                })();
+    
+                v1.TransactionOptions = (function() {
+    
+                    /**
+                     * Properties of a TransactionOptions.
+                     * @memberof google.spanner.v1
+                     * @interface ITransactionOptions
+                     * @property {google.spanner.v1.TransactionOptions.IReadWrite|null} [readWrite] TransactionOptions readWrite
+                     * @property {google.spanner.v1.TransactionOptions.IPartitionedDml|null} [partitionedDml] TransactionOptions partitionedDml
+                     * @property {google.spanner.v1.TransactionOptions.IReadOnly|null} [readOnly] TransactionOptions readOnly
+                     * @property {boolean|null} [excludeTxnFromChangeStreams] TransactionOptions excludeTxnFromChangeStreams
+                     * @property {google.spanner.v1.TransactionOptions.IsolationLevel|null} [isolationLevel] TransactionOptions isolationLevel
+                     */
+    
+                    /**
+                     * Constructs a new TransactionOptions.
+                     * @memberof google.spanner.v1
+                     * @classdesc Represents a TransactionOptions.
+                     * @implements ITransactionOptions
+                     * @constructor
+                     * @param {google.spanner.v1.ITransactionOptions=} [properties] Properties to set
+                     */
+                    function TransactionOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TransactionOptions readWrite.
+                     * @member {google.spanner.v1.TransactionOptions.IReadWrite|null|undefined} readWrite
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @instance
+                     */
+                    TransactionOptions.prototype.readWrite = null;
+    
+                    /**
+                     * TransactionOptions partitionedDml.
+                     * @member {google.spanner.v1.TransactionOptions.IPartitionedDml|null|undefined} partitionedDml
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @instance
+                     */
+                    TransactionOptions.prototype.partitionedDml = null;
+    
+                    /**
+                     * TransactionOptions readOnly.
+                     * @member {google.spanner.v1.TransactionOptions.IReadOnly|null|undefined} readOnly
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @instance
+                     */
+                    TransactionOptions.prototype.readOnly = null;
+    
+                    /**
+                     * TransactionOptions excludeTxnFromChangeStreams.
+                     * @member {boolean} excludeTxnFromChangeStreams
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @instance
+                     */
+                    TransactionOptions.prototype.excludeTxnFromChangeStreams = false;
+    
+                    /**
+                     * TransactionOptions isolationLevel.
+                     * @member {google.spanner.v1.TransactionOptions.IsolationLevel} isolationLevel
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @instance
+                     */
+                    TransactionOptions.prototype.isolationLevel = 0;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * TransactionOptions mode.
+                     * @member {"readWrite"|"partitionedDml"|"readOnly"|undefined} mode
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @instance
+                     */
+                    Object.defineProperty(TransactionOptions.prototype, "mode", {
+                        get: $util.oneOfGetter($oneOfFields = ["readWrite", "partitionedDml", "readOnly"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new TransactionOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {google.spanner.v1.ITransactionOptions=} [properties] Properties to set
+                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions instance
+                     */
+                    TransactionOptions.create = function create(properties) {
+                        return new TransactionOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TransactionOptions message. Does not implicitly {@link google.spanner.v1.TransactionOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {google.spanner.v1.ITransactionOptions} message TransactionOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TransactionOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.readWrite != null && Object.hasOwnProperty.call(message, "readWrite"))
+                            $root.google.spanner.v1.TransactionOptions.ReadWrite.encode(message.readWrite, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.readOnly != null && Object.hasOwnProperty.call(message, "readOnly"))
+                            $root.google.spanner.v1.TransactionOptions.ReadOnly.encode(message.readOnly, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.partitionedDml != null && Object.hasOwnProperty.call(message, "partitionedDml"))
+                            $root.google.spanner.v1.TransactionOptions.PartitionedDml.encode(message.partitionedDml, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.excludeTxnFromChangeStreams != null && Object.hasOwnProperty.call(message, "excludeTxnFromChangeStreams"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.excludeTxnFromChangeStreams);
+                        if (message.isolationLevel != null && Object.hasOwnProperty.call(message, "isolationLevel"))
+                            writer.uint32(/* id 6, wireType 0 =*/48).int32(message.isolationLevel);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TransactionOptions message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {google.spanner.v1.ITransactionOptions} message TransactionOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TransactionOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TransactionOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TransactionOptions.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.readWrite = $root.google.spanner.v1.TransactionOptions.ReadWrite.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 3: {
+                                    message.partitionedDml = $root.google.spanner.v1.TransactionOptions.PartitionedDml.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 2: {
+                                    message.readOnly = $root.google.spanner.v1.TransactionOptions.ReadOnly.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 5: {
+                                    message.excludeTxnFromChangeStreams = reader.bool();
+                                    break;
+                                }
+                            case 6: {
+                                    message.isolationLevel = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TransactionOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TransactionOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TransactionOptions message.
+                     * @function verify
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TransactionOptions.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        var properties = {};
+                        if (message.readWrite != null && message.hasOwnProperty("readWrite")) {
+                            properties.mode = 1;
+                            {
+                                var error = $root.google.spanner.v1.TransactionOptions.ReadWrite.verify(message.readWrite, long + 1);
+                                if (error)
+                                    return "readWrite." + error;
+                            }
+                        }
+                        if (message.partitionedDml != null && message.hasOwnProperty("partitionedDml")) {
+                            if (properties.mode === 1)
+                                return "mode: multiple values";
+                            properties.mode = 1;
+                            {
+                                var error = $root.google.spanner.v1.TransactionOptions.PartitionedDml.verify(message.partitionedDml, long + 1);
+                                if (error)
+                                    return "partitionedDml." + error;
+                            }
+                        }
+                        if (message.readOnly != null && message.hasOwnProperty("readOnly")) {
+                            if (properties.mode === 1)
+                                return "mode: multiple values";
+                            properties.mode = 1;
+                            {
+                                var error = $root.google.spanner.v1.TransactionOptions.ReadOnly.verify(message.readOnly, long + 1);
+                                if (error)
+                                    return "readOnly." + error;
+                            }
+                        }
+                        if (message.excludeTxnFromChangeStreams != null && message.hasOwnProperty("excludeTxnFromChangeStreams"))
+                            if (typeof message.excludeTxnFromChangeStreams !== "boolean")
+                                return "excludeTxnFromChangeStreams: boolean expected";
+                        if (message.isolationLevel != null && message.hasOwnProperty("isolationLevel"))
+                            switch (message.isolationLevel) {
+                            default:
+                                return "isolationLevel: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TransactionOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.spanner.v1.TransactionOptions} TransactionOptions
+                     */
+                    TransactionOptions.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.spanner.v1.TransactionOptions)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.spanner.v1.TransactionOptions();
+                        if (object.readWrite != null) {
+                            if (typeof object.readWrite !== "object")
+                                throw TypeError(".google.spanner.v1.TransactionOptions.readWrite: object expected");
+                            message.readWrite = $root.google.spanner.v1.TransactionOptions.ReadWrite.fromObject(object.readWrite, long + 1);
+                        }
+                        if (object.partitionedDml != null) {
+                            if (typeof object.partitionedDml !== "object")
+                                throw TypeError(".google.spanner.v1.TransactionOptions.partitionedDml: object expected");
+                            message.partitionedDml = $root.google.spanner.v1.TransactionOptions.PartitionedDml.fromObject(object.partitionedDml, long + 1);
+                        }
+                        if (object.readOnly != null) {
+                            if (typeof object.readOnly !== "object")
+                                throw TypeError(".google.spanner.v1.TransactionOptions.readOnly: object expected");
+                            message.readOnly = $root.google.spanner.v1.TransactionOptions.ReadOnly.fromObject(object.readOnly, long + 1);
+                        }
+                        if (object.excludeTxnFromChangeStreams != null)
+                            message.excludeTxnFromChangeStreams = Boolean(object.excludeTxnFromChangeStreams);
+                        switch (object.isolationLevel) {
+                        default:
+                            if (typeof object.isolationLevel === "number") {
+                                message.isolationLevel = object.isolationLevel;
+                                break;
+                            }
+                            break;
+                        case "ISOLATION_LEVEL_UNSPECIFIED":
+                        case 0:
+                            message.isolationLevel = 0;
+                            break;
+                        case "SERIALIZABLE":
+                        case 1:
+                            message.isolationLevel = 1;
+                            break;
+                        case "REPEATABLE_READ":
+                        case 2:
+                            message.isolationLevel = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TransactionOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {google.spanner.v1.TransactionOptions} message TransactionOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TransactionOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.excludeTxnFromChangeStreams = false;
+                            object.isolationLevel = options.enums === String ? "ISOLATION_LEVEL_UNSPECIFIED" : 0;
+                        }
+                        if (message.readWrite != null && message.hasOwnProperty("readWrite")) {
+                            object.readWrite = $root.google.spanner.v1.TransactionOptions.ReadWrite.toObject(message.readWrite, options);
+                            if (options.oneofs)
+                                object.mode = "readWrite";
+                        }
+                        if (message.readOnly != null && message.hasOwnProperty("readOnly")) {
+                            object.readOnly = $root.google.spanner.v1.TransactionOptions.ReadOnly.toObject(message.readOnly, options);
+                            if (options.oneofs)
+                                object.mode = "readOnly";
+                        }
+                        if (message.partitionedDml != null && message.hasOwnProperty("partitionedDml")) {
+                            object.partitionedDml = $root.google.spanner.v1.TransactionOptions.PartitionedDml.toObject(message.partitionedDml, options);
+                            if (options.oneofs)
+                                object.mode = "partitionedDml";
+                        }
+                        if (message.excludeTxnFromChangeStreams != null && message.hasOwnProperty("excludeTxnFromChangeStreams"))
+                            object.excludeTxnFromChangeStreams = message.excludeTxnFromChangeStreams;
+                        if (message.isolationLevel != null && message.hasOwnProperty("isolationLevel"))
+                            object.isolationLevel = options.enums === String ? $root.google.spanner.v1.TransactionOptions.IsolationLevel[message.isolationLevel] === undefined ? message.isolationLevel : $root.google.spanner.v1.TransactionOptions.IsolationLevel[message.isolationLevel] : message.isolationLevel;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TransactionOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TransactionOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for TransactionOptions
+                     * @function getTypeUrl
+                     * @memberof google.spanner.v1.TransactionOptions
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TransactionOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.spanner.v1.TransactionOptions";
+                    };
+    
+                    TransactionOptions.ReadWrite = (function() {
+    
+                        /**
+                         * Properties of a ReadWrite.
+                         * @memberof google.spanner.v1.TransactionOptions
+                         * @interface IReadWrite
+                         * @property {google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode|null} [readLockMode] ReadWrite readLockMode
+                         * @property {Uint8Array|null} [multiplexedSessionPreviousTransactionId] ReadWrite multiplexedSessionPreviousTransactionId
+                         */
+    
+                        /**
+                         * Constructs a new ReadWrite.
+                         * @memberof google.spanner.v1.TransactionOptions
+                         * @classdesc Represents a ReadWrite.
+                         * @implements IReadWrite
+                         * @constructor
+                         * @param {google.spanner.v1.TransactionOptions.IReadWrite=} [properties] Properties to set
+                         */
+                        function ReadWrite(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReadWrite readLockMode.
+                         * @member {google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode} readLockMode
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @instance
+                         */
+                        ReadWrite.prototype.readLockMode = 0;
+    
+                        /**
+                         * ReadWrite multiplexedSessionPreviousTransactionId.
+                         * @member {Uint8Array} multiplexedSessionPreviousTransactionId
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @instance
+                         */
+                        ReadWrite.prototype.multiplexedSessionPreviousTransactionId = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new ReadWrite instance using the specified properties.
+                         * @function create
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IReadWrite=} [properties] Properties to set
+                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite instance
+                         */
+                        ReadWrite.create = function create(properties) {
+                            return new ReadWrite(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReadWrite message. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadWrite.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IReadWrite} message ReadWrite message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadWrite.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.readLockMode != null && Object.hasOwnProperty.call(message, "readLockMode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.readLockMode);
+                            if (message.multiplexedSessionPreviousTransactionId != null && Object.hasOwnProperty.call(message, "multiplexedSessionPreviousTransactionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.multiplexedSessionPreviousTransactionId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReadWrite message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadWrite.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IReadWrite} message ReadWrite message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadWrite.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReadWrite message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadWrite.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions.ReadWrite();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.readLockMode = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.multiplexedSessionPreviousTransactionId = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReadWrite message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadWrite.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReadWrite message.
+                         * @function verify
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReadWrite.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            if (message.readLockMode != null && message.hasOwnProperty("readLockMode"))
+                                switch (message.readLockMode) {
+                                default:
+                                    return "readLockMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.multiplexedSessionPreviousTransactionId != null && message.hasOwnProperty("multiplexedSessionPreviousTransactionId"))
+                                if (!(message.multiplexedSessionPreviousTransactionId && typeof message.multiplexedSessionPreviousTransactionId.length === "number" || $util.isString(message.multiplexedSessionPreviousTransactionId)))
+                                    return "multiplexedSessionPreviousTransactionId: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReadWrite message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.spanner.v1.TransactionOptions.ReadWrite} ReadWrite
+                         */
+                        ReadWrite.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.spanner.v1.TransactionOptions.ReadWrite)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.spanner.v1.TransactionOptions.ReadWrite();
+                            switch (object.readLockMode) {
+                            default:
+                                if (typeof object.readLockMode === "number") {
+                                    message.readLockMode = object.readLockMode;
+                                    break;
+                                }
+                                break;
+                            case "READ_LOCK_MODE_UNSPECIFIED":
+                            case 0:
+                                message.readLockMode = 0;
+                                break;
+                            case "PESSIMISTIC":
+                            case 1:
+                                message.readLockMode = 1;
+                                break;
+                            case "OPTIMISTIC":
+                            case 2:
+                                message.readLockMode = 2;
+                                break;
+                            }
+                            if (object.multiplexedSessionPreviousTransactionId != null)
+                                if (typeof object.multiplexedSessionPreviousTransactionId === "string")
+                                    $util.base64.decode(object.multiplexedSessionPreviousTransactionId, message.multiplexedSessionPreviousTransactionId = $util.newBuffer($util.base64.length(object.multiplexedSessionPreviousTransactionId)), 0);
+                                else if (object.multiplexedSessionPreviousTransactionId.length >= 0)
+                                    message.multiplexedSessionPreviousTransactionId = object.multiplexedSessionPreviousTransactionId;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReadWrite message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.ReadWrite} message ReadWrite
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReadWrite.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.readLockMode = options.enums === String ? "READ_LOCK_MODE_UNSPECIFIED" : 0;
+                                if (options.bytes === String)
+                                    object.multiplexedSessionPreviousTransactionId = "";
+                                else {
+                                    object.multiplexedSessionPreviousTransactionId = [];
+                                    if (options.bytes !== Array)
+                                        object.multiplexedSessionPreviousTransactionId = $util.newBuffer(object.multiplexedSessionPreviousTransactionId);
+                                }
+                            }
+                            if (message.readLockMode != null && message.hasOwnProperty("readLockMode"))
+                                object.readLockMode = options.enums === String ? $root.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode[message.readLockMode] === undefined ? message.readLockMode : $root.google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode[message.readLockMode] : message.readLockMode;
+                            if (message.multiplexedSessionPreviousTransactionId != null && message.hasOwnProperty("multiplexedSessionPreviousTransactionId"))
+                                object.multiplexedSessionPreviousTransactionId = options.bytes === String ? $util.base64.encode(message.multiplexedSessionPreviousTransactionId, 0, message.multiplexedSessionPreviousTransactionId.length) : options.bytes === Array ? Array.prototype.slice.call(message.multiplexedSessionPreviousTransactionId) : message.multiplexedSessionPreviousTransactionId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReadWrite to JSON.
+                         * @function toJSON
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReadWrite.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReadWrite
+                         * @function getTypeUrl
+                         * @memberof google.spanner.v1.TransactionOptions.ReadWrite
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReadWrite.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.spanner.v1.TransactionOptions.ReadWrite";
+                        };
+    
+                        /**
+                         * ReadLockMode enum.
+                         * @name google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode
+                         * @enum {number}
+                         * @property {number} READ_LOCK_MODE_UNSPECIFIED=0 READ_LOCK_MODE_UNSPECIFIED value
+                         * @property {number} PESSIMISTIC=1 PESSIMISTIC value
+                         * @property {number} OPTIMISTIC=2 OPTIMISTIC value
+                         */
+                        ReadWrite.ReadLockMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "READ_LOCK_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PESSIMISTIC"] = 1;
+                            values[valuesById[2] = "OPTIMISTIC"] = 2;
+                            return values;
+                        })();
+    
+                        return ReadWrite;
+                    })();
+    
+                    TransactionOptions.PartitionedDml = (function() {
+    
+                        /**
+                         * Properties of a PartitionedDml.
+                         * @memberof google.spanner.v1.TransactionOptions
+                         * @interface IPartitionedDml
+                         */
+    
+                        /**
+                         * Constructs a new PartitionedDml.
+                         * @memberof google.spanner.v1.TransactionOptions
+                         * @classdesc Represents a PartitionedDml.
+                         * @implements IPartitionedDml
+                         * @constructor
+                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml=} [properties] Properties to set
+                         */
+                        function PartitionedDml(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new PartitionedDml instance using the specified properties.
+                         * @function create
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml=} [properties] Properties to set
+                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml instance
+                         */
+                        PartitionedDml.create = function create(properties) {
+                            return new PartitionedDml(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PartitionedDml message. Does not implicitly {@link google.spanner.v1.TransactionOptions.PartitionedDml.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml} message PartitionedDml message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PartitionedDml.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PartitionedDml message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.PartitionedDml.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IPartitionedDml} message PartitionedDml message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PartitionedDml.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PartitionedDml message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PartitionedDml.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions.PartitionedDml();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PartitionedDml message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PartitionedDml.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PartitionedDml message.
+                         * @function verify
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PartitionedDml.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PartitionedDml message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.spanner.v1.TransactionOptions.PartitionedDml} PartitionedDml
+                         */
+                        PartitionedDml.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.spanner.v1.TransactionOptions.PartitionedDml)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            return new $root.google.spanner.v1.TransactionOptions.PartitionedDml();
+                        };
+    
+                        /**
+                         * Creates a plain object from a PartitionedDml message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.PartitionedDml} message PartitionedDml
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PartitionedDml.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this PartitionedDml to JSON.
+                         * @function toJSON
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PartitionedDml.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PartitionedDml
+                         * @function getTypeUrl
+                         * @memberof google.spanner.v1.TransactionOptions.PartitionedDml
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PartitionedDml.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.spanner.v1.TransactionOptions.PartitionedDml";
+                        };
+    
+                        return PartitionedDml;
+                    })();
+    
+                    TransactionOptions.ReadOnly = (function() {
+    
+                        /**
+                         * Properties of a ReadOnly.
+                         * @memberof google.spanner.v1.TransactionOptions
+                         * @interface IReadOnly
+                         * @property {boolean|null} [strong] ReadOnly strong
+                         * @property {google.protobuf.ITimestamp|null} [minReadTimestamp] ReadOnly minReadTimestamp
+                         * @property {google.protobuf.IDuration|null} [maxStaleness] ReadOnly maxStaleness
+                         * @property {google.protobuf.ITimestamp|null} [readTimestamp] ReadOnly readTimestamp
+                         * @property {google.protobuf.IDuration|null} [exactStaleness] ReadOnly exactStaleness
+                         * @property {boolean|null} [returnReadTimestamp] ReadOnly returnReadTimestamp
+                         */
+    
+                        /**
+                         * Constructs a new ReadOnly.
+                         * @memberof google.spanner.v1.TransactionOptions
+                         * @classdesc Represents a ReadOnly.
+                         * @implements IReadOnly
+                         * @constructor
+                         * @param {google.spanner.v1.TransactionOptions.IReadOnly=} [properties] Properties to set
+                         */
+                        function ReadOnly(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ReadOnly strong.
+                         * @member {boolean|null|undefined} strong
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        ReadOnly.prototype.strong = null;
+    
+                        /**
+                         * ReadOnly minReadTimestamp.
+                         * @member {google.protobuf.ITimestamp|null|undefined} minReadTimestamp
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        ReadOnly.prototype.minReadTimestamp = null;
+    
+                        /**
+                         * ReadOnly maxStaleness.
+                         * @member {google.protobuf.IDuration|null|undefined} maxStaleness
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        ReadOnly.prototype.maxStaleness = null;
+    
+                        /**
+                         * ReadOnly readTimestamp.
+                         * @member {google.protobuf.ITimestamp|null|undefined} readTimestamp
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        ReadOnly.prototype.readTimestamp = null;
+    
+                        /**
+                         * ReadOnly exactStaleness.
+                         * @member {google.protobuf.IDuration|null|undefined} exactStaleness
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        ReadOnly.prototype.exactStaleness = null;
+    
+                        /**
+                         * ReadOnly returnReadTimestamp.
+                         * @member {boolean} returnReadTimestamp
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        ReadOnly.prototype.returnReadTimestamp = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ReadOnly timestampBound.
+                         * @member {"strong"|"minReadTimestamp"|"maxStaleness"|"readTimestamp"|"exactStaleness"|undefined} timestampBound
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         */
+                        Object.defineProperty(ReadOnly.prototype, "timestampBound", {
+                            get: $util.oneOfGetter($oneOfFields = ["strong", "minReadTimestamp", "maxStaleness", "readTimestamp", "exactStaleness"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ReadOnly instance using the specified properties.
+                         * @function create
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IReadOnly=} [properties] Properties to set
+                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly instance
+                         */
+                        ReadOnly.create = function create(properties) {
+                            return new ReadOnly(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ReadOnly message. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadOnly.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IReadOnly} message ReadOnly message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadOnly.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.strong != null && Object.hasOwnProperty.call(message, "strong"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.strong);
+                            if (message.minReadTimestamp != null && Object.hasOwnProperty.call(message, "minReadTimestamp"))
+                                $root.google.protobuf.Timestamp.encode(message.minReadTimestamp, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.maxStaleness != null && Object.hasOwnProperty.call(message, "maxStaleness"))
+                                $root.google.protobuf.Duration.encode(message.maxStaleness, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.readTimestamp != null && Object.hasOwnProperty.call(message, "readTimestamp"))
+                                $root.google.protobuf.Timestamp.encode(message.readTimestamp, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.exactStaleness != null && Object.hasOwnProperty.call(message, "exactStaleness"))
+                                $root.google.protobuf.Duration.encode(message.exactStaleness, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.returnReadTimestamp != null && Object.hasOwnProperty.call(message, "returnReadTimestamp"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.returnReadTimestamp);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ReadOnly message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionOptions.ReadOnly.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.IReadOnly} message ReadOnly message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ReadOnly.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ReadOnly message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadOnly.decode = function decode(reader, length, error, long) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $Reader.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionOptions.ReadOnly();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.strong = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.minReadTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 3: {
+                                        message.maxStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 4: {
+                                        message.readTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 5: {
+                                        message.exactStaleness = $root.google.protobuf.Duration.decode(reader, reader.uint32(), undefined, long + 1);
+                                        break;
+                                    }
+                                case 6: {
+                                        message.returnReadTimestamp = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7, long);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ReadOnly message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ReadOnly.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ReadOnly message.
+                         * @function verify
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ReadOnly.verify = function verify(message, long) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                return "maximum nesting depth exceeded";
+                            var properties = {};
+                            if (message.strong != null && message.hasOwnProperty("strong")) {
+                                properties.timestampBound = 1;
+                                if (typeof message.strong !== "boolean")
+                                    return "strong: boolean expected";
+                            }
+                            if (message.minReadTimestamp != null && message.hasOwnProperty("minReadTimestamp")) {
+                                if (properties.timestampBound === 1)
+                                    return "timestampBound: multiple values";
+                                properties.timestampBound = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.minReadTimestamp, long + 1);
+                                    if (error)
+                                        return "minReadTimestamp." + error;
+                                }
+                            }
+                            if (message.maxStaleness != null && message.hasOwnProperty("maxStaleness")) {
+                                if (properties.timestampBound === 1)
+                                    return "timestampBound: multiple values";
+                                properties.timestampBound = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.maxStaleness, long + 1);
+                                    if (error)
+                                        return "maxStaleness." + error;
+                                }
+                            }
+                            if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp")) {
+                                if (properties.timestampBound === 1)
+                                    return "timestampBound: multiple values";
+                                properties.timestampBound = 1;
+                                {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.readTimestamp, long + 1);
+                                    if (error)
+                                        return "readTimestamp." + error;
+                                }
+                            }
+                            if (message.exactStaleness != null && message.hasOwnProperty("exactStaleness")) {
+                                if (properties.timestampBound === 1)
+                                    return "timestampBound: multiple values";
+                                properties.timestampBound = 1;
+                                {
+                                    var error = $root.google.protobuf.Duration.verify(message.exactStaleness, long + 1);
+                                    if (error)
+                                        return "exactStaleness." + error;
+                                }
+                            }
+                            if (message.returnReadTimestamp != null && message.hasOwnProperty("returnReadTimestamp"))
+                                if (typeof message.returnReadTimestamp !== "boolean")
+                                    return "returnReadTimestamp: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ReadOnly message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.spanner.v1.TransactionOptions.ReadOnly} ReadOnly
+                         */
+                        ReadOnly.fromObject = function fromObject(object, long) {
+                            if (object instanceof $root.google.spanner.v1.TransactionOptions.ReadOnly)
+                                return object;
+                            if (long === undefined)
+                                long = 0;
+                            if (long > $util.recursionLimit)
+                                throw Error("maximum nesting depth exceeded");
+                            var message = new $root.google.spanner.v1.TransactionOptions.ReadOnly();
+                            if (object.strong != null)
+                                message.strong = Boolean(object.strong);
+                            if (object.minReadTimestamp != null) {
+                                if (typeof object.minReadTimestamp !== "object")
+                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.minReadTimestamp: object expected");
+                                message.minReadTimestamp = $root.google.protobuf.Timestamp.fromObject(object.minReadTimestamp, long + 1);
+                            }
+                            if (object.maxStaleness != null) {
+                                if (typeof object.maxStaleness !== "object")
+                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.maxStaleness: object expected");
+                                message.maxStaleness = $root.google.protobuf.Duration.fromObject(object.maxStaleness, long + 1);
+                            }
+                            if (object.readTimestamp != null) {
+                                if (typeof object.readTimestamp !== "object")
+                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.readTimestamp: object expected");
+                                message.readTimestamp = $root.google.protobuf.Timestamp.fromObject(object.readTimestamp, long + 1);
+                            }
+                            if (object.exactStaleness != null) {
+                                if (typeof object.exactStaleness !== "object")
+                                    throw TypeError(".google.spanner.v1.TransactionOptions.ReadOnly.exactStaleness: object expected");
+                                message.exactStaleness = $root.google.protobuf.Duration.fromObject(object.exactStaleness, long + 1);
+                            }
+                            if (object.returnReadTimestamp != null)
+                                message.returnReadTimestamp = Boolean(object.returnReadTimestamp);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ReadOnly message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {google.spanner.v1.TransactionOptions.ReadOnly} message ReadOnly
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ReadOnly.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.returnReadTimestamp = false;
+                            if (message.strong != null && message.hasOwnProperty("strong")) {
+                                object.strong = message.strong;
+                                if (options.oneofs)
+                                    object.timestampBound = "strong";
+                            }
+                            if (message.minReadTimestamp != null && message.hasOwnProperty("minReadTimestamp")) {
+                                object.minReadTimestamp = $root.google.protobuf.Timestamp.toObject(message.minReadTimestamp, options);
+                                if (options.oneofs)
+                                    object.timestampBound = "minReadTimestamp";
+                            }
+                            if (message.maxStaleness != null && message.hasOwnProperty("maxStaleness")) {
+                                object.maxStaleness = $root.google.protobuf.Duration.toObject(message.maxStaleness, options);
+                                if (options.oneofs)
+                                    object.timestampBound = "maxStaleness";
+                            }
+                            if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp")) {
+                                object.readTimestamp = $root.google.protobuf.Timestamp.toObject(message.readTimestamp, options);
+                                if (options.oneofs)
+                                    object.timestampBound = "readTimestamp";
+                            }
+                            if (message.exactStaleness != null && message.hasOwnProperty("exactStaleness")) {
+                                object.exactStaleness = $root.google.protobuf.Duration.toObject(message.exactStaleness, options);
+                                if (options.oneofs)
+                                    object.timestampBound = "exactStaleness";
+                            }
+                            if (message.returnReadTimestamp != null && message.hasOwnProperty("returnReadTimestamp"))
+                                object.returnReadTimestamp = message.returnReadTimestamp;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ReadOnly to JSON.
+                         * @function toJSON
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ReadOnly.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ReadOnly
+                         * @function getTypeUrl
+                         * @memberof google.spanner.v1.TransactionOptions.ReadOnly
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ReadOnly.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.spanner.v1.TransactionOptions.ReadOnly";
+                        };
+    
+                        return ReadOnly;
+                    })();
+    
+                    /**
+                     * IsolationLevel enum.
+                     * @name google.spanner.v1.TransactionOptions.IsolationLevel
+                     * @enum {number}
+                     * @property {number} ISOLATION_LEVEL_UNSPECIFIED=0 ISOLATION_LEVEL_UNSPECIFIED value
+                     * @property {number} SERIALIZABLE=1 SERIALIZABLE value
+                     * @property {number} REPEATABLE_READ=2 REPEATABLE_READ value
+                     */
+                    TransactionOptions.IsolationLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ISOLATION_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SERIALIZABLE"] = 1;
+                        values[valuesById[2] = "REPEATABLE_READ"] = 2;
+                        return values;
+                    })();
+    
+                    return TransactionOptions;
+                })();
+    
+                v1.Transaction = (function() {
+    
+                    /**
+                     * Properties of a Transaction.
+                     * @memberof google.spanner.v1
+                     * @interface ITransaction
+                     * @property {Uint8Array|null} [id] Transaction id
+                     * @property {google.protobuf.ITimestamp|null} [readTimestamp] Transaction readTimestamp
+                     * @property {google.spanner.v1.IMultiplexedSessionPrecommitToken|null} [precommitToken] Transaction precommitToken
+                     * @property {google.spanner.v1.ICacheUpdate|null} [cacheUpdate] Transaction cacheUpdate
+                     */
+    
+                    /**
+                     * Constructs a new Transaction.
+                     * @memberof google.spanner.v1
+                     * @classdesc Represents a Transaction.
+                     * @implements ITransaction
+                     * @constructor
+                     * @param {google.spanner.v1.ITransaction=} [properties] Properties to set
+                     */
+                    function Transaction(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Transaction id.
+                     * @member {Uint8Array} id
+                     * @memberof google.spanner.v1.Transaction
+                     * @instance
+                     */
+                    Transaction.prototype.id = $util.newBuffer([]);
+    
+                    /**
+                     * Transaction readTimestamp.
+                     * @member {google.protobuf.ITimestamp|null|undefined} readTimestamp
+                     * @memberof google.spanner.v1.Transaction
+                     * @instance
+                     */
+                    Transaction.prototype.readTimestamp = null;
+    
+                    /**
+                     * Transaction precommitToken.
+                     * @member {google.spanner.v1.IMultiplexedSessionPrecommitToken|null|undefined} precommitToken
+                     * @memberof google.spanner.v1.Transaction
+                     * @instance
+                     */
+                    Transaction.prototype.precommitToken = null;
+    
+                    /**
+                     * Transaction cacheUpdate.
+                     * @member {google.spanner.v1.ICacheUpdate|null|undefined} cacheUpdate
+                     * @memberof google.spanner.v1.Transaction
+                     * @instance
+                     */
+                    Transaction.prototype.cacheUpdate = null;
+    
+                    /**
+                     * Creates a new Transaction instance using the specified properties.
+                     * @function create
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {google.spanner.v1.ITransaction=} [properties] Properties to set
+                     * @returns {google.spanner.v1.Transaction} Transaction instance
+                     */
+                    Transaction.create = function create(properties) {
+                        return new Transaction(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Transaction message. Does not implicitly {@link google.spanner.v1.Transaction.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {google.spanner.v1.ITransaction} message Transaction message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Transaction.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.id);
+                        if (message.readTimestamp != null && Object.hasOwnProperty.call(message, "readTimestamp"))
+                            $root.google.protobuf.Timestamp.encode(message.readTimestamp, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.precommitToken != null && Object.hasOwnProperty.call(message, "precommitToken"))
+                            $root.google.spanner.v1.MultiplexedSessionPrecommitToken.encode(message.precommitToken, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.cacheUpdate != null && Object.hasOwnProperty.call(message, "cacheUpdate"))
+                            $root.google.spanner.v1.CacheUpdate.encode(message.cacheUpdate, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Transaction message, length delimited. Does not implicitly {@link google.spanner.v1.Transaction.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {google.spanner.v1.ITransaction} message Transaction message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Transaction.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Transaction message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.spanner.v1.Transaction} Transaction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Transaction.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.Transaction();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.id = reader.bytes();
+                                    break;
+                                }
+                            case 2: {
+                                    message.readTimestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 3: {
+                                    message.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 5: {
+                                    message.cacheUpdate = $root.google.spanner.v1.CacheUpdate.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Transaction message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.spanner.v1.Transaction} Transaction
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Transaction.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Transaction message.
+                     * @function verify
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Transaction.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            if (!(message.id && typeof message.id.length === "number" || $util.isString(message.id)))
+                                return "id: buffer expected";
+                        if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.readTimestamp, long + 1);
+                            if (error)
+                                return "readTimestamp." + error;
+                        }
+                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken")) {
+                            var error = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.verify(message.precommitToken, long + 1);
+                            if (error)
+                                return "precommitToken." + error;
+                        }
+                        if (message.cacheUpdate != null && message.hasOwnProperty("cacheUpdate")) {
+                            var error = $root.google.spanner.v1.CacheUpdate.verify(message.cacheUpdate, long + 1);
+                            if (error)
+                                return "cacheUpdate." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Transaction message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.spanner.v1.Transaction} Transaction
+                     */
+                    Transaction.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.spanner.v1.Transaction)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.spanner.v1.Transaction();
+                        if (object.id != null)
+                            if (typeof object.id === "string")
+                                $util.base64.decode(object.id, message.id = $util.newBuffer($util.base64.length(object.id)), 0);
+                            else if (object.id.length >= 0)
+                                message.id = object.id;
+                        if (object.readTimestamp != null) {
+                            if (typeof object.readTimestamp !== "object")
+                                throw TypeError(".google.spanner.v1.Transaction.readTimestamp: object expected");
+                            message.readTimestamp = $root.google.protobuf.Timestamp.fromObject(object.readTimestamp, long + 1);
+                        }
+                        if (object.precommitToken != null) {
+                            if (typeof object.precommitToken !== "object")
+                                throw TypeError(".google.spanner.v1.Transaction.precommitToken: object expected");
+                            message.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.fromObject(object.precommitToken, long + 1);
+                        }
+                        if (object.cacheUpdate != null) {
+                            if (typeof object.cacheUpdate !== "object")
+                                throw TypeError(".google.spanner.v1.Transaction.cacheUpdate: object expected");
+                            message.cacheUpdate = $root.google.spanner.v1.CacheUpdate.fromObject(object.cacheUpdate, long + 1);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Transaction message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {google.spanner.v1.Transaction} message Transaction
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Transaction.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            if (options.bytes === String)
+                                object.id = "";
+                            else {
+                                object.id = [];
+                                if (options.bytes !== Array)
+                                    object.id = $util.newBuffer(object.id);
+                            }
+                            object.readTimestamp = null;
+                            object.precommitToken = null;
+                            object.cacheUpdate = null;
+                        }
+                        if (message.id != null && message.hasOwnProperty("id"))
+                            object.id = options.bytes === String ? $util.base64.encode(message.id, 0, message.id.length) : options.bytes === Array ? Array.prototype.slice.call(message.id) : message.id;
+                        if (message.readTimestamp != null && message.hasOwnProperty("readTimestamp"))
+                            object.readTimestamp = $root.google.protobuf.Timestamp.toObject(message.readTimestamp, options);
+                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken"))
+                            object.precommitToken = $root.google.spanner.v1.MultiplexedSessionPrecommitToken.toObject(message.precommitToken, options);
+                        if (message.cacheUpdate != null && message.hasOwnProperty("cacheUpdate"))
+                            object.cacheUpdate = $root.google.spanner.v1.CacheUpdate.toObject(message.cacheUpdate, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Transaction to JSON.
+                     * @function toJSON
+                     * @memberof google.spanner.v1.Transaction
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Transaction.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Transaction
+                     * @function getTypeUrl
+                     * @memberof google.spanner.v1.Transaction
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Transaction.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.spanner.v1.Transaction";
+                    };
+    
+                    return Transaction;
+                })();
+    
+                v1.TransactionSelector = (function() {
+    
+                    /**
+                     * Properties of a TransactionSelector.
+                     * @memberof google.spanner.v1
+                     * @interface ITransactionSelector
+                     * @property {google.spanner.v1.ITransactionOptions|null} [singleUse] TransactionSelector singleUse
+                     * @property {Uint8Array|null} [id] TransactionSelector id
+                     * @property {google.spanner.v1.ITransactionOptions|null} [begin] TransactionSelector begin
+                     */
+    
+                    /**
+                     * Constructs a new TransactionSelector.
+                     * @memberof google.spanner.v1
+                     * @classdesc Represents a TransactionSelector.
+                     * @implements ITransactionSelector
+                     * @constructor
+                     * @param {google.spanner.v1.ITransactionSelector=} [properties] Properties to set
+                     */
+                    function TransactionSelector(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TransactionSelector singleUse.
+                     * @member {google.spanner.v1.ITransactionOptions|null|undefined} singleUse
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @instance
+                     */
+                    TransactionSelector.prototype.singleUse = null;
+    
+                    /**
+                     * TransactionSelector id.
+                     * @member {Uint8Array|null|undefined} id
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @instance
+                     */
+                    TransactionSelector.prototype.id = null;
+    
+                    /**
+                     * TransactionSelector begin.
+                     * @member {google.spanner.v1.ITransactionOptions|null|undefined} begin
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @instance
+                     */
+                    TransactionSelector.prototype.begin = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * TransactionSelector selector.
+                     * @member {"singleUse"|"id"|"begin"|undefined} selector
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @instance
+                     */
+                    Object.defineProperty(TransactionSelector.prototype, "selector", {
+                        get: $util.oneOfGetter($oneOfFields = ["singleUse", "id", "begin"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new TransactionSelector instance using the specified properties.
+                     * @function create
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {google.spanner.v1.ITransactionSelector=} [properties] Properties to set
+                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector instance
+                     */
+                    TransactionSelector.create = function create(properties) {
+                        return new TransactionSelector(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TransactionSelector message. Does not implicitly {@link google.spanner.v1.TransactionSelector.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {google.spanner.v1.ITransactionSelector} message TransactionSelector message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TransactionSelector.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.singleUse != null && Object.hasOwnProperty.call(message, "singleUse"))
+                            $root.google.spanner.v1.TransactionOptions.encode(message.singleUse, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.id);
+                        if (message.begin != null && Object.hasOwnProperty.call(message, "begin"))
+                            $root.google.spanner.v1.TransactionOptions.encode(message.begin, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TransactionSelector message, length delimited. Does not implicitly {@link google.spanner.v1.TransactionSelector.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {google.spanner.v1.ITransactionSelector} message TransactionSelector message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TransactionSelector.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TransactionSelector message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TransactionSelector.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.TransactionSelector();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.singleUse = $root.google.spanner.v1.TransactionOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 2: {
+                                    message.id = reader.bytes();
+                                    break;
+                                }
+                            case 3: {
+                                    message.begin = $root.google.spanner.v1.TransactionOptions.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TransactionSelector message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TransactionSelector.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TransactionSelector message.
+                     * @function verify
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TransactionSelector.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        var properties = {};
+                        if (message.singleUse != null && message.hasOwnProperty("singleUse")) {
+                            properties.selector = 1;
+                            {
+                                var error = $root.google.spanner.v1.TransactionOptions.verify(message.singleUse, long + 1);
+                                if (error)
+                                    return "singleUse." + error;
+                            }
+                        }
+                        if (message.id != null && message.hasOwnProperty("id")) {
+                            if (properties.selector === 1)
+                                return "selector: multiple values";
+                            properties.selector = 1;
+                            if (!(message.id && typeof message.id.length === "number" || $util.isString(message.id)))
+                                return "id: buffer expected";
+                        }
+                        if (message.begin != null && message.hasOwnProperty("begin")) {
+                            if (properties.selector === 1)
+                                return "selector: multiple values";
+                            properties.selector = 1;
+                            {
+                                var error = $root.google.spanner.v1.TransactionOptions.verify(message.begin, long + 1);
+                                if (error)
+                                    return "begin." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TransactionSelector message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.spanner.v1.TransactionSelector} TransactionSelector
+                     */
+                    TransactionSelector.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.spanner.v1.TransactionSelector)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.spanner.v1.TransactionSelector();
+                        if (object.singleUse != null) {
+                            if (typeof object.singleUse !== "object")
+                                throw TypeError(".google.spanner.v1.TransactionSelector.singleUse: object expected");
+                            message.singleUse = $root.google.spanner.v1.TransactionOptions.fromObject(object.singleUse, long + 1);
+                        }
+                        if (object.id != null)
+                            if (typeof object.id === "string")
+                                $util.base64.decode(object.id, message.id = $util.newBuffer($util.base64.length(object.id)), 0);
+                            else if (object.id.length >= 0)
+                                message.id = object.id;
+                        if (object.begin != null) {
+                            if (typeof object.begin !== "object")
+                                throw TypeError(".google.spanner.v1.TransactionSelector.begin: object expected");
+                            message.begin = $root.google.spanner.v1.TransactionOptions.fromObject(object.begin, long + 1);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TransactionSelector message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {google.spanner.v1.TransactionSelector} message TransactionSelector
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TransactionSelector.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.singleUse != null && message.hasOwnProperty("singleUse")) {
+                            object.singleUse = $root.google.spanner.v1.TransactionOptions.toObject(message.singleUse, options);
+                            if (options.oneofs)
+                                object.selector = "singleUse";
+                        }
+                        if (message.id != null && message.hasOwnProperty("id")) {
+                            object.id = options.bytes === String ? $util.base64.encode(message.id, 0, message.id.length) : options.bytes === Array ? Array.prototype.slice.call(message.id) : message.id;
+                            if (options.oneofs)
+                                object.selector = "id";
+                        }
+                        if (message.begin != null && message.hasOwnProperty("begin")) {
+                            object.begin = $root.google.spanner.v1.TransactionOptions.toObject(message.begin, options);
+                            if (options.oneofs)
+                                object.selector = "begin";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TransactionSelector to JSON.
+                     * @function toJSON
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TransactionSelector.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for TransactionSelector
+                     * @function getTypeUrl
+                     * @memberof google.spanner.v1.TransactionSelector
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TransactionSelector.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.spanner.v1.TransactionSelector";
+                    };
+    
+                    return TransactionSelector;
+                })();
+    
+                v1.MultiplexedSessionPrecommitToken = (function() {
+    
+                    /**
+                     * Properties of a MultiplexedSessionPrecommitToken.
+                     * @memberof google.spanner.v1
+                     * @interface IMultiplexedSessionPrecommitToken
+                     * @property {Uint8Array|null} [precommitToken] MultiplexedSessionPrecommitToken precommitToken
+                     * @property {number|null} [seqNum] MultiplexedSessionPrecommitToken seqNum
+                     */
+    
+                    /**
+                     * Constructs a new MultiplexedSessionPrecommitToken.
+                     * @memberof google.spanner.v1
+                     * @classdesc Represents a MultiplexedSessionPrecommitToken.
+                     * @implements IMultiplexedSessionPrecommitToken
+                     * @constructor
+                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken=} [properties] Properties to set
+                     */
+                    function MultiplexedSessionPrecommitToken(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MultiplexedSessionPrecommitToken precommitToken.
+                     * @member {Uint8Array} precommitToken
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @instance
+                     */
+                    MultiplexedSessionPrecommitToken.prototype.precommitToken = $util.newBuffer([]);
+    
+                    /**
+                     * MultiplexedSessionPrecommitToken seqNum.
+                     * @member {number} seqNum
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @instance
+                     */
+                    MultiplexedSessionPrecommitToken.prototype.seqNum = 0;
+    
+                    /**
+                     * Creates a new MultiplexedSessionPrecommitToken instance using the specified properties.
+                     * @function create
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken=} [properties] Properties to set
+                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken instance
+                     */
+                    MultiplexedSessionPrecommitToken.create = function create(properties) {
+                        return new MultiplexedSessionPrecommitToken(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MultiplexedSessionPrecommitToken message. Does not implicitly {@link google.spanner.v1.MultiplexedSessionPrecommitToken.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken} message MultiplexedSessionPrecommitToken message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MultiplexedSessionPrecommitToken.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.precommitToken != null && Object.hasOwnProperty.call(message, "precommitToken"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.precommitToken);
+                        if (message.seqNum != null && Object.hasOwnProperty.call(message, "seqNum"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.seqNum);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MultiplexedSessionPrecommitToken message, length delimited. Does not implicitly {@link google.spanner.v1.MultiplexedSessionPrecommitToken.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {google.spanner.v1.IMultiplexedSessionPrecommitToken} message MultiplexedSessionPrecommitToken message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MultiplexedSessionPrecommitToken.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MultiplexedSessionPrecommitToken message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MultiplexedSessionPrecommitToken.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.MultiplexedSessionPrecommitToken();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.precommitToken = reader.bytes();
+                                    break;
+                                }
+                            case 2: {
+                                    message.seqNum = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MultiplexedSessionPrecommitToken message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MultiplexedSessionPrecommitToken.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MultiplexedSessionPrecommitToken message.
+                     * @function verify
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MultiplexedSessionPrecommitToken.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken"))
+                            if (!(message.precommitToken && typeof message.precommitToken.length === "number" || $util.isString(message.precommitToken)))
+                                return "precommitToken: buffer expected";
+                        if (message.seqNum != null && message.hasOwnProperty("seqNum"))
+                            if (!$util.isInteger(message.seqNum))
+                                return "seqNum: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MultiplexedSessionPrecommitToken message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.spanner.v1.MultiplexedSessionPrecommitToken} MultiplexedSessionPrecommitToken
+                     */
+                    MultiplexedSessionPrecommitToken.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.spanner.v1.MultiplexedSessionPrecommitToken)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.spanner.v1.MultiplexedSessionPrecommitToken();
+                        if (object.precommitToken != null)
+                            if (typeof object.precommitToken === "string")
+                                $util.base64.decode(object.precommitToken, message.precommitToken = $util.newBuffer($util.base64.length(object.precommitToken)), 0);
+                            else if (object.precommitToken.length >= 0)
+                                message.precommitToken = object.precommitToken;
+                        if (object.seqNum != null)
+                            message.seqNum = object.seqNum | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MultiplexedSessionPrecommitToken message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {google.spanner.v1.MultiplexedSessionPrecommitToken} message MultiplexedSessionPrecommitToken
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MultiplexedSessionPrecommitToken.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            if (options.bytes === String)
+                                object.precommitToken = "";
+                            else {
+                                object.precommitToken = [];
+                                if (options.bytes !== Array)
+                                    object.precommitToken = $util.newBuffer(object.precommitToken);
+                            }
+                            object.seqNum = 0;
+                        }
+                        if (message.precommitToken != null && message.hasOwnProperty("precommitToken"))
+                            object.precommitToken = options.bytes === String ? $util.base64.encode(message.precommitToken, 0, message.precommitToken.length) : options.bytes === Array ? Array.prototype.slice.call(message.precommitToken) : message.precommitToken;
+                        if (message.seqNum != null && message.hasOwnProperty("seqNum"))
+                            object.seqNum = message.seqNum;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MultiplexedSessionPrecommitToken to JSON.
+                     * @function toJSON
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MultiplexedSessionPrecommitToken.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MultiplexedSessionPrecommitToken
+                     * @function getTypeUrl
+                     * @memberof google.spanner.v1.MultiplexedSessionPrecommitToken
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MultiplexedSessionPrecommitToken.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.spanner.v1.MultiplexedSessionPrecommitToken";
+                    };
+    
+                    return MultiplexedSessionPrecommitToken;
+                })();
+    
+                v1.KeyRange = (function() {
+    
+                    /**
+                     * Properties of a KeyRange.
+                     * @memberof google.spanner.v1
+                     * @interface IKeyRange
+                     * @property {google.protobuf.IListValue|null} [startClosed] KeyRange startClosed
+                     * @property {google.protobuf.IListValue|null} [startOpen] KeyRange startOpen
+                     * @property {google.protobuf.IListValue|null} [endClosed] KeyRange endClosed
+                     * @property {google.protobuf.IListValue|null} [endOpen] KeyRange endOpen
+                     */
+    
+                    /**
+                     * Constructs a new KeyRange.
+                     * @memberof google.spanner.v1
+                     * @classdesc Represents a KeyRange.
+                     * @implements IKeyRange
+                     * @constructor
+                     * @param {google.spanner.v1.IKeyRange=} [properties] Properties to set
+                     */
+                    function KeyRange(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * KeyRange startClosed.
+                     * @member {google.protobuf.IListValue|null|undefined} startClosed
+                     * @memberof google.spanner.v1.KeyRange
+                     * @instance
+                     */
+                    KeyRange.prototype.startClosed = null;
+    
+                    /**
+                     * KeyRange startOpen.
+                     * @member {google.protobuf.IListValue|null|undefined} startOpen
+                     * @memberof google.spanner.v1.KeyRange
+                     * @instance
+                     */
+                    KeyRange.prototype.startOpen = null;
+    
+                    /**
+                     * KeyRange endClosed.
+                     * @member {google.protobuf.IListValue|null|undefined} endClosed
+                     * @memberof google.spanner.v1.KeyRange
+                     * @instance
+                     */
+                    KeyRange.prototype.endClosed = null;
+    
+                    /**
+                     * KeyRange endOpen.
+                     * @member {google.protobuf.IListValue|null|undefined} endOpen
+                     * @memberof google.spanner.v1.KeyRange
+                     * @instance
+                     */
+                    KeyRange.prototype.endOpen = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * KeyRange startKeyType.
+                     * @member {"startClosed"|"startOpen"|undefined} startKeyType
+                     * @memberof google.spanner.v1.KeyRange
+                     * @instance
+                     */
+                    Object.defineProperty(KeyRange.prototype, "startKeyType", {
+                        get: $util.oneOfGetter($oneOfFields = ["startClosed", "startOpen"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * KeyRange endKeyType.
+                     * @member {"endClosed"|"endOpen"|undefined} endKeyType
+                     * @memberof google.spanner.v1.KeyRange
+                     * @instance
+                     */
+                    Object.defineProperty(KeyRange.prototype, "endKeyType", {
+                        get: $util.oneOfGetter($oneOfFields = ["endClosed", "endOpen"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new KeyRange instance using the specified properties.
+                     * @function create
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {google.spanner.v1.IKeyRange=} [properties] Properties to set
+                     * @returns {google.spanner.v1.KeyRange} KeyRange instance
+                     */
+                    KeyRange.create = function create(properties) {
+                        return new KeyRange(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified KeyRange message. Does not implicitly {@link google.spanner.v1.KeyRange.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {google.spanner.v1.IKeyRange} message KeyRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    KeyRange.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.startClosed != null && Object.hasOwnProperty.call(message, "startClosed"))
+                            $root.google.protobuf.ListValue.encode(message.startClosed, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.startOpen != null && Object.hasOwnProperty.call(message, "startOpen"))
+                            $root.google.protobuf.ListValue.encode(message.startOpen, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.endClosed != null && Object.hasOwnProperty.call(message, "endClosed"))
+                            $root.google.protobuf.ListValue.encode(message.endClosed, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.endOpen != null && Object.hasOwnProperty.call(message, "endOpen"))
+                            $root.google.protobuf.ListValue.encode(message.endOpen, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified KeyRange message, length delimited. Does not implicitly {@link google.spanner.v1.KeyRange.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {google.spanner.v1.IKeyRange} message KeyRange message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    KeyRange.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a KeyRange message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.spanner.v1.KeyRange} KeyRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    KeyRange.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.KeyRange();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.startClosed = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 2: {
+                                    message.startOpen = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 3: {
+                                    message.endClosed = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            case 4: {
+                                    message.endOpen = $root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1);
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a KeyRange message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.spanner.v1.KeyRange} KeyRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    KeyRange.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a KeyRange message.
+                     * @function verify
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    KeyRange.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        var properties = {};
+                        if (message.startClosed != null && message.hasOwnProperty("startClosed")) {
+                            properties.startKeyType = 1;
+                            {
+                                var error = $root.google.protobuf.ListValue.verify(message.startClosed, long + 1);
+                                if (error)
+                                    return "startClosed." + error;
+                            }
+                        }
+                        if (message.startOpen != null && message.hasOwnProperty("startOpen")) {
+                            if (properties.startKeyType === 1)
+                                return "startKeyType: multiple values";
+                            properties.startKeyType = 1;
+                            {
+                                var error = $root.google.protobuf.ListValue.verify(message.startOpen, long + 1);
+                                if (error)
+                                    return "startOpen." + error;
+                            }
+                        }
+                        if (message.endClosed != null && message.hasOwnProperty("endClosed")) {
+                            properties.endKeyType = 1;
+                            {
+                                var error = $root.google.protobuf.ListValue.verify(message.endClosed, long + 1);
+                                if (error)
+                                    return "endClosed." + error;
+                            }
+                        }
+                        if (message.endOpen != null && message.hasOwnProperty("endOpen")) {
+                            if (properties.endKeyType === 1)
+                                return "endKeyType: multiple values";
+                            properties.endKeyType = 1;
+                            {
+                                var error = $root.google.protobuf.ListValue.verify(message.endOpen, long + 1);
+                                if (error)
+                                    return "endOpen." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a KeyRange message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.spanner.v1.KeyRange} KeyRange
+                     */
+                    KeyRange.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.spanner.v1.KeyRange)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.spanner.v1.KeyRange();
+                        if (object.startClosed != null) {
+                            if (typeof object.startClosed !== "object")
+                                throw TypeError(".google.spanner.v1.KeyRange.startClosed: object expected");
+                            message.startClosed = $root.google.protobuf.ListValue.fromObject(object.startClosed, long + 1);
+                        }
+                        if (object.startOpen != null) {
+                            if (typeof object.startOpen !== "object")
+                                throw TypeError(".google.spanner.v1.KeyRange.startOpen: object expected");
+                            message.startOpen = $root.google.protobuf.ListValue.fromObject(object.startOpen, long + 1);
+                        }
+                        if (object.endClosed != null) {
+                            if (typeof object.endClosed !== "object")
+                                throw TypeError(".google.spanner.v1.KeyRange.endClosed: object expected");
+                            message.endClosed = $root.google.protobuf.ListValue.fromObject(object.endClosed, long + 1);
+                        }
+                        if (object.endOpen != null) {
+                            if (typeof object.endOpen !== "object")
+                                throw TypeError(".google.spanner.v1.KeyRange.endOpen: object expected");
+                            message.endOpen = $root.google.protobuf.ListValue.fromObject(object.endOpen, long + 1);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a KeyRange message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {google.spanner.v1.KeyRange} message KeyRange
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    KeyRange.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.startClosed != null && message.hasOwnProperty("startClosed")) {
+                            object.startClosed = $root.google.protobuf.ListValue.toObject(message.startClosed, options);
+                            if (options.oneofs)
+                                object.startKeyType = "startClosed";
+                        }
+                        if (message.startOpen != null && message.hasOwnProperty("startOpen")) {
+                            object.startOpen = $root.google.protobuf.ListValue.toObject(message.startOpen, options);
+                            if (options.oneofs)
+                                object.startKeyType = "startOpen";
+                        }
+                        if (message.endClosed != null && message.hasOwnProperty("endClosed")) {
+                            object.endClosed = $root.google.protobuf.ListValue.toObject(message.endClosed, options);
+                            if (options.oneofs)
+                                object.endKeyType = "endClosed";
+                        }
+                        if (message.endOpen != null && message.hasOwnProperty("endOpen")) {
+                            object.endOpen = $root.google.protobuf.ListValue.toObject(message.endOpen, options);
+                            if (options.oneofs)
+                                object.endKeyType = "endOpen";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this KeyRange to JSON.
+                     * @function toJSON
+                     * @memberof google.spanner.v1.KeyRange
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    KeyRange.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for KeyRange
+                     * @function getTypeUrl
+                     * @memberof google.spanner.v1.KeyRange
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    KeyRange.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.spanner.v1.KeyRange";
+                    };
+    
+                    return KeyRange;
+                })();
+    
+                v1.KeySet = (function() {
+    
+                    /**
+                     * Properties of a KeySet.
+                     * @memberof google.spanner.v1
+                     * @interface IKeySet
+                     * @property {Array.<google.protobuf.IListValue>|null} [keys] KeySet keys
+                     * @property {Array.<google.spanner.v1.IKeyRange>|null} [ranges] KeySet ranges
+                     * @property {boolean|null} [all] KeySet all
+                     */
+    
+                    /**
+                     * Constructs a new KeySet.
+                     * @memberof google.spanner.v1
+                     * @classdesc Represents a KeySet.
+                     * @implements IKeySet
+                     * @constructor
+                     * @param {google.spanner.v1.IKeySet=} [properties] Properties to set
+                     */
+                    function KeySet(properties) {
+                        this.keys = [];
+                        this.ranges = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null && keys[i] !== "__proto__")
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * KeySet keys.
+                     * @member {Array.<google.protobuf.IListValue>} keys
+                     * @memberof google.spanner.v1.KeySet
+                     * @instance
+                     */
+                    KeySet.prototype.keys = $util.emptyArray;
+    
+                    /**
+                     * KeySet ranges.
+                     * @member {Array.<google.spanner.v1.IKeyRange>} ranges
+                     * @memberof google.spanner.v1.KeySet
+                     * @instance
+                     */
+                    KeySet.prototype.ranges = $util.emptyArray;
+    
+                    /**
+                     * KeySet all.
+                     * @member {boolean} all
+                     * @memberof google.spanner.v1.KeySet
+                     * @instance
+                     */
+                    KeySet.prototype.all = false;
+    
+                    /**
+                     * Creates a new KeySet instance using the specified properties.
+                     * @function create
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {google.spanner.v1.IKeySet=} [properties] Properties to set
+                     * @returns {google.spanner.v1.KeySet} KeySet instance
+                     */
+                    KeySet.create = function create(properties) {
+                        return new KeySet(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified KeySet message. Does not implicitly {@link google.spanner.v1.KeySet.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {google.spanner.v1.IKeySet} message KeySet message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    KeySet.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.keys != null && message.keys.length)
+                            for (var i = 0; i < message.keys.length; ++i)
+                                $root.google.protobuf.ListValue.encode(message.keys[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.ranges != null && message.ranges.length)
+                            for (var i = 0; i < message.ranges.length; ++i)
+                                $root.google.spanner.v1.KeyRange.encode(message.ranges[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.all != null && Object.hasOwnProperty.call(message, "all"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.all);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified KeySet message, length delimited. Does not implicitly {@link google.spanner.v1.KeySet.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {google.spanner.v1.IKeySet} message KeySet message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    KeySet.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a KeySet message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.spanner.v1.KeySet} KeySet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    KeySet.decode = function decode(reader, length, error, long) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $Reader.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.spanner.v1.KeySet();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.keys && message.keys.length))
+                                        message.keys = [];
+                                    message.keys.push($root.google.protobuf.ListValue.decode(reader, reader.uint32(), undefined, long + 1));
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.ranges && message.ranges.length))
+                                        message.ranges = [];
+                                    message.ranges.push($root.google.spanner.v1.KeyRange.decode(reader, reader.uint32(), undefined, long + 1));
+                                    break;
+                                }
+                            case 3: {
+                                    message.all = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7, long);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a KeySet message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.spanner.v1.KeySet} KeySet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    KeySet.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a KeySet message.
+                     * @function verify
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    KeySet.verify = function verify(message, long) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            return "maximum nesting depth exceeded";
+                        if (message.keys != null && message.hasOwnProperty("keys")) {
+                            if (!Array.isArray(message.keys))
+                                return "keys: array expected";
+                            for (var i = 0; i < message.keys.length; ++i) {
+                                var error = $root.google.protobuf.ListValue.verify(message.keys[i], long + 1);
+                                if (error)
+                                    return "keys." + error;
+                            }
+                        }
+                        if (message.ranges != null && message.hasOwnProperty("ranges")) {
+                            if (!Array.isArray(message.ranges))
+                                return "ranges: array expected";
+                            for (var i = 0; i < message.ranges.length; ++i) {
+                                var error = $root.google.spanner.v1.KeyRange.verify(message.ranges[i], long + 1);
+                                if (error)
+                                    return "ranges." + error;
+                            }
+                        }
+                        if (message.all != null && message.hasOwnProperty("all"))
+                            if (typeof message.all !== "boolean")
+                                return "all: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a KeySet message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.spanner.v1.KeySet} KeySet
+                     */
+                    KeySet.fromObject = function fromObject(object, long) {
+                        if (object instanceof $root.google.spanner.v1.KeySet)
+                            return object;
+                        if (long === undefined)
+                            long = 0;
+                        if (long > $util.recursionLimit)
+                            throw Error("maximum nesting depth exceeded");
+                        var message = new $root.google.spanner.v1.KeySet();
+                        if (object.keys) {
+                            if (!Array.isArray(object.keys))
+                                throw TypeError(".google.spanner.v1.KeySet.keys: array expected");
+                            message.keys = [];
+                            for (var i = 0; i < object.keys.length; ++i) {
+                                if (typeof object.keys[i] !== "object")
+                                    throw TypeError(".google.spanner.v1.KeySet.keys: object expected");
+                                message.keys[i] = $root.google.protobuf.ListValue.fromObject(object.keys[i], long + 1);
+                            }
+                        }
+                        if (object.ranges) {
+                            if (!Array.isArray(object.ranges))
+                                throw TypeError(".google.spanner.v1.KeySet.ranges: array expected");
+                            message.ranges = [];
+                            for (var i = 0; i < object.ranges.length; ++i) {
+                                if (typeof object.ranges[i] !== "object")
+                                    throw TypeError(".google.spanner.v1.KeySet.ranges: object expected");
+                                message.ranges[i] = $root.google.spanner.v1.KeyRange.fromObject(object.ranges[i], long + 1);
+                            }
+                        }
+                        if (object.all != null)
+                            message.all = Boolean(object.all);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a KeySet message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {google.spanner.v1.KeySet} message KeySet
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    KeySet.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.keys = [];
+                            object.ranges = [];
+                        }
+                        if (options.defaults)
+                            object.all = false;
+                        if (message.keys && message.keys.length) {
+                            object.keys = [];
+                            for (var j = 0; j < message.keys.length; ++j)
+                                object.keys[j] = $root.google.protobuf.ListValue.toObject(message.keys[j], options);
+                        }
+                        if (message.ranges && message.ranges.length) {
+                            object.ranges = [];
+                            for (var j = 0; j < message.ranges.length; ++j)
+                                object.ranges[j] = $root.google.spanner.v1.KeyRange.toObject(message.ranges[j], options);
+                        }
+                        if (message.all != null && message.hasOwnProperty("all"))
+                            object.all = message.all;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this KeySet to JSON.
+                     * @function toJSON
+                     * @memberof google.spanner.v1.KeySet
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    KeySet.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for KeySet
+                     * @function getTypeUrl
+                     * @memberof google.spanner.v1.KeySet
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    KeySet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.spanner.v1.KeySet";
+                    };
+    
+                    return KeySet;
                 })();
     
                 v1.Mutation = (function() {
