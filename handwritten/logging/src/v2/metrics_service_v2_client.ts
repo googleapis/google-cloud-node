@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,9 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import {Transform} from 'stream';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -50,9 +51,11 @@ export class MetricsServiceV2Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('logging');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -61,9 +64,9 @@ export class MetricsServiceV2Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  metricsServiceV2Stub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  metricsServiceV2Stub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of MetricsServiceV2Client.
@@ -87,7 +90,7 @@ export class MetricsServiceV2Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -139,7 +142,7 @@ export class MetricsServiceV2Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -324,7 +327,7 @@ export class MetricsServiceV2Client {
       'google.logging.v2.MetricsServiceV2',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      { 'x-goog-api-client': clientHeader.join(' ') },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -364,7 +367,7 @@ export class MetricsServiceV2Client {
           (this._protos as any).google.logging.v2.MetricsServiceV2,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{[method: string]: Function}>;
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -377,7 +380,7 @@ export class MetricsServiceV2Client {
     ];
     for (const methodName of metricsServiceV2StubMethods) {
       const callPromise = this.metricsServiceV2Stub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -575,8 +578,50 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         metric_name: request.metricName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getLogMetric(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getLogMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogMetric,
+          protos.google.logging.v2.IGetLogMetricRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLogMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLogMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogMetric,
+          protos.google.logging.v2.IGetLogMetricRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getLogMetric response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates a logs-based metric.
@@ -664,8 +709,50 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createLogMetric(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createLogMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogMetric,
+          protos.google.logging.v2.ICreateLogMetricRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createLogMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createLogMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogMetric,
+          protos.google.logging.v2.ICreateLogMetricRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLogMetric response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates or updates a logs-based metric.
@@ -754,8 +841,50 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         metric_name: request.metricName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateLogMetric(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateLogMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogMetric,
+          protos.google.logging.v2.IUpdateLogMetricRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateLogMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateLogMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogMetric,
+          protos.google.logging.v2.IUpdateLogMetricRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLogMetric response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes a logs-based metric.
@@ -838,8 +967,50 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         metric_name: request.metricName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteLogMetric(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteLogMetric request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteLogMetricRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteLogMetric response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteLogMetric(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteLogMetricRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLogMetric response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -935,12 +1106,38 @@ export class MetricsServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listLogMetrics(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListLogMetricsRequest,
+          protos.google.logging.v2.IListLogMetricsResponse | null | undefined,
+          protos.google.logging.v2.ILogMetric
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLogMetrics values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLogMetrics request %j', request);
+    return this.innerApiCalls
+      .listLogMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.logging.v2.ILogMetric[],
+          protos.google.logging.v2.IListLogMetricsRequest | null,
+          protos.google.logging.v2.IListLogMetricsResponse,
+        ]) => {
+          this._log.info('listLogMetrics values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLogMetrics`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -981,7 +1178,10 @@ export class MetricsServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLogMetrics stream %j', request);
     return this.descriptors.page.listLogMetrics.createStream(
       this.innerApiCalls.listLogMetrics as GaxCall,
       request,
@@ -1034,7 +1234,10 @@ export class MetricsServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogMetrics'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLogMetrics iterate %j', request);
     return this.descriptors.page.listLogMetrics.asyncIterate(
       this.innerApiCalls['listLogMetrics'] as GaxCall,
       request as {},
@@ -2713,7 +2916,8 @@ export class MetricsServiceV2Client {
    */
   close(): Promise<void> {
     if (this.metricsServiceV2Stub && !this._terminated) {
-      return this.metricsServiceV2Stub.then(stub => {
+      return this.metricsServiceV2Stub.then((stub) => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });

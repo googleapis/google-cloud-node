@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class PartnerLinkServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('datamanager');
@@ -57,9 +64,9 @@ export class PartnerLinkServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  partnerLinkServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  partnerLinkServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of PartnerLinkServiceClient.
@@ -100,21 +107,42 @@ export class PartnerLinkServiceClient {
    *     const client = new PartnerLinkServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PartnerLinkServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'datamanager.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +167,7 @@ export class PartnerLinkServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class PartnerLinkServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,37 +203,44 @@ export class PartnerLinkServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       accountPathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}'
+        'accountTypes/{account_type}/accounts/{account}',
       ),
       partnerLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}'
+        'accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}',
       ),
       userListPathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userLists/{user_list}'
+        'accountTypes/{account_type}/accounts/{account}/userLists/{user_list}',
       ),
       userListDirectLicensePathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userListDirectLicenses/{user_list_direct_license}'
+        'accountTypes/{account_type}/accounts/{account}/userListDirectLicenses/{user_list_direct_license}',
       ),
       userListGlobalLicensePathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}'
+        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}',
       ),
-      userListGlobalLicenseCustomerInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}/customerInfos/{license_customer_info}'
-      ),
+      userListGlobalLicenseCustomerInfoPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'accountTypes/{account_type}/accounts/{account}/userListGlobalLicenses/{user_list_global_license}/customerInfos/{license_customer_info}',
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      searchPartnerLinks:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'partnerLinks')
+      searchPartnerLinks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'partnerLinks',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ads.datamanager.v1.PartnerLinkService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ads.datamanager.v1.PartnerLinkService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -239,37 +271,44 @@ export class PartnerLinkServiceClient {
     // Put together the "service stub" for
     // google.ads.datamanager.v1.PartnerLinkService.
     this.partnerLinkServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ads.datamanager.v1.PartnerLinkService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ads.datamanager.v1.PartnerLinkService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.ads.datamanager.v1.PartnerLinkService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const partnerLinkServiceStubMethods =
-        ['createPartnerLink', 'deletePartnerLink', 'searchPartnerLinks'];
+    const partnerLinkServiceStubMethods = [
+      'createPartnerLink',
+      'deletePartnerLink',
+      'searchPartnerLinks',
+    ];
     for (const methodName of partnerLinkServiceStubMethods) {
       const callPromise = this.partnerLinkServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -284,8 +323,14 @@ export class PartnerLinkServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'datamanager.googleapis.com';
   }
@@ -296,8 +341,14 @@ export class PartnerLinkServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'datamanager.googleapis.com';
   }
@@ -328,9 +379,7 @@ export class PartnerLinkServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/datamanager'
-    ];
+    return ['https://www.googleapis.com/auth/datamanager'];
   }
 
   getProjectId(): Promise<string>;
@@ -339,8 +388,9 @@ export class PartnerLinkServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -351,347 +401,458 @@ export class PartnerLinkServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a partner link for the given account.
- *
- * Authorization Headers:
- *
- * This method supports the following optional headers to define how the API
- * authorizes access for the request:
- *
- * * `login-account`: (Optional) The resource name of the account where the
- *   Google Account of the credentials is a user. If not set, defaults to the
- *   account of the request. Format:
- *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of partner links.
- *   Format: accountTypes/{account_type}/accounts/{account}
- * @param {google.ads.datamanager.v1.PartnerLink} request.partnerLink
- *   Required. The partner link to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/partner_link_service.create_partner_link.js</caption>
- * region_tag:datamanager_v1_generated_PartnerLinkService_CreatePartnerLink_async
- */
+  /**
+   * Creates a partner link for the given account.
+   *
+   * Authorization Headers:
+   *
+   * This method supports the following optional headers to define how the API
+   * authorizes access for the request:
+   *
+   * * `login-account`: (Optional) The resource name of the account where the
+   *   Google Account of the credentials is a user. If not set, defaults to the
+   *   account of the request. Format:
+   *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of partner links.
+   *   Format: accountTypes/{account_type}/accounts/{account}
+   * @param {google.ads.datamanager.v1.PartnerLink} request.partnerLink
+   *   Required. The partner link to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/partner_link_service.create_partner_link.js</caption>
+   * region_tag:datamanager_v1_generated_PartnerLinkService_CreatePartnerLink_async
+   */
   createPartnerLink(
-      request?: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.datamanager.v1.IPartnerLink,
-        protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IPartnerLink,
+      protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createPartnerLink(
-      request: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.datamanager.v1.IPartnerLink,
-          protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.datamanager.v1.IPartnerLink,
+      | protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPartnerLink(
-      request: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
-      callback: Callback<
-          protos.google.ads.datamanager.v1.IPartnerLink,
-          protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
+    callback: Callback<
+      protos.google.ads.datamanager.v1.IPartnerLink,
+      | protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPartnerLink(
-      request?: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.datamanager.v1.IPartnerLink,
-          protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.datamanager.v1.IPartnerLink,
-          protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.datamanager.v1.IPartnerLink,
-        protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.datamanager.v1.IPartnerLink,
+      | protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IPartnerLink,
+      protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createPartnerLink request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.datamanager.v1.IPartnerLink,
-        protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.datamanager.v1.IPartnerLink,
+          | protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createPartnerLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createPartnerLink(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.datamanager.v1.IPartnerLink,
-        protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createPartnerLink response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createPartnerLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.datamanager.v1.IPartnerLink,
+          (
+            | protos.google.ads.datamanager.v1.ICreatePartnerLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createPartnerLink response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a partner link for the given account.
- *
- * Authorization Headers:
- *
- * This method supports the following optional headers to define how the API
- * authorizes access for the request:
- *
- * * `login-account`: (Optional) The resource name of the account where the
- *   Google Account of the credentials is a user. If not set, defaults to the
- *   account of the request. Format:
- *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the partner link to delete.
- *   Format:
- *   accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/partner_link_service.delete_partner_link.js</caption>
- * region_tag:datamanager_v1_generated_PartnerLinkService_DeletePartnerLink_async
- */
+  /**
+   * Deletes a partner link for the given account.
+   *
+   * Authorization Headers:
+   *
+   * This method supports the following optional headers to define how the API
+   * authorizes access for the request:
+   *
+   * * `login-account`: (Optional) The resource name of the account where the
+   *   Google Account of the credentials is a user. If not set, defaults to the
+   *   account of the request. Format:
+   *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the partner link to delete.
+   *   Format:
+   *   accountTypes/{account_type}/accounts/{account}/partnerLinks/{partner_link}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/partner_link_service.delete_partner_link.js</caption>
+   * region_tag:datamanager_v1_generated_PartnerLinkService_DeletePartnerLink_async
+   */
   deletePartnerLink(
-      request?: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deletePartnerLink(
-      request: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePartnerLink(
-      request: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePartnerLink(
-      request?: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deletePartnerLink request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deletePartnerLink response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deletePartnerLink(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deletePartnerLink response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deletePartnerLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ads.datamanager.v1.IDeletePartnerLinkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePartnerLink response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Searches for all partner links to and from a given account.
- *
- * Authorization Headers:
- *
- * This method supports the following optional headers to define how the API
- * authorizes access for the request:
- *
- * * `login-account`: (Optional) The resource name of the account where the
- *   Google Account of the credentials is a user. If not set, defaults to the
- *   account of the request. Format:
- *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Account to search for partner links. If no `filter` is specified,
- *   all partner links where this account is either the `owning_account` or
- *   `partner_account` are returned.
- *
- *   Format: `accountTypes/{account_type}/accounts/{account}`
- * @param {number} request.pageSize
- *   The maximum number of partner links to return. The service may return
- *   fewer than this value.
- *   If unspecified, at most 10 partner links will be returned.
- *   The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} request.pageToken
- *   A page token, received from a previous `SearchPartnerLinks` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `SearchPartnerLinks`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A [filter string](https://google.aip.dev/160). All fields need to
- *   be on the left hand side of each condition (for example: `partner_link_id =
- *   123456789`). Fields must be specified using either all [camel
- *   case](https://en.wikipedia.org/wiki/Camel_case) or all [snake
- *   case](https://en.wikipedia.org/wiki/Snake_case). Don't use a combination of
- *   camel case and snake case.
- *
- *   Supported operations:
- *
- *   - `AND`
- *   - `=`
- *   - `!=`
- *
- *   Supported fields:
- *
- *   - `partner_link_id`
- *   - `owning_account.account_type`
- *   - `owning_account.account_id`
- *   - `partner_account.account_type`
- *   - `partner_account.account_id`
- *
- *   Example:
- *   `owning_account.account_type = "GOOGLE_ADS" AND partner_account.account_id
- *   = 987654321`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchPartnerLinksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Searches for all partner links to and from a given account.
+   *
+   * Authorization Headers:
+   *
+   * This method supports the following optional headers to define how the API
+   * authorizes access for the request:
+   *
+   * * `login-account`: (Optional) The resource name of the account where the
+   *   Google Account of the credentials is a user. If not set, defaults to the
+   *   account of the request. Format:
+   *   `accountTypes/{loginAccountType}/accounts/{loginAccountId}`
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Account to search for partner links. If no `filter` is specified,
+   *   all partner links where this account is either the `owning_account` or
+   *   `partner_account` are returned.
+   *
+   *   Format: `accountTypes/{account_type}/accounts/{account}`
+   * @param {number} request.pageSize
+   *   The maximum number of partner links to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 10 partner links will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `SearchPartnerLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `SearchPartnerLinks`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A [filter string](https://google.aip.dev/160). All fields need to
+   *   be on the left hand side of each condition (for example: `partner_link_id =
+   *   123456789`). Fields must be specified using either all [camel
+   *   case](https://en.wikipedia.org/wiki/Camel_case) or all [snake
+   *   case](https://en.wikipedia.org/wiki/Snake_case). Don't use a combination of
+   *   camel case and snake case.
+   *
+   *   Supported operations:
+   *
+   *   - `AND`
+   *   - `=`
+   *   - `!=`
+   *
+   *   Supported fields:
+   *
+   *   - `partner_link_id`
+   *   - `owning_account.account_type`
+   *   - `owning_account.account_id`
+   *   - `partner_account.account_type`
+   *   - `partner_account.account_id`
+   *
+   *   Example:
+   *   `owning_account.account_type = "GOOGLE_ADS" AND partner_account.account_id
+   *   = 987654321`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchPartnerLinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchPartnerLinks(
-      request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.datamanager.v1.IPartnerLink[],
-        protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest|null,
-        protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
-      ]>;
+    request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IPartnerLink[],
+      protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest | null,
+      protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse,
+    ]
+  >;
   searchPartnerLinks(
-      request: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-          protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse|null|undefined,
-          protos.google.ads.datamanager.v1.IPartnerLink>): void;
+    request: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+      | protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
+      | null
+      | undefined,
+      protos.google.ads.datamanager.v1.IPartnerLink
+    >,
+  ): void;
   searchPartnerLinks(
-      request: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-      callback: PaginationCallback<
-          protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-          protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse|null|undefined,
-          protos.google.ads.datamanager.v1.IPartnerLink>): void;
+    request: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+    callback: PaginationCallback<
+      protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+      | protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
+      | null
+      | undefined,
+      protos.google.ads.datamanager.v1.IPartnerLink
+    >,
+  ): void;
   searchPartnerLinks(
-      request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-          protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse|null|undefined,
-          protos.google.ads.datamanager.v1.IPartnerLink>,
-      callback?: PaginationCallback<
-          protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-          protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse|null|undefined,
-          protos.google.ads.datamanager.v1.IPartnerLink>):
-      Promise<[
-        protos.google.ads.datamanager.v1.IPartnerLink[],
-        protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest|null,
-        protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
-      ]>|void {
+          | protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
+          | null
+          | undefined,
+          protos.google.ads.datamanager.v1.IPartnerLink
+        >,
+    callback?: PaginationCallback<
+      protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+      | protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
+      | null
+      | undefined,
+      protos.google.ads.datamanager.v1.IPartnerLink
+    >,
+  ): Promise<
+    [
+      protos.google.ads.datamanager.v1.IPartnerLink[],
+      protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest | null,
+      protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-      protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse|null|undefined,
-      protos.google.ads.datamanager.v1.IPartnerLink>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+          | protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
+          | null
+          | undefined,
+          protos.google.ads.datamanager.v1.IPartnerLink
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('searchPartnerLinks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -700,178 +861,182 @@ export class PartnerLinkServiceClient {
     this._log.info('searchPartnerLinks request %j', request);
     return this.innerApiCalls
       .searchPartnerLinks(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.ads.datamanager.v1.IPartnerLink[],
-        protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest|null,
-        protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse
-      ]) => {
-        this._log.info('searchPartnerLinks values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.datamanager.v1.IPartnerLink[],
+          protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest | null,
+          protos.google.ads.datamanager.v1.ISearchPartnerLinksResponse,
+        ]) => {
+          this._log.info('searchPartnerLinks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `searchPartnerLinks`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Account to search for partner links. If no `filter` is specified,
- *   all partner links where this account is either the `owning_account` or
- *   `partner_account` are returned.
- *
- *   Format: `accountTypes/{account_type}/accounts/{account}`
- * @param {number} request.pageSize
- *   The maximum number of partner links to return. The service may return
- *   fewer than this value.
- *   If unspecified, at most 10 partner links will be returned.
- *   The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} request.pageToken
- *   A page token, received from a previous `SearchPartnerLinks` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `SearchPartnerLinks`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A [filter string](https://google.aip.dev/160). All fields need to
- *   be on the left hand side of each condition (for example: `partner_link_id =
- *   123456789`). Fields must be specified using either all [camel
- *   case](https://en.wikipedia.org/wiki/Camel_case) or all [snake
- *   case](https://en.wikipedia.org/wiki/Snake_case). Don't use a combination of
- *   camel case and snake case.
- *
- *   Supported operations:
- *
- *   - `AND`
- *   - `=`
- *   - `!=`
- *
- *   Supported fields:
- *
- *   - `partner_link_id`
- *   - `owning_account.account_type`
- *   - `owning_account.account_id`
- *   - `partner_account.account_type`
- *   - `partner_account.account_id`
- *
- *   Example:
- *   `owning_account.account_type = "GOOGLE_ADS" AND partner_account.account_id
- *   = 987654321`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchPartnerLinksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `searchPartnerLinks`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Account to search for partner links. If no `filter` is specified,
+   *   all partner links where this account is either the `owning_account` or
+   *   `partner_account` are returned.
+   *
+   *   Format: `accountTypes/{account_type}/accounts/{account}`
+   * @param {number} request.pageSize
+   *   The maximum number of partner links to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 10 partner links will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `SearchPartnerLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `SearchPartnerLinks`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A [filter string](https://google.aip.dev/160). All fields need to
+   *   be on the left hand side of each condition (for example: `partner_link_id =
+   *   123456789`). Fields must be specified using either all [camel
+   *   case](https://en.wikipedia.org/wiki/Camel_case) or all [snake
+   *   case](https://en.wikipedia.org/wiki/Snake_case). Don't use a combination of
+   *   camel case and snake case.
+   *
+   *   Supported operations:
+   *
+   *   - `AND`
+   *   - `=`
+   *   - `!=`
+   *
+   *   Supported fields:
+   *
+   *   - `partner_link_id`
+   *   - `owning_account.account_type`
+   *   - `owning_account.account_id`
+   *   - `partner_account.account_type`
+   *   - `partner_account.account_id`
+   *
+   *   Example:
+   *   `owning_account.account_type = "GOOGLE_ADS" AND partner_account.account_id
+   *   = 987654321`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchPartnerLinksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchPartnerLinksStream(
-      request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchPartnerLinks stream %j', request);
     return this.descriptors.page.searchPartnerLinks.createStream(
       this.innerApiCalls.searchPartnerLinks as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `searchPartnerLinks`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Account to search for partner links. If no `filter` is specified,
- *   all partner links where this account is either the `owning_account` or
- *   `partner_account` are returned.
- *
- *   Format: `accountTypes/{account_type}/accounts/{account}`
- * @param {number} request.pageSize
- *   The maximum number of partner links to return. The service may return
- *   fewer than this value.
- *   If unspecified, at most 10 partner links will be returned.
- *   The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} request.pageToken
- *   A page token, received from a previous `SearchPartnerLinks` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `SearchPartnerLinks`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. A [filter string](https://google.aip.dev/160). All fields need to
- *   be on the left hand side of each condition (for example: `partner_link_id =
- *   123456789`). Fields must be specified using either all [camel
- *   case](https://en.wikipedia.org/wiki/Camel_case) or all [snake
- *   case](https://en.wikipedia.org/wiki/Snake_case). Don't use a combination of
- *   camel case and snake case.
- *
- *   Supported operations:
- *
- *   - `AND`
- *   - `=`
- *   - `!=`
- *
- *   Supported fields:
- *
- *   - `partner_link_id`
- *   - `owning_account.account_type`
- *   - `owning_account.account_id`
- *   - `partner_account.account_type`
- *   - `partner_account.account_id`
- *
- *   Example:
- *   `owning_account.account_type = "GOOGLE_ADS" AND partner_account.account_id
- *   = 987654321`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/partner_link_service.search_partner_links.js</caption>
- * region_tag:datamanager_v1_generated_PartnerLinkService_SearchPartnerLinks_async
- */
+  /**
+   * Equivalent to `searchPartnerLinks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Account to search for partner links. If no `filter` is specified,
+   *   all partner links where this account is either the `owning_account` or
+   *   `partner_account` are returned.
+   *
+   *   Format: `accountTypes/{account_type}/accounts/{account}`
+   * @param {number} request.pageSize
+   *   The maximum number of partner links to return. The service may return
+   *   fewer than this value.
+   *   If unspecified, at most 10 partner links will be returned.
+   *   The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `SearchPartnerLinks` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `SearchPartnerLinks`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. A [filter string](https://google.aip.dev/160). All fields need to
+   *   be on the left hand side of each condition (for example: `partner_link_id =
+   *   123456789`). Fields must be specified using either all [camel
+   *   case](https://en.wikipedia.org/wiki/Camel_case) or all [snake
+   *   case](https://en.wikipedia.org/wiki/Snake_case). Don't use a combination of
+   *   camel case and snake case.
+   *
+   *   Supported operations:
+   *
+   *   - `AND`
+   *   - `=`
+   *   - `!=`
+   *
+   *   Supported fields:
+   *
+   *   - `partner_link_id`
+   *   - `owning_account.account_type`
+   *   - `owning_account.account_id`
+   *   - `partner_account.account_type`
+   *   - `partner_account.account_id`
+   *
+   *   Example:
+   *   `owning_account.account_type = "GOOGLE_ADS" AND partner_account.account_id
+   *   = 987654321`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ads.datamanager.v1.PartnerLink|PartnerLink}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/partner_link_service.search_partner_links.js</caption>
+   * region_tag:datamanager_v1_generated_PartnerLinkService_SearchPartnerLinks_async
+   */
   searchPartnerLinksAsync(
-      request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.ads.datamanager.v1.IPartnerLink>{
+    request?: protos.google.ads.datamanager.v1.ISearchPartnerLinksRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.ads.datamanager.v1.IPartnerLink> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['searchPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('searchPartnerLinks iterate %j', request);
     return this.descriptors.page.searchPartnerLinks.asyncIterate(
       this.innerApiCalls['searchPartnerLinks'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.ads.datamanager.v1.IPartnerLink>;
   }
   // --------------------
@@ -885,7 +1050,7 @@ export class PartnerLinkServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(accountType:string,account:string) {
+  accountPath(accountType: string, account: string) {
     return this.pathTemplates.accountPathTemplate.render({
       account_type: accountType,
       account: account,
@@ -900,7 +1065,8 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the account_type.
    */
   matchAccountTypeFromAccountName(accountName: string) {
-    return this.pathTemplates.accountPathTemplate.match(accountName).account_type;
+    return this.pathTemplates.accountPathTemplate.match(accountName)
+      .account_type;
   }
 
   /**
@@ -922,7 +1088,7 @@ export class PartnerLinkServiceClient {
    * @param {string} partner_link
    * @returns {string} Resource name string.
    */
-  partnerLinkPath(accountType:string,account:string,partnerLink:string) {
+  partnerLinkPath(accountType: string, account: string, partnerLink: string) {
     return this.pathTemplates.partnerLinkPathTemplate.render({
       account_type: accountType,
       account: account,
@@ -938,7 +1104,8 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the account_type.
    */
   matchAccountTypeFromPartnerLinkName(partnerLinkName: string) {
-    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).account_type;
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName)
+      .account_type;
   }
 
   /**
@@ -949,7 +1116,8 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromPartnerLinkName(partnerLinkName: string) {
-    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).account;
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName)
+      .account;
   }
 
   /**
@@ -960,7 +1128,8 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the partner_link.
    */
   matchPartnerLinkFromPartnerLinkName(partnerLinkName: string) {
-    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName).partner_link;
+    return this.pathTemplates.partnerLinkPathTemplate.match(partnerLinkName)
+      .partner_link;
   }
 
   /**
@@ -971,7 +1140,7 @@ export class PartnerLinkServiceClient {
    * @param {string} user_list
    * @returns {string} Resource name string.
    */
-  userListPath(accountType:string,account:string,userList:string) {
+  userListPath(accountType: string, account: string, userList: string) {
     return this.pathTemplates.userListPathTemplate.render({
       account_type: accountType,
       account: account,
@@ -987,7 +1156,8 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the account_type.
    */
   matchAccountTypeFromUserListName(userListName: string) {
-    return this.pathTemplates.userListPathTemplate.match(userListName).account_type;
+    return this.pathTemplates.userListPathTemplate.match(userListName)
+      .account_type;
   }
 
   /**
@@ -1009,7 +1179,8 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the user_list.
    */
   matchUserListFromUserListName(userListName: string) {
-    return this.pathTemplates.userListPathTemplate.match(userListName).user_list;
+    return this.pathTemplates.userListPathTemplate.match(userListName)
+      .user_list;
   }
 
   /**
@@ -1020,7 +1191,11 @@ export class PartnerLinkServiceClient {
    * @param {string} user_list_direct_license
    * @returns {string} Resource name string.
    */
-  userListDirectLicensePath(accountType:string,account:string,userListDirectLicense:string) {
+  userListDirectLicensePath(
+    accountType: string,
+    account: string,
+    userListDirectLicense: string,
+  ) {
     return this.pathTemplates.userListDirectLicensePathTemplate.render({
       account_type: accountType,
       account: account,
@@ -1035,8 +1210,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListDirectLicense resource.
    * @returns {string} A string representing the account_type.
    */
-  matchAccountTypeFromUserListDirectLicenseName(userListDirectLicenseName: string) {
-    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).account_type;
+  matchAccountTypeFromUserListDirectLicenseName(
+    userListDirectLicenseName: string,
+  ) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(
+      userListDirectLicenseName,
+    ).account_type;
   }
 
   /**
@@ -1047,7 +1226,9 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromUserListDirectLicenseName(userListDirectLicenseName: string) {
-    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).account;
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(
+      userListDirectLicenseName,
+    ).account;
   }
 
   /**
@@ -1057,8 +1238,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListDirectLicense resource.
    * @returns {string} A string representing the user_list_direct_license.
    */
-  matchUserListDirectLicenseFromUserListDirectLicenseName(userListDirectLicenseName: string) {
-    return this.pathTemplates.userListDirectLicensePathTemplate.match(userListDirectLicenseName).user_list_direct_license;
+  matchUserListDirectLicenseFromUserListDirectLicenseName(
+    userListDirectLicenseName: string,
+  ) {
+    return this.pathTemplates.userListDirectLicensePathTemplate.match(
+      userListDirectLicenseName,
+    ).user_list_direct_license;
   }
 
   /**
@@ -1069,7 +1254,11 @@ export class PartnerLinkServiceClient {
    * @param {string} user_list_global_license
    * @returns {string} Resource name string.
    */
-  userListGlobalLicensePath(accountType:string,account:string,userListGlobalLicense:string) {
+  userListGlobalLicensePath(
+    accountType: string,
+    account: string,
+    userListGlobalLicense: string,
+  ) {
     return this.pathTemplates.userListGlobalLicensePathTemplate.render({
       account_type: accountType,
       account: account,
@@ -1084,8 +1273,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListGlobalLicense resource.
    * @returns {string} A string representing the account_type.
    */
-  matchAccountTypeFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
-    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).account_type;
+  matchAccountTypeFromUserListGlobalLicenseName(
+    userListGlobalLicenseName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(
+      userListGlobalLicenseName,
+    ).account_type;
   }
 
   /**
@@ -1096,7 +1289,9 @@ export class PartnerLinkServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
-    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).account;
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(
+      userListGlobalLicenseName,
+    ).account;
   }
 
   /**
@@ -1106,8 +1301,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListGlobalLicense resource.
    * @returns {string} A string representing the user_list_global_license.
    */
-  matchUserListGlobalLicenseFromUserListGlobalLicenseName(userListGlobalLicenseName: string) {
-    return this.pathTemplates.userListGlobalLicensePathTemplate.match(userListGlobalLicenseName).user_list_global_license;
+  matchUserListGlobalLicenseFromUserListGlobalLicenseName(
+    userListGlobalLicenseName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicensePathTemplate.match(
+      userListGlobalLicenseName,
+    ).user_list_global_license;
   }
 
   /**
@@ -1119,13 +1318,20 @@ export class PartnerLinkServiceClient {
    * @param {string} license_customer_info
    * @returns {string} Resource name string.
    */
-  userListGlobalLicenseCustomerInfoPath(accountType:string,account:string,userListGlobalLicense:string,licenseCustomerInfo:string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.render({
-      account_type: accountType,
-      account: account,
-      user_list_global_license: userListGlobalLicense,
-      license_customer_info: licenseCustomerInfo,
-    });
+  userListGlobalLicenseCustomerInfoPath(
+    accountType: string,
+    account: string,
+    userListGlobalLicense: string,
+    licenseCustomerInfo: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.render(
+      {
+        account_type: accountType,
+        account: account,
+        user_list_global_license: userListGlobalLicense,
+        license_customer_info: licenseCustomerInfo,
+      },
+    );
   }
 
   /**
@@ -1135,8 +1341,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the account_type.
    */
-  matchAccountTypeFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).account_type;
+  matchAccountTypeFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).account_type;
   }
 
   /**
@@ -1146,8 +1356,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the account.
    */
-  matchAccountFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).account;
+  matchAccountFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).account;
   }
 
   /**
@@ -1157,8 +1371,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the user_list_global_license.
    */
-  matchUserListGlobalLicenseFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).user_list_global_license;
+  matchUserListGlobalLicenseFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).user_list_global_license;
   }
 
   /**
@@ -1168,8 +1386,12 @@ export class PartnerLinkServiceClient {
    *   A fully-qualified path representing UserListGlobalLicenseCustomerInfo resource.
    * @returns {string} A string representing the license_customer_info.
    */
-  matchLicenseCustomerInfoFromUserListGlobalLicenseCustomerInfoName(userListGlobalLicenseCustomerInfoName: string) {
-    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(userListGlobalLicenseCustomerInfoName).license_customer_info;
+  matchLicenseCustomerInfoFromUserListGlobalLicenseCustomerInfoName(
+    userListGlobalLicenseCustomerInfoName: string,
+  ) {
+    return this.pathTemplates.userListGlobalLicenseCustomerInfoPathTemplate.match(
+      userListGlobalLicenseCustomerInfoName,
+    ).license_customer_info;
   }
 
   /**
@@ -1180,7 +1402,7 @@ export class PartnerLinkServiceClient {
    */
   close(): Promise<void> {
     if (this.partnerLinkServiceStub && !this._terminated) {
-      return this.partnerLinkServiceStub.then(stub => {
+      return this.partnerLinkServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

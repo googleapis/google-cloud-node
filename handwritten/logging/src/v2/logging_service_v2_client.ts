@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,9 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import {Transform, PassThrough} from 'stream';
+import { Transform, PassThrough } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -50,9 +51,11 @@ export class LoggingServiceV2Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('logging');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -61,9 +64,9 @@ export class LoggingServiceV2Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  loggingServiceV2Stub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  loggingServiceV2Stub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of LoggingServiceV2Client.
@@ -87,7 +90,7 @@ export class LoggingServiceV2Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -139,7 +142,7 @@ export class LoggingServiceV2Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -339,7 +342,7 @@ export class LoggingServiceV2Client {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // Some methods on this API support automatically batching
     // requests; denote this.
 
@@ -360,7 +363,7 @@ export class LoggingServiceV2Client {
       'google.logging.v2.LoggingServiceV2',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      { 'x-goog-api-client': clientHeader.join(' ') },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -400,7 +403,7 @@ export class LoggingServiceV2Client {
           (this._protos as any).google.logging.v2.LoggingServiceV2,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{[method: string]: Function}>;
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -414,11 +417,11 @@ export class LoggingServiceV2Client {
     ];
     for (const methodName of loggingServiceV2StubMethods) {
       const callPromise = this.loggingServiceV2Stub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough();
+                const stream = new PassThrough({ objectMode: true });
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -641,8 +644,50 @@ export class LoggingServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         log_name: request.logName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteLog(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteLog request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteLogRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteLog response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteLog(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteLogRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLog response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Writes log entries to Logging. This API method is the
@@ -792,8 +837,50 @@ export class LoggingServiceV2Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.writeLogEntries(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('writeLogEntries request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.IWriteLogEntriesResponse,
+          protos.google.logging.v2.IWriteLogEntriesRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('writeLogEntries response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .writeLogEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.IWriteLogEntriesResponse,
+          protos.google.logging.v2.IWriteLogEntriesRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('writeLogEntries response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -812,7 +899,10 @@ export class LoggingServiceV2Client {
    * region_tag:logging_v2_generated_LoggingServiceV2_TailLogEntries_async
    */
   tailLogEntries(options?: CallOptions): gax.CancellableStream {
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('tailLogEntries stream %j', options);
     return this.innerApiCalls.tailLogEntries(null, options);
   }
 
@@ -936,12 +1026,38 @@ export class LoggingServiceV2Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listLogEntries(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListLogEntriesRequest,
+          protos.google.logging.v2.IListLogEntriesResponse | null | undefined,
+          protos.google.logging.v2.ILogEntry
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLogEntries values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLogEntries request %j', request);
+    return this.innerApiCalls
+      .listLogEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.logging.v2.ILogEntry[],
+          protos.google.logging.v2.IListLogEntriesRequest | null,
+          protos.google.logging.v2.IListLogEntriesResponse,
+        ]) => {
+          this._log.info('listLogEntries values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLogEntries`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string[]} request.resourceNames
@@ -1006,7 +1122,10 @@ export class LoggingServiceV2Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLogEntries stream %j', request);
     return this.descriptors.page.listLogEntries.createStream(
       this.innerApiCalls.listLogEntries as GaxCall,
       request,
@@ -1083,7 +1202,10 @@ export class LoggingServiceV2Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listLogEntries'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLogEntries iterate %j', request);
     return this.descriptors.page.listLogEntries.asyncIterate(
       this.innerApiCalls['listLogEntries'] as GaxCall,
       request as {},
@@ -1183,16 +1305,43 @@ export class LoggingServiceV2Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.listMonitoredResourceDescriptors(
-      request,
-      options,
-      callback,
-    );
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest,
+          | protos.google.logging.v2.IListMonitoredResourceDescriptorsResponse
+          | null
+          | undefined,
+          protos.google.api.IMonitoredResourceDescriptor
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMonitoredResourceDescriptors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMonitoredResourceDescriptors request %j', request);
+    return this.innerApiCalls
+      .listMonitoredResourceDescriptors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.api.IMonitoredResourceDescriptor[],
+          protos.google.logging.v2.IListMonitoredResourceDescriptorsRequest | null,
+          protos.google.logging.v2.IListMonitoredResourceDescriptorsResponse,
+        ]) => {
+          this._log.info(
+            'listMonitoredResourceDescriptors values %j',
+            response,
+          );
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listMonitoredResourceDescriptors`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} [request.pageSize]
@@ -1226,7 +1375,10 @@ export class LoggingServiceV2Client {
     const defaultCallSettings =
       this._defaults['listMonitoredResourceDescriptors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listMonitoredResourceDescriptors stream %j', request);
     return this.descriptors.page.listMonitoredResourceDescriptors.createStream(
       this.innerApiCalls.listMonitoredResourceDescriptors as GaxCall,
       request,
@@ -1272,7 +1424,10 @@ export class LoggingServiceV2Client {
     const defaultCallSettings =
       this._defaults['listMonitoredResourceDescriptors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listMonitoredResourceDescriptors iterate %j', request);
     return this.descriptors.page.listMonitoredResourceDescriptors.asyncIterate(
       this.innerApiCalls['listMonitoredResourceDescriptors'] as GaxCall,
       request as {},
@@ -1392,12 +1547,38 @@ export class LoggingServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listLogs(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListLogsRequest,
+          protos.google.logging.v2.IListLogsResponse | null | undefined,
+          string
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLogs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLogs request %j', request);
+    return this.innerApiCalls
+      .listLogs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          string[],
+          protos.google.logging.v2.IListLogsRequest | null,
+          protos.google.logging.v2.IListLogsResponse,
+        ]) => {
+          this._log.info('listLogs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLogs`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1457,7 +1638,10 @@ export class LoggingServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLogs stream %j', request);
     return this.descriptors.page.listLogs.createStream(
       this.innerApiCalls.listLogs as GaxCall,
       request,
@@ -1529,7 +1713,10 @@ export class LoggingServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLogs iterate %j', request);
     return this.descriptors.page.listLogs.asyncIterate(
       this.innerApiCalls['listLogs'] as GaxCall,
       request as {},
@@ -3208,7 +3395,8 @@ export class LoggingServiceV2Client {
    */
   close(): Promise<void> {
     if (this.loggingServiceV2Stub && !this._terminated) {
-      return this.loggingServiceV2Stub.then(stub => {
+      return this.loggingServiceV2Stub.then((stub) => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
       });
