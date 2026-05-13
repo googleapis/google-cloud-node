@@ -320,7 +320,9 @@ export class ClusterManagerClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/container',
+      'https://www.googleapis.com/auth/container.read-only'
     ];
   }
 
@@ -938,6 +940,8 @@ export class ClusterManagerClient {
  *   Consolidation delay defines duration after which the Cluster Autoscaler can
  *   scale down underutilized nodes. If not set, nodes are scaled down by
  *   default behavior, i.e. according to the chosen autoscaling profile.
+ * @param {google.container.v1.TaintConfig} request.taintConfig
+ *   The taint configuration for the node pool.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -4286,12 +4290,12 @@ export class ClusterManagerClient {
       });
   }
 /**
- * Fetch upgrade information of a specific nodepool.
+ * Fetch upgrade information of a specific node pool.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. The name (project, location, cluster, nodepool) of the nodepool
+ *   Required. The name (project, location, cluster, node pool) of the node pool
  *   to get. Specified in the format
  *   `projects/* /locations/* /clusters/* /nodePools/*` or
  *   `projects/* /zones/* /clusters/* /nodePools/*`.
