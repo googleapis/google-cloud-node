@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class ToolServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('ces');
@@ -57,10 +64,10 @@ export class ToolServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  toolServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  toolServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ToolServiceClient.
@@ -101,21 +108,42 @@ export class ToolServiceClient {
    *     const client = new ToolServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ToolServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'ces.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +168,7 @@ export class ToolServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +182,11 @@ export class ToolServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,65 +208,68 @@ export class ToolServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}'
+        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}',
       ),
       appPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}'
+        'projects/{project}/locations/{location}/apps/{app}',
       ),
       appVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/versions/{version}'
+        'projects/{project}/locations/{location}/apps/{app}/versions/{version}',
       ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}'
+        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}',
       ),
       conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}'
+        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}',
       ),
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}',
       ),
       evaluationDatasetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluationDatasets/{evaluation_dataset}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluationDatasets/{evaluation_dataset}',
       ),
       evaluationExpectationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluationExpectations/{evaluation_expectation}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluationExpectations/{evaluation_expectation}',
       ),
       evaluationResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result}',
       ),
       evaluationRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluationRuns/{evaluation_run}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluationRuns/{evaluation_run}',
       ),
       examplePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/examples/{example}'
+        'projects/{project}/locations/{location}/apps/{app}/examples/{example}',
       ),
       guardrailPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}'
+        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}',
       ),
       omnichannelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/omnichannels/{omnichannel}'
+        'projects/{project}/locations/{location}/omnichannels/{omnichannel}',
       ),
       scheduledEvaluationRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}'
+        'projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}',
       ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securitySettings'
+        'projects/{project}/locations/{location}/securitySettings',
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}'
+        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}',
       ),
       toolsetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}'
+        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.ces.v1beta.ToolService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.ces.v1beta.ToolService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -273,36 +300,44 @@ export class ToolServiceClient {
     // Put together the "service stub" for
     // google.cloud.ces.v1beta.ToolService.
     this.toolServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.ces.v1beta.ToolService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.ces.v1beta.ToolService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.ces.v1beta.ToolService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const toolServiceStubMethods =
-        ['executeTool', 'retrieveToolSchema', 'retrieveTools'];
+    const toolServiceStubMethods = [
+      'executeTool',
+      'retrieveToolSchema',
+      'retrieveTools',
+    ];
     for (const methodName of toolServiceStubMethods) {
       const callPromise = this.toolServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -317,8 +352,14 @@ export class ToolServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -329,8 +370,14 @@ export class ToolServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -363,7 +410,7 @@ export class ToolServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/ces',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -373,8 +420,9 @@ export class ToolServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -385,326 +433,430 @@ export class ToolServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Executes the given tool with the given arguments.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} [request.tool]
- *   Optional. The name of the tool to execute.
- *   Format:
- *   projects/{project}/locations/{location}/apps/{app}/tools/{tool}
- * @param {google.cloud.ces.v1beta.ToolsetTool} [request.toolsetTool]
- *   Optional. The toolset tool to execute. Only one tool should match the
- *   predicate from the toolset. Otherwise, an error will be returned.
- * @param {google.protobuf.Struct} [request.variables]
- *   Optional. The variables that are available for the tool execution.
- * @param {google.protobuf.Struct} [request.context]
- *   Optional. The
- *   [ToolCallContext](https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/tool/python#environment
- *   for details) to be passed to the Python tool.
- * @param {string} request.parent
- *   Required. The resource name of the app which the tool/toolset belongs to.
- *   Format: `projects/{project}/locations/{location}/apps/{app}`
- * @param {google.protobuf.Struct} [request.args]
- *   Optional. The input parameters and values for the tool in JSON object
- *   format.
- * @param {google.cloud.ces.v1beta.MockConfig} [request.mockConfig]
- *   Optional. Mock configuration for the tool execution.
- *   If this field is set, tools that call other tools will be
- *   mocked based on the provided patterns and responses.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ExecuteToolResponse|ExecuteToolResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/tool_service.execute_tool.js</caption>
- * region_tag:ces_v1beta_generated_ToolService_ExecuteTool_async
- */
+  /**
+   * Executes the given tool with the given arguments.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.tool]
+   *   Optional. The name of the tool to execute.
+   *   Format:
+   *   projects/{project}/locations/{location}/apps/{app}/tools/{tool}
+   * @param {google.cloud.ces.v1beta.ToolsetTool} [request.toolsetTool]
+   *   Optional. The toolset tool to execute. Only one tool should match the
+   *   predicate from the toolset. Otherwise, an error will be returned.
+   * @param {google.protobuf.Struct} [request.variables]
+   *   Optional. The variables that are available for the tool execution.
+   * @param {google.protobuf.Struct} [request.context]
+   *   Optional. The
+   *   [ToolCallContext](https://docs.cloud.google.com/customer-engagement-ai/conversational-agents/ps/tool/python#environment
+   *   for details) to be passed to the Python tool.
+   * @param {string} request.parent
+   *   Required. The resource name of the app which the tool/toolset belongs to.
+   *   Format: `projects/{project}/locations/{location}/apps/{app}`
+   * @param {google.protobuf.Struct} [request.args]
+   *   Optional. The input parameters and values for the tool in JSON object
+   *   format.
+   * @param {google.cloud.ces.v1beta.MockConfig} [request.mockConfig]
+   *   Optional. Mock configuration for the tool execution.
+   *   If this field is set, tools that call other tools will be
+   *   mocked based on the provided patterns and responses.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ExecuteToolResponse|ExecuteToolResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/tool_service.execute_tool.js</caption>
+   * region_tag:ces_v1beta_generated_ToolService_ExecuteTool_async
+   */
   executeTool(
-      request?: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-        protos.google.cloud.ces.v1beta.IExecuteToolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IExecuteToolResponse,
+      protos.google.cloud.ces.v1beta.IExecuteToolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   executeTool(
-      request: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-          protos.google.cloud.ces.v1beta.IExecuteToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IExecuteToolResponse,
+      protos.google.cloud.ces.v1beta.IExecuteToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   executeTool(
-      request: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-          protos.google.cloud.ces.v1beta.IExecuteToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IExecuteToolResponse,
+      protos.google.cloud.ces.v1beta.IExecuteToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   executeTool(
-      request?: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IExecuteToolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-          protos.google.cloud.ces.v1beta.IExecuteToolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-          protos.google.cloud.ces.v1beta.IExecuteToolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-        protos.google.cloud.ces.v1beta.IExecuteToolRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1beta.IExecuteToolRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IExecuteToolResponse,
+      protos.google.cloud.ces.v1beta.IExecuteToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IExecuteToolResponse,
+      protos.google.cloud.ces.v1beta.IExecuteToolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('executeTool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-        protos.google.cloud.ces.v1beta.IExecuteToolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IExecuteToolResponse,
+          protos.google.cloud.ces.v1beta.IExecuteToolRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('executeTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.executeTool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IExecuteToolResponse,
-        protos.google.cloud.ces.v1beta.IExecuteToolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('executeTool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .executeTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IExecuteToolResponse,
+          protos.google.cloud.ces.v1beta.IExecuteToolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('executeTool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve the schema of the given tool. The schema is computed on the fly
- * for the given instance of the tool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} [request.tool]
- *   Optional. The name of the tool to retrieve the schema for.
- *   Format:
- *   projects/{project}/locations/{location}/apps/{app}/tools/{tool}
- * @param {google.cloud.ces.v1beta.ToolsetTool} [request.toolsetTool]
- *   Optional. The toolset tool to retrieve the schema for. Only one tool
- *   should match the predicate from the toolset. Otherwise, an error will be
- *   returned.
- * @param {string} request.parent
- *   Required. The resource name of the app which the tool/toolset belongs to.
- *   Format: `projects/{project}/locations/{location}/apps/{app}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.RetrieveToolSchemaResponse|RetrieveToolSchemaResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/tool_service.retrieve_tool_schema.js</caption>
- * region_tag:ces_v1beta_generated_ToolService_RetrieveToolSchema_async
- */
+  /**
+   * Retrieve the schema of the given tool. The schema is computed on the fly
+   * for the given instance of the tool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} [request.tool]
+   *   Optional. The name of the tool to retrieve the schema for.
+   *   Format:
+   *   projects/{project}/locations/{location}/apps/{app}/tools/{tool}
+   * @param {google.cloud.ces.v1beta.ToolsetTool} [request.toolsetTool]
+   *   Optional. The toolset tool to retrieve the schema for. Only one tool
+   *   should match the predicate from the toolset. Otherwise, an error will be
+   *   returned.
+   * @param {string} request.parent
+   *   Required. The resource name of the app which the tool/toolset belongs to.
+   *   Format: `projects/{project}/locations/{location}/apps/{app}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.RetrieveToolSchemaResponse|RetrieveToolSchemaResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/tool_service.retrieve_tool_schema.js</caption>
+   * region_tag:ces_v1beta_generated_ToolService_RetrieveToolSchema_async
+   */
   retrieveToolSchema(
-      request?: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
+      protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   retrieveToolSchema(
-      request: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
+      | protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveToolSchema(
-      request: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
+      | protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveToolSchema(
-      request?: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
+      | protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
+      protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('retrieveToolSchema request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
+          | protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('retrieveToolSchema response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.retrieveToolSchema(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('retrieveToolSchema response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .retrieveToolSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaResponse,
+          protos.google.cloud.ces.v1beta.IRetrieveToolSchemaRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveToolSchema response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve the list of tools included in the specified toolset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.toolset
- *   Required. The name of the toolset to retrieve the tools for.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}`
- * @param {string[]} [request.toolIds]
- *   Optional. The identifiers of the tools to retrieve from the toolset.
- *   If empty, all tools in the toolset will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.RetrieveToolsResponse|RetrieveToolsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/tool_service.retrieve_tools.js</caption>
- * region_tag:ces_v1beta_generated_ToolService_RetrieveTools_async
- */
+  /**
+   * Retrieve the list of tools included in the specified toolset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.toolset
+   *   Required. The name of the toolset to retrieve the tools for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}`
+   * @param {string[]} [request.toolIds]
+   *   Optional. The identifiers of the tools to retrieve from the toolset.
+   *   If empty, all tools in the toolset will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.RetrieveToolsResponse|RetrieveToolsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/tool_service.retrieve_tools.js</caption>
+   * region_tag:ces_v1beta_generated_ToolService_RetrieveTools_async
+   */
   retrieveTools(
-      request?: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
+      protos.google.cloud.ces.v1beta.IRetrieveToolsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   retrieveTools(
-      request: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
+      protos.google.cloud.ces.v1beta.IRetrieveToolsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveTools(
-      request: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
+      protos.google.cloud.ces.v1beta.IRetrieveToolsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveTools(
-      request?: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IRetrieveToolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-          protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IRetrieveToolsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
+      protos.google.cloud.ces.v1beta.IRetrieveToolsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
+      protos.google.cloud.ces.v1beta.IRetrieveToolsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'toolset': request.toolset ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        toolset: request.toolset ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('retrieveTools request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
+          | protos.google.cloud.ces.v1beta.IRetrieveToolsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('retrieveTools response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.retrieveTools(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
-        protos.google.cloud.ces.v1beta.IRetrieveToolsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('retrieveTools response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .retrieveTools(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IRetrieveToolsResponse,
+          protos.google.cloud.ces.v1beta.IRetrieveToolsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveTools response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -739,12 +891,11 @@ export class ToolServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -777,7 +928,7 @@ export class ToolServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -795,7 +946,7 @@ export class ToolServiceClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project:string,location:string,app:string,agent:string) {
+  agentPath(project: string, location: string, app: string, agent: string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -856,7 +1007,7 @@ export class ToolServiceClient {
    * @param {string} app
    * @returns {string} Resource name string.
    */
-  appPath(project:string,location:string,app:string) {
+  appPath(project: string, location: string, app: string) {
     return this.pathTemplates.appPathTemplate.render({
       project: project,
       location: location,
@@ -906,7 +1057,12 @@ export class ToolServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  appVersionPath(project:string,location:string,app:string,version:string) {
+  appVersionPath(
+    project: string,
+    location: string,
+    app: string,
+    version: string,
+  ) {
     return this.pathTemplates.appVersionPathTemplate.render({
       project: project,
       location: location,
@@ -923,7 +1079,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).project;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .project;
   }
 
   /**
@@ -934,7 +1091,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).location;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .location;
   }
 
   /**
@@ -956,7 +1114,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).version;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .version;
   }
 
   /**
@@ -968,7 +1127,12 @@ export class ToolServiceClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(project:string,location:string,app:string,changelog:string) {
+  changelogPath(
+    project: string,
+    location: string,
+    app: string,
+    changelog: string,
+  ) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -985,7 +1149,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .project;
   }
 
   /**
@@ -996,7 +1161,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .location;
   }
 
   /**
@@ -1018,7 +1184,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .changelog;
   }
 
   /**
@@ -1030,7 +1197,12 @@ export class ToolServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(project:string,location:string,app:string,conversation:string) {
+  conversationPath(
+    project: string,
+    location: string,
+    app: string,
+    conversation: string,
+  ) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -1047,7 +1219,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
   }
 
   /**
@@ -1058,7 +1231,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
   }
 
   /**
@@ -1069,7 +1243,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).app;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .app;
   }
 
   /**
@@ -1080,7 +1255,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**
@@ -1092,7 +1268,12 @@ export class ToolServiceClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,app:string,deployment:string) {
+  deploymentPath(
+    project: string,
+    location: string,
+    app: string,
+    deployment: string,
+  ) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1109,7 +1290,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -1120,7 +1302,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -1142,7 +1325,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -1154,7 +1338,12 @@ export class ToolServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  evaluationPath(project:string,location:string,app:string,evaluation:string) {
+  evaluationPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluation: string,
+  ) {
     return this.pathTemplates.evaluationPathTemplate.render({
       project: project,
       location: location,
@@ -1171,7 +1360,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).project;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
   }
 
   /**
@@ -1182,7 +1372,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).location;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .location;
   }
 
   /**
@@ -1204,7 +1395,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).evaluation;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
   }
 
   /**
@@ -1216,7 +1408,12 @@ export class ToolServiceClient {
    * @param {string} evaluation_dataset
    * @returns {string} Resource name string.
    */
-  evaluationDatasetPath(project:string,location:string,app:string,evaluationDataset:string) {
+  evaluationDatasetPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluationDataset: string,
+  ) {
     return this.pathTemplates.evaluationDatasetPathTemplate.render({
       project: project,
       location: location,
@@ -1233,7 +1430,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).project;
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).project;
   }
 
   /**
@@ -1244,7 +1443,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).location;
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).location;
   }
 
   /**
@@ -1255,7 +1456,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).app;
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).app;
   }
 
   /**
@@ -1265,8 +1468,12 @@ export class ToolServiceClient {
    *   A fully-qualified path representing EvaluationDataset resource.
    * @returns {string} A string representing the evaluation_dataset.
    */
-  matchEvaluationDatasetFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).evaluation_dataset;
+  matchEvaluationDatasetFromEvaluationDatasetName(
+    evaluationDatasetName: string,
+  ) {
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).evaluation_dataset;
   }
 
   /**
@@ -1278,7 +1485,12 @@ export class ToolServiceClient {
    * @param {string} evaluation_expectation
    * @returns {string} Resource name string.
    */
-  evaluationExpectationPath(project:string,location:string,app:string,evaluationExpectation:string) {
+  evaluationExpectationPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluationExpectation: string,
+  ) {
     return this.pathTemplates.evaluationExpectationPathTemplate.render({
       project: project,
       location: location,
@@ -1295,7 +1507,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).project;
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).project;
   }
 
   /**
@@ -1305,8 +1519,12 @@ export class ToolServiceClient {
    *   A fully-qualified path representing EvaluationExpectation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).location;
+  matchLocationFromEvaluationExpectationName(
+    evaluationExpectationName: string,
+  ) {
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).location;
   }
 
   /**
@@ -1317,7 +1535,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).app;
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).app;
   }
 
   /**
@@ -1327,8 +1547,12 @@ export class ToolServiceClient {
    *   A fully-qualified path representing EvaluationExpectation resource.
    * @returns {string} A string representing the evaluation_expectation.
    */
-  matchEvaluationExpectationFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).evaluation_expectation;
+  matchEvaluationExpectationFromEvaluationExpectationName(
+    evaluationExpectationName: string,
+  ) {
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).evaluation_expectation;
   }
 
   /**
@@ -1341,7 +1565,13 @@ export class ToolServiceClient {
    * @param {string} evaluation_result
    * @returns {string} Resource name string.
    */
-  evaluationResultPath(project:string,location:string,app:string,evaluation:string,evaluationResult:string) {
+  evaluationResultPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluation: string,
+    evaluationResult: string,
+  ) {
     return this.pathTemplates.evaluationResultPathTemplate.render({
       project: project,
       location: location,
@@ -1359,7 +1589,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).project;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).project;
   }
 
   /**
@@ -1370,7 +1602,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).location;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).location;
   }
 
   /**
@@ -1381,7 +1615,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).app;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).app;
   }
 
   /**
@@ -1392,7 +1628,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).evaluation;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).evaluation;
   }
 
   /**
@@ -1403,7 +1641,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the evaluation_result.
    */
   matchEvaluationResultFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).evaluation_result;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).evaluation_result;
   }
 
   /**
@@ -1415,7 +1655,12 @@ export class ToolServiceClient {
    * @param {string} evaluation_run
    * @returns {string} Resource name string.
    */
-  evaluationRunPath(project:string,location:string,app:string,evaluationRun:string) {
+  evaluationRunPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluationRun: string,
+  ) {
     return this.pathTemplates.evaluationRunPathTemplate.render({
       project: project,
       location: location,
@@ -1432,7 +1677,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).project;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .project;
   }
 
   /**
@@ -1443,7 +1689,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).location;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .location;
   }
 
   /**
@@ -1454,7 +1701,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).app;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .app;
   }
 
   /**
@@ -1465,7 +1713,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the evaluation_run.
    */
   matchEvaluationRunFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).evaluation_run;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .evaluation_run;
   }
 
   /**
@@ -1477,7 +1726,7 @@ export class ToolServiceClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(project:string,location:string,app:string,example:string) {
+  examplePath(project: string, location: string, app: string, example: string) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       location: location,
@@ -1539,7 +1788,12 @@ export class ToolServiceClient {
    * @param {string} guardrail
    * @returns {string} Resource name string.
    */
-  guardrailPath(project:string,location:string,app:string,guardrail:string) {
+  guardrailPath(
+    project: string,
+    location: string,
+    app: string,
+    guardrail: string,
+  ) {
     return this.pathTemplates.guardrailPathTemplate.render({
       project: project,
       location: location,
@@ -1556,7 +1810,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).project;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .project;
   }
 
   /**
@@ -1567,7 +1822,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).location;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .location;
   }
 
   /**
@@ -1589,7 +1845,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the guardrail.
    */
   matchGuardrailFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).guardrail;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .guardrail;
   }
 
   /**
@@ -1600,7 +1857,7 @@ export class ToolServiceClient {
    * @param {string} omnichannel
    * @returns {string} Resource name string.
    */
-  omnichannelPath(project:string,location:string,omnichannel:string) {
+  omnichannelPath(project: string, location: string, omnichannel: string) {
     return this.pathTemplates.omnichannelPathTemplate.render({
       project: project,
       location: location,
@@ -1616,7 +1873,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).project;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .project;
   }
 
   /**
@@ -1627,7 +1885,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).location;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .location;
   }
 
   /**
@@ -1638,7 +1897,8 @@ export class ToolServiceClient {
    * @returns {string} A string representing the omnichannel.
    */
   matchOmnichannelFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).omnichannel;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .omnichannel;
   }
 
   /**
@@ -1650,7 +1910,12 @@ export class ToolServiceClient {
    * @param {string} scheduled_evaluation_run
    * @returns {string} Resource name string.
    */
-  scheduledEvaluationRunPath(project:string,location:string,app:string,scheduledEvaluationRun:string) {
+  scheduledEvaluationRunPath(
+    project: string,
+    location: string,
+    app: string,
+    scheduledEvaluationRun: string,
+  ) {
     return this.pathTemplates.scheduledEvaluationRunPathTemplate.render({
       project: project,
       location: location,
@@ -1666,8 +1931,12 @@ export class ToolServiceClient {
    *   A fully-qualified path representing ScheduledEvaluationRun resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).project;
+  matchProjectFromScheduledEvaluationRunName(
+    scheduledEvaluationRunName: string,
+  ) {
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).project;
   }
 
   /**
@@ -1677,8 +1946,12 @@ export class ToolServiceClient {
    *   A fully-qualified path representing ScheduledEvaluationRun resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).location;
+  matchLocationFromScheduledEvaluationRunName(
+    scheduledEvaluationRunName: string,
+  ) {
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).location;
   }
 
   /**
@@ -1689,7 +1962,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).app;
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).app;
   }
 
   /**
@@ -1699,8 +1974,12 @@ export class ToolServiceClient {
    *   A fully-qualified path representing ScheduledEvaluationRun resource.
    * @returns {string} A string representing the scheduled_evaluation_run.
    */
-  matchScheduledEvaluationRunFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).scheduled_evaluation_run;
+  matchScheduledEvaluationRunFromScheduledEvaluationRunName(
+    scheduledEvaluationRunName: string,
+  ) {
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).scheduled_evaluation_run;
   }
 
   /**
@@ -1710,7 +1989,7 @@ export class ToolServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(project:string,location:string) {
+  securitySettingsPath(project: string, location: string) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -1725,7 +2004,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).project;
   }
 
   /**
@@ -1736,7 +2017,9 @@ export class ToolServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).location;
   }
 
   /**
@@ -1748,7 +2031,7 @@ export class ToolServiceClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project:string,location:string,app:string,tool:string) {
+  toolPath(project: string, location: string, app: string, tool: string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -1810,7 +2093,7 @@ export class ToolServiceClient {
    * @param {string} toolset
    * @returns {string} Resource name string.
    */
-  toolsetPath(project:string,location:string,app:string,toolset:string) {
+  toolsetPath(project: string, location: string, app: string, toolset: string) {
     return this.pathTemplates.toolsetPathTemplate.render({
       project: project,
       location: location,
@@ -1871,11 +2154,13 @@ export class ToolServiceClient {
    */
   close(): Promise<void> {
     if (this.toolServiceStub && !this._terminated) {
-      return this.toolServiceStub.then(stub => {
+      return this.toolServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();
