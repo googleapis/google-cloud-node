@@ -5,6 +5,912 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "a63b61d13c1651deb62b3903292f3bd1c7f4d614",
+          "message": "For bigquery-storage add protobufjs to depend",
+          "issues": [
+            "8243"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "778adb0d5f368448f99bf68dcbcf37c3a7394f5d",
+          "message": "Upgrade the protobufjs dependency for bigquery storage",
+          "issues": [
+            "8136"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "c9813311-f380-43d5-9a52-b7ee6e8e44e5",
+      "createTime": "2026-05-13T17:03:24.079Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1cb0ff89f5f8a8cbe422c429bd61874b983f6cef",
+          "message": "Unblock release by upgrading @types/sinon for the add optimize package",
+          "issues": [
+            "8258"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appoptimize",
+      "id": "221d16c6-aef1-41e5-9223-a4e02037ed4c",
+      "createTime": "2026-05-13T15:30:23.911Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6dccbb711dfd1a8827f5b74cae5a81baf0b8349",
+          "message": "Add initial files for google.cloud.databasecenter.v1beta",
+          "issues": [
+            "8232"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/databasecenter",
+      "id": "5d9c76e6-8302-4e39-8444-15b6112d252c",
+      "createTime": "2026-05-12T18:41:57.101Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e4f3c355ae1718c6c3392d6c61055c3989b3038a",
+          "message": "Add initial files for google.devicesandservices.health.v4",
+          "issues": [
+            "8230"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "25b3cb53-81bd-4fec-b242-d0af5201ed62",
+      "createTime": "2026-05-12T18:41:57.082Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b8123ca35894377b0cfdb95f18f44b758ab0f7a4",
+          "message": "Add initial files for google.cloud.appoptimize.v1beta",
+          "issues": [
+            "8231"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appoptimize",
+      "id": "dec1f45c-b9ab-40e6-bc11-23f01cd6f7a1",
+      "createTime": "2026-05-12T18:41:57.061Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b78108349141a2b7967543419308689b9df0300d",
+          "message": "[vectorsearch] add preview support for precision reranking via Ranking API. Includes free usage up to a specific quota for vector-search-2 users during the preview period",
+          "issues": [
+            "8176"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "a3b1598c-ebbf-466c-8997-64da03d955a4",
+      "createTime": "2026-05-12T18:41:57.017Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "650147ce3d1b7e3abc5c2770c5feb06ae67d2306",
+          "message": "[netapp] add ScaleType for Storage Pools and LargeCapacityConfig for Volumes",
+          "issues": [
+            "8086"
+          ]
+        }
+      ],
+      "version": "0.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "ae16a400-eff3-44bc-8052-4bc985ecb418",
+      "createTime": "2026-05-12T18:41:56.991Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a9e9ef64da9396313a9fb4d49caeeb33ba934230",
+          "message": "[memorystore] Synchronize new proto/yaml changes.",
+          "issues": [
+            "8142"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "e2e718e8-d5c5-46fe-9215-894faa698d77",
+      "createTime": "2026-05-12T18:41:56.973Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3b19b3a827a22d92bf0592382611bfe8bce1d507",
+          "message": "[dataproc] add support for Cloud Resource Manager tags for Dataproc Serverless workloads",
+          "issues": [
+            "8179"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "3b186995-6387-44f8-89e4-29a1e14df7a4",
+      "createTime": "2026-05-12T18:41:56.954Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260410 (#1184)",
+          "issues": [
+            "8113"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "Update Compute Engine v1 API to revision 20260410",
+          "issues": [
+            "1185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "Update Compute Engine v1beta API to revision 20260331",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "Update Compute Engine v1 API to revision 20260331",
+          "issues": []
+        }
+      ],
+      "version": "6.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "b41f973a-53f0-4910-b068-1067c940002a",
+      "createTime": "2026-05-12T18:41:56.936Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ddb0db637cff6477e8be1f60c9c5ba19c4a4e4a3",
+          "message": "[chronicle] Adding Client Libraries for BigQueryExportService",
+          "issues": [
+            "8139"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "dc6a6e07-d621-4b8f-8af2-278834c006c2",
+      "createTime": "2026-05-12T18:41:56.916Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "606d6324ba2bb3d11c44675825dd5b2aead69969",
+          "message": "Release ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine v1beta1 API",
+          "issues": [
+            "8135"
+          ]
+        }
+      ],
+      "version": "6.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "b5936d4d-d329-4908-a3df-86b2bf6927df",
+      "createTime": "2026-05-12T18:41:56.893Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "74955618ec87f34d9af132b9b97b47287975c4cd",
+          "message": "[analytics-data] remove SheetExportAudienceList method, associated resources, and OAuth scopes from v1 alpha",
+          "issues": [
+            "8131"
+          ],
+          "breakingChangeNote": "[analytics-data] remove SheetExportAudienceList method, associated resources, and OAuth scopes from v1 alpha ([#8131](https://github.com/googleapis/google-cloud-node/issues/8131))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "e615fc4f-3fcb-4e1b-b502-c444a9295d30",
+      "createTime": "2026-05-12T18:41:56.874Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "1a44778856255471fa96e7df26e232ffb543d87c",
+          "message": "Resolve flakiness in Service retry system tests",
+          "issues": [
+            "7945"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d60757e2c61077ee3dfd881be45ef7ca554bd038",
+          "message": "Implement Object Contexts with advanced filtering and validation",
+          "issues": [
+            "7548"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "1a693aa3ade3ffb2ac25ff54677602d199b5e3da",
+          "message": "Set CRC32C as the default checksum option",
+          "issues": [
+            "7547"
+          ],
+          "scope": "storage"
+        },
+        {
+          "type": "feat",
+          "sha": "113d05c3bf068487bd81a7d4dbb4510f89142618",
+          "message": "Implement robust path validation and structured skip reporting",
+          "issues": [
+            "7546"
+          ],
+          "scope": "storage"
+        }
+      ],
+      "version": "7.20.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "1c3db543-b721-4601-8b95-895f88226ca8",
+      "createTime": "2026-05-11T14:38:47.488Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "841f0ca06d3d70278bb1d0c99535ad3c73c3d5d4",
+          "message": "Remove messages from leasing on nackWithResponse",
+          "issues": [
+            "7817"
+          ],
+          "scope": "pubsub"
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "4d6d709c-e09e-4c20-b3d1-aafcbce9d74a",
+      "createTime": "2026-05-11T14:38:47.483Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "6.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-winston",
+      "id": "a0941acf-8d69-45da-9d5c-4bb6f9a389bf",
+      "createTime": "2026-05-11T14:38:47.476Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "5.1.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-bunyan",
+      "id": "ca72da69-8eea-487c-a9ac-73915ea28d93",
+      "createTime": "2026-05-11T14:38:47.470Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "11.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging",
+      "id": "0a10d88f-635d-4762-85c3-c5e17a5e6732",
+      "createTime": "2026-05-11T14:38:47.464Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "41671b08ba94df02ab6fd42ea216dbcfe51d18ad",
+          "message": "Added FieldValue.minimum() and FieldValue.maximum()",
+          "issues": [
+            "8151"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "feat",
+          "sha": "4acb07593b5c6a1387a1dfb97bf7ab4cd399f329",
+          "message": "Added search stage support for languageCode, offset, limit, and retrievalDepth",
+          "issues": [
+            "8161"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "86310088f5dea61b4dfe3580e273b34aad79eac0",
+          "message": "Ensure limit(0) is properly serialized in query requests",
+          "issues": [
+            "8076",
+            "7382"
+          ],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "a9f6c3f3f721ba4920d925de6afa24ba9e81c7ad",
+          "message": "Respect `ignoreUndefinedProperties` in subpipelines",
+          "issues": [
+            "8089"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "8.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "c80c7683-78ba-4ca1-b6bc-b6111fb934ef",
+      "createTime": "2026-05-11T14:38:47.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "939d18dfd14295405a06d2023651d006d4992310",
+          "message": "Upgrade protobufjs and fix legacy key decoding in Datastore",
+          "issues": [
+            "8088"
+          ]
+        }
+      ],
+      "version": "10.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore",
+      "id": "17cdbfef-b16c-4f29-bd60-e320782b32dd",
+      "createTime": "2026-05-11T14:38:47.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "6.0.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/profiler",
+      "id": "794f3ea7-14f2-4f85-9868-86099caba83a",
+      "createTime": "2026-05-11T14:38:47.441Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "6.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "ec003268-4350-44e5-9598-0432ce95ff7e",
+      "createTime": "2026-05-11T14:38:47.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "778adb0d5f368448f99bf68dcbcf37c3a7394f5d",
+          "message": "Upgrade the protobufjs dependency for bigquery storage",
+          "issues": [
+            "8136"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "3aaecfc9-e770-44b6-9187-5b716c06f244",
+      "createTime": "2026-05-11T14:38:47.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "374167bd4c1b45c38112938df55e821fdeb82c97",
+          "message": "Pin @sinonjs/fake-timers to unblock build in bigquery",
+          "issues": [
+            "8121"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "0948b354bab60bbae906b7e9f8996b5b35754361",
+          "message": "Run npm run types in correct directory in owlbot",
+          "issues": [
+            "8061"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "8.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "2a785b06-b5db-4b2e-ac25-bb5b0fcd7b8a",
+      "createTime": "2026-05-11T14:38:47.423Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "01f7f502-875c-49a6-8dbf-ff5abfb6a9a6",
+      "createTime": "2026-05-11T14:38:47.418Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "d903896e-5998-4bef-8f76-3ead2403437a",
+      "createTime": "2026-05-11T14:38:47.411Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "5.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "cfa97d8c-0ce3-4bd3-bd76-3c8d446f55b2",
+      "createTime": "2026-05-11T14:38:47.405Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/paginator",
+      "id": "c844e3c7-394d-4950-a301-ff4ec0af8460",
+      "createTime": "2026-05-11T14:38:47.400Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "1.0.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-tools",
+      "id": "2c233f80-0d07-4184-82cc-50aec0f059d8",
+      "createTime": "2026-05-11T14:38:47.393Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "8.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "retry-request",
+      "id": "a79b5790-f3f0-4882-9ab8-f060b6115476",
+      "createTime": "2026-05-11T14:38:47.387Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "3.0.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "proto3-json-serializer",
+      "id": "5c961d51-ee60-4ded-8902-59cbaccb84ac",
+      "createTime": "2026-05-11T14:38:47.381Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "8.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "ad2e0386-48c3-44d3-9dba-a27fab4b9b2c",
+      "createTime": "2026-05-11T14:38:47.375Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "1.1.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-logging-utils",
+      "id": "ca32b9a7-a2c5-4cbf-9b30-95b17675a0cb",
+      "createTime": "2026-05-11T14:38:47.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "10.6.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "423eaec1-0806-4a35-973b-3eb2564d84f5",
+      "createTime": "2026-05-11T14:38:47.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "8.1.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "ef7b3f56-4555-40db-a090-b2366e6506ba",
+      "createTime": "2026-05-11T14:38:47.356Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "7.1.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "3dadb133-eedd-454a-afdb-a26f87e749a2",
+      "createTime": "2026-05-11T14:38:47.350Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "5.0.7",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "2a1681b4-6dfd-4ff2-8ef1-b932a5fb35c0",
+      "createTime": "2026-05-11T14:38:47.344Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "b90800518eb02799a812e6c2d21f57216564da30",
+          "message": "Add logic to check for IAM RPC methods within the service before adding mixin to avoid generating duplicate methods",
+          "issues": [
+            "7929"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "5b4ab3bd8487ad5ba4816157e0deb33d418ed836",
+          "message": "Add .boolean() to diregapic and handwritten_layer",
+          "issues": [
+            "8100"
+          ],
+          "scope": "gapic-generator-typescript"
+        }
+      ],
+      "version": "4.11.14",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "17b22f40-6fe1-4bac-8271-49dd83ba986e",
+      "createTime": "2026-05-11T14:38:47.338Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "4.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "pack-n-play",
+      "id": "cd400018-90ad-4419-9347-6fb628c89438",
+      "createTime": "2026-05-11T14:38:47.328Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "4.0.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-region-tag",
+      "id": "852908bf-5d43-40c6-874c-2ccab2ca0a1e",
+      "createTime": "2026-05-11T14:38:47.315Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "5.0.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "jsdoc-fresh",
+      "id": "c3ac52ea-f5aa-403e-85e8-6b82ab9d84e1",
+      "createTime": "2026-05-11T14:38:47.305Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        }
+      ],
+      "version": "6.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "0e843685-81b0-45a4-bfb4-b3288ba4ef68",
+      "createTime": "2026-05-11T14:38:47.292Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
           "message": "Bump all node submodules",
           "issues": [
@@ -77798,5 +78704,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-06T21:35:08.503Z"
+  "updateTime": "2026-05-13T17:03:24.079Z"
 }

@@ -176,7 +176,11 @@ export class BackendBucketsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      aggregatedList:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
       list:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items'),
+      listUsable:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'items')
     };
 
@@ -223,7 +227,7 @@ export class BackendBucketsClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const backendBucketsStubMethods =
-        ['addSignedUrlKey', 'delete', 'deleteSignedUrlKey', 'get', 'getIamPolicy', 'insert', 'list', 'patch', 'setEdgeSecurityPolicy', 'setIamPolicy', 'testIamPermissions', 'update'];
+        ['addSignedUrlKey', 'aggregatedList', 'delete', 'deleteSignedUrlKey', 'get', 'getIamPolicy', 'insert', 'list', 'listUsable', 'patch', 'setEdgeSecurityPolicy', 'setIamPolicy', 'testIamPermissions', 'update'];
     for (const methodName of backendBucketsStubMethods) {
       const callPromise = this.backendBucketsStub.then(
         stub => (...args: Array<{}>) => {
@@ -1548,6 +1552,153 @@ export class BackendBucketsClient {
       });
   }
 
+
+/**
+ * Retrieves the list of all BackendBucket resources, regional and global,
+ * available to the specified project.
+ *
+ * To prevent failure, it is recommended that you set the
+ * `returnPartialSuccess` parameter to `true`.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
+ * @param {boolean} request.includeAllScopes
+ *   Indicates whether every visible scope for each scope type (zone, region,
+ *   global) should be included in the response. For new resource types added
+ *   after this field, the flag has no effect as new resource types will always
+ *   include every visible scope for each scope type in response. For resource
+ *   types which predate this field, if this flag is omitted or false, only
+ *   scopes of the scope types where the resource type is expected to be found
+ *   will be included.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
+ * @param {string} request.project
+ *   Name of the project scoping this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
+ * @param {number} request.serviceProjectNumber
+ *   The Shared VPC service project id or service project number for which
+ *   aggregated list request is invoked for subnetworks list-usable api.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   as tuple [string, {@link protos.google.cloud.compute.v1.BackendBucketsScopedList|BackendBucketsScopedList}]. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/backend_buckets.aggregated_list.js</caption>
+ * region_tag:compute_v1_generated_BackendBuckets_AggregatedList_async
+ */
+  aggregatedListAsync(
+      request?: protos.google.cloud.compute.v1.IAggregatedListBackendBucketsRequest,
+      options?: CallOptions):
+    AsyncIterable<[string, protos.google.cloud.compute.v1.IBackendBucketsScopedList]>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
+    const defaultCallSettings = this._defaults['aggregatedList'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('aggregatedList iterate %j', request);
+    return this.descriptors.page.aggregatedList.asyncIterate(
+      this.innerApiCalls['aggregatedList'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<[string, protos.google.cloud.compute.v1.IBackendBucketsScopedList]>;
+  }
  /**
  * Retrieves the list of BackendBucket resources available to the specified
  * project.
@@ -1988,6 +2139,449 @@ export class BackendBucketsClient {
     this._log.info('list iterate %j', request);
     return this.descriptors.page.list.asyncIterate(
       this.innerApiCalls['list'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.compute.v1.IBackendBucket>;
+  }
+ /**
+ * Retrieves a list of all usable backend buckets in the specified project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.BackendBucket|BackendBucket}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listUsableAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listUsable(
+      request?: protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IBackendBucket[],
+        protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest|null,
+        protos.google.cloud.compute.v1.IBackendBucketListUsable
+      ]>;
+  listUsable(
+      request: protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+          protos.google.cloud.compute.v1.IBackendBucketListUsable|null|undefined,
+          protos.google.cloud.compute.v1.IBackendBucket>): void;
+  listUsable(
+      request: protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+          protos.google.cloud.compute.v1.IBackendBucketListUsable|null|undefined,
+          protos.google.cloud.compute.v1.IBackendBucket>): void;
+  listUsable(
+      request?: protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+          protos.google.cloud.compute.v1.IBackendBucketListUsable|null|undefined,
+          protos.google.cloud.compute.v1.IBackendBucket>,
+      callback?: PaginationCallback<
+          protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+          protos.google.cloud.compute.v1.IBackendBucketListUsable|null|undefined,
+          protos.google.cloud.compute.v1.IBackendBucket>):
+      Promise<[
+        protos.google.cloud.compute.v1.IBackendBucket[],
+        protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest|null,
+        protos.google.cloud.compute.v1.IBackendBucketListUsable
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+      protos.google.cloud.compute.v1.IBackendBucketListUsable|null|undefined,
+      protos.google.cloud.compute.v1.IBackendBucket>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsable values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsable request %j', request);
+    return this.innerApiCalls
+      .listUsable(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.compute.v1.IBackendBucket[],
+        protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest|null,
+        protos.google.cloud.compute.v1.IBackendBucketListUsable
+      ]) => {
+        this._log.info('listUsable values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listUsable`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.BackendBucket|BackendBucket} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listUsableAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listUsableStream(
+      request?: protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
+    const defaultCallSettings = this._defaults['listUsable'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listUsable stream %j', request);
+    return this.descriptors.page.listUsable.createStream(
+      this.innerApiCalls.listUsable as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listUsable`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. Most
+ *   Compute resources support two types of filter expressions:
+ *   expressions that support regular expressions and expressions that follow
+ *   API improvement proposal AIP-160.
+ *   These two types of filter expressions cannot be mixed in one request.
+ *
+ *   If you want to use AIP-160, your expression must specify the field name, an
+ *   operator, and the value that you want to use for filtering. The value
+ *   must be a string, a number, or a boolean. The operator
+ *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can
+ *   exclude instances named `example-instance` by specifying
+ *   `name != example-instance`.
+ *
+ *   The `:*` comparison can be used to test whether a key has been defined.
+ *   For example, to find all objects with `owner` label use:
+ *   ```
+ *   labels.owner:*
+ *   ```
+ *
+ *   You can also filter nested fields. For example, you could specify
+ *   `scheduling.automaticRestart = false` to include instances only
+ *   if they are not scheduled for automatic restarts. You can use filtering
+ *   on nested fields to filter based onresource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within
+ *   parentheses. For example:
+ *   ```
+ *   (scheduling.automaticRestart = true)
+ *   (cpuPlatform = "Intel Skylake")
+ *   ```
+ *   By default, each expression is an `AND` expression. However, you
+ *   can include `AND` and `OR` expressions explicitly.
+ *   For example:
+ *   ```
+ *   (cpuPlatform = "Intel Skylake") OR
+ *   (cpuPlatform = "Intel Broadwell") AND
+ *   (scheduling.automaticRestart = true)
+ *   ```
+ *
+ *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+ *   (not equal) operator against a single un-parenthesized expression with or
+ *   without quotes or against multiple parenthesized expressions. Examples:
+ *
+ *   `fieldname eq unquoted literal`
+ *   `fieldname eq 'single quoted literal'`
+ *   `fieldname eq "double quoted literal"`
+ *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+ *
+ *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+ *   The literal value must match the entire field.
+ *
+ *   For example, to filter for instances that do not end with name "instance",
+ *   you would use `name ne .*instance`.
+ *
+ *   You cannot combine constraints on multiple fields using regular
+ *   expressions.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned.
+ *   If the number of available results is larger than `maxResults`,
+ *   Compute Engine returns a `nextPageToken` that can be used to get
+ *   the next page of results in subsequent list requests. Acceptable values are
+ *   `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results
+ *   are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation
+ *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+ *   results based on the `creationTimestamp` field in
+ *   reverse chronological order (newest result first). Use this to sort
+ *   resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or
+ *   `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the
+ *   `nextPageToken` returned by a previous list request to get
+ *   the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case
+ *   of failure. The default value is false.
+ *
+ *   For example, when partial success behavior is enabled, aggregatedList for a
+ *   single zone scope either returns all resources in the zone or no resources,
+ *   with an error code.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.compute.v1.BackendBucket|BackendBucket}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/backend_buckets.list_usable.js</caption>
+ * region_tag:compute_v1_generated_BackendBuckets_ListUsable_async
+ */
+  listUsableAsync(
+      request?: protos.google.cloud.compute.v1.IListUsableBackendBucketsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.compute.v1.IBackendBucket>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+    });
+    const defaultCallSettings = this._defaults['listUsable'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listUsable iterate %j', request);
+    return this.descriptors.page.listUsable.asyncIterate(
+      this.innerApiCalls['listUsable'] as GaxCall,
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.compute.v1.IBackendBucket>;
