@@ -231,6 +231,8 @@
     "packages/google-cloud-auditmanager": {},
     "packages/google-maps-geocode": {},
     "packages/google-cloud-datacatalog-lineage-configmanagement": {},
+    "packages/google-cloud-appoptimize": {},
+    "packages/google-devicesandservices-health": {},
     "packages/google-cloud-databasecenter": {}
   },
   "plugins": [

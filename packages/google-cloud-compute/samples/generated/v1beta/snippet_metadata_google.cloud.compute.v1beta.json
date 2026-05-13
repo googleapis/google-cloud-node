@@ -688,6 +688,102 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_Advice_Capacity_async",
+      "title": "AcceleratorTypes capacity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Advice on making real-time decisions (such as choosing zone or machine types) during deployment to maximize your chances of obtaining capacity.",
+      "canonical": true,
+      "file": "advice.capacity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Capacity",
+        "fullName": "google.cloud.compute.v1beta.Advice.Capacity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "capacity_advice_request_resource",
+            "type": ".google.cloud.compute.v1beta.CapacityAdviceRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.CapacityAdviceResponse",
+        "client": {
+          "shortName": "AdviceClient",
+          "fullName": "google.cloud.compute.v1beta.AdviceClient"
+        },
+        "method": {
+          "shortName": "Capacity",
+          "fullName": "google.cloud.compute.v1beta.Advice.Capacity",
+          "service": {
+            "shortName": "Advice",
+            "fullName": "google.cloud.compute.v1beta.Advice"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_Advice_CapacityHistory_async",
+      "title": "AcceleratorTypes capacityHistory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the capacity history.",
+      "canonical": true,
+      "file": "advice.capacity_history.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CapacityHistory",
+        "fullName": "google.cloud.compute.v1beta.Advice.CapacityHistory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "capacity_history_request_resource",
+            "type": ".google.cloud.compute.v1beta.CapacityHistoryRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.CapacityHistoryResponse",
+        "client": {
+          "shortName": "AdviceClient",
+          "fullName": "google.cloud.compute.v1beta.AdviceClient"
+        },
+        "method": {
+          "shortName": "CapacityHistory",
+          "fullName": "google.cloud.compute.v1beta.Advice.CapacityHistory",
+          "service": {
+            "shortName": "Advice",
+            "fullName": "google.cloud.compute.v1beta.Advice"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_Autoscalers_AggregatedList_async",
       "title": "AcceleratorTypes aggregatedList Sample",
       "origin": "API_DEFINITION",
@@ -6222,7 +6318,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 63,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -6241,6 +6337,10 @@
           },
           {
             "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
             "type": "TYPE_STRING"
           }
         ],
@@ -7398,7 +7498,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 58,
+          "end": 62,
           "type": "FULL"
         }
       ],
@@ -7413,6 +7513,10 @@
           },
           {
             "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
             "type": "TYPE_STRING"
           }
         ],
@@ -10694,7 +10798,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 78,
+          "end": 83,
           "type": "FULL"
         }
       ],
@@ -10706,6 +10810,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -10746,7 +10854,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 83,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -10762,6 +10870,10 @@
           {
             "name": "instance_group_managers_delete_instances_request_resource",
             "type": ".google.cloud.compute.v1beta.InstanceGroupManagersDeleteInstancesRequest"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -11382,7 +11494,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 83,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -11398,6 +11510,10 @@
           {
             "name": "instance_group_managers_recreate_instances_request_resource",
             "type": ".google.cloud.compute.v1beta.InstanceGroupManagersRecreateInstancesRequest"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -11830,7 +11946,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 83,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -11846,6 +11962,10 @@
           {
             "name": "instance_group_managers_stop_instances_request_resource",
             "type": ".google.cloud.compute.v1beta.InstanceGroupManagersStopInstancesRequest"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -19276,6 +19396,102 @@
         "method": {
           "shortName": "Get",
           "fullName": "google.cloud.compute.v1beta.LicenseCodes.Get",
+          "service": {
+            "shortName": "LicenseCodes",
+            "fullName": "google.cloud.compute.v1beta.LicenseCodes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_LicenseCodes_GetIamPolicy_async",
+      "title": "AcceleratorTypes getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.  *Caution* This resource is intended for use only by third-party partners who are creatingCloud Marketplace images.",
+      "canonical": true,
+      "file": "license_codes.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.LicenseCodes.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "options_requested_policy_version",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "LicenseCodesClient",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodesClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodes.GetIamPolicy",
+          "service": {
+            "shortName": "LicenseCodes",
+            "fullName": "google.cloud.compute.v1beta.LicenseCodes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_LicenseCodes_SetIamPolicy_async",
+      "title": "AcceleratorTypes setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy.  *Caution* This resource is intended for use only by third-party partners who are creatingCloud Marketplace images.",
+      "canonical": true,
+      "file": "license_codes.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.compute.v1beta.LicenseCodes.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "global_set_policy_request_resource",
+            "type": ".google.cloud.compute.v1beta.GlobalSetPolicyRequest"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Policy",
+        "client": {
+          "shortName": "LicenseCodesClient",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodesClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.compute.v1beta.LicenseCodes.SetIamPolicy",
           "service": {
             "shortName": "LicenseCodes",
             "fullName": "google.cloud.compute.v1beta.LicenseCodes"
@@ -33558,7 +33774,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 77,
+          "end": 82,
           "type": "FULL"
         }
       ],
@@ -33570,6 +33786,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -33610,7 +33830,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 87,
           "type": "FULL"
         }
       ],
@@ -33622,6 +33842,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -34198,7 +34422,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 87,
           "type": "FULL"
         }
       ],
@@ -34210,6 +34434,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -34646,7 +34874,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 82,
+          "end": 87,
           "type": "FULL"
         }
       ],
@@ -34658,6 +34886,10 @@
           {
             "name": "instance_group_manager",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "no_graceful_shutdown",
+            "type": "TYPE_BOOL"
           },
           {
             "name": "project",
@@ -56987,7 +57219,7 @@
       "regionTag": "compute_v1beta_generated_ZoneVmExtensionPolicies_Delete_async",
       "title": "AcceleratorTypes delete Sample",
       "origin": "API_DEFINITION",
-      "description": " Deletes a specified zone VM extension policy.",
+      "description": " Deletes a specified zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.delete.js",
       "language": "JAVASCRIPT",
@@ -57039,7 +57271,7 @@
       "regionTag": "compute_v1beta_generated_ZoneVmExtensionPolicies_Get_async",
       "title": "AcceleratorTypes get Sample",
       "origin": "API_DEFINITION",
-      "description": " Retrieves details of a specific zone VM extension policy.",
+      "description": " Retrieves details of a specific zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.get.js",
       "language": "JAVASCRIPT",
@@ -57203,7 +57435,7 @@
       "regionTag": "compute_v1beta_generated_ZoneVmExtensionPolicies_Update_async",
       "title": "AcceleratorTypes update Sample",
       "origin": "API_DEFINITION",
-      "description": " Modifies an existing zone VM extension policy.",
+      "description": " Modifies an existing zone VM extension policy within a project.",
       "canonical": true,
       "file": "zone_vm_extension_policies.update.js",
       "language": "JAVASCRIPT",

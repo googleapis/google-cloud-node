@@ -1,0 +1,5 @@
+package-lock.json
+docs
+.vscode
+.coverage
+__pycache__
