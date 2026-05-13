@@ -18,11 +18,19 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LocationsClient, LocationProtos} from 'google-gax';
-import {PassThrough} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { PassThrough } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -48,7 +56,7 @@ export class ConversationalSearchServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('retail');
@@ -61,11 +69,11 @@ export class ConversationalSearchServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  conversationalSearchServiceStub?: Promise<{[name: string]: Function}>;
+  conversationalSearchServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ConversationalSearchServiceClient.
@@ -106,21 +114,43 @@ export class ConversationalSearchServiceClient {
    *     const client = new ConversationalSearchServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof ConversationalSearchServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof ConversationalSearchServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -145,7 +175,7 @@ export class ConversationalSearchServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -159,15 +189,11 @@ export class ConversationalSearchServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -189,38 +215,42 @@ export class ConversationalSearchServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       alertConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/alertConfig'
+        'projects/{project}/alertConfig',
       ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig',
       ),
       branchPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}',
       ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}',
       ),
       completionConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig',
       ),
       controlPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}',
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}',
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}',
       ),
       servingConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}',
       ),
     };
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      conversationalSearch: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+      conversationalSearch: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -229,23 +259,45 @@ export class ConversationalSearchServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2beta/{name=projects/*/locations/*/operations/*}',},{get: '/v2beta/{name=projects/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',additional_bindings: [{get: '/v2beta/{name=projects/*/locations/*}/operations',},{get: '/v2beta/{name=projects/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v2beta/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v2beta/{name=projects/*/locations/*/catalogs/*/operations/*}',
+            },
+            { get: '/v2beta/{name=projects/*/locations/*/operations/*}' },
+            { get: '/v2beta/{name=projects/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v2beta/{name=projects/*/locations/*/catalogs/*}/operations',
+          additional_bindings: [
+            { get: '/v2beta/{name=projects/*/locations/*}/operations' },
+            { get: '/v2beta/{name=projects/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
 
-    this.descriptors.longrunning = {
-    };
+    this.descriptors.longrunning = {};
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.retail.v2beta.ConversationalSearchService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.retail.v2beta.ConversationalSearchService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -276,44 +328,53 @@ export class ConversationalSearchServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2beta.ConversationalSearchService.
     this.conversationalSearchServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2beta.ConversationalSearchService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.retail.v2beta.ConversationalSearchService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.retail.v2beta.ConversationalSearchService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.retail.v2beta
+            .ConversationalSearchService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const conversationalSearchServiceStubMethods =
-        ['conversationalSearch'];
+    const conversationalSearchServiceStubMethods = ['conversationalSearch'];
     for (const methodName of conversationalSearchServiceStubMethods) {
       const callPromise = this.conversationalSearchServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            if (methodName in this.descriptors.stream) {
-              const stream = new PassThrough({objectMode: true});
-              setImmediate(() => {
-                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
-              });
-              return stream;
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough({ objectMode: true });
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.',
+                    ),
+                  );
+                });
+                return stream;
+              }
+              return Promise.reject('The client has already been closed.');
             }
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.stream[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.stream[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -328,8 +389,14 @@ export class ConversationalSearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'retail.googleapis.com';
   }
@@ -340,8 +407,14 @@ export class ConversationalSearchServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'retail.googleapis.com';
   }
@@ -372,9 +445,7 @@ export class ConversationalSearchServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -383,8 +454,9 @@ export class ConversationalSearchServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -396,118 +468,119 @@ export class ConversationalSearchServiceClient {
   // -- Service calls --
   // -------------------
 
-/**
- * Performs a conversational search.
- *
- * This feature is only available for users who have Conversational Search
- * enabled.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.placement
- *   Required. The resource name of the search engine placement, such as
- *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
- *   or
- *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
- *   This field is used to identify the serving config name and the set
- *   of models that will be used to make the search.
- * @param {string} request.branch
- *   Required. The branch resource name, such as
- *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
- *
- *   Use "default_branch" as the branch ID or leave this field empty, to search
- *   products under the default branch.
- * @param {string} [request.query]
- *   Optional. Raw search query to be searched for.
- *
- *   If this field is empty, the request is considered a category browsing
- *   request.
- * @param {string[]} [request.pageCategories]
- *   Optional. The categories associated with a category page. Must be set for
- *   category navigation queries to achieve good search quality. The format
- *   should be the same as
- *   {@link protos.google.cloud.retail.v2beta.UserEvent.page_categories|UserEvent.page_categories};
- *
- *   To represent full path of category, use '>' sign to separate different
- *   hierarchies. If '>' is part of the category name, replace it with
- *   other character(s).
- *
- *   Category pages include special pages such as sales or promotions. For
- *   instance, a special sale page may have the category hierarchy:
- *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
- * @param {string} [request.conversationId]
- *   Optional. This field specifies the conversation id, which maintains the
- *   state of the conversation between client side and server side. Use the
- *   value from the previous
- *   {@link protos.google.cloud.retail.v2beta.ConversationalSearchResponse.conversation_id|ConversationalSearchResponse.conversation_id}.
- *   For the initial request, this should be empty.
- * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams} [request.searchParams]
- *   Optional. Search parameters.
- * @param {string} request.visitorId
- *   Required. A unique identifier for tracking visitors. For example, this
- *   could be implemented with an HTTP cookie, which should be able to uniquely
- *   identify a visitor on a single device. This unique identifier should not
- *   change if the visitor logs in or out of the website.
- *
- *   This should be the same identifier as
- *   {@link protos.google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id}.
- *
- *   The field must be a UTF-8 encoded string with a length limit of 128
- *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
- * @param {google.cloud.retail.v2beta.UserInfo} [request.userInfo]
- *   Optional. User information.
- * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec} [request.conversationalFilteringSpec]
- *   Optional. This field specifies all conversational filtering related
- *   parameters.
- * @param {number[]} [request.userLabels]
- *   Optional. The user labels applied to a resource must meet the following
- *   requirements:
- *
- *   * Each resource can have multiple labels, up to a maximum of 64.
- *   * Each label must be a key-value pair.
- *   * Keys have a minimum length of 1 character and a maximum length of 63
- *     characters and cannot be empty. Values can be empty and have a maximum
- *     length of 63 characters.
- *   * Keys and values can contain only lowercase letters, numeric characters,
- *     underscores, and dashes. All characters must use UTF-8 encoding, and
- *     international characters are allowed.
- *   * The key portion of a label must be unique. However, you can use the same
- *     key with multiple resources.
- *   * Keys must start with a lowercase letter or international character.
- *
- *   See [Google Cloud
- *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
- *   for more details.
- * @param {number[]} [request.safetySettings]
- *   Optional. The safety settings to be applied to the generated content.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits {@link protos.google.cloud.retail.v2beta.ConversationalSearchResponse|ConversationalSearchResponse} on 'data' event.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/conversational_search_service.conversational_search.js</caption>
- * region_tag:retail_v2beta_generated_ConversationalSearchService_ConversationalSearch_async
- */
+  /**
+   * Performs a conversational search.
+   *
+   * This feature is only available for users who have Conversational Search
+   * enabled.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.placement
+   *   Required. The resource name of the search engine placement, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/placements/default_search`
+   *   or
+   *   `projects/* /locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+   *   This field is used to identify the serving config name and the set
+   *   of models that will be used to make the search.
+   * @param {string} request.branch
+   *   Required. The branch resource name, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/0`.
+   *
+   *   Use "default_branch" as the branch ID or leave this field empty, to search
+   *   products under the default branch.
+   * @param {string} [request.query]
+   *   Optional. Raw search query to be searched for.
+   *
+   *   If this field is empty, the request is considered a category browsing
+   *   request.
+   * @param {string[]} [request.pageCategories]
+   *   Optional. The categories associated with a category page. Must be set for
+   *   category navigation queries to achieve good search quality. The format
+   *   should be the same as
+   *   {@link protos.google.cloud.retail.v2beta.UserEvent.page_categories|UserEvent.page_categories};
+   *
+   *   To represent full path of category, use '>' sign to separate different
+   *   hierarchies. If '>' is part of the category name, replace it with
+   *   other character(s).
+   *
+   *   Category pages include special pages such as sales or promotions. For
+   *   instance, a special sale page may have the category hierarchy:
+   *   "pageCategories" : ["Sales > 2017 Black Friday Deals"].
+   * @param {string} [request.conversationId]
+   *   Optional. This field specifies the conversation id, which maintains the
+   *   state of the conversation between client side and server side. Use the
+   *   value from the previous
+   *   {@link protos.google.cloud.retail.v2beta.ConversationalSearchResponse.conversation_id|ConversationalSearchResponse.conversation_id}.
+   *   For the initial request, this should be empty.
+   * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.SearchParams} [request.searchParams]
+   *   Optional. Search parameters.
+   * @param {string} request.visitorId
+   *   Required. A unique identifier for tracking visitors. For example, this
+   *   could be implemented with an HTTP cookie, which should be able to uniquely
+   *   identify a visitor on a single device. This unique identifier should not
+   *   change if the visitor logs in or out of the website.
+   *
+   *   This should be the same identifier as
+   *   {@link protos.google.cloud.retail.v2beta.UserEvent.visitor_id|UserEvent.visitor_id}.
+   *
+   *   The field must be a UTF-8 encoded string with a length limit of 128
+   *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
+   * @param {google.cloud.retail.v2beta.UserInfo} [request.userInfo]
+   *   Optional. User information.
+   * @param {google.cloud.retail.v2beta.ConversationalSearchRequest.ConversationalFilteringSpec} [request.conversationalFilteringSpec]
+   *   Optional. This field specifies all conversational filtering related
+   *   parameters.
+   * @param {number[]} [request.userLabels]
+   *   Optional. The user labels applied to a resource must meet the following
+   *   requirements:
+   *
+   *   * Each resource can have multiple labels, up to a maximum of 64.
+   *   * Each label must be a key-value pair.
+   *   * Keys have a minimum length of 1 character and a maximum length of 63
+   *     characters and cannot be empty. Values can be empty and have a maximum
+   *     length of 63 characters.
+   *   * Keys and values can contain only lowercase letters, numeric characters,
+   *     underscores, and dashes. All characters must use UTF-8 encoding, and
+   *     international characters are allowed.
+   *   * The key portion of a label must be unique. However, you can use the same
+   *     key with multiple resources.
+   *   * Keys must start with a lowercase letter or international character.
+   *
+   *   See [Google Cloud
+   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+   *   for more details.
+   * @param {number[]} [request.safetySettings]
+   *   Optional. The safety settings to be applied to the generated content.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.retail.v2beta.ConversationalSearchResponse|ConversationalSearchResponse} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/conversational_search_service.conversational_search.js</caption>
+   * region_tag:retail_v2beta_generated_ConversationalSearchService_ConversationalSearch_async
+   */
   conversationalSearch(
-      request?: protos.google.cloud.retail.v2beta.IConversationalSearchRequest,
-      options?: CallOptions):
-    gax.CancellableStream{
+    request?: protos.google.cloud.retail.v2beta.IConversationalSearchRequest,
+    options?: CallOptions,
+  ): gax.CancellableStream {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'placement': request.placement ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        placement: request.placement ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('conversationalSearch stream %j', options);
     return this.innerApiCalls.conversationalSearch(request, options);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -542,12 +615,11 @@ export class ConversationalSearchServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -580,12 +652,12 @@ export class ConversationalSearchServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -628,22 +700,22 @@ export class ConversationalSearchServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -678,15 +750,15 @@ export class ConversationalSearchServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -720,7 +792,7 @@ export class ConversationalSearchServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -733,25 +805,24 @@ export class ConversationalSearchServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -790,22 +861,22 @@ export class ConversationalSearchServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -819,7 +890,7 @@ export class ConversationalSearchServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  alertConfigPath(project:string) {
+  alertConfigPath(project: string) {
     return this.pathTemplates.alertConfigPathTemplate.render({
       project: project,
     });
@@ -833,7 +904,8 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAlertConfigName(alertConfigName: string) {
-    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName).project;
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
   }
 
   /**
@@ -844,7 +916,7 @@ export class ConversationalSearchServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project:string,location:string,catalog:string) {
+  attributesConfigPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -860,7 +932,9 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName,
+    ).project;
   }
 
   /**
@@ -871,7 +945,9 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName,
+    ).location;
   }
 
   /**
@@ -882,7 +958,9 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName,
+    ).catalog;
   }
 
   /**
@@ -894,7 +972,12 @@ export class ConversationalSearchServiceClient {
    * @param {string} branch
    * @returns {string} Resource name string.
    */
-  branchPath(project:string,location:string,catalog:string,branch:string) {
+  branchPath(
+    project: string,
+    location: string,
+    catalog: string,
+    branch: string,
+  ) {
     return this.pathTemplates.branchPathTemplate.render({
       project: project,
       location: location,
@@ -955,7 +1038,7 @@ export class ConversationalSearchServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project:string,location:string,catalog:string) {
+  catalogPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1004,7 +1087,7 @@ export class ConversationalSearchServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project:string,location:string,catalog:string) {
+  completionConfigPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1020,7 +1103,9 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName,
+    ).project;
   }
 
   /**
@@ -1031,7 +1116,9 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName,
+    ).location;
   }
 
   /**
@@ -1042,7 +1129,9 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName,
+    ).catalog;
   }
 
   /**
@@ -1054,7 +1143,12 @@ export class ConversationalSearchServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(project:string,location:string,catalog:string,control:string) {
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string,
+  ) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1116,7 +1210,7 @@ export class ConversationalSearchServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project:string,location:string,catalog:string,model:string) {
+  modelPath(project: string, location: string, catalog: string, model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1179,7 +1273,13 @@ export class ConversationalSearchServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
+  productPath(
+    project: string,
+    location: string,
+    catalog: string,
+    branch: string,
+    product: string,
+  ) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -1253,7 +1353,12 @@ export class ConversationalSearchServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string,
+  ) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1270,7 +1375,8 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
   }
 
   /**
@@ -1281,7 +1387,8 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
   }
 
   /**
@@ -1292,7 +1399,8 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
   }
 
   /**
@@ -1303,7 +1411,8 @@ export class ConversationalSearchServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**
@@ -1314,11 +1423,13 @@ export class ConversationalSearchServiceClient {
    */
   close(): Promise<void> {
     if (this.conversationalSearchServiceStub && !this._terminated) {
-      return this.conversationalSearchServiceStub.then(stub => {
+      return this.conversationalSearchServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }
