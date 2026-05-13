@@ -1,0 +1,7 @@
+[
+  "../../protos/google/shopping/merchant/lfp/v1/lfpinventory.proto",
+  "../../protos/google/shopping/merchant/lfp/v1/lfpmerchantstate.proto",
+  "../../protos/google/shopping/merchant/lfp/v1/lfpsale.proto",
+  "../../protos/google/shopping/merchant/lfp/v1/lfpstore.proto",
+  "../../protos/google/shopping/type/types.proto"
+]
