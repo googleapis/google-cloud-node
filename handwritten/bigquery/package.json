@@ -70,6 +70,7 @@
     }
   },
   "devDependencies": {
+    "eslint": "^10.0.0",
     "@google-cloud/storage": "^7.16.0",
     "@types/big.js": "^6.2.2",
     "@types/duplexify": "^3.6.4",

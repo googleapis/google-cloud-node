@@ -48,6 +48,7 @@
     "teeny-request": "^9.0.0"
   },
   "devDependencies": {
+    "eslint": "^10.0.0",
     "@types/extend": "^3.0.0",
     "@types/long": "^5.0.0",
     "@types/mocha": "^9.0.0",

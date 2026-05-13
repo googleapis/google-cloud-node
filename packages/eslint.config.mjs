@@ -1,0 +1,13 @@
+export default [
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/.coverage/**",
+      "**/build/**",
+      "**/docs/**",
+      "**/protos/**",
+      "**/system-test/**",
+      "**/samples/generated/**"
+    ]
+  }
+];

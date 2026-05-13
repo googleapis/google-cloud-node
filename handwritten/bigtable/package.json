@@ -79,6 +79,7 @@
     "stream-events": "^1.0.5"
   },
   "devDependencies": {
+    "eslint": "^10.0.0",
     "@grpc/grpc-js": "^1.13.2",
     "@grpc/proto-loader": "^0.7.13",
     "@types/escape-string-regexp": "^2.0.3",

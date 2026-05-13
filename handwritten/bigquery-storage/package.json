@@ -45,6 +45,7 @@
     "protobufjs": "^7.5.5"
   },
   "devDependencies": {
+    "eslint": "^10.0.0",
     "@google-cloud/bigquery": "^8.0.0",
     "@types/extend": "^3.0.4",
     "@types/mocha": "^10.0.10",
