@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class LabelServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('admanager');
@@ -57,9 +64,9 @@ export class LabelServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  labelServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  labelServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of LabelServiceClient.
@@ -100,27 +107,48 @@ export class LabelServiceClient {
    *     const client = new LabelServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof LabelServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'admanager.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = {fallback: true};
+      opts = { fallback: true };
     } else {
       opts.fallback = opts.fallback ?? true;
     }
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -145,7 +173,7 @@ export class LabelServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -159,10 +187,7 @@ export class LabelServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,148 +209,148 @@ export class LabelServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       adBreakPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}'
+        'networks/{network_code}/liveStreamEventsByAssetKey/{asset_key}/adBreaks/{ad_break}',
       ),
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}'
+        'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/adUnits/{ad_unit}'
+        'networks/{network_code}/adUnits/{ad_unit}',
       ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/applications/{application}'
+        'networks/{network_code}/applications/{application}',
       ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/audienceSegments/{audience_segment}'
+        'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/bandwidthGroups/{bandwidth_group}'
+        'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
       ),
       browserPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/browsers/{browser}'
+        'networks/{network_code}/browsers/{browser}',
       ),
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/browserLanguages/{browser_language}'
+        'networks/{network_code}/browserLanguages/{browser_language}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/childPublishers/{child_publisher}'
+        'networks/{network_code}/childPublishers/{child_publisher}',
       ),
       cmsMetadataKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}'
+        'networks/{network_code}/cmsMetadataKeys/{cms_metadata_key}',
       ),
       cmsMetadataValuePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/cmsMetadataValues/{cms_metadata_value}'
+        'networks/{network_code}/cmsMetadataValues/{cms_metadata_value}',
       ),
       companyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/companies/{company}'
+        'networks/{network_code}/companies/{company}',
       ),
       contactPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/contacts/{contact}'
+        'networks/{network_code}/contacts/{contact}',
       ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/content/{content}'
+        'networks/{network_code}/content/{content}',
       ),
       contentBundlePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/contentBundles/{content_bundle}'
+        'networks/{network_code}/contentBundles/{content_bundle}',
       ),
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/contentLabels/{content_label}'
+        'networks/{network_code}/contentLabels/{content_label}',
       ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/creativeTemplates/{creative_template}'
+        'networks/{network_code}/creativeTemplates/{creative_template}',
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customFields/{custom_field}'
+        'networks/{network_code}/customFields/{custom_field}',
       ),
       customTargetingKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customTargetingKeys/{custom_targeting_key}'
+        'networks/{network_code}/customTargetingKeys/{custom_targeting_key}',
       ),
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/customTargetingValues/{custom_targeting_value}'
+        'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
       ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/deviceCapabilities/{device_capability}'
+        'networks/{network_code}/deviceCapabilities/{device_capability}',
       ),
       deviceCategoryPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/deviceCategories/{device_category}'
+        'networks/{network_code}/deviceCategories/{device_category}',
       ),
       deviceManufacturerPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/deviceManufacturers/{device_manufacturer}'
+        'networks/{network_code}/deviceManufacturers/{device_manufacturer}',
       ),
       entitySignalsMappingPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}'
+        'networks/{network_code}/entitySignalsMappings/{entity_signals_mapping}',
       ),
       geoTargetPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/geoTargets/{geo_target}'
+        'networks/{network_code}/geoTargets/{geo_target}',
       ),
       labelPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/labels/{label}'
+        'networks/{network_code}/labels/{label}',
       ),
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/lineItems/{line_item}'
+        'networks/{network_code}/lineItems/{line_item}',
       ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/linkedDevices/{linked_device}'
+        'networks/{network_code}/linkedDevices/{linked_device}',
       ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/liveStreamEvents/{live_stream_event}'
+        'networks/{network_code}/liveStreamEvents/{live_stream_event}',
       ),
       mobileCarrierPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/mobileCarriers/{mobile_carrier}'
+        'networks/{network_code}/mobileCarriers/{mobile_carrier}',
       ),
       mobileDevicePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/mobileDevices/{mobile_device}'
+        'networks/{network_code}/mobileDevices/{mobile_device}',
       ),
       mobileDeviceSubmodelPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}'
+        'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}',
       ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}'
+        'networks/{network_code}',
       ),
       operatingSystemPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/operatingSystems/{operating_system}'
+        'networks/{network_code}/operatingSystems/{operating_system}',
       ),
       operatingSystemVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/operatingSystemVersions/{operating_system_version}'
+        'networks/{network_code}/operatingSystemVersions/{operating_system_version}',
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/orders/{order}'
+        'networks/{network_code}/orders/{order}',
       ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/placements/{placement}'
+        'networks/{network_code}/placements/{placement}',
       ),
       privateAuctionPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/privateAuctions/{private_auction}'
+        'networks/{network_code}/privateAuctions/{private_auction}',
       ),
       privateAuctionDealPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/privateAuctionDeals/{private_auction_deal}'
+        'networks/{network_code}/privateAuctionDeals/{private_auction_deal}',
       ),
       programmaticBuyerPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/programmaticBuyers/{programmatic_buyer}'
+        'networks/{network_code}/programmaticBuyers/{programmatic_buyer}',
       ),
       reportPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/reports/{report}'
+        'networks/{network_code}/reports/{report}',
       ),
       richMediaAdsCompanyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/richMediaAdsCompanies/{rich_media_ads_company}'
+        'networks/{network_code}/richMediaAdsCompanies/{rich_media_ads_company}',
       ),
       rolePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/roles/{role}'
+        'networks/{network_code}/roles/{role}',
       ),
       sitePathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/sites/{site}'
+        'networks/{network_code}/sites/{site}',
       ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/taxonomyCategories/{taxonomy_category}'
+        'networks/{network_code}/taxonomyCategories/{taxonomy_category}',
       ),
       teamPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/teams/{team}'
+        'networks/{network_code}/teams/{team}',
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/users/{user}'
+        'networks/{network_code}/users/{user}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
-        'networks/{network_code}/webProperties/{web_property}'
+        'networks/{network_code}/webProperties/{web_property}',
       ),
     };
 
@@ -333,14 +358,20 @@ export class LabelServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listLabels:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'labels')
+      listLabels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'labels',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.ads.admanager.v1.LabelService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.ads.admanager.v1.LabelService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -371,37 +402,49 @@ export class LabelServiceClient {
     // Put together the "service stub" for
     // google.ads.admanager.v1.LabelService.
     this.labelServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.ads.admanager.v1.LabelService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.ads.admanager.v1.LabelService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.ads.admanager.v1.LabelService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const labelServiceStubMethods =
-        ['getLabel', 'listLabels', 'createLabel', 'batchCreateLabels', 'updateLabel', 'batchUpdateLabels', 'batchActivateLabels', 'batchDeactivateLabels'];
+    const labelServiceStubMethods = [
+      'getLabel',
+      'listLabels',
+      'createLabel',
+      'batchCreateLabels',
+      'updateLabel',
+      'batchUpdateLabels',
+      'batchActivateLabels',
+      'batchDeactivateLabels',
+    ];
     for (const methodName of labelServiceStubMethods) {
       const callPromise = this.labelServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -416,8 +459,14 @@ export class LabelServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'admanager.googleapis.com';
   }
@@ -428,8 +477,14 @@ export class LabelServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'admanager.googleapis.com';
   }
@@ -462,7 +517,7 @@ export class LabelServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/admanager',
-      'https://www.googleapis.com/auth/admanager.readonly'
+      'https://www.googleapis.com/auth/admanager.readonly',
     ];
   }
 
@@ -472,8 +527,9 @@ export class LabelServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -484,799 +540,1070 @@ export class LabelServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * API to retrieve a `Label` object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the Label.
- *   Format: `networks/{network_code}/labels/{label_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Label|Label}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.get_label.js</caption>
- * region_tag:admanager_v1_generated_LabelService_GetLabel_async
- */
+  /**
+   * API to retrieve a `Label` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Label.
+   *   Format: `networks/{network_code}/labels/{label_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Label|Label}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.get_label.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_GetLabel_async
+   */
   getLabel(
-      request?: protos.google.ads.admanager.v1.IGetLabelRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IGetLabelRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IGetLabelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IGetLabelRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getLabel(
-      request: protos.google.ads.admanager.v1.IGetLabelRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IGetLabelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IGetLabelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IGetLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getLabel(
-      request: protos.google.ads.admanager.v1.IGetLabelRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IGetLabelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IGetLabelRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IGetLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getLabel(
-      request?: protos.google.ads.admanager.v1.IGetLabelRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IGetLabelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IGetLabelRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IGetLabelRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IGetLabelRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.ads.admanager.v1.IGetLabelRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IGetLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IGetLabelRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getLabel request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IGetLabelRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ILabel,
+          protos.google.ads.admanager.v1.IGetLabelRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getLabel(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IGetLabelRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getLabel response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getLabel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ILabel,
+          protos.google.ads.admanager.v1.IGetLabelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getLabel response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to create a `Label` object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this `Label` will be created.
- *   Format: `networks/{network_code}`
- * @param {google.ads.admanager.v1.Label} request.label
- *   Required. The `Label` to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Label|Label}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.create_label.js</caption>
- * region_tag:admanager_v1_generated_LabelService_CreateLabel_async
- */
+  /**
+   * API to create a `Label` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this `Label` will be created.
+   *   Format: `networks/{network_code}`
+   * @param {google.ads.admanager.v1.Label} request.label
+   *   Required. The `Label` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Label|Label}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.create_label.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_CreateLabel_async
+   */
   createLabel(
-      request?: protos.google.ads.admanager.v1.ICreateLabelRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.ICreateLabelRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.ICreateLabelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.ICreateLabelRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createLabel(
-      request: protos.google.ads.admanager.v1.ICreateLabelRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.ICreateLabelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.ICreateLabelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.ICreateLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createLabel(
-      request: protos.google.ads.admanager.v1.ICreateLabelRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.ICreateLabelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.ICreateLabelRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.ICreateLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createLabel(
-      request?: protos.google.ads.admanager.v1.ICreateLabelRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.ICreateLabelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.ICreateLabelRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.ICreateLabelRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.ICreateLabelRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.ads.admanager.v1.ICreateLabelRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.ICreateLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.ICreateLabelRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createLabel request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.ICreateLabelRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ILabel,
+          protos.google.ads.admanager.v1.ICreateLabelRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createLabel(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.ICreateLabelRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createLabel response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createLabel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ILabel,
+          protos.google.ads.admanager.v1.ICreateLabelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLabel response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to batch create `Label` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where `Labels` will be created.
- *   Format: `networks/{network_code}`
- *   The parent field in the CreateLabelRequest must match this
- *   field.
- * @param {number[]} request.requests
- *   Required. The `Label` objects to create.
- *   A maximum of 100 objects can be created in a batch.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateLabelsResponse|BatchCreateLabelsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.batch_create_labels.js</caption>
- * region_tag:admanager_v1_generated_LabelService_BatchCreateLabels_async
- */
+  /**
+   * API to batch create `Label` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `Labels` will be created.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the CreateLabelRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `Label` objects to create.
+   *   A maximum of 100 objects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateLabelsResponse|BatchCreateLabelsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.batch_create_labels.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_BatchCreateLabels_async
+   */
   batchCreateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchCreateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   batchCreateLabels(
-      request: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreateLabels(
-      request: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IBatchCreateLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IBatchCreateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchCreateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchCreateLabels request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchCreateLabels response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchCreateLabels(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchCreateLabelsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchCreateLabels response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchCreateLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateLabelsResponse,
+          protos.google.ads.admanager.v1.IBatchCreateLabelsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateLabels response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to update a `Label` object.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.ads.admanager.v1.Label} request.label
- *   Required. The `Label` to update.
- *
- *   The `Label`'s `name` is used to identify the `Label` to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Label|Label}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.update_label.js</caption>
- * region_tag:admanager_v1_generated_LabelService_UpdateLabel_async
- */
+  /**
+   * API to update a `Label` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.Label} request.label
+   *   Required. The `Label` to update.
+   *
+   *   The `Label`'s `name` is used to identify the `Label` to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.Label|Label}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.update_label.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_UpdateLabel_async
+   */
   updateLabel(
-      request?: protos.google.ads.admanager.v1.IUpdateLabelRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IUpdateLabelRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IUpdateLabelRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IUpdateLabelRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateLabel(
-      request: protos.google.ads.admanager.v1.IUpdateLabelRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IUpdateLabelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IUpdateLabelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IUpdateLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLabel(
-      request: protos.google.ads.admanager.v1.IUpdateLabelRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IUpdateLabelRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IUpdateLabelRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IUpdateLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLabel(
-      request?: protos.google.ads.admanager.v1.IUpdateLabelRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IUpdateLabelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IUpdateLabelRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.ILabel,
-          protos.google.ads.admanager.v1.IUpdateLabelRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IUpdateLabelRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.ads.admanager.v1.IUpdateLabelRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IUpdateLabelRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel,
+      protos.google.ads.admanager.v1.IUpdateLabelRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'label.name': request.label!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'label.name': request.label!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateLabel request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IUpdateLabelRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ILabel,
+          protos.google.ads.admanager.v1.IUpdateLabelRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateLabel response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateLabel(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.ILabel,
-        protos.google.ads.admanager.v1.IUpdateLabelRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateLabel response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateLabel(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ILabel,
+          protos.google.ads.admanager.v1.IUpdateLabelRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLabel response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to batch update `Label` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where `Labels` will be updated.
- *   Format: `networks/{network_code}`
- *   The parent field in the UpdateLabelRequest must match this
- *   field.
- * @param {number[]} request.requests
- *   Required. The `Label` objects to update.
- *   A maximum of 100 objects can be updated in a batch.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateLabelsResponse|BatchUpdateLabelsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.batch_update_labels.js</caption>
- * region_tag:admanager_v1_generated_LabelService_BatchUpdateLabels_async
- */
+  /**
+   * API to batch update `Label` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `Labels` will be updated.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the UpdateLabelRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `Label` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateLabelsResponse|BatchUpdateLabelsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.batch_update_labels.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_BatchUpdateLabels_async
+   */
   batchUpdateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   batchUpdateLabels(
-      request: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchUpdateLabels(
-      request: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchUpdateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchUpdateLabels request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchUpdateLabels response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchUpdateLabels(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchUpdateLabels response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchUpdateLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateLabelsResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateLabelsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateLabels response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to activate `Label` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Format: `networks/{network_code}`
- * @param {string[]} request.names
- *   Required. Resource names for the Label.
- *   Format: `networks/{network_code}/labels/{label_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateLabelsResponse|BatchActivateLabelsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.batch_activate_labels.js</caption>
- * region_tag:admanager_v1_generated_LabelService_BatchActivateLabels_async
- */
+  /**
+   * API to activate `Label` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. Resource names for the Label.
+   *   Format: `networks/{network_code}/labels/{label_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateLabelsResponse|BatchActivateLabelsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.batch_activate_labels.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_BatchActivateLabels_async
+   */
   batchActivateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchActivateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   batchActivateLabels(
-      request: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchActivateLabels(
-      request: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchActivateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IBatchActivateLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IBatchActivateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchActivateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchActivateLabels request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchActivateLabels response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchActivateLabels(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchActivateLabelsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchActivateLabels response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchActivateLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchActivateLabelsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchActivateLabelsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchActivateLabels response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * API to deactivate `Label` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Format: `networks/{network_code}`
- * @param {string[]} request.names
- *   Required. Resource names for the Label.
- *   Format: `networks/{network_code}/labels/{label_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateLabelsResponse|BatchDeactivateLabelsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.batch_deactivate_labels.js</caption>
- * region_tag:admanager_v1_generated_LabelService_BatchDeactivateLabels_async
- */
+  /**
+   * API to deactivate `Label` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. Resource names for the Label.
+   *   Format: `networks/{network_code}/labels/{label_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateLabelsResponse|BatchDeactivateLabelsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.batch_deactivate_labels.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_BatchDeactivateLabels_async
+   */
   batchDeactivateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   batchDeactivateLabels(
-      request: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeactivateLabels(
-      request: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
-      callback: Callback<
-          protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeactivateLabels(
-      request?: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-          protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
+      protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('batchDeactivateLabels request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('batchDeactivateLabels response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.batchDeactivateLabels(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
-        protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('batchDeactivateLabels response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .batchDeactivateLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDeactivateLabelsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchDeactivateLabelsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeactivateLabels response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * API to retrieve a list of `Label` objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of Labels.
- *   Format: `networks/{network_code}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `Labels` to return. The service may return
- *   fewer than this value. If unspecified, at most 50 `Labels` will be
- *   returned. The maximum value is 1000; values greater than 1000 will be
- *   coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListLabels` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListLabels` must match
- *   the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Expression to filter the response.
- *    See syntax details at
- *    https://developers.google.com/ad-manager/api/beta/filters
- *
- *   <b>Filterable fields:</b>
- *   <ul style="list-style-type:none">
- *     <li><code>active</code></li>
- *     <li><code>description</code></li>
- *     <li><code>displayName</code></li>
- *     <li><code>name</code></li>
- *     <li><code>types</code></li>
- *   </ul>
- * @param {string} [request.orderBy]
- *   Optional. Expression to specify sorting order.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters#order
- * @param {number} [request.skip]
- *   Optional. Number of individual resources to skip while paginating.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.Label|Label}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listLabelsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * API to retrieve a list of `Label` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Labels.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `Labels` to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 `Labels` will be
+   *   returned. The maximum value is 1000; values greater than 1000 will be
+   *   coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListLabels` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListLabels` must match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *    See syntax details at
+   *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   <b>Filterable fields:</b>
+   *   <ul style="list-style-type:none">
+   *     <li><code>active</code></li>
+   *     <li><code>description</code></li>
+   *     <li><code>displayName</code></li>
+   *     <li><code>name</code></li>
+   *     <li><code>types</code></li>
+   *   </ul>
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.Label|Label}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listLabelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listLabels(
-      request?: protos.google.ads.admanager.v1.IListLabelsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel[],
-        protos.google.ads.admanager.v1.IListLabelsRequest|null,
-        protos.google.ads.admanager.v1.IListLabelsResponse
-      ]>;
+    request?: protos.google.ads.admanager.v1.IListLabelsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel[],
+      protos.google.ads.admanager.v1.IListLabelsRequest | null,
+      protos.google.ads.admanager.v1.IListLabelsResponse,
+    ]
+  >;
   listLabels(
-      request: protos.google.ads.admanager.v1.IListLabelsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.ads.admanager.v1.IListLabelsRequest,
-          protos.google.ads.admanager.v1.IListLabelsResponse|null|undefined,
-          protos.google.ads.admanager.v1.ILabel>): void;
+    request: protos.google.ads.admanager.v1.IListLabelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListLabelsRequest,
+      protos.google.ads.admanager.v1.IListLabelsResponse | null | undefined,
+      protos.google.ads.admanager.v1.ILabel
+    >,
+  ): void;
   listLabels(
-      request: protos.google.ads.admanager.v1.IListLabelsRequest,
-      callback: PaginationCallback<
-          protos.google.ads.admanager.v1.IListLabelsRequest,
-          protos.google.ads.admanager.v1.IListLabelsResponse|null|undefined,
-          protos.google.ads.admanager.v1.ILabel>): void;
+    request: protos.google.ads.admanager.v1.IListLabelsRequest,
+    callback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListLabelsRequest,
+      protos.google.ads.admanager.v1.IListLabelsResponse | null | undefined,
+      protos.google.ads.admanager.v1.ILabel
+    >,
+  ): void;
   listLabels(
-      request?: protos.google.ads.admanager.v1.IListLabelsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.ads.admanager.v1.IListLabelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.ads.admanager.v1.IListLabelsRequest,
-          protos.google.ads.admanager.v1.IListLabelsResponse|null|undefined,
-          protos.google.ads.admanager.v1.ILabel>,
-      callback?: PaginationCallback<
-          protos.google.ads.admanager.v1.IListLabelsRequest,
-          protos.google.ads.admanager.v1.IListLabelsResponse|null|undefined,
-          protos.google.ads.admanager.v1.ILabel>):
-      Promise<[
-        protos.google.ads.admanager.v1.ILabel[],
-        protos.google.ads.admanager.v1.IListLabelsRequest|null,
-        protos.google.ads.admanager.v1.IListLabelsResponse
-      ]>|void {
+          protos.google.ads.admanager.v1.IListLabelsResponse | null | undefined,
+          protos.google.ads.admanager.v1.ILabel
+        >,
+    callback?: PaginationCallback<
+      protos.google.ads.admanager.v1.IListLabelsRequest,
+      protos.google.ads.admanager.v1.IListLabelsResponse | null | undefined,
+      protos.google.ads.admanager.v1.ILabel
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILabel[],
+      protos.google.ads.admanager.v1.IListLabelsRequest | null,
+      protos.google.ads.admanager.v1.IListLabelsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.ads.admanager.v1.IListLabelsRequest,
-      protos.google.ads.admanager.v1.IListLabelsResponse|null|undefined,
-      protos.google.ads.admanager.v1.ILabel>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListLabelsRequest,
+          protos.google.ads.admanager.v1.IListLabelsResponse | null | undefined,
+          protos.google.ads.admanager.v1.ILabel
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listLabels values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1285,160 +1612,164 @@ export class LabelServiceClient {
     this._log.info('listLabels request %j', request);
     return this.innerApiCalls
       .listLabels(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.ads.admanager.v1.ILabel[],
-        protos.google.ads.admanager.v1.IListLabelsRequest|null,
-        protos.google.ads.admanager.v1.IListLabelsResponse
-      ]) => {
-        this._log.info('listLabels values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.ILabel[],
+          protos.google.ads.admanager.v1.IListLabelsRequest | null,
+          protos.google.ads.admanager.v1.IListLabelsResponse,
+        ]) => {
+          this._log.info('listLabels values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listLabels`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of Labels.
- *   Format: `networks/{network_code}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `Labels` to return. The service may return
- *   fewer than this value. If unspecified, at most 50 `Labels` will be
- *   returned. The maximum value is 1000; values greater than 1000 will be
- *   coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListLabels` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListLabels` must match
- *   the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Expression to filter the response.
- *    See syntax details at
- *    https://developers.google.com/ad-manager/api/beta/filters
- *
- *   <b>Filterable fields:</b>
- *   <ul style="list-style-type:none">
- *     <li><code>active</code></li>
- *     <li><code>description</code></li>
- *     <li><code>displayName</code></li>
- *     <li><code>name</code></li>
- *     <li><code>types</code></li>
- *   </ul>
- * @param {string} [request.orderBy]
- *   Optional. Expression to specify sorting order.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters#order
- * @param {number} [request.skip]
- *   Optional. Number of individual resources to skip while paginating.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.Label|Label} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listLabelsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listLabels`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Labels.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `Labels` to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 `Labels` will be
+   *   returned. The maximum value is 1000; values greater than 1000 will be
+   *   coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListLabels` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListLabels` must match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *    See syntax details at
+   *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   <b>Filterable fields:</b>
+   *   <ul style="list-style-type:none">
+   *     <li><code>active</code></li>
+   *     <li><code>description</code></li>
+   *     <li><code>displayName</code></li>
+   *     <li><code>name</code></li>
+   *     <li><code>types</code></li>
+   *   </ul>
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.Label|Label} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listLabelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listLabelsStream(
-      request?: protos.google.ads.admanager.v1.IListLabelsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.ads.admanager.v1.IListLabelsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listLabels stream %j', request);
     return this.descriptors.page.listLabels.createStream(
       this.innerApiCalls.listLabels as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listLabels`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of Labels.
- *   Format: `networks/{network_code}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of `Labels` to return. The service may return
- *   fewer than this value. If unspecified, at most 50 `Labels` will be
- *   returned. The maximum value is 1000; values greater than 1000 will be
- *   coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListLabels` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListLabels` must match
- *   the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Expression to filter the response.
- *    See syntax details at
- *    https://developers.google.com/ad-manager/api/beta/filters
- *
- *   <b>Filterable fields:</b>
- *   <ul style="list-style-type:none">
- *     <li><code>active</code></li>
- *     <li><code>description</code></li>
- *     <li><code>displayName</code></li>
- *     <li><code>name</code></li>
- *     <li><code>types</code></li>
- *   </ul>
- * @param {string} [request.orderBy]
- *   Optional. Expression to specify sorting order.
- *   See syntax details at
- *   https://developers.google.com/ad-manager/api/beta/filters#order
- * @param {number} [request.skip]
- *   Optional. Number of individual resources to skip while paginating.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.ads.admanager.v1.Label|Label}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/label_service.list_labels.js</caption>
- * region_tag:admanager_v1_generated_LabelService_ListLabels_async
- */
+  /**
+   * Equivalent to `listLabels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Labels.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of `Labels` to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 `Labels` will be
+   *   returned. The maximum value is 1000; values greater than 1000 will be
+   *   coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListLabels` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListLabels` must match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *    See syntax details at
+   *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   <b>Filterable fields:</b>
+   *   <ul style="list-style-type:none">
+   *     <li><code>active</code></li>
+   *     <li><code>description</code></li>
+   *     <li><code>displayName</code></li>
+   *     <li><code>name</code></li>
+   *     <li><code>types</code></li>
+   *   </ul>
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ads.admanager.v1.Label|Label}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/label_service.list_labels.js</caption>
+   * region_tag:admanager_v1_generated_LabelService_ListLabels_async
+   */
   listLabelsAsync(
-      request?: protos.google.ads.admanager.v1.IListLabelsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.ads.admanager.v1.ILabel>{
+    request?: protos.google.ads.admanager.v1.IListLabelsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.ads.admanager.v1.ILabel> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listLabels iterate %j', request);
     return this.descriptors.page.listLabels.asyncIterate(
       this.innerApiCalls['listLabels'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.ads.admanager.v1.ILabel>;
   }
   // --------------------
@@ -1453,7 +1784,7 @@ export class LabelServiceClient {
    * @param {string} ad_break
    * @returns {string} Resource name string.
    */
-  adBreakPath(networkCode:string,assetKey:string,adBreak:string) {
+  adBreakPath(networkCode: string, assetKey: string, adBreak: string) {
     return this.pathTemplates.adBreakPathTemplate.render({
       network_code: networkCode,
       asset_key: assetKey,
@@ -1469,7 +1800,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromAdBreakName(adBreakName: string) {
-    return this.pathTemplates.adBreakPathTemplate.match(adBreakName).network_code;
+    return this.pathTemplates.adBreakPathTemplate.match(adBreakName)
+      .network_code;
   }
 
   /**
@@ -1502,7 +1834,11 @@ export class LabelServiceClient {
    * @param {string} ad_review_center_ad
    * @returns {string} Resource name string.
    */
-  adReviewCenterAdPath(networkCode:string,webPropertyCode:string,adReviewCenterAd:string) {
+  adReviewCenterAdPath(
+    networkCode: string,
+    webPropertyCode: string,
+    adReviewCenterAd: string,
+  ) {
     return this.pathTemplates.adReviewCenterAdPathTemplate.render({
       network_code: networkCode,
       web_property_code: webPropertyCode,
@@ -1518,7 +1854,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
-    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).network_code;
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(
+      adReviewCenterAdName,
+    ).network_code;
   }
 
   /**
@@ -1529,7 +1867,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the web_property_code.
    */
   matchWebPropertyCodeFromAdReviewCenterAdName(adReviewCenterAdName: string) {
-    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).web_property_code;
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(
+      adReviewCenterAdName,
+    ).web_property_code;
   }
 
   /**
@@ -1540,7 +1880,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the ad_review_center_ad.
    */
   matchAdReviewCenterAdFromAdReviewCenterAdName(adReviewCenterAdName: string) {
-    return this.pathTemplates.adReviewCenterAdPathTemplate.match(adReviewCenterAdName).ad_review_center_ad;
+    return this.pathTemplates.adReviewCenterAdPathTemplate.match(
+      adReviewCenterAdName,
+    ).ad_review_center_ad;
   }
 
   /**
@@ -1550,7 +1892,7 @@ export class LabelServiceClient {
    * @param {string} ad_unit
    * @returns {string} Resource name string.
    */
-  adUnitPath(networkCode:string,adUnit:string) {
+  adUnitPath(networkCode: string, adUnit: string) {
     return this.pathTemplates.adUnitPathTemplate.render({
       network_code: networkCode,
       ad_unit: adUnit,
@@ -1586,7 +1928,7 @@ export class LabelServiceClient {
    * @param {string} application
    * @returns {string} Resource name string.
    */
-  applicationPath(networkCode:string,application:string) {
+  applicationPath(networkCode: string, application: string) {
     return this.pathTemplates.applicationPathTemplate.render({
       network_code: networkCode,
       application: application,
@@ -1601,7 +1943,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).network_code;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .network_code;
   }
 
   /**
@@ -1612,7 +1955,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the application.
    */
   matchApplicationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName).application;
+    return this.pathTemplates.applicationPathTemplate.match(applicationName)
+      .application;
   }
 
   /**
@@ -1622,7 +1966,7 @@ export class LabelServiceClient {
    * @param {string} audience_segment
    * @returns {string} Resource name string.
    */
-  audienceSegmentPath(networkCode:string,audienceSegment:string) {
+  audienceSegmentPath(networkCode: string, audienceSegment: string) {
     return this.pathTemplates.audienceSegmentPathTemplate.render({
       network_code: networkCode,
       audience_segment: audienceSegment,
@@ -1637,7 +1981,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromAudienceSegmentName(audienceSegmentName: string) {
-    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).network_code;
+    return this.pathTemplates.audienceSegmentPathTemplate.match(
+      audienceSegmentName,
+    ).network_code;
   }
 
   /**
@@ -1648,7 +1994,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the audience_segment.
    */
   matchAudienceSegmentFromAudienceSegmentName(audienceSegmentName: string) {
-    return this.pathTemplates.audienceSegmentPathTemplate.match(audienceSegmentName).audience_segment;
+    return this.pathTemplates.audienceSegmentPathTemplate.match(
+      audienceSegmentName,
+    ).audience_segment;
   }
 
   /**
@@ -1658,7 +2006,7 @@ export class LabelServiceClient {
    * @param {string} bandwidth_group
    * @returns {string} Resource name string.
    */
-  bandwidthGroupPath(networkCode:string,bandwidthGroup:string) {
+  bandwidthGroupPath(networkCode: string, bandwidthGroup: string) {
     return this.pathTemplates.bandwidthGroupPathTemplate.render({
       network_code: networkCode,
       bandwidth_group: bandwidthGroup,
@@ -1673,7 +2021,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromBandwidthGroupName(bandwidthGroupName: string) {
-    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).network_code;
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(
+      bandwidthGroupName,
+    ).network_code;
   }
 
   /**
@@ -1684,7 +2034,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the bandwidth_group.
    */
   matchBandwidthGroupFromBandwidthGroupName(bandwidthGroupName: string) {
-    return this.pathTemplates.bandwidthGroupPathTemplate.match(bandwidthGroupName).bandwidth_group;
+    return this.pathTemplates.bandwidthGroupPathTemplate.match(
+      bandwidthGroupName,
+    ).bandwidth_group;
   }
 
   /**
@@ -1694,7 +2046,7 @@ export class LabelServiceClient {
    * @param {string} browser
    * @returns {string} Resource name string.
    */
-  browserPath(networkCode:string,browser:string) {
+  browserPath(networkCode: string, browser: string) {
     return this.pathTemplates.browserPathTemplate.render({
       network_code: networkCode,
       browser: browser,
@@ -1709,7 +2061,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromBrowserName(browserName: string) {
-    return this.pathTemplates.browserPathTemplate.match(browserName).network_code;
+    return this.pathTemplates.browserPathTemplate.match(browserName)
+      .network_code;
   }
 
   /**
@@ -1730,7 +2083,7 @@ export class LabelServiceClient {
    * @param {string} browser_language
    * @returns {string} Resource name string.
    */
-  browserLanguagePath(networkCode:string,browserLanguage:string) {
+  browserLanguagePath(networkCode: string, browserLanguage: string) {
     return this.pathTemplates.browserLanguagePathTemplate.render({
       network_code: networkCode,
       browser_language: browserLanguage,
@@ -1745,7 +2098,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromBrowserLanguageName(browserLanguageName: string) {
-    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).network_code;
+    return this.pathTemplates.browserLanguagePathTemplate.match(
+      browserLanguageName,
+    ).network_code;
   }
 
   /**
@@ -1756,7 +2111,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the browser_language.
    */
   matchBrowserLanguageFromBrowserLanguageName(browserLanguageName: string) {
-    return this.pathTemplates.browserLanguagePathTemplate.match(browserLanguageName).browser_language;
+    return this.pathTemplates.browserLanguagePathTemplate.match(
+      browserLanguageName,
+    ).browser_language;
   }
 
   /**
@@ -1766,7 +2123,7 @@ export class LabelServiceClient {
    * @param {string} child_publisher
    * @returns {string} Resource name string.
    */
-  childPublisherPath(networkCode:string,childPublisher:string) {
+  childPublisherPath(networkCode: string, childPublisher: string) {
     return this.pathTemplates.childPublisherPathTemplate.render({
       network_code: networkCode,
       child_publisher: childPublisher,
@@ -1781,7 +2138,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromChildPublisherName(childPublisherName: string) {
-    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).network_code;
+    return this.pathTemplates.childPublisherPathTemplate.match(
+      childPublisherName,
+    ).network_code;
   }
 
   /**
@@ -1792,7 +2151,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the child_publisher.
    */
   matchChildPublisherFromChildPublisherName(childPublisherName: string) {
-    return this.pathTemplates.childPublisherPathTemplate.match(childPublisherName).child_publisher;
+    return this.pathTemplates.childPublisherPathTemplate.match(
+      childPublisherName,
+    ).child_publisher;
   }
 
   /**
@@ -1802,7 +2163,7 @@ export class LabelServiceClient {
    * @param {string} cms_metadata_key
    * @returns {string} Resource name string.
    */
-  cmsMetadataKeyPath(networkCode:string,cmsMetadataKey:string) {
+  cmsMetadataKeyPath(networkCode: string, cmsMetadataKey: string) {
     return this.pathTemplates.cmsMetadataKeyPathTemplate.render({
       network_code: networkCode,
       cms_metadata_key: cmsMetadataKey,
@@ -1817,7 +2178,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
-    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).network_code;
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(
+      cmsMetadataKeyName,
+    ).network_code;
   }
 
   /**
@@ -1828,7 +2191,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the cms_metadata_key.
    */
   matchCmsMetadataKeyFromCmsMetadataKeyName(cmsMetadataKeyName: string) {
-    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(cmsMetadataKeyName).cms_metadata_key;
+    return this.pathTemplates.cmsMetadataKeyPathTemplate.match(
+      cmsMetadataKeyName,
+    ).cms_metadata_key;
   }
 
   /**
@@ -1838,7 +2203,7 @@ export class LabelServiceClient {
    * @param {string} cms_metadata_value
    * @returns {string} Resource name string.
    */
-  cmsMetadataValuePath(networkCode:string,cmsMetadataValue:string) {
+  cmsMetadataValuePath(networkCode: string, cmsMetadataValue: string) {
     return this.pathTemplates.cmsMetadataValuePathTemplate.render({
       network_code: networkCode,
       cms_metadata_value: cmsMetadataValue,
@@ -1853,7 +2218,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCmsMetadataValueName(cmsMetadataValueName: string) {
-    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).network_code;
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(
+      cmsMetadataValueName,
+    ).network_code;
   }
 
   /**
@@ -1864,7 +2231,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the cms_metadata_value.
    */
   matchCmsMetadataValueFromCmsMetadataValueName(cmsMetadataValueName: string) {
-    return this.pathTemplates.cmsMetadataValuePathTemplate.match(cmsMetadataValueName).cms_metadata_value;
+    return this.pathTemplates.cmsMetadataValuePathTemplate.match(
+      cmsMetadataValueName,
+    ).cms_metadata_value;
   }
 
   /**
@@ -1874,7 +2243,7 @@ export class LabelServiceClient {
    * @param {string} company
    * @returns {string} Resource name string.
    */
-  companyPath(networkCode:string,company:string) {
+  companyPath(networkCode: string, company: string) {
     return this.pathTemplates.companyPathTemplate.render({
       network_code: networkCode,
       company: company,
@@ -1889,7 +2258,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCompanyName(companyName: string) {
-    return this.pathTemplates.companyPathTemplate.match(companyName).network_code;
+    return this.pathTemplates.companyPathTemplate.match(companyName)
+      .network_code;
   }
 
   /**
@@ -1910,7 +2280,7 @@ export class LabelServiceClient {
    * @param {string} contact
    * @returns {string} Resource name string.
    */
-  contactPath(networkCode:string,contact:string) {
+  contactPath(networkCode: string, contact: string) {
     return this.pathTemplates.contactPathTemplate.render({
       network_code: networkCode,
       contact: contact,
@@ -1925,7 +2295,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContactName(contactName: string) {
-    return this.pathTemplates.contactPathTemplate.match(contactName).network_code;
+    return this.pathTemplates.contactPathTemplate.match(contactName)
+      .network_code;
   }
 
   /**
@@ -1946,7 +2317,7 @@ export class LabelServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(networkCode:string,content:string) {
+  contentPath(networkCode: string, content: string) {
     return this.pathTemplates.contentPathTemplate.render({
       network_code: networkCode,
       content: content,
@@ -1961,7 +2332,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContentName(contentName: string) {
-    return this.pathTemplates.contentPathTemplate.match(contentName).network_code;
+    return this.pathTemplates.contentPathTemplate.match(contentName)
+      .network_code;
   }
 
   /**
@@ -1982,7 +2354,7 @@ export class LabelServiceClient {
    * @param {string} content_bundle
    * @returns {string} Resource name string.
    */
-  contentBundlePath(networkCode:string,contentBundle:string) {
+  contentBundlePath(networkCode: string, contentBundle: string) {
     return this.pathTemplates.contentBundlePathTemplate.render({
       network_code: networkCode,
       content_bundle: contentBundle,
@@ -1997,7 +2369,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContentBundleName(contentBundleName: string) {
-    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).network_code;
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName)
+      .network_code;
   }
 
   /**
@@ -2008,7 +2381,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the content_bundle.
    */
   matchContentBundleFromContentBundleName(contentBundleName: string) {
-    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName).content_bundle;
+    return this.pathTemplates.contentBundlePathTemplate.match(contentBundleName)
+      .content_bundle;
   }
 
   /**
@@ -2018,7 +2392,7 @@ export class LabelServiceClient {
    * @param {string} content_label
    * @returns {string} Resource name string.
    */
-  contentLabelPath(networkCode:string,contentLabel:string) {
+  contentLabelPath(networkCode: string, contentLabel: string) {
     return this.pathTemplates.contentLabelPathTemplate.render({
       network_code: networkCode,
       content_label: contentLabel,
@@ -2033,7 +2407,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromContentLabelName(contentLabelName: string) {
-    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).network_code;
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName)
+      .network_code;
   }
 
   /**
@@ -2044,7 +2419,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the content_label.
    */
   matchContentLabelFromContentLabelName(contentLabelName: string) {
-    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName).content_label;
+    return this.pathTemplates.contentLabelPathTemplate.match(contentLabelName)
+      .content_label;
   }
 
   /**
@@ -2054,7 +2430,7 @@ export class LabelServiceClient {
    * @param {string} creative_template
    * @returns {string} Resource name string.
    */
-  creativeTemplatePath(networkCode:string,creativeTemplate:string) {
+  creativeTemplatePath(networkCode: string, creativeTemplate: string) {
     return this.pathTemplates.creativeTemplatePathTemplate.render({
       network_code: networkCode,
       creative_template: creativeTemplate,
@@ -2069,7 +2445,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCreativeTemplateName(creativeTemplateName: string) {
-    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).network_code;
+    return this.pathTemplates.creativeTemplatePathTemplate.match(
+      creativeTemplateName,
+    ).network_code;
   }
 
   /**
@@ -2080,7 +2458,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the creative_template.
    */
   matchCreativeTemplateFromCreativeTemplateName(creativeTemplateName: string) {
-    return this.pathTemplates.creativeTemplatePathTemplate.match(creativeTemplateName).creative_template;
+    return this.pathTemplates.creativeTemplatePathTemplate.match(
+      creativeTemplateName,
+    ).creative_template;
   }
 
   /**
@@ -2090,7 +2470,7 @@ export class LabelServiceClient {
    * @param {string} custom_field
    * @returns {string} Resource name string.
    */
-  customFieldPath(networkCode:string,customField:string) {
+  customFieldPath(networkCode: string, customField: string) {
     return this.pathTemplates.customFieldPathTemplate.render({
       network_code: networkCode,
       custom_field: customField,
@@ -2105,7 +2485,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).network_code;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
+      .network_code;
   }
 
   /**
@@ -2116,7 +2497,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the custom_field.
    */
   matchCustomFieldFromCustomFieldName(customFieldName: string) {
-    return this.pathTemplates.customFieldPathTemplate.match(customFieldName).custom_field;
+    return this.pathTemplates.customFieldPathTemplate.match(customFieldName)
+      .custom_field;
   }
 
   /**
@@ -2126,7 +2508,7 @@ export class LabelServiceClient {
    * @param {string} custom_targeting_key
    * @returns {string} Resource name string.
    */
-  customTargetingKeyPath(networkCode:string,customTargetingKey:string) {
+  customTargetingKeyPath(networkCode: string, customTargetingKey: string) {
     return this.pathTemplates.customTargetingKeyPathTemplate.render({
       network_code: networkCode,
       custom_targeting_key: customTargetingKey,
@@ -2141,7 +2523,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromCustomTargetingKeyName(customTargetingKeyName: string) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).network_code;
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(
+      customTargetingKeyName,
+    ).network_code;
   }
 
   /**
@@ -2151,8 +2535,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing CustomTargetingKey resource.
    * @returns {string} A string representing the custom_targeting_key.
    */
-  matchCustomTargetingKeyFromCustomTargetingKeyName(customTargetingKeyName: string) {
-    return this.pathTemplates.customTargetingKeyPathTemplate.match(customTargetingKeyName).custom_targeting_key;
+  matchCustomTargetingKeyFromCustomTargetingKeyName(
+    customTargetingKeyName: string,
+  ) {
+    return this.pathTemplates.customTargetingKeyPathTemplate.match(
+      customTargetingKeyName,
+    ).custom_targeting_key;
   }
 
   /**
@@ -2162,7 +2550,7 @@ export class LabelServiceClient {
    * @param {string} custom_targeting_value
    * @returns {string} Resource name string.
    */
-  customTargetingValuePath(networkCode:string,customTargetingValue:string) {
+  customTargetingValuePath(networkCode: string, customTargetingValue: string) {
     return this.pathTemplates.customTargetingValuePathTemplate.render({
       network_code: networkCode,
       custom_targeting_value: customTargetingValue,
@@ -2176,8 +2564,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromCustomTargetingValueName(customTargetingValueName: string) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).network_code;
+  matchNetworkCodeFromCustomTargetingValueName(
+    customTargetingValueName: string,
+  ) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(
+      customTargetingValueName,
+    ).network_code;
   }
 
   /**
@@ -2187,8 +2579,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing CustomTargetingValue resource.
    * @returns {string} A string representing the custom_targeting_value.
    */
-  matchCustomTargetingValueFromCustomTargetingValueName(customTargetingValueName: string) {
-    return this.pathTemplates.customTargetingValuePathTemplate.match(customTargetingValueName).custom_targeting_value;
+  matchCustomTargetingValueFromCustomTargetingValueName(
+    customTargetingValueName: string,
+  ) {
+    return this.pathTemplates.customTargetingValuePathTemplate.match(
+      customTargetingValueName,
+    ).custom_targeting_value;
   }
 
   /**
@@ -2198,7 +2594,7 @@ export class LabelServiceClient {
    * @param {string} device_capability
    * @returns {string} Resource name string.
    */
-  deviceCapabilityPath(networkCode:string,deviceCapability:string) {
+  deviceCapabilityPath(networkCode: string, deviceCapability: string) {
     return this.pathTemplates.deviceCapabilityPathTemplate.render({
       network_code: networkCode,
       device_capability: deviceCapability,
@@ -2213,7 +2609,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromDeviceCapabilityName(deviceCapabilityName: string) {
-    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).network_code;
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(
+      deviceCapabilityName,
+    ).network_code;
   }
 
   /**
@@ -2224,7 +2622,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the device_capability.
    */
   matchDeviceCapabilityFromDeviceCapabilityName(deviceCapabilityName: string) {
-    return this.pathTemplates.deviceCapabilityPathTemplate.match(deviceCapabilityName).device_capability;
+    return this.pathTemplates.deviceCapabilityPathTemplate.match(
+      deviceCapabilityName,
+    ).device_capability;
   }
 
   /**
@@ -2234,7 +2634,7 @@ export class LabelServiceClient {
    * @param {string} device_category
    * @returns {string} Resource name string.
    */
-  deviceCategoryPath(networkCode:string,deviceCategory:string) {
+  deviceCategoryPath(networkCode: string, deviceCategory: string) {
     return this.pathTemplates.deviceCategoryPathTemplate.render({
       network_code: networkCode,
       device_category: deviceCategory,
@@ -2249,7 +2649,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromDeviceCategoryName(deviceCategoryName: string) {
-    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).network_code;
+    return this.pathTemplates.deviceCategoryPathTemplate.match(
+      deviceCategoryName,
+    ).network_code;
   }
 
   /**
@@ -2260,7 +2662,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the device_category.
    */
   matchDeviceCategoryFromDeviceCategoryName(deviceCategoryName: string) {
-    return this.pathTemplates.deviceCategoryPathTemplate.match(deviceCategoryName).device_category;
+    return this.pathTemplates.deviceCategoryPathTemplate.match(
+      deviceCategoryName,
+    ).device_category;
   }
 
   /**
@@ -2270,7 +2674,7 @@ export class LabelServiceClient {
    * @param {string} device_manufacturer
    * @returns {string} Resource name string.
    */
-  deviceManufacturerPath(networkCode:string,deviceManufacturer:string) {
+  deviceManufacturerPath(networkCode: string, deviceManufacturer: string) {
     return this.pathTemplates.deviceManufacturerPathTemplate.render({
       network_code: networkCode,
       device_manufacturer: deviceManufacturer,
@@ -2285,7 +2689,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromDeviceManufacturerName(deviceManufacturerName: string) {
-    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).network_code;
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(
+      deviceManufacturerName,
+    ).network_code;
   }
 
   /**
@@ -2295,8 +2701,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing DeviceManufacturer resource.
    * @returns {string} A string representing the device_manufacturer.
    */
-  matchDeviceManufacturerFromDeviceManufacturerName(deviceManufacturerName: string) {
-    return this.pathTemplates.deviceManufacturerPathTemplate.match(deviceManufacturerName).device_manufacturer;
+  matchDeviceManufacturerFromDeviceManufacturerName(
+    deviceManufacturerName: string,
+  ) {
+    return this.pathTemplates.deviceManufacturerPathTemplate.match(
+      deviceManufacturerName,
+    ).device_manufacturer;
   }
 
   /**
@@ -2306,7 +2716,7 @@ export class LabelServiceClient {
    * @param {string} entity_signals_mapping
    * @returns {string} Resource name string.
    */
-  entitySignalsMappingPath(networkCode:string,entitySignalsMapping:string) {
+  entitySignalsMappingPath(networkCode: string, entitySignalsMapping: string) {
     return this.pathTemplates.entitySignalsMappingPathTemplate.render({
       network_code: networkCode,
       entity_signals_mapping: entitySignalsMapping,
@@ -2320,8 +2730,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromEntitySignalsMappingName(entitySignalsMappingName: string) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).network_code;
+  matchNetworkCodeFromEntitySignalsMappingName(
+    entitySignalsMappingName: string,
+  ) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
+      entitySignalsMappingName,
+    ).network_code;
   }
 
   /**
@@ -2331,8 +2745,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing EntitySignalsMapping resource.
    * @returns {string} A string representing the entity_signals_mapping.
    */
-  matchEntitySignalsMappingFromEntitySignalsMappingName(entitySignalsMappingName: string) {
-    return this.pathTemplates.entitySignalsMappingPathTemplate.match(entitySignalsMappingName).entity_signals_mapping;
+  matchEntitySignalsMappingFromEntitySignalsMappingName(
+    entitySignalsMappingName: string,
+  ) {
+    return this.pathTemplates.entitySignalsMappingPathTemplate.match(
+      entitySignalsMappingName,
+    ).entity_signals_mapping;
   }
 
   /**
@@ -2342,7 +2760,7 @@ export class LabelServiceClient {
    * @param {string} geo_target
    * @returns {string} Resource name string.
    */
-  geoTargetPath(networkCode:string,geoTarget:string) {
+  geoTargetPath(networkCode: string, geoTarget: string) {
     return this.pathTemplates.geoTargetPathTemplate.render({
       network_code: networkCode,
       geo_target: geoTarget,
@@ -2357,7 +2775,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromGeoTargetName(geoTargetName: string) {
-    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).network_code;
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName)
+      .network_code;
   }
 
   /**
@@ -2368,7 +2787,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the geo_target.
    */
   matchGeoTargetFromGeoTargetName(geoTargetName: string) {
-    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName).geo_target;
+    return this.pathTemplates.geoTargetPathTemplate.match(geoTargetName)
+      .geo_target;
   }
 
   /**
@@ -2378,7 +2798,7 @@ export class LabelServiceClient {
    * @param {string} label
    * @returns {string} Resource name string.
    */
-  labelPath(networkCode:string,label:string) {
+  labelPath(networkCode: string, label: string) {
     return this.pathTemplates.labelPathTemplate.render({
       network_code: networkCode,
       label: label,
@@ -2414,7 +2834,7 @@ export class LabelServiceClient {
    * @param {string} line_item
    * @returns {string} Resource name string.
    */
-  lineItemPath(networkCode:string,lineItem:string) {
+  lineItemPath(networkCode: string, lineItem: string) {
     return this.pathTemplates.lineItemPathTemplate.render({
       network_code: networkCode,
       line_item: lineItem,
@@ -2429,7 +2849,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromLineItemName(lineItemName: string) {
-    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).network_code;
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
+      .network_code;
   }
 
   /**
@@ -2440,7 +2861,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the line_item.
    */
   matchLineItemFromLineItemName(lineItemName: string) {
-    return this.pathTemplates.lineItemPathTemplate.match(lineItemName).line_item;
+    return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
+      .line_item;
   }
 
   /**
@@ -2450,7 +2872,7 @@ export class LabelServiceClient {
    * @param {string} linked_device
    * @returns {string} Resource name string.
    */
-  linkedDevicePath(networkCode:string,linkedDevice:string) {
+  linkedDevicePath(networkCode: string, linkedDevice: string) {
     return this.pathTemplates.linkedDevicePathTemplate.render({
       network_code: networkCode,
       linked_device: linkedDevice,
@@ -2465,7 +2887,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromLinkedDeviceName(linkedDeviceName: string) {
-    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).network_code;
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName)
+      .network_code;
   }
 
   /**
@@ -2476,7 +2899,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the linked_device.
    */
   matchLinkedDeviceFromLinkedDeviceName(linkedDeviceName: string) {
-    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName).linked_device;
+    return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName)
+      .linked_device;
   }
 
   /**
@@ -2486,7 +2910,7 @@ export class LabelServiceClient {
    * @param {string} live_stream_event
    * @returns {string} Resource name string.
    */
-  liveStreamEventPath(networkCode:string,liveStreamEvent:string) {
+  liveStreamEventPath(networkCode: string, liveStreamEvent: string) {
     return this.pathTemplates.liveStreamEventPathTemplate.render({
       network_code: networkCode,
       live_stream_event: liveStreamEvent,
@@ -2501,7 +2925,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromLiveStreamEventName(liveStreamEventName: string) {
-    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).network_code;
+    return this.pathTemplates.liveStreamEventPathTemplate.match(
+      liveStreamEventName,
+    ).network_code;
   }
 
   /**
@@ -2512,7 +2938,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the live_stream_event.
    */
   matchLiveStreamEventFromLiveStreamEventName(liveStreamEventName: string) {
-    return this.pathTemplates.liveStreamEventPathTemplate.match(liveStreamEventName).live_stream_event;
+    return this.pathTemplates.liveStreamEventPathTemplate.match(
+      liveStreamEventName,
+    ).live_stream_event;
   }
 
   /**
@@ -2522,7 +2950,7 @@ export class LabelServiceClient {
    * @param {string} mobile_carrier
    * @returns {string} Resource name string.
    */
-  mobileCarrierPath(networkCode:string,mobileCarrier:string) {
+  mobileCarrierPath(networkCode: string, mobileCarrier: string) {
     return this.pathTemplates.mobileCarrierPathTemplate.render({
       network_code: networkCode,
       mobile_carrier: mobileCarrier,
@@ -2537,7 +2965,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromMobileCarrierName(mobileCarrierName: string) {
-    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).network_code;
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName)
+      .network_code;
   }
 
   /**
@@ -2548,7 +2977,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the mobile_carrier.
    */
   matchMobileCarrierFromMobileCarrierName(mobileCarrierName: string) {
-    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName).mobile_carrier;
+    return this.pathTemplates.mobileCarrierPathTemplate.match(mobileCarrierName)
+      .mobile_carrier;
   }
 
   /**
@@ -2558,7 +2988,7 @@ export class LabelServiceClient {
    * @param {string} mobile_device
    * @returns {string} Resource name string.
    */
-  mobileDevicePath(networkCode:string,mobileDevice:string) {
+  mobileDevicePath(networkCode: string, mobileDevice: string) {
     return this.pathTemplates.mobileDevicePathTemplate.render({
       network_code: networkCode,
       mobile_device: mobileDevice,
@@ -2573,7 +3003,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromMobileDeviceName(mobileDeviceName: string) {
-    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).network_code;
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName)
+      .network_code;
   }
 
   /**
@@ -2584,7 +3015,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the mobile_device.
    */
   matchMobileDeviceFromMobileDeviceName(mobileDeviceName: string) {
-    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName).mobile_device;
+    return this.pathTemplates.mobileDevicePathTemplate.match(mobileDeviceName)
+      .mobile_device;
   }
 
   /**
@@ -2594,7 +3026,7 @@ export class LabelServiceClient {
    * @param {string} mobile_device_submodel
    * @returns {string} Resource name string.
    */
-  mobileDeviceSubmodelPath(networkCode:string,mobileDeviceSubmodel:string) {
+  mobileDeviceSubmodelPath(networkCode: string, mobileDeviceSubmodel: string) {
     return this.pathTemplates.mobileDeviceSubmodelPathTemplate.render({
       network_code: networkCode,
       mobile_device_submodel: mobileDeviceSubmodel,
@@ -2608,8 +3040,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing MobileDeviceSubmodel resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
-    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).network_code;
+  matchNetworkCodeFromMobileDeviceSubmodelName(
+    mobileDeviceSubmodelName: string,
+  ) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(
+      mobileDeviceSubmodelName,
+    ).network_code;
   }
 
   /**
@@ -2619,8 +3055,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing MobileDeviceSubmodel resource.
    * @returns {string} A string representing the mobile_device_submodel.
    */
-  matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(mobileDeviceSubmodelName: string) {
-    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(mobileDeviceSubmodelName).mobile_device_submodel;
+  matchMobileDeviceSubmodelFromMobileDeviceSubmodelName(
+    mobileDeviceSubmodelName: string,
+  ) {
+    return this.pathTemplates.mobileDeviceSubmodelPathTemplate.match(
+      mobileDeviceSubmodelName,
+    ).mobile_device_submodel;
   }
 
   /**
@@ -2629,7 +3069,7 @@ export class LabelServiceClient {
    * @param {string} network_code
    * @returns {string} Resource name string.
    */
-  networkPath(networkCode:string) {
+  networkPath(networkCode: string) {
     return this.pathTemplates.networkPathTemplate.render({
       network_code: networkCode,
     });
@@ -2643,7 +3083,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromNetworkName(networkName: string) {
-    return this.pathTemplates.networkPathTemplate.match(networkName).network_code;
+    return this.pathTemplates.networkPathTemplate.match(networkName)
+      .network_code;
   }
 
   /**
@@ -2653,7 +3094,7 @@ export class LabelServiceClient {
    * @param {string} operating_system
    * @returns {string} Resource name string.
    */
-  operatingSystemPath(networkCode:string,operatingSystem:string) {
+  operatingSystemPath(networkCode: string, operatingSystem: string) {
     return this.pathTemplates.operatingSystemPathTemplate.render({
       network_code: networkCode,
       operating_system: operatingSystem,
@@ -2668,7 +3109,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromOperatingSystemName(operatingSystemName: string) {
-    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).network_code;
+    return this.pathTemplates.operatingSystemPathTemplate.match(
+      operatingSystemName,
+    ).network_code;
   }
 
   /**
@@ -2679,7 +3122,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the operating_system.
    */
   matchOperatingSystemFromOperatingSystemName(operatingSystemName: string) {
-    return this.pathTemplates.operatingSystemPathTemplate.match(operatingSystemName).operating_system;
+    return this.pathTemplates.operatingSystemPathTemplate.match(
+      operatingSystemName,
+    ).operating_system;
   }
 
   /**
@@ -2689,7 +3134,10 @@ export class LabelServiceClient {
    * @param {string} operating_system_version
    * @returns {string} Resource name string.
    */
-  operatingSystemVersionPath(networkCode:string,operatingSystemVersion:string) {
+  operatingSystemVersionPath(
+    networkCode: string,
+    operatingSystemVersion: string,
+  ) {
     return this.pathTemplates.operatingSystemVersionPathTemplate.render({
       network_code: networkCode,
       operating_system_version: operatingSystemVersion,
@@ -2703,8 +3151,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing OperatingSystemVersion resource.
    * @returns {string} A string representing the network_code.
    */
-  matchNetworkCodeFromOperatingSystemVersionName(operatingSystemVersionName: string) {
-    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).network_code;
+  matchNetworkCodeFromOperatingSystemVersionName(
+    operatingSystemVersionName: string,
+  ) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(
+      operatingSystemVersionName,
+    ).network_code;
   }
 
   /**
@@ -2714,8 +3166,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing OperatingSystemVersion resource.
    * @returns {string} A string representing the operating_system_version.
    */
-  matchOperatingSystemVersionFromOperatingSystemVersionName(operatingSystemVersionName: string) {
-    return this.pathTemplates.operatingSystemVersionPathTemplate.match(operatingSystemVersionName).operating_system_version;
+  matchOperatingSystemVersionFromOperatingSystemVersionName(
+    operatingSystemVersionName: string,
+  ) {
+    return this.pathTemplates.operatingSystemVersionPathTemplate.match(
+      operatingSystemVersionName,
+    ).operating_system_version;
   }
 
   /**
@@ -2725,7 +3181,7 @@ export class LabelServiceClient {
    * @param {string} order
    * @returns {string} Resource name string.
    */
-  orderPath(networkCode:string,order:string) {
+  orderPath(networkCode: string, order: string) {
     return this.pathTemplates.orderPathTemplate.render({
       network_code: networkCode,
       order: order,
@@ -2761,7 +3217,7 @@ export class LabelServiceClient {
    * @param {string} placement
    * @returns {string} Resource name string.
    */
-  placementPath(networkCode:string,placement:string) {
+  placementPath(networkCode: string, placement: string) {
     return this.pathTemplates.placementPathTemplate.render({
       network_code: networkCode,
       placement: placement,
@@ -2776,7 +3232,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName).network_code;
+    return this.pathTemplates.placementPathTemplate.match(placementName)
+      .network_code;
   }
 
   /**
@@ -2787,7 +3244,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the placement.
    */
   matchPlacementFromPlacementName(placementName: string) {
-    return this.pathTemplates.placementPathTemplate.match(placementName).placement;
+    return this.pathTemplates.placementPathTemplate.match(placementName)
+      .placement;
   }
 
   /**
@@ -2797,7 +3255,7 @@ export class LabelServiceClient {
    * @param {string} private_auction
    * @returns {string} Resource name string.
    */
-  privateAuctionPath(networkCode:string,privateAuction:string) {
+  privateAuctionPath(networkCode: string, privateAuction: string) {
     return this.pathTemplates.privateAuctionPathTemplate.render({
       network_code: networkCode,
       private_auction: privateAuction,
@@ -2812,7 +3270,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPrivateAuctionName(privateAuctionName: string) {
-    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).network_code;
+    return this.pathTemplates.privateAuctionPathTemplate.match(
+      privateAuctionName,
+    ).network_code;
   }
 
   /**
@@ -2823,7 +3283,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the private_auction.
    */
   matchPrivateAuctionFromPrivateAuctionName(privateAuctionName: string) {
-    return this.pathTemplates.privateAuctionPathTemplate.match(privateAuctionName).private_auction;
+    return this.pathTemplates.privateAuctionPathTemplate.match(
+      privateAuctionName,
+    ).private_auction;
   }
 
   /**
@@ -2833,7 +3295,7 @@ export class LabelServiceClient {
    * @param {string} private_auction_deal
    * @returns {string} Resource name string.
    */
-  privateAuctionDealPath(networkCode:string,privateAuctionDeal:string) {
+  privateAuctionDealPath(networkCode: string, privateAuctionDeal: string) {
     return this.pathTemplates.privateAuctionDealPathTemplate.render({
       network_code: networkCode,
       private_auction_deal: privateAuctionDeal,
@@ -2848,7 +3310,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromPrivateAuctionDealName(privateAuctionDealName: string) {
-    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).network_code;
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(
+      privateAuctionDealName,
+    ).network_code;
   }
 
   /**
@@ -2858,8 +3322,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing PrivateAuctionDeal resource.
    * @returns {string} A string representing the private_auction_deal.
    */
-  matchPrivateAuctionDealFromPrivateAuctionDealName(privateAuctionDealName: string) {
-    return this.pathTemplates.privateAuctionDealPathTemplate.match(privateAuctionDealName).private_auction_deal;
+  matchPrivateAuctionDealFromPrivateAuctionDealName(
+    privateAuctionDealName: string,
+  ) {
+    return this.pathTemplates.privateAuctionDealPathTemplate.match(
+      privateAuctionDealName,
+    ).private_auction_deal;
   }
 
   /**
@@ -2869,7 +3337,7 @@ export class LabelServiceClient {
    * @param {string} programmatic_buyer
    * @returns {string} Resource name string.
    */
-  programmaticBuyerPath(networkCode:string,programmaticBuyer:string) {
+  programmaticBuyerPath(networkCode: string, programmaticBuyer: string) {
     return this.pathTemplates.programmaticBuyerPathTemplate.render({
       network_code: networkCode,
       programmatic_buyer: programmaticBuyer,
@@ -2884,7 +3352,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromProgrammaticBuyerName(programmaticBuyerName: string) {
-    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).network_code;
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(
+      programmaticBuyerName,
+    ).network_code;
   }
 
   /**
@@ -2894,8 +3364,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing ProgrammaticBuyer resource.
    * @returns {string} A string representing the programmatic_buyer.
    */
-  matchProgrammaticBuyerFromProgrammaticBuyerName(programmaticBuyerName: string) {
-    return this.pathTemplates.programmaticBuyerPathTemplate.match(programmaticBuyerName).programmatic_buyer;
+  matchProgrammaticBuyerFromProgrammaticBuyerName(
+    programmaticBuyerName: string,
+  ) {
+    return this.pathTemplates.programmaticBuyerPathTemplate.match(
+      programmaticBuyerName,
+    ).programmatic_buyer;
   }
 
   /**
@@ -2905,7 +3379,7 @@ export class LabelServiceClient {
    * @param {string} report
    * @returns {string} Resource name string.
    */
-  reportPath(networkCode:string,report:string) {
+  reportPath(networkCode: string, report: string) {
     return this.pathTemplates.reportPathTemplate.render({
       network_code: networkCode,
       report: report,
@@ -2941,7 +3415,7 @@ export class LabelServiceClient {
    * @param {string} rich_media_ads_company
    * @returns {string} Resource name string.
    */
-  richMediaAdsCompanyPath(networkCode:string,richMediaAdsCompany:string) {
+  richMediaAdsCompanyPath(networkCode: string, richMediaAdsCompany: string) {
     return this.pathTemplates.richMediaAdsCompanyPathTemplate.render({
       network_code: networkCode,
       rich_media_ads_company: richMediaAdsCompany,
@@ -2956,7 +3430,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
-    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).network_code;
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(
+      richMediaAdsCompanyName,
+    ).network_code;
   }
 
   /**
@@ -2966,8 +3442,12 @@ export class LabelServiceClient {
    *   A fully-qualified path representing RichMediaAdsCompany resource.
    * @returns {string} A string representing the rich_media_ads_company.
    */
-  matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(richMediaAdsCompanyName: string) {
-    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(richMediaAdsCompanyName).rich_media_ads_company;
+  matchRichMediaAdsCompanyFromRichMediaAdsCompanyName(
+    richMediaAdsCompanyName: string,
+  ) {
+    return this.pathTemplates.richMediaAdsCompanyPathTemplate.match(
+      richMediaAdsCompanyName,
+    ).rich_media_ads_company;
   }
 
   /**
@@ -2977,7 +3457,7 @@ export class LabelServiceClient {
    * @param {string} role
    * @returns {string} Resource name string.
    */
-  rolePath(networkCode:string,role:string) {
+  rolePath(networkCode: string, role: string) {
     return this.pathTemplates.rolePathTemplate.render({
       network_code: networkCode,
       role: role,
@@ -3013,7 +3493,7 @@ export class LabelServiceClient {
    * @param {string} site
    * @returns {string} Resource name string.
    */
-  sitePath(networkCode:string,site:string) {
+  sitePath(networkCode: string, site: string) {
     return this.pathTemplates.sitePathTemplate.render({
       network_code: networkCode,
       site: site,
@@ -3049,7 +3529,7 @@ export class LabelServiceClient {
    * @param {string} taxonomy_category
    * @returns {string} Resource name string.
    */
-  taxonomyCategoryPath(networkCode:string,taxonomyCategory:string) {
+  taxonomyCategoryPath(networkCode: string, taxonomyCategory: string) {
     return this.pathTemplates.taxonomyCategoryPathTemplate.render({
       network_code: networkCode,
       taxonomy_category: taxonomyCategory,
@@ -3064,7 +3544,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).network_code;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
+      taxonomyCategoryName,
+    ).network_code;
   }
 
   /**
@@ -3075,7 +3557,9 @@ export class LabelServiceClient {
    * @returns {string} A string representing the taxonomy_category.
    */
   matchTaxonomyCategoryFromTaxonomyCategoryName(taxonomyCategoryName: string) {
-    return this.pathTemplates.taxonomyCategoryPathTemplate.match(taxonomyCategoryName).taxonomy_category;
+    return this.pathTemplates.taxonomyCategoryPathTemplate.match(
+      taxonomyCategoryName,
+    ).taxonomy_category;
   }
 
   /**
@@ -3085,7 +3569,7 @@ export class LabelServiceClient {
    * @param {string} team
    * @returns {string} Resource name string.
    */
-  teamPath(networkCode:string,team:string) {
+  teamPath(networkCode: string, team: string) {
     return this.pathTemplates.teamPathTemplate.render({
       network_code: networkCode,
       team: team,
@@ -3121,7 +3605,7 @@ export class LabelServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(networkCode:string,user:string) {
+  userPath(networkCode: string, user: string) {
     return this.pathTemplates.userPathTemplate.render({
       network_code: networkCode,
       user: user,
@@ -3157,7 +3641,7 @@ export class LabelServiceClient {
    * @param {string} web_property
    * @returns {string} Resource name string.
    */
-  webPropertyPath(networkCode:string,webProperty:string) {
+  webPropertyPath(networkCode: string, webProperty: string) {
     return this.pathTemplates.webPropertyPathTemplate.render({
       network_code: networkCode,
       web_property: webProperty,
@@ -3172,7 +3656,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the network_code.
    */
   matchNetworkCodeFromWebPropertyName(webPropertyName: string) {
-    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).network_code;
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName)
+      .network_code;
   }
 
   /**
@@ -3183,7 +3668,8 @@ export class LabelServiceClient {
    * @returns {string} A string representing the web_property.
    */
   matchWebPropertyFromWebPropertyName(webPropertyName: string) {
-    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName).web_property;
+    return this.pathTemplates.webPropertyPathTemplate.match(webPropertyName)
+      .web_property;
   }
 
   /**
@@ -3194,7 +3680,7 @@ export class LabelServiceClient {
    */
   close(): Promise<void> {
     if (this.labelServiceStub && !this._terminated) {
-      return this.labelServiceStub.then(stub => {
+      return this.labelServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
