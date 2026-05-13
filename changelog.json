@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "1cb0ff89f5f8a8cbe422c429bd61874b983f6cef",
+          "message": "Unblock release by upgrading @types/sinon for the add optimize package",
+          "issues": [
+            "8258"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appoptimize",
+      "id": "221d16c6-aef1-41e5-9223-a4e02037ed4c",
+      "createTime": "2026-05-13T15:30:23.911Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "d6dccbb711dfd1a8827f5b74cae5a81baf0b8349",
           "message": "Add initial files for google.cloud.databasecenter.v1beta",
@@ -78654,5 +78671,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-12T18:41:57.101Z"
+  "updateTime": "2026-05-13T15:30:23.911Z"
 }

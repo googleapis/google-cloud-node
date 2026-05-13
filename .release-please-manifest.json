@@ -259,7 +259,7 @@
   "packages/google-cloud-datacatalog-lineage-configmanagement": "0.1.1",
   "packages/google-cloud-auditmanager": "0.1.1",
   "packages/google-maps-geocode": "0.1.1",
-  "packages/google-cloud-appoptimize": "0.1.0",
+  "packages/google-cloud-appoptimize": "0.1.1",
   "packages/google-devicesandservices-health": "0.1.0",
   "packages/google-cloud-databasecenter": "0.1.0"
 }
