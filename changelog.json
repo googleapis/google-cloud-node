@@ -5,6 +5,39 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "a63b61d13c1651deb62b3903292f3bd1c7f4d614",
+          "message": "For bigquery-storage add protobufjs to depend",
+          "issues": [
+            "8243"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "778adb0d5f368448f99bf68dcbcf37c3a7394f5d",
+          "message": "Upgrade the protobufjs dependency for bigquery storage",
+          "issues": [
+            "8136"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "c9813311-f380-43d5-9a52-b7ee6e8e44e5",
+      "createTime": "2026-05-13T17:03:24.079Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "1cb0ff89f5f8a8cbe422c429bd61874b983f6cef",
           "message": "Unblock release by upgrading @types/sinon for the add optimize package",
           "issues": [
@@ -78671,5 +78704,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-13T15:30:23.911Z"
+  "updateTime": "2026-05-13T17:03:24.079Z"
 }
