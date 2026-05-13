@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/spanner/google-spanner-nodejs
-      dest: /owl-bot-staging/google-spanner
+    - source: /google/spanner/executor/google-spanner-executor-nodejs
+      dest: /owl-bot-staging/google-spanner-executor
 
-api-name: spanner
+api-name: executor
