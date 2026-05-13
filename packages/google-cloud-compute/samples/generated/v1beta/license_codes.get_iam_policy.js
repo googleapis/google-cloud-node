@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(forwardingRule, project, region) {
-  // [START compute_v1beta_generated_ForwardingRules_Get_async]
+function main(project, resource) {
+  // [START compute_v1beta_generated_LicenseCodes_GetIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,43 +29,38 @@ function main(forwardingRule, project, region) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the ForwardingRule resource to return.
+   *  Requested IAM Policy version.
    */
-  // const forwardingRule = 'abc123'
+  // const optionsRequestedPolicyVersion = 1234
   /**
    *  Project ID for this request.
    */
   // const project = 'my-project'
   /**
-   *  Name of the region scoping this request.
+   *  Name or id of the resource for this request.
    */
-  // const region = 'us-central1'
-  /**
-   *  Check the View enum for the list of possible values.
-   */
-  // const view = 'abc123'
+  // const resource = 'abc123'
 
   // Imports the Compute library
-  const {ForwardingRulesClient} = require('@google-cloud/compute').v1beta;
+  const {LicenseCodesClient} = require('@google-cloud/compute').v1beta;
 
   // Instantiates a client
-  const computeClient = new ForwardingRulesClient();
+  const computeClient = new LicenseCodesClient();
 
-  async function callGet() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
-      forwardingRule,
       project,
-      region,
+      resource,
     };
 
     // Run request
-    const response = await computeClient.get(request);
+    const response = await computeClient.getIamPolicy(request);
     console.log(response);
   }
 
-  callGet();
-  // [END compute_v1beta_generated_ForwardingRules_Get_async]
+  callGetIamPolicy();
+  // [END compute_v1beta_generated_LicenseCodes_GetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

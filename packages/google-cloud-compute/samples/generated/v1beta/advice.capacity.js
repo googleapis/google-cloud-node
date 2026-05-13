@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(forwardingRule, project, region) {
-  // [START compute_v1beta_generated_ForwardingRules_Get_async]
+function main(capacityAdviceRequestResource, project, region) {
+  // [START compute_v1beta_generated_Advice_Capacity_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,43 +29,39 @@ function main(forwardingRule, project, region) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Name of the ForwardingRule resource to return.
+   *  The body resource for this request
    */
-  // const forwardingRule = 'abc123'
+  // const capacityAdviceRequestResource = {}
   /**
    *  Project ID for this request.
    */
   // const project = 'my-project'
   /**
-   *  Name of the region scoping this request.
+   *  Name of the region for this request.
    */
   // const region = 'us-central1'
-  /**
-   *  Check the View enum for the list of possible values.
-   */
-  // const view = 'abc123'
 
   // Imports the Compute library
-  const {ForwardingRulesClient} = require('@google-cloud/compute').v1beta;
+  const {AdviceClient} = require('@google-cloud/compute').v1beta;
 
   // Instantiates a client
-  const computeClient = new ForwardingRulesClient();
+  const computeClient = new AdviceClient();
 
-  async function callGet() {
+  async function callCapacity() {
     // Construct request
     const request = {
-      forwardingRule,
+      capacityAdviceRequestResource,
       project,
       region,
     };
 
     // Run request
-    const response = await computeClient.get(request);
+    const response = await computeClient.capacity(request);
     console.log(response);
   }
 
-  callGet();
-  // [END compute_v1beta_generated_ForwardingRules_Get_async]
+  callCapacity();
+  // [END compute_v1beta_generated_Advice_Capacity_async]
 }
 
 process.on('unhandledRejection', err => {
