@@ -41596,6 +41596,7 @@
                      * @property {Array.<google.chat.v1.IAttachment>|null} [attachment] Message attachment
                      * @property {google.chat.v1.IMatchedUrl|null} [matchedUrl] Message matchedUrl
                      * @property {boolean|null} [threadReply] Message threadReply
+                     * @property {boolean|null} [silent] Message silent
                      * @property {string|null} [clientAssignedMessageId] Message clientAssignedMessageId
                      * @property {Array.<google.chat.v1.IEmojiReactionSummary>|null} [emojiReactionSummaries] Message emojiReactionSummaries
                      * @property {google.chat.v1.IUser|null} [privateMessageViewer] Message privateMessageViewer
@@ -41780,6 +41781,14 @@
                     Message.prototype.threadReply = false;
     
                     /**
+                     * Message silent.
+                     * @member {boolean} silent
+                     * @memberof google.chat.v1.Message
+                     * @instance
+                     */
+                    Message.prototype.silent = false;
+    
+                    /**
                      * Message clientAssignedMessageId.
                      * @member {string} clientAssignedMessageId
                      * @memberof google.chat.v1.Message
@@ -41918,6 +41927,8 @@
                         if (message.accessoryWidgets != null && message.accessoryWidgets.length)
                             for (var i = 0; i < message.accessoryWidgets.length; ++i)
                                 $root.google.chat.v1.AccessoryWidget.encode(message.accessoryWidgets[i], writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
+                        if (message.silent != null && Object.hasOwnProperty.call(message, "silent"))
+                            writer.uint32(/* id 46, wireType 0 =*/368).bool(message.silent);
                         return writer;
                     };
     
@@ -42036,6 +42047,10 @@
                                 }
                             case 25: {
                                     message.threadReply = reader.bool();
+                                    break;
+                                }
+                            case 46: {
+                                    message.silent = reader.bool();
                                     break;
                                 }
                             case 32: {
@@ -42206,6 +42221,9 @@
                         if (message.threadReply != null && message.hasOwnProperty("threadReply"))
                             if (typeof message.threadReply !== "boolean")
                                 return "threadReply: boolean expected";
+                        if (message.silent != null && message.hasOwnProperty("silent"))
+                            if (typeof message.silent !== "boolean")
+                                return "silent: boolean expected";
                         if (message.clientAssignedMessageId != null && message.hasOwnProperty("clientAssignedMessageId"))
                             if (!$util.isString(message.clientAssignedMessageId))
                                 return "clientAssignedMessageId: string expected";
@@ -42363,6 +42381,8 @@
                         }
                         if (object.threadReply != null)
                             message.threadReply = Boolean(object.threadReply);
+                        if (object.silent != null)
+                            message.silent = Boolean(object.silent);
                         if (object.clientAssignedMessageId != null)
                             message.clientAssignedMessageId = String(object.clientAssignedMessageId);
                         if (object.emojiReactionSummaries) {
@@ -42455,6 +42475,7 @@
                             object.deletionMetadata = null;
                             object.quotedMessageMetadata = null;
                             object.formattedText = "";
+                            object.silent = false;
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -42529,6 +42550,8 @@
                             for (var j = 0; j < message.accessoryWidgets.length; ++j)
                                 object.accessoryWidgets[j] = $root.google.chat.v1.AccessoryWidget.toObject(message.accessoryWidgets[j], options);
                         }
+                        if (message.silent != null && message.hasOwnProperty("silent"))
+                            object.silent = message.silent;
                         return object;
                     };
     
@@ -45681,6 +45704,7 @@
                      * @property {string|null} [requestId] CreateMessageRequest requestId
                      * @property {google.chat.v1.CreateMessageRequest.MessageReplyOption|null} [messageReplyOption] CreateMessageRequest messageReplyOption
                      * @property {string|null} [messageId] CreateMessageRequest messageId
+                     * @property {google.chat.v1.ICreateMessageNotificationOptions|null} [createMessageNotificationOptions] CreateMessageRequest createMessageNotificationOptions
                      */
     
                     /**
@@ -45747,6 +45771,14 @@
                     CreateMessageRequest.prototype.messageId = "";
     
                     /**
+                     * CreateMessageRequest createMessageNotificationOptions.
+                     * @member {google.chat.v1.ICreateMessageNotificationOptions|null|undefined} createMessageNotificationOptions
+                     * @memberof google.chat.v1.CreateMessageRequest
+                     * @instance
+                     */
+                    CreateMessageRequest.prototype.createMessageNotificationOptions = null;
+    
+                    /**
                      * Creates a new CreateMessageRequest instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.CreateMessageRequest
@@ -45782,6 +45814,8 @@
                             writer.uint32(/* id 8, wireType 0 =*/64).int32(message.messageReplyOption);
                         if (message.messageId != null && Object.hasOwnProperty.call(message, "messageId"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.messageId);
+                        if (message.createMessageNotificationOptions != null && Object.hasOwnProperty.call(message, "createMessageNotificationOptions"))
+                            $root.google.chat.v1.CreateMessageNotificationOptions.encode(message.createMessageNotificationOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                         return writer;
                     };
     
@@ -45840,6 +45874,10 @@
                                 }
                             case 9: {
                                     message.messageId = reader.string();
+                                    break;
+                                }
+                            case 10: {
+                                    message.createMessageNotificationOptions = $root.google.chat.v1.CreateMessageNotificationOptions.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -45903,6 +45941,11 @@
                         if (message.messageId != null && message.hasOwnProperty("messageId"))
                             if (!$util.isString(message.messageId))
                                 return "messageId: string expected";
+                        if (message.createMessageNotificationOptions != null && message.hasOwnProperty("createMessageNotificationOptions")) {
+                            var error = $root.google.chat.v1.CreateMessageNotificationOptions.verify(message.createMessageNotificationOptions);
+                            if (error)
+                                return "createMessageNotificationOptions." + error;
+                        }
                         return null;
                     };
     
@@ -45951,6 +45994,11 @@
                         }
                         if (object.messageId != null)
                             message.messageId = String(object.messageId);
+                        if (object.createMessageNotificationOptions != null) {
+                            if (typeof object.createMessageNotificationOptions !== "object")
+                                throw TypeError(".google.chat.v1.CreateMessageRequest.createMessageNotificationOptions: object expected");
+                            message.createMessageNotificationOptions = $root.google.chat.v1.CreateMessageNotificationOptions.fromObject(object.createMessageNotificationOptions);
+                        }
                         return message;
                     };
     
@@ -45974,6 +46022,7 @@
                             object.requestId = "";
                             object.messageReplyOption = options.enums === String ? "MESSAGE_REPLY_OPTION_UNSPECIFIED" : 0;
                             object.messageId = "";
+                            object.createMessageNotificationOptions = null;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -45987,6 +46036,8 @@
                             object.messageReplyOption = options.enums === String ? $root.google.chat.v1.CreateMessageRequest.MessageReplyOption[message.messageReplyOption] === undefined ? message.messageReplyOption : $root.google.chat.v1.CreateMessageRequest.MessageReplyOption[message.messageReplyOption] : message.messageReplyOption;
                         if (message.messageId != null && message.hasOwnProperty("messageId"))
                             object.messageId = message.messageId;
+                        if (message.createMessageNotificationOptions != null && message.hasOwnProperty("createMessageNotificationOptions"))
+                            object.createMessageNotificationOptions = $root.google.chat.v1.CreateMessageNotificationOptions.toObject(message.createMessageNotificationOptions, options);
                         return object;
                     };
     
@@ -46033,6 +46084,251 @@
                     })();
     
                     return CreateMessageRequest;
+                })();
+    
+                v1.CreateMessageNotificationOptions = (function() {
+    
+                    /**
+                     * Properties of a CreateMessageNotificationOptions.
+                     * @memberof google.chat.v1
+                     * @interface ICreateMessageNotificationOptions
+                     * @property {google.chat.v1.CreateMessageNotificationOptions.NotificationType|null} [notificationType] CreateMessageNotificationOptions notificationType
+                     */
+    
+                    /**
+                     * Constructs a new CreateMessageNotificationOptions.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a CreateMessageNotificationOptions.
+                     * @implements ICreateMessageNotificationOptions
+                     * @constructor
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions=} [properties] Properties to set
+                     */
+                    function CreateMessageNotificationOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * CreateMessageNotificationOptions notificationType.
+                     * @member {google.chat.v1.CreateMessageNotificationOptions.NotificationType} notificationType
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @instance
+                     */
+                    CreateMessageNotificationOptions.prototype.notificationType = 0;
+    
+                    /**
+                     * Creates a new CreateMessageNotificationOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions=} [properties] Properties to set
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions instance
+                     */
+                    CreateMessageNotificationOptions.create = function create(properties) {
+                        return new CreateMessageNotificationOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified CreateMessageNotificationOptions message. Does not implicitly {@link google.chat.v1.CreateMessageNotificationOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions} message CreateMessageNotificationOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateMessageNotificationOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.notificationType != null && Object.hasOwnProperty.call(message, "notificationType"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.notificationType);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified CreateMessageNotificationOptions message, length delimited. Does not implicitly {@link google.chat.v1.CreateMessageNotificationOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.ICreateMessageNotificationOptions} message CreateMessageNotificationOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    CreateMessageNotificationOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a CreateMessageNotificationOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateMessageNotificationOptions.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.CreateMessageNotificationOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.notificationType = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a CreateMessageNotificationOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    CreateMessageNotificationOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a CreateMessageNotificationOptions message.
+                     * @function verify
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    CreateMessageNotificationOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.notificationType != null && message.hasOwnProperty("notificationType"))
+                            switch (message.notificationType) {
+                            default:
+                                return "notificationType: enum value expected";
+                            case 0:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a CreateMessageNotificationOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.CreateMessageNotificationOptions} CreateMessageNotificationOptions
+                     */
+                    CreateMessageNotificationOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.CreateMessageNotificationOptions)
+                            return object;
+                        var message = new $root.google.chat.v1.CreateMessageNotificationOptions();
+                        switch (object.notificationType) {
+                        default:
+                            if (typeof object.notificationType === "number") {
+                                message.notificationType = object.notificationType;
+                                break;
+                            }
+                            break;
+                        case "NOTIFICATION_TYPE_NONE":
+                        case 0:
+                            message.notificationType = 0;
+                            break;
+                        case "NOTIFICATION_TYPE_FORCE_NOTIFY":
+                        case 2:
+                            message.notificationType = 2;
+                            break;
+                        case "NOTIFICATION_TYPE_SILENT":
+                        case 3:
+                            message.notificationType = 3;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a CreateMessageNotificationOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {google.chat.v1.CreateMessageNotificationOptions} message CreateMessageNotificationOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    CreateMessageNotificationOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.notificationType = options.enums === String ? "NOTIFICATION_TYPE_NONE" : 0;
+                        if (message.notificationType != null && message.hasOwnProperty("notificationType"))
+                            object.notificationType = options.enums === String ? $root.google.chat.v1.CreateMessageNotificationOptions.NotificationType[message.notificationType] === undefined ? message.notificationType : $root.google.chat.v1.CreateMessageNotificationOptions.NotificationType[message.notificationType] : message.notificationType;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this CreateMessageNotificationOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    CreateMessageNotificationOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for CreateMessageNotificationOptions
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.CreateMessageNotificationOptions
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    CreateMessageNotificationOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.CreateMessageNotificationOptions";
+                    };
+    
+                    /**
+                     * NotificationType enum.
+                     * @name google.chat.v1.CreateMessageNotificationOptions.NotificationType
+                     * @enum {number}
+                     * @property {number} NOTIFICATION_TYPE_NONE=0 NOTIFICATION_TYPE_NONE value
+                     * @property {number} NOTIFICATION_TYPE_FORCE_NOTIFY=2 NOTIFICATION_TYPE_FORCE_NOTIFY value
+                     * @property {number} NOTIFICATION_TYPE_SILENT=3 NOTIFICATION_TYPE_SILENT value
+                     */
+                    CreateMessageNotificationOptions.NotificationType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NOTIFICATION_TYPE_NONE"] = 0;
+                        values[valuesById[2] = "NOTIFICATION_TYPE_FORCE_NOTIFY"] = 2;
+                        values[valuesById[3] = "NOTIFICATION_TYPE_SILENT"] = 3;
+                        return values;
+                    })();
+    
+                    return CreateMessageNotificationOptions;
                 })();
     
                 v1.ListMessagesRequest = (function() {

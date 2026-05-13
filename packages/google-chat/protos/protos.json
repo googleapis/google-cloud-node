@@ -4684,6 +4684,13 @@
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
+                    "silent": {
+                      "type": "bool",
+                      "id": 46,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
                     "clientAssignedMessageId": {
                       "type": "string",
                       "id": 32,
@@ -5072,6 +5079,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "createMessageNotificationOptions": {
+                      "type": "CreateMessageNotificationOptions",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -5080,6 +5094,23 @@
                         "MESSAGE_REPLY_OPTION_UNSPECIFIED": 0,
                         "REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD": 1,
                         "REPLY_MESSAGE_OR_FAIL": 2
+                      }
+                    }
+                  }
+                },
+                "CreateMessageNotificationOptions": {
+                  "fields": {
+                    "notificationType": {
+                      "type": "NotificationType",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "NotificationType": {
+                      "values": {
+                        "NOTIFICATION_TYPE_NONE": 0,
+                        "NOTIFICATION_TYPE_FORCE_NOTIFY": 2,
+                        "NOTIFICATION_TYPE_SILENT": 3
                       }
                     }
                   }
