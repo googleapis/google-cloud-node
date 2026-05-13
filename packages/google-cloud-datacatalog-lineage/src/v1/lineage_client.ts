@@ -17,9 +17,9 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import type * as gax from 'google-gax';
+import * as gax from 'google-gax';
 import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
@@ -214,6 +214,12 @@ export class LineageClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'processLinks')
     };
 
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      searchLineageStreaming: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+    };
+
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
@@ -290,11 +296,18 @@ export class LineageClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const lineageStubMethods =
-        ['processOpenLineageRunEvent', 'createProcess', 'updateProcess', 'getProcess', 'listProcesses', 'deleteProcess', 'createRun', 'updateRun', 'getRun', 'listRuns', 'deleteRun', 'createLineageEvent', 'getLineageEvent', 'listLineageEvents', 'deleteLineageEvent', 'searchLinks', 'batchSearchLinkProcesses'];
+        ['processOpenLineageRunEvent', 'createProcess', 'updateProcess', 'getProcess', 'listProcesses', 'deleteProcess', 'createRun', 'updateRun', 'getRun', 'listRuns', 'deleteRun', 'createLineageEvent', 'getLineageEvent', 'listLineageEvents', 'deleteLineageEvent', 'searchLinks', 'batchSearchLinkProcesses', 'searchLineageStreaming'];
     for (const methodName of lineageStubMethods) {
       const callPromise = this.lineageStub.then(
         stub => (...args: Array<{}>) => {
           if (this._terminated) {
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
+            }
             return Promise.reject('The client has already been closed.');
           }
           const func = stub[methodName];
@@ -306,6 +319,7 @@ export class LineageClient {
 
       const descriptor =
         this.descriptors.page[methodName] ||
+        this.descriptors.stream[methodName] ||
         this.descriptors.longrunning[methodName] ||
         undefined;
       const apiCall = this._gaxModule.createApiCall(
@@ -408,10 +422,10 @@ export class LineageClient {
  * @param {google.protobuf.Struct} request.openLineage
  *   Required. OpenLineage message following OpenLineage format:
  *   https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters.
- *   A random UUID is recommended. This request is idempotent only if a
- *   `request_id` is provided.
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for this request. Restricted to 36 ASCII
+ *   characters. A random UUID is recommended. This request is idempotent only
+ *   if a `request_id` is provided.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -455,7 +469,10 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventResponse,
         protos.google.cloud.datacatalog.lineage.v1.IProcessOpenLineageRunEventRequest|undefined, {}|undefined
       ]>|void {
-    request = request || {};
+    request = request || {};   
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
@@ -509,10 +526,10 @@ export class LineageClient {
  *   process.
  * @param {google.cloud.datacatalog.lineage.v1.Process} request.process
  *   Required. The process to create.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters.
- *   A random UUID is recommended. This request is idempotent only if a
- *   `request_id` is provided.
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for this request. Restricted to 36 ASCII
+ *   characters. A random UUID is recommended. This request is idempotent only
+ *   if a `request_id` is provided.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -556,7 +573,10 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IProcess,
         protos.google.cloud.datacatalog.lineage.v1.ICreateProcessRequest|undefined, {}|undefined
       ]>|void {
-    request = request || {};
+    request = request || {};   
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
@@ -609,11 +629,16 @@ export class LineageClient {
  *   Required. The lineage process to update.
  *
  *   The process's `name` field is used to identify the process to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   The list of fields to update. Currently not used. The whole message is
- *   updated.
- * @param {boolean} request.allowMissing
- *   If set to true and the process is not found, the request inserts it.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update. Currently not used. The whole
+ *   message is updated.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the process is not found, the request inserts
+ *   it.
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for this request. Restricted to 36 ASCII
+ *   characters. A random UUID is recommended. This request is idempotent only
+ *   if a `request_id` is provided.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -657,7 +682,10 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IProcess,
         protos.google.cloud.datacatalog.lineage.v1.IUpdateProcessRequest|undefined, {}|undefined
       ]>|void {
-    request = request || {};
+    request = request || {};   
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
@@ -804,10 +832,10 @@ export class LineageClient {
  *   Required. The name of the process that should own the run.
  * @param {google.cloud.datacatalog.lineage.v1.Run} request.run
  *   Required. The run to create.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters.
- *   A random UUID is recommended. This request is idempotent only if a
- *   `request_id` is provided.
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for this request. Restricted to 36 ASCII
+ *   characters. A random UUID is recommended. This request is idempotent only
+ *   if a `request_id` is provided.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -851,7 +879,10 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.IRun,
         protos.google.cloud.datacatalog.lineage.v1.ICreateRunRequest|undefined, {}|undefined
       ]>|void {
-    request = request || {};
+    request = request || {};   
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
@@ -907,11 +938,11 @@ export class LineageClient {
  *
  *   Format:
  *   `projects/{project}/locations/{location}/processes/{process}/runs/{run}`.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   The list of fields to update. Currently not used. The whole message is
- *   updated.
- * @param {boolean} request.allowMissing
- *   If set to true and the run is not found, the request creates it.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. The list of fields to update. Currently not used. The whole
+ *   message is updated.
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the run is not found, the request creates it.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1102,10 +1133,10 @@ export class LineageClient {
  *   Required. The name of the run that should own the lineage event.
  * @param {google.cloud.datacatalog.lineage.v1.LineageEvent} request.lineageEvent
  *   Required. The lineage event to create.
- * @param {string} request.requestId
- *   A unique identifier for this request. Restricted to 36 ASCII characters.
- *   A random UUID is recommended. This request is idempotent only if a
- *   `request_id` is provided.
+ * @param {string} [request.requestId]
+ *   Optional. A unique identifier for this request. Restricted to 36 ASCII
+ *   characters. A random UUID is recommended. This request is idempotent only
+ *   if a `request_id` is provided.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1149,7 +1180,10 @@ export class LineageClient {
         protos.google.cloud.datacatalog.lineage.v1.ILineageEvent,
         protos.google.cloud.datacatalog.lineage.v1.ICreateLineageEventRequest|undefined, {}|undefined
       ]>|void {
-    request = request || {};
+    request = request || {};   
+    if (!request.requestId) {
+      request.requestId = gax.makeUUID();
+    }
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
@@ -1294,8 +1328,8 @@ export class LineageClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The name of the lineage event to delete.
- * @param {boolean} request.allowMissing
- *   If set to true and the lineage event is not found, the request
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the lineage event is not found, the request
  *   succeeds but the server doesn't perform any actions.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1386,14 +1420,82 @@ export class LineageClient {
   }
 
 /**
+ * Retrieves a streaming response of lineage links connected to the requested
+ * assets by performing a breadth-first search in the given direction. Links
+ * represent the data flow between **source** (upstream) and **target**
+ * (downstream) assets in transformation pipelines. Links are stored in the
+ * same project as the Lineage Events that create them. This method retrieves
+ * links from all valid locations provided in the request. This method
+ * supports Column-Level Lineage (CLL) along with wildcard support to retrieve
+ * all CLL for an Entity FQN.
+ *
+ * Following permissions are required to retrieve links:
+ * * `datalineage.events.get` permission for the project where the link is
+ * stored for entity-level lineage.
+ * * `datalineage.events.getFields` permission for the project where the link
+ * is stored for column-level lineage.
+ *
+ * This method also returns processes that created the links if explicitly
+ * requested by setting
+ * [max_process_per_link](google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.limits.max_process_per_link)
+ * is non-zero and full process details are requested via
+ * `links.processes.process` in the
+ * [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask).
+ *
+ * Permission required to retrieve processes:
+ * * `datalineage.processes.get` permission for the project where the process
+ * is stored.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location to initiate the search from.
+ * @param {string[]} request.locations
+ *   Required. The locations to search in.
+ * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria} request.rootCriteria
+ *   Required. Criteria for the root of the search.
+ * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection} request.direction
+ *   Required. Direction of the search.
+ * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters} [request.filters]
+ *   Optional. Filters for the search.
+ * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits} [request.limits]
+ *   Optional. Limits for the search.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits {@link protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse|SearchLineageStreamingResponse} on 'data' event.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/lineage.search_lineage_streaming.js</caption>
+ * region_tag:datalineage_v1_generated_Lineage_SearchLineageStreaming_async
+ */
+  searchLineageStreaming(
+      request?: protos.google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest,
+      options?: CallOptions):
+    gax.CancellableStream{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('searchLineageStreaming stream %j', options);
+    return this.innerApiCalls.searchLineageStreaming(request, options);
+  }
+
+/**
  * Deletes the process with the specified name.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The name of the process to delete.
- * @param {boolean} request.allowMissing
- *   If set to true and the process is not found, the request
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the process is not found, the request
  *   succeeds but the server doesn't perform any actions.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1502,8 +1604,8 @@ export class LineageClient {
  *   The request object that will be sent.
  * @param {string} request.name
  *   Required. The name of the run to delete.
- * @param {boolean} request.allowMissing
- *   If set to true and the run is not found, the request
+ * @param {boolean} [request.allowMissing]
+ *   Optional. If set to true and the run is not found, the request
  *   succeeds but the server doesn't perform any actions.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1614,14 +1716,14 @@ export class LineageClient {
  * @param {string} request.parent
  *   Required. The name of the project and its location that owns this
  *   collection of processes.
- * @param {number} request.pageSize
- *   The maximum number of processes to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of processes to return. The service may return
  *   fewer than this value. If unspecified, at most 50 processes are
  *   returned. The maximum value is 100; values greater than 100 are cut to
  *   100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListProcesses` call. Specify
- *   it to get the next page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListProcesses` call.
+ *   Specify it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
  *   match the parameters of the call that provided the page token.
@@ -1720,14 +1822,14 @@ export class LineageClient {
  * @param {string} request.parent
  *   Required. The name of the project and its location that owns this
  *   collection of processes.
- * @param {number} request.pageSize
- *   The maximum number of processes to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of processes to return. The service may return
  *   fewer than this value. If unspecified, at most 50 processes are
  *   returned. The maximum value is 100; values greater than 100 are cut to
  *   100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListProcesses` call. Specify
- *   it to get the next page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListProcesses` call.
+ *   Specify it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
  *   match the parameters of the call that provided the page token.
@@ -1775,14 +1877,14 @@ export class LineageClient {
  * @param {string} request.parent
  *   Required. The name of the project and its location that owns this
  *   collection of processes.
- * @param {number} request.pageSize
- *   The maximum number of processes to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of processes to return. The service may return
  *   fewer than this value. If unspecified, at most 50 processes are
  *   returned. The maximum value is 100; values greater than 100 are cut to
  *   100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListProcesses` call. Specify
- *   it to get the next page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListProcesses` call.
+ *   Specify it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
  *   match the parameters of the call that provided the page token.
@@ -1829,13 +1931,13 @@ export class LineageClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The name of process that owns this collection of runs.
- * @param {number} request.pageSize
- *   The maximum number of runs to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of runs to return. The service may return
  *   fewer than this value. If unspecified, at most 50 runs are
  *   returned. The maximum value is 100; values greater than 100 are cut to
  *   100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListRuns` call. Specify
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListRuns` call. Specify
  *   it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
@@ -1934,13 +2036,13 @@ export class LineageClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The name of process that owns this collection of runs.
- * @param {number} request.pageSize
- *   The maximum number of runs to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of runs to return. The service may return
  *   fewer than this value. If unspecified, at most 50 runs are
  *   returned. The maximum value is 100; values greater than 100 are cut to
  *   100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListRuns` call. Specify
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListRuns` call. Specify
  *   it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
@@ -1988,13 +2090,13 @@ export class LineageClient {
  *   The request object that will be sent.
  * @param {string} request.parent
  *   Required. The name of process that owns this collection of runs.
- * @param {number} request.pageSize
- *   The maximum number of runs to return. The service may return
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of runs to return. The service may return
  *   fewer than this value. If unspecified, at most 50 runs are
  *   returned. The maximum value is 100; values greater than 100 are cut to
  *   100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListRuns` call. Specify
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListRuns` call. Specify
  *   it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
@@ -2043,15 +2145,15 @@ export class LineageClient {
  * @param {string} request.parent
  *   Required. The name of the run that owns the collection of lineage events to
  *   get.
- * @param {number} request.pageSize
- *   The maximum number of lineage events to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of lineage events to return.
  *
  *   The service may return fewer events than this value.
  *   If unspecified, at most 50 events are returned. The maximum value is 100;
  *   values greater than 100 are cut to 100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListLineageEvents` call. Specify
- *   it to get the next page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListLineageEvents` call.
+ *   Specify it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
  *   match the parameters of the call that provided the page token.
@@ -2150,15 +2252,15 @@ export class LineageClient {
  * @param {string} request.parent
  *   Required. The name of the run that owns the collection of lineage events to
  *   get.
- * @param {number} request.pageSize
- *   The maximum number of lineage events to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of lineage events to return.
  *
  *   The service may return fewer events than this value.
  *   If unspecified, at most 50 events are returned. The maximum value is 100;
  *   values greater than 100 are cut to 100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListLineageEvents` call. Specify
- *   it to get the next page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListLineageEvents` call.
+ *   Specify it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
  *   match the parameters of the call that provided the page token.
@@ -2206,15 +2308,15 @@ export class LineageClient {
  * @param {string} request.parent
  *   Required. The name of the run that owns the collection of lineage events to
  *   get.
- * @param {number} request.pageSize
- *   The maximum number of lineage events to return.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of lineage events to return.
  *
  *   The service may return fewer events than this value.
  *   If unspecified, at most 50 events are returned. The maximum value is 100;
  *   values greater than 100 are cut to 100.
- * @param {string} request.pageToken
- *   The page token received from a previous `ListLineageEvents` call. Specify
- *   it to get the next page.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous `ListLineageEvents` call.
+ *   Specify it to get the next page.
  *
  *   When paginating, all other parameters specified in this call must
  *   match the parameters of the call that provided the page token.
@@ -2274,6 +2376,22 @@ export class LineageClient {
  * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.target]
  *   Optional. Send asset information in the **target** field to retrieve all
  *   links that lead from upstream assets to the specified asset.
+ * @param {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} [request.sources]
+ *   Optional. Send a list of asset information in the **sources** field to
+ *   retrieve all links that lead from the specified assets to downstream
+ *   assets. This field is similar to the `source`
+ *   {@link protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest.source|source}
+ *   field but allows providing multiple entities.
+ *   All entities within the `MultipleEntityReference` must have the same
+ *   `fully_qualified_name`.
+ * @param {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} [request.targets]
+ *   Optional. Send a list of asset information in the **targets** field to
+ *   retrieve all links that lead from upstream assets to the specified
+ *   assets. This field is similar to the `target`
+ *   {@link protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest.target|target}
+ *   field but allows providing multiple entities.
+ *   All entities within the `MultipleEntityReference` must have the same
+ *   `fully_qualified_name`.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of links to return in a single page of the
  *   response. A page may contain fewer links than this value. If unspecified,
@@ -2387,6 +2505,22 @@ export class LineageClient {
  * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.target]
  *   Optional. Send asset information in the **target** field to retrieve all
  *   links that lead from upstream assets to the specified asset.
+ * @param {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} [request.sources]
+ *   Optional. Send a list of asset information in the **sources** field to
+ *   retrieve all links that lead from the specified assets to downstream
+ *   assets. This field is similar to the `source`
+ *   {@link protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest.source|source}
+ *   field but allows providing multiple entities.
+ *   All entities within the `MultipleEntityReference` must have the same
+ *   `fully_qualified_name`.
+ * @param {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} [request.targets]
+ *   Optional. Send a list of asset information in the **targets** field to
+ *   retrieve all links that lead from upstream assets to the specified
+ *   assets. This field is similar to the `target`
+ *   {@link protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest.target|target}
+ *   field but allows providing multiple entities.
+ *   All entities within the `MultipleEntityReference` must have the same
+ *   `fully_qualified_name`.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of links to return in a single page of the
  *   response. A page may contain fewer links than this value. If unspecified,
@@ -2449,6 +2583,22 @@ export class LineageClient {
  * @param {google.cloud.datacatalog.lineage.v1.EntityReference} [request.target]
  *   Optional. Send asset information in the **target** field to retrieve all
  *   links that lead from upstream assets to the specified asset.
+ * @param {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} [request.sources]
+ *   Optional. Send a list of asset information in the **sources** field to
+ *   retrieve all links that lead from the specified assets to downstream
+ *   assets. This field is similar to the `source`
+ *   {@link protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest.source|source}
+ *   field but allows providing multiple entities.
+ *   All entities within the `MultipleEntityReference` must have the same
+ *   `fully_qualified_name`.
+ * @param {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} [request.targets]
+ *   Optional. Send a list of asset information in the **targets** field to
+ *   retrieve all links that lead from upstream assets to the specified
+ *   assets. This field is similar to the `target`
+ *   {@link protos.google.cloud.datacatalog.lineage.v1.SearchLinksRequest.target|target}
+ *   field but allows providing multiple entities.
+ *   All entities within the `MultipleEntityReference` must have the same
+ *   `fully_qualified_name`.
  * @param {number} [request.pageSize]
  *   Optional. The maximum number of links to return in a single page of the
  *   response. A page may contain fewer links than this value. If unspecified,
@@ -2525,12 +2675,12 @@ export class LineageClient {
  *   `INVALID_ARGUMENT` error.
  *
  *   Format: `projects/{project}/locations/{location}/links/{link}`.
- * @param {number} request.pageSize
- *   The maximum number of processes to return in a single page of the response.
- *   A page may contain fewer results than this value.
- * @param {string} request.pageToken
- *   The page token received from a previous `BatchSearchLinkProcesses` call.
- *   Use it to get the next page.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of processes to return in a single page of the
+ *   response. A page may contain fewer results than this value.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous
+ *   `BatchSearchLinkProcesses` call. Use it to get the next page.
  *
  *   When requesting subsequent pages of a response, remember that
  *   all parameters must match the values you provided
@@ -2637,12 +2787,12 @@ export class LineageClient {
  *   `INVALID_ARGUMENT` error.
  *
  *   Format: `projects/{project}/locations/{location}/links/{link}`.
- * @param {number} request.pageSize
- *   The maximum number of processes to return in a single page of the response.
- *   A page may contain fewer results than this value.
- * @param {string} request.pageToken
- *   The page token received from a previous `BatchSearchLinkProcesses` call.
- *   Use it to get the next page.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of processes to return in a single page of the
+ *   response. A page may contain fewer results than this value.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous
+ *   `BatchSearchLinkProcesses` call. Use it to get the next page.
  *
  *   When requesting subsequent pages of a response, remember that
  *   all parameters must match the values you provided
@@ -2698,12 +2848,12 @@ export class LineageClient {
  *   `INVALID_ARGUMENT` error.
  *
  *   Format: `projects/{project}/locations/{location}/links/{link}`.
- * @param {number} request.pageSize
- *   The maximum number of processes to return in a single page of the response.
- *   A page may contain fewer results than this value.
- * @param {string} request.pageToken
- *   The page token received from a previous `BatchSearchLinkProcesses` call.
- *   Use it to get the next page.
+ * @param {number} [request.pageSize]
+ *   Optional. The maximum number of processes to return in a single page of the
+ *   response. A page may contain fewer results than this value.
+ * @param {string} [request.pageToken]
+ *   Optional. The page token received from a previous
+ *   `BatchSearchLinkProcesses` call. Use it to get the next page.
  *
  *   When requesting subsequent pages of a response, remember that
  *   all parameters must match the values you provided

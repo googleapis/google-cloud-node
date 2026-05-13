@@ -54,6 +54,18 @@ function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error
     return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubServerStreamingCall<ResponseType>(response?: ResponseType, error?: Error) {
+    const transformStub = error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+    const mockStream = new PassThrough({
+        objectMode: true,
+        transform: transformStub,
+    });
+    // write something to the stream to trigger transformStub and send the response back to the client
+    setImmediate(() => { mockStream.write({}); });
+    setImmediate(() => { mockStream.end(); });
+    return sinon.stub().returns(mockStream);
+}
+
 function stubLongRunningCall<ResponseType>(response?: ResponseType, callError?: Error, lroError?: Error) {
     const innerStub = lroError ? sinon.stub().rejects(lroError) : sinon.stub().resolves([response]);
     const mockOperation = {
@@ -300,7 +312,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes processOpenLineageRunEvent without error using callback', async () => {
@@ -338,7 +352,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes processOpenLineageRunEvent with error', async () => {
@@ -362,7 +378,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.processOpenLineageRunEvent as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes processOpenLineageRunEvent with closed client', async () => {
@@ -408,7 +426,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createProcess as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createProcess without error using callback', async () => {
@@ -446,7 +466,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createProcess as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createProcess with error', async () => {
@@ -470,7 +492,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createProcess as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createProcess as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createProcess with closed client', async () => {
@@ -517,7 +541,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.updateProcess as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes updateProcess without error using callback', async () => {
@@ -556,7 +582,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.updateProcess as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes updateProcess with error', async () => {
@@ -581,7 +609,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.updateProcess as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.updateProcess as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes updateProcess with closed client', async () => {
@@ -736,7 +766,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createRun as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createRun without error using callback', async () => {
@@ -774,7 +806,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createRun as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createRun with error', async () => {
@@ -798,7 +832,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createRun as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createRun as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createRun with closed client', async () => {
@@ -1064,7 +1100,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createLineageEvent as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createLineageEvent without error using callback', async () => {
@@ -1102,7 +1140,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createLineageEvent as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createLineageEvent with error', async () => {
@@ -1126,7 +1166,9 @@ describe('v1.LineageClient', () => {
             assert.deepStrictEqual(actualRequest, request);
             const actualHeaderRequestParams = (client.innerApiCalls.createLineageEvent as SinonStub)
                 .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));    
+            assert.match((client.innerApiCalls.createLineageEvent as SinonStub)
+                .getCall(0).args[0].requestId, /[a-z0-9-]{36}/)
         });
 
         it('invokes createLineageEvent with closed client', async () => {
@@ -1668,6 +1710,146 @@ describe('v1.LineageClient', () => {
             await assert.rejects(client.checkDeleteRunProgress(''), expectedError);
             assert((client.operationsClient.getOperation as SinonStub)
                 .getCall(0));
+        });
+    });
+
+    describe('searchLineageStreaming', () => {
+        it('invokes searchLineageStreaming without error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse()
+            );
+            client.innerApiCalls.searchLineageStreaming = stubServerStreamingCall(expectedResponse);
+            const stream = client.searchLineageStreaming(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchLineageStreaming as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchLineageStreaming as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes searchLineageStreaming without error and gaxServerStreamingRetries enabled', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+              gaxServerStreamingRetries: true
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse()
+            );
+            client.innerApiCalls.searchLineageStreaming = stubServerStreamingCall(expectedResponse);
+            const stream = client.searchLineageStreaming(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.searchLineageStreaming as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchLineageStreaming as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes searchLineageStreaming with error', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.searchLineageStreaming = stubServerStreamingCall(undefined, expectedError);
+            const stream = client.searchLineageStreaming(request);
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            const actualRequest = (client.innerApiCalls.searchLineageStreaming as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.searchLineageStreaming as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes searchLineageStreaming with closed client', async () => {
+            const client = new lineageModule.v1.LineageClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            const stream = client.searchLineageStreaming(request, {retryRequestOptions: {noResponseRetries: 0}});
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+        });
+        it('should create a client with gaxServerStreamingRetries enabled', () => {
+            const client = new lineageModule.v1.LineageClient({
+                gaxServerStreamingRetries: true,
+            });
+            assert(client);
         });
     });
 

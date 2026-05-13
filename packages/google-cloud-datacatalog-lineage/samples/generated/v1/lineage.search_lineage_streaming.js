@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(process) {
-  // [START datalineage_v1_generated_Lineage_UpdateProcess_async]
+function main(parent, locations, rootCriteria, direction) {
+  // [START datalineage_v1_generated_Lineage_SearchLineageStreaming_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,26 +29,29 @@ function main(process) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The lineage process to update.
-   *  The process's `name` field is used to identify the process to update.
+   *  Required. The project and location to initiate the search from.
    */
-  // const process = {}
+  // const parent = 'abc123'
   /**
-   *  Optional. The list of fields to update. Currently not used. The whole
-   *  message is updated.
+   *  Required. The locations to search in.
    */
-  // const updateMask = {}
+  // const locations = ['abc','def']
   /**
-   *  Optional. If set to true and the process is not found, the request inserts
-   *  it.
+   *  Required. Criteria for the root of the search.
    */
-  // const allowMissing = true
+  // const rootCriteria = {}
   /**
-   *  Optional. A unique identifier for this request. Restricted to 36 ASCII
-   *  characters. A random UUID is recommended. This request is idempotent only
-   *  if a `request_id` is provided.
+   *  Required. Direction of the search.
    */
-  // const requestId = 'abc123'
+  // const direction = {}
+  /**
+   *  Optional. Filters for the search.
+   */
+  // const filters = {}
+  /**
+   *  Optional. Limits for the search.
+   */
+  // const limits = {}
 
   // Imports the Lineage library
   const {LineageClient} = require('@google-cloud/lineage').v1;
@@ -56,19 +59,24 @@ function main(process) {
   // Instantiates a client
   const lineageClient = new LineageClient();
 
-  async function callUpdateProcess() {
+  async function callSearchLineageStreaming() {
     // Construct request
     const request = {
-      process,
+      parent,
+      locations,
+      rootCriteria,
+      direction,
     };
 
     // Run request
-    const response = await lineageClient.updateProcess(request);
-    console.log(response);
+    const stream = await lineageClient.searchLineageStreaming(request);
+    stream.on('data', (response) => { console.log(response) });
+    stream.on('error', (err) => { throw(err) });
+    stream.on('end', () => { /* API call completed */ });
   }
 
-  callUpdateProcess();
-  // [END datalineage_v1_generated_Lineage_UpdateProcess_async]
+  callSearchLineageStreaming();
+  // [END datalineage_v1_generated_Lineage_SearchLineageStreaming_async]
 }
 
 process.on('unhandledRejection', err => {

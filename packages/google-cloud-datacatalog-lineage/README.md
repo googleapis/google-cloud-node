@@ -19,7 +19,7 @@ A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
 * [Data Lineage API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/lineage/latest)
-
+* [Data Lineage API Documentation](https://cloud.google.com/dataplex/docs/about-data-lineage)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -72,6 +72,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list processes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_processes.js) |
 | list runs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.list_runs.js) |
 | process open lineage run event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.process_open_lineage_run_event.js) |
+| search lineage streaming | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.search_lineage_streaming.js) |
 | search links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.search_links.js) |
 | update process | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_process.js) |
 | update run | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-datacatalog-lineage/samples/generated/v1/lineage.update_run.js) |
