@@ -36,6 +36,10 @@ function main(forwardingRule, project) {
    *  Project ID for this request.
    */
   // const project = 'my-project'
+  /**
+   *  Check the View enum for the list of possible values.
+   */
+  // const view = 'abc123'
 
   // Imports the Compute library
   const {GlobalForwardingRulesClient} = require('@google-cloud/compute').v1beta;
