@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +63,7 @@ export class InsightsConfigServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('developerconnect');
@@ -65,11 +76,11 @@ export class InsightsConfigServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  insightsConfigServiceStub?: Promise<{[name: string]: Function}>;
+  insightsConfigServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of InsightsConfigServiceClient.
@@ -110,21 +121,43 @@ export class InsightsConfigServiceClient {
    *     const client = new InsightsConfigServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof InsightsConfigServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof InsightsConfigServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'developerconnect.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -149,7 +182,7 @@ export class InsightsConfigServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -163,15 +196,11 @@ export class InsightsConfigServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -193,28 +222,28 @@ export class InsightsConfigServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       accountConnectorPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/accountConnectors/{account_connector}'
+        'projects/{project}/locations/{location}/accountConnectors/{account_connector}',
       ),
       connectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/connections/{connection}'
+        'projects/{project}/locations/{location}/connections/{connection}',
       ),
       deploymentEventPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{deployment_event}'
+        'projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{deployment_event}',
       ),
       gitRepositoryLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}'
+        'projects/{project}/locations/{location}/connections/{connection}/gitRepositoryLinks/{git_repository_link}',
       ),
       insightsConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/insightsConfigs/{insights_config}'
+        'projects/{project}/locations/{location}/insightsConfigs/{insights_config}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       userPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/accountConnectors/{account_connector}/users/{user}'
+        'projects/{project}/locations/{location}/accountConnectors/{account_connector}/users/{user}',
       ),
     };
 
@@ -222,10 +251,16 @@ export class InsightsConfigServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listInsightsConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'insightsConfigs'),
-      listDeploymentEvents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deploymentEvents')
+      listInsightsConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'insightsConfigs',
+      ),
+      listDeploymentEvents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'deploymentEvents',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -234,45 +269,85 @@ export class InsightsConfigServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createInsightsConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.InsightsConfig') as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.InsightsConfig',
+    ) as gax.protobuf.Type;
     const createInsightsConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateInsightsConfigResponse = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.InsightsConfig') as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.InsightsConfig',
+    ) as gax.protobuf.Type;
     const updateInsightsConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteInsightsConfigResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteInsightsConfigMetadata = protoFilesRoot.lookup(
-      '.google.cloud.developerconnect.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.developerconnect.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInsightsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInsightsConfigResponse.decode.bind(createInsightsConfigResponse),
-        createInsightsConfigMetadata.decode.bind(createInsightsConfigMetadata)),
+        createInsightsConfigMetadata.decode.bind(createInsightsConfigMetadata),
+      ),
       updateInsightsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateInsightsConfigResponse.decode.bind(updateInsightsConfigResponse),
-        updateInsightsConfigMetadata.decode.bind(updateInsightsConfigMetadata)),
+        updateInsightsConfigMetadata.decode.bind(updateInsightsConfigMetadata),
+      ),
       deleteInsightsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteInsightsConfigResponse.decode.bind(deleteInsightsConfigResponse),
-        deleteInsightsConfigMetadata.decode.bind(deleteInsightsConfigMetadata))
+        deleteInsightsConfigMetadata.decode.bind(deleteInsightsConfigMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.developerconnect.v1.InsightsConfigService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.developerconnect.v1.InsightsConfigService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -303,28 +378,42 @@ export class InsightsConfigServiceClient {
     // Put together the "service stub" for
     // google.cloud.developerconnect.v1.InsightsConfigService.
     this.insightsConfigServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.developerconnect.v1.InsightsConfigService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.developerconnect.v1.InsightsConfigService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.developerconnect.v1.InsightsConfigService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.developerconnect.v1
+            .InsightsConfigService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const insightsConfigServiceStubMethods =
-        ['listInsightsConfigs', 'createInsightsConfig', 'getInsightsConfig', 'updateInsightsConfig', 'deleteInsightsConfig', 'getDeploymentEvent', 'listDeploymentEvents'];
+    const insightsConfigServiceStubMethods = [
+      'listInsightsConfigs',
+      'createInsightsConfig',
+      'getInsightsConfig',
+      'updateInsightsConfig',
+      'deleteInsightsConfig',
+      'getDeploymentEvent',
+      'listDeploymentEvents',
+    ];
     for (const methodName of insightsConfigServiceStubMethods) {
       const callPromise = this.insightsConfigServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -334,7 +423,7 @@ export class InsightsConfigServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -349,8 +438,14 @@ export class InsightsConfigServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'developerconnect.googleapis.com';
   }
@@ -361,8 +456,14 @@ export class InsightsConfigServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'developerconnect.googleapis.com';
   }
@@ -393,9 +494,7 @@ export class InsightsConfigServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -404,8 +503,9 @@ export class InsightsConfigServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -416,655 +516,964 @@ export class InsightsConfigServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single Insight.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.get_insights_config.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_GetInsightsConfig_async
- */
+  /**
+   * Gets details of a single Insight.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.get_insights_config.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_GetInsightsConfig_async
+   */
   getInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IInsightsConfig,
-        protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IInsightsConfig,
+      (
+        | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.developerconnect.v1.IInsightsConfig,
-          protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IInsightsConfig,
+      | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
-      callback: Callback<
-          protos.google.cloud.developerconnect.v1.IInsightsConfig,
-          protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IInsightsConfig,
+      | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.developerconnect.v1.IInsightsConfig,
-          protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.developerconnect.v1.IInsightsConfig,
-          protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IInsightsConfig,
-        protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IInsightsConfig,
+      | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IInsightsConfig,
+      (
+        | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getInsightsConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.developerconnect.v1.IInsightsConfig,
-        protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IInsightsConfig,
+          | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInsightsConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getInsightsConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.developerconnect.v1.IInsightsConfig,
-        protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getInsightsConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getInsightsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IInsightsConfig,
+          (
+            | protos.google.cloud.developerconnect.v1.IGetInsightsConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInsightsConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a single Deployment Event.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the deployment event to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{uuid}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.get_deployment_event.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_GetDeploymentEvent_async
- */
+  /**
+   * Gets a single Deployment Event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the deployment event to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}/deploymentEvents/{uuid}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.get_deployment_event.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_GetDeploymentEvent_async
+   */
   getDeploymentEvent(
-      request?: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+      (
+        | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getDeploymentEvent(
-      request: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+      | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDeploymentEvent(
-      request: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
-      callback: Callback<
-          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+    callback: Callback<
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+      | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDeploymentEvent(
-      request?: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-          protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+      | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+      (
+        | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDeploymentEvent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+          | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDeploymentEvent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDeploymentEvent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.developerconnect.v1.IDeploymentEvent,
-        protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDeploymentEvent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDeploymentEvent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent,
+          (
+            | protos.google.cloud.developerconnect.v1.IGetDeploymentEventRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeploymentEvent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new InsightsConfig in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.insightsConfigId
- *   Required. ID of the requesting InsightsConfig.
- * @param {google.cloud.developerconnect.v1.InsightsConfig} request.insightsConfig
- *   Required. The resource being created.
- * @param {boolean} [request.validateOnly]
- *   Optional. If set, validate the request, but do not actually post it.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.create_insights_config.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_CreateInsightsConfig_async
- */
+  /**
+   * Creates a new InsightsConfig in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.insightsConfigId
+   *   Required. ID of the requesting InsightsConfig.
+   * @param {google.cloud.developerconnect.v1.InsightsConfig} request.insightsConfig
+   *   Required. The resource being created.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request, but do not actually post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.create_insights_config.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_CreateInsightsConfig_async
+   */
   createInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.developerconnect.v1.ICreateInsightsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IInsightsConfig,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IInsightsConfig,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createInsightsConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInsightsConfig request %j', request);
-    return this.innerApiCalls.createInsightsConfig(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createInsightsConfig response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createInsightsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IInsightsConfig,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInsightsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createInsightsConfig()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.create_insights_config.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_CreateInsightsConfig_async
- */
-  async checkCreateInsightsConfigProgress(name: string): Promise<LROperation<protos.google.cloud.developerconnect.v1.InsightsConfig, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createInsightsConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.create_insights_config.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_CreateInsightsConfig_async
+   */
+  async checkCreateInsightsConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.developerconnect.v1.InsightsConfig,
+      protos.google.cloud.developerconnect.v1.OperationMetadata
+    >
+  > {
     this._log.info('createInsightsConfig long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInsightsConfig, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.InsightsConfig, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createInsightsConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.developerconnect.v1.InsightsConfig,
+      protos.google.cloud.developerconnect.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single InsightsConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.developerconnect.v1.InsightsConfig} request.insightsConfig
- *   Required. The resource being updated.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {boolean} [request.allowMissing]
- *   Optional. If set to true, and the insightsConfig is not found a new
- *   insightsConfig will be created. In this situation `update_mask` is ignored.
- *   The creation will succeed only if the input insightsConfig has all the
- *   necessary information (e.g a github_config with both  user_oauth_token and
- *   installation_id properties).
- * @param {boolean} [request.validateOnly]
- *   Optional. If set, validate the request, but do not actually post it.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.update_insights_config.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_UpdateInsightsConfig_async
- */
+  /**
+   * Updates the parameters of a single InsightsConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.developerconnect.v1.InsightsConfig} request.insightsConfig
+   *   Required. The resource being updated.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the insightsConfig is not found a new
+   *   insightsConfig will be created. In this situation `update_mask` is ignored.
+   *   The creation will succeed only if the input insightsConfig has all the
+   *   necessary information (e.g a github_config with both  user_oauth_token and
+   *   installation_id properties).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request, but do not actually post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.update_insights_config.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_UpdateInsightsConfig_async
+   */
   updateInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.developerconnect.v1.IUpdateInsightsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IInsightsConfig,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.developerconnect.v1.IInsightsConfig,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'insights_config.name': request.insightsConfig!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'insights_config.name': request.insightsConfig!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IInsightsConfig,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateInsightsConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateInsightsConfig request %j', request);
-    return this.innerApiCalls.updateInsightsConfig(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.developerconnect.v1.IInsightsConfig, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateInsightsConfig response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateInsightsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.developerconnect.v1.IInsightsConfig,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateInsightsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateInsightsConfig()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.update_insights_config.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_UpdateInsightsConfig_async
- */
-  async checkUpdateInsightsConfigProgress(name: string): Promise<LROperation<protos.google.cloud.developerconnect.v1.InsightsConfig, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateInsightsConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.update_insights_config.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_UpdateInsightsConfig_async
+   */
+  async checkUpdateInsightsConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.developerconnect.v1.InsightsConfig,
+      protos.google.cloud.developerconnect.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateInsightsConfig long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateInsightsConfig, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.developerconnect.v1.InsightsConfig, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateInsightsConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.developerconnect.v1.InsightsConfig,
+      protos.google.cloud.developerconnect.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single Insight.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Value for parent.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {boolean} [request.validateOnly]
- *   Optional. If set, validate the request, but do not actually post it.
- * @param {string} [request.etag]
- *   Optional. This checksum is computed by the server based on the value of
- *   other fields, and may be sent on update and delete requests to ensure the
- *   client has an up-to-date value before proceeding.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.delete_insights_config.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_DeleteInsightsConfig_async
- */
+  /**
+   * Deletes a single Insight.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Value for parent.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request, but do not actually post it.
+   * @param {string} [request.etag]
+   *   Optional. This checksum is computed by the server based on the value of
+   *   other fields, and may be sent on update and delete requests to ensure the
+   *   client has an up-to-date value before proceeding.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.delete_insights_config.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_DeleteInsightsConfig_async
+   */
   deleteInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInsightsConfig(
-      request: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInsightsConfig(
-      request?: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.developerconnect.v1.IDeleteInsightsConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.developerconnect.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteInsightsConfig response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInsightsConfig request %j', request);
-    return this.innerApiCalls.deleteInsightsConfig(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.developerconnect.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteInsightsConfig response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteInsightsConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.developerconnect.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInsightsConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteInsightsConfig()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.delete_insights_config.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_DeleteInsightsConfig_async
- */
-  async checkDeleteInsightsConfigProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteInsightsConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.delete_insights_config.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_DeleteInsightsConfig_async
+   */
+  async checkDeleteInsightsConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.developerconnect.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteInsightsConfig long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInsightsConfig, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.developerconnect.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInsightsConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.developerconnect.v1.OperationMetadata
+    >;
   }
- /**
- * Lists InsightsConfigs in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInsightsConfigsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See https://google.aip.dev/160 for more
- *   details. Filter string, adhering to the rules in
- *   https://google.aip.dev/160. List only InsightsConfigs matching the filter.
- *   If filter is empty, all InsightsConfigs are listed.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInsightsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists InsightsConfigs in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInsightsConfigsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See https://google.aip.dev/160 for more
+   *   details. Filter string, adhering to the rules in
+   *   https://google.aip.dev/160. List only InsightsConfigs matching the filter.
+   *   If filter is empty, all InsightsConfigs are listed.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInsightsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInsightsConfigs(
-      request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IInsightsConfig[],
-        protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest|null,
-        protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
-      ]>;
+    request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IInsightsConfig[],
+      protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest | null,
+      protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse,
+    ]
+  >;
   listInsightsConfigs(
-      request: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-          protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IInsightsConfig>): void;
+    request: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+      | protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IInsightsConfig
+    >,
+  ): void;
   listInsightsConfigs(
-      request: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-          protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IInsightsConfig>): void;
+    request: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+      | protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IInsightsConfig
+    >,
+  ): void;
   listInsightsConfigs(
-      request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-          protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IInsightsConfig>,
-      callback?: PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-          protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IInsightsConfig>):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IInsightsConfig[],
-        protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest|null,
-        protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
-      ]>|void {
+          | protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IInsightsConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+      | protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IInsightsConfig
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IInsightsConfig[],
+      protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest | null,
+      protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-      protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse|null|undefined,
-      protos.google.cloud.developerconnect.v1.IInsightsConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+          | protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IInsightsConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInsightsConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1073,217 +1482,246 @@ export class InsightsConfigServiceClient {
     this._log.info('listInsightsConfigs request %j', request);
     return this.innerApiCalls
       .listInsightsConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.developerconnect.v1.IInsightsConfig[],
-        protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest|null,
-        protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse
-      ]) => {
-        this._log.info('listInsightsConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.developerconnect.v1.IInsightsConfig[],
+          protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest | null,
+          protos.google.cloud.developerconnect.v1.IListInsightsConfigsResponse,
+        ]) => {
+          this._log.info('listInsightsConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listInsightsConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInsightsConfigsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See https://google.aip.dev/160 for more
- *   details. Filter string, adhering to the rules in
- *   https://google.aip.dev/160. List only InsightsConfigs matching the filter.
- *   If filter is empty, all InsightsConfigs are listed.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInsightsConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listInsightsConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInsightsConfigsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See https://google.aip.dev/160 for more
+   *   details. Filter string, adhering to the rules in
+   *   https://google.aip.dev/160. List only InsightsConfigs matching the filter.
+   *   If filter is empty, all InsightsConfigs are listed.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInsightsConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInsightsConfigsStream(
-      request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInsightsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInsightsConfigs stream %j', request);
     return this.descriptors.page.listInsightsConfigs.createStream(
       this.innerApiCalls.listInsightsConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listInsightsConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInsightsConfigsRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See https://google.aip.dev/160 for more
- *   details. Filter string, adhering to the rules in
- *   https://google.aip.dev/160. List only InsightsConfigs matching the filter.
- *   If filter is empty, all InsightsConfigs are listed.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.list_insights_configs.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_ListInsightsConfigs_async
- */
+  /**
+   * Equivalent to `listInsightsConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInsightsConfigsRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See https://google.aip.dev/160 for more
+   *   details. Filter string, adhering to the rules in
+   *   https://google.aip.dev/160. List only InsightsConfigs matching the filter.
+   *   If filter is empty, all InsightsConfigs are listed.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.developerconnect.v1.InsightsConfig|InsightsConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.list_insights_configs.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_ListInsightsConfigs_async
+   */
   listInsightsConfigsAsync(
-      request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.developerconnect.v1.IInsightsConfig>{
+    request?: protos.google.cloud.developerconnect.v1.IListInsightsConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.developerconnect.v1.IInsightsConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInsightsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInsightsConfigs iterate %j', request);
     return this.descriptors.page.listInsightsConfigs.asyncIterate(
       this.innerApiCalls['listInsightsConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IInsightsConfig>;
   }
- /**
- * Lists Deployment Events in a given insights config.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent insights config that owns this collection of
- *   deployment events. Format:
- *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of deployment events to return. The service
- *   may return fewer than this value. If unspecified, at most 50 deployment
- *   events will be returned. The maximum value is 1000; values above 1000 will
- *   be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDeploymentEvents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDeploymentEvents`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter expression that matches a subset of the DeploymentEvents.
- *   https://google.aip.dev/160.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDeploymentEventsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Deployment Events in a given insights config.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent insights config that owns this collection of
+   *   deployment events. Format:
+   *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of deployment events to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 deployment
+   *   events will be returned. The maximum value is 1000; values above 1000 will
+   *   be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDeploymentEvents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDeploymentEvents`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression that matches a subset of the DeploymentEvents.
+   *   https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDeploymentEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDeploymentEvents(
-      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
-        protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest|null,
-        protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
-      ]>;
+    request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest | null,
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse,
+    ]
+  >;
   listDeploymentEvents(
-      request: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IDeploymentEvent>): void;
+    request: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      | protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent
+    >,
+  ): void;
   listDeploymentEvents(
-      request: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IDeploymentEvent>): void;
+    request: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      | protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent
+    >,
+  ): void;
   listDeploymentEvents(
-      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IDeploymentEvent>,
-      callback?: PaginationCallback<
-          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
-          protos.google.cloud.developerconnect.v1.IDeploymentEvent>):
-      Promise<[
-        protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
-        protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest|null,
-        protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
-      ]>|void {
+          | protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+      | protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+      | null
+      | undefined,
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest | null,
+      protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-      protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse|null|undefined,
-      protos.google.cloud.developerconnect.v1.IDeploymentEvent>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+          | protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
+          | null
+          | undefined,
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeploymentEvents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1292,133 +1730,138 @@ export class InsightsConfigServiceClient {
     this._log.info('listDeploymentEvents request %j', request);
     return this.innerApiCalls
       .listDeploymentEvents(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
-        protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest|null,
-        protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse
-      ]) => {
-        this._log.info('listDeploymentEvents values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.developerconnect.v1.IDeploymentEvent[],
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest | null,
+          protos.google.cloud.developerconnect.v1.IListDeploymentEventsResponse,
+        ]) => {
+          this._log.info('listDeploymentEvents values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDeploymentEvents`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent insights config that owns this collection of
- *   deployment events. Format:
- *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of deployment events to return. The service
- *   may return fewer than this value. If unspecified, at most 50 deployment
- *   events will be returned. The maximum value is 1000; values above 1000 will
- *   be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDeploymentEvents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDeploymentEvents`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter expression that matches a subset of the DeploymentEvents.
- *   https://google.aip.dev/160.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDeploymentEventsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDeploymentEvents`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent insights config that owns this collection of
+   *   deployment events. Format:
+   *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of deployment events to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 deployment
+   *   events will be returned. The maximum value is 1000; values above 1000 will
+   *   be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDeploymentEvents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDeploymentEvents`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression that matches a subset of the DeploymentEvents.
+   *   https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDeploymentEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDeploymentEventsStream(
-      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDeploymentEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDeploymentEvents stream %j', request);
     return this.descriptors.page.listDeploymentEvents.createStream(
       this.innerApiCalls.listDeploymentEvents as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDeploymentEvents`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent insights config that owns this collection of
- *   deployment events. Format:
- *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of deployment events to return. The service
- *   may return fewer than this value. If unspecified, at most 50 deployment
- *   events will be returned. The maximum value is 1000; values above 1000 will
- *   be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDeploymentEvents`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDeploymentEvents`
- *   must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter expression that matches a subset of the DeploymentEvents.
- *   https://google.aip.dev/160.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/insights_config_service.list_deployment_events.js</caption>
- * region_tag:developerconnect_v1_generated_InsightsConfigService_ListDeploymentEvents_async
- */
+  /**
+   * Equivalent to `listDeploymentEvents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent insights config that owns this collection of
+   *   deployment events. Format:
+   *   projects/{project}/locations/{location}/insightsConfigs/{insights_config}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of deployment events to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 deployment
+   *   events will be returned. The maximum value is 1000; values above 1000 will
+   *   be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDeploymentEvents`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDeploymentEvents`
+   *   must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression that matches a subset of the DeploymentEvents.
+   *   https://google.aip.dev/160.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.developerconnect.v1.DeploymentEvent|DeploymentEvent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/insights_config_service.list_deployment_events.js</caption>
+   * region_tag:developerconnect_v1_generated_InsightsConfigService_ListDeploymentEvents_async
+   */
   listDeploymentEventsAsync(
-      request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.developerconnect.v1.IDeploymentEvent>{
+    request?: protos.google.cloud.developerconnect.v1.IListDeploymentEventsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.developerconnect.v1.IDeploymentEvent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDeploymentEvents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDeploymentEvents iterate %j', request);
     return this.descriptors.page.listDeploymentEvents.asyncIterate(
       this.innerApiCalls['listDeploymentEvents'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.developerconnect.v1.IDeploymentEvent>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1453,12 +1896,11 @@ export class InsightsConfigServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1491,12 +1933,12 @@ export class InsightsConfigServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1539,22 +1981,22 @@ export class InsightsConfigServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1589,15 +2031,15 @@ export class InsightsConfigServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1631,7 +2073,7 @@ export class InsightsConfigServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1644,25 +2086,24 @@ export class InsightsConfigServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1701,22 +2142,22 @@ export class InsightsConfigServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1732,7 +2173,11 @@ export class InsightsConfigServiceClient {
    * @param {string} account_connector
    * @returns {string} Resource name string.
    */
-  accountConnectorPath(project:string,location:string,accountConnector:string) {
+  accountConnectorPath(
+    project: string,
+    location: string,
+    accountConnector: string,
+  ) {
     return this.pathTemplates.accountConnectorPathTemplate.render({
       project: project,
       location: location,
@@ -1748,7 +2193,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAccountConnectorName(accountConnectorName: string) {
-    return this.pathTemplates.accountConnectorPathTemplate.match(accountConnectorName).project;
+    return this.pathTemplates.accountConnectorPathTemplate.match(
+      accountConnectorName,
+    ).project;
   }
 
   /**
@@ -1759,7 +2206,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAccountConnectorName(accountConnectorName: string) {
-    return this.pathTemplates.accountConnectorPathTemplate.match(accountConnectorName).location;
+    return this.pathTemplates.accountConnectorPathTemplate.match(
+      accountConnectorName,
+    ).location;
   }
 
   /**
@@ -1770,7 +2219,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the account_connector.
    */
   matchAccountConnectorFromAccountConnectorName(accountConnectorName: string) {
-    return this.pathTemplates.accountConnectorPathTemplate.match(accountConnectorName).account_connector;
+    return this.pathTemplates.accountConnectorPathTemplate.match(
+      accountConnectorName,
+    ).account_connector;
   }
 
   /**
@@ -1781,7 +2232,7 @@ export class InsightsConfigServiceClient {
    * @param {string} connection
    * @returns {string} Resource name string.
    */
-  connectionPath(project:string,location:string,connection:string) {
+  connectionPath(project: string, location: string, connection: string) {
     return this.pathTemplates.connectionPathTemplate.render({
       project: project,
       location: location,
@@ -1797,7 +2248,8 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName).project;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName)
+      .project;
   }
 
   /**
@@ -1808,7 +2260,8 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName).location;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName)
+      .location;
   }
 
   /**
@@ -1819,7 +2272,8 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the connection.
    */
   matchConnectionFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName).connection;
+    return this.pathTemplates.connectionPathTemplate.match(connectionName)
+      .connection;
   }
 
   /**
@@ -1831,7 +2285,12 @@ export class InsightsConfigServiceClient {
    * @param {string} deployment_event
    * @returns {string} Resource name string.
    */
-  deploymentEventPath(project:string,location:string,insightsConfig:string,deploymentEvent:string) {
+  deploymentEventPath(
+    project: string,
+    location: string,
+    insightsConfig: string,
+    deploymentEvent: string,
+  ) {
     return this.pathTemplates.deploymentEventPathTemplate.render({
       project: project,
       location: location,
@@ -1848,7 +2307,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentEventName(deploymentEventName: string) {
-    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).project;
+    return this.pathTemplates.deploymentEventPathTemplate.match(
+      deploymentEventName,
+    ).project;
   }
 
   /**
@@ -1859,7 +2320,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentEventName(deploymentEventName: string) {
-    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).location;
+    return this.pathTemplates.deploymentEventPathTemplate.match(
+      deploymentEventName,
+    ).location;
   }
 
   /**
@@ -1870,7 +2333,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the insights_config.
    */
   matchInsightsConfigFromDeploymentEventName(deploymentEventName: string) {
-    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).insights_config;
+    return this.pathTemplates.deploymentEventPathTemplate.match(
+      deploymentEventName,
+    ).insights_config;
   }
 
   /**
@@ -1881,7 +2346,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the deployment_event.
    */
   matchDeploymentEventFromDeploymentEventName(deploymentEventName: string) {
-    return this.pathTemplates.deploymentEventPathTemplate.match(deploymentEventName).deployment_event;
+    return this.pathTemplates.deploymentEventPathTemplate.match(
+      deploymentEventName,
+    ).deployment_event;
   }
 
   /**
@@ -1893,7 +2360,12 @@ export class InsightsConfigServiceClient {
    * @param {string} git_repository_link
    * @returns {string} Resource name string.
    */
-  gitRepositoryLinkPath(project:string,location:string,connection:string,gitRepositoryLink:string) {
+  gitRepositoryLinkPath(
+    project: string,
+    location: string,
+    connection: string,
+    gitRepositoryLink: string,
+  ) {
     return this.pathTemplates.gitRepositoryLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1910,7 +2382,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).project;
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
+      gitRepositoryLinkName,
+    ).project;
   }
 
   /**
@@ -1921,7 +2395,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).location;
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
+      gitRepositoryLinkName,
+    ).location;
   }
 
   /**
@@ -1932,7 +2408,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the connection.
    */
   matchConnectionFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).connection;
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
+      gitRepositoryLinkName,
+    ).connection;
   }
 
   /**
@@ -1942,8 +2420,12 @@ export class InsightsConfigServiceClient {
    *   A fully-qualified path representing GitRepositoryLink resource.
    * @returns {string} A string representing the git_repository_link.
    */
-  matchGitRepositoryLinkFromGitRepositoryLinkName(gitRepositoryLinkName: string) {
-    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(gitRepositoryLinkName).git_repository_link;
+  matchGitRepositoryLinkFromGitRepositoryLinkName(
+    gitRepositoryLinkName: string,
+  ) {
+    return this.pathTemplates.gitRepositoryLinkPathTemplate.match(
+      gitRepositoryLinkName,
+    ).git_repository_link;
   }
 
   /**
@@ -1954,7 +2436,11 @@ export class InsightsConfigServiceClient {
    * @param {string} insights_config
    * @returns {string} Resource name string.
    */
-  insightsConfigPath(project:string,location:string,insightsConfig:string) {
+  insightsConfigPath(
+    project: string,
+    location: string,
+    insightsConfig: string,
+  ) {
     return this.pathTemplates.insightsConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1970,7 +2456,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromInsightsConfigName(insightsConfigName: string) {
-    return this.pathTemplates.insightsConfigPathTemplate.match(insightsConfigName).project;
+    return this.pathTemplates.insightsConfigPathTemplate.match(
+      insightsConfigName,
+    ).project;
   }
 
   /**
@@ -1981,7 +2469,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromInsightsConfigName(insightsConfigName: string) {
-    return this.pathTemplates.insightsConfigPathTemplate.match(insightsConfigName).location;
+    return this.pathTemplates.insightsConfigPathTemplate.match(
+      insightsConfigName,
+    ).location;
   }
 
   /**
@@ -1992,7 +2482,9 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the insights_config.
    */
   matchInsightsConfigFromInsightsConfigName(insightsConfigName: string) {
-    return this.pathTemplates.insightsConfigPathTemplate.match(insightsConfigName).insights_config;
+    return this.pathTemplates.insightsConfigPathTemplate.match(
+      insightsConfigName,
+    ).insights_config;
   }
 
   /**
@@ -2002,7 +2494,7 @@ export class InsightsConfigServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2037,7 +2529,7 @@ export class InsightsConfigServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2063,7 +2555,12 @@ export class InsightsConfigServiceClient {
    * @param {string} user
    * @returns {string} Resource name string.
    */
-  userPath(project:string,location:string,accountConnector:string,user:string) {
+  userPath(
+    project: string,
+    location: string,
+    accountConnector: string,
+    user: string,
+  ) {
     return this.pathTemplates.userPathTemplate.render({
       project: project,
       location: location,
@@ -2102,7 +2599,8 @@ export class InsightsConfigServiceClient {
    * @returns {string} A string representing the account_connector.
    */
   matchAccountConnectorFromUserName(userName: string) {
-    return this.pathTemplates.userPathTemplate.match(userName).account_connector;
+    return this.pathTemplates.userPathTemplate.match(userName)
+      .account_connector;
   }
 
   /**
@@ -2124,11 +2622,13 @@ export class InsightsConfigServiceClient {
    */
   close(): Promise<void> {
     if (this.insightsConfigServiceStub && !this._terminated) {
-      return this.insightsConfigServiceStub.then(stub => {
+      return this.insightsConfigServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

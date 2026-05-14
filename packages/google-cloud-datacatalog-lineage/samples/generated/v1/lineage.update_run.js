@@ -36,12 +36,12 @@ function main(run) {
    */
   // const run = {}
   /**
-   *  The list of fields to update. Currently not used. The whole message is
-   *  updated.
+   *  Optional. The list of fields to update. Currently not used. The whole
+   *  message is updated.
    */
   // const updateMask = {}
   /**
-   *  If set to true and the run is not found, the request creates it.
+   *  Optional. If set to true and the run is not found, the request creates it.
    */
   // const allowMissing = true
 

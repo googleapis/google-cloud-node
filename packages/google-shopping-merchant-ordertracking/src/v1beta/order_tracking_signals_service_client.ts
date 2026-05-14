@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +49,7 @@ export class OrderTrackingSignalsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('ordertracking');
@@ -57,9 +62,9 @@ export class OrderTrackingSignalsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  orderTrackingSignalsServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  orderTrackingSignalsServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of OrderTrackingSignalsServiceClient.
@@ -100,21 +105,43 @@ export class OrderTrackingSignalsServiceClient {
    *     const client = new OrderTrackingSignalsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof OrderTrackingSignalsServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof OrderTrackingSignalsServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +166,7 @@ export class OrderTrackingSignalsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +180,7 @@ export class OrderTrackingSignalsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,14 +202,17 @@ export class OrderTrackingSignalsServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       accountPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}'
+        'accounts/{account}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -216,36 +243,43 @@ export class OrderTrackingSignalsServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService.
     this.orderTrackingSignalsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignalsService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.ordertracking.v1beta
+            .OrderTrackingSignalsService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const orderTrackingSignalsServiceStubMethods =
-        ['createOrderTrackingSignal'];
+    const orderTrackingSignalsServiceStubMethods = [
+      'createOrderTrackingSignal',
+    ];
     for (const methodName of orderTrackingSignalsServiceStubMethods) {
       const callPromise = this.orderTrackingSignalsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -260,8 +294,14 @@ export class OrderTrackingSignalsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -272,8 +312,14 @@ export class OrderTrackingSignalsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -304,9 +350,7 @@ export class OrderTrackingSignalsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/content'
-    ];
+    return ['https://www.googleapis.com/auth/content'];
   }
 
   getProjectId(): Promise<string>;
@@ -315,8 +359,9 @@ export class OrderTrackingSignalsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -327,101 +372,150 @@ export class OrderTrackingSignalsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates new order tracking signal.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The account of the business for which the order signal is
- *   created. Format: accounts/{account}
- * @param {string} request.orderTrackingSignalId
- *   Output only. The ID that uniquely identifies this order tracking signal.
- * @param {google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignal} request.orderTrackingSignal
- *   Required. The order signal to be created.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignal|OrderTrackingSignal}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/order_tracking_signals_service.create_order_tracking_signal.js</caption>
- * region_tag:merchantapi_v1beta_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_async
- */
+  /**
+   * Creates new order tracking signal.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account of the business for which the order signal is
+   *   created. Format: accounts/{account}
+   * @param {string} request.orderTrackingSignalId
+   *   Output only. The ID that uniquely identifies this order tracking signal.
+   * @param {google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignal} request.orderTrackingSignal
+   *   Required. The order signal to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.ordertracking.v1beta.OrderTrackingSignal|OrderTrackingSignal}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/order_tracking_signals_service.create_order_tracking_signal.js</caption>
+   * region_tag:merchantapi_v1beta_generated_OrderTrackingSignalsService_CreateOrderTrackingSignal_async
+   */
   createOrderTrackingSignal(
-      request?: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-        protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
+      (
+        | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createOrderTrackingSignal(
-      request: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-          protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
+      | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createOrderTrackingSignal(
-      request: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-          protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
+      | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createOrderTrackingSignal(
-      request?: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-          protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-          protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-        protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
+      | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
+      (
+        | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createOrderTrackingSignal request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-        protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
+          | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createOrderTrackingSignal response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createOrderTrackingSignal(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
-        protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createOrderTrackingSignal response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createOrderTrackingSignal(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.ordertracking.v1beta.IOrderTrackingSignal,
+          (
+            | protos.google.shopping.merchant.ordertracking.v1beta.ICreateOrderTrackingSignalRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createOrderTrackingSignal response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
@@ -437,7 +531,7 @@ export class OrderTrackingSignalsServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account:string) {
+  accountPath(account: string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -462,7 +556,7 @@ export class OrderTrackingSignalsServiceClient {
    */
   close(): Promise<void> {
     if (this.orderTrackingSignalsServiceStub && !this._terminated) {
-      return this.orderTrackingSignalsServiceStub.then(stub => {
+      return this.orderTrackingSignalsServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-lineage",
-    "version": "2.1.1",
+    "version": "0.1.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -118,7 +118,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 63,
+          "end": 70,
           "type": "FULL"
         }
       ],
@@ -138,6 +138,10 @@
           {
             "name": "allow_missing",
             "type": "TYPE_BOOL"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.cloud.datacatalog.lineage.v1.Process",
@@ -706,7 +710,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 80,
+          "end": 100,
           "type": "FULL"
         }
       ],
@@ -726,6 +730,14 @@
           {
             "name": "target",
             "type": ".google.cloud.datacatalog.lineage.v1.EntityReference"
+          },
+          {
+            "name": "sources",
+            "type": ".google.cloud.datacatalog.lineage.v1.MultipleEntityReference"
+          },
+          {
+            "name": "targets",
+            "type": ".google.cloud.datacatalog.lineage.v1.MultipleEntityReference"
           },
           {
             "name": "page_size",
@@ -796,6 +808,66 @@
         "method": {
           "shortName": "BatchSearchLinkProcesses",
           "fullName": "google.cloud.datacatalog.lineage.v1.Lineage.BatchSearchLinkProcesses",
+          "service": {
+            "shortName": "Lineage",
+            "fullName": "google.cloud.datacatalog.lineage.v1.Lineage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalineage_v1_generated_Lineage_SearchLineageStreaming_async",
+      "title": "Lineage searchLineageStreaming Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a streaming response of lineage links connected to the requested assets by performing a breadth-first search in the given direction. Links represent the data flow between **source** (upstream) and **target** (downstream) assets in transformation pipelines. Links are stored in the same project as the Lineage Events that create them. This method retrieves links from all valid locations provided in the request. This method supports Column-Level Lineage (CLL) along with wildcard support to retrieve all CLL for an Entity FQN. Following permissions are required to retrieve links: * `datalineage.events.get` permission for the project where the link is stored for entity-level lineage. * `datalineage.events.getFields` permission for the project where the link is stored for column-level lineage. This method also returns processes that created the links if explicitly requested by setting [max_process_per_link](google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.limits.max_process_per_link) is non-zero and full process details are requested via `links.processes.process` in the [FieldMask](https://developers.google.com/workspace/docs/api/how-tos/field-masks#read_with_a_field_mask). Permission required to retrieve processes: * `datalineage.processes.get` permission for the project where the process is stored.",
+      "canonical": true,
+      "file": "lineage.search_lineage_streaming.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchLineageStreaming",
+        "fullName": "google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreaming",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "locations",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "root_criteria",
+            "type": ".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria"
+          },
+          {
+            "name": "direction",
+            "type": ".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection"
+          },
+          {
+            "name": "filters",
+            "type": ".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters"
+          },
+          {
+            "name": "limits",
+            "type": ".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits"
+          }
+        ],
+        "resultType": ".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse",
+        "client": {
+          "shortName": "LineageClient",
+          "fullName": "google.cloud.datacatalog.lineage.v1.LineageClient"
+        },
+        "method": {
+          "shortName": "SearchLineageStreaming",
+          "fullName": "google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreaming",
           "service": {
             "shortName": "Lineage",
             "fullName": "google.cloud.datacatalog.lineage.v1.Lineage"

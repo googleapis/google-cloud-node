@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-container",
-    "version": "6.7.0",
+    "version": "0.1.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -230,7 +230,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 234,
+          "end": 238,
           "type": "FULL"
         }
       ],
@@ -386,6 +386,10 @@
           {
             "name": "consolidation_delay",
             "type": ".google.protobuf.Duration"
+          },
+          {
+            "name": "taint_config",
+            "type": ".google.container.v1beta1.TaintConfig"
           }
         ],
         "resultType": ".google.container.v1beta1.Operation",
@@ -2051,7 +2055,7 @@
       "regionTag": "container_v1beta1_generated_ClusterManager_FetchNodePoolUpgradeInfo_async",
       "title": "ClusterManager fetchNodePoolUpgradeInfo Sample",
       "origin": "API_DEFINITION",
-      "description": " Fetch upgrade information of a specific nodepool.",
+      "description": " Fetch upgrade information of a specific node pool.",
       "canonical": true,
       "file": "cluster_manager.fetch_node_pool_upgrade_info.js",
       "language": "JAVASCRIPT",

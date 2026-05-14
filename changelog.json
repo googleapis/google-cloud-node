@@ -4,6 +4,368 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "d67ad568b13e6b12c4d16b9b34dbde41b6eac4a5",
+          "message": "[container] add confidential instance type and hyperdisk support to GKE API",
+          "issues": [
+            "8257"
+          ]
+        }
+      ],
+      "version": "6.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "397a11dd-93f4-4e8c-9007-5d62d6104e9c",
+      "createTime": "2026-05-14T00:02:24.695Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9641d3641c304e1779a4a0ef83a6482c552c66b1",
+          "message": "[lineage] A new method SearchLineageStreaming is added",
+          "issues": [
+            "8238"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "9641d3641c304e1779a4a0ef83a6482c552c66b1",
+          "message": "SearchLinks can now accept multiple source and target entity references as search criteria",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "9641d3641c304e1779a4a0ef83a6482c552c66b1",
+          "message": "Added support for column level lineage information to be passed and returned from the Lineage service",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "28dcc11d-c7ce-4ce8-aa81-2e03bc0d99c5",
+      "createTime": "2026-05-14T00:02:24.667Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "33fbecc5b7df0d2a5e336ccc6b276c2074a0dc04",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260422 (#1192)",
+          "issues": [
+            "8248"
+          ]
+        }
+      ],
+      "version": "6.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "32268bac-731c-4a03-a7cf-4bb61eab94c9",
+      "createTime": "2026-05-14T00:02:24.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ea2e21e9ebe1790507d87b03e925ee63e6b7aff9",
+          "message": "[chat] Support force notify and silent notification option for CreateMessage",
+          "issues": [
+            "8239"
+          ]
+        }
+      ],
+      "version": "0.24.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "1499a20b-085b-476f-b0dd-828c7f09658f",
+      "createTime": "2026-05-14T00:02:24.593Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a63b61d13c1651deb62b3903292f3bd1c7f4d614",
+          "message": "For bigquery-storage add protobufjs to depend",
+          "issues": [
+            "8243"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
+          "message": "Bump all node submodules",
+          "issues": [
+            "8178"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "778adb0d5f368448f99bf68dcbcf37c3a7394f5d",
+          "message": "Upgrade the protobufjs dependency for bigquery storage",
+          "issues": [
+            "8136"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "c9813311-f380-43d5-9a52-b7ee6e8e44e5",
+      "createTime": "2026-05-13T17:03:24.079Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1cb0ff89f5f8a8cbe422c429bd61874b983f6cef",
+          "message": "Unblock release by upgrading @types/sinon for the add optimize package",
+          "issues": [
+            "8258"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appoptimize",
+      "id": "221d16c6-aef1-41e5-9223-a4e02037ed4c",
+      "createTime": "2026-05-13T15:30:23.911Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6dccbb711dfd1a8827f5b74cae5a81baf0b8349",
+          "message": "Add initial files for google.cloud.databasecenter.v1beta",
+          "issues": [
+            "8232"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/databasecenter",
+      "id": "5d9c76e6-8302-4e39-8444-15b6112d252c",
+      "createTime": "2026-05-12T18:41:57.101Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e4f3c355ae1718c6c3392d6c61055c3989b3038a",
+          "message": "Add initial files for google.devicesandservices.health.v4",
+          "issues": [
+            "8230"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "25b3cb53-81bd-4fec-b242-d0af5201ed62",
+      "createTime": "2026-05-12T18:41:57.082Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b8123ca35894377b0cfdb95f18f44b758ab0f7a4",
+          "message": "Add initial files for google.cloud.appoptimize.v1beta",
+          "issues": [
+            "8231"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "c1a03fe604662091be283055c7d34052c64d6334",
+          "message": "Change the copyright year for files in the packages folder",
+          "issues": [
+            "8109"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appoptimize",
+      "id": "dec1f45c-b9ab-40e6-bc11-23f01cd6f7a1",
+      "createTime": "2026-05-12T18:41:57.061Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b78108349141a2b7967543419308689b9df0300d",
+          "message": "[vectorsearch] add preview support for precision reranking via Ranking API. Includes free usage up to a specific quota for vector-search-2 users during the preview period",
+          "issues": [
+            "8176"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vectorsearch",
+      "id": "a3b1598c-ebbf-466c-8997-64da03d955a4",
+      "createTime": "2026-05-12T18:41:57.017Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "650147ce3d1b7e3abc5c2770c5feb06ae67d2306",
+          "message": "[netapp] add ScaleType for Storage Pools and LargeCapacityConfig for Volumes",
+          "issues": [
+            "8086"
+          ]
+        }
+      ],
+      "version": "0.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "ae16a400-eff3-44bc-8052-4bc985ecb418",
+      "createTime": "2026-05-12T18:41:56.991Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a9e9ef64da9396313a9fb4d49caeeb33ba934230",
+          "message": "[memorystore] Synchronize new proto/yaml changes.",
+          "issues": [
+            "8142"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "e2e718e8-d5c5-46fe-9215-894faa698d77",
+      "createTime": "2026-05-12T18:41:56.973Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3b19b3a827a22d92bf0592382611bfe8bce1d507",
+          "message": "[dataproc] add support for Cloud Resource Manager tags for Dataproc Serverless workloads",
+          "issues": [
+            "8179"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "3b186995-6387-44f8-89e4-29a1e14df7a4",
+      "createTime": "2026-05-12T18:41:56.954Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260410 (#1184)",
+          "issues": [
+            "8113"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "Update Compute Engine v1 API to revision 20260410",
+          "issues": [
+            "1185"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "Update Compute Engine v1beta API to revision 20260331",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "cac808691b071f0d8b87853cbbd9f4a2df224921",
+          "message": "Update Compute Engine v1 API to revision 20260331",
+          "issues": []
+        }
+      ],
+      "version": "6.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "b41f973a-53f0-4910-b068-1067c940002a",
+      "createTime": "2026-05-12T18:41:56.936Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ddb0db637cff6477e8be1f60c9c5ba19c4a4e4a3",
+          "message": "[chronicle] Adding Client Libraries for BigQueryExportService",
+          "issues": [
+            "8139"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "dc6a6e07-d621-4b8f-8af2-278834c006c2",
+      "createTime": "2026-05-12T18:41:56.916Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "606d6324ba2bb3d11c44675825dd5b2aead69969",
+          "message": "Release ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine v1beta1 API",
+          "issues": [
+            "8135"
+          ]
+        }
+      ],
+      "version": "6.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "b5936d4d-d329-4908-a3df-86b2bf6927df",
+      "createTime": "2026-05-12T18:41:56.893Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "74955618ec87f34d9af132b9b97b47287975c4cd",
+          "message": "[analytics-data] remove SheetExportAudienceList method, associated resources, and OAuth scopes from v1 alpha",
+          "issues": [
+            "8131"
+          ],
+          "breakingChangeNote": "[analytics-data] remove SheetExportAudienceList method, associated resources, and OAuth scopes from v1 alpha ([#8131](https://github.com/googleapis/google-cloud-node/issues/8131))"
+        }
+      ],
+      "version": "6.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "e615fc4f-3fcb-4e1b-b502-c444a9295d30",
+      "createTime": "2026-05-12T18:41:56.874Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "9fd76eff87b1cf02db6205f141449b31e8ab7d8f",
           "message": "Bump all node submodules",
@@ -78422,5 +78784,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-11T14:38:47.488Z"
+  "updateTime": "2026-05-14T00:02:24.695Z"
 }

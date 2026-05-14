@@ -16,13 +16,62 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, LineItemServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient} from '@google-ads/admanager';
+import {
+  AdBreakServiceClient,
+  AdReviewCenterAdServiceClient,
+  AdUnitServiceClient,
+  ApplicationServiceClient,
+  AudienceSegmentServiceClient,
+  BandwidthGroupServiceClient,
+  BrowserLanguageServiceClient,
+  BrowserServiceClient,
+  CmsMetadataKeyServiceClient,
+  CmsMetadataValueServiceClient,
+  CompanyServiceClient,
+  ContactServiceClient,
+  ContentBundleServiceClient,
+  ContentLabelServiceClient,
+  ContentServiceClient,
+  CreativeTemplateServiceClient,
+  CustomFieldServiceClient,
+  CustomTargetingKeyServiceClient,
+  CustomTargetingValueServiceClient,
+  DeviceCapabilityServiceClient,
+  DeviceCategoryServiceClient,
+  DeviceManufacturerServiceClient,
+  EntitySignalsMappingServiceClient,
+  GeoTargetServiceClient,
+  LabelServiceClient,
+  LineItemServiceClient,
+  LinkedDeviceServiceClient,
+  McmEarningsServiceClient,
+  MobileCarrierServiceClient,
+  MobileDeviceServiceClient,
+  MobileDeviceSubmodelServiceClient,
+  NetworkServiceClient,
+  OperatingSystemServiceClient,
+  OperatingSystemVersionServiceClient,
+  OrderServiceClient,
+  PlacementServiceClient,
+  PrivateAuctionDealServiceClient,
+  PrivateAuctionServiceClient,
+  ProgrammaticBuyerServiceClient,
+  ReportServiceClient,
+  RichMediaAdsCompanyServiceClient,
+  RoleServiceClient,
+  SiteServiceClient,
+  TaxonomyCategoryServiceClient,
+  TeamServiceClient,
+  UserServiceClient,
+} from '@google-ads/admanager';
 
 // check that the client class type name can be used
 function doStuffWithAdBreakServiceClient(client: AdBreakServiceClient) {
   client.close();
 }
-function doStuffWithAdReviewCenterAdServiceClient(client: AdReviewCenterAdServiceClient) {
+function doStuffWithAdReviewCenterAdServiceClient(
+  client: AdReviewCenterAdServiceClient,
+) {
   client.close();
 }
 function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
@@ -31,22 +80,32 @@ function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
 function doStuffWithApplicationServiceClient(client: ApplicationServiceClient) {
   client.close();
 }
-function doStuffWithAudienceSegmentServiceClient(client: AudienceSegmentServiceClient) {
+function doStuffWithAudienceSegmentServiceClient(
+  client: AudienceSegmentServiceClient,
+) {
   client.close();
 }
-function doStuffWithBandwidthGroupServiceClient(client: BandwidthGroupServiceClient) {
+function doStuffWithBandwidthGroupServiceClient(
+  client: BandwidthGroupServiceClient,
+) {
   client.close();
 }
-function doStuffWithBrowserLanguageServiceClient(client: BrowserLanguageServiceClient) {
+function doStuffWithBrowserLanguageServiceClient(
+  client: BrowserLanguageServiceClient,
+) {
   client.close();
 }
 function doStuffWithBrowserServiceClient(client: BrowserServiceClient) {
   client.close();
 }
-function doStuffWithCmsMetadataKeyServiceClient(client: CmsMetadataKeyServiceClient) {
+function doStuffWithCmsMetadataKeyServiceClient(
+  client: CmsMetadataKeyServiceClient,
+) {
   client.close();
 }
-function doStuffWithCmsMetadataValueServiceClient(client: CmsMetadataValueServiceClient) {
+function doStuffWithCmsMetadataValueServiceClient(
+  client: CmsMetadataValueServiceClient,
+) {
   client.close();
 }
 function doStuffWithCompanyServiceClient(client: CompanyServiceClient) {
@@ -55,61 +114,100 @@ function doStuffWithCompanyServiceClient(client: CompanyServiceClient) {
 function doStuffWithContactServiceClient(client: ContactServiceClient) {
   client.close();
 }
-function doStuffWithContentBundleServiceClient(client: ContentBundleServiceClient) {
+function doStuffWithContentBundleServiceClient(
+  client: ContentBundleServiceClient,
+) {
   client.close();
 }
-function doStuffWithContentLabelServiceClient(client: ContentLabelServiceClient) {
+function doStuffWithContentLabelServiceClient(
+  client: ContentLabelServiceClient,
+) {
   client.close();
 }
 function doStuffWithContentServiceClient(client: ContentServiceClient) {
   client.close();
 }
-function doStuffWithCreativeTemplateServiceClient(client: CreativeTemplateServiceClient) {
+function doStuffWithCreativeTemplateServiceClient(
+  client: CreativeTemplateServiceClient,
+) {
   client.close();
 }
 function doStuffWithCustomFieldServiceClient(client: CustomFieldServiceClient) {
   client.close();
 }
-function doStuffWithCustomTargetingKeyServiceClient(client: CustomTargetingKeyServiceClient) {
+function doStuffWithCustomTargetingKeyServiceClient(
+  client: CustomTargetingKeyServiceClient,
+) {
   client.close();
 }
-function doStuffWithCustomTargetingValueServiceClient(client: CustomTargetingValueServiceClient) {
+function doStuffWithCustomTargetingValueServiceClient(
+  client: CustomTargetingValueServiceClient,
+) {
   client.close();
 }
-function doStuffWithDeviceCapabilityServiceClient(client: DeviceCapabilityServiceClient) {
+function doStuffWithDeviceCapabilityServiceClient(
+  client: DeviceCapabilityServiceClient,
+) {
   client.close();
 }
-function doStuffWithDeviceCategoryServiceClient(client: DeviceCategoryServiceClient) {
+function doStuffWithDeviceCategoryServiceClient(
+  client: DeviceCategoryServiceClient,
+) {
   client.close();
 }
-function doStuffWithDeviceManufacturerServiceClient(client: DeviceManufacturerServiceClient) {
+function doStuffWithDeviceManufacturerServiceClient(
+  client: DeviceManufacturerServiceClient,
+) {
   client.close();
 }
-function doStuffWithEntitySignalsMappingServiceClient(client: EntitySignalsMappingServiceClient) {
+function doStuffWithEntitySignalsMappingServiceClient(
+  client: EntitySignalsMappingServiceClient,
+) {
   client.close();
 }
 function doStuffWithGeoTargetServiceClient(client: GeoTargetServiceClient) {
   client.close();
 }
+function doStuffWithLabelServiceClient(client: LabelServiceClient) {
+  client.close();
+}
 function doStuffWithLineItemServiceClient(client: LineItemServiceClient) {
   client.close();
 }
-function doStuffWithMobileCarrierServiceClient(client: MobileCarrierServiceClient) {
+function doStuffWithLinkedDeviceServiceClient(
+  client: LinkedDeviceServiceClient,
+) {
   client.close();
 }
-function doStuffWithMobileDeviceServiceClient(client: MobileDeviceServiceClient) {
+function doStuffWithMcmEarningsServiceClient(client: McmEarningsServiceClient) {
   client.close();
 }
-function doStuffWithMobileDeviceSubmodelServiceClient(client: MobileDeviceSubmodelServiceClient) {
+function doStuffWithMobileCarrierServiceClient(
+  client: MobileCarrierServiceClient,
+) {
+  client.close();
+}
+function doStuffWithMobileDeviceServiceClient(
+  client: MobileDeviceServiceClient,
+) {
+  client.close();
+}
+function doStuffWithMobileDeviceSubmodelServiceClient(
+  client: MobileDeviceSubmodelServiceClient,
+) {
   client.close();
 }
 function doStuffWithNetworkServiceClient(client: NetworkServiceClient) {
   client.close();
 }
-function doStuffWithOperatingSystemServiceClient(client: OperatingSystemServiceClient) {
+function doStuffWithOperatingSystemServiceClient(
+  client: OperatingSystemServiceClient,
+) {
   client.close();
 }
-function doStuffWithOperatingSystemVersionServiceClient(client: OperatingSystemVersionServiceClient) {
+function doStuffWithOperatingSystemVersionServiceClient(
+  client: OperatingSystemVersionServiceClient,
+) {
   client.close();
 }
 function doStuffWithOrderServiceClient(client: OrderServiceClient) {
@@ -118,16 +216,27 @@ function doStuffWithOrderServiceClient(client: OrderServiceClient) {
 function doStuffWithPlacementServiceClient(client: PlacementServiceClient) {
   client.close();
 }
-function doStuffWithPrivateAuctionDealServiceClient(client: PrivateAuctionDealServiceClient) {
+function doStuffWithPrivateAuctionDealServiceClient(
+  client: PrivateAuctionDealServiceClient,
+) {
   client.close();
 }
-function doStuffWithPrivateAuctionServiceClient(client: PrivateAuctionServiceClient) {
+function doStuffWithPrivateAuctionServiceClient(
+  client: PrivateAuctionServiceClient,
+) {
   client.close();
 }
-function doStuffWithProgrammaticBuyerServiceClient(client: ProgrammaticBuyerServiceClient) {
+function doStuffWithProgrammaticBuyerServiceClient(
+  client: ProgrammaticBuyerServiceClient,
+) {
   client.close();
 }
 function doStuffWithReportServiceClient(client: ReportServiceClient) {
+  client.close();
+}
+function doStuffWithRichMediaAdsCompanyServiceClient(
+  client: RichMediaAdsCompanyServiceClient,
+) {
   client.close();
 }
 function doStuffWithRoleServiceClient(client: RoleServiceClient) {
@@ -136,7 +245,9 @@ function doStuffWithRoleServiceClient(client: RoleServiceClient) {
 function doStuffWithSiteServiceClient(client: SiteServiceClient) {
   client.close();
 }
-function doStuffWithTaxonomyCategoryServiceClient(client: TaxonomyCategoryServiceClient) {
+function doStuffWithTaxonomyCategoryServiceClient(
+  client: TaxonomyCategoryServiceClient,
+) {
   client.close();
 }
 function doStuffWithTeamServiceClient(client: TeamServiceClient) {
@@ -202,8 +313,11 @@ function main() {
   const customTargetingKeyServiceClient = new CustomTargetingKeyServiceClient();
   doStuffWithCustomTargetingKeyServiceClient(customTargetingKeyServiceClient);
   // check that the client instance can be created
-  const customTargetingValueServiceClient = new CustomTargetingValueServiceClient();
-  doStuffWithCustomTargetingValueServiceClient(customTargetingValueServiceClient);
+  const customTargetingValueServiceClient =
+    new CustomTargetingValueServiceClient();
+  doStuffWithCustomTargetingValueServiceClient(
+    customTargetingValueServiceClient,
+  );
   // check that the client instance can be created
   const deviceCapabilityServiceClient = new DeviceCapabilityServiceClient();
   doStuffWithDeviceCapabilityServiceClient(deviceCapabilityServiceClient);
@@ -214,14 +328,26 @@ function main() {
   const deviceManufacturerServiceClient = new DeviceManufacturerServiceClient();
   doStuffWithDeviceManufacturerServiceClient(deviceManufacturerServiceClient);
   // check that the client instance can be created
-  const entitySignalsMappingServiceClient = new EntitySignalsMappingServiceClient();
-  doStuffWithEntitySignalsMappingServiceClient(entitySignalsMappingServiceClient);
+  const entitySignalsMappingServiceClient =
+    new EntitySignalsMappingServiceClient();
+  doStuffWithEntitySignalsMappingServiceClient(
+    entitySignalsMappingServiceClient,
+  );
   // check that the client instance can be created
   const geoTargetServiceClient = new GeoTargetServiceClient();
   doStuffWithGeoTargetServiceClient(geoTargetServiceClient);
   // check that the client instance can be created
+  const labelServiceClient = new LabelServiceClient();
+  doStuffWithLabelServiceClient(labelServiceClient);
+  // check that the client instance can be created
   const lineItemServiceClient = new LineItemServiceClient();
   doStuffWithLineItemServiceClient(lineItemServiceClient);
+  // check that the client instance can be created
+  const linkedDeviceServiceClient = new LinkedDeviceServiceClient();
+  doStuffWithLinkedDeviceServiceClient(linkedDeviceServiceClient);
+  // check that the client instance can be created
+  const mcmEarningsServiceClient = new McmEarningsServiceClient();
+  doStuffWithMcmEarningsServiceClient(mcmEarningsServiceClient);
   // check that the client instance can be created
   const mobileCarrierServiceClient = new MobileCarrierServiceClient();
   doStuffWithMobileCarrierServiceClient(mobileCarrierServiceClient);
@@ -229,8 +355,11 @@ function main() {
   const mobileDeviceServiceClient = new MobileDeviceServiceClient();
   doStuffWithMobileDeviceServiceClient(mobileDeviceServiceClient);
   // check that the client instance can be created
-  const mobileDeviceSubmodelServiceClient = new MobileDeviceSubmodelServiceClient();
-  doStuffWithMobileDeviceSubmodelServiceClient(mobileDeviceSubmodelServiceClient);
+  const mobileDeviceSubmodelServiceClient =
+    new MobileDeviceSubmodelServiceClient();
+  doStuffWithMobileDeviceSubmodelServiceClient(
+    mobileDeviceSubmodelServiceClient,
+  );
   // check that the client instance can be created
   const networkServiceClient = new NetworkServiceClient();
   doStuffWithNetworkServiceClient(networkServiceClient);
@@ -238,8 +367,11 @@ function main() {
   const operatingSystemServiceClient = new OperatingSystemServiceClient();
   doStuffWithOperatingSystemServiceClient(operatingSystemServiceClient);
   // check that the client instance can be created
-  const operatingSystemVersionServiceClient = new OperatingSystemVersionServiceClient();
-  doStuffWithOperatingSystemVersionServiceClient(operatingSystemVersionServiceClient);
+  const operatingSystemVersionServiceClient =
+    new OperatingSystemVersionServiceClient();
+  doStuffWithOperatingSystemVersionServiceClient(
+    operatingSystemVersionServiceClient,
+  );
   // check that the client instance can be created
   const orderServiceClient = new OrderServiceClient();
   doStuffWithOrderServiceClient(orderServiceClient);
@@ -258,6 +390,10 @@ function main() {
   // check that the client instance can be created
   const reportServiceClient = new ReportServiceClient();
   doStuffWithReportServiceClient(reportServiceClient);
+  // check that the client instance can be created
+  const richMediaAdsCompanyServiceClient =
+    new RichMediaAdsCompanyServiceClient();
+  doStuffWithRichMediaAdsCompanyServiceClient(richMediaAdsCompanyServiceClient);
   // check that the client instance can be created
   const roleServiceClient = new RoleServiceClient();
   doStuffWithRoleServiceClient(roleServiceClient);

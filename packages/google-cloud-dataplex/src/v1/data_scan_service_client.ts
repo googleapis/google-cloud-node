@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +57,7 @@ export class DataScanServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataplex');
@@ -59,11 +70,11 @@ export class DataScanServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  dataScanServiceStub?: Promise<{[name: string]: Function}>;
+  dataScanServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DataScanServiceClient.
@@ -104,21 +115,42 @@ export class DataScanServiceClient {
    *     const client = new DataScanServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataScanServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'dataplex.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -143,7 +175,7 @@ export class DataScanServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -157,15 +189,11 @@ export class DataScanServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -187,100 +215,102 @@ export class DataScanServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       aspectTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}'
+        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}',
       ),
       assetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}',
       ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
+        'projects/{project}/locations/{location}/lakes/{lake}/content/{content}',
       ),
       dataAssetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}'
+        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}',
       ),
       dataAttributePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
+        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}',
       ),
       dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}',
       ),
       dataProductPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataProducts/{data_product}'
+        'projects/{project}/locations/{location}/dataProducts/{data_product}',
       ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}'
+        'projects/{project}/locations/{location}/dataScans/{dataScan}',
       ),
       dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
+        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}',
       ),
       dataTaxonomyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}'
+        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}',
       ),
       encryptionConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}'
+        'organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}',
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}',
       ),
       entryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}',
       ),
       entryGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}',
       ),
       entryLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}',
       ),
       entryTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryTypes/{entry_type}'
+        'projects/{project}/locations/{location}/entryTypes/{entry_type}',
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}',
       ),
       glossaryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}',
       ),
       glossaryCategoryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}',
       ),
       glossaryTermPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}',
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
+        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}',
       ),
       lakePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}'
+        'projects/{project}/locations/{location}/lakes/{lake}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       metadataFeedPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}'
+        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}',
       ),
       metadataJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
+        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}',
       ),
       partitionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}',
       ),
       projectLocationLakeActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}'
+        'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}',
       ),
-      projectLocationLakeZoneActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
-      ),
-      projectLocationLakeZoneAssetActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
-      ),
+      projectLocationLakeZoneActionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}',
+        ),
+      projectLocationLakeZoneAssetActionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}',
+        ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}'
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}',
       ),
       taskPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}'
+        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}',
       ),
       zonePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}',
       ),
     };
 
@@ -288,10 +318,16 @@ export class DataScanServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listDataScans:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataScans'),
-      listDataScanJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataScanJobs')
+      listDataScans: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataScans',
+      ),
+      listDataScanJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataScanJobs',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -300,52 +336,329 @@ export class DataScanServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createDataScanResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.DataScan') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.DataScan',
+    ) as gax.protobuf.Type;
     const createDataScanMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateDataScanResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.DataScan') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.DataScan',
+    ) as gax.protobuf.Type;
     const updateDataScanMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteDataScanResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteDataScanMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDataScan: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createDataScanResponse.decode.bind(createDataScanResponse),
-        createDataScanMetadata.decode.bind(createDataScanMetadata)),
+        createDataScanMetadata.decode.bind(createDataScanMetadata),
+      ),
       updateDataScan: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateDataScanResponse.decode.bind(updateDataScanResponse),
-        updateDataScanMetadata.decode.bind(updateDataScanMetadata)),
+        updateDataScanMetadata.decode.bind(updateDataScanMetadata),
+      ),
       deleteDataScan: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteDataScanResponse.decode.bind(deleteDataScanResponse),
-        deleteDataScanMetadata.decode.bind(deleteDataScanMetadata))
+        deleteDataScanMetadata.decode.bind(deleteDataScanMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dataplex.v1.DataScanService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dataplex.v1.DataScanService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -376,28 +689,43 @@ export class DataScanServiceClient {
     // Put together the "service stub" for
     // google.cloud.dataplex.v1.DataScanService.
     this.dataScanServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dataplex.v1.DataScanService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dataplex.v1.DataScanService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataplex.v1.DataScanService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataScanServiceStubMethods =
-        ['createDataScan', 'updateDataScan', 'deleteDataScan', 'getDataScan', 'listDataScans', 'runDataScan', 'getDataScanJob', 'listDataScanJobs', 'generateDataQualityRules'];
+    const dataScanServiceStubMethods = [
+      'createDataScan',
+      'updateDataScan',
+      'deleteDataScan',
+      'getDataScan',
+      'listDataScans',
+      'runDataScan',
+      'getDataScanJob',
+      'listDataScanJobs',
+      'generateDataQualityRules',
+    ];
     for (const methodName of dataScanServiceStubMethods) {
       const callPromise = this.dataScanServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -407,7 +735,7 @@ export class DataScanServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -422,8 +750,14 @@ export class DataScanServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataplex.googleapis.com';
   }
@@ -434,8 +768,14 @@ export class DataScanServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataplex.googleapis.com';
   }
@@ -466,9 +806,7 @@ export class DataScanServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -477,8 +815,9 @@ export class DataScanServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -489,851 +828,1207 @@ export class DataScanServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets a DataScan resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the dataScan:
- *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {google.cloud.dataplex.v1.GetDataScanRequest.DataScanView} [request.view]
- *   Optional. Select the DataScan view to return. Defaults to `BASIC`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.get_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_GetDataScan_async
- */
+  /**
+   * Gets a DataScan resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the dataScan:
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {google.cloud.dataplex.v1.GetDataScanRequest.DataScanView} [request.view]
+   *   Optional. Select the DataScan view to return. Defaults to `BASIC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.get_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_GetDataScan_async
+   */
   getDataScan(
-      request?: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScan,
-        protos.google.cloud.dataplex.v1.IGetDataScanRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScan,
+      protos.google.cloud.dataplex.v1.IGetDataScanRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getDataScan(
-      request: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IDataScan,
-          protos.google.cloud.dataplex.v1.IGetDataScanRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IDataScan,
+      protos.google.cloud.dataplex.v1.IGetDataScanRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataScan(
-      request: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IDataScan,
-          protos.google.cloud.dataplex.v1.IGetDataScanRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IDataScan,
+      protos.google.cloud.dataplex.v1.IGetDataScanRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataScan(
-      request?: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGetDataScanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IDataScan,
-          protos.google.cloud.dataplex.v1.IGetDataScanRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IDataScan,
-          protos.google.cloud.dataplex.v1.IGetDataScanRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScan,
-        protos.google.cloud.dataplex.v1.IGetDataScanRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IGetDataScanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IDataScan,
+      protos.google.cloud.dataplex.v1.IGetDataScanRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScan,
+      protos.google.cloud.dataplex.v1.IGetDataScanRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDataScan request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IDataScan,
-        protos.google.cloud.dataplex.v1.IGetDataScanRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IDataScan,
+          | protos.google.cloud.dataplex.v1.IGetDataScanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataScan response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDataScan(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IDataScan,
-        protos.google.cloud.dataplex.v1.IGetDataScanRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDataScan response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDataScan(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IDataScan,
+          protos.google.cloud.dataplex.v1.IGetDataScanRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataScan response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Runs an on-demand execution of a DataScan
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the DataScan:
- *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`.
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- *
- *   Only **OnDemand** data scans are allowed.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.RunDataScanResponse|RunDataScanResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.run_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_RunDataScan_async
- */
+  /**
+   * Runs an on-demand execution of a DataScan
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the DataScan:
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`.
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   *
+   *   Only **OnDemand** data scans are allowed.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.RunDataScanResponse|RunDataScanResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.run_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_RunDataScan_async
+   */
   runDataScan(
-      request?: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-        protos.google.cloud.dataplex.v1.IRunDataScanRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRunDataScanResponse,
+      protos.google.cloud.dataplex.v1.IRunDataScanRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   runDataScan(
-      request: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-          protos.google.cloud.dataplex.v1.IRunDataScanRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRunDataScanResponse,
+      protos.google.cloud.dataplex.v1.IRunDataScanRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runDataScan(
-      request: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-          protos.google.cloud.dataplex.v1.IRunDataScanRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRunDataScanResponse,
+      protos.google.cloud.dataplex.v1.IRunDataScanRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runDataScan(
-      request?: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IRunDataScanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-          protos.google.cloud.dataplex.v1.IRunDataScanRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-          protos.google.cloud.dataplex.v1.IRunDataScanRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-        protos.google.cloud.dataplex.v1.IRunDataScanRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IRunDataScanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IRunDataScanResponse,
+      protos.google.cloud.dataplex.v1.IRunDataScanRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRunDataScanResponse,
+      protos.google.cloud.dataplex.v1.IRunDataScanRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('runDataScan request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-        protos.google.cloud.dataplex.v1.IRunDataScanRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IRunDataScanResponse,
+          | protos.google.cloud.dataplex.v1.IRunDataScanRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('runDataScan response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.runDataScan(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IRunDataScanResponse,
-        protos.google.cloud.dataplex.v1.IRunDataScanRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('runDataScan response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .runDataScan(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IRunDataScanResponse,
+          protos.google.cloud.dataplex.v1.IRunDataScanRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runDataScan response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a DataScanJob resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the DataScanJob:
- *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {google.cloud.dataplex.v1.GetDataScanJobRequest.DataScanJobView} [request.view]
- *   Optional. Select the DataScanJob view to return. Defaults to `BASIC`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.get_data_scan_job.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_GetDataScanJob_async
- */
+  /**
+   * Gets a DataScanJob resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the DataScanJob:
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {google.cloud.dataplex.v1.GetDataScanJobRequest.DataScanJobView} [request.view]
+   *   Optional. Select the DataScanJob view to return. Defaults to `BASIC`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.get_data_scan_job.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_GetDataScanJob_async
+   */
   getDataScanJob(
-      request?: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScanJob,
-        protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScanJob,
+      protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getDataScanJob(
-      request: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IDataScanJob,
-          protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IDataScanJob,
+      protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataScanJob(
-      request: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IDataScanJob,
-          protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IDataScanJob,
+      protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDataScanJob(
-      request?: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGetDataScanJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IDataScanJob,
-          protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IDataScanJob,
-          protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScanJob,
-        protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IGetDataScanJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IDataScanJob,
+      protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScanJob,
+      protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDataScanJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IDataScanJob,
-        protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IDataScanJob,
+          | protos.google.cloud.dataplex.v1.IGetDataScanJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDataScanJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDataScanJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IDataScanJob,
-        protos.google.cloud.dataplex.v1.IGetDataScanJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDataScanJob response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDataScanJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IDataScanJob,
+          protos.google.cloud.dataplex.v1.IGetDataScanJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDataScanJob response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Generates recommended data quality rules based on the results of a data
- * profiling scan.
- *
- * Use the recommendations to build rules for a data quality scan.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name must be one of the following:
- *
- *   * The name of a data scan with at least one successful, completed data
- *   profiling job
- *   * The name of a successful, completed data profiling job (a data scan job
- *   where the job type is data profiling)
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.GenerateDataQualityRulesResponse|GenerateDataQualityRulesResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.generate_data_quality_rules.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_GenerateDataQualityRules_async
- */
+  /**
+   * Generates recommended data quality rules based on the results of a data
+   * profiling scan.
+   *
+   * Use the recommendations to build rules for a data quality scan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name must be one of the following:
+   *
+   *   * The name of a data scan with at least one successful, completed data
+   *   profiling job
+   *   * The name of a successful, completed data profiling job (a data scan job
+   *   where the job type is data profiling)
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.GenerateDataQualityRulesResponse|GenerateDataQualityRulesResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.generate_data_quality_rules.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_GenerateDataQualityRules_async
+   */
   generateDataQualityRules(
-      request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   generateDataQualityRules(
-      request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateDataQualityRules(
-      request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateDataQualityRules(
-      request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+      (
+        | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('generateDataQualityRules request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+          | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateDataQualityRules response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.generateDataQualityRules(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
-        protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('generateDataQualityRules response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .generateDataQualityRules(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesResponse,
+          (
+            | protos.google.cloud.dataplex.v1.IGenerateDataQualityRulesRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('generateDataQualityRules response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a DataScan resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent location:
- *   `projects/{project}/locations/{location_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {google.cloud.dataplex.v1.DataScan} request.dataScan
- *   Required. DataScan resource.
- * @param {string} request.dataScanId
- *   Required. DataScan identifier.
- *
- *   * Must contain only lowercase letters, numbers and hyphens.
- *   * Must start with a letter.
- *   * Must end with a number or a letter.
- *   * Must be between 1-63 characters.
- *   * Must be unique within the customer project / location.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.create_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_CreateDataScan_async
- */
+  /**
+   * Creates a DataScan resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location:
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {google.cloud.dataplex.v1.DataScan} request.dataScan
+   *   Required. DataScan resource.
+   * @param {string} request.dataScanId
+   *   Required. DataScan identifier.
+   *
+   *   * Must contain only lowercase letters, numbers and hyphens.
+   *   * Must start with a letter.
+   *   * Must end with a number or a letter.
+   *   * Must be between 1-63 characters.
+   *   * Must be unique within the customer project / location.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.create_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_CreateDataScan_async
+   */
   createDataScan(
-      request?: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createDataScan(
-      request: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataScan(
-      request: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDataScan(
-      request?: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.ICreateDataScanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataScan,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataScan,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createDataScan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createDataScan request %j', request);
-    return this.innerApiCalls.createDataScan(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createDataScan response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createDataScan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataScan,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDataScan response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createDataScan()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.create_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_CreateDataScan_async
- */
-  async checkCreateDataScanProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.DataScan, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createDataScan()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.create_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_CreateDataScan_async
+   */
+  async checkCreateDataScanProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.DataScan,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('createDataScan long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createDataScan, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.DataScan, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDataScan,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.DataScan,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a DataScan resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.dataplex.v1.DataScan} request.dataScan
- *   Required. DataScan resource to be updated.
- *
- *   Only fields specified in `update_mask` are updated.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Mask of fields to update.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is `false`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.update_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_UpdateDataScan_async
- */
+  /**
+   * Updates a DataScan resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dataplex.v1.DataScan} request.dataScan
+   *   Required. DataScan resource to be updated.
+   *
+   *   Only fields specified in `update_mask` are updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask of fields to update.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is `false`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.update_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_UpdateDataScan_async
+   */
   updateDataScan(
-      request?: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateDataScan(
-      request: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataScan(
-      request: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDataScan(
-      request?: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IUpdateDataScanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataScan,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IDataScan,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'data_scan.name': request.dataScan!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'data_scan.name': request.dataScan!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataScan,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateDataScan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateDataScan request %j', request);
-    return this.innerApiCalls.updateDataScan(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.IDataScan, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateDataScan response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateDataScan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IDataScan,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDataScan response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateDataScan()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.update_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_UpdateDataScan_async
- */
-  async checkUpdateDataScanProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.DataScan, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateDataScan()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.update_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_UpdateDataScan_async
+   */
+  async checkUpdateDataScanProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.DataScan,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateDataScan long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateDataScan, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.DataScan, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateDataScan,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.DataScan,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a DataScan resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the dataScan:
- *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {boolean} [request.force]
- *   Optional. If set to true, any child resources of this data scan will also
- *   be deleted. (Otherwise, the request will only work if the data scan has no
- *   child resources.)
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.delete_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_DeleteDataScan_async
- */
+  /**
+   * Deletes a DataScan resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the dataScan:
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any child resources of this data scan will also
+   *   be deleted. (Otherwise, the request will only work if the data scan has no
+   *   child resources.)
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.delete_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_DeleteDataScan_async
+   */
   deleteDataScan(
-      request?: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteDataScan(
-      request: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataScan(
-      request: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDataScan(
-      request?: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IDeleteDataScanRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteDataScan response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteDataScan request %j', request);
-    return this.innerApiCalls.deleteDataScan(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteDataScan response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteDataScan(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDataScan response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteDataScan()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.delete_data_scan.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_DeleteDataScan_async
- */
-  async checkDeleteDataScanProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteDataScan()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.delete_data_scan.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_DeleteDataScan_async
+   */
+  async checkDeleteDataScanProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteDataScan long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteDataScan, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDataScan,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
- /**
- * Lists DataScans.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent location:
- *   `projects/{project}/locations/{location_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of dataScans to return. The service may return
- *   fewer than this value. If unspecified, at most 500 scans will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListDataScans` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListDataScans` must match the call that provided the
- *   page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields (`name` or `create_time`) for the result.
- *   If not specified, the ordering is undefined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDataScansAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists DataScans.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location:
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of dataScans to return. The service may return
+   *   fewer than this value. If unspecified, at most 500 scans will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListDataScans` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListDataScans` must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   If not specified, the ordering is undefined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDataScansAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataScans(
-      request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScan[],
-        protos.google.cloud.dataplex.v1.IListDataScansRequest|null,
-        protos.google.cloud.dataplex.v1.IListDataScansResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScan[],
+      protos.google.cloud.dataplex.v1.IListDataScansRequest | null,
+      protos.google.cloud.dataplex.v1.IListDataScansResponse,
+    ]
+  >;
   listDataScans(
-      request: protos.google.cloud.dataplex.v1.IListDataScansRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListDataScansRequest,
-          protos.google.cloud.dataplex.v1.IListDataScansResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScan>): void;
+    request: protos.google.cloud.dataplex.v1.IListDataScansRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListDataScansRequest,
+      protos.google.cloud.dataplex.v1.IListDataScansResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IDataScan
+    >,
+  ): void;
   listDataScans(
-      request: protos.google.cloud.dataplex.v1.IListDataScansRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListDataScansRequest,
-          protos.google.cloud.dataplex.v1.IListDataScansResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScan>): void;
+    request: protos.google.cloud.dataplex.v1.IListDataScansRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListDataScansRequest,
+      protos.google.cloud.dataplex.v1.IListDataScansResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IDataScan
+    >,
+  ): void;
   listDataScans(
-      request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListDataScansRequest,
-          protos.google.cloud.dataplex.v1.IListDataScansResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScan>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListDataScansRequest,
-          protos.google.cloud.dataplex.v1.IListDataScansResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScan>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScan[],
-        protos.google.cloud.dataplex.v1.IListDataScansRequest|null,
-        protos.google.cloud.dataplex.v1.IListDataScansResponse
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IListDataScansResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IDataScan
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListDataScansRequest,
+      protos.google.cloud.dataplex.v1.IListDataScansResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IDataScan
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScan[],
+      protos.google.cloud.dataplex.v1.IListDataScansRequest | null,
+      protos.google.cloud.dataplex.v1.IListDataScansResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListDataScansRequest,
-      protos.google.cloud.dataplex.v1.IListDataScansResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IDataScan>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListDataScansRequest,
+          | protos.google.cloud.dataplex.v1.IListDataScansResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IDataScan
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataScans values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1342,242 +2037,271 @@ export class DataScanServiceClient {
     this._log.info('listDataScans request %j', request);
     return this.innerApiCalls
       .listDataScans(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IDataScan[],
-        protos.google.cloud.dataplex.v1.IListDataScansRequest|null,
-        protos.google.cloud.dataplex.v1.IListDataScansResponse
-      ]) => {
-        this._log.info('listDataScans values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IDataScan[],
+          protos.google.cloud.dataplex.v1.IListDataScansRequest | null,
+          protos.google.cloud.dataplex.v1.IListDataScansResponse,
+        ]) => {
+          this._log.info('listDataScans values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDataScans`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent location:
- *   `projects/{project}/locations/{location_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of dataScans to return. The service may return
- *   fewer than this value. If unspecified, at most 500 scans will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListDataScans` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListDataScans` must match the call that provided the
- *   page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields (`name` or `create_time`) for the result.
- *   If not specified, the ordering is undefined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.DataScan|DataScan} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDataScansAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDataScans`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location:
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of dataScans to return. The service may return
+   *   fewer than this value. If unspecified, at most 500 scans will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListDataScans` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListDataScans` must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   If not specified, the ordering is undefined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.DataScan|DataScan} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDataScansAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataScansStream(
-      request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataScans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataScans stream %j', request);
     return this.descriptors.page.listDataScans.createStream(
       this.innerApiCalls.listDataScans as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDataScans`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent location:
- *   `projects/{project}/locations/{location_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of dataScans to return. The service may return
- *   fewer than this value. If unspecified, at most 500 scans will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListDataScans` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListDataScans` must match the call that provided the
- *   page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields (`name` or `create_time`) for the result.
- *   If not specified, the ordering is undefined.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.list_data_scans.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_ListDataScans_async
- */
+  /**
+   * Equivalent to `listDataScans`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent location:
+   *   `projects/{project}/locations/{location_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of dataScans to return. The service may return
+   *   fewer than this value. If unspecified, at most 500 scans will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListDataScans` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListDataScans` must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields (`name` or `create_time`) for the result.
+   *   If not specified, the ordering is undefined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.DataScan|DataScan}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.list_data_scans.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_ListDataScans_async
+   */
   listDataScansAsync(
-      request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IDataScan>{
+    request?: protos.google.cloud.dataplex.v1.IListDataScansRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IDataScan> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataScans'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataScans iterate %j', request);
     return this.descriptors.page.listDataScans.asyncIterate(
       this.innerApiCalls['listDataScans'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IDataScan>;
   }
- /**
- * Lists DataScanJobs under the given DataScan.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent environment:
- *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of DataScanJobs to return. The service may return
- *   fewer than this value. If unspecified, at most 10 DataScanJobs will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListDataScanJobs` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListDataScanJobs` must match the call that provided
- *   the page token.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the ListDataScanJobs
- *   request.
- *
- *   If unspecified, all datascan jobs will be returned. Multiple filters can be
- *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
- *
- *   Allowed fields are:
- *
- *   - `start_time`
- *   - `end_time`
- *
- *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
- *   2018-10-08T18:30:00-07:00).
- *
- *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
- *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
- *   specified start and end times.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDataScanJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists DataScanJobs under the given DataScan.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of DataScanJobs to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 DataScanJobs will be
+   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListDataScanJobs` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListDataScanJobs` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the ListDataScanJobs
+   *   request.
+   *
+   *   If unspecified, all datascan jobs will be returned. Multiple filters can be
+   *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+   *
+   *   Allowed fields are:
+   *
+   *   - `start_time`
+   *   - `end_time`
+   *
+   *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+   *   2018-10-08T18:30:00-07:00).
+   *
+   *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+   *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+   *   specified start and end times.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDataScanJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataScanJobs(
-      request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScanJob[],
-        protos.google.cloud.dataplex.v1.IListDataScanJobsRequest|null,
-        protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScanJob[],
+      protos.google.cloud.dataplex.v1.IListDataScanJobsRequest | null,
+      protos.google.cloud.dataplex.v1.IListDataScanJobsResponse,
+    ]
+  >;
   listDataScanJobs(
-      request: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-          protos.google.cloud.dataplex.v1.IListDataScanJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScanJob>): void;
+    request: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+      | protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IDataScanJob
+    >,
+  ): void;
   listDataScanJobs(
-      request: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-          protos.google.cloud.dataplex.v1.IListDataScanJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScanJob>): void;
+    request: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+      | protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IDataScanJob
+    >,
+  ): void;
   listDataScanJobs(
-      request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-          protos.google.cloud.dataplex.v1.IListDataScanJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScanJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-          protos.google.cloud.dataplex.v1.IListDataScanJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IDataScanJob>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IDataScanJob[],
-        protos.google.cloud.dataplex.v1.IListDataScanJobsRequest|null,
-        protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IDataScanJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+      | protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataplex.v1.IDataScanJob
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IDataScanJob[],
+      protos.google.cloud.dataplex.v1.IListDataScanJobsRequest | null,
+      protos.google.cloud.dataplex.v1.IListDataScanJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-      protos.google.cloud.dataplex.v1.IListDataScanJobsResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IDataScanJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+          | protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IDataScanJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDataScanJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1586,163 +2310,168 @@ export class DataScanServiceClient {
     this._log.info('listDataScanJobs request %j', request);
     return this.innerApiCalls
       .listDataScanJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IDataScanJob[],
-        protos.google.cloud.dataplex.v1.IListDataScanJobsRequest|null,
-        protos.google.cloud.dataplex.v1.IListDataScanJobsResponse
-      ]) => {
-        this._log.info('listDataScanJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IDataScanJob[],
+          protos.google.cloud.dataplex.v1.IListDataScanJobsRequest | null,
+          protos.google.cloud.dataplex.v1.IListDataScanJobsResponse,
+        ]) => {
+          this._log.info('listDataScanJobs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDataScanJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent environment:
- *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of DataScanJobs to return. The service may return
- *   fewer than this value. If unspecified, at most 10 DataScanJobs will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListDataScanJobs` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListDataScanJobs` must match the call that provided
- *   the page token.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the ListDataScanJobs
- *   request.
- *
- *   If unspecified, all datascan jobs will be returned. Multiple filters can be
- *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
- *
- *   Allowed fields are:
- *
- *   - `start_time`
- *   - `end_time`
- *
- *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
- *   2018-10-08T18:30:00-07:00).
- *
- *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
- *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
- *   specified start and end times.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDataScanJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDataScanJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of DataScanJobs to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 DataScanJobs will be
+   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListDataScanJobs` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListDataScanJobs` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the ListDataScanJobs
+   *   request.
+   *
+   *   If unspecified, all datascan jobs will be returned. Multiple filters can be
+   *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+   *
+   *   Allowed fields are:
+   *
+   *   - `start_time`
+   *   - `end_time`
+   *
+   *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+   *   2018-10-08T18:30:00-07:00).
+   *
+   *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+   *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+   *   specified start and end times.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDataScanJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDataScanJobsStream(
-      request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataScanJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataScanJobs stream %j', request);
     return this.descriptors.page.listDataScanJobs.createStream(
       this.innerApiCalls.listDataScanJobs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDataScanJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent environment:
- *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
- *   where `project` refers to a *project_id* or *project_number* and
- *   `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of DataScanJobs to return. The service may return
- *   fewer than this value. If unspecified, at most 10 DataScanJobs will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListDataScanJobs` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListDataScanJobs` must match the call that provided
- *   the page token.
- * @param {string} [request.filter]
- *   Optional. An expression for filtering the results of the ListDataScanJobs
- *   request.
- *
- *   If unspecified, all datascan jobs will be returned. Multiple filters can be
- *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
- *
- *   Allowed fields are:
- *
- *   - `start_time`
- *   - `end_time`
- *
- *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
- *   2018-10-08T18:30:00-07:00).
- *
- *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
- *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
- *   specified start and end times.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/data_scan_service.list_data_scan_jobs.js</caption>
- * region_tag:dataplex_v1_generated_DataScanService_ListDataScanJobs_async
- */
+  /**
+   * Equivalent to `listDataScanJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+   *   where `project` refers to a *project_id* or *project_number* and
+   *   `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of DataScanJobs to return. The service may return
+   *   fewer than this value. If unspecified, at most 10 DataScanJobs will be
+   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListDataScanJobs` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListDataScanJobs` must match the call that provided
+   *   the page token.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the ListDataScanJobs
+   *   request.
+   *
+   *   If unspecified, all datascan jobs will be returned. Multiple filters can be
+   *   applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+   *
+   *   Allowed fields are:
+   *
+   *   - `start_time`
+   *   - `end_time`
+   *
+   *   `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+   *   2018-10-08T18:30:00-07:00).
+   *
+   *   For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+   *   2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+   *   specified start and end times.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.DataScanJob|DataScanJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/data_scan_service.list_data_scan_jobs.js</caption>
+   * region_tag:dataplex_v1_generated_DataScanService_ListDataScanJobs_async
+   */
   listDataScanJobsAsync(
-      request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IDataScanJob>{
+    request?: protos.google.cloud.dataplex.v1.IListDataScanJobsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IDataScanJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDataScanJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDataScanJobs iterate %j', request);
     return this.descriptors.page.listDataScanJobs.asyncIterate(
       this.innerApiCalls['listDataScanJobs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IDataScanJob>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1777,12 +2506,11 @@ export class DataScanServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1815,12 +2543,12 @@ export class DataScanServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1863,22 +2591,22 @@ export class DataScanServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1913,15 +2641,15 @@ export class DataScanServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1955,7 +2683,7 @@ export class DataScanServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1968,25 +2696,24 @@ export class DataScanServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -2025,22 +2752,22 @@ export class DataScanServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -2056,7 +2783,7 @@ export class DataScanServiceClient {
    * @param {string} aspect_type
    * @returns {string} Resource name string.
    */
-  aspectTypePath(project:string,location:string,aspectType:string) {
+  aspectTypePath(project: string, location: string, aspectType: string) {
     return this.pathTemplates.aspectTypePathTemplate.render({
       project: project,
       location: location,
@@ -2072,7 +2799,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).project;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .project;
   }
 
   /**
@@ -2083,7 +2811,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).location;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .location;
   }
 
   /**
@@ -2094,7 +2823,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the aspect_type.
    */
   matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).aspect_type;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .aspect_type;
   }
 
   /**
@@ -2107,7 +2837,13 @@ export class DataScanServiceClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(project:string,location:string,lake:string,zone:string,asset:string) {
+  assetPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    asset: string,
+  ) {
     return this.pathTemplates.assetPathTemplate.render({
       project: project,
       location: location,
@@ -2181,7 +2917,12 @@ export class DataScanServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(project:string,location:string,lake:string,content:string) {
+  contentPath(
+    project: string,
+    location: string,
+    lake: string,
+    content: string,
+  ) {
     return this.pathTemplates.contentPathTemplate.render({
       project: project,
       location: location,
@@ -2243,7 +2984,12 @@ export class DataScanServiceClient {
    * @param {string} data_asset
    * @returns {string} Resource name string.
    */
-  dataAssetPath(project:string,location:string,dataProduct:string,dataAsset:string) {
+  dataAssetPath(
+    project: string,
+    location: string,
+    dataProduct: string,
+    dataAsset: string,
+  ) {
     return this.pathTemplates.dataAssetPathTemplate.render({
       project: project,
       location: location,
@@ -2260,7 +3006,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).project;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .project;
   }
 
   /**
@@ -2271,7 +3018,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).location;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .location;
   }
 
   /**
@@ -2282,7 +3030,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the data_product.
    */
   matchDataProductFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_product;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .data_product;
   }
 
   /**
@@ -2293,7 +3042,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the data_asset.
    */
   matchDataAssetFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_asset;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .data_asset;
   }
 
   /**
@@ -2305,7 +3055,12 @@ export class DataScanServiceClient {
    * @param {string} data_attribute_id
    * @returns {string} Resource name string.
    */
-  dataAttributePath(project:string,location:string,dataTaxonomy:string,dataAttributeId:string) {
+  dataAttributePath(
+    project: string,
+    location: string,
+    dataTaxonomy: string,
+    dataAttributeId: string,
+  ) {
     return this.pathTemplates.dataAttributePathTemplate.render({
       project: project,
       location: location,
@@ -2322,7 +3077,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).project;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .project;
   }
 
   /**
@@ -2333,7 +3089,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).location;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .location;
   }
 
   /**
@@ -2344,7 +3101,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the dataTaxonomy.
    */
   matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).dataTaxonomy;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .dataTaxonomy;
   }
 
   /**
@@ -2355,7 +3113,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the data_attribute_id.
    */
   matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).data_attribute_id;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .data_attribute_id;
   }
 
   /**
@@ -2366,7 +3125,11 @@ export class DataScanServiceClient {
    * @param {string} data_attribute_binding_id
    * @returns {string} Resource name string.
    */
-  dataAttributeBindingPath(project:string,location:string,dataAttributeBindingId:string) {
+  dataAttributeBindingPath(
+    project: string,
+    location: string,
+    dataAttributeBindingId: string,
+  ) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.render({
       project: project,
       location: location,
@@ -2382,7 +3145,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).project;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).project;
   }
 
   /**
@@ -2393,7 +3158,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).location;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).location;
   }
 
   /**
@@ -2403,8 +3170,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing DataAttributeBinding resource.
    * @returns {string} A string representing the data_attribute_binding_id.
    */
-  matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
+  matchDataAttributeBindingIdFromDataAttributeBindingName(
+    dataAttributeBindingName: string,
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).data_attribute_binding_id;
   }
 
   /**
@@ -2415,7 +3186,7 @@ export class DataScanServiceClient {
    * @param {string} data_product
    * @returns {string} Resource name string.
    */
-  dataProductPath(project:string,location:string,dataProduct:string) {
+  dataProductPath(project: string, location: string, dataProduct: string) {
     return this.pathTemplates.dataProductPathTemplate.render({
       project: project,
       location: location,
@@ -2431,7 +3202,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).project;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .project;
   }
 
   /**
@@ -2442,7 +3214,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).location;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .location;
   }
 
   /**
@@ -2453,7 +3226,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the data_product.
    */
   matchDataProductFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).data_product;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .data_product;
   }
 
   /**
@@ -2464,7 +3238,7 @@ export class DataScanServiceClient {
    * @param {string} dataScan
    * @returns {string} Resource name string.
    */
-  dataScanPath(project:string,location:string,dataScan:string) {
+  dataScanPath(project: string, location: string, dataScan: string) {
     return this.pathTemplates.dataScanPathTemplate.render({
       project: project,
       location: location,
@@ -2514,7 +3288,12 @@ export class DataScanServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  dataScanJobPath(project:string,location:string,dataScan:string,job:string) {
+  dataScanJobPath(
+    project: string,
+    location: string,
+    dataScan: string,
+    job: string,
+  ) {
     return this.pathTemplates.dataScanJobPathTemplate.render({
       project: project,
       location: location,
@@ -2531,7 +3310,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).project;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .project;
   }
 
   /**
@@ -2542,7 +3322,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).location;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .location;
   }
 
   /**
@@ -2553,7 +3334,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the dataScan.
    */
   matchDataScanFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).dataScan;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .dataScan;
   }
 
   /**
@@ -2564,7 +3346,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).job;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .job;
   }
 
   /**
@@ -2575,7 +3358,7 @@ export class DataScanServiceClient {
    * @param {string} data_taxonomy_id
    * @returns {string} Resource name string.
    */
-  dataTaxonomyPath(project:string,location:string,dataTaxonomyId:string) {
+  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
     return this.pathTemplates.dataTaxonomyPathTemplate.render({
       project: project,
       location: location,
@@ -2591,7 +3374,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).project;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .project;
   }
 
   /**
@@ -2602,7 +3386,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).location;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .location;
   }
 
   /**
@@ -2613,7 +3398,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the data_taxonomy_id.
    */
   matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).data_taxonomy_id;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .data_taxonomy_id;
   }
 
   /**
@@ -2624,7 +3410,11 @@ export class DataScanServiceClient {
    * @param {string} encryption_config
    * @returns {string} Resource name string.
    */
-  encryptionConfigPath(organization:string,location:string,encryptionConfig:string) {
+  encryptionConfigPath(
+    organization: string,
+    location: string,
+    encryptionConfig: string,
+  ) {
     return this.pathTemplates.encryptionConfigPathTemplate.render({
       organization: organization,
       location: location,
@@ -2640,7 +3430,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).organization;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).organization;
   }
 
   /**
@@ -2651,7 +3443,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).location;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).location;
   }
 
   /**
@@ -2662,7 +3456,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the encryption_config.
    */
   matchEncryptionConfigFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).encryption_config;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).encryption_config;
   }
 
   /**
@@ -2675,7 +3471,13 @@ export class DataScanServiceClient {
    * @param {string} entity
    * @returns {string} Resource name string.
    */
-  entityPath(project:string,location:string,lake:string,zone:string,entity:string) {
+  entityPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    entity: string,
+  ) {
     return this.pathTemplates.entityPathTemplate.render({
       project: project,
       location: location,
@@ -2749,7 +3551,12 @@ export class DataScanServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  entryPath(project:string,location:string,entryGroup:string,entry:string) {
+  entryPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entry: string,
+  ) {
     return this.pathTemplates.entryPathTemplate.render({
       project: project,
       location: location,
@@ -2810,7 +3617,7 @@ export class DataScanServiceClient {
    * @param {string} entry_group
    * @returns {string} Resource name string.
    */
-  entryGroupPath(project:string,location:string,entryGroup:string) {
+  entryGroupPath(project: string, location: string, entryGroup: string) {
     return this.pathTemplates.entryGroupPathTemplate.render({
       project: project,
       location: location,
@@ -2826,7 +3633,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).project;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .project;
   }
 
   /**
@@ -2837,7 +3645,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).location;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .location;
   }
 
   /**
@@ -2848,7 +3657,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).entry_group;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
   }
 
   /**
@@ -2860,7 +3670,12 @@ export class DataScanServiceClient {
    * @param {string} entry_link
    * @returns {string} Resource name string.
    */
-  entryLinkPath(project:string,location:string,entryGroup:string,entryLink:string) {
+  entryLinkPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entryLink: string,
+  ) {
     return this.pathTemplates.entryLinkPathTemplate.render({
       project: project,
       location: location,
@@ -2877,7 +3692,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).project;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .project;
   }
 
   /**
@@ -2888,7 +3704,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).location;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .location;
   }
 
   /**
@@ -2899,7 +3716,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_group;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .entry_group;
   }
 
   /**
@@ -2910,7 +3728,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the entry_link.
    */
   matchEntryLinkFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_link;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .entry_link;
   }
 
   /**
@@ -2921,7 +3740,7 @@ export class DataScanServiceClient {
    * @param {string} entry_type
    * @returns {string} Resource name string.
    */
-  entryTypePath(project:string,location:string,entryType:string) {
+  entryTypePath(project: string, location: string, entryType: string) {
     return this.pathTemplates.entryTypePathTemplate.render({
       project: project,
       location: location,
@@ -2937,7 +3756,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).project;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .project;
   }
 
   /**
@@ -2948,7 +3768,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).location;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .location;
   }
 
   /**
@@ -2959,7 +3780,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the entry_type.
    */
   matchEntryTypeFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).entry_type;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .entry_type;
   }
 
   /**
@@ -2971,7 +3793,12 @@ export class DataScanServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(project:string,location:string,lake:string,environment:string) {
+  environmentPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string,
+  ) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -2988,7 +3815,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
   }
 
   /**
@@ -2999,7 +3827,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .location;
   }
 
   /**
@@ -3010,7 +3839,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the lake.
    */
   matchLakeFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).lake;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .lake;
   }
 
   /**
@@ -3021,7 +3851,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**
@@ -3032,7 +3863,7 @@ export class DataScanServiceClient {
    * @param {string} glossary
    * @returns {string} Resource name string.
    */
-  glossaryPath(project:string,location:string,glossary:string) {
+  glossaryPath(project: string, location: string, glossary: string) {
     return this.pathTemplates.glossaryPathTemplate.render({
       project: project,
       location: location,
@@ -3082,7 +3913,12 @@ export class DataScanServiceClient {
    * @param {string} glossary_category
    * @returns {string} Resource name string.
    */
-  glossaryCategoryPath(project:string,location:string,glossary:string,glossaryCategory:string) {
+  glossaryCategoryPath(
+    project: string,
+    location: string,
+    glossary: string,
+    glossaryCategory: string,
+  ) {
     return this.pathTemplates.glossaryCategoryPathTemplate.render({
       project: project,
       location: location,
@@ -3099,7 +3935,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).project;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).project;
   }
 
   /**
@@ -3110,7 +3948,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).location;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).location;
   }
 
   /**
@@ -3121,7 +3961,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the glossary.
    */
   matchGlossaryFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).glossary;
   }
 
   /**
@@ -3132,7 +3974,9 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the glossary_category.
    */
   matchGlossaryCategoryFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary_category;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).glossary_category;
   }
 
   /**
@@ -3144,7 +3988,12 @@ export class DataScanServiceClient {
    * @param {string} glossary_term
    * @returns {string} Resource name string.
    */
-  glossaryTermPath(project:string,location:string,glossary:string,glossaryTerm:string) {
+  glossaryTermPath(
+    project: string,
+    location: string,
+    glossary: string,
+    glossaryTerm: string,
+  ) {
     return this.pathTemplates.glossaryTermPathTemplate.render({
       project: project,
       location: location,
@@ -3161,7 +4010,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).project;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .project;
   }
 
   /**
@@ -3172,7 +4022,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).location;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .location;
   }
 
   /**
@@ -3183,7 +4034,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the glossary.
    */
   matchGlossaryFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .glossary;
   }
 
   /**
@@ -3194,7 +4046,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the glossary_term.
    */
   matchGlossaryTermFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary_term;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .glossary_term;
   }
 
   /**
@@ -3207,7 +4060,13 @@ export class DataScanServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(project:string,location:string,lake:string,task:string,job:string) {
+  jobPath(
+    project: string,
+    location: string,
+    lake: string,
+    task: string,
+    job: string,
+  ) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -3280,7 +4139,7 @@ export class DataScanServiceClient {
    * @param {string} lake
    * @returns {string} Resource name string.
    */
-  lakePath(project:string,location:string,lake:string) {
+  lakePath(project: string, location: string, lake: string) {
     return this.pathTemplates.lakePathTemplate.render({
       project: project,
       location: location,
@@ -3328,7 +4187,7 @@ export class DataScanServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -3365,7 +4224,7 @@ export class DataScanServiceClient {
    * @param {string} metadata_feed
    * @returns {string} Resource name string.
    */
-  metadataFeedPath(project:string,location:string,metadataFeed:string) {
+  metadataFeedPath(project: string, location: string, metadataFeed: string) {
     return this.pathTemplates.metadataFeedPathTemplate.render({
       project: project,
       location: location,
@@ -3381,7 +4240,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).project;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .project;
   }
 
   /**
@@ -3392,7 +4252,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).location;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .location;
   }
 
   /**
@@ -3403,7 +4264,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the metadata_feed.
    */
   matchMetadataFeedFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).metadata_feed;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .metadata_feed;
   }
 
   /**
@@ -3414,7 +4276,7 @@ export class DataScanServiceClient {
    * @param {string} metadataJob
    * @returns {string} Resource name string.
    */
-  metadataJobPath(project:string,location:string,metadataJob:string) {
+  metadataJobPath(project: string, location: string, metadataJob: string) {
     return this.pathTemplates.metadataJobPathTemplate.render({
       project: project,
       location: location,
@@ -3430,7 +4292,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).project;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .project;
   }
 
   /**
@@ -3441,7 +4304,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).location;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .location;
   }
 
   /**
@@ -3452,7 +4316,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the metadataJob.
    */
   matchMetadataJobFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).metadataJob;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .metadataJob;
   }
 
   /**
@@ -3466,7 +4331,14 @@ export class DataScanServiceClient {
    * @param {string} partition
    * @returns {string} Resource name string.
    */
-  partitionPath(project:string,location:string,lake:string,zone:string,entity:string,partition:string) {
+  partitionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    entity: string,
+    partition: string,
+  ) {
     return this.pathTemplates.partitionPathTemplate.render({
       project: project,
       location: location,
@@ -3485,7 +4357,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).project;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .project;
   }
 
   /**
@@ -3496,7 +4369,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).location;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .location;
   }
 
   /**
@@ -3540,7 +4414,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the partition.
    */
   matchPartitionFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).partition;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .partition;
   }
 
   /**
@@ -3552,7 +4427,12 @@ export class DataScanServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeActionPath(project:string,location:string,lake:string,action:string) {
+  projectLocationLakeActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    action: string,
+  ) {
     return this.pathTemplates.projectLocationLakeActionPathTemplate.render({
       project: project,
       location: location,
@@ -3568,8 +4448,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).project;
+  matchProjectFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).project;
   }
 
   /**
@@ -3579,8 +4463,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).location;
+  matchLocationFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).location;
   }
 
   /**
@@ -3590,8 +4478,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).lake;
+  matchLakeFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).lake;
   }
 
   /**
@@ -3601,8 +4493,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).action;
+  matchActionFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).action;
   }
 
   /**
@@ -3615,7 +4511,13 @@ export class DataScanServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneActionPath(project:string,location:string,lake:string,zone:string,action:string) {
+  projectLocationLakeZoneActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    action: string,
+  ) {
     return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.render({
       project: project,
       location: location,
@@ -3632,8 +4534,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).project;
+  matchProjectFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).project;
   }
 
   /**
@@ -3643,8 +4549,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).location;
+  matchLocationFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).location;
   }
 
   /**
@@ -3654,8 +4564,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).lake;
+  matchLakeFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).lake;
   }
 
   /**
@@ -3665,8 +4579,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).zone;
+  matchZoneFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).zone;
   }
 
   /**
@@ -3676,8 +4594,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).action;
+  matchActionFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).action;
   }
 
   /**
@@ -3691,15 +4613,24 @@ export class DataScanServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneAssetActionPath(project:string,location:string,lake:string,zone:string,asset:string,action:string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render({
-      project: project,
-      location: location,
-      lake: lake,
-      zone: zone,
-      asset: asset,
-      action: action,
-    });
+  projectLocationLakeZoneAssetActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    asset: string,
+    action: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        lake: lake,
+        zone: zone,
+        asset: asset,
+        action: action,
+      },
+    );
   }
 
   /**
@@ -3709,8 +4640,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).project;
+  matchProjectFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).project;
   }
 
   /**
@@ -3720,8 +4655,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).location;
+  matchLocationFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).location;
   }
 
   /**
@@ -3731,8 +4670,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).lake;
+  matchLakeFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).lake;
   }
 
   /**
@@ -3742,8 +4685,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).zone;
+  matchZoneFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).zone;
   }
 
   /**
@@ -3753,8 +4700,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).asset;
+  matchAssetFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).asset;
   }
 
   /**
@@ -3764,8 +4715,12 @@ export class DataScanServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).action;
+  matchActionFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).action;
   }
 
   /**
@@ -3778,7 +4733,13 @@ export class DataScanServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(project:string,location:string,lake:string,environment:string,session:string) {
+  sessionPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string,
+    session: string,
+  ) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -3829,7 +4790,8 @@ export class DataScanServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromSessionName(sessionName: string) {
-    return this.pathTemplates.sessionPathTemplate.match(sessionName).environment;
+    return this.pathTemplates.sessionPathTemplate.match(sessionName)
+      .environment;
   }
 
   /**
@@ -3852,7 +4814,7 @@ export class DataScanServiceClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(project:string,location:string,lake:string,task:string) {
+  taskPath(project: string, location: string, lake: string, task: string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -3914,7 +4876,7 @@ export class DataScanServiceClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project:string,location:string,lake:string,zone:string) {
+  zonePath(project: string, location: string, lake: string, zone: string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -3975,11 +4937,13 @@ export class DataScanServiceClient {
    */
   close(): Promise<void> {
     if (this.dataScanServiceStub && !this._terminated) {
-      return this.dataScanServiceStub.then(stub => {
+      return this.dataScanServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

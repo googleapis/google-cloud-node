@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {RecommenderClient} from '@google-cloud/recommender';
+import { RecommenderClient } from '@google-cloud/recommender';
 
 // check that the client class type name can be used
 function doStuffWithRecommenderClient(client: RecommenderClient) {
