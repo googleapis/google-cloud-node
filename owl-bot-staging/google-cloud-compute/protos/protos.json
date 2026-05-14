@@ -216887,6 +216887,7 @@
                           "values": {
                             "UNDEFINED_CONSUME_RESERVATION_TYPE": 0,
                             "ANY_RESERVATION": 200008121,
+                            "ANY_RESERVATION_THEN_FAIL": 236541178,
                             "NO_RESERVATION": 169322030,
                             "SPECIFIC_RESERVATION": 229889055,
                             "SPECIFIC_THEN_ANY_RESERVATION": 37025924,
