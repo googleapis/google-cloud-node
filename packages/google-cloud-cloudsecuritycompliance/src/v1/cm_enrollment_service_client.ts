@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +52,7 @@ export class CmEnrollmentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('cloudsecuritycompliance');
@@ -58,10 +65,10 @@ export class CmEnrollmentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  cmEnrollmentServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  cmEnrollmentServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of CmEnrollmentServiceClient.
@@ -102,21 +109,42 @@ export class CmEnrollmentServiceClient {
    *     const client = new CmEnrollmentServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CmEnrollmentServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudsecuritycompliance.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +169,7 @@ export class CmEnrollmentServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +183,11 @@ export class CmEnrollmentServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,96 +208,124 @@ export class CmEnrollmentServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      folderLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/findingSummaries/{finding_summary}'
-      ),
-      folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
-      ),
-      folderLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
-      ),
-      folderLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
-      ),
-      organizationLocationCloudControlDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}'
-      ),
-      organizationLocationCloudControlsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cloudControls/{cloud_control}'
-      ),
-      organizationLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cmEnrollment'
-      ),
-      organizationLocationControlsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/controls/{control}'
-      ),
-      organizationLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/findingSummaries/{finding_summary}'
-      ),
-      organizationLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
-      ),
-      organizationLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkAudits/{framework_audit}'
-      ),
-      organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
-      ),
-      organizationLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
-      ),
-      organizationLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
-      ),
-      organizationLocationFrameworkDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}'
-      ),
-      organizationLocationFrameworksPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworks/{framework}'
-      ),
-      projectLocationCloudControlDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}'
-      ),
-      projectLocationCloudControlsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/cloudControls/{cloud_control}'
-      ),
+      folderLocationFindingSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/findingSummaries/{finding_summary}',
+        ),
+      folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}',
+        ),
+      folderLocationFrameworkComplianceReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}',
+        ),
+      folderLocationFrameworkComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}',
+        ),
+      organizationLocationCloudControlDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}',
+        ),
+      organizationLocationCloudControlsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/cloudControls/{cloud_control}',
+        ),
+      organizationLocationCmEnrollmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/cmEnrollment',
+        ),
+      organizationLocationControlsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/controls/{control}',
+        ),
+      organizationLocationFindingSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/findingSummaries/{finding_summary}',
+        ),
+      organizationLocationFrameworkAuditScopeReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}',
+        ),
+      organizationLocationFrameworkAuditsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkAudits/{framework_audit}',
+        ),
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}',
+        ),
+      organizationLocationFrameworkComplianceReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}',
+        ),
+      organizationLocationFrameworkComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}',
+        ),
+      organizationLocationFrameworkDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}',
+        ),
+      organizationLocationFrameworksPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworks/{framework}',
+        ),
+      projectLocationCloudControlDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}',
+        ),
+      projectLocationCloudControlsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/cloudControls/{cloud_control}',
+        ),
       projectLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/cmEnrollment'
+        'projects/{project}/locations/{location}/cmEnrollment',
       ),
       projectLocationControlsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/controls/{control}'
+        'projects/{project}/locations/{location}/controls/{control}',
       ),
-      projectLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/findingSummaries/{finding_summary}'
-      ),
-      projectLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
-      ),
-      projectLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkAudits/{framework_audit}'
-      ),
-      projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
-      ),
-      projectLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
-      ),
-      projectLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
-      ),
-      projectLocationFrameworkDeploymentsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}'
-      ),
+      projectLocationFindingSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/findingSummaries/{finding_summary}',
+        ),
+      projectLocationFrameworkAuditScopeReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}',
+        ),
+      projectLocationFrameworkAuditsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkAudits/{framework_audit}',
+        ),
+      projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}',
+        ),
+      projectLocationFrameworkComplianceReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}',
+        ),
+      projectLocationFrameworkComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}',
+        ),
+      projectLocationFrameworkDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}',
+        ),
       projectLocationFrameworksPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworks/{framework}'
+        'projects/{project}/locations/{location}/frameworks/{framework}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -304,36 +356,44 @@ export class CmEnrollmentServiceClient {
     // Put together the "service stub" for
     // google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService.
     this.cmEnrollmentServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.cloudsecuritycompliance.v1
+            .CmEnrollmentService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cmEnrollmentServiceStubMethods =
-        ['updateCmEnrollment', 'calculateEffectiveCmEnrollment'];
+    const cmEnrollmentServiceStubMethods = [
+      'updateCmEnrollment',
+      'calculateEffectiveCmEnrollment',
+    ];
     for (const methodName of cmEnrollmentServiceStubMethods) {
       const callPromise = this.cmEnrollmentServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -348,8 +408,14 @@ export class CmEnrollmentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudsecuritycompliance.googleapis.com';
   }
@@ -360,8 +426,14 @@ export class CmEnrollmentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudsecuritycompliance.googleapis.com';
   }
@@ -392,9 +464,7 @@ export class CmEnrollmentServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -403,8 +473,9 @@ export class CmEnrollmentServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -415,211 +486,315 @@ export class CmEnrollmentServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Updates the Compliance Manager enrollment for a resource to facilitate
- * an audit.
- * Use this method to enroll a resource in Compliance Manager or to
- * create or update feature-specific configurations.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.cloudsecuritycompliance.v1.CmEnrollment} request.cmEnrollment
- *   Required. The Compliance Manager enrollment to update.
- *   The `name` field is used to identify the settings that you want to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields that you want to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CmEnrollment|CmEnrollment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/cm_enrollment_service.update_cm_enrollment.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_CmEnrollmentService_UpdateCmEnrollment_async
- */
+  /**
+   * Updates the Compliance Manager enrollment for a resource to facilitate
+   * an audit.
+   * Use this method to enroll a resource in Compliance Manager or to
+   * create or update feature-specific configurations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.cloudsecuritycompliance.v1.CmEnrollment} request.cmEnrollment
+   *   Required. The Compliance Manager enrollment to update.
+   *   The `name` field is used to identify the settings that you want to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields that you want to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CmEnrollment|CmEnrollment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cm_enrollment_service.update_cm_enrollment.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_CmEnrollmentService_UpdateCmEnrollment_async
+   */
   updateCmEnrollment(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateCmEnrollment(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCmEnrollment(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCmEnrollment(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'cm_enrollment.name': request.cmEnrollment!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'cm_enrollment.name': request.cmEnrollment!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateCmEnrollment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCmEnrollment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateCmEnrollment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateCmEnrollment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateCmEnrollment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.ICmEnrollment,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCmEnrollment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Calculates the effective Compliance Manager enrollment for a resource.
- * An effective enrollment is either a direct enrollment of a
- * resource (if it exists), or an enrollment of the closest parent of a
- * resource that's enrolled in Compliance Manager.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the Compliance Manager enrollment to calculate.
- *
- *   Supported formats are the following:
- *
- *   * `organizations/{organization_id}/locations/{location}/cmEnrollment`
- *   * `folders/{folder_id}/locations/{location}/cmEnrollment`
- *   * `projects/{project_id}/locations/{location}/cmEnrollment`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse|CalculateEffectiveCmEnrollmentResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/cm_enrollment_service.calculate_effective_cm_enrollment.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_CmEnrollmentService_CalculateEffectiveCmEnrollment_async
- */
+  /**
+   * Calculates the effective Compliance Manager enrollment for a resource.
+   * An effective enrollment is either a direct enrollment of a
+   * resource (if it exists), or an enrollment of the closest parent of a
+   * resource that's enrolled in Compliance Manager.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Compliance Manager enrollment to calculate.
+   *
+   *   Supported formats are the following:
+   *
+   *   * `organizations/{organization_id}/locations/{location}/cmEnrollment`
+   *   * `folders/{folder_id}/locations/{location}/cmEnrollment`
+   *   * `projects/{project_id}/locations/{location}/cmEnrollment`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse|CalculateEffectiveCmEnrollmentResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/cm_enrollment_service.calculate_effective_cm_enrollment.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_CmEnrollmentService_CalculateEffectiveCmEnrollment_async
+   */
   calculateEffectiveCmEnrollment(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   calculateEffectiveCmEnrollment(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   calculateEffectiveCmEnrollment(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   calculateEffectiveCmEnrollment(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('calculateEffectiveCmEnrollment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
+          | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('calculateEffectiveCmEnrollment response %j', response);
+          this._log.info(
+            'calculateEffectiveCmEnrollment response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.calculateEffectiveCmEnrollment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('calculateEffectiveCmEnrollment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .calculateEffectiveCmEnrollment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'calculateEffectiveCmEnrollment response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -654,12 +829,11 @@ export class CmEnrollmentServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -692,7 +866,7 @@ export class CmEnrollmentServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -709,12 +883,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} finding_summary
    * @returns {string} Resource name string.
    */
-  folderLocationFindingSummariesPath(folder:string,location:string,findingSummary:string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.render({
-      folder: folder,
-      location: location,
-      finding_summary: findingSummary,
-    });
+  folderLocationFindingSummariesPath(
+    folder: string,
+    location: string,
+    findingSummary: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        finding_summary: findingSummary,
+      },
+    );
   }
 
   /**
@@ -724,8 +904,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_findingSummaries resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).folder;
+  matchFolderFromFolderLocationFindingSummariesName(
+    folderLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(
+      folderLocationFindingSummariesName,
+    ).folder;
   }
 
   /**
@@ -735,8 +919,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_findingSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).location;
+  matchLocationFromFolderLocationFindingSummariesName(
+    folderLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(
+      folderLocationFindingSummariesName,
+    ).location;
   }
 
   /**
@@ -746,8 +934,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_findingSummaries resource.
    * @returns {string} A string representing the finding_summary.
    */
-  matchFindingSummaryFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).finding_summary;
+  matchFindingSummaryFromFolderLocationFindingSummariesName(
+    folderLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(
+      folderLocationFindingSummariesName,
+    ).finding_summary;
   }
 
   /**
@@ -759,13 +951,20 @@ export class CmEnrollmentServiceClient {
    * @param {string} control_compliance_summary
    * @returns {string} Resource name string.
    */
-  folderLocationFrameworkComplianceReportControlComplianceSummariesPath(folder:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
-      folder: folder,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-      control_compliance_summary: controlComplianceSummary,
-    });
+  folderLocationFrameworkComplianceReportControlComplianceSummariesPath(
+    folder: string,
+    location: string,
+    frameworkComplianceReport: string,
+    controlComplianceSummary: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+        control_compliance_summary: controlComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -775,8 +974,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).folder;
+  matchFolderFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).folder;
   }
 
   /**
@@ -786,8 +989,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  matchLocationFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -797,8 +1004,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -808,8 +1019,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the control_compliance_summary.
    */
-  matchControlComplianceSummaryFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  matchControlComplianceSummaryFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).control_compliance_summary;
   }
 
   /**
@@ -820,12 +1035,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_compliance_report
    * @returns {string} Resource name string.
    */
-  folderLocationFrameworkComplianceReportsPath(folder:string,location:string,frameworkComplianceReport:string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.render({
-      folder: folder,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-    });
+  folderLocationFrameworkComplianceReportsPath(
+    folder: string,
+    location: string,
+    frameworkComplianceReport: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+      },
+    );
   }
 
   /**
@@ -835,8 +1056,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).folder;
+  matchFolderFromFolderLocationFrameworkComplianceReportsName(
+    folderLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(
+      folderLocationFrameworkComplianceReportsName,
+    ).folder;
   }
 
   /**
@@ -846,8 +1071,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).location;
+  matchLocationFromFolderLocationFrameworkComplianceReportsName(
+    folderLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(
+      folderLocationFrameworkComplianceReportsName,
+    ).location;
   }
 
   /**
@@ -857,8 +1086,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).framework_compliance_report;
+  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportsName(
+    folderLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(
+      folderLocationFrameworkComplianceReportsName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -869,12 +1102,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_compliance_summary
    * @returns {string} Resource name string.
    */
-  folderLocationFrameworkComplianceSummariesPath(folder:string,location:string,frameworkComplianceSummary:string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.render({
-      folder: folder,
-      location: location,
-      framework_compliance_summary: frameworkComplianceSummary,
-    });
+  folderLocationFrameworkComplianceSummariesPath(
+    folder: string,
+    location: string,
+    frameworkComplianceSummary: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        framework_compliance_summary: frameworkComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -884,8 +1123,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).folder;
+  matchFolderFromFolderLocationFrameworkComplianceSummariesName(
+    folderLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceSummariesName,
+    ).folder;
   }
 
   /**
@@ -895,8 +1138,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).location;
+  matchLocationFromFolderLocationFrameworkComplianceSummariesName(
+    folderLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -906,8 +1153,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_summary.
    */
-  matchFrameworkComplianceSummaryFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  matchFrameworkComplianceSummaryFromFolderLocationFrameworkComplianceSummariesName(
+    folderLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceSummariesName,
+    ).framework_compliance_summary;
   }
 
   /**
@@ -918,12 +1169,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} cloud_control_deployment
    * @returns {string} Resource name string.
    */
-  organizationLocationCloudControlDeploymentsPath(organization:string,location:string,cloudControlDeployment:string) {
-    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.render({
-      organization: organization,
-      location: location,
-      cloud_control_deployment: cloudControlDeployment,
-    });
+  organizationLocationCloudControlDeploymentsPath(
+    organization: string,
+    location: string,
+    cloudControlDeployment: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        cloud_control_deployment: cloudControlDeployment,
+      },
+    );
   }
 
   /**
@@ -933,8 +1190,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationCloudControlDeploymentsName(organizationLocationCloudControlDeploymentsName: string) {
-    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(organizationLocationCloudControlDeploymentsName).organization;
+  matchOrganizationFromOrganizationLocationCloudControlDeploymentsName(
+    organizationLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(
+      organizationLocationCloudControlDeploymentsName,
+    ).organization;
   }
 
   /**
@@ -944,8 +1205,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationCloudControlDeploymentsName(organizationLocationCloudControlDeploymentsName: string) {
-    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(organizationLocationCloudControlDeploymentsName).location;
+  matchLocationFromOrganizationLocationCloudControlDeploymentsName(
+    organizationLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(
+      organizationLocationCloudControlDeploymentsName,
+    ).location;
   }
 
   /**
@@ -955,8 +1220,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
    * @returns {string} A string representing the cloud_control_deployment.
    */
-  matchCloudControlDeploymentFromOrganizationLocationCloudControlDeploymentsName(organizationLocationCloudControlDeploymentsName: string) {
-    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(organizationLocationCloudControlDeploymentsName).cloud_control_deployment;
+  matchCloudControlDeploymentFromOrganizationLocationCloudControlDeploymentsName(
+    organizationLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(
+      organizationLocationCloudControlDeploymentsName,
+    ).cloud_control_deployment;
   }
 
   /**
@@ -967,12 +1236,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} cloud_control
    * @returns {string} Resource name string.
    */
-  organizationLocationCloudControlsPath(organization:string,location:string,cloudControl:string) {
-    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.render({
-      organization: organization,
-      location: location,
-      cloud_control: cloudControl,
-    });
+  organizationLocationCloudControlsPath(
+    organization: string,
+    location: string,
+    cloudControl: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        cloud_control: cloudControl,
+      },
+    );
   }
 
   /**
@@ -982,8 +1257,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cloudControls resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationCloudControlsName(organizationLocationCloudControlsName: string) {
-    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(organizationLocationCloudControlsName).organization;
+  matchOrganizationFromOrganizationLocationCloudControlsName(
+    organizationLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(
+      organizationLocationCloudControlsName,
+    ).organization;
   }
 
   /**
@@ -993,8 +1272,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cloudControls resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationCloudControlsName(organizationLocationCloudControlsName: string) {
-    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(organizationLocationCloudControlsName).location;
+  matchLocationFromOrganizationLocationCloudControlsName(
+    organizationLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(
+      organizationLocationCloudControlsName,
+    ).location;
   }
 
   /**
@@ -1004,8 +1287,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cloudControls resource.
    * @returns {string} A string representing the cloud_control.
    */
-  matchCloudControlFromOrganizationLocationCloudControlsName(organizationLocationCloudControlsName: string) {
-    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(organizationLocationCloudControlsName).cloud_control;
+  matchCloudControlFromOrganizationLocationCloudControlsName(
+    organizationLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(
+      organizationLocationCloudControlsName,
+    ).cloud_control;
   }
 
   /**
@@ -1015,11 +1302,13 @@ export class CmEnrollmentServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationCmEnrollmentPath(organization:string,location:string) {
-    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render({
-      organization: organization,
-      location: location,
-    });
+  organizationLocationCmEnrollmentPath(organization: string, location: string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+      },
+    );
   }
 
   /**
@@ -1029,8 +1318,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cmEnrollment resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
-    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).organization;
+  matchOrganizationFromOrganizationLocationCmEnrollmentName(
+    organizationLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(
+      organizationLocationCmEnrollmentName,
+    ).organization;
   }
 
   /**
@@ -1040,8 +1333,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_cmEnrollment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
-    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).location;
+  matchLocationFromOrganizationLocationCmEnrollmentName(
+    organizationLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(
+      organizationLocationCmEnrollmentName,
+    ).location;
   }
 
   /**
@@ -1052,7 +1349,11 @@ export class CmEnrollmentServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  organizationLocationControlsPath(organization:string,location:string,control:string) {
+  organizationLocationControlsPath(
+    organization: string,
+    location: string,
+    control: string,
+  ) {
     return this.pathTemplates.organizationLocationControlsPathTemplate.render({
       organization: organization,
       location: location,
@@ -1067,8 +1368,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_controls resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationControlsName(organizationLocationControlsName: string) {
-    return this.pathTemplates.organizationLocationControlsPathTemplate.match(organizationLocationControlsName).organization;
+  matchOrganizationFromOrganizationLocationControlsName(
+    organizationLocationControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(
+      organizationLocationControlsName,
+    ).organization;
   }
 
   /**
@@ -1078,8 +1383,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_controls resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationControlsName(organizationLocationControlsName: string) {
-    return this.pathTemplates.organizationLocationControlsPathTemplate.match(organizationLocationControlsName).location;
+  matchLocationFromOrganizationLocationControlsName(
+    organizationLocationControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(
+      organizationLocationControlsName,
+    ).location;
   }
 
   /**
@@ -1089,8 +1398,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_controls resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromOrganizationLocationControlsName(organizationLocationControlsName: string) {
-    return this.pathTemplates.organizationLocationControlsPathTemplate.match(organizationLocationControlsName).control;
+  matchControlFromOrganizationLocationControlsName(
+    organizationLocationControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(
+      organizationLocationControlsName,
+    ).control;
   }
 
   /**
@@ -1101,12 +1414,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} finding_summary
    * @returns {string} Resource name string.
    */
-  organizationLocationFindingSummariesPath(organization:string,location:string,findingSummary:string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.render({
-      organization: organization,
-      location: location,
-      finding_summary: findingSummary,
-    });
+  organizationLocationFindingSummariesPath(
+    organization: string,
+    location: string,
+    findingSummary: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        finding_summary: findingSummary,
+      },
+    );
   }
 
   /**
@@ -1116,8 +1435,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_findingSummaries resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).organization;
+  matchOrganizationFromOrganizationLocationFindingSummariesName(
+    organizationLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(
+      organizationLocationFindingSummariesName,
+    ).organization;
   }
 
   /**
@@ -1127,8 +1450,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_findingSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).location;
+  matchLocationFromOrganizationLocationFindingSummariesName(
+    organizationLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(
+      organizationLocationFindingSummariesName,
+    ).location;
   }
 
   /**
@@ -1138,8 +1465,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_findingSummaries resource.
    * @returns {string} A string representing the finding_summary.
    */
-  matchFindingSummaryFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).finding_summary;
+  matchFindingSummaryFromOrganizationLocationFindingSummariesName(
+    organizationLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(
+      organizationLocationFindingSummariesName,
+    ).finding_summary;
   }
 
   /**
@@ -1150,12 +1481,19 @@ export class CmEnrollmentServiceClient {
    * @param {string} generate_framework_audit_scope_report_response
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkAuditScopeReportsPath(organization:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render({
-      organization: organization,
-      location: location,
-      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
-    });
+  organizationLocationFrameworkAuditScopeReportsPath(
+    organization: string,
+    location: string,
+    generateFrameworkAuditScopeReportResponse: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        generate_framework_audit_scope_report_response:
+          generateFrameworkAuditScopeReportResponse,
+      },
+    );
   }
 
   /**
@@ -1165,8 +1503,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName(
+    organizationLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(
+      organizationLocationFrameworkAuditScopeReportsName,
+    ).organization;
   }
 
   /**
@@ -1176,8 +1518,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).location;
+  matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName(
+    organizationLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(
+      organizationLocationFrameworkAuditScopeReportsName,
+    ).location;
   }
 
   /**
@@ -1187,8 +1533,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the generate_framework_audit_scope_report_response.
    */
-  matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName(
+    organizationLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(
+      organizationLocationFrameworkAuditScopeReportsName,
+    ).generate_framework_audit_scope_report_response;
   }
 
   /**
@@ -1199,12 +1549,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_audit
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkAuditsPath(organization:string,location:string,frameworkAudit:string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_audit: frameworkAudit,
-    });
+  organizationLocationFrameworkAuditsPath(
+    organization: string,
+    location: string,
+    frameworkAudit: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_audit: frameworkAudit,
+      },
+    );
   }
 
   /**
@@ -1214,8 +1570,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkAudits resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkAuditsName(
+    organizationLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(
+      organizationLocationFrameworkAuditsName,
+    ).organization;
   }
 
   /**
@@ -1225,8 +1585,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkAudits resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).location;
+  matchLocationFromOrganizationLocationFrameworkAuditsName(
+    organizationLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(
+      organizationLocationFrameworkAuditsName,
+    ).location;
   }
 
   /**
@@ -1236,8 +1600,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkAudits resource.
    * @returns {string} A string representing the framework_audit.
    */
-  matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).framework_audit;
+  matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName(
+    organizationLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(
+      organizationLocationFrameworkAuditsName,
+    ).framework_audit;
   }
 
   /**
@@ -1249,13 +1617,20 @@ export class CmEnrollmentServiceClient {
    * @param {string} control_compliance_summary
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkComplianceReportControlComplianceSummariesPath(organization:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-      control_compliance_summary: controlComplianceSummary,
-    });
+  organizationLocationFrameworkComplianceReportControlComplianceSummariesPath(
+    organization: string,
+    location: string,
+    frameworkComplianceReport: string,
+    controlComplianceSummary: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+        control_compliance_summary: controlComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -1265,8 +1640,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).organization;
   }
 
   /**
@@ -1276,8 +1655,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  matchLocationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -1287,8 +1670,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -1298,8 +1685,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the control_compliance_summary.
    */
-  matchControlComplianceSummaryFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  matchControlComplianceSummaryFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).control_compliance_summary;
   }
 
   /**
@@ -1310,12 +1701,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_compliance_report
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkComplianceReportsPath(organization:string,location:string,frameworkComplianceReport:string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-    });
+  organizationLocationFrameworkComplianceReportsPath(
+    organization: string,
+    location: string,
+    frameworkComplianceReport: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+      },
+    );
   }
 
   /**
@@ -1325,8 +1722,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkComplianceReportsName(
+    organizationLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(
+      organizationLocationFrameworkComplianceReportsName,
+    ).organization;
   }
 
   /**
@@ -1336,8 +1737,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).location;
+  matchLocationFromOrganizationLocationFrameworkComplianceReportsName(
+    organizationLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(
+      organizationLocationFrameworkComplianceReportsName,
+    ).location;
   }
 
   /**
@@ -1347,8 +1752,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).framework_compliance_report;
+  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportsName(
+    organizationLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(
+      organizationLocationFrameworkComplianceReportsName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -1359,12 +1768,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_compliance_summary
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkComplianceSummariesPath(organization:string,location:string,frameworkComplianceSummary:string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_compliance_summary: frameworkComplianceSummary,
-    });
+  organizationLocationFrameworkComplianceSummariesPath(
+    organization: string,
+    location: string,
+    frameworkComplianceSummary: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_compliance_summary: frameworkComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -1374,8 +1789,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkComplianceSummariesName(
+    organizationLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceSummariesName,
+    ).organization;
   }
 
   /**
@@ -1385,8 +1804,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).location;
+  matchLocationFromOrganizationLocationFrameworkComplianceSummariesName(
+    organizationLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -1396,8 +1819,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_summary.
    */
-  matchFrameworkComplianceSummaryFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  matchFrameworkComplianceSummaryFromOrganizationLocationFrameworkComplianceSummariesName(
+    organizationLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceSummariesName,
+    ).framework_compliance_summary;
   }
 
   /**
@@ -1408,12 +1835,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_deployment
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkDeploymentsPath(organization:string,location:string,frameworkDeployment:string) {
-    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_deployment: frameworkDeployment,
-    });
+  organizationLocationFrameworkDeploymentsPath(
+    organization: string,
+    location: string,
+    frameworkDeployment: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_deployment: frameworkDeployment,
+      },
+    );
   }
 
   /**
@@ -1423,8 +1856,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkDeployments resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkDeploymentsName(organizationLocationFrameworkDeploymentsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(organizationLocationFrameworkDeploymentsName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkDeploymentsName(
+    organizationLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(
+      organizationLocationFrameworkDeploymentsName,
+    ).organization;
   }
 
   /**
@@ -1434,8 +1871,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkDeployments resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkDeploymentsName(organizationLocationFrameworkDeploymentsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(organizationLocationFrameworkDeploymentsName).location;
+  matchLocationFromOrganizationLocationFrameworkDeploymentsName(
+    organizationLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(
+      organizationLocationFrameworkDeploymentsName,
+    ).location;
   }
 
   /**
@@ -1445,8 +1886,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworkDeployments resource.
    * @returns {string} A string representing the framework_deployment.
    */
-  matchFrameworkDeploymentFromOrganizationLocationFrameworkDeploymentsName(organizationLocationFrameworkDeploymentsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(organizationLocationFrameworkDeploymentsName).framework_deployment;
+  matchFrameworkDeploymentFromOrganizationLocationFrameworkDeploymentsName(
+    organizationLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(
+      organizationLocationFrameworkDeploymentsName,
+    ).framework_deployment;
   }
 
   /**
@@ -1457,12 +1902,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworksPath(organization:string,location:string,framework:string) {
-    return this.pathTemplates.organizationLocationFrameworksPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework: framework,
-    });
+  organizationLocationFrameworksPath(
+    organization: string,
+    location: string,
+    framework: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework: framework,
+      },
+    );
   }
 
   /**
@@ -1472,8 +1923,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworks resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworksName(organizationLocationFrameworksName: string) {
-    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(organizationLocationFrameworksName).organization;
+  matchOrganizationFromOrganizationLocationFrameworksName(
+    organizationLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(
+      organizationLocationFrameworksName,
+    ).organization;
   }
 
   /**
@@ -1483,8 +1938,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworks resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworksName(organizationLocationFrameworksName: string) {
-    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(organizationLocationFrameworksName).location;
+  matchLocationFromOrganizationLocationFrameworksName(
+    organizationLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(
+      organizationLocationFrameworksName,
+    ).location;
   }
 
   /**
@@ -1494,8 +1953,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing organization_location_frameworks resource.
    * @returns {string} A string representing the framework.
    */
-  matchFrameworkFromOrganizationLocationFrameworksName(organizationLocationFrameworksName: string) {
-    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(organizationLocationFrameworksName).framework;
+  matchFrameworkFromOrganizationLocationFrameworksName(
+    organizationLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(
+      organizationLocationFrameworksName,
+    ).framework;
   }
 
   /**
@@ -1506,12 +1969,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} cloud_control_deployment
    * @returns {string} Resource name string.
    */
-  projectLocationCloudControlDeploymentsPath(project:string,location:string,cloudControlDeployment:string) {
-    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.render({
-      project: project,
-      location: location,
-      cloud_control_deployment: cloudControlDeployment,
-    });
+  projectLocationCloudControlDeploymentsPath(
+    project: string,
+    location: string,
+    cloudControlDeployment: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        cloud_control_deployment: cloudControlDeployment,
+      },
+    );
   }
 
   /**
@@ -1521,8 +1990,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cloudControlDeployments resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCloudControlDeploymentsName(projectLocationCloudControlDeploymentsName: string) {
-    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(projectLocationCloudControlDeploymentsName).project;
+  matchProjectFromProjectLocationCloudControlDeploymentsName(
+    projectLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(
+      projectLocationCloudControlDeploymentsName,
+    ).project;
   }
 
   /**
@@ -1532,8 +2005,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cloudControlDeployments resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCloudControlDeploymentsName(projectLocationCloudControlDeploymentsName: string) {
-    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(projectLocationCloudControlDeploymentsName).location;
+  matchLocationFromProjectLocationCloudControlDeploymentsName(
+    projectLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(
+      projectLocationCloudControlDeploymentsName,
+    ).location;
   }
 
   /**
@@ -1543,8 +2020,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cloudControlDeployments resource.
    * @returns {string} A string representing the cloud_control_deployment.
    */
-  matchCloudControlDeploymentFromProjectLocationCloudControlDeploymentsName(projectLocationCloudControlDeploymentsName: string) {
-    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(projectLocationCloudControlDeploymentsName).cloud_control_deployment;
+  matchCloudControlDeploymentFromProjectLocationCloudControlDeploymentsName(
+    projectLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(
+      projectLocationCloudControlDeploymentsName,
+    ).cloud_control_deployment;
   }
 
   /**
@@ -1555,7 +2036,11 @@ export class CmEnrollmentServiceClient {
    * @param {string} cloud_control
    * @returns {string} Resource name string.
    */
-  projectLocationCloudControlsPath(project:string,location:string,cloudControl:string) {
+  projectLocationCloudControlsPath(
+    project: string,
+    location: string,
+    cloudControl: string,
+  ) {
     return this.pathTemplates.projectLocationCloudControlsPathTemplate.render({
       project: project,
       location: location,
@@ -1570,8 +2055,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cloudControls resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCloudControlsName(projectLocationCloudControlsName: string) {
-    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(projectLocationCloudControlsName).project;
+  matchProjectFromProjectLocationCloudControlsName(
+    projectLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(
+      projectLocationCloudControlsName,
+    ).project;
   }
 
   /**
@@ -1581,8 +2070,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cloudControls resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCloudControlsName(projectLocationCloudControlsName: string) {
-    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(projectLocationCloudControlsName).location;
+  matchLocationFromProjectLocationCloudControlsName(
+    projectLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(
+      projectLocationCloudControlsName,
+    ).location;
   }
 
   /**
@@ -1592,8 +2085,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cloudControls resource.
    * @returns {string} A string representing the cloud_control.
    */
-  matchCloudControlFromProjectLocationCloudControlsName(projectLocationCloudControlsName: string) {
-    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(projectLocationCloudControlsName).cloud_control;
+  matchCloudControlFromProjectLocationCloudControlsName(
+    projectLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(
+      projectLocationCloudControlsName,
+    ).cloud_control;
   }
 
   /**
@@ -1603,7 +2100,7 @@ export class CmEnrollmentServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationCmEnrollmentPath(project:string,location:string) {
+  projectLocationCmEnrollmentPath(project: string, location: string) {
     return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.render({
       project: project,
       location: location,
@@ -1617,8 +2114,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cmEnrollment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
-    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).project;
+  matchProjectFromProjectLocationCmEnrollmentName(
+    projectLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(
+      projectLocationCmEnrollmentName,
+    ).project;
   }
 
   /**
@@ -1628,8 +2129,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_cmEnrollment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
-    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).location;
+  matchLocationFromProjectLocationCmEnrollmentName(
+    projectLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(
+      projectLocationCmEnrollmentName,
+    ).location;
   }
 
   /**
@@ -1640,7 +2145,11 @@ export class CmEnrollmentServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  projectLocationControlsPath(project:string,location:string,control:string) {
+  projectLocationControlsPath(
+    project: string,
+    location: string,
+    control: string,
+  ) {
     return this.pathTemplates.projectLocationControlsPathTemplate.render({
       project: project,
       location: location,
@@ -1655,8 +2164,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_controls resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationControlsName(projectLocationControlsName: string) {
-    return this.pathTemplates.projectLocationControlsPathTemplate.match(projectLocationControlsName).project;
+  matchProjectFromProjectLocationControlsName(
+    projectLocationControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(
+      projectLocationControlsName,
+    ).project;
   }
 
   /**
@@ -1666,8 +2179,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_controls resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationControlsName(projectLocationControlsName: string) {
-    return this.pathTemplates.projectLocationControlsPathTemplate.match(projectLocationControlsName).location;
+  matchLocationFromProjectLocationControlsName(
+    projectLocationControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(
+      projectLocationControlsName,
+    ).location;
   }
 
   /**
@@ -1677,8 +2194,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_controls resource.
    * @returns {string} A string representing the control.
    */
-  matchControlFromProjectLocationControlsName(projectLocationControlsName: string) {
-    return this.pathTemplates.projectLocationControlsPathTemplate.match(projectLocationControlsName).control;
+  matchControlFromProjectLocationControlsName(
+    projectLocationControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(
+      projectLocationControlsName,
+    ).control;
   }
 
   /**
@@ -1689,12 +2210,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} finding_summary
    * @returns {string} Resource name string.
    */
-  projectLocationFindingSummariesPath(project:string,location:string,findingSummary:string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.render({
-      project: project,
-      location: location,
-      finding_summary: findingSummary,
-    });
+  projectLocationFindingSummariesPath(
+    project: string,
+    location: string,
+    findingSummary: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        finding_summary: findingSummary,
+      },
+    );
   }
 
   /**
@@ -1704,8 +2231,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_findingSummaries resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).project;
+  matchProjectFromProjectLocationFindingSummariesName(
+    projectLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(
+      projectLocationFindingSummariesName,
+    ).project;
   }
 
   /**
@@ -1715,8 +2246,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_findingSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).location;
+  matchLocationFromProjectLocationFindingSummariesName(
+    projectLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(
+      projectLocationFindingSummariesName,
+    ).location;
   }
 
   /**
@@ -1726,8 +2261,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_findingSummaries resource.
    * @returns {string} A string representing the finding_summary.
    */
-  matchFindingSummaryFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).finding_summary;
+  matchFindingSummaryFromProjectLocationFindingSummariesName(
+    projectLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(
+      projectLocationFindingSummariesName,
+    ).finding_summary;
   }
 
   /**
@@ -1738,12 +2277,19 @@ export class CmEnrollmentServiceClient {
    * @param {string} generate_framework_audit_scope_report_response
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkAuditScopeReportsPath(project:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render({
-      project: project,
-      location: location,
-      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
-    });
+  projectLocationFrameworkAuditScopeReportsPath(
+    project: string,
+    location: string,
+    generateFrameworkAuditScopeReportResponse: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        generate_framework_audit_scope_report_response:
+          generateFrameworkAuditScopeReportResponse,
+      },
+    );
   }
 
   /**
@@ -1753,8 +2299,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).project;
+  matchProjectFromProjectLocationFrameworkAuditScopeReportsName(
+    projectLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(
+      projectLocationFrameworkAuditScopeReportsName,
+    ).project;
   }
 
   /**
@@ -1764,8 +2314,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).location;
+  matchLocationFromProjectLocationFrameworkAuditScopeReportsName(
+    projectLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(
+      projectLocationFrameworkAuditScopeReportsName,
+    ).location;
   }
 
   /**
@@ -1775,8 +2329,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the generate_framework_audit_scope_report_response.
    */
-  matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName(
+    projectLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(
+      projectLocationFrameworkAuditScopeReportsName,
+    ).generate_framework_audit_scope_report_response;
   }
 
   /**
@@ -1787,12 +2345,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_audit
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkAuditsPath(project:string,location:string,frameworkAudit:string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render({
-      project: project,
-      location: location,
-      framework_audit: frameworkAudit,
-    });
+  projectLocationFrameworkAuditsPath(
+    project: string,
+    location: string,
+    frameworkAudit: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_audit: frameworkAudit,
+      },
+    );
   }
 
   /**
@@ -1802,8 +2366,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkAudits resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).project;
+  matchProjectFromProjectLocationFrameworkAuditsName(
+    projectLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(
+      projectLocationFrameworkAuditsName,
+    ).project;
   }
 
   /**
@@ -1813,8 +2381,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkAudits resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).location;
+  matchLocationFromProjectLocationFrameworkAuditsName(
+    projectLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(
+      projectLocationFrameworkAuditsName,
+    ).location;
   }
 
   /**
@@ -1824,8 +2396,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkAudits resource.
    * @returns {string} A string representing the framework_audit.
    */
-  matchFrameworkAuditFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).framework_audit;
+  matchFrameworkAuditFromProjectLocationFrameworkAuditsName(
+    projectLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(
+      projectLocationFrameworkAuditsName,
+    ).framework_audit;
   }
 
   /**
@@ -1837,13 +2413,20 @@ export class CmEnrollmentServiceClient {
    * @param {string} control_compliance_summary
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkComplianceReportControlComplianceSummariesPath(project:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
-      project: project,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-      control_compliance_summary: controlComplianceSummary,
-    });
+  projectLocationFrameworkComplianceReportControlComplianceSummariesPath(
+    project: string,
+    location: string,
+    frameworkComplianceReport: string,
+    controlComplianceSummary: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+        control_compliance_summary: controlComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -1853,8 +2436,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).project;
+  matchProjectFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).project;
   }
 
   /**
@@ -1864,8 +2451,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  matchLocationFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -1875,8 +2466,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -1886,8 +2481,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the control_compliance_summary.
    */
-  matchControlComplianceSummaryFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  matchControlComplianceSummaryFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).control_compliance_summary;
   }
 
   /**
@@ -1898,12 +2497,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_compliance_report
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkComplianceReportsPath(project:string,location:string,frameworkComplianceReport:string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.render({
-      project: project,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-    });
+  projectLocationFrameworkComplianceReportsPath(
+    project: string,
+    location: string,
+    frameworkComplianceReport: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+      },
+    );
   }
 
   /**
@@ -1913,8 +2518,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).project;
+  matchProjectFromProjectLocationFrameworkComplianceReportsName(
+    projectLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(
+      projectLocationFrameworkComplianceReportsName,
+    ).project;
   }
 
   /**
@@ -1924,8 +2533,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).location;
+  matchLocationFromProjectLocationFrameworkComplianceReportsName(
+    projectLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(
+      projectLocationFrameworkComplianceReportsName,
+    ).location;
   }
 
   /**
@@ -1935,8 +2548,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).framework_compliance_report;
+  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportsName(
+    projectLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(
+      projectLocationFrameworkComplianceReportsName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -1947,12 +2564,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_compliance_summary
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkComplianceSummariesPath(project:string,location:string,frameworkComplianceSummary:string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.render({
-      project: project,
-      location: location,
-      framework_compliance_summary: frameworkComplianceSummary,
-    });
+  projectLocationFrameworkComplianceSummariesPath(
+    project: string,
+    location: string,
+    frameworkComplianceSummary: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_compliance_summary: frameworkComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -1962,8 +2585,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).project;
+  matchProjectFromProjectLocationFrameworkComplianceSummariesName(
+    projectLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceSummariesName,
+    ).project;
   }
 
   /**
@@ -1973,8 +2600,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).location;
+  matchLocationFromProjectLocationFrameworkComplianceSummariesName(
+    projectLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -1984,8 +2615,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_summary.
    */
-  matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName(
+    projectLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceSummariesName,
+    ).framework_compliance_summary;
   }
 
   /**
@@ -1996,12 +2631,18 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework_deployment
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkDeploymentsPath(project:string,location:string,frameworkDeployment:string) {
-    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.render({
-      project: project,
-      location: location,
-      framework_deployment: frameworkDeployment,
-    });
+  projectLocationFrameworkDeploymentsPath(
+    project: string,
+    location: string,
+    frameworkDeployment: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_deployment: frameworkDeployment,
+      },
+    );
   }
 
   /**
@@ -2011,8 +2652,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkDeployments resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkDeploymentsName(projectLocationFrameworkDeploymentsName: string) {
-    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(projectLocationFrameworkDeploymentsName).project;
+  matchProjectFromProjectLocationFrameworkDeploymentsName(
+    projectLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(
+      projectLocationFrameworkDeploymentsName,
+    ).project;
   }
 
   /**
@@ -2022,8 +2667,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkDeployments resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkDeploymentsName(projectLocationFrameworkDeploymentsName: string) {
-    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(projectLocationFrameworkDeploymentsName).location;
+  matchLocationFromProjectLocationFrameworkDeploymentsName(
+    projectLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(
+      projectLocationFrameworkDeploymentsName,
+    ).location;
   }
 
   /**
@@ -2033,8 +2682,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworkDeployments resource.
    * @returns {string} A string representing the framework_deployment.
    */
-  matchFrameworkDeploymentFromProjectLocationFrameworkDeploymentsName(projectLocationFrameworkDeploymentsName: string) {
-    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(projectLocationFrameworkDeploymentsName).framework_deployment;
+  matchFrameworkDeploymentFromProjectLocationFrameworkDeploymentsName(
+    projectLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(
+      projectLocationFrameworkDeploymentsName,
+    ).framework_deployment;
   }
 
   /**
@@ -2045,7 +2698,11 @@ export class CmEnrollmentServiceClient {
    * @param {string} framework
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworksPath(project:string,location:string,framework:string) {
+  projectLocationFrameworksPath(
+    project: string,
+    location: string,
+    framework: string,
+  ) {
     return this.pathTemplates.projectLocationFrameworksPathTemplate.render({
       project: project,
       location: location,
@@ -2060,8 +2717,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworks resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworksName(projectLocationFrameworksName: string) {
-    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(projectLocationFrameworksName).project;
+  matchProjectFromProjectLocationFrameworksName(
+    projectLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(
+      projectLocationFrameworksName,
+    ).project;
   }
 
   /**
@@ -2071,8 +2732,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworks resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworksName(projectLocationFrameworksName: string) {
-    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(projectLocationFrameworksName).location;
+  matchLocationFromProjectLocationFrameworksName(
+    projectLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(
+      projectLocationFrameworksName,
+    ).location;
   }
 
   /**
@@ -2082,8 +2747,12 @@ export class CmEnrollmentServiceClient {
    *   A fully-qualified path representing project_location_frameworks resource.
    * @returns {string} A string representing the framework.
    */
-  matchFrameworkFromProjectLocationFrameworksName(projectLocationFrameworksName: string) {
-    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(projectLocationFrameworksName).framework;
+  matchFrameworkFromProjectLocationFrameworksName(
+    projectLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(
+      projectLocationFrameworksName,
+    ).framework;
   }
 
   /**
@@ -2094,11 +2763,13 @@ export class CmEnrollmentServiceClient {
    */
   close(): Promise<void> {
     if (this.cmEnrollmentServiceStub && !this._terminated) {
-      return this.cmEnrollmentServiceStub.then(stub => {
+      return this.cmEnrollmentServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

@@ -668,6 +668,39 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.datacatalog.lineage.v1.Lineage|searchLineageStreaming}.
+                             * @memberof google.cloud.datacatalog.lineage.v1.Lineage
+                             * @typedef SearchLineageStreamingCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse} [response] SearchLineageStreamingResponse
+                             */
+    
+                            /**
+                             * Calls SearchLineageStreaming.
+                             * @function searchLineageStreaming
+                             * @memberof google.cloud.datacatalog.lineage.v1.Lineage
+                             * @instance
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest} request SearchLineageStreamingRequest message or plain object
+                             * @param {google.cloud.datacatalog.lineage.v1.Lineage.SearchLineageStreamingCallback} callback Node-style callback called with the error, if any, and SearchLineageStreamingResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(Lineage.prototype.searchLineageStreaming = function searchLineageStreaming(request, callback) {
+                                return this.rpcCall(searchLineageStreaming, $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest, $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse, request, callback);
+                            }, "name", { value: "SearchLineageStreaming" });
+    
+                            /**
+                             * Calls SearchLineageStreaming.
+                             * @function searchLineageStreaming
+                             * @memberof google.cloud.datacatalog.lineage.v1.Lineage
+                             * @instance
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest} request SearchLineageStreamingRequest message or plain object
+                             * @returns {Promise<google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse>} Promise
+                             * @variation 2
+                             */
+    
                             return Lineage;
                         })();
     
@@ -1737,6 +1770,7 @@
                              * @interface IEventLink
                              * @property {google.cloud.datacatalog.lineage.v1.IEntityReference|null} [source] EventLink source
                              * @property {google.cloud.datacatalog.lineage.v1.IEntityReference|null} [target] EventLink target
+                             * @property {google.cloud.datacatalog.lineage.v1.IDependencyInfo|null} [dependencyInfo] EventLink dependencyInfo
                              */
     
                             /**
@@ -1771,6 +1805,14 @@
                             EventLink.prototype.target = null;
     
                             /**
+                             * EventLink dependencyInfo.
+                             * @member {google.cloud.datacatalog.lineage.v1.IDependencyInfo|null|undefined} dependencyInfo
+                             * @memberof google.cloud.datacatalog.lineage.v1.EventLink
+                             * @instance
+                             */
+                            EventLink.prototype.dependencyInfo = null;
+    
+                            /**
                              * Creates a new EventLink instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.datacatalog.lineage.v1.EventLink
@@ -1798,6 +1840,8 @@
                                     $root.google.cloud.datacatalog.lineage.v1.EntityReference.encode(message.source, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                                 if (message.target != null && Object.hasOwnProperty.call(message, "target"))
                                     $root.google.cloud.datacatalog.lineage.v1.EntityReference.encode(message.target, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.dependencyInfo != null && Object.hasOwnProperty.call(message, "dependencyInfo"))
+                                    $root.google.cloud.datacatalog.lineage.v1.DependencyInfo.encode(message.dependencyInfo, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1840,6 +1884,10 @@
                                         }
                                     case 2: {
                                             message.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.dependencyInfo = $root.google.cloud.datacatalog.lineage.v1.DependencyInfo.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -1887,6 +1935,11 @@
                                     if (error)
                                         return "target." + error;
                                 }
+                                if (message.dependencyInfo != null && message.hasOwnProperty("dependencyInfo")) {
+                                    var error = $root.google.cloud.datacatalog.lineage.v1.DependencyInfo.verify(message.dependencyInfo);
+                                    if (error)
+                                        return "dependencyInfo." + error;
+                                }
                                 return null;
                             };
     
@@ -1912,6 +1965,11 @@
                                         throw TypeError(".google.cloud.datacatalog.lineage.v1.EventLink.target: object expected");
                                     message.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.fromObject(object.target);
                                 }
+                                if (object.dependencyInfo != null) {
+                                    if (typeof object.dependencyInfo !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.EventLink.dependencyInfo: object expected");
+                                    message.dependencyInfo = $root.google.cloud.datacatalog.lineage.v1.DependencyInfo.fromObject(object.dependencyInfo);
+                                }
                                 return message;
                             };
     
@@ -1931,11 +1989,14 @@
                                 if (options.defaults) {
                                     object.source = null;
                                     object.target = null;
+                                    object.dependencyInfo = null;
                                 }
                                 if (message.source != null && message.hasOwnProperty("source"))
                                     object.source = $root.google.cloud.datacatalog.lineage.v1.EntityReference.toObject(message.source, options);
                                 if (message.target != null && message.hasOwnProperty("target"))
                                     object.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.toObject(message.target, options);
+                                if (message.dependencyInfo != null && message.hasOwnProperty("dependencyInfo"))
+                                    object.dependencyInfo = $root.google.cloud.datacatalog.lineage.v1.DependencyInfo.toObject(message.dependencyInfo, options);
                                 return object;
                             };
     
@@ -1968,6 +2029,235 @@
                             return EventLink;
                         })();
     
+                        v1.DependencyInfo = (function() {
+    
+                            /**
+                             * Properties of a DependencyInfo.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @interface IDependencyInfo
+                             * @property {google.cloud.datacatalog.lineage.v1.DependencyType|null} [dependencyType] DependencyInfo dependencyType
+                             */
+    
+                            /**
+                             * Constructs a new DependencyInfo.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @classdesc Represents a DependencyInfo.
+                             * @implements IDependencyInfo
+                             * @constructor
+                             * @param {google.cloud.datacatalog.lineage.v1.IDependencyInfo=} [properties] Properties to set
+                             */
+                            function DependencyInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DependencyInfo dependencyType.
+                             * @member {google.cloud.datacatalog.lineage.v1.DependencyType} dependencyType
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @instance
+                             */
+                            DependencyInfo.prototype.dependencyType = 0;
+    
+                            /**
+                             * Creates a new DependencyInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.IDependencyInfo=} [properties] Properties to set
+                             * @returns {google.cloud.datacatalog.lineage.v1.DependencyInfo} DependencyInfo instance
+                             */
+                            DependencyInfo.create = function create(properties) {
+                                return new DependencyInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DependencyInfo message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.DependencyInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.IDependencyInfo} message DependencyInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DependencyInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.dependencyType != null && Object.hasOwnProperty.call(message, "dependencyType"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.dependencyType);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DependencyInfo message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.DependencyInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.IDependencyInfo} message DependencyInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DependencyInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DependencyInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datacatalog.lineage.v1.DependencyInfo} DependencyInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DependencyInfo.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.DependencyInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.dependencyType = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DependencyInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datacatalog.lineage.v1.DependencyInfo} DependencyInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DependencyInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DependencyInfo message.
+                             * @function verify
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DependencyInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.dependencyType != null && message.hasOwnProperty("dependencyType"))
+                                    switch (message.dependencyType) {
+                                    default:
+                                        return "dependencyType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DependencyInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datacatalog.lineage.v1.DependencyInfo} DependencyInfo
+                             */
+                            DependencyInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datacatalog.lineage.v1.DependencyInfo)
+                                    return object;
+                                var message = new $root.google.cloud.datacatalog.lineage.v1.DependencyInfo();
+                                switch (object.dependencyType) {
+                                default:
+                                    if (typeof object.dependencyType === "number") {
+                                        message.dependencyType = object.dependencyType;
+                                        break;
+                                    }
+                                    break;
+                                case "DEPENDENCY_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.dependencyType = 0;
+                                    break;
+                                case "EXACT_COPY":
+                                case 1:
+                                    message.dependencyType = 1;
+                                    break;
+                                case "OTHER":
+                                case 3:
+                                    message.dependencyType = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DependencyInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.DependencyInfo} message DependencyInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DependencyInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.dependencyType = options.enums === String ? "DEPENDENCY_TYPE_UNSPECIFIED" : 0;
+                                if (message.dependencyType != null && message.hasOwnProperty("dependencyType"))
+                                    object.dependencyType = options.enums === String ? $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyType] === undefined ? message.dependencyType : $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyType] : message.dependencyType;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DependencyInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DependencyInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DependencyInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datacatalog.lineage.v1.DependencyInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DependencyInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.DependencyInfo";
+                            };
+    
+                            return DependencyInfo;
+                        })();
+    
                         v1.EntityReference = (function() {
     
                             /**
@@ -1975,6 +2265,7 @@
                              * @memberof google.cloud.datacatalog.lineage.v1
                              * @interface IEntityReference
                              * @property {string|null} [fullyQualifiedName] EntityReference fullyQualifiedName
+                             * @property {Array.<string>|null} [field] EntityReference field
                              */
     
                             /**
@@ -1986,6 +2277,7 @@
                              * @param {google.cloud.datacatalog.lineage.v1.IEntityReference=} [properties] Properties to set
                              */
                             function EntityReference(properties) {
+                                this.field = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -1999,6 +2291,14 @@
                              * @instance
                              */
                             EntityReference.prototype.fullyQualifiedName = "";
+    
+                            /**
+                             * EntityReference field.
+                             * @member {Array.<string>} field
+                             * @memberof google.cloud.datacatalog.lineage.v1.EntityReference
+                             * @instance
+                             */
+                            EntityReference.prototype.field = $util.emptyArray;
     
                             /**
                              * Creates a new EntityReference instance using the specified properties.
@@ -2026,6 +2326,9 @@
                                     writer = $Writer.create();
                                 if (message.fullyQualifiedName != null && Object.hasOwnProperty.call(message, "fullyQualifiedName"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.fullyQualifiedName);
+                                if (message.field != null && message.field.length)
+                                    for (var i = 0; i < message.field.length; ++i)
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.field[i]);
                                 return writer;
                             };
     
@@ -2066,6 +2369,12 @@
                                             message.fullyQualifiedName = reader.string();
                                             break;
                                         }
+                                    case 3: {
+                                            if (!(message.field && message.field.length))
+                                                message.field = [];
+                                            message.field.push(reader.string());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -2104,6 +2413,13 @@
                                 if (message.fullyQualifiedName != null && message.hasOwnProperty("fullyQualifiedName"))
                                     if (!$util.isString(message.fullyQualifiedName))
                                         return "fullyQualifiedName: string expected";
+                                if (message.field != null && message.hasOwnProperty("field")) {
+                                    if (!Array.isArray(message.field))
+                                        return "field: array expected";
+                                    for (var i = 0; i < message.field.length; ++i)
+                                        if (!$util.isString(message.field[i]))
+                                            return "field: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -2121,6 +2437,13 @@
                                 var message = new $root.google.cloud.datacatalog.lineage.v1.EntityReference();
                                 if (object.fullyQualifiedName != null)
                                     message.fullyQualifiedName = String(object.fullyQualifiedName);
+                                if (object.field) {
+                                    if (!Array.isArray(object.field))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.EntityReference.field: array expected");
+                                    message.field = [];
+                                    for (var i = 0; i < object.field.length; ++i)
+                                        message.field[i] = String(object.field[i]);
+                                }
                                 return message;
                             };
     
@@ -2137,10 +2460,17 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.field = [];
                                 if (options.defaults)
                                     object.fullyQualifiedName = "";
                                 if (message.fullyQualifiedName != null && message.hasOwnProperty("fullyQualifiedName"))
                                     object.fullyQualifiedName = message.fullyQualifiedName;
+                                if (message.field && message.field.length) {
+                                    object.field = [];
+                                    for (var j = 0; j < message.field.length; ++j)
+                                        object.field[j] = message.field[j];
+                                }
                                 return object;
                             };
     
@@ -3390,6 +3720,7 @@
                              * @property {google.cloud.datacatalog.lineage.v1.IProcess|null} [process] UpdateProcessRequest process
                              * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateProcessRequest updateMask
                              * @property {boolean|null} [allowMissing] UpdateProcessRequest allowMissing
+                             * @property {string|null} [requestId] UpdateProcessRequest requestId
                              */
     
                             /**
@@ -3432,6 +3763,14 @@
                             UpdateProcessRequest.prototype.allowMissing = false;
     
                             /**
+                             * UpdateProcessRequest requestId.
+                             * @member {string} requestId
+                             * @memberof google.cloud.datacatalog.lineage.v1.UpdateProcessRequest
+                             * @instance
+                             */
+                            UpdateProcessRequest.prototype.requestId = "";
+    
+                            /**
                              * Creates a new UpdateProcessRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.datacatalog.lineage.v1.UpdateProcessRequest
@@ -3461,6 +3800,8 @@
                                     $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.allowMissing != null && Object.hasOwnProperty.call(message, "allowMissing"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.allowMissing);
+                                if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
                                 return writer;
                             };
     
@@ -3507,6 +3848,10 @@
                                         }
                                     case 3: {
                                             message.allowMissing = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.requestId = reader.string();
                                             break;
                                         }
                                     default:
@@ -3557,6 +3902,9 @@
                                 if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
                                     if (typeof message.allowMissing !== "boolean")
                                         return "allowMissing: boolean expected";
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    if (!$util.isString(message.requestId))
+                                        return "requestId: string expected";
                                 return null;
                             };
     
@@ -3584,6 +3932,8 @@
                                 }
                                 if (object.allowMissing != null)
                                     message.allowMissing = Boolean(object.allowMissing);
+                                if (object.requestId != null)
+                                    message.requestId = String(object.requestId);
                                 return message;
                             };
     
@@ -3604,6 +3954,7 @@
                                     object.process = null;
                                     object.updateMask = null;
                                     object.allowMissing = false;
+                                    object.requestId = "";
                                 }
                                 if (message.process != null && message.hasOwnProperty("process"))
                                     object.process = $root.google.cloud.datacatalog.lineage.v1.Process.toObject(message.process, options);
@@ -3611,6 +3962,8 @@
                                     object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
                                 if (message.allowMissing != null && message.hasOwnProperty("allowMissing"))
                                     object.allowMissing = message.allowMissing;
+                                if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                    object.requestId = message.requestId;
                                 return object;
                             };
     
@@ -7236,6 +7589,8 @@
                              * @property {string|null} [parent] SearchLinksRequest parent
                              * @property {google.cloud.datacatalog.lineage.v1.IEntityReference|null} [source] SearchLinksRequest source
                              * @property {google.cloud.datacatalog.lineage.v1.IEntityReference|null} [target] SearchLinksRequest target
+                             * @property {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null} [sources] SearchLinksRequest sources
+                             * @property {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null} [targets] SearchLinksRequest targets
                              * @property {number|null} [pageSize] SearchLinksRequest pageSize
                              * @property {string|null} [pageToken] SearchLinksRequest pageToken
                              */
@@ -7280,6 +7635,22 @@
                             SearchLinksRequest.prototype.target = null;
     
                             /**
+                             * SearchLinksRequest sources.
+                             * @member {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null|undefined} sources
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLinksRequest
+                             * @instance
+                             */
+                            SearchLinksRequest.prototype.sources = null;
+    
+                            /**
+                             * SearchLinksRequest targets.
+                             * @member {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null|undefined} targets
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLinksRequest
+                             * @instance
+                             */
+                            SearchLinksRequest.prototype.targets = null;
+    
+                            /**
                              * SearchLinksRequest pageSize.
                              * @member {number} pageSize
                              * @memberof google.cloud.datacatalog.lineage.v1.SearchLinksRequest
@@ -7300,12 +7671,12 @@
     
                             /**
                              * SearchLinksRequest criteria.
-                             * @member {"source"|"target"|undefined} criteria
+                             * @member {"source"|"target"|"sources"|"targets"|undefined} criteria
                              * @memberof google.cloud.datacatalog.lineage.v1.SearchLinksRequest
                              * @instance
                              */
                             Object.defineProperty(SearchLinksRequest.prototype, "criteria", {
-                                get: $util.oneOfGetter($oneOfFields = ["source", "target"]),
+                                get: $util.oneOfGetter($oneOfFields = ["source", "target", "sources", "targets"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -7343,6 +7714,10 @@
                                     $root.google.cloud.datacatalog.lineage.v1.EntityReference.encode(message.source, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.target != null && Object.hasOwnProperty.call(message, "target"))
                                     $root.google.cloud.datacatalog.lineage.v1.EntityReference.encode(message.target, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.sources != null && Object.hasOwnProperty.call(message, "sources"))
+                                    $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.encode(message.sources, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                if (message.targets != null && Object.hasOwnProperty.call(message, "targets"))
+                                    $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.encode(message.targets, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 return writer;
                             };
     
@@ -7389,6 +7764,14 @@
                                         }
                                     case 5: {
                                             message.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.sources = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.targets = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 2: {
@@ -7456,6 +7839,26 @@
                                             return "target." + error;
                                     }
                                 }
+                                if (message.sources != null && message.hasOwnProperty("sources")) {
+                                    if (properties.criteria === 1)
+                                        return "criteria: multiple values";
+                                    properties.criteria = 1;
+                                    {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.verify(message.sources);
+                                        if (error)
+                                            return "sources." + error;
+                                    }
+                                }
+                                if (message.targets != null && message.hasOwnProperty("targets")) {
+                                    if (properties.criteria === 1)
+                                        return "criteria: multiple values";
+                                    properties.criteria = 1;
+                                    {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.verify(message.targets);
+                                        if (error)
+                                            return "targets." + error;
+                                    }
+                                }
                                 if (message.pageSize != null && message.hasOwnProperty("pageSize"))
                                     if (!$util.isInteger(message.pageSize))
                                         return "pageSize: integer expected";
@@ -7488,6 +7891,16 @@
                                     if (typeof object.target !== "object")
                                         throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLinksRequest.target: object expected");
                                     message.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.fromObject(object.target);
+                                }
+                                if (object.sources != null) {
+                                    if (typeof object.sources !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLinksRequest.sources: object expected");
+                                    message.sources = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.fromObject(object.sources);
+                                }
+                                if (object.targets != null) {
+                                    if (typeof object.targets !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLinksRequest.targets: object expected");
+                                    message.targets = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.fromObject(object.targets);
                                 }
                                 if (object.pageSize != null)
                                     message.pageSize = object.pageSize | 0;
@@ -7530,6 +7943,16 @@
                                     if (options.oneofs)
                                         object.criteria = "target";
                                 }
+                                if (message.sources != null && message.hasOwnProperty("sources")) {
+                                    object.sources = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.toObject(message.sources, options);
+                                    if (options.oneofs)
+                                        object.criteria = "sources";
+                                }
+                                if (message.targets != null && message.hasOwnProperty("targets")) {
+                                    object.targets = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.toObject(message.targets, options);
+                                    if (options.oneofs)
+                                        object.criteria = "targets";
+                                }
                                 return object;
                             };
     
@@ -7560,6 +7983,232 @@
                             };
     
                             return SearchLinksRequest;
+                        })();
+    
+                        v1.MultipleEntityReference = (function() {
+    
+                            /**
+                             * Properties of a MultipleEntityReference.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @interface IMultipleEntityReference
+                             * @property {Array.<google.cloud.datacatalog.lineage.v1.IEntityReference>|null} [entities] MultipleEntityReference entities
+                             */
+    
+                            /**
+                             * Constructs a new MultipleEntityReference.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @classdesc Represents a MultipleEntityReference.
+                             * @implements IMultipleEntityReference
+                             * @constructor
+                             * @param {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference=} [properties] Properties to set
+                             */
+                            function MultipleEntityReference(properties) {
+                                this.entities = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * MultipleEntityReference entities.
+                             * @member {Array.<google.cloud.datacatalog.lineage.v1.IEntityReference>} entities
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @instance
+                             */
+                            MultipleEntityReference.prototype.entities = $util.emptyArray;
+    
+                            /**
+                             * Creates a new MultipleEntityReference instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference=} [properties] Properties to set
+                             * @returns {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} MultipleEntityReference instance
+                             */
+                            MultipleEntityReference.create = function create(properties) {
+                                return new MultipleEntityReference(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified MultipleEntityReference message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.MultipleEntityReference.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference} message MultipleEntityReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MultipleEntityReference.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.entities != null && message.entities.length)
+                                    for (var i = 0; i < message.entities.length; ++i)
+                                        $root.google.cloud.datacatalog.lineage.v1.EntityReference.encode(message.entities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified MultipleEntityReference message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.MultipleEntityReference.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference} message MultipleEntityReference message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            MultipleEntityReference.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a MultipleEntityReference message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} MultipleEntityReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MultipleEntityReference.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.entities && message.entities.length))
+                                                message.entities = [];
+                                            message.entities.push($root.google.cloud.datacatalog.lineage.v1.EntityReference.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a MultipleEntityReference message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} MultipleEntityReference
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            MultipleEntityReference.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a MultipleEntityReference message.
+                             * @function verify
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            MultipleEntityReference.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.entities != null && message.hasOwnProperty("entities")) {
+                                    if (!Array.isArray(message.entities))
+                                        return "entities: array expected";
+                                    for (var i = 0; i < message.entities.length; ++i) {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.EntityReference.verify(message.entities[i]);
+                                        if (error)
+                                            return "entities." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a MultipleEntityReference message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} MultipleEntityReference
+                             */
+                            MultipleEntityReference.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference)
+                                    return object;
+                                var message = new $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference();
+                                if (object.entities) {
+                                    if (!Array.isArray(object.entities))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.MultipleEntityReference.entities: array expected");
+                                    message.entities = [];
+                                    for (var i = 0; i < object.entities.length; ++i) {
+                                        if (typeof object.entities[i] !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.MultipleEntityReference.entities: object expected");
+                                        message.entities[i] = $root.google.cloud.datacatalog.lineage.v1.EntityReference.fromObject(object.entities[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a MultipleEntityReference message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.MultipleEntityReference} message MultipleEntityReference
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            MultipleEntityReference.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.entities = [];
+                                if (message.entities && message.entities.length) {
+                                    object.entities = [];
+                                    for (var j = 0; j < message.entities.length; ++j)
+                                        object.entities[j] = $root.google.cloud.datacatalog.lineage.v1.EntityReference.toObject(message.entities[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this MultipleEntityReference to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            MultipleEntityReference.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for MultipleEntityReference
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datacatalog.lineage.v1.MultipleEntityReference
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            MultipleEntityReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.MultipleEntityReference";
+                            };
+    
+                            return MultipleEntityReference;
                         })();
     
                         v1.SearchLinksResponse = (function() {
@@ -7823,6 +8472,7 @@
                              * @property {google.cloud.datacatalog.lineage.v1.IEntityReference|null} [target] Link target
                              * @property {google.protobuf.ITimestamp|null} [startTime] Link startTime
                              * @property {google.protobuf.ITimestamp|null} [endTime] Link endTime
+                             * @property {Array.<google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo>|null} [dependencyInfo] Link dependencyInfo
                              */
     
                             /**
@@ -7834,6 +8484,7 @@
                              * @param {google.cloud.datacatalog.lineage.v1.ILink=} [properties] Properties to set
                              */
                             function Link(properties) {
+                                this.dependencyInfo = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -7881,6 +8532,14 @@
                             Link.prototype.endTime = null;
     
                             /**
+                             * Link dependencyInfo.
+                             * @member {Array.<google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo>} dependencyInfo
+                             * @memberof google.cloud.datacatalog.lineage.v1.Link
+                             * @instance
+                             */
+                            Link.prototype.dependencyInfo = $util.emptyArray;
+    
+                            /**
                              * Creates a new Link instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.datacatalog.lineage.v1.Link
@@ -7914,6 +8573,9 @@
                                     $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                                 if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                                     $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.dependencyInfo != null && message.dependencyInfo.length)
+                                    for (var i = 0; i < message.dependencyInfo.length; ++i)
+                                        $root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.encode(message.dependencyInfo[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -7968,6 +8630,12 @@
                                         }
                                     case 5: {
                                             message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            if (!(message.dependencyInfo && message.dependencyInfo.length))
+                                                message.dependencyInfo = [];
+                                            message.dependencyInfo.push($root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     default:
@@ -8028,6 +8696,15 @@
                                     if (error)
                                         return "endTime." + error;
                                 }
+                                if (message.dependencyInfo != null && message.hasOwnProperty("dependencyInfo")) {
+                                    if (!Array.isArray(message.dependencyInfo))
+                                        return "dependencyInfo: array expected";
+                                    for (var i = 0; i < message.dependencyInfo.length; ++i) {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.verify(message.dependencyInfo[i]);
+                                        if (error)
+                                            return "dependencyInfo." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -8065,6 +8742,16 @@
                                         throw TypeError(".google.cloud.datacatalog.lineage.v1.Link.endTime: object expected");
                                     message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                                 }
+                                if (object.dependencyInfo) {
+                                    if (!Array.isArray(object.dependencyInfo))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.Link.dependencyInfo: array expected");
+                                    message.dependencyInfo = [];
+                                    for (var i = 0; i < object.dependencyInfo.length; ++i) {
+                                        if (typeof object.dependencyInfo[i] !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.Link.dependencyInfo: object expected");
+                                        message.dependencyInfo[i] = $root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.fromObject(object.dependencyInfo[i]);
+                                    }
+                                }
                                 return message;
                             };
     
@@ -8081,6 +8768,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.dependencyInfo = [];
                                 if (options.defaults) {
                                     object.name = "";
                                     object.source = null;
@@ -8098,6 +8787,11 @@
                                     object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                                 if (message.endTime != null && message.hasOwnProperty("endTime"))
                                     object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                if (message.dependencyInfo && message.dependencyInfo.length) {
+                                    object.dependencyInfo = [];
+                                    for (var j = 0; j < message.dependencyInfo.length; ++j)
+                                        object.dependencyInfo[j] = $root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.toObject(message.dependencyInfo[j], options);
+                                }
                                 return object;
                             };
     
@@ -8126,6 +8820,235 @@
                                 }
                                 return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.Link";
                             };
+    
+                            Link.DependencyInfo = (function() {
+    
+                                /**
+                                 * Properties of a DependencyInfo.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link
+                                 * @interface IDependencyInfo
+                                 * @property {google.cloud.datacatalog.lineage.v1.DependencyType|null} [dependencyType] DependencyInfo dependencyType
+                                 */
+    
+                                /**
+                                 * Constructs a new DependencyInfo.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link
+                                 * @classdesc Represents a DependencyInfo.
+                                 * @implements IDependencyInfo
+                                 * @constructor
+                                 * @param {google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo=} [properties] Properties to set
+                                 */
+                                function DependencyInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DependencyInfo dependencyType.
+                                 * @member {google.cloud.datacatalog.lineage.v1.DependencyType} dependencyType
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @instance
+                                 */
+                                DependencyInfo.prototype.dependencyType = 0;
+    
+                                /**
+                                 * Creates a new DependencyInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.datacatalog.lineage.v1.Link.DependencyInfo} DependencyInfo instance
+                                 */
+                                DependencyInfo.create = function create(properties) {
+                                    return new DependencyInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DependencyInfo message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo} message DependencyInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DependencyInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.dependencyType != null && Object.hasOwnProperty.call(message, "dependencyType"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.dependencyType);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DependencyInfo message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.Link.DependencyInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.Link.IDependencyInfo} message DependencyInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DependencyInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DependencyInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datacatalog.lineage.v1.Link.DependencyInfo} DependencyInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DependencyInfo.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.dependencyType = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DependencyInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datacatalog.lineage.v1.Link.DependencyInfo} DependencyInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DependencyInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DependencyInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DependencyInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.dependencyType != null && message.hasOwnProperty("dependencyType"))
+                                        switch (message.dependencyType) {
+                                        default:
+                                            return "dependencyType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 3:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DependencyInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datacatalog.lineage.v1.Link.DependencyInfo} DependencyInfo
+                                 */
+                                DependencyInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.datacatalog.lineage.v1.Link.DependencyInfo();
+                                    switch (object.dependencyType) {
+                                    default:
+                                        if (typeof object.dependencyType === "number") {
+                                            message.dependencyType = object.dependencyType;
+                                            break;
+                                        }
+                                        break;
+                                    case "DEPENDENCY_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.dependencyType = 0;
+                                        break;
+                                    case "EXACT_COPY":
+                                    case 1:
+                                        message.dependencyType = 1;
+                                        break;
+                                    case "OTHER":
+                                    case 3:
+                                        message.dependencyType = 3;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DependencyInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.Link.DependencyInfo} message DependencyInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DependencyInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.dependencyType = options.enums === String ? "DEPENDENCY_TYPE_UNSPECIFIED" : 0;
+                                    if (message.dependencyType != null && message.hasOwnProperty("dependencyType"))
+                                        object.dependencyType = options.enums === String ? $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyType] === undefined ? message.dependencyType : $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyType] : message.dependencyType;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DependencyInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DependencyInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DependencyInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.datacatalog.lineage.v1.Link.DependencyInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DependencyInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.Link.DependencyInfo";
+                                };
+    
+                                return DependencyInfo;
+                            })();
     
                             return Link;
                         })();
@@ -9343,6 +10266,9 @@
                                     case 4:
                                     case 5:
                                     case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.name != null && message.hasOwnProperty("name"))
@@ -9397,6 +10323,18 @@
                                 case "DATAPROC":
                                 case 6:
                                     message.sourceType = 6;
+                                    break;
+                                case "VERTEX_AI":
+                                case 7:
+                                    message.sourceType = 7;
+                                    break;
+                                case "DATAFLOW":
+                                case 8:
+                                    message.sourceType = 8;
+                                    break;
+                                case "LOOKER_CORE":
+                                case 9:
+                                    message.sourceType = 9;
                                     break;
                                 }
                                 if (object.name != null)
@@ -9465,6 +10403,9 @@
                              * @property {number} COMPOSER=4 COMPOSER value
                              * @property {number} LOOKER_STUDIO=5 LOOKER_STUDIO value
                              * @property {number} DATAPROC=6 DATAPROC value
+                             * @property {number} VERTEX_AI=7 VERTEX_AI value
+                             * @property {number} DATAFLOW=8 DATAFLOW value
+                             * @property {number} LOOKER_CORE=9 LOOKER_CORE value
                              */
                             Origin.SourceType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -9475,10 +10416,2322 @@
                                 values[valuesById[4] = "COMPOSER"] = 4;
                                 values[valuesById[5] = "LOOKER_STUDIO"] = 5;
                                 values[valuesById[6] = "DATAPROC"] = 6;
+                                values[valuesById[7] = "VERTEX_AI"] = 7;
+                                values[valuesById[8] = "DATAFLOW"] = 8;
+                                values[valuesById[9] = "LOOKER_CORE"] = 9;
                                 return values;
                             })();
     
                             return Origin;
+                        })();
+    
+                        v1.LineageLink = (function() {
+    
+                            /**
+                             * Properties of a LineageLink.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @interface ILineageLink
+                             * @property {google.cloud.datacatalog.lineage.v1.IEntityReference|null} [source] LineageLink source
+                             * @property {google.cloud.datacatalog.lineage.v1.IEntityReference|null} [target] LineageLink target
+                             * @property {Array.<google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess>|null} [processes] LineageLink processes
+                             * @property {Array.<google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo>|null} [dependencyInfo] LineageLink dependencyInfo
+                             * @property {number|null} [depth] LineageLink depth
+                             * @property {string|null} [location] LineageLink location
+                             */
+    
+                            /**
+                             * Constructs a new LineageLink.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @classdesc Represents a LineageLink.
+                             * @implements ILineageLink
+                             * @constructor
+                             * @param {google.cloud.datacatalog.lineage.v1.ILineageLink=} [properties] Properties to set
+                             */
+                            function LineageLink(properties) {
+                                this.processes = [];
+                                this.dependencyInfo = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * LineageLink source.
+                             * @member {google.cloud.datacatalog.lineage.v1.IEntityReference|null|undefined} source
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @instance
+                             */
+                            LineageLink.prototype.source = null;
+    
+                            /**
+                             * LineageLink target.
+                             * @member {google.cloud.datacatalog.lineage.v1.IEntityReference|null|undefined} target
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @instance
+                             */
+                            LineageLink.prototype.target = null;
+    
+                            /**
+                             * LineageLink processes.
+                             * @member {Array.<google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess>} processes
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @instance
+                             */
+                            LineageLink.prototype.processes = $util.emptyArray;
+    
+                            /**
+                             * LineageLink dependencyInfo.
+                             * @member {Array.<google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo>} dependencyInfo
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @instance
+                             */
+                            LineageLink.prototype.dependencyInfo = $util.emptyArray;
+    
+                            /**
+                             * LineageLink depth.
+                             * @member {number} depth
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @instance
+                             */
+                            LineageLink.prototype.depth = 0;
+    
+                            /**
+                             * LineageLink location.
+                             * @member {string} location
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @instance
+                             */
+                            LineageLink.prototype.location = "";
+    
+                            /**
+                             * Creates a new LineageLink instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ILineageLink=} [properties] Properties to set
+                             * @returns {google.cloud.datacatalog.lineage.v1.LineageLink} LineageLink instance
+                             */
+                            LineageLink.create = function create(properties) {
+                                return new LineageLink(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified LineageLink message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ILineageLink} message LineageLink message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LineageLink.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                    $root.google.cloud.datacatalog.lineage.v1.EntityReference.encode(message.source, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                    $root.google.cloud.datacatalog.lineage.v1.EntityReference.encode(message.target, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.processes != null && message.processes.length)
+                                    for (var i = 0; i < message.processes.length; ++i)
+                                        $root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.encode(message.processes[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.dependencyInfo != null && message.dependencyInfo.length)
+                                    for (var i = 0; i < message.dependencyInfo.length; ++i)
+                                        $root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.encode(message.dependencyInfo[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.depth != null && Object.hasOwnProperty.call(message, "depth"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.depth);
+                                if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.location);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified LineageLink message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ILineageLink} message LineageLink message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            LineageLink.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a LineageLink message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datacatalog.lineage.v1.LineageLink} LineageLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LineageLink.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.LineageLink();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.source = $root.google.cloud.datacatalog.lineage.v1.EntityReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            if (!(message.processes && message.processes.length))
+                                                message.processes = [];
+                                            message.processes.push($root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 4: {
+                                            if (!(message.dependencyInfo && message.dependencyInfo.length))
+                                                message.dependencyInfo = [];
+                                            message.dependencyInfo.push($root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.depth = reader.int32();
+                                            break;
+                                        }
+                                    case 7: {
+                                            message.location = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a LineageLink message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datacatalog.lineage.v1.LineageLink} LineageLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            LineageLink.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a LineageLink message.
+                             * @function verify
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            LineageLink.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.source != null && message.hasOwnProperty("source")) {
+                                    var error = $root.google.cloud.datacatalog.lineage.v1.EntityReference.verify(message.source);
+                                    if (error)
+                                        return "source." + error;
+                                }
+                                if (message.target != null && message.hasOwnProperty("target")) {
+                                    var error = $root.google.cloud.datacatalog.lineage.v1.EntityReference.verify(message.target);
+                                    if (error)
+                                        return "target." + error;
+                                }
+                                if (message.processes != null && message.hasOwnProperty("processes")) {
+                                    if (!Array.isArray(message.processes))
+                                        return "processes: array expected";
+                                    for (var i = 0; i < message.processes.length; ++i) {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.verify(message.processes[i]);
+                                        if (error)
+                                            return "processes." + error;
+                                    }
+                                }
+                                if (message.dependencyInfo != null && message.hasOwnProperty("dependencyInfo")) {
+                                    if (!Array.isArray(message.dependencyInfo))
+                                        return "dependencyInfo: array expected";
+                                    for (var i = 0; i < message.dependencyInfo.length; ++i) {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.verify(message.dependencyInfo[i]);
+                                        if (error)
+                                            return "dependencyInfo." + error;
+                                    }
+                                }
+                                if (message.depth != null && message.hasOwnProperty("depth"))
+                                    if (!$util.isInteger(message.depth))
+                                        return "depth: integer expected";
+                                if (message.location != null && message.hasOwnProperty("location"))
+                                    if (!$util.isString(message.location))
+                                        return "location: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a LineageLink message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datacatalog.lineage.v1.LineageLink} LineageLink
+                             */
+                            LineageLink.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datacatalog.lineage.v1.LineageLink)
+                                    return object;
+                                var message = new $root.google.cloud.datacatalog.lineage.v1.LineageLink();
+                                if (object.source != null) {
+                                    if (typeof object.source !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.LineageLink.source: object expected");
+                                    message.source = $root.google.cloud.datacatalog.lineage.v1.EntityReference.fromObject(object.source);
+                                }
+                                if (object.target != null) {
+                                    if (typeof object.target !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.LineageLink.target: object expected");
+                                    message.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.fromObject(object.target);
+                                }
+                                if (object.processes) {
+                                    if (!Array.isArray(object.processes))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.LineageLink.processes: array expected");
+                                    message.processes = [];
+                                    for (var i = 0; i < object.processes.length; ++i) {
+                                        if (typeof object.processes[i] !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.LineageLink.processes: object expected");
+                                        message.processes[i] = $root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.fromObject(object.processes[i]);
+                                    }
+                                }
+                                if (object.dependencyInfo) {
+                                    if (!Array.isArray(object.dependencyInfo))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.LineageLink.dependencyInfo: array expected");
+                                    message.dependencyInfo = [];
+                                    for (var i = 0; i < object.dependencyInfo.length; ++i) {
+                                        if (typeof object.dependencyInfo[i] !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.LineageLink.dependencyInfo: object expected");
+                                        message.dependencyInfo[i] = $root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.fromObject(object.dependencyInfo[i]);
+                                    }
+                                }
+                                if (object.depth != null)
+                                    message.depth = object.depth | 0;
+                                if (object.location != null)
+                                    message.location = String(object.location);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a LineageLink message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.LineageLink} message LineageLink
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            LineageLink.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.processes = [];
+                                    object.dependencyInfo = [];
+                                }
+                                if (options.defaults) {
+                                    object.source = null;
+                                    object.target = null;
+                                    object.depth = 0;
+                                    object.location = "";
+                                }
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    object.source = $root.google.cloud.datacatalog.lineage.v1.EntityReference.toObject(message.source, options);
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    object.target = $root.google.cloud.datacatalog.lineage.v1.EntityReference.toObject(message.target, options);
+                                if (message.processes && message.processes.length) {
+                                    object.processes = [];
+                                    for (var j = 0; j < message.processes.length; ++j)
+                                        object.processes[j] = $root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.toObject(message.processes[j], options);
+                                }
+                                if (message.dependencyInfo && message.dependencyInfo.length) {
+                                    object.dependencyInfo = [];
+                                    for (var j = 0; j < message.dependencyInfo.length; ++j)
+                                        object.dependencyInfo[j] = $root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.toObject(message.dependencyInfo[j], options);
+                                }
+                                if (message.depth != null && message.hasOwnProperty("depth"))
+                                    object.depth = message.depth;
+                                if (message.location != null && message.hasOwnProperty("location"))
+                                    object.location = message.location;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this LineageLink to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            LineageLink.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for LineageLink
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            LineageLink.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.LineageLink";
+                            };
+    
+                            LineageLink.LineageProcess = (function() {
+    
+                                /**
+                                 * Properties of a LineageProcess.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                                 * @interface ILineageProcess
+                                 * @property {google.cloud.datacatalog.lineage.v1.IProcess|null} [process] LineageProcess process
+                                 */
+    
+                                /**
+                                 * Constructs a new LineageProcess.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                                 * @classdesc Represents a LineageProcess.
+                                 * @implements ILineageProcess
+                                 * @constructor
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess=} [properties] Properties to set
+                                 */
+                                function LineageProcess(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * LineageProcess process.
+                                 * @member {google.cloud.datacatalog.lineage.v1.IProcess|null|undefined} process
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @instance
+                                 */
+                                LineageProcess.prototype.process = null;
+    
+                                /**
+                                 * Creates a new LineageProcess instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess=} [properties] Properties to set
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess} LineageProcess instance
+                                 */
+                                LineageProcess.create = function create(properties) {
+                                    return new LineageProcess(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified LineageProcess message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess} message LineageProcess message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LineageProcess.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.process != null && Object.hasOwnProperty.call(message, "process"))
+                                        $root.google.cloud.datacatalog.lineage.v1.Process.encode(message.process, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified LineageProcess message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.ILineageProcess} message LineageProcess message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                LineageProcess.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a LineageProcess message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess} LineageProcess
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LineageProcess.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 3: {
+                                                message.process = $root.google.cloud.datacatalog.lineage.v1.Process.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a LineageProcess message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess} LineageProcess
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                LineageProcess.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a LineageProcess message.
+                                 * @function verify
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                LineageProcess.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.process != null && message.hasOwnProperty("process")) {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.Process.verify(message.process);
+                                        if (error)
+                                            return "process." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a LineageProcess message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess} LineageProcess
+                                 */
+                                LineageProcess.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess)
+                                        return object;
+                                    var message = new $root.google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess();
+                                    if (object.process != null) {
+                                        if (typeof object.process !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess.process: object expected");
+                                        message.process = $root.google.cloud.datacatalog.lineage.v1.Process.fromObject(object.process);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a LineageProcess message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess} message LineageProcess
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                LineageProcess.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.process = null;
+                                    if (message.process != null && message.hasOwnProperty("process"))
+                                        object.process = $root.google.cloud.datacatalog.lineage.v1.Process.toObject(message.process, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this LineageProcess to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                LineageProcess.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for LineageProcess
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                LineageProcess.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.LineageLink.LineageProcess";
+                                };
+    
+                                return LineageProcess;
+                            })();
+    
+                            LineageLink.DependencyInfo = (function() {
+    
+                                /**
+                                 * Properties of a DependencyInfo.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                                 * @interface IDependencyInfo
+                                 * @property {google.cloud.datacatalog.lineage.v1.DependencyType|null} [dependencyType] DependencyInfo dependencyType
+                                 */
+    
+                                /**
+                                 * Constructs a new DependencyInfo.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink
+                                 * @classdesc Represents a DependencyInfo.
+                                 * @implements IDependencyInfo
+                                 * @constructor
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo=} [properties] Properties to set
+                                 */
+                                function DependencyInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * DependencyInfo dependencyType.
+                                 * @member {google.cloud.datacatalog.lineage.v1.DependencyType} dependencyType
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @instance
+                                 */
+                                DependencyInfo.prototype.dependencyType = 0;
+    
+                                /**
+                                 * Creates a new DependencyInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo} DependencyInfo instance
+                                 */
+                                DependencyInfo.create = function create(properties) {
+                                    return new DependencyInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified DependencyInfo message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo} message DependencyInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DependencyInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.dependencyType != null && Object.hasOwnProperty.call(message, "dependencyType"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.dependencyType);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified DependencyInfo message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.IDependencyInfo} message DependencyInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                DependencyInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a DependencyInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo} DependencyInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DependencyInfo.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.dependencyType = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a DependencyInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo} DependencyInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                DependencyInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a DependencyInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                DependencyInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.dependencyType != null && message.hasOwnProperty("dependencyType"))
+                                        switch (message.dependencyType) {
+                                        default:
+                                            return "dependencyType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 3:
+                                            break;
+                                        }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a DependencyInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo} DependencyInfo
+                                 */
+                                DependencyInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo();
+                                    switch (object.dependencyType) {
+                                    default:
+                                        if (typeof object.dependencyType === "number") {
+                                            message.dependencyType = object.dependencyType;
+                                            break;
+                                        }
+                                        break;
+                                    case "DEPENDENCY_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.dependencyType = 0;
+                                        break;
+                                    case "EXACT_COPY":
+                                    case 1:
+                                        message.dependencyType = 1;
+                                        break;
+                                    case "OTHER":
+                                    case 3:
+                                        message.dependencyType = 3;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a DependencyInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo} message DependencyInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                DependencyInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults)
+                                        object.dependencyType = options.enums === String ? "DEPENDENCY_TYPE_UNSPECIFIED" : 0;
+                                    if (message.dependencyType != null && message.hasOwnProperty("dependencyType"))
+                                        object.dependencyType = options.enums === String ? $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyType] === undefined ? message.dependencyType : $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyType] : message.dependencyType;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this DependencyInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                DependencyInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for DependencyInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                DependencyInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.LineageLink.DependencyInfo";
+                                };
+    
+                                return DependencyInfo;
+                            })();
+    
+                            return LineageLink;
+                        })();
+    
+                        v1.SearchLineageStreamingRequest = (function() {
+    
+                            /**
+                             * Properties of a SearchLineageStreamingRequest.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @interface ISearchLineageStreamingRequest
+                             * @property {string|null} [parent] SearchLineageStreamingRequest parent
+                             * @property {Array.<string>|null} [locations] SearchLineageStreamingRequest locations
+                             * @property {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria|null} [rootCriteria] SearchLineageStreamingRequest rootCriteria
+                             * @property {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection|null} [direction] SearchLineageStreamingRequest direction
+                             * @property {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters|null} [filters] SearchLineageStreamingRequest filters
+                             * @property {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits|null} [limits] SearchLineageStreamingRequest limits
+                             */
+    
+                            /**
+                             * Constructs a new SearchLineageStreamingRequest.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @classdesc Represents a SearchLineageStreamingRequest.
+                             * @implements ISearchLineageStreamingRequest
+                             * @constructor
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest=} [properties] Properties to set
+                             */
+                            function SearchLineageStreamingRequest(properties) {
+                                this.locations = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchLineageStreamingRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @instance
+                             */
+                            SearchLineageStreamingRequest.prototype.parent = "";
+    
+                            /**
+                             * SearchLineageStreamingRequest locations.
+                             * @member {Array.<string>} locations
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @instance
+                             */
+                            SearchLineageStreamingRequest.prototype.locations = $util.emptyArray;
+    
+                            /**
+                             * SearchLineageStreamingRequest rootCriteria.
+                             * @member {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria|null|undefined} rootCriteria
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @instance
+                             */
+                            SearchLineageStreamingRequest.prototype.rootCriteria = null;
+    
+                            /**
+                             * SearchLineageStreamingRequest direction.
+                             * @member {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection} direction
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @instance
+                             */
+                            SearchLineageStreamingRequest.prototype.direction = 0;
+    
+                            /**
+                             * SearchLineageStreamingRequest filters.
+                             * @member {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters|null|undefined} filters
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @instance
+                             */
+                            SearchLineageStreamingRequest.prototype.filters = null;
+    
+                            /**
+                             * SearchLineageStreamingRequest limits.
+                             * @member {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits|null|undefined} limits
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @instance
+                             */
+                            SearchLineageStreamingRequest.prototype.limits = null;
+    
+                            /**
+                             * Creates a new SearchLineageStreamingRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest=} [properties] Properties to set
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest} SearchLineageStreamingRequest instance
+                             */
+                            SearchLineageStreamingRequest.create = function create(properties) {
+                                return new SearchLineageStreamingRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchLineageStreamingRequest message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest} message SearchLineageStreamingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchLineageStreamingRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.locations != null && message.locations.length)
+                                    for (var i = 0; i < message.locations.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.locations[i]);
+                                if (message.rootCriteria != null && Object.hasOwnProperty.call(message, "rootCriteria"))
+                                    $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.encode(message.rootCriteria, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.direction != null && Object.hasOwnProperty.call(message, "direction"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.direction);
+                                if (message.filters != null && Object.hasOwnProperty.call(message, "filters"))
+                                    $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.encode(message.filters, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.limits != null && Object.hasOwnProperty.call(message, "limits"))
+                                    $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.encode(message.limits, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchLineageStreamingRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingRequest} message SearchLineageStreamingRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchLineageStreamingRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchLineageStreamingRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest} SearchLineageStreamingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchLineageStreamingRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.locations && message.locations.length))
+                                                message.locations = [];
+                                            message.locations.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.rootCriteria = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.direction = reader.int32();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.filters = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 6: {
+                                            message.limits = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchLineageStreamingRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest} SearchLineageStreamingRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchLineageStreamingRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchLineageStreamingRequest message.
+                             * @function verify
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchLineageStreamingRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.locations != null && message.hasOwnProperty("locations")) {
+                                    if (!Array.isArray(message.locations))
+                                        return "locations: array expected";
+                                    for (var i = 0; i < message.locations.length; ++i)
+                                        if (!$util.isString(message.locations[i]))
+                                            return "locations: string[] expected";
+                                }
+                                if (message.rootCriteria != null && message.hasOwnProperty("rootCriteria")) {
+                                    var error = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.verify(message.rootCriteria);
+                                    if (error)
+                                        return "rootCriteria." + error;
+                                }
+                                if (message.direction != null && message.hasOwnProperty("direction"))
+                                    switch (message.direction) {
+                                    default:
+                                        return "direction: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.filters != null && message.hasOwnProperty("filters")) {
+                                    var error = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.verify(message.filters);
+                                    if (error)
+                                        return "filters." + error;
+                                }
+                                if (message.limits != null && message.hasOwnProperty("limits")) {
+                                    var error = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.verify(message.limits);
+                                    if (error)
+                                        return "limits." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchLineageStreamingRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest} SearchLineageStreamingRequest
+                             */
+                            SearchLineageStreamingRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest)
+                                    return object;
+                                var message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.locations) {
+                                    if (!Array.isArray(object.locations))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.locations: array expected");
+                                    message.locations = [];
+                                    for (var i = 0; i < object.locations.length; ++i)
+                                        message.locations[i] = String(object.locations[i]);
+                                }
+                                if (object.rootCriteria != null) {
+                                    if (typeof object.rootCriteria !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.rootCriteria: object expected");
+                                    message.rootCriteria = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.fromObject(object.rootCriteria);
+                                }
+                                switch (object.direction) {
+                                default:
+                                    if (typeof object.direction === "number") {
+                                        message.direction = object.direction;
+                                        break;
+                                    }
+                                    break;
+                                case "SEARCH_DIRECTION_UNSPECIFIED":
+                                case 0:
+                                    message.direction = 0;
+                                    break;
+                                case "DOWNSTREAM":
+                                case 1:
+                                    message.direction = 1;
+                                    break;
+                                case "UPSTREAM":
+                                case 2:
+                                    message.direction = 2;
+                                    break;
+                                }
+                                if (object.filters != null) {
+                                    if (typeof object.filters !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.filters: object expected");
+                                    message.filters = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.fromObject(object.filters);
+                                }
+                                if (object.limits != null) {
+                                    if (typeof object.limits !== "object")
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.limits: object expected");
+                                    message.limits = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.fromObject(object.limits);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchLineageStreamingRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest} message SearchLineageStreamingRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchLineageStreamingRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.locations = [];
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.rootCriteria = null;
+                                    object.direction = options.enums === String ? "SEARCH_DIRECTION_UNSPECIFIED" : 0;
+                                    object.filters = null;
+                                    object.limits = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.locations && message.locations.length) {
+                                    object.locations = [];
+                                    for (var j = 0; j < message.locations.length; ++j)
+                                        object.locations[j] = message.locations[j];
+                                }
+                                if (message.rootCriteria != null && message.hasOwnProperty("rootCriteria"))
+                                    object.rootCriteria = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.toObject(message.rootCriteria, options);
+                                if (message.direction != null && message.hasOwnProperty("direction"))
+                                    object.direction = options.enums === String ? $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection[message.direction] === undefined ? message.direction : $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection[message.direction] : message.direction;
+                                if (message.filters != null && message.hasOwnProperty("filters"))
+                                    object.filters = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.toObject(message.filters, options);
+                                if (message.limits != null && message.hasOwnProperty("limits"))
+                                    object.limits = $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.toObject(message.limits, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchLineageStreamingRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchLineageStreamingRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SearchLineageStreamingRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SearchLineageStreamingRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest";
+                            };
+    
+                            /**
+                             * SearchDirection enum.
+                             * @name google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchDirection
+                             * @enum {number}
+                             * @property {number} SEARCH_DIRECTION_UNSPECIFIED=0 SEARCH_DIRECTION_UNSPECIFIED value
+                             * @property {number} DOWNSTREAM=1 DOWNSTREAM value
+                             * @property {number} UPSTREAM=2 UPSTREAM value
+                             */
+                            SearchLineageStreamingRequest.SearchDirection = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "SEARCH_DIRECTION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "DOWNSTREAM"] = 1;
+                                values[valuesById[2] = "UPSTREAM"] = 2;
+                                return values;
+                            })();
+    
+                            /**
+                             * EntitySet enum.
+                             * @name google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet
+                             * @enum {number}
+                             * @property {number} ENTITY_SET_UNSPECIFIED=0 ENTITY_SET_UNSPECIFIED value
+                             * @property {number} ENTITIES=1 ENTITIES value
+                             */
+                            SearchLineageStreamingRequest.EntitySet = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "ENTITY_SET_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "ENTITIES"] = 1;
+                                return values;
+                            })();
+    
+                            SearchLineageStreamingRequest.SearchFilters = (function() {
+    
+                                /**
+                                 * Properties of a SearchFilters.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                                 * @interface ISearchFilters
+                                 * @property {Array.<google.cloud.datacatalog.lineage.v1.DependencyType>|null} [dependencyTypes] SearchFilters dependencyTypes
+                                 * @property {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet|null} [entitySet] SearchFilters entitySet
+                                 * @property {google.type.IInterval|null} [timeRange] SearchFilters timeRange
+                                 */
+    
+                                /**
+                                 * Constructs a new SearchFilters.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                                 * @classdesc Represents a SearchFilters.
+                                 * @implements ISearchFilters
+                                 * @constructor
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters=} [properties] Properties to set
+                                 */
+                                function SearchFilters(properties) {
+                                    this.dependencyTypes = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SearchFilters dependencyTypes.
+                                 * @member {Array.<google.cloud.datacatalog.lineage.v1.DependencyType>} dependencyTypes
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @instance
+                                 */
+                                SearchFilters.prototype.dependencyTypes = $util.emptyArray;
+    
+                                /**
+                                 * SearchFilters entitySet.
+                                 * @member {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet} entitySet
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @instance
+                                 */
+                                SearchFilters.prototype.entitySet = 0;
+    
+                                /**
+                                 * SearchFilters timeRange.
+                                 * @member {google.type.IInterval|null|undefined} timeRange
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @instance
+                                 */
+                                SearchFilters.prototype.timeRange = null;
+    
+                                /**
+                                 * Creates a new SearchFilters instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters=} [properties] Properties to set
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters} SearchFilters instance
+                                 */
+                                SearchFilters.create = function create(properties) {
+                                    return new SearchFilters(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchFilters message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters} message SearchFilters message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchFilters.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.dependencyTypes != null && message.dependencyTypes.length) {
+                                        writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                        for (var i = 0; i < message.dependencyTypes.length; ++i)
+                                            writer.int32(message.dependencyTypes[i]);
+                                        writer.ldelim();
+                                    }
+                                    if (message.entitySet != null && Object.hasOwnProperty.call(message, "entitySet"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.entitySet);
+                                    if (message.timeRange != null && Object.hasOwnProperty.call(message, "timeRange"))
+                                        $root.google.type.Interval.encode(message.timeRange, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchFilters message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchFilters} message SearchFilters message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchFilters.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SearchFilters message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters} SearchFilters
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchFilters.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.dependencyTypes && message.dependencyTypes.length))
+                                                    message.dependencyTypes = [];
+                                                if ((tag & 7) === 2) {
+                                                    var end2 = reader.uint32() + reader.pos;
+                                                    while (reader.pos < end2)
+                                                        message.dependencyTypes.push(reader.int32());
+                                                } else
+                                                    message.dependencyTypes.push(reader.int32());
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.entitySet = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.timeRange = $root.google.type.Interval.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SearchFilters message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters} SearchFilters
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchFilters.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SearchFilters message.
+                                 * @function verify
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SearchFilters.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.dependencyTypes != null && message.hasOwnProperty("dependencyTypes")) {
+                                        if (!Array.isArray(message.dependencyTypes))
+                                            return "dependencyTypes: array expected";
+                                        for (var i = 0; i < message.dependencyTypes.length; ++i)
+                                            switch (message.dependencyTypes[i]) {
+                                            default:
+                                                return "dependencyTypes: enum value[] expected";
+                                            case 0:
+                                            case 1:
+                                            case 3:
+                                                break;
+                                            }
+                                    }
+                                    if (message.entitySet != null && message.hasOwnProperty("entitySet"))
+                                        switch (message.entitySet) {
+                                        default:
+                                            return "entitySet: enum value expected";
+                                        case 0:
+                                        case 1:
+                                            break;
+                                        }
+                                    if (message.timeRange != null && message.hasOwnProperty("timeRange")) {
+                                        var error = $root.google.type.Interval.verify(message.timeRange);
+                                        if (error)
+                                            return "timeRange." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SearchFilters message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters} SearchFilters
+                                 */
+                                SearchFilters.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters)
+                                        return object;
+                                    var message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters();
+                                    if (object.dependencyTypes) {
+                                        if (!Array.isArray(object.dependencyTypes))
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.dependencyTypes: array expected");
+                                        message.dependencyTypes = [];
+                                        for (var i = 0; i < object.dependencyTypes.length; ++i)
+                                            switch (object.dependencyTypes[i]) {
+                                            default:
+                                                if (typeof object.dependencyTypes[i] === "number") {
+                                                    message.dependencyTypes[i] = object.dependencyTypes[i];
+                                                    break;
+                                                }
+                                            case "DEPENDENCY_TYPE_UNSPECIFIED":
+                                            case 0:
+                                                message.dependencyTypes[i] = 0;
+                                                break;
+                                            case "EXACT_COPY":
+                                            case 1:
+                                                message.dependencyTypes[i] = 1;
+                                                break;
+                                            case "OTHER":
+                                            case 3:
+                                                message.dependencyTypes[i] = 3;
+                                                break;
+                                            }
+                                    }
+                                    switch (object.entitySet) {
+                                    default:
+                                        if (typeof object.entitySet === "number") {
+                                            message.entitySet = object.entitySet;
+                                            break;
+                                        }
+                                        break;
+                                    case "ENTITY_SET_UNSPECIFIED":
+                                    case 0:
+                                        message.entitySet = 0;
+                                        break;
+                                    case "ENTITIES":
+                                    case 1:
+                                        message.entitySet = 1;
+                                        break;
+                                    }
+                                    if (object.timeRange != null) {
+                                        if (typeof object.timeRange !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters.timeRange: object expected");
+                                        message.timeRange = $root.google.type.Interval.fromObject(object.timeRange);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SearchFilters message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters} message SearchFilters
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SearchFilters.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.dependencyTypes = [];
+                                    if (options.defaults) {
+                                        object.entitySet = options.enums === String ? "ENTITY_SET_UNSPECIFIED" : 0;
+                                        object.timeRange = null;
+                                    }
+                                    if (message.dependencyTypes && message.dependencyTypes.length) {
+                                        object.dependencyTypes = [];
+                                        for (var j = 0; j < message.dependencyTypes.length; ++j)
+                                            object.dependencyTypes[j] = options.enums === String ? $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyTypes[j]] === undefined ? message.dependencyTypes[j] : $root.google.cloud.datacatalog.lineage.v1.DependencyType[message.dependencyTypes[j]] : message.dependencyTypes[j];
+                                    }
+                                    if (message.entitySet != null && message.hasOwnProperty("entitySet"))
+                                        object.entitySet = options.enums === String ? $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet[message.entitySet] === undefined ? message.entitySet : $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.EntitySet[message.entitySet] : message.entitySet;
+                                    if (message.timeRange != null && message.hasOwnProperty("timeRange"))
+                                        object.timeRange = $root.google.type.Interval.toObject(message.timeRange, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SearchFilters to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SearchFilters.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SearchFilters
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SearchFilters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchFilters";
+                                };
+    
+                                return SearchFilters;
+                            })();
+    
+                            SearchLineageStreamingRequest.SearchLimits = (function() {
+    
+                                /**
+                                 * Properties of a SearchLimits.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                                 * @interface ISearchLimits
+                                 * @property {number|null} [maxDepth] SearchLimits maxDepth
+                                 * @property {number|null} [maxResults] SearchLimits maxResults
+                                 * @property {number|null} [maxProcessPerLink] SearchLimits maxProcessPerLink
+                                 */
+    
+                                /**
+                                 * Constructs a new SearchLimits.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                                 * @classdesc Represents a SearchLimits.
+                                 * @implements ISearchLimits
+                                 * @constructor
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits=} [properties] Properties to set
+                                 */
+                                function SearchLimits(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * SearchLimits maxDepth.
+                                 * @member {number} maxDepth
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @instance
+                                 */
+                                SearchLimits.prototype.maxDepth = 0;
+    
+                                /**
+                                 * SearchLimits maxResults.
+                                 * @member {number} maxResults
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @instance
+                                 */
+                                SearchLimits.prototype.maxResults = 0;
+    
+                                /**
+                                 * SearchLimits maxProcessPerLink.
+                                 * @member {number} maxProcessPerLink
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @instance
+                                 */
+                                SearchLimits.prototype.maxProcessPerLink = 0;
+    
+                                /**
+                                 * Creates a new SearchLimits instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits=} [properties] Properties to set
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits} SearchLimits instance
+                                 */
+                                SearchLimits.create = function create(properties) {
+                                    return new SearchLimits(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchLimits message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits} message SearchLimits message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchLimits.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.maxDepth != null && Object.hasOwnProperty.call(message, "maxDepth"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.maxDepth);
+                                    if (message.maxResults != null && Object.hasOwnProperty.call(message, "maxResults"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxResults);
+                                    if (message.maxProcessPerLink != null && Object.hasOwnProperty.call(message, "maxProcessPerLink"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.maxProcessPerLink);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified SearchLimits message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.ISearchLimits} message SearchLimits message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                SearchLimits.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a SearchLimits message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits} SearchLimits
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchLimits.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.maxDepth = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.maxResults = reader.int32();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.maxProcessPerLink = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a SearchLimits message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits} SearchLimits
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                SearchLimits.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a SearchLimits message.
+                                 * @function verify
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                SearchLimits.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.maxDepth != null && message.hasOwnProperty("maxDepth"))
+                                        if (!$util.isInteger(message.maxDepth))
+                                            return "maxDepth: integer expected";
+                                    if (message.maxResults != null && message.hasOwnProperty("maxResults"))
+                                        if (!$util.isInteger(message.maxResults))
+                                            return "maxResults: integer expected";
+                                    if (message.maxProcessPerLink != null && message.hasOwnProperty("maxProcessPerLink"))
+                                        if (!$util.isInteger(message.maxProcessPerLink))
+                                            return "maxProcessPerLink: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a SearchLimits message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits} SearchLimits
+                                 */
+                                SearchLimits.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits)
+                                        return object;
+                                    var message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits();
+                                    if (object.maxDepth != null)
+                                        message.maxDepth = object.maxDepth | 0;
+                                    if (object.maxResults != null)
+                                        message.maxResults = object.maxResults | 0;
+                                    if (object.maxProcessPerLink != null)
+                                        message.maxProcessPerLink = object.maxProcessPerLink | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a SearchLimits message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits} message SearchLimits
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                SearchLimits.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.maxDepth = 0;
+                                        object.maxResults = 0;
+                                        object.maxProcessPerLink = 0;
+                                    }
+                                    if (message.maxDepth != null && message.hasOwnProperty("maxDepth"))
+                                        object.maxDepth = message.maxDepth;
+                                    if (message.maxResults != null && message.hasOwnProperty("maxResults"))
+                                        object.maxResults = message.maxResults;
+                                    if (message.maxProcessPerLink != null && message.hasOwnProperty("maxProcessPerLink"))
+                                        object.maxProcessPerLink = message.maxProcessPerLink;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this SearchLimits to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                SearchLimits.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for SearchLimits
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                SearchLimits.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.SearchLimits";
+                                };
+    
+                                return SearchLimits;
+                            })();
+    
+                            SearchLineageStreamingRequest.RootCriteria = (function() {
+    
+                                /**
+                                 * Properties of a RootCriteria.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                                 * @interface IRootCriteria
+                                 * @property {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null} [entities] RootCriteria entities
+                                 */
+    
+                                /**
+                                 * Constructs a new RootCriteria.
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest
+                                 * @classdesc Represents a RootCriteria.
+                                 * @implements IRootCriteria
+                                 * @constructor
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria=} [properties] Properties to set
+                                 */
+                                function RootCriteria(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RootCriteria entities.
+                                 * @member {google.cloud.datacatalog.lineage.v1.IMultipleEntityReference|null|undefined} entities
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @instance
+                                 */
+                                RootCriteria.prototype.entities = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                /**
+                                 * RootCriteria criteria.
+                                 * @member {"entities"|undefined} criteria
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @instance
+                                 */
+                                Object.defineProperty(RootCriteria.prototype, "criteria", {
+                                    get: $util.oneOfGetter($oneOfFields = ["entities"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new RootCriteria instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria=} [properties] Properties to set
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria} RootCriteria instance
+                                 */
+                                RootCriteria.create = function create(properties) {
+                                    return new RootCriteria(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RootCriteria message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria} message RootCriteria message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RootCriteria.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.entities != null && Object.hasOwnProperty.call(message, "entities"))
+                                        $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.encode(message.entities, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RootCriteria message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.IRootCriteria} message RootCriteria message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RootCriteria.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RootCriteria message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria} RootCriteria
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RootCriteria.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.entities = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RootCriteria message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria} RootCriteria
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RootCriteria.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RootCriteria message.
+                                 * @function verify
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RootCriteria.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.entities != null && message.hasOwnProperty("entities")) {
+                                        properties.criteria = 1;
+                                        {
+                                            var error = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.verify(message.entities);
+                                            if (error)
+                                                return "entities." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RootCriteria message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria} RootCriteria
+                                 */
+                                RootCriteria.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria)
+                                        return object;
+                                    var message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria();
+                                    if (object.entities != null) {
+                                        if (typeof object.entities !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria.entities: object expected");
+                                        message.entities = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.fromObject(object.entities);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RootCriteria message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria} message RootCriteria
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RootCriteria.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.entities != null && message.hasOwnProperty("entities")) {
+                                        object.entities = $root.google.cloud.datacatalog.lineage.v1.MultipleEntityReference.toObject(message.entities, options);
+                                        if (options.oneofs)
+                                            object.criteria = "entities";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RootCriteria to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RootCriteria.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RootCriteria
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RootCriteria.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingRequest.RootCriteria";
+                                };
+    
+                                return RootCriteria;
+                            })();
+    
+                            return SearchLineageStreamingRequest;
+                        })();
+    
+                        v1.SearchLineageStreamingResponse = (function() {
+    
+                            /**
+                             * Properties of a SearchLineageStreamingResponse.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @interface ISearchLineageStreamingResponse
+                             * @property {Array.<google.cloud.datacatalog.lineage.v1.ILineageLink>|null} [links] SearchLineageStreamingResponse links
+                             * @property {Array.<string>|null} [unreachable] SearchLineageStreamingResponse unreachable
+                             */
+    
+                            /**
+                             * Constructs a new SearchLineageStreamingResponse.
+                             * @memberof google.cloud.datacatalog.lineage.v1
+                             * @classdesc Represents a SearchLineageStreamingResponse.
+                             * @implements ISearchLineageStreamingResponse
+                             * @constructor
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse=} [properties] Properties to set
+                             */
+                            function SearchLineageStreamingResponse(properties) {
+                                this.links = [];
+                                this.unreachable = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchLineageStreamingResponse links.
+                             * @member {Array.<google.cloud.datacatalog.lineage.v1.ILineageLink>} links
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @instance
+                             */
+                            SearchLineageStreamingResponse.prototype.links = $util.emptyArray;
+    
+                            /**
+                             * SearchLineageStreamingResponse unreachable.
+                             * @member {Array.<string>} unreachable
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @instance
+                             */
+                            SearchLineageStreamingResponse.prototype.unreachable = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SearchLineageStreamingResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse=} [properties] Properties to set
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse} SearchLineageStreamingResponse instance
+                             */
+                            SearchLineageStreamingResponse.create = function create(properties) {
+                                return new SearchLineageStreamingResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchLineageStreamingResponse message. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse} message SearchLineageStreamingResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchLineageStreamingResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.links != null && message.links.length)
+                                    for (var i = 0; i < message.links.length; ++i)
+                                        $root.google.cloud.datacatalog.lineage.v1.LineageLink.encode(message.links[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.unreachable != null && message.unreachable.length)
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.unreachable[i]);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchLineageStreamingResponse message, length delimited. Does not implicitly {@link google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.ISearchLineageStreamingResponse} message SearchLineageStreamingResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchLineageStreamingResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchLineageStreamingResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse} SearchLineageStreamingResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchLineageStreamingResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.links && message.links.length))
+                                                message.links = [];
+                                            message.links.push($root.google.cloud.datacatalog.lineage.v1.LineageLink.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.unreachable && message.unreachable.length))
+                                                message.unreachable = [];
+                                            message.unreachable.push(reader.string());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchLineageStreamingResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse} SearchLineageStreamingResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchLineageStreamingResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchLineageStreamingResponse message.
+                             * @function verify
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchLineageStreamingResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.links != null && message.hasOwnProperty("links")) {
+                                    if (!Array.isArray(message.links))
+                                        return "links: array expected";
+                                    for (var i = 0; i < message.links.length; ++i) {
+                                        var error = $root.google.cloud.datacatalog.lineage.v1.LineageLink.verify(message.links[i]);
+                                        if (error)
+                                            return "links." + error;
+                                    }
+                                }
+                                if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                    if (!Array.isArray(message.unreachable))
+                                        return "unreachable: array expected";
+                                    for (var i = 0; i < message.unreachable.length; ++i)
+                                        if (!$util.isString(message.unreachable[i]))
+                                            return "unreachable: string[] expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchLineageStreamingResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse} SearchLineageStreamingResponse
+                             */
+                            SearchLineageStreamingResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse)
+                                    return object;
+                                var message = new $root.google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse();
+                                if (object.links) {
+                                    if (!Array.isArray(object.links))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse.links: array expected");
+                                    message.links = [];
+                                    for (var i = 0; i < object.links.length; ++i) {
+                                        if (typeof object.links[i] !== "object")
+                                            throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse.links: object expected");
+                                        message.links[i] = $root.google.cloud.datacatalog.lineage.v1.LineageLink.fromObject(object.links[i]);
+                                    }
+                                }
+                                if (object.unreachable) {
+                                    if (!Array.isArray(object.unreachable))
+                                        throw TypeError(".google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse.unreachable: array expected");
+                                    message.unreachable = [];
+                                    for (var i = 0; i < object.unreachable.length; ++i)
+                                        message.unreachable[i] = String(object.unreachable[i]);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchLineageStreamingResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse} message SearchLineageStreamingResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchLineageStreamingResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults) {
+                                    object.links = [];
+                                    object.unreachable = [];
+                                }
+                                if (message.links && message.links.length) {
+                                    object.links = [];
+                                    for (var j = 0; j < message.links.length; ++j)
+                                        object.links[j] = $root.google.cloud.datacatalog.lineage.v1.LineageLink.toObject(message.links[j], options);
+                                }
+                                if (message.unreachable && message.unreachable.length) {
+                                    object.unreachable = [];
+                                    for (var j = 0; j < message.unreachable.length; ++j)
+                                        object.unreachable[j] = message.unreachable[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchLineageStreamingResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchLineageStreamingResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SearchLineageStreamingResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SearchLineageStreamingResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.datacatalog.lineage.v1.SearchLineageStreamingResponse";
+                            };
+    
+                            return SearchLineageStreamingResponse;
+                        })();
+    
+                        /**
+                         * DependencyType enum.
+                         * @name google.cloud.datacatalog.lineage.v1.DependencyType
+                         * @enum {number}
+                         * @property {number} DEPENDENCY_TYPE_UNSPECIFIED=0 DEPENDENCY_TYPE_UNSPECIFIED value
+                         * @property {number} EXACT_COPY=1 EXACT_COPY value
+                         * @property {number} OTHER=3 OTHER value
+                         */
+                        v1.DependencyType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DEPENDENCY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EXACT_COPY"] = 1;
+                            values[valuesById[3] = "OTHER"] = 3;
+                            return values;
                         })();
     
                         return v1;
@@ -10479,6 +13732,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -10514,6 +13768,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -10545,6 +13807,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -10594,6 +13858,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -10647,6 +13915,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -10689,6 +13962,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -10707,8 +13985,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -10716,6 +13996,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -12538,6 +15820,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -12562,6 +15845,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -12589,6 +15880,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -12627,6 +15920,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -12669,6 +15966,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -12689,6 +15991,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -12705,10 +16012,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -12737,6 +16048,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -13614,6 +17177,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -13625,6 +17189,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -13638,6 +17203,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -13665,6 +17238,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -13695,7 +17271,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -13703,6 +17279,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -13745,6 +17344,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -13765,6 +17372,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -13781,10 +17395,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -14423,6 +18045,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -14475,6 +18342,515 @@
                 values[valuesById[7] = "NON_EMPTY_DEFAULT"] = 7;
                 values[valuesById[8] = "IDENTIFIER"] = 8;
                 return values;
+            })();
+    
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    this.referencedTypes = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -15408,6 +19784,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -15422,6 +19799,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -15446,6 +19824,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -15468,6 +19847,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -15517,6 +19897,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -15639,6 +20027,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -15709,6 +20100,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -15813,6 +20210,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -15867,6 +20271,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -15918,6 +20323,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -15981,6 +20393,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -16047,6 +20463,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -16103,6 +20520,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -16151,6 +20573,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -16257,6 +20680,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -16308,6 +20739,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -16398,6 +20831,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -16513,6 +20950,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -16612,6 +21058,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -16641,6 +21107,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -16686,6 +21153,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -18730,6 +23199,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -18791,6 +23261,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -18827,6 +23305,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -18887,6 +23367,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -18957,6 +23441,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -19006,6 +23499,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -19030,6 +23543,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -19050,6 +23564,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -21368,8 +25884,10 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
     
@@ -21489,6 +26007,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -21503,6 +26029,14 @@
                  * @instance
                  */
                 FieldOptions.prototype[".google.api.fieldBehavior"] = $util.emptyArray;
+    
+                /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
     
                 /**
                  * FieldOptions .google.api.resourceReference.
@@ -21562,6 +26096,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -21570,6 +26106,8 @@
                             writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -21663,6 +26201,10 @@
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                 break;
                             }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
+                                break;
+                            }
                         case 999: {
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
@@ -21678,6 +26220,10 @@
                                         message[".google.api.fieldBehavior"].push(reader.int32());
                                 } else
                                     message[".google.api.fieldBehavior"].push(reader.int32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         case 1055: {
@@ -21798,6 +26344,11 @@
                         if (error)
                             return "features." + error;
                     }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -21825,6 +26376,11 @@
                             case 8:
                                 break;
                             }
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference")) {
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
@@ -21986,6 +26542,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -22045,6 +26606,11 @@
                                 break;
                             }
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     if (object[".google.api.resourceReference"] != null) {
                         if (typeof object[".google.api.resourceReference"] !== "object")
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
@@ -22083,7 +26649,9 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -22115,6 +26683,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -22127,6 +26697,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     
@@ -22387,6 +26959,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -22427,6 +27000,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -22525,6 +27102,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -23119,6 +28178,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -23163,6 +28223,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -23200,6 +28268,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -23249,6 +28319,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -23303,6 +28377,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -23336,6 +28415,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -23368,6 +28452,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -23375,6 +28460,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -24842,6 +29929,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -24908,6 +29997,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -24943,6 +30048,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -25001,6 +30110,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -25091,6 +30208,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -25232,6 +30369,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -25255,6 +30440,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -25268,6 +30455,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -25393,6 +30584,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -25579,6 +30983,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -25596,6 +31001,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -25643,6 +31049,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -25695,6 +31105,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -25804,7 +31218,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -25831,12 +31246,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -25862,10 +31285,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -25906,8 +31331,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -25950,6 +31379,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -25962,10 +31392,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -25992,6 +31427,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -26034,10 +31473,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -26056,13 +31500,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -27275,6 +32722,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {
@@ -31720,6 +37183,257 @@
             })();
     
             return rpc;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Interval = (function() {
+    
+                /**
+                 * Properties of an Interval.
+                 * @memberof google.type
+                 * @interface IInterval
+                 * @property {google.protobuf.ITimestamp|null} [startTime] Interval startTime
+                 * @property {google.protobuf.ITimestamp|null} [endTime] Interval endTime
+                 */
+    
+                /**
+                 * Constructs a new Interval.
+                 * @memberof google.type
+                 * @classdesc Represents an Interval.
+                 * @implements IInterval
+                 * @constructor
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 */
+                function Interval(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Interval startTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.startTime = null;
+    
+                /**
+                 * Interval endTime.
+                 * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                 * @memberof google.type.Interval
+                 * @instance
+                 */
+                Interval.prototype.endTime = null;
+    
+                /**
+                 * Creates a new Interval instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval=} [properties] Properties to set
+                 * @returns {google.type.Interval} Interval instance
+                 */
+                Interval.create = function create(properties) {
+                    return new Interval(properties);
+                };
+    
+                /**
+                 * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                        $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                        $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.IInterval} message Interval message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Interval.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Interval();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Interval message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Interval} Interval
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Interval.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Interval message.
+                 * @function verify
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Interval.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                        if (error)
+                            return "startTime." + error;
+                    }
+                    if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                        var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                        if (error)
+                            return "endTime." + error;
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Interval} Interval
+                 */
+                Interval.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Interval)
+                        return object;
+                    var message = new $root.google.type.Interval();
+                    if (object.startTime != null) {
+                        if (typeof object.startTime !== "object")
+                            throw TypeError(".google.type.Interval.startTime: object expected");
+                        message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                    }
+                    if (object.endTime != null) {
+                        if (typeof object.endTime !== "object")
+                            throw TypeError(".google.type.Interval.endTime: object expected");
+                        message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {google.type.Interval} message Interval
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Interval.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.startTime = null;
+                        object.endTime = null;
+                    }
+                    if (message.startTime != null && message.hasOwnProperty("startTime"))
+                        object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                    if (message.endTime != null && message.hasOwnProperty("endTime"))
+                        object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                    return object;
+                };
+    
+                /**
+                 * Converts this Interval to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Interval
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Interval.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Interval
+                 * @function getTypeUrl
+                 * @memberof google.type.Interval
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Interval.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Interval";
+                };
+    
+                return Interval;
+            })();
+    
+            return type;
         })();
     
         return google;

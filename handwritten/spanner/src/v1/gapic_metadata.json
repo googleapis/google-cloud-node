@@ -2,24 +2,174 @@
   "schema": "1.0",
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
-  "protoPackage": "google.spanner.executor.v1",
-  "libraryPackage": "@google-cloud/executor",
+  "protoPackage": "google.spanner.v1",
+  "libraryPackage": "@google-cloud/spanner",
   "services": {
-    "SpannerExecutorProxy": {
+    "Spanner": {
       "clients": {
         "grpc": {
-          "libraryClient": "SpannerExecutorProxyClient",
+          "libraryClient": "SpannerClient",
           "rpcs": {
-            "ExecuteActionAsync": {
+            "CreateSession": {
               "methods": [
-                "executeActionAsync"
+                "createSession"
+              ]
+            },
+            "BatchCreateSessions": {
+              "methods": [
+                "batchCreateSessions"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ExecuteSql": {
+              "methods": [
+                "executeSql"
+              ]
+            },
+            "ExecuteBatchDml": {
+              "methods": [
+                "executeBatchDml"
+              ]
+            },
+            "Read": {
+              "methods": [
+                "read"
+              ]
+            },
+            "BeginTransaction": {
+              "methods": [
+                "beginTransaction"
+              ]
+            },
+            "Commit": {
+              "methods": [
+                "commit"
+              ]
+            },
+            "Rollback": {
+              "methods": [
+                "rollback"
+              ]
+            },
+            "PartitionQuery": {
+              "methods": [
+                "partitionQuery"
+              ]
+            },
+            "PartitionRead": {
+              "methods": [
+                "partitionRead"
+              ]
+            },
+            "ExecuteStreamingSql": {
+              "methods": [
+                "executeStreamingSql"
+              ]
+            },
+            "StreamingRead": {
+              "methods": [
+                "streamingRead"
+              ]
+            },
+            "BatchWrite": {
+              "methods": [
+                "batchWrite"
+              ]
+            },
+            "FetchCacheUpdate": {
+              "methods": [
+                "fetchCacheUpdate"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
               ]
             }
           }
         },
         "grpc-fallback": {
-          "libraryClient": "SpannerExecutorProxyClient",
-          "rpcs": {}
+          "libraryClient": "SpannerClient",
+          "rpcs": {
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "BatchCreateSessions": {
+              "methods": [
+                "batchCreateSessions"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ExecuteSql": {
+              "methods": [
+                "executeSql"
+              ]
+            },
+            "ExecuteBatchDml": {
+              "methods": [
+                "executeBatchDml"
+              ]
+            },
+            "Read": {
+              "methods": [
+                "read"
+              ]
+            },
+            "BeginTransaction": {
+              "methods": [
+                "beginTransaction"
+              ]
+            },
+            "Commit": {
+              "methods": [
+                "commit"
+              ]
+            },
+            "Rollback": {
+              "methods": [
+                "rollback"
+              ]
+            },
+            "PartitionQuery": {
+              "methods": [
+                "partitionQuery"
+              ]
+            },
+            "PartitionRead": {
+              "methods": [
+                "partitionRead"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            }
+          }
         }
       }
     }

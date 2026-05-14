@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class SessionControllerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataproc');
@@ -57,11 +68,11 @@ export class SessionControllerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  sessionControllerStub?: Promise<{[name: string]: Function}>;
+  sessionControllerStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SessionControllerClient.
@@ -102,21 +113,42 @@ export class SessionControllerClient {
    *     const client = new SessionControllerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SessionControllerClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'dataproc.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class SessionControllerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,13 +186,9 @@ export class SessionControllerClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -182,34 +210,38 @@ export class SessionControllerClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       batchPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/batches/{batch}'
+        'projects/{project}/locations/{location}/batches/{batch}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       nodeGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}'
+        'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
-      projectLocationAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}'
-      ),
-      projectLocationWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}'
-      ),
-      projectRegionAutoscalingPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}'
-      ),
-      projectRegionWorkflowTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}'
-      ),
+      projectLocationAutoscalingPolicyPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}',
+        ),
+      projectLocationWorkflowTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/workflowTemplates/{workflow_template}',
+        ),
+      projectRegionAutoscalingPolicyPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}',
+        ),
+      projectRegionWorkflowTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/regions/{region}/workflowTemplates/{workflow_template}',
+        ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sessions/{session}'
+        'projects/{project}/locations/{location}/sessions/{session}',
       ),
       sessionTemplatePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sessionTemplates/{template}'
+        'projects/{project}/locations/{location}/sessionTemplates/{template}',
       ),
     };
 
@@ -217,8 +249,11 @@ export class SessionControllerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSessions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'sessions')
+      listSessions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'sessions',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -227,52 +262,181 @@ export class SessionControllerClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/regions/*/clusters/*}:getIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:getIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:getIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/regions/*/clusters/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/regions/*/clusters/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/regions/*/jobs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/operations/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',additional_bindings: [{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/regions/*/operations/*}',additional_bindings: [{delete: '/v1/{name=projects/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/regions/*/operations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/regions/*/operations}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*/operations}',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          post: '/v1/{resource=projects/*/regions/*/clusters/*}:getIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/regions/*/jobs/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/operations/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:getIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:getIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/regions/*/clusters/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/regions/*/jobs/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/operations/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/regions/*/clusters/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/regions/*/jobs/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/operations/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/workflowTemplates/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/workflowTemplates/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/regions/*/autoscalingPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/autoscalingPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/regions/*/operations/*}:cancel',
+          additional_bindings: [
+            { post: '/v1/{name=projects/*/locations/*/operations/*}:cancel' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/regions/*/operations/*}',
+          additional_bindings: [
+            { delete: '/v1/{name=projects/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/regions/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=projects/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/regions/*/operations}',
+          additional_bindings: [
+            { get: '/v1/{name=projects/*/locations/*/operations}' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createSessionResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.Session') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.Session',
+    ) as gax.protobuf.Type;
     const createSessionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.SessionOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.SessionOperationMetadata',
+    ) as gax.protobuf.Type;
     const terminateSessionResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.Session') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.Session',
+    ) as gax.protobuf.Type;
     const terminateSessionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.SessionOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.SessionOperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteSessionResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.Session') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.Session',
+    ) as gax.protobuf.Type;
     const deleteSessionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataproc.v1.SessionOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataproc.v1.SessionOperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createSession: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createSessionResponse.decode.bind(createSessionResponse),
-        createSessionMetadata.decode.bind(createSessionMetadata)),
+        createSessionMetadata.decode.bind(createSessionMetadata),
+      ),
       terminateSession: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         terminateSessionResponse.decode.bind(terminateSessionResponse),
-        terminateSessionMetadata.decode.bind(terminateSessionMetadata)),
+        terminateSessionMetadata.decode.bind(terminateSessionMetadata),
+      ),
       deleteSession: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteSessionResponse.decode.bind(deleteSessionResponse),
-        deleteSessionMetadata.decode.bind(deleteSessionMetadata))
+        deleteSessionMetadata.decode.bind(deleteSessionMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dataproc.v1.SessionController', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dataproc.v1.SessionController',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -303,28 +467,39 @@ export class SessionControllerClient {
     // Put together the "service stub" for
     // google.cloud.dataproc.v1.SessionController.
     this.sessionControllerStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dataproc.v1.SessionController') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dataproc.v1.SessionController',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataproc.v1.SessionController,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sessionControllerStubMethods =
-        ['createSession', 'getSession', 'listSessions', 'terminateSession', 'deleteSession'];
+    const sessionControllerStubMethods = [
+      'createSession',
+      'getSession',
+      'listSessions',
+      'terminateSession',
+      'deleteSession',
+    ];
     for (const methodName of sessionControllerStubMethods) {
       const callPromise = this.sessionControllerStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -334,7 +509,7 @@ export class SessionControllerClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -349,8 +524,14 @@ export class SessionControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataproc.googleapis.com';
   }
@@ -361,8 +542,14 @@ export class SessionControllerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataproc.googleapis.com';
   }
@@ -396,7 +583,7 @@ export class SessionControllerClient {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
       'https://www.googleapis.com/auth/dataproc',
-      'https://www.googleapis.com/auth/dataproc.read-only'
+      'https://www.googleapis.com/auth/dataproc.read-only',
     ];
   }
 
@@ -406,8 +593,9 @@ export class SessionControllerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -418,565 +606,800 @@ export class SessionControllerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets the resource representation for an interactive session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the session to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Session|Session}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.get_session.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_GetSession_async
- */
+  /**
+   * Gets the resource representation for an interactive session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the session to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataproc.v1.Session|Session}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.get_session.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_GetSession_async
+   */
   getSession(
-      request?: protos.google.cloud.dataproc.v1.IGetSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataproc.v1.ISession,
-        protos.google.cloud.dataproc.v1.IGetSessionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataproc.v1.IGetSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.ISession,
+      protos.google.cloud.dataproc.v1.IGetSessionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getSession(
-      request: protos.google.cloud.dataproc.v1.IGetSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataproc.v1.ISession,
-          protos.google.cloud.dataproc.v1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.IGetSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataproc.v1.ISession,
+      protos.google.cloud.dataproc.v1.IGetSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSession(
-      request: protos.google.cloud.dataproc.v1.IGetSessionRequest,
-      callback: Callback<
-          protos.google.cloud.dataproc.v1.ISession,
-          protos.google.cloud.dataproc.v1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.IGetSessionRequest,
+    callback: Callback<
+      protos.google.cloud.dataproc.v1.ISession,
+      protos.google.cloud.dataproc.v1.IGetSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSession(
-      request?: protos.google.cloud.dataproc.v1.IGetSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataproc.v1.IGetSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataproc.v1.ISession,
-          protos.google.cloud.dataproc.v1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataproc.v1.ISession,
-          protos.google.cloud.dataproc.v1.IGetSessionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataproc.v1.ISession,
-        protos.google.cloud.dataproc.v1.IGetSessionRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataproc.v1.IGetSessionRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataproc.v1.ISession,
+      protos.google.cloud.dataproc.v1.IGetSessionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.ISession,
+      protos.google.cloud.dataproc.v1.IGetSessionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSession request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataproc.v1.ISession,
-        protos.google.cloud.dataproc.v1.IGetSessionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataproc.v1.ISession,
+          protos.google.cloud.dataproc.v1.IGetSessionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSession response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSession(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataproc.v1.ISession,
-        protos.google.cloud.dataproc.v1.IGetSessionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSession response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataproc.v1.ISession,
+          protos.google.cloud.dataproc.v1.IGetSessionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSession response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Create an interactive session asynchronously.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this session will be created.
- * @param {google.cloud.dataproc.v1.Session} request.session
- *   Required. The interactive session to create.
- * @param {string} request.sessionId
- *   Required. The ID to use for the session, which becomes the final component
- *   of the session's resource name.
- *
- *   This value must be 4-63 characters. Valid characters
- *   are /{@link protos.0-9|a-z}-/.
- * @param {string} [request.requestId]
- *   Optional. A unique ID used to identify the request. If the service
- *   receives two
- *   [CreateSessionRequests](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateSessionRequest)s
- *   with the same ID, the second request is ignored, and the
- *   first {@link protos.google.cloud.dataproc.v1.Session|Session} is created and stored in
- *   the backend.
- *
- *   Recommendation: Set this value to a
- *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
- *
- *   The value must contain only letters (a-z, A-Z), numbers (0-9),
- *   underscores (_), and hyphens (-). The maximum length is 40 characters.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.create_session.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_CreateSession_async
- */
+  /**
+   * Create an interactive session asynchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this session will be created.
+   * @param {google.cloud.dataproc.v1.Session} request.session
+   *   Required. The interactive session to create.
+   * @param {string} request.sessionId
+   *   Required. The ID to use for the session, which becomes the final component
+   *   of the session's resource name.
+   *
+   *   This value must be 4-63 characters. Valid characters
+   *   are /{@link protos.0-9|a-z}-/.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the service
+   *   receives two
+   *   [CreateSessionRequests](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateSessionRequest)s
+   *   with the same ID, the second request is ignored, and the
+   *   first {@link protos.google.cloud.dataproc.v1.Session|Session} is created and stored in
+   *   the backend.
+   *
+   *   Recommendation: Set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The value must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.create_session.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_CreateSession_async
+   */
   createSession(
-      request?: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createSession(
-      request: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSession(
-      request: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSession(
-      request?: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataproc.v1.ICreateSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createSession request %j', request);
-    return this.innerApiCalls.createSession(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createSession response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createSession()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.create_session.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_CreateSession_async
- */
-  async checkCreateSessionProgress(name: string): Promise<LROperation<protos.google.cloud.dataproc.v1.Session, protos.google.cloud.dataproc.v1.SessionOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createSession()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.create_session.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_CreateSession_async
+   */
+  async checkCreateSessionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Session,
+      protos.google.cloud.dataproc.v1.SessionOperationMetadata
+    >
+  > {
     this._log.info('createSession long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createSession, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataproc.v1.Session, protos.google.cloud.dataproc.v1.SessionOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createSession,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Session,
+      protos.google.cloud.dataproc.v1.SessionOperationMetadata
+    >;
   }
-/**
- * Terminates the interactive session.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the session resource to terminate.
- * @param {string} [request.requestId]
- *   Optional. A unique ID used to identify the request. If the service
- *   receives two
- *   [TerminateSessionRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.TerminateSessionRequest)s
- *   with the same ID, the second request is ignored.
- *
- *   Recommendation: Set this value to a
- *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
- *
- *   The value must contain only letters (a-z, A-Z), numbers (0-9),
- *   underscores (_), and hyphens (-). The maximum length is 40 characters.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.terminate_session.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_TerminateSession_async
- */
+  /**
+   * Terminates the interactive session.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the session resource to terminate.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the service
+   *   receives two
+   *   [TerminateSessionRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.TerminateSessionRequest)s
+   *   with the same ID, the second request is ignored.
+   *
+   *   Recommendation: Set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The value must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.terminate_session.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_TerminateSession_async
+   */
   terminateSession(
-      request?: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   terminateSession(
-      request: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   terminateSession(
-      request: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   terminateSession(
-      request?: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataproc.v1.ITerminateSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('terminateSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('terminateSession request %j', request);
-    return this.innerApiCalls.terminateSession(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('terminateSession response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .terminateSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('terminateSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `terminateSession()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.terminate_session.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_TerminateSession_async
- */
-  async checkTerminateSessionProgress(name: string): Promise<LROperation<protos.google.cloud.dataproc.v1.Session, protos.google.cloud.dataproc.v1.SessionOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `terminateSession()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.terminate_session.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_TerminateSession_async
+   */
+  async checkTerminateSessionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Session,
+      protos.google.cloud.dataproc.v1.SessionOperationMetadata
+    >
+  > {
     this._log.info('terminateSession long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.terminateSession, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataproc.v1.Session, protos.google.cloud.dataproc.v1.SessionOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.terminateSession,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Session,
+      protos.google.cloud.dataproc.v1.SessionOperationMetadata
+    >;
   }
-/**
- * Deletes the interactive session resource. If the session is not in terminal
- * state, it is terminated, and then deleted.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the session resource to delete.
- * @param {string} [request.requestId]
- *   Optional. A unique ID used to identify the request. If the service
- *   receives two
- *   [DeleteSessionRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteSessionRequest)s
- *   with the same ID, the second request is ignored.
- *
- *   Recommendation: Set this value to a
- *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
- *
- *   The value must contain only letters (a-z, A-Z), numbers (0-9),
- *   underscores (_), and hyphens (-). The maximum length is 40 characters.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.delete_session.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_DeleteSession_async
- */
+  /**
+   * Deletes the interactive session resource. If the session is not in terminal
+   * state, it is terminated, and then deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the session resource to delete.
+   * @param {string} [request.requestId]
+   *   Optional. A unique ID used to identify the request. If the service
+   *   receives two
+   *   [DeleteSessionRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteSessionRequest)s
+   *   with the same ID, the second request is ignored.
+   *
+   *   Recommendation: Set this value to a
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+   *
+   *   The value must contain only letters (a-z, A-Z), numbers (0-9),
+   *   underscores (_), and hyphens (-). The maximum length is 40 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.delete_session.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_DeleteSession_async
+   */
   deleteSession(
-      request?: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteSession(
-      request: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSession(
-      request: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSession(
-      request?: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataproc.v1.IDeleteSessionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataproc.v1.ISession,
+        protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteSession response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteSession request %j', request);
-    return this.innerApiCalls.deleteSession(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataproc.v1.ISession, protos.google.cloud.dataproc.v1.ISessionOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteSession response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteSession(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataproc.v1.ISession,
+            protos.google.cloud.dataproc.v1.ISessionOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSession response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteSession()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.delete_session.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_DeleteSession_async
- */
-  async checkDeleteSessionProgress(name: string): Promise<LROperation<protos.google.cloud.dataproc.v1.Session, protos.google.cloud.dataproc.v1.SessionOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteSession()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.delete_session.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_DeleteSession_async
+   */
+  async checkDeleteSessionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataproc.v1.Session,
+      protos.google.cloud.dataproc.v1.SessionOperationMetadata
+    >
+  > {
     this._log.info('deleteSession long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteSession, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataproc.v1.Session, protos.google.cloud.dataproc.v1.SessionOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteSession,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataproc.v1.Session,
+      protos.google.cloud.dataproc.v1.SessionOperationMetadata
+    >;
   }
- /**
- * Lists interactive sessions.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of sessions.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of sessions to return in each response.
- *   The service may return fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListSessions` call.
- *   Provide this token to retrieve the subsequent page.
- * @param {string} [request.filter]
- *   Optional. A filter for the sessions to return in the response.
- *
- *   A filter is a logical expression constraining the values of various fields
- *   in each session resource. Filters are case sensitive, and may contain
- *   multiple clauses combined with logical operators (AND, OR).
- *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
- *   and `labels`.
- *
- *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
- *   is a filter for sessions in an ACTIVE state that were created before
- *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
- *   for sessions in an ACTIVE state that have a production environment label.
- *
- *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
- *   description of the filter syntax and a list of supported comparators.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataproc.v1.Session|Session}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists interactive sessions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of sessions.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of sessions to return in each response.
+   *   The service may return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListSessions` call.
+   *   Provide this token to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. A filter for the sessions to return in the response.
+   *
+   *   A filter is a logical expression constraining the values of various fields
+   *   in each session resource. Filters are case sensitive, and may contain
+   *   multiple clauses combined with logical operators (AND, OR).
+   *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
+   *   and `labels`.
+   *
+   *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
+   *   is a filter for sessions in an ACTIVE state that were created before
+   *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
+   *   for sessions in an ACTIVE state that have a production environment label.
+   *
+   *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
+   *   description of the filter syntax and a list of supported comparators.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataproc.v1.Session|Session}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSessions(
-      request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataproc.v1.ISession[],
-        protos.google.cloud.dataproc.v1.IListSessionsRequest|null,
-        protos.google.cloud.dataproc.v1.IListSessionsResponse
-      ]>;
+    request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.ISession[],
+      protos.google.cloud.dataproc.v1.IListSessionsRequest | null,
+      protos.google.cloud.dataproc.v1.IListSessionsResponse,
+    ]
+  >;
   listSessions(
-      request: protos.google.cloud.dataproc.v1.IListSessionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataproc.v1.IListSessionsRequest,
-          protos.google.cloud.dataproc.v1.IListSessionsResponse|null|undefined,
-          protos.google.cloud.dataproc.v1.ISession>): void;
+    request: protos.google.cloud.dataproc.v1.IListSessionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListSessionsRequest,
+      protos.google.cloud.dataproc.v1.IListSessionsResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.ISession
+    >,
+  ): void;
   listSessions(
-      request: protos.google.cloud.dataproc.v1.IListSessionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataproc.v1.IListSessionsRequest,
-          protos.google.cloud.dataproc.v1.IListSessionsResponse|null|undefined,
-          protos.google.cloud.dataproc.v1.ISession>): void;
+    request: protos.google.cloud.dataproc.v1.IListSessionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListSessionsRequest,
+      protos.google.cloud.dataproc.v1.IListSessionsResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.ISession
+    >,
+  ): void;
   listSessions(
-      request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataproc.v1.IListSessionsRequest,
-          protos.google.cloud.dataproc.v1.IListSessionsResponse|null|undefined,
-          protos.google.cloud.dataproc.v1.ISession>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataproc.v1.IListSessionsRequest,
-          protos.google.cloud.dataproc.v1.IListSessionsResponse|null|undefined,
-          protos.google.cloud.dataproc.v1.ISession>):
-      Promise<[
-        protos.google.cloud.dataproc.v1.ISession[],
-        protos.google.cloud.dataproc.v1.IListSessionsRequest|null,
-        protos.google.cloud.dataproc.v1.IListSessionsResponse
-      ]>|void {
+          | protos.google.cloud.dataproc.v1.IListSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataproc.v1.ISession
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataproc.v1.IListSessionsRequest,
+      protos.google.cloud.dataproc.v1.IListSessionsResponse | null | undefined,
+      protos.google.cloud.dataproc.v1.ISession
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataproc.v1.ISession[],
+      protos.google.cloud.dataproc.v1.IListSessionsRequest | null,
+      protos.google.cloud.dataproc.v1.IListSessionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataproc.v1.IListSessionsRequest,
-      protos.google.cloud.dataproc.v1.IListSessionsResponse|null|undefined,
-      protos.google.cloud.dataproc.v1.ISession>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataproc.v1.IListSessionsRequest,
+          | protos.google.cloud.dataproc.v1.IListSessionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataproc.v1.ISession
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -985,169 +1408,173 @@ export class SessionControllerClient {
     this._log.info('listSessions request %j', request);
     return this.innerApiCalls
       .listSessions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataproc.v1.ISession[],
-        protos.google.cloud.dataproc.v1.IListSessionsRequest|null,
-        protos.google.cloud.dataproc.v1.IListSessionsResponse
-      ]) => {
-        this._log.info('listSessions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataproc.v1.ISession[],
+          protos.google.cloud.dataproc.v1.IListSessionsRequest | null,
+          protos.google.cloud.dataproc.v1.IListSessionsResponse,
+        ]) => {
+          this._log.info('listSessions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSessions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of sessions.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of sessions to return in each response.
- *   The service may return fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListSessions` call.
- *   Provide this token to retrieve the subsequent page.
- * @param {string} [request.filter]
- *   Optional. A filter for the sessions to return in the response.
- *
- *   A filter is a logical expression constraining the values of various fields
- *   in each session resource. Filters are case sensitive, and may contain
- *   multiple clauses combined with logical operators (AND, OR).
- *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
- *   and `labels`.
- *
- *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
- *   is a filter for sessions in an ACTIVE state that were created before
- *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
- *   for sessions in an ACTIVE state that have a production environment label.
- *
- *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
- *   description of the filter syntax and a list of supported comparators.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataproc.v1.Session|Session} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSessionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSessions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of sessions.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of sessions to return in each response.
+   *   The service may return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListSessions` call.
+   *   Provide this token to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. A filter for the sessions to return in the response.
+   *
+   *   A filter is a logical expression constraining the values of various fields
+   *   in each session resource. Filters are case sensitive, and may contain
+   *   multiple clauses combined with logical operators (AND, OR).
+   *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
+   *   and `labels`.
+   *
+   *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
+   *   is a filter for sessions in an ACTIVE state that were created before
+   *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
+   *   for sessions in an ACTIVE state that have a production environment label.
+   *
+   *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
+   *   description of the filter syntax and a list of supported comparators.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataproc.v1.Session|Session} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSessionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSessionsStream(
-      request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSessions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, which owns this collection of sessions.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of sessions to return in each response.
- *   The service may return fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token received from a previous `ListSessions` call.
- *   Provide this token to retrieve the subsequent page.
- * @param {string} [request.filter]
- *   Optional. A filter for the sessions to return in the response.
- *
- *   A filter is a logical expression constraining the values of various fields
- *   in each session resource. Filters are case sensitive, and may contain
- *   multiple clauses combined with logical operators (AND, OR).
- *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
- *   and `labels`.
- *
- *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
- *   is a filter for sessions in an ACTIVE state that were created before
- *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
- *   for sessions in an ACTIVE state that have a production environment label.
- *
- *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
- *   description of the filter syntax and a list of supported comparators.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataproc.v1.Session|Session}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/session_controller.list_sessions.js</caption>
- * region_tag:dataproc_v1_generated_SessionController_ListSessions_async
- */
+  /**
+   * Equivalent to `listSessions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of sessions.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of sessions to return in each response.
+   *   The service may return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ListSessions` call.
+   *   Provide this token to retrieve the subsequent page.
+   * @param {string} [request.filter]
+   *   Optional. A filter for the sessions to return in the response.
+   *
+   *   A filter is a logical expression constraining the values of various fields
+   *   in each session resource. Filters are case sensitive, and may contain
+   *   multiple clauses combined with logical operators (AND, OR).
+   *   Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
+   *   and `labels`.
+   *
+   *   Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
+   *   is a filter for sessions in an ACTIVE state that were created before
+   *   2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
+   *   for sessions in an ACTIVE state that have a production environment label.
+   *
+   *   See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
+   *   description of the filter syntax and a list of supported comparators.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataproc.v1.Session|Session}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/session_controller.list_sessions.js</caption>
+   * region_tag:dataproc_v1_generated_SessionController_ListSessions_async
+   */
   listSessionsAsync(
-      request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataproc.v1.ISession>{
+    request?: protos.google.cloud.dataproc.v1.IListSessionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataproc.v1.ISession> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataproc.v1.ISession>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -1161,40 +1588,40 @@ export class SessionControllerClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -1208,41 +1635,41 @@ export class SessionControllerClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -1256,12 +1683,12 @@ export class SessionControllerClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1304,22 +1731,22 @@ export class SessionControllerClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1354,15 +1781,15 @@ export class SessionControllerClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1396,7 +1823,7 @@ export class SessionControllerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1409,25 +1836,24 @@ export class SessionControllerClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1466,22 +1892,22 @@ export class SessionControllerClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1497,7 +1923,7 @@ export class SessionControllerClient {
    * @param {string} batch
    * @returns {string} Resource name string.
    */
-  batchPath(project:string,location:string,batch:string) {
+  batchPath(project: string, location: string, batch: string) {
     return this.pathTemplates.batchPathTemplate.render({
       project: project,
       location: location,
@@ -1545,7 +1971,7 @@ export class SessionControllerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1583,7 +2009,12 @@ export class SessionControllerClient {
    * @param {string} node_group
    * @returns {string} Resource name string.
    */
-  nodeGroupPath(project:string,region:string,cluster:string,nodeGroup:string) {
+  nodeGroupPath(
+    project: string,
+    region: string,
+    cluster: string,
+    nodeGroup: string,
+  ) {
     return this.pathTemplates.nodeGroupPathTemplate.render({
       project: project,
       region: region,
@@ -1600,7 +2031,8 @@ export class SessionControllerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).project;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .project;
   }
 
   /**
@@ -1622,7 +2054,8 @@ export class SessionControllerClient {
    * @returns {string} A string representing the cluster.
    */
   matchClusterFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).cluster;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .cluster;
   }
 
   /**
@@ -1633,7 +2066,8 @@ export class SessionControllerClient {
    * @returns {string} A string representing the node_group.
    */
   matchNodeGroupFromNodeGroupName(nodeGroupName: string) {
-    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName).node_group;
+    return this.pathTemplates.nodeGroupPathTemplate.match(nodeGroupName)
+      .node_group;
   }
 
   /**
@@ -1642,7 +2076,7 @@ export class SessionControllerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1667,12 +2101,18 @@ export class SessionControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectLocationAutoscalingPolicyPath(project:string,location:string,autoscalingPolicy:string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render({
-      project: project,
-      location: location,
-      autoscaling_policy: autoscalingPolicy,
-    });
+  projectLocationAutoscalingPolicyPath(
+    project: string,
+    location: string,
+    autoscalingPolicy: string,
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        autoscaling_policy: autoscalingPolicy,
+      },
+    );
   }
 
   /**
@@ -1682,8 +2122,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).project;
+  matchProjectFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string,
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName,
+    ).project;
   }
 
   /**
@@ -1693,8 +2137,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).location;
+  matchLocationFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string,
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName,
+    ).location;
   }
 
   /**
@@ -1704,8 +2152,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_location_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(projectLocationAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(projectLocationAutoscalingPolicyName).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectLocationAutoscalingPolicyName(
+    projectLocationAutoscalingPolicyName: string,
+  ) {
+    return this.pathTemplates.projectLocationAutoscalingPolicyPathTemplate.match(
+      projectLocationAutoscalingPolicyName,
+    ).autoscaling_policy;
   }
 
   /**
@@ -1716,12 +2168,18 @@ export class SessionControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectLocationWorkflowTemplatePath(project:string,location:string,workflowTemplate:string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render({
-      project: project,
-      location: location,
-      workflow_template: workflowTemplate,
-    });
+  projectLocationWorkflowTemplatePath(
+    project: string,
+    location: string,
+    workflowTemplate: string,
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        workflow_template: workflowTemplate,
+      },
+    );
   }
 
   /**
@@ -1731,8 +2189,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).project;
+  matchProjectFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string,
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName,
+    ).project;
   }
 
   /**
@@ -1742,8 +2204,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).location;
+  matchLocationFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string,
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName,
+    ).location;
   }
 
   /**
@@ -1753,8 +2219,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_location_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(projectLocationWorkflowTemplateName: string) {
-    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(projectLocationWorkflowTemplateName).workflow_template;
+  matchWorkflowTemplateFromProjectLocationWorkflowTemplateName(
+    projectLocationWorkflowTemplateName: string,
+  ) {
+    return this.pathTemplates.projectLocationWorkflowTemplatePathTemplate.match(
+      projectLocationWorkflowTemplateName,
+    ).workflow_template;
   }
 
   /**
@@ -1765,12 +2235,18 @@ export class SessionControllerClient {
    * @param {string} autoscaling_policy
    * @returns {string} Resource name string.
    */
-  projectRegionAutoscalingPolicyPath(project:string,region:string,autoscalingPolicy:string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render({
-      project: project,
-      region: region,
-      autoscaling_policy: autoscalingPolicy,
-    });
+  projectRegionAutoscalingPolicyPath(
+    project: string,
+    region: string,
+    autoscalingPolicy: string,
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.render(
+      {
+        project: project,
+        region: region,
+        autoscaling_policy: autoscalingPolicy,
+      },
+    );
   }
 
   /**
@@ -1780,8 +2256,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).project;
+  matchProjectFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string,
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName,
+    ).project;
   }
 
   /**
@@ -1791,8 +2271,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).region;
+  matchRegionFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string,
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName,
+    ).region;
   }
 
   /**
@@ -1802,8 +2286,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_region_autoscaling_policy resource.
    * @returns {string} A string representing the autoscaling_policy.
    */
-  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(projectRegionAutoscalingPolicyName: string) {
-    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(projectRegionAutoscalingPolicyName).autoscaling_policy;
+  matchAutoscalingPolicyFromProjectRegionAutoscalingPolicyName(
+    projectRegionAutoscalingPolicyName: string,
+  ) {
+    return this.pathTemplates.projectRegionAutoscalingPolicyPathTemplate.match(
+      projectRegionAutoscalingPolicyName,
+    ).autoscaling_policy;
   }
 
   /**
@@ -1814,7 +2302,11 @@ export class SessionControllerClient {
    * @param {string} workflow_template
    * @returns {string} Resource name string.
    */
-  projectRegionWorkflowTemplatePath(project:string,region:string,workflowTemplate:string) {
+  projectRegionWorkflowTemplatePath(
+    project: string,
+    region: string,
+    workflowTemplate: string,
+  ) {
     return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.render({
       project: project,
       region: region,
@@ -1829,8 +2321,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).project;
+  matchProjectFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string,
+  ) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName,
+    ).project;
   }
 
   /**
@@ -1840,8 +2336,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the region.
    */
-  matchRegionFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).region;
+  matchRegionFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string,
+  ) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName,
+    ).region;
   }
 
   /**
@@ -1851,8 +2351,12 @@ export class SessionControllerClient {
    *   A fully-qualified path representing project_region_workflow_template resource.
    * @returns {string} A string representing the workflow_template.
    */
-  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(projectRegionWorkflowTemplateName: string) {
-    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(projectRegionWorkflowTemplateName).workflow_template;
+  matchWorkflowTemplateFromProjectRegionWorkflowTemplateName(
+    projectRegionWorkflowTemplateName: string,
+  ) {
+    return this.pathTemplates.projectRegionWorkflowTemplatePathTemplate.match(
+      projectRegionWorkflowTemplateName,
+    ).workflow_template;
   }
 
   /**
@@ -1863,7 +2367,7 @@ export class SessionControllerClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(project:string,location:string,session:string) {
+  sessionPath(project: string, location: string, session: string) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -1912,7 +2416,7 @@ export class SessionControllerClient {
    * @param {string} template
    * @returns {string} Resource name string.
    */
-  sessionTemplatePath(project:string,location:string,template:string) {
+  sessionTemplatePath(project: string, location: string, template: string) {
     return this.pathTemplates.sessionTemplatePathTemplate.render({
       project: project,
       location: location,
@@ -1928,7 +2432,9 @@ export class SessionControllerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).project;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(
+      sessionTemplateName,
+    ).project;
   }
 
   /**
@@ -1939,7 +2445,9 @@ export class SessionControllerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).location;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(
+      sessionTemplateName,
+    ).location;
   }
 
   /**
@@ -1950,7 +2458,9 @@ export class SessionControllerClient {
    * @returns {string} A string representing the template.
    */
   matchTemplateFromSessionTemplateName(sessionTemplateName: string) {
-    return this.pathTemplates.sessionTemplatePathTemplate.match(sessionTemplateName).template;
+    return this.pathTemplates.sessionTemplatePathTemplate.match(
+      sessionTemplateName,
+    ).template;
   }
 
   /**
@@ -1961,11 +2471,13 @@ export class SessionControllerClient {
    */
   close(): Promise<void> {
     if (this.sessionControllerStub && !this._terminated) {
-      return this.sessionControllerStub.then(stub => {
+      return this.sessionControllerStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

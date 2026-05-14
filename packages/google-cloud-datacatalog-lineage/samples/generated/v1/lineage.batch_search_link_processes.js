@@ -41,13 +41,13 @@ function main(parent, links) {
    */
   // const links = ['abc','def']
   /**
-   *  The maximum number of processes to return in a single page of the response.
-   *  A page may contain fewer results than this value.
+   *  Optional. The maximum number of processes to return in a single page of the
+   *  response. A page may contain fewer results than this value.
    */
   // const pageSize = 1234
   /**
-   *  The page token received from a previous `BatchSearchLinkProcesses` call.
-   *  Use it to get the next page.
+   *  Optional. The page token received from a previous
+   *  `BatchSearchLinkProcesses` call. Use it to get the next page.
    *  When requesting subsequent pages of a response, remember that
    *  all parameters must match the values you provided
    *  in the original request.

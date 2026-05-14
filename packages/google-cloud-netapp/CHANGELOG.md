@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.17.1...netapp-v0.18.0) (2026-05-12)
+
+
+### Features
+
+* [netapp] add ScaleType for Storage Pools and LargeCapacityConfig for Volumes ([#8086](https://github.com/googleapis/google-cloud-node/issues/8086)) ([650147c](https://github.com/googleapis/google-cloud-node/commit/650147ce3d1b7e3abc5c2770c5feb06ae67d2306))
+
 ## [0.17.1](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.17.0...netapp-v0.17.1) (2026-05-01)
 
 

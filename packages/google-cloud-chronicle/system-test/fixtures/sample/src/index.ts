@@ -16,19 +16,39 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BigQueryExportServiceClient, DashboardChartServiceClient, DashboardQueryServiceClient, DataAccessControlServiceClient, DataTableServiceClient, EntityServiceClient, FeaturedContentNativeDashboardServiceClient, InstanceServiceClient, NativeDashboardServiceClient, ReferenceListServiceClient, RuleServiceClient} from '@google-cloud/chronicle';
+import {
+  BigQueryExportServiceClient,
+  DashboardChartServiceClient,
+  DashboardQueryServiceClient,
+  DataAccessControlServiceClient,
+  DataTableServiceClient,
+  EntityServiceClient,
+  FeaturedContentNativeDashboardServiceClient,
+  InstanceServiceClient,
+  NativeDashboardServiceClient,
+  ReferenceListServiceClient,
+  RuleServiceClient,
+} from '@google-cloud/chronicle';
 
 // check that the client class type name can be used
-function doStuffWithBigQueryExportServiceClient(client: BigQueryExportServiceClient) {
+function doStuffWithBigQueryExportServiceClient(
+  client: BigQueryExportServiceClient,
+) {
   client.close();
 }
-function doStuffWithDashboardChartServiceClient(client: DashboardChartServiceClient) {
+function doStuffWithDashboardChartServiceClient(
+  client: DashboardChartServiceClient,
+) {
   client.close();
 }
-function doStuffWithDashboardQueryServiceClient(client: DashboardQueryServiceClient) {
+function doStuffWithDashboardQueryServiceClient(
+  client: DashboardQueryServiceClient,
+) {
   client.close();
 }
-function doStuffWithDataAccessControlServiceClient(client: DataAccessControlServiceClient) {
+function doStuffWithDataAccessControlServiceClient(
+  client: DataAccessControlServiceClient,
+) {
   client.close();
 }
 function doStuffWithDataTableServiceClient(client: DataTableServiceClient) {
@@ -37,16 +57,22 @@ function doStuffWithDataTableServiceClient(client: DataTableServiceClient) {
 function doStuffWithEntityServiceClient(client: EntityServiceClient) {
   client.close();
 }
-function doStuffWithFeaturedContentNativeDashboardServiceClient(client: FeaturedContentNativeDashboardServiceClient) {
+function doStuffWithFeaturedContentNativeDashboardServiceClient(
+  client: FeaturedContentNativeDashboardServiceClient,
+) {
   client.close();
 }
 function doStuffWithInstanceServiceClient(client: InstanceServiceClient) {
   client.close();
 }
-function doStuffWithNativeDashboardServiceClient(client: NativeDashboardServiceClient) {
+function doStuffWithNativeDashboardServiceClient(
+  client: NativeDashboardServiceClient,
+) {
   client.close();
 }
-function doStuffWithReferenceListServiceClient(client: ReferenceListServiceClient) {
+function doStuffWithReferenceListServiceClient(
+  client: ReferenceListServiceClient,
+) {
   client.close();
 }
 function doStuffWithRuleServiceClient(client: RuleServiceClient) {
@@ -73,8 +99,11 @@ function main() {
   const entityServiceClient = new EntityServiceClient();
   doStuffWithEntityServiceClient(entityServiceClient);
   // check that the client instance can be created
-  const featuredContentNativeDashboardServiceClient = new FeaturedContentNativeDashboardServiceClient();
-  doStuffWithFeaturedContentNativeDashboardServiceClient(featuredContentNativeDashboardServiceClient);
+  const featuredContentNativeDashboardServiceClient =
+    new FeaturedContentNativeDashboardServiceClient();
+  doStuffWithFeaturedContentNativeDashboardServiceClient(
+    featuredContentNativeDashboardServiceClient,
+  );
   // check that the client instance can be created
   const instanceServiceClient = new InstanceServiceClient();
   doStuffWithInstanceServiceClient(instanceServiceClient);
