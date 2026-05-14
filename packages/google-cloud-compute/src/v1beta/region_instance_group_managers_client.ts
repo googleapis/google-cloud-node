@@ -836,6 +836,9 @@ export class RegionInstanceGroupManagersClient {
  *   The request object that will be sent.
  * @param {string} request.instanceGroupManager
  *   Name of the managed instance group to delete.
+ * @param {boolean} request.noGracefulShutdown
+ *   When set, graceful shutdown is skipped for instance deletion even if it's
+ *   configured for the instances.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.region
@@ -968,6 +971,9 @@ export class RegionInstanceGroupManagersClient {
  *   The request object that will be sent.
  * @param {string} request.instanceGroupManager
  *   Name of the managed instance group.
+ * @param {boolean} request.noGracefulShutdown
+ *   When set, graceful shutdown is skipped for instance deletion even if it's
+ *   configured for the instances.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.region
@@ -1689,6 +1695,9 @@ export class RegionInstanceGroupManagersClient {
  *   The request object that will be sent.
  * @param {string} request.instanceGroupManager
  *   Name of the managed instance group.
+ * @param {boolean} request.noGracefulShutdown
+ *   When set, graceful shutdown is skipped for instance recreation even if it's
+ *   configured for the instances.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.region
@@ -2737,6 +2746,9 @@ export class RegionInstanceGroupManagersClient {
  *   The request object that will be sent.
  * @param {string} request.instanceGroupManager
  *   The name of the managed instance group.
+ * @param {boolean} request.noGracefulShutdown
+ *   When set, graceful shutdown is skipped for instance stopping even if it's
+ *   configured for the instances.
  * @param {string} request.project
  *   Project ID for this request.
  * @param {string} request.region
