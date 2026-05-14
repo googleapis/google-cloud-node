@@ -18,11 +18,19 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LocationsClient, LocationProtos} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +53,7 @@ export class ContentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataplex');
@@ -58,11 +66,11 @@ export class ContentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  contentServiceStub?: Promise<{[name: string]: Function}>;
+  contentServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ContentServiceClient.
@@ -103,21 +111,42 @@ export class ContentServiceClient {
    *     const client = new ContentServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ContentServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'dataplex.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +171,7 @@ export class ContentServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,15 +185,11 @@ export class ContentServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -186,97 +211,99 @@ export class ContentServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       aspectTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}'
+        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}',
       ),
       assetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}',
       ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
+        'projects/{project}/locations/{location}/lakes/{lake}/content/{content}',
       ),
       dataAssetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}'
+        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}',
       ),
       dataAttributePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
+        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}',
       ),
       dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}',
       ),
       dataProductPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataProducts/{data_product}'
+        'projects/{project}/locations/{location}/dataProducts/{data_product}',
       ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}'
+        'projects/{project}/locations/{location}/dataScans/{dataScan}',
       ),
       dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
+        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}',
       ),
       dataTaxonomyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}'
+        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}',
       ),
       encryptionConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}'
+        'organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}',
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}',
       ),
       entryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}',
       ),
       entryGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}',
       ),
       entryLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}',
       ),
       entryTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryTypes/{entry_type}'
+        'projects/{project}/locations/{location}/entryTypes/{entry_type}',
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}',
       ),
       glossaryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}',
       ),
       glossaryCategoryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}',
       ),
       glossaryTermPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}',
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
+        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}',
       ),
       lakePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}'
+        'projects/{project}/locations/{location}/lakes/{lake}',
       ),
       metadataFeedPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}'
+        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}',
       ),
       metadataJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
+        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}',
       ),
       partitionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}',
       ),
       projectLocationLakeActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}'
+        'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}',
       ),
-      projectLocationLakeZoneActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
-      ),
-      projectLocationLakeZoneAssetActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
-      ),
+      projectLocationLakeZoneActionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}',
+        ),
+      projectLocationLakeZoneAssetActionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}',
+        ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}'
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}',
       ),
       taskPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}'
+        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}',
       ),
       zonePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}',
       ),
     };
 
@@ -286,28 +313,295 @@ export class ContentServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
 
-    this.descriptors.longrunning = {
-    };
+    this.descriptors.longrunning = {};
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dataplex.v1.ContentService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dataplex.v1.ContentService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -338,11 +632,15 @@ export class ContentServiceClient {
     // Put together the "service stub" for
     // google.cloud.dataplex.v1.ContentService.
     this.contentServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dataplex.v1.ContentService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dataplex.v1.ContentService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataplex.v1.ContentService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     return this.contentServiceStub;
   }
@@ -353,8 +651,14 @@ export class ContentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataplex.googleapis.com';
   }
@@ -365,8 +669,14 @@ export class ContentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataplex.googleapis.com';
   }
@@ -406,8 +716,9 @@ export class ContentServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -419,7 +730,7 @@ export class ContentServiceClient {
   // -- Service calls --
   // -------------------
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -454,12 +765,11 @@ export class ContentServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -492,12 +802,12 @@ export class ContentServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -540,22 +850,22 @@ export class ContentServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -590,15 +900,15 @@ export class ContentServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -632,7 +942,7 @@ export class ContentServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -645,25 +955,24 @@ export class ContentServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -702,22 +1011,22 @@ export class ContentServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -733,7 +1042,7 @@ export class ContentServiceClient {
    * @param {string} aspect_type
    * @returns {string} Resource name string.
    */
-  aspectTypePath(project:string,location:string,aspectType:string) {
+  aspectTypePath(project: string, location: string, aspectType: string) {
     return this.pathTemplates.aspectTypePathTemplate.render({
       project: project,
       location: location,
@@ -749,7 +1058,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).project;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .project;
   }
 
   /**
@@ -760,7 +1070,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).location;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .location;
   }
 
   /**
@@ -771,7 +1082,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the aspect_type.
    */
   matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).aspect_type;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .aspect_type;
   }
 
   /**
@@ -784,7 +1096,13 @@ export class ContentServiceClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(project:string,location:string,lake:string,zone:string,asset:string) {
+  assetPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    asset: string,
+  ) {
     return this.pathTemplates.assetPathTemplate.render({
       project: project,
       location: location,
@@ -858,7 +1176,12 @@ export class ContentServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(project:string,location:string,lake:string,content:string) {
+  contentPath(
+    project: string,
+    location: string,
+    lake: string,
+    content: string,
+  ) {
     return this.pathTemplates.contentPathTemplate.render({
       project: project,
       location: location,
@@ -920,7 +1243,12 @@ export class ContentServiceClient {
    * @param {string} data_asset
    * @returns {string} Resource name string.
    */
-  dataAssetPath(project:string,location:string,dataProduct:string,dataAsset:string) {
+  dataAssetPath(
+    project: string,
+    location: string,
+    dataProduct: string,
+    dataAsset: string,
+  ) {
     return this.pathTemplates.dataAssetPathTemplate.render({
       project: project,
       location: location,
@@ -937,7 +1265,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).project;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .project;
   }
 
   /**
@@ -948,7 +1277,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).location;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .location;
   }
 
   /**
@@ -959,7 +1289,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the data_product.
    */
   matchDataProductFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_product;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .data_product;
   }
 
   /**
@@ -970,7 +1301,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the data_asset.
    */
   matchDataAssetFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_asset;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .data_asset;
   }
 
   /**
@@ -982,7 +1314,12 @@ export class ContentServiceClient {
    * @param {string} data_attribute_id
    * @returns {string} Resource name string.
    */
-  dataAttributePath(project:string,location:string,dataTaxonomy:string,dataAttributeId:string) {
+  dataAttributePath(
+    project: string,
+    location: string,
+    dataTaxonomy: string,
+    dataAttributeId: string,
+  ) {
     return this.pathTemplates.dataAttributePathTemplate.render({
       project: project,
       location: location,
@@ -999,7 +1336,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).project;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .project;
   }
 
   /**
@@ -1010,7 +1348,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).location;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .location;
   }
 
   /**
@@ -1021,7 +1360,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the dataTaxonomy.
    */
   matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).dataTaxonomy;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .dataTaxonomy;
   }
 
   /**
@@ -1032,7 +1372,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the data_attribute_id.
    */
   matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).data_attribute_id;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .data_attribute_id;
   }
 
   /**
@@ -1043,7 +1384,11 @@ export class ContentServiceClient {
    * @param {string} data_attribute_binding_id
    * @returns {string} Resource name string.
    */
-  dataAttributeBindingPath(project:string,location:string,dataAttributeBindingId:string) {
+  dataAttributeBindingPath(
+    project: string,
+    location: string,
+    dataAttributeBindingId: string,
+  ) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.render({
       project: project,
       location: location,
@@ -1059,7 +1404,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).project;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).project;
   }
 
   /**
@@ -1070,7 +1417,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).location;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).location;
   }
 
   /**
@@ -1080,8 +1429,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing DataAttributeBinding resource.
    * @returns {string} A string representing the data_attribute_binding_id.
    */
-  matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
+  matchDataAttributeBindingIdFromDataAttributeBindingName(
+    dataAttributeBindingName: string,
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).data_attribute_binding_id;
   }
 
   /**
@@ -1092,7 +1445,7 @@ export class ContentServiceClient {
    * @param {string} data_product
    * @returns {string} Resource name string.
    */
-  dataProductPath(project:string,location:string,dataProduct:string) {
+  dataProductPath(project: string, location: string, dataProduct: string) {
     return this.pathTemplates.dataProductPathTemplate.render({
       project: project,
       location: location,
@@ -1108,7 +1461,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).project;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .project;
   }
 
   /**
@@ -1119,7 +1473,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).location;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .location;
   }
 
   /**
@@ -1130,7 +1485,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the data_product.
    */
   matchDataProductFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).data_product;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .data_product;
   }
 
   /**
@@ -1141,7 +1497,7 @@ export class ContentServiceClient {
    * @param {string} dataScan
    * @returns {string} Resource name string.
    */
-  dataScanPath(project:string,location:string,dataScan:string) {
+  dataScanPath(project: string, location: string, dataScan: string) {
     return this.pathTemplates.dataScanPathTemplate.render({
       project: project,
       location: location,
@@ -1191,7 +1547,12 @@ export class ContentServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  dataScanJobPath(project:string,location:string,dataScan:string,job:string) {
+  dataScanJobPath(
+    project: string,
+    location: string,
+    dataScan: string,
+    job: string,
+  ) {
     return this.pathTemplates.dataScanJobPathTemplate.render({
       project: project,
       location: location,
@@ -1208,7 +1569,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).project;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .project;
   }
 
   /**
@@ -1219,7 +1581,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).location;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .location;
   }
 
   /**
@@ -1230,7 +1593,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the dataScan.
    */
   matchDataScanFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).dataScan;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .dataScan;
   }
 
   /**
@@ -1241,7 +1605,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).job;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .job;
   }
 
   /**
@@ -1252,7 +1617,7 @@ export class ContentServiceClient {
    * @param {string} data_taxonomy_id
    * @returns {string} Resource name string.
    */
-  dataTaxonomyPath(project:string,location:string,dataTaxonomyId:string) {
+  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
     return this.pathTemplates.dataTaxonomyPathTemplate.render({
       project: project,
       location: location,
@@ -1268,7 +1633,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).project;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .project;
   }
 
   /**
@@ -1279,7 +1645,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).location;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .location;
   }
 
   /**
@@ -1290,7 +1657,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the data_taxonomy_id.
    */
   matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).data_taxonomy_id;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .data_taxonomy_id;
   }
 
   /**
@@ -1301,7 +1669,11 @@ export class ContentServiceClient {
    * @param {string} encryption_config
    * @returns {string} Resource name string.
    */
-  encryptionConfigPath(organization:string,location:string,encryptionConfig:string) {
+  encryptionConfigPath(
+    organization: string,
+    location: string,
+    encryptionConfig: string,
+  ) {
     return this.pathTemplates.encryptionConfigPathTemplate.render({
       organization: organization,
       location: location,
@@ -1317,7 +1689,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).organization;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).organization;
   }
 
   /**
@@ -1328,7 +1702,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).location;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).location;
   }
 
   /**
@@ -1339,7 +1715,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the encryption_config.
    */
   matchEncryptionConfigFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).encryption_config;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).encryption_config;
   }
 
   /**
@@ -1352,7 +1730,13 @@ export class ContentServiceClient {
    * @param {string} entity
    * @returns {string} Resource name string.
    */
-  entityPath(project:string,location:string,lake:string,zone:string,entity:string) {
+  entityPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    entity: string,
+  ) {
     return this.pathTemplates.entityPathTemplate.render({
       project: project,
       location: location,
@@ -1426,7 +1810,12 @@ export class ContentServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  entryPath(project:string,location:string,entryGroup:string,entry:string) {
+  entryPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entry: string,
+  ) {
     return this.pathTemplates.entryPathTemplate.render({
       project: project,
       location: location,
@@ -1487,7 +1876,7 @@ export class ContentServiceClient {
    * @param {string} entry_group
    * @returns {string} Resource name string.
    */
-  entryGroupPath(project:string,location:string,entryGroup:string) {
+  entryGroupPath(project: string, location: string, entryGroup: string) {
     return this.pathTemplates.entryGroupPathTemplate.render({
       project: project,
       location: location,
@@ -1503,7 +1892,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).project;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .project;
   }
 
   /**
@@ -1514,7 +1904,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).location;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .location;
   }
 
   /**
@@ -1525,7 +1916,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).entry_group;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
   }
 
   /**
@@ -1537,7 +1929,12 @@ export class ContentServiceClient {
    * @param {string} entry_link
    * @returns {string} Resource name string.
    */
-  entryLinkPath(project:string,location:string,entryGroup:string,entryLink:string) {
+  entryLinkPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entryLink: string,
+  ) {
     return this.pathTemplates.entryLinkPathTemplate.render({
       project: project,
       location: location,
@@ -1554,7 +1951,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).project;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .project;
   }
 
   /**
@@ -1565,7 +1963,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).location;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .location;
   }
 
   /**
@@ -1576,7 +1975,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_group;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .entry_group;
   }
 
   /**
@@ -1587,7 +1987,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the entry_link.
    */
   matchEntryLinkFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_link;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .entry_link;
   }
 
   /**
@@ -1598,7 +1999,7 @@ export class ContentServiceClient {
    * @param {string} entry_type
    * @returns {string} Resource name string.
    */
-  entryTypePath(project:string,location:string,entryType:string) {
+  entryTypePath(project: string, location: string, entryType: string) {
     return this.pathTemplates.entryTypePathTemplate.render({
       project: project,
       location: location,
@@ -1614,7 +2015,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).project;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .project;
   }
 
   /**
@@ -1625,7 +2027,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).location;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .location;
   }
 
   /**
@@ -1636,7 +2039,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the entry_type.
    */
   matchEntryTypeFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).entry_type;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .entry_type;
   }
 
   /**
@@ -1648,7 +2052,12 @@ export class ContentServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(project:string,location:string,lake:string,environment:string) {
+  environmentPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string,
+  ) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -1665,7 +2074,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
   }
 
   /**
@@ -1676,7 +2086,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .location;
   }
 
   /**
@@ -1687,7 +2098,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the lake.
    */
   matchLakeFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).lake;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .lake;
   }
 
   /**
@@ -1698,7 +2110,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**
@@ -1709,7 +2122,7 @@ export class ContentServiceClient {
    * @param {string} glossary
    * @returns {string} Resource name string.
    */
-  glossaryPath(project:string,location:string,glossary:string) {
+  glossaryPath(project: string, location: string, glossary: string) {
     return this.pathTemplates.glossaryPathTemplate.render({
       project: project,
       location: location,
@@ -1759,7 +2172,12 @@ export class ContentServiceClient {
    * @param {string} glossary_category
    * @returns {string} Resource name string.
    */
-  glossaryCategoryPath(project:string,location:string,glossary:string,glossaryCategory:string) {
+  glossaryCategoryPath(
+    project: string,
+    location: string,
+    glossary: string,
+    glossaryCategory: string,
+  ) {
     return this.pathTemplates.glossaryCategoryPathTemplate.render({
       project: project,
       location: location,
@@ -1776,7 +2194,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).project;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).project;
   }
 
   /**
@@ -1787,7 +2207,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).location;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).location;
   }
 
   /**
@@ -1798,7 +2220,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the glossary.
    */
   matchGlossaryFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).glossary;
   }
 
   /**
@@ -1809,7 +2233,9 @@ export class ContentServiceClient {
    * @returns {string} A string representing the glossary_category.
    */
   matchGlossaryCategoryFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary_category;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).glossary_category;
   }
 
   /**
@@ -1821,7 +2247,12 @@ export class ContentServiceClient {
    * @param {string} glossary_term
    * @returns {string} Resource name string.
    */
-  glossaryTermPath(project:string,location:string,glossary:string,glossaryTerm:string) {
+  glossaryTermPath(
+    project: string,
+    location: string,
+    glossary: string,
+    glossaryTerm: string,
+  ) {
     return this.pathTemplates.glossaryTermPathTemplate.render({
       project: project,
       location: location,
@@ -1838,7 +2269,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).project;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .project;
   }
 
   /**
@@ -1849,7 +2281,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).location;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .location;
   }
 
   /**
@@ -1860,7 +2293,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the glossary.
    */
   matchGlossaryFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .glossary;
   }
 
   /**
@@ -1871,7 +2305,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the glossary_term.
    */
   matchGlossaryTermFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary_term;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .glossary_term;
   }
 
   /**
@@ -1884,7 +2319,13 @@ export class ContentServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(project:string,location:string,lake:string,task:string,job:string) {
+  jobPath(
+    project: string,
+    location: string,
+    lake: string,
+    task: string,
+    job: string,
+  ) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -1957,7 +2398,7 @@ export class ContentServiceClient {
    * @param {string} lake
    * @returns {string} Resource name string.
    */
-  lakePath(project:string,location:string,lake:string) {
+  lakePath(project: string, location: string, lake: string) {
     return this.pathTemplates.lakePathTemplate.render({
       project: project,
       location: location,
@@ -2006,7 +2447,7 @@ export class ContentServiceClient {
    * @param {string} metadata_feed
    * @returns {string} Resource name string.
    */
-  metadataFeedPath(project:string,location:string,metadataFeed:string) {
+  metadataFeedPath(project: string, location: string, metadataFeed: string) {
     return this.pathTemplates.metadataFeedPathTemplate.render({
       project: project,
       location: location,
@@ -2022,7 +2463,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).project;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .project;
   }
 
   /**
@@ -2033,7 +2475,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).location;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .location;
   }
 
   /**
@@ -2044,7 +2487,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the metadata_feed.
    */
   matchMetadataFeedFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).metadata_feed;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .metadata_feed;
   }
 
   /**
@@ -2055,7 +2499,7 @@ export class ContentServiceClient {
    * @param {string} metadataJob
    * @returns {string} Resource name string.
    */
-  metadataJobPath(project:string,location:string,metadataJob:string) {
+  metadataJobPath(project: string, location: string, metadataJob: string) {
     return this.pathTemplates.metadataJobPathTemplate.render({
       project: project,
       location: location,
@@ -2071,7 +2515,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).project;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .project;
   }
 
   /**
@@ -2082,7 +2527,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).location;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .location;
   }
 
   /**
@@ -2093,7 +2539,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the metadataJob.
    */
   matchMetadataJobFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).metadataJob;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .metadataJob;
   }
 
   /**
@@ -2107,7 +2554,14 @@ export class ContentServiceClient {
    * @param {string} partition
    * @returns {string} Resource name string.
    */
-  partitionPath(project:string,location:string,lake:string,zone:string,entity:string,partition:string) {
+  partitionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    entity: string,
+    partition: string,
+  ) {
     return this.pathTemplates.partitionPathTemplate.render({
       project: project,
       location: location,
@@ -2126,7 +2580,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).project;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .project;
   }
 
   /**
@@ -2137,7 +2592,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).location;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .location;
   }
 
   /**
@@ -2181,7 +2637,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the partition.
    */
   matchPartitionFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).partition;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .partition;
   }
 
   /**
@@ -2193,7 +2650,12 @@ export class ContentServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeActionPath(project:string,location:string,lake:string,action:string) {
+  projectLocationLakeActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    action: string,
+  ) {
     return this.pathTemplates.projectLocationLakeActionPathTemplate.render({
       project: project,
       location: location,
@@ -2209,8 +2671,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).project;
+  matchProjectFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).project;
   }
 
   /**
@@ -2220,8 +2686,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).location;
+  matchLocationFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).location;
   }
 
   /**
@@ -2231,8 +2701,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).lake;
+  matchLakeFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).lake;
   }
 
   /**
@@ -2242,8 +2716,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).action;
+  matchActionFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).action;
   }
 
   /**
@@ -2256,7 +2734,13 @@ export class ContentServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneActionPath(project:string,location:string,lake:string,zone:string,action:string) {
+  projectLocationLakeZoneActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    action: string,
+  ) {
     return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.render({
       project: project,
       location: location,
@@ -2273,8 +2757,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).project;
+  matchProjectFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).project;
   }
 
   /**
@@ -2284,8 +2772,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).location;
+  matchLocationFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).location;
   }
 
   /**
@@ -2295,8 +2787,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).lake;
+  matchLakeFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).lake;
   }
 
   /**
@@ -2306,8 +2802,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).zone;
+  matchZoneFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).zone;
   }
 
   /**
@@ -2317,8 +2817,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).action;
+  matchActionFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).action;
   }
 
   /**
@@ -2332,15 +2836,24 @@ export class ContentServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneAssetActionPath(project:string,location:string,lake:string,zone:string,asset:string,action:string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render({
-      project: project,
-      location: location,
-      lake: lake,
-      zone: zone,
-      asset: asset,
-      action: action,
-    });
+  projectLocationLakeZoneAssetActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    asset: string,
+    action: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        lake: lake,
+        zone: zone,
+        asset: asset,
+        action: action,
+      },
+    );
   }
 
   /**
@@ -2350,8 +2863,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).project;
+  matchProjectFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).project;
   }
 
   /**
@@ -2361,8 +2878,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).location;
+  matchLocationFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).location;
   }
 
   /**
@@ -2372,8 +2893,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).lake;
+  matchLakeFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).lake;
   }
 
   /**
@@ -2383,8 +2908,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).zone;
+  matchZoneFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).zone;
   }
 
   /**
@@ -2394,8 +2923,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).asset;
+  matchAssetFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).asset;
   }
 
   /**
@@ -2405,8 +2938,12 @@ export class ContentServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).action;
+  matchActionFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).action;
   }
 
   /**
@@ -2419,7 +2956,13 @@ export class ContentServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(project:string,location:string,lake:string,environment:string,session:string) {
+  sessionPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string,
+    session: string,
+  ) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -2470,7 +3013,8 @@ export class ContentServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromSessionName(sessionName: string) {
-    return this.pathTemplates.sessionPathTemplate.match(sessionName).environment;
+    return this.pathTemplates.sessionPathTemplate.match(sessionName)
+      .environment;
   }
 
   /**
@@ -2493,7 +3037,7 @@ export class ContentServiceClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(project:string,location:string,lake:string,task:string) {
+  taskPath(project: string, location: string, lake: string, task: string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -2555,7 +3099,7 @@ export class ContentServiceClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project:string,location:string,lake:string,zone:string) {
+  zonePath(project: string, location: string, lake: string, zone: string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -2616,11 +3160,13 @@ export class ContentServiceClient {
    */
   close(): Promise<void> {
     if (this.contentServiceStub && !this._terminated) {
-      return this.contentServiceStub.then(stub => {
+      return this.contentServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

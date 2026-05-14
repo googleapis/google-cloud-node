@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(report, updateMask) {
+function main(report) {
   // [START admanager_v1_generated_ReportService_UpdateReport_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -33,7 +33,7 @@ function main(report, updateMask) {
    */
   // const report = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -47,7 +47,6 @@ function main(report, updateMask) {
     // Construct request
     const request = {
       report,
-      updateMask,
     };
 
     // Run request

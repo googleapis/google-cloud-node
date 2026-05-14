@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class SaasDeploymentsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('saasservicemgmt');
@@ -57,10 +66,10 @@ export class SaasDeploymentsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  saasDeploymentsStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  saasDeploymentsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SaasDeploymentsClient.
@@ -101,21 +110,42 @@ export class SaasDeploymentsClient {
    *     const client = new SaasDeploymentsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SaasDeploymentsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'saasservicemgmt.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +170,7 @@ export class SaasDeploymentsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +184,11 @@ export class SaasDeploymentsClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,34 +210,34 @@ export class SaasDeploymentsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       releasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/releases/{release}'
+        'projects/{project}/locations/{location}/releases/{release}',
       ),
       rolloutPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/rollouts/{rollout_id}'
+        'projects/{project}/locations/{location}/rollouts/{rollout_id}',
       ),
       rolloutKindPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/rolloutKinds/{rollout_kind_id}'
+        'projects/{project}/locations/{location}/rolloutKinds/{rollout_kind_id}',
       ),
       saasPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/saas/{saas}'
+        'projects/{project}/locations/{location}/saas/{saas}',
       ),
       tenantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tenants/{tenant}'
+        'projects/{project}/locations/{location}/tenants/{tenant}',
       ),
       unitPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/units/{unit}'
+        'projects/{project}/locations/{location}/units/{unit}',
       ),
       unitKindPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/unitKinds/{unitKind}'
+        'projects/{project}/locations/{location}/unitKinds/{unitKind}',
       ),
       unitOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/unitOperations/{unitOperation}'
+        'projects/{project}/locations/{location}/unitOperations/{unitOperation}',
       ),
     };
 
@@ -219,24 +245,45 @@ export class SaasDeploymentsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listSaas:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'saas'),
-      listTenants:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tenants'),
-      listUnitKinds:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'unitKinds'),
-      listUnits:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'units'),
-      listUnitOperations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'unitOperations'),
-      listReleases:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'releases')
+      listSaas: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'saas',
+      ),
+      listTenants: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tenants',
+      ),
+      listUnitKinds: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'unitKinds',
+      ),
+      listUnits: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'units',
+      ),
+      listUnitOperations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'unitOperations',
+      ),
+      listReleases: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'releases',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -267,37 +314,72 @@ export class SaasDeploymentsClient {
     // Put together the "service stub" for
     // google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments.
     this.saasDeploymentsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasDeployments',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.saasplatform.saasservicemgmt
+            .v1beta1.SaasDeployments,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const saasDeploymentsStubMethods =
-        ['listSaas', 'getSaas', 'createSaas', 'updateSaas', 'deleteSaas', 'listTenants', 'getTenant', 'createTenant', 'updateTenant', 'deleteTenant', 'listUnitKinds', 'getUnitKind', 'createUnitKind', 'updateUnitKind', 'deleteUnitKind', 'listUnits', 'getUnit', 'createUnit', 'updateUnit', 'deleteUnit', 'listUnitOperations', 'getUnitOperation', 'createUnitOperation', 'updateUnitOperation', 'deleteUnitOperation', 'listReleases', 'getRelease', 'createRelease', 'updateRelease', 'deleteRelease'];
+    const saasDeploymentsStubMethods = [
+      'listSaas',
+      'getSaas',
+      'createSaas',
+      'updateSaas',
+      'deleteSaas',
+      'listTenants',
+      'getTenant',
+      'createTenant',
+      'updateTenant',
+      'deleteTenant',
+      'listUnitKinds',
+      'getUnitKind',
+      'createUnitKind',
+      'updateUnitKind',
+      'deleteUnitKind',
+      'listUnits',
+      'getUnit',
+      'createUnit',
+      'updateUnit',
+      'deleteUnit',
+      'listUnitOperations',
+      'getUnitOperation',
+      'createUnitOperation',
+      'updateUnitOperation',
+      'deleteUnitOperation',
+      'listReleases',
+      'getRelease',
+      'createRelease',
+      'updateRelease',
+      'deleteRelease',
+    ];
     for (const methodName of saasDeploymentsStubMethods) {
       const callPromise = this.saasDeploymentsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -312,8 +394,14 @@ export class SaasDeploymentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'saasservicemgmt.googleapis.com';
   }
@@ -324,8 +412,14 @@ export class SaasDeploymentsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'saasservicemgmt.googleapis.com';
   }
@@ -356,9 +450,7 @@ export class SaasDeploymentsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -367,8 +459,9 @@ export class SaasDeploymentsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -379,2787 +472,3988 @@ export class SaasDeploymentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieve a single saas.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_saas.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetSaas_async
- */
+  /**
+   * Retrieve a single saas.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_saas.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetSaas_async
+   */
   getSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSaas request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSaas response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSaas(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSaas response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSaas(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetSaasRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getSaas response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new saas.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the saas.
- * @param {string} request.saasId
- *   Required. The ID value for the new saas.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas} request.saas
- *   Required. The desired state for the saas.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_saas.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateSaas_async
- */
+  /**
+   * Create a new saas.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the saas.
+   * @param {string} request.saasId
+   *   Required. The ID value for the new saas.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas} request.saas
+   *   Required. The desired state for the saas.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_saas.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateSaas_async
+   */
   createSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createSaas request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSaas response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createSaas(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createSaas response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createSaas(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateSaasRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createSaas response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single saas.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas} request.saas
- *   Required. The desired state for the saas.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   Saas resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   Saas will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_saas.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateSaas_async
- */
+  /**
+   * Update a single saas.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas} request.saas
+   *   Required. The desired state for the saas.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Saas resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   Saas will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_saas.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateSaas_async
+   */
   updateSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'saas.name': request.saas!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'saas.name': request.saas!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateSaas request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSaas response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateSaas(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateSaas response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateSaas(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateSaasRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSaas response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single saas.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the saas. This is
- *   used with state-changing methods to prevent accidental overwrites when
- *   multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the saas. The Any wildcard (`*`) requires that the resource
- *   must already exists, and the Not Any wildcard (`!*`) requires that it must
- *   not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_saas.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteSaas_async
- */
+  /**
+   * Delete a single saas.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the saas. This is
+   *   used with state-changing methods to prevent accidental overwrites when
+   *   multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the saas. The Any wildcard (`*`) requires that the resource
+   *   must already exists, and the Not Any wildcard (`!*`) requires that it must
+   *   not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_saas.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteSaas_async
+   */
   deleteSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteSaas request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteSaas response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteSaas(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteSaas response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteSaas(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteSaasRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSaas response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve a single tenant.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_tenant.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetTenant_async
- */
+  /**
+   * Retrieve a single tenant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_tenant.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetTenant_async
+   */
   getTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getTenant request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getTenant(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getTenant response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetTenantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getTenant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new tenant.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the tenant.
- * @param {string} request.tenantId
- *   Required. The ID value for the new tenant.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant} request.tenant
- *   Required. The desired state for the tenant.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_tenant.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateTenant_async
- */
+  /**
+   * Create a new tenant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the tenant.
+   * @param {string} request.tenantId
+   *   Required. The ID value for the new tenant.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant} request.tenant
+   *   Required. The desired state for the tenant.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_tenant.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateTenant_async
+   */
   createTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createTenant request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createTenant(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createTenant response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateTenantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createTenant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single tenant.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant} request.tenant
- *   Required. The desired state for the tenant.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   Tenant resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   Tenant will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_tenant.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateTenant_async
- */
+  /**
+   * Update a single tenant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant} request.tenant
+   *   Required. The desired state for the tenant.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Tenant resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   Tenant will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_tenant.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateTenant_async
+   */
   updateTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'tenant.name': request.tenant!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'tenant.name': request.tenant!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateTenant request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateTenant(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateTenant response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateTenantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTenant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single tenant.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the tenant. This is
- *   used with state-changing methods to prevent accidental overwrites when
- *   multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the tenant. The Any wildcard (`*`) requires that the resource
- *   must already exists, and the Not Any wildcard (`!*`) requires that it must
- *   not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_tenant.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteTenant_async
- */
+  /**
+   * Delete a single tenant.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the tenant. This is
+   *   used with state-changing methods to prevent accidental overwrites when
+   *   multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the tenant. The Any wildcard (`*`) requires that the resource
+   *   must already exists, and the Not Any wildcard (`!*`) requires that it must
+   *   not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_tenant.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteTenant_async
+   */
   deleteTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTenant(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTenant(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteTenant request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTenant response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteTenant(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteTenant response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteTenant(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteTenantRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTenant response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve a single unit kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_unit_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnitKind_async
- */
+  /**
+   * Retrieve a single unit kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_unit_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnitKind_async
+   */
   getUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getUnitKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getUnitKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getUnitKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getUnitKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getUnitKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUnitKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new unit kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit kind.
- * @param {string} request.unitKindId
- *   Required. The ID value for the new unit kind.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind} request.unitKind
- *   Required. The desired state for the unit kind.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_unit_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnitKind_async
- */
+  /**
+   * Create a new unit kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit kind.
+   * @param {string} request.unitKindId
+   *   Required. The ID value for the new unit kind.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind} request.unitKind
+   *   Required. The desired state for the unit kind.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_unit_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnitKind_async
+   */
   createUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createUnitKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createUnitKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createUnitKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createUnitKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createUnitKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUnitKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single unit kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind} request.unitKind
- *   Required. The desired state for the unit kind.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   UnitKind resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   UnitKind will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_unit_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnitKind_async
- */
+  /**
+   * Update a single unit kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind} request.unitKind
+   *   Required. The desired state for the unit kind.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   UnitKind resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   UnitKind will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_unit_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnitKind_async
+   */
   updateUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'unit_kind.name': request.unitKind!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'unit_kind.name': request.unitKind!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateUnitKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateUnitKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateUnitKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateUnitKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateUnitKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUnitKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single unit kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the unit kind. This
- *   is used with state-changing methods to prevent accidental overwrites when
- *   multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the unit kind. The Any wildcard (`*`) requires that the
- *   resource must already exists, and the Not Any wildcard (`!*`) requires that
- *   it must not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_unit_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnitKind_async
- */
+  /**
+   * Delete a single unit kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the unit kind. This
+   *   is used with state-changing methods to prevent accidental overwrites when
+   *   multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the unit kind. The Any wildcard (`*`) requires that the
+   *   resource must already exists, and the Not Any wildcard (`!*`) requires that
+   *   it must not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_unit_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnitKind_async
+   */
   deleteUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteUnitKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteUnitKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteUnitKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteUnitKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteUnitKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteUnitKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteUnitKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUnitKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve a single unit.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_unit.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnit_async
- */
+  /**
+   * Retrieve a single unit.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_unit.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnit_async
+   */
   getUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getUnit request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getUnit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getUnit(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getUnit response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getUnit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUnit response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new unit.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit.
- * @param {string} request.unitId
- *   Required. The ID value for the new unit.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit} request.unit
- *   Required. The desired state for the unit.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_unit.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnit_async
- */
+  /**
+   * Create a new unit.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit.
+   * @param {string} request.unitId
+   *   Required. The ID value for the new unit.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit} request.unit
+   *   Required. The desired state for the unit.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_unit.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnit_async
+   */
   createUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createUnit request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createUnit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createUnit(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createUnit response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createUnit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUnit response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single unit.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit} request.unit
- *   Required. The desired state for the unit.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   Unit resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   Unit will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_unit.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnit_async
- */
+  /**
+   * Update a single unit.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit} request.unit
+   *   Required. The desired state for the unit.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Unit resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   Unit will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_unit.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnit_async
+   */
   updateUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'unit.name': request.unit!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'unit.name': request.unit!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateUnit request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateUnit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateUnit(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateUnit response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateUnit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUnit response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single unit.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the unit. This is
- *   used with state-changing methods to prevent accidental overwrites when
- *   multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the unit. The Any wildcard (`*`) requires that the resource
- *   must already exists, and the Not Any wildcard (`!*`) requires that it must
- *   not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_unit.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnit_async
- */
+  /**
+   * Delete a single unit.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the unit. This is
+   *   used with state-changing methods to prevent accidental overwrites when
+   *   multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the unit. The Any wildcard (`*`) requires that the resource
+   *   must already exists, and the Not Any wildcard (`!*`) requires that it must
+   *   not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_unit.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnit_async
+   */
   deleteUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteUnit(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteUnit(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteUnit request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteUnit response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteUnit(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteUnit response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteUnit(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUnit response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve a single unit operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_unit_operation.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnitOperation_async
- */
+  /**
+   * Retrieve a single unit operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_unit_operation.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetUnitOperation_async
+   */
   getUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getUnitOperation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getUnitOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getUnitOperation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getUnitOperation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getUnitOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetUnitOperationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getUnitOperation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new unit operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit operation.
- * @param {string} request.unitOperationId
- *   Required. The ID value for the new unit operation.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation} request.unitOperation
- *   Required. The desired state for the unit operation.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_unit_operation.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnitOperation_async
- */
+  /**
+   * Create a new unit operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit operation.
+   * @param {string} request.unitOperationId
+   *   Required. The ID value for the new unit operation.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation} request.unitOperation
+   *   Required. The desired state for the unit operation.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_unit_operation.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateUnitOperation_async
+   */
   createUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createUnitOperation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createUnitOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createUnitOperation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createUnitOperation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createUnitOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateUnitOperationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createUnitOperation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single unit operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation} request.unitOperation
- *   Required. The desired state for the unit operation.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   UnitOperation resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   UnitOperation will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_unit_operation.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnitOperation_async
- */
+  /**
+   * Update a single unit operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation} request.unitOperation
+   *   Required. The desired state for the unit operation.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   UnitOperation resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   UnitOperation will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_unit_operation.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateUnitOperation_async
+   */
   updateUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'unit_operation.name': request.unitOperation!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'unit_operation.name': request.unitOperation!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateUnitOperation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateUnitOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateUnitOperation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateUnitOperation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateUnitOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateUnitOperationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUnitOperation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single unit operation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the unit operation.
- *   This is used with state-changing methods to prevent accidental overwrites
- *   when multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the unit operation. The Any wildcard (`*`) requires that the
- *   resource must already exists, and the Not Any wildcard (`!*`) requires that
- *   it must not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_unit_operation.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnitOperation_async
- */
+  /**
+   * Delete a single unit operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the unit operation.
+   *   This is used with state-changing methods to prevent accidental overwrites
+   *   when multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the unit operation. The Any wildcard (`*`) requires that the
+   *   resource must already exists, and the Not Any wildcard (`!*`) requires that
+   *   it must not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_unit_operation.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteUnitOperation_async
+   */
   deleteUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteUnitOperation(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteUnitOperation(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteUnitOperation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteUnitOperation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteUnitOperation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteUnitOperation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteUnitOperation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteUnitOperationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteUnitOperation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve a single release.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_release.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetRelease_async
- */
+  /**
+   * Retrieve a single release.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.get_release.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_GetRelease_async
+   */
   getRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRelease request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRelease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRelease(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRelease response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRelease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetReleaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRelease response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new release.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the release.
- * @param {string} request.releaseId
- *   Required. The ID value for the new release.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Release} request.release
- *   Required. The desired state for the release.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_release.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateRelease_async
- */
+  /**
+   * Create a new release.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the release.
+   * @param {string} request.releaseId
+   *   Required. The ID value for the new release.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Release} request.release
+   *   Required. The desired state for the release.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.create_release.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_CreateRelease_async
+   */
   createRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createRelease request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRelease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createRelease(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createRelease response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createRelease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateReleaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRelease response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single release.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Release} request.release
- *   Required. The desired state for the release.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   Release resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   Release will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_release.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateRelease_async
- */
+  /**
+   * Update a single release.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Release} request.release
+   *   Required. The desired state for the release.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Release resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   Release will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.update_release.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_UpdateRelease_async
+   */
   updateRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'release.name': request.release!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'release.name': request.release!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateRelease request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRelease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateRelease(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateRelease response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateRelease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateReleaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRelease response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single release.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the release. This is
- *   used with state-changing methods to prevent accidental overwrites when
- *   multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the release. The Any wildcard (`*`) requires that the resource
- *   must already exists, and the Not Any wildcard (`!*`) requires that it must
- *   not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_release.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteRelease_async
- */
+  /**
+   * Delete a single release.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the release. This is
+   *   used with state-changing methods to prevent accidental overwrites when
+   *   multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the release. The Any wildcard (`*`) requires that the resource
+   *   must already exists, and the Not Any wildcard (`!*`) requires that it must
+   *   not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.delete_release.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_DeleteRelease_async
+   */
   deleteRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRelease(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRelease(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteRelease request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRelease response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteRelease(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteRelease response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteRelease(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteReleaseRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRelease response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Retrieve a collection of saas.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the saas.
- * @param {number} request.pageSize
- *   The maximum number of saas to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listSaasAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of saas.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the saas.
+   * @param {number} request.pageSize
+   *   The maximum number of saas to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSaasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse,
+    ]
+  >;
   listSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas
+    >,
+  ): void;
   listSaas(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas
+    >,
+  ): void;
   listSaas(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listSaas values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3168,204 +4462,233 @@ export class SaasDeploymentsClient {
     this._log.info('listSaas request %j', request);
     return this.innerApiCalls
       .listSaas(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse
-      ]) => {
-        this._log.info('listSaas values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasResponse,
+        ]) => {
+          this._log.info('listSaas values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listSaas`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the saas.
- * @param {number} request.pageSize
- *   The maximum number of saas to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listSaasAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listSaas`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the saas.
+   * @param {number} request.pageSize
+   *   The maximum number of saas to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSaasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listSaasStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSaas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSaas stream %j', request);
     return this.descriptors.page.listSaas.createStream(
       this.innerApiCalls.listSaas as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listSaas`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the saas.
- * @param {number} request.pageSize
- *   The maximum number of saas to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_saas.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListSaas_async
- */
+  /**
+   * Equivalent to `listSaas`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the saas.
+   * @param {number} request.pageSize
+   *   The maximum number of saas to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Saas|Saas}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_saas.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListSaas_async
+   */
   listSaasAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListSaasRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listSaas'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listSaas iterate %j', request);
     return this.descriptors.page.listSaas.asyncIterate(
       this.innerApiCalls['listSaas'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ISaas>;
   }
- /**
- * Retrieve a collection of tenants.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the tenant.
- * @param {number} request.pageSize
- *   The maximum number of tenants to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listTenantsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of tenants.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the tenant.
+   * @param {number} request.pageSize
+   *   The maximum number of tenants to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTenantsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTenants(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse,
+    ]
+  >;
   listTenants(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant
+    >,
+  ): void;
   listTenants(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant
+    >,
+  ): void;
   listTenants(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTenants values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3374,204 +4697,233 @@ export class SaasDeploymentsClient {
     this._log.info('listTenants request %j', request);
     return this.innerApiCalls
       .listTenants(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse
-      ]) => {
-        this._log.info('listTenants values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsResponse,
+        ]) => {
+          this._log.info('listTenants values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listTenants`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the tenant.
- * @param {number} request.pageSize
- *   The maximum number of tenants to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listTenantsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listTenants`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the tenant.
+   * @param {number} request.pageSize
+   *   The maximum number of tenants to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTenantsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTenantsStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTenants stream %j', request);
     return this.descriptors.page.listTenants.createStream(
       this.innerApiCalls.listTenants as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listTenants`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the tenant.
- * @param {number} request.pageSize
- *   The maximum number of tenants to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_tenants.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListTenants_async
- */
+  /**
+   * Equivalent to `listTenants`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the tenant.
+   * @param {number} request.pageSize
+   *   The maximum number of tenants to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Tenant|Tenant}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_tenants.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListTenants_async
+   */
   listTenantsAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListTenantsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTenants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTenants iterate %j', request);
     return this.descriptors.page.listTenants.asyncIterate(
       this.innerApiCalls['listTenants'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ITenant>;
   }
- /**
- * Retrieve a collection of unit kinds.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit kind.
- * @param {number} request.pageSize
- *   The maximum number of unit kinds to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listUnitKindsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of unit kinds.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit kind.
+   * @param {number} request.pageSize
+   *   The maximum number of unit kinds to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUnitKindsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUnitKinds(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse,
+    ]
+  >;
   listUnitKinds(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind
+    >,
+  ): void;
   listUnitKinds(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind
+    >,
+  ): void;
   listUnitKinds(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listUnitKinds values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3580,204 +4932,233 @@ export class SaasDeploymentsClient {
     this._log.info('listUnitKinds request %j', request);
     return this.innerApiCalls
       .listUnitKinds(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse
-      ]) => {
-        this._log.info('listUnitKinds values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsResponse,
+        ]) => {
+          this._log.info('listUnitKinds values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listUnitKinds`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit kind.
- * @param {number} request.pageSize
- *   The maximum number of unit kinds to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listUnitKindsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listUnitKinds`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit kind.
+   * @param {number} request.pageSize
+   *   The maximum number of unit kinds to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUnitKindsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUnitKindsStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listUnitKinds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listUnitKinds stream %j', request);
     return this.descriptors.page.listUnitKinds.createStream(
       this.innerApiCalls.listUnitKinds as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listUnitKinds`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit kind.
- * @param {number} request.pageSize
- *   The maximum number of unit kinds to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_unit_kinds.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnitKinds_async
- */
+  /**
+   * Equivalent to `listUnitKinds`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit kind.
+   * @param {number} request.pageSize
+   *   The maximum number of unit kinds to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitKind|UnitKind}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_unit_kinds.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnitKinds_async
+   */
   listUnitKindsAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitKindsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listUnitKinds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listUnitKinds iterate %j', request);
     return this.descriptors.page.listUnitKinds.asyncIterate(
       this.innerApiCalls['listUnitKinds'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitKind>;
   }
- /**
- * Retrieve a collection of units.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit.
- * @param {number} request.pageSize
- *   The maximum number of units to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listUnitsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of units.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit.
+   * @param {number} request.pageSize
+   *   The maximum number of units to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUnitsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUnits(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse,
+    ]
+  >;
   listUnits(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit
+    >,
+  ): void;
   listUnits(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit
+    >,
+  ): void;
   listUnits(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listUnits values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3786,204 +5167,233 @@ export class SaasDeploymentsClient {
     this._log.info('listUnits request %j', request);
     return this.innerApiCalls
       .listUnits(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse
-      ]) => {
-        this._log.info('listUnits values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsResponse,
+        ]) => {
+          this._log.info('listUnits values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listUnits`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit.
- * @param {number} request.pageSize
- *   The maximum number of units to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listUnitsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listUnits`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit.
+   * @param {number} request.pageSize
+   *   The maximum number of units to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUnitsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUnitsStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listUnits stream %j', request);
     return this.descriptors.page.listUnits.createStream(
       this.innerApiCalls.listUnits as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listUnits`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit.
- * @param {number} request.pageSize
- *   The maximum number of units to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_units.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnits_async
- */
+  /**
+   * Equivalent to `listUnits`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit.
+   * @param {number} request.pageSize
+   *   The maximum number of units to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Unit|Unit}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_units.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnits_async
+   */
   listUnitsAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listUnits'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listUnits iterate %j', request);
     return this.descriptors.page.listUnits.asyncIterate(
       this.innerApiCalls['listUnits'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnit>;
   }
- /**
- * Retrieve a collection of unit operations.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit operation.
- * @param {number} request.pageSize
- *   The maximum number of unit operations to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listUnitOperationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of unit operations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit operation.
+   * @param {number} request.pageSize
+   *   The maximum number of unit operations to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUnitOperationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUnitOperations(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse,
+    ]
+  >;
   listUnitOperations(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation
+    >,
+  ): void;
   listUnitOperations(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation
+    >,
+  ): void;
   listUnitOperations(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listUnitOperations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3992,204 +5402,233 @@ export class SaasDeploymentsClient {
     this._log.info('listUnitOperations request %j', request);
     return this.innerApiCalls
       .listUnitOperations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse
-      ]) => {
-        this._log.info('listUnitOperations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsResponse,
+        ]) => {
+          this._log.info('listUnitOperations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listUnitOperations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit operation.
- * @param {number} request.pageSize
- *   The maximum number of unit operations to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listUnitOperationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listUnitOperations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit operation.
+   * @param {number} request.pageSize
+   *   The maximum number of unit operations to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUnitOperationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listUnitOperationsStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listUnitOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listUnitOperations stream %j', request);
     return this.descriptors.page.listUnitOperations.createStream(
       this.innerApiCalls.listUnitOperations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listUnitOperations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the unit operation.
- * @param {number} request.pageSize
- *   The maximum number of unit operations to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_unit_operations.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnitOperations_async
- */
+  /**
+   * Equivalent to `listUnitOperations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the unit operation.
+   * @param {number} request.pageSize
+   *   The maximum number of unit operations to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.UnitOperation|UnitOperation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_unit_operations.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListUnitOperations_async
+   */
   listUnitOperationsAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListUnitOperationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listUnitOperations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listUnitOperations iterate %j', request);
     return this.descriptors.page.listUnitOperations.asyncIterate(
       this.innerApiCalls['listUnitOperations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUnitOperation>;
   }
- /**
- * Retrieve a collection of releases.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the release.
- * @param {number} request.pageSize
- *   The maximum number of releases to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listReleasesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of releases.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the release.
+   * @param {number} request.pageSize
+   *   The maximum number of releases to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReleasesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listReleases(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse,
+    ]
+  >;
   listReleases(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease
+    >,
+  ): void;
   listReleases(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease
+    >,
+  ): void;
   listReleases(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listReleases values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4198,119 +5637,124 @@ export class SaasDeploymentsClient {
     this._log.info('listReleases request %j', request);
     return this.innerApiCalls
       .listReleases(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse
-      ]) => {
-        this._log.info('listReleases values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesResponse,
+        ]) => {
+          this._log.info('listReleases values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listReleases`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the release.
- * @param {number} request.pageSize
- *   The maximum number of releases to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listReleasesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listReleases`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the release.
+   * @param {number} request.pageSize
+   *   The maximum number of releases to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReleasesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listReleasesStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReleases stream %j', request);
     return this.descriptors.page.listReleases.createStream(
       this.innerApiCalls.listReleases as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listReleases`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the release.
- * @param {number} request.pageSize
- *   The maximum number of releases to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_releases.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListReleases_async
- */
+  /**
+   * Equivalent to `listReleases`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the release.
+   * @param {number} request.pageSize
+   *   The maximum number of releases to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Release|Release}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_deployments.list_releases.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasDeployments_ListReleases_async
+   */
   listReleasesAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListReleasesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listReleases'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listReleases iterate %j', request);
     return this.descriptors.page.listReleases.asyncIterate(
       this.innerApiCalls['listReleases'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRelease>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -4345,12 +5789,11 @@ export class SaasDeploymentsClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -4383,7 +5826,7 @@ export class SaasDeploymentsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -4399,7 +5842,7 @@ export class SaasDeploymentsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -4434,7 +5877,7 @@ export class SaasDeploymentsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -4459,7 +5902,7 @@ export class SaasDeploymentsClient {
    * @param {string} release
    * @returns {string} Resource name string.
    */
-  releasePath(project:string,location:string,release:string) {
+  releasePath(project: string, location: string, release: string) {
     return this.pathTemplates.releasePathTemplate.render({
       project: project,
       location: location,
@@ -4508,7 +5951,7 @@ export class SaasDeploymentsClient {
    * @param {string} rollout_id
    * @returns {string} Resource name string.
    */
-  rolloutPath(project:string,location:string,rolloutId:string) {
+  rolloutPath(project: string, location: string, rolloutId: string) {
     return this.pathTemplates.rolloutPathTemplate.render({
       project: project,
       location: location,
@@ -4557,7 +6000,7 @@ export class SaasDeploymentsClient {
    * @param {string} rollout_kind_id
    * @returns {string} Resource name string.
    */
-  rolloutKindPath(project:string,location:string,rolloutKindId:string) {
+  rolloutKindPath(project: string, location: string, rolloutKindId: string) {
     return this.pathTemplates.rolloutKindPathTemplate.render({
       project: project,
       location: location,
@@ -4573,7 +6016,8 @@ export class SaasDeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRolloutKindName(rolloutKindName: string) {
-    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName).project;
+    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName)
+      .project;
   }
 
   /**
@@ -4584,7 +6028,8 @@ export class SaasDeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRolloutKindName(rolloutKindName: string) {
-    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName).location;
+    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName)
+      .location;
   }
 
   /**
@@ -4595,7 +6040,8 @@ export class SaasDeploymentsClient {
    * @returns {string} A string representing the rollout_kind_id.
    */
   matchRolloutKindIdFromRolloutKindName(rolloutKindName: string) {
-    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName).rollout_kind_id;
+    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName)
+      .rollout_kind_id;
   }
 
   /**
@@ -4606,7 +6052,7 @@ export class SaasDeploymentsClient {
    * @param {string} saas
    * @returns {string} Resource name string.
    */
-  saasPath(project:string,location:string,saas:string) {
+  saasPath(project: string, location: string, saas: string) {
     return this.pathTemplates.saasPathTemplate.render({
       project: project,
       location: location,
@@ -4655,7 +6101,7 @@ export class SaasDeploymentsClient {
    * @param {string} tenant
    * @returns {string} Resource name string.
    */
-  tenantPath(project:string,location:string,tenant:string) {
+  tenantPath(project: string, location: string, tenant: string) {
     return this.pathTemplates.tenantPathTemplate.render({
       project: project,
       location: location,
@@ -4704,7 +6150,7 @@ export class SaasDeploymentsClient {
    * @param {string} unit
    * @returns {string} Resource name string.
    */
-  unitPath(project:string,location:string,unit:string) {
+  unitPath(project: string, location: string, unit: string) {
     return this.pathTemplates.unitPathTemplate.render({
       project: project,
       location: location,
@@ -4753,7 +6199,7 @@ export class SaasDeploymentsClient {
    * @param {string} unitKind
    * @returns {string} Resource name string.
    */
-  unitKindPath(project:string,location:string,unitKind:string) {
+  unitKindPath(project: string, location: string, unitKind: string) {
     return this.pathTemplates.unitKindPathTemplate.render({
       project: project,
       location: location,
@@ -4802,7 +6248,7 @@ export class SaasDeploymentsClient {
    * @param {string} unitOperation
    * @returns {string} Resource name string.
    */
-  unitOperationPath(project:string,location:string,unitOperation:string) {
+  unitOperationPath(project: string, location: string, unitOperation: string) {
     return this.pathTemplates.unitOperationPathTemplate.render({
       project: project,
       location: location,
@@ -4818,7 +6264,8 @@ export class SaasDeploymentsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromUnitOperationName(unitOperationName: string) {
-    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName).project;
+    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName)
+      .project;
   }
 
   /**
@@ -4829,7 +6276,8 @@ export class SaasDeploymentsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromUnitOperationName(unitOperationName: string) {
-    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName).location;
+    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName)
+      .location;
   }
 
   /**
@@ -4840,7 +6288,8 @@ export class SaasDeploymentsClient {
    * @returns {string} A string representing the unitOperation.
    */
   matchUnitOperationFromUnitOperationName(unitOperationName: string) {
-    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName).unitOperation;
+    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName)
+      .unitOperation;
   }
 
   /**
@@ -4851,11 +6300,13 @@ export class SaasDeploymentsClient {
    */
   close(): Promise<void> {
     if (this.saasDeploymentsStub && !this._terminated) {
-      return this.saasDeploymentsStub.then(stub => {
+      return this.saasDeploymentsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

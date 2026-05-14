@@ -19,1018 +19,1372 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as databasecenterModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf} from 'google-gax';
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1beta.DatabaseCenterClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'databasecenter.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'databasecenter.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          databasecenterModule.v1beta.DatabaseCenterClient.servicePath;
+        assert.strictEqual(servicePath, 'databasecenter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          databasecenterModule.v1beta.DatabaseCenterClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'databasecenter.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'databasecenter.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'databasecenter.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new databasecenterModule.v1beta.DatabaseCenterClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'databasecenter.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(
+            servicePath,
+            'databasecenter.configured.example.com',
+          );
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new databasecenterModule.v1beta.DatabaseCenterClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
+      });
+    });
 
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = databasecenterModule.v1beta.DatabaseCenterClient.servicePath;
-                assert.strictEqual(servicePath, 'databasecenter.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('has port', () => {
+      const port = databasecenterModule.v1beta.DatabaseCenterClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = databasecenterModule.v1beta.DatabaseCenterClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'databasecenter.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
+    it('should create a client with no option', () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        fallback: true,
+      });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.databaseCenterStub, undefined);
+      await client.initialize();
+      assert(client.databaseCenterStub);
+    });
+
+    it('has close method for the initialized client', (done) => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.databaseCenterStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has close method for the non-initialized client', (done) => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.databaseCenterStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
+        });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
+
+  describe('aggregateIssueStats', () => {
+    it('invokes aggregateIssueStats without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsResponse(),
+      );
+      client.innerApiCalls.aggregateIssueStats =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.aggregateIssueStats(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes aggregateIssueStats without error using callback', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest(),
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsResponse(),
+      );
+      client.innerApiCalls.aggregateIssueStats =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.aggregateIssueStats(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes aggregateIssueStats with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.aggregateIssueStats = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.aggregateIssueStats(request), expectedError);
+    });
+
+    it('invokes aggregateIssueStats with closed client', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest(),
+      );
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.aggregateIssueStats(request), expectedError);
+    });
+  });
+
+  describe('queryProducts', () => {
+    it('invokes queryProducts without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+      ];
+      client.innerApiCalls.queryProducts = stubSimpleCall(expectedResponse);
+      const [response] = await client.queryProducts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes queryProducts without error using callback', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+      ];
+      client.innerApiCalls.queryProducts =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryProducts(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.databasecenter.v1beta.IProduct[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes queryProducts with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryProducts = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.queryProducts(request), expectedError);
+    });
+
+    it('invokes queryProductsStream without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+      ];
+      client.descriptors.page.queryProducts.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.queryProductsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.Product[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.databasecenter.v1beta.Product) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.queryProducts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.queryProducts, request),
+      );
+    });
+
+    it('invokes queryProductsStream with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.queryProducts.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.queryProductsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.Product[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.databasecenter.v1beta.Product) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.queryProducts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.queryProducts, request),
+      );
+    });
+
+    it('uses async iteration with queryProducts without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.Product(),
+        ),
+      ];
+      client.descriptors.page.queryProducts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.databasecenter.v1beta.IProduct[] =
+        [];
+      const iterable = client.queryProductsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.queryProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+
+    it('uses async iteration with queryProducts with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.queryProducts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.queryProductsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.databasecenter.v1beta.IProduct[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'databasecenter.example.com');
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.queryProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+  });
+
+  describe('aggregateFleet', () => {
+    it('invokes aggregateFleet without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+      ];
+      client.innerApiCalls.aggregateFleet = stubSimpleCall(expectedResponse);
+      const [response] = await client.aggregateFleet(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes aggregateFleet without error using callback', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+      ];
+      client.innerApiCalls.aggregateFleet =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.aggregateFleet(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes aggregateFleet with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.aggregateFleet = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.aggregateFleet(request), expectedError);
+    });
+
+    it('invokes aggregateFleetStream without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+      ];
+      client.descriptors.page.aggregateFleet.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.aggregateFleetStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'databasecenter.example.com');
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.aggregateFleet.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.aggregateFleet, request),
+      );
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new databasecenterModule.v1beta.DatabaseCenterClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'databasecenter.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('invokes aggregateFleetStream with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.aggregateFleet.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.aggregateFleetStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.aggregateFleet.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.aggregateFleet, request),
+      );
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new databasecenterModule.v1beta.DatabaseCenterClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'databasecenter.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
+    it('uses async iteration with aggregateFleet without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow(),
+        ),
+      ];
+      client.descriptors.page.aggregateFleet.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[] =
+        [];
+      const iterable = client.aggregateFleetAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregateFleet.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+
+    it('uses async iteration with aggregateFleet with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.aggregateFleet.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.aggregateFleetAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
         }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new databasecenterModule.v1beta.DatabaseCenterClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregateFleet.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+  });
 
-        it('has port', () => {
-            const port = databasecenterModule.v1beta.DatabaseCenterClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
-
-        it('should create a client with no option', () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.databaseCenterStub, undefined);
-            await client.initialize();
-            assert(client.databaseCenterStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.databaseCenterStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.databaseCenterStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
-        });
+  describe('queryDatabaseResourceGroups', () => {
+    it('invokes queryDatabaseResourceGroups without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+      ];
+      client.innerApiCalls.queryDatabaseResourceGroups =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.queryDatabaseResourceGroups(request);
+      assert.deepStrictEqual(response, expectedResponse);
     });
 
-    describe('aggregateIssueStats', () => {
-        it('invokes aggregateIssueStats without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsResponse()
-            );
-            client.innerApiCalls.aggregateIssueStats = stubSimpleCall(expectedResponse);
-            const [response] = await client.aggregateIssueStats(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes aggregateIssueStats without error using callback', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest()
-            );
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsResponse()
-            );
-            client.innerApiCalls.aggregateIssueStats = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.aggregateIssueStats(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.databasecenter.v1beta.IAggregateIssueStatsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes aggregateIssueStats with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.aggregateIssueStats = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.aggregateIssueStats(request), expectedError);
-        });
-
-        it('invokes aggregateIssueStats with closed client', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateIssueStatsRequest()
-            );
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.aggregateIssueStats(request), expectedError);
-        });
-    });
-
-    describe('queryProducts', () => {
-        it('invokes queryProducts without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-            ];
-            client.innerApiCalls.queryProducts = stubSimpleCall(expectedResponse);
-            const [response] = await client.queryProducts(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes queryProducts without error using callback', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-            ];
-            client.innerApiCalls.queryProducts = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.queryProducts(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.databasecenter.v1beta.IProduct[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes queryProducts with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.queryProducts = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.queryProducts(request), expectedError);
-        });
-
-        it('invokes queryProductsStream without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-            ];
-            client.descriptors.page.queryProducts.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.queryProductsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.Product[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.Product) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.queryProducts.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.queryProducts, request));
-        });
-
-        it('invokes queryProductsStream with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.queryProducts.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.queryProductsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.Product[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.Product) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.queryProducts.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.queryProducts, request));
-        });
-
-        it('uses async iteration with queryProducts without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.Product()),
-            ];
-            client.descriptors.page.queryProducts.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.databasecenter.v1beta.IProduct[] = [];
-            const iterable = client.queryProductsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes queryDatabaseResourceGroups without error using callback', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+      ];
+      client.innerApiCalls.queryDatabaseResourceGroups =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryDatabaseResourceGroups(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.queryProducts.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-
-        it('uses async iteration with queryProducts with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryProductsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.queryProducts.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.queryProductsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.databasecenter.v1beta.IProduct[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.queryProducts.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
     });
 
-    describe('aggregateFleet', () => {
-        it('invokes aggregateFleet without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-            ];
-            client.innerApiCalls.aggregateFleet = stubSimpleCall(expectedResponse);
-            const [response] = await client.aggregateFleet(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
+    it('invokes queryDatabaseResourceGroups with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryDatabaseResourceGroups = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.queryDatabaseResourceGroups(request),
+        expectedError,
+      );
+    });
 
-        it('invokes aggregateFleet without error using callback', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-            ];
-            client.innerApiCalls.aggregateFleet = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.aggregateFleet(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
+    it('invokes queryDatabaseResourceGroupsStream without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+      ];
+      client.descriptors.page.queryDatabaseResourceGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.queryDatabaseResourceGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes aggregateFleet with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.aggregateFleet = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.aggregateFleet(request), expectedError);
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.queryDatabaseResourceGroups
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.queryDatabaseResourceGroups,
+            request,
+          ),
+      );
+    });
 
-        it('invokes aggregateFleetStream without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-            ];
-            client.descriptors.page.aggregateFleet.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.aggregateFleetStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.aggregateFleet.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.aggregateFleet, request));
+    it('invokes queryDatabaseResourceGroupsStream with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.queryDatabaseResourceGroups.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.queryDatabaseResourceGroupsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes aggregateFleetStream with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.aggregateFleet.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.aggregateFleetStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.AggregateFleetRow) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.aggregateFleet.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.aggregateFleet, request));
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.queryDatabaseResourceGroups
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.queryDatabaseResourceGroups,
+            request,
+          ),
+      );
+    });
 
-        it('uses async iteration with aggregateFleet without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.AggregateFleetRow()),
-            ];
-            client.descriptors.page.aggregateFleet.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[] = [];
-            const iterable = client.aggregateFleetAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('uses async iteration with queryDatabaseResourceGroups without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup(),
+        ),
+      ];
+      client.descriptors.page.queryDatabaseResourceGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[] =
+        [];
+      const iterable = client.queryDatabaseResourceGroupsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.queryDatabaseResourceGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+
+    it('uses async iteration with queryDatabaseResourceGroups with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.queryDatabaseResourceGroups.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.queryDatabaseResourceGroupsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.queryDatabaseResourceGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+    });
+  });
+
+  describe('queryIssues', () => {
+    it('invokes queryIssues without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+      ];
+      client.innerApiCalls.queryIssues = stubSimpleCall(expectedResponse);
+      const [response] = await client.queryIssues(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes queryIssues without error using callback', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+      ];
+      client.innerApiCalls.queryIssues =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.queryIssues(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[]
+              | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.aggregateFleet.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-
-        it('uses async iteration with aggregateFleet with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.AggregateFleetRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.aggregateFleet.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.aggregateFleetAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.databasecenter.v1beta.IAggregateFleetRow[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.aggregateFleet.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
     });
 
-    describe('queryDatabaseResourceGroups', () => {
-        it('invokes queryDatabaseResourceGroups without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-            ];
-            client.innerApiCalls.queryDatabaseResourceGroups = stubSimpleCall(expectedResponse);
-            const [response] = await client.queryDatabaseResourceGroups(request);
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes queryDatabaseResourceGroups without error using callback', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-            ];
-            client.innerApiCalls.queryDatabaseResourceGroups = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.queryDatabaseResourceGroups(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-        });
-
-        it('invokes queryDatabaseResourceGroups with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.queryDatabaseResourceGroups = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.queryDatabaseResourceGroups(request), expectedError);
-        });
-
-        it('invokes queryDatabaseResourceGroupsStream without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-            ];
-            client.descriptors.page.queryDatabaseResourceGroups.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.queryDatabaseResourceGroupsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.queryDatabaseResourceGroups.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.queryDatabaseResourceGroups, request));
-        });
-
-        it('invokes queryDatabaseResourceGroupsStream with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.queryDatabaseResourceGroups.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.queryDatabaseResourceGroupsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.queryDatabaseResourceGroups.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.queryDatabaseResourceGroups, request));
-        });
-
-        it('uses async iteration with queryDatabaseResourceGroups without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceGroup()),
-            ];
-            client.descriptors.page.queryDatabaseResourceGroups.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[] = [];
-            const iterable = client.queryDatabaseResourceGroupsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.queryDatabaseResourceGroups.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-
-        it('uses async iteration with queryDatabaseResourceGroups with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryDatabaseResourceGroupsRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.queryDatabaseResourceGroups.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.queryDatabaseResourceGroupsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceGroup[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.queryDatabaseResourceGroups.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+    it('invokes queryIssues with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.queryIssues = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.queryIssues(request), expectedError);
     });
 
-    describe('queryIssues', () => {
-        it('invokes queryIssues without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-            ];
-            client.innerApiCalls.queryIssues = stubSimpleCall(expectedResponse);
-            const [response] = await client.queryIssues(request);
-            assert.deepStrictEqual(response, expectedResponse);
+    it('invokes queryIssuesStream without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+      ];
+      client.descriptors.page.queryIssues.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.queryIssuesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
         });
-
-        it('invokes queryIssues without error using callback', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest()
-            );const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-            ];
-            client.innerApiCalls.queryIssues = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.queryIssues(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
+        stream.on('error', (err: Error) => {
+          reject(err);
         });
-
-        it('invokes queryIssues with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest()
-            );
-            const expectedError = new Error('expected');
-            client.innerApiCalls.queryIssues = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.queryIssues(request), expectedError);
-        });
-
-        it('invokes queryIssuesStream without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-            ];
-            client.descriptors.page.queryIssues.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.queryIssuesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.queryIssues.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.queryIssues, request));
-        });
-
-        it('invokes queryIssuesStream with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.queryIssues.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.queryIssuesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue[] = [];
-                stream.on('data', (response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.queryIssues.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.queryIssues, request));
-        });
-
-        it('uses async iteration with queryIssues without error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest()
-            );
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-              generateSampleMessage(new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue()),
-            ];
-            client.descriptors.page.queryIssues.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[] = [];
-            const iterable = client.queryIssuesAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
-            }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.queryIssues.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
-
-        it('uses async iteration with queryIssues with error', async () => {
-            const client = new databasecenterModule.v1beta.DatabaseCenterClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest()
-            );
-            const expectedError = new Error('expected');
-            client.descriptors.page.queryIssues.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.queryIssuesAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.queryIssues.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.queryIssues.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.queryIssues, request),
+      );
     });
+
+    it('invokes queryIssuesStream with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.queryIssues.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.queryIssuesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue,
+          ) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.queryIssues.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.queryIssues, request),
+      );
+    });
+
+    it('uses async iteration with queryIssues without error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest(),
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.databasecenter.v1beta.DatabaseResourceIssue(),
+        ),
+      ];
+      client.descriptors.page.queryIssues.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[] =
+        [];
+      const iterable = client.queryIssuesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.queryIssues.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1],
+        request,
+      );
+    });
+
+    it('uses async iteration with queryIssues with error', async () => {
+      const client = new databasecenterModule.v1beta.DatabaseCenterClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.databasecenter.v1beta.QueryIssuesRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.queryIssues.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError,
+      );
+      const iterable = client.queryIssuesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.databasecenter.v1beta.IDatabaseResourceIssue[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.queryIssues.asyncIterate as SinonStub).getCall(
+          0,
+        ).args[1],
+        request,
+      );
+    });
+  });
 });

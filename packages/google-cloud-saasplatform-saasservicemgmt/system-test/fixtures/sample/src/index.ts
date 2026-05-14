@@ -16,7 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {SaasDeploymentsClient, SaasRolloutsClient} from '@google-cloud/saasservicemgmt';
+import {
+  SaasDeploymentsClient,
+  SaasRolloutsClient,
+} from '@google-cloud/saasservicemgmt';
 
 // check that the client class type name can be used
 function doStuffWithSaasDeploymentsClient(client: SaasDeploymentsClient) {

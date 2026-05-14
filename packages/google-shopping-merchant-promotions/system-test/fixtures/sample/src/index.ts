@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {PromotionsServiceClient} from '@google-shopping/promotions';
+import { PromotionsServiceClient } from '@google-shopping/promotions';
 
 // check that the client class type name can be used
 function doStuffWithPromotionsServiceClient(client: PromotionsServiceClient) {
