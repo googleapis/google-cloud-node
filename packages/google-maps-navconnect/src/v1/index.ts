@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {NavConnectServiceClient} from './nav_connect_service_client';
+export { NavConnectServiceClient } from './nav_connect_service_client';

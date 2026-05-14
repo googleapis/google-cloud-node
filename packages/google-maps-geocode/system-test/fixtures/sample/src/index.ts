@@ -16,7 +16,10 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DestinationServiceClient, GeocodeServiceClient} from '@google-cloud/geocode';
+import {
+  DestinationServiceClient,
+  GeocodeServiceClient,
+} from '@google-cloud/geocode';
 
 // check that the client class type name can be used
 function doStuffWithDestinationServiceClient(client: DestinationServiceClient) {

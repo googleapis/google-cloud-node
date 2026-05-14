@@ -16,17 +16,22 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {MarketingplatformAdminServiceClient} from '@google-ads/marketing-platform-admin';
+import { MarketingplatformAdminServiceClient } from '@google-ads/marketing-platform-admin';
 
 // check that the client class type name can be used
-function doStuffWithMarketingplatformAdminServiceClient(client: MarketingplatformAdminServiceClient) {
+function doStuffWithMarketingplatformAdminServiceClient(
+  client: MarketingplatformAdminServiceClient,
+) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const marketingplatformAdminServiceClient = new MarketingplatformAdminServiceClient();
-  doStuffWithMarketingplatformAdminServiceClient(marketingplatformAdminServiceClient);
+  const marketingplatformAdminServiceClient =
+    new MarketingplatformAdminServiceClient();
+  doStuffWithMarketingplatformAdminServiceClient(
+    marketingplatformAdminServiceClient,
+  );
 }
 
 main();

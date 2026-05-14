@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {MarketingplatformAdminServiceClient} from './marketingplatform_admin_service_client';
+export { MarketingplatformAdminServiceClient } from './marketingplatform_admin_service_client';
