@@ -26,7 +26,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "google-logging-utils": "^1.1.3"
+    "google-logging-utils": "^1.1.4"
   },
   "devDependencies": {
     "@google-cloud/typeless-sample-bot": "^2.1.0",

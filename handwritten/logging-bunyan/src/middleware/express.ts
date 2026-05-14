@@ -52,7 +52,7 @@ export interface MiddlewareReturnType {
  * Express middleware
  */
 export async function middleware(
-  options?: MiddlewareOptions
+  options?: MiddlewareOptions,
 ): Promise<MiddlewareReturnType> {
   const defaultOptions = {logName: 'bunyan_log', level: 'info'};
   options = Object.assign({}, defaultOptions, options);
@@ -63,7 +63,7 @@ export async function middleware(
       // need to have distinct names. For exact requirements see:
       // https://cloud.google.com/appengine/articles/logging#linking_app_logs_and_requests
       logName: `${options.logName}_${APP_LOG_SUFFIX}`,
-    })
+    }),
   );
   const logger = bunyan.createLogger({
     name: `${options.logName}_${APP_LOG_SUFFIX}`,
@@ -98,7 +98,7 @@ export async function middleware(
       httpRequest: HttpRequest,
       trace: string,
       span?: string,
-      sampled?: boolean
+      sampled?: boolean,
     ) => {
       requestLogger.info({
         [LOGGING_TRACE_KEY]: trace,
@@ -114,14 +114,14 @@ export async function middleware(
     mw: commonMiddleware.express.makeMiddleware(
       projectId,
       makeChildLogger,
-      emitRequestLog
+      emitRequestLog,
     ),
   };
 
   function makeChildLogger(trace: string, span?: string) {
     return logger.child(
       {[LOGGING_TRACE_KEY]: trace, [LOGGING_SPAN_KEY]: span},
-      true /* simple child */
+      true /* simple child */,
     );
   }
 }

@@ -135,7 +135,6 @@ describe('Storage Transport', () => {
 
     const clearStub = sandbox.stub();
     const addStub = sandbox.stub();
-
     const transportInstance = new Gaxios();
     transportInstance.interceptors.request.clear = clearStub;
     transportInstance.interceptors.request.add = addStub;

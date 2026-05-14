@@ -21,17 +21,17 @@ import os
 logging.basicConfig(level=logging.DEBUG)
 
 common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library()
-s.copy(templates, excludes=[
+templates = common_templates.node_mono_repo_library(relative_dir="handwritten/logging-winston")
+s.copy(templates, destination="handwritten/logging-winston", excludes=[
     ".github/auto-label.yaml",
     ".github/release-please.yml",
     ".github/CODEOWNERS",
     ".github/sync-repo-settings.yaml",
     ".github/workflows/ci.yaml",
-    ".kokoro"
+    ".kokoro",
+    "README.md"
 ]) 
-node.fix()
-
+node.fix_hermetic(relative_dir="handwritten/logging-winston")
 
 # --------------------------------------------------------------------------
 # Modify test configs
@@ -39,16 +39,16 @@ node.fix()
 
 # add shared environment variables to test configs
 s.move(
-    ".kokoro/common_env_vars.cfg",
-    ".kokoro/common.cfg",
-    merge=lambda src, dst, _, : f"{dst}\n{src}",
+    "handwritten/logging-winston/.kokoro/common_env_vars.cfg",
+    "handwritten/logging-winston/.kokoro/common.cfg",
+    merge=lambda src, dst, _: dst if src.strip() in dst else f"{dst.rstrip()}\n{src.strip()}\n",
 )
-for path, subdirs, files in os.walk(f".kokoro/continuous"):
+for path, subdirs, files in os.walk(f"handwritten/logging-winston/.kokoro/continuous"):
     for name in files:
         if name == "common.cfg":
             file_path = os.path.join(path, name)
             s.move(
-                ".kokoro/common_env_vars.cfg",
+                "handwritten/logging-winston/.kokoro/common_env_vars.cfg",
                 file_path,
-                merge=lambda src, dst, _, : f"{dst}\n{src}",
+                merge=lambda src, dst, _: dst if src.strip() in dst else f"{dst.rstrip()}\n{src.strip()}\n",
             )

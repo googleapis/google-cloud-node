@@ -17,13 +17,7 @@
 import synthtool.languages.node_mono_repo as node
 from synthtool import shell
 
-node.owlbot_main(relative_dir="handwritten/bigquery",
-    templates_excludes=[
-        '.github/bug-report.md',
-        '.github/release-please.yml',
-        '.github/workflows/ci.yaml',
-    ]
-)
+node.owlbot_main(relative_dir="handwritten/bigquery")
 
 # Install dependencies and regenerate Discovery types.
 shell.run(('npm', 'install'), cwd='handwritten/bigquery')
