@@ -57,7 +57,7 @@
     "stream-events": "^1.0.5"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@google-cloud/storage": "^7.16.0",
     "@types/extend": "^3.0.4",
     "@types/is": "^0.0.25",
@@ -89,5 +89,14 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/datastore"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/datastore",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

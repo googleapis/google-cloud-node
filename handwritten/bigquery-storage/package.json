@@ -45,7 +45,7 @@
     "protobufjs": "^7.5.5"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@google-cloud/bigquery": "^8.0.0",
     "@types/extend": "^3.0.4",
     "@types/mocha": "^10.0.10",
@@ -75,5 +75,14 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery-storage"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery-storage",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

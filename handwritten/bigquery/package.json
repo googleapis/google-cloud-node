@@ -63,14 +63,16 @@
     "extend": "^3.0.2",
     "stream-events": "^1.0.5"
   },
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
   "overrides": {
+    "eslint": "10.0.0",
     "@sinonjs/fake-timers": "15.1.1",
     "@google-cloud/common": {
       "google-auth-library": "10.3.0"
     }
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@google-cloud/storage": "^7.16.0",
     "@types/big.js": "^6.2.2",
     "@types/duplexify": "^3.6.4",
@@ -98,5 +100,10 @@
     "sinon": "21.0.3",
     "typescript": "^5.8.2"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery",
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

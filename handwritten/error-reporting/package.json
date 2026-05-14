@@ -39,7 +39,7 @@
     "console-log-level": "^1.4.1"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@compodoc/compodoc": "1.1.25",
     "@hapi/hapi": "^21.4.4",
     "@types/boom": "^7.3.5",
@@ -71,13 +71,16 @@
     "typescript": "^5.9.3",
     "uuid": "^8.3.2"
   },
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
   "overrides": {
+    "eslint": "10.0.0",
     "undici": "5.28.4",
     "tablesort": "5.6.0",
     "cheerio": "1.0.0"
   },
   "pnpm": {
     "overrides": {
+      "eslint": "10.0.0",
       "tablesort": "5.6.0",
       "cheerio": "1.0.0"
     }

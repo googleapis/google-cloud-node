@@ -59,7 +59,7 @@
     "google-auth-library": "^9.0.0"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@google-cloud/common": "^5.0.0",
     "@types/bunyan": "^1.8.4",
     "@types/express": "^4.16.0",
@@ -88,5 +88,14 @@
   "peerDependencies": {
     "bunyan": "*"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging-bunyan"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging-bunyan",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

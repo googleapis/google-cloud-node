@@ -75,5 +75,14 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
   }
 }

@@ -93,7 +93,7 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@babel/cli": "^7.22.10",
     "@babel/core": "^7.22.11",
     "@google-cloud/pubsub": "^4.0.0",
@@ -134,5 +134,14 @@
     "yargs": "^17.3.1",
     "cross-env": "^7.0.3"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/storage"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/storage",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

@@ -98,7 +98,7 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@grpc/reflection": "^1.0.4",
     "@opentelemetry/sdk-trace-base": "^2.0.0",
     "@opentelemetry/sdk-trace-node": "^2.0.0",
@@ -146,12 +146,15 @@
     "typescript": "^5.8.2",
     "yargs": "^17.7.2"
   },
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
   "overrides": {
+    "eslint": "10.0.0",
     "gcp-metadata": "^7.0.1",
     "@sinonjs/fake-timers": "15.2.1"
   },
   "pnpm": {
     "overrides": {
+      "eslint": "10.0.0",
       "gcp-metadata": "^7.0.1",
       "@sinonjs/fake-timers": "15.2.1"
     }

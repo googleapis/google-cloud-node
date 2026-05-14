@@ -48,7 +48,7 @@
     "teeny-request": "^9.0.0"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@types/extend": "^3.0.0",
     "@types/long": "^5.0.0",
     "@types/mocha": "^9.0.0",
@@ -87,5 +87,14 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/cloud-profiler"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/cloud-profiler",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

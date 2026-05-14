@@ -60,7 +60,7 @@
     "winston-transport": "^4.9.0"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@google-cloud/common": "^6.0.0",
     "@types/lodash.mapvalues": "^4.6.9",
     "@types/mocha": "^10.0.10",
@@ -85,5 +85,14 @@
   "peerDependencies": {
     "winston": ">=3.2.1"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging-winston"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging-winston",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

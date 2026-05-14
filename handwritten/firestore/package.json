@@ -76,7 +76,7 @@
     "protobufjs": "^7.5.3"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@google-cloud/cloud-rad": "^0.4.10",
     "@google-cloud/opentelemetry-cloud-trace-exporter": "^3.0.0",
     "@google-cloud/promisify": "^5.0.0",
@@ -123,7 +123,9 @@
     "typescript": "^5.9.2"
   },
   "//_comment": "TODO: Remove @sinonjs/fake-timers overrides/resolutions when version > 15.3.0 fixes the duplicate identifier 'withGlobal' issue.",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
   "overrides": {
+    "eslint": "10.0.0",
     "@sinonjs/fake-timers": "15.1.1"
   },
   "resolutions": {
@@ -141,5 +143,10 @@
     "./package.json": "./package.json",
     "./build/src/path": "./build/src/path.js"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/firestore"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/firestore",
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

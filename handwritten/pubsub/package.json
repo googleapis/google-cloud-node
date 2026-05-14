@@ -71,7 +71,7 @@
     "p-defer": "^3.0.0"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@grpc/proto-loader": "^0.8.0",
     "@opentelemetry/sdk-trace-base": "^1.17.0",
     "@types/duplexify": "^3.6.4",
@@ -112,5 +112,14 @@
     "why-is-node-running": "^2.3.0",
     "yargs": "^17.7.2"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/pubsub"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/pubsub",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }

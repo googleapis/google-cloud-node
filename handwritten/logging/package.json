@@ -69,7 +69,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "eslint": "^10.0.0",
+    "eslint": "10.0.0",
     "@google-cloud/bigquery": "^7.0.0",
     "@google-cloud/opentelemetry-cloud-trace-exporter": "^2.1.0",
     "@google-cloud/pubsub": "^4.0.0",
@@ -114,5 +114,14 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/logging",
+  "//_comment_eslint": "Pin eslint version at 10.0.0 until we upgrade the node version",
+  "overrides": {
+    "eslint": "10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint": "10.0.0"
+    }
+  }
 }
