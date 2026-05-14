@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ConfigManagementServiceClient} from './config_management_service_client';
+export { ConfigManagementServiceClient } from './config_management_service_client';

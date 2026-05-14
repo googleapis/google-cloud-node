@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ConfidentialComputingClient} from './confidential_computing_client';
+export { ConfidentialComputingClient } from './confidential_computing_client';
