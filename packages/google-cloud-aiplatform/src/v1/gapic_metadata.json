@@ -3058,6 +3058,11 @@
                 "queryReasoningEngine"
               ]
             },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
+              ]
+            },
             "StreamQueryReasoningEngine": {
               "methods": [
                 "streamQueryReasoningEngine"
@@ -3076,6 +3081,11 @@
             "QueryReasoningEngine": {
               "methods": [
                 "queryReasoningEngine"
+              ]
+            },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
               ]
             },
             "AsyncQueryReasoningEngine": {

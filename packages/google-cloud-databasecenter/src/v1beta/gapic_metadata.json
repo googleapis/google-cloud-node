@@ -1,0 +1,89 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.databasecenter.v1beta",
+  "libraryPackage": "@google-cloud/databasecenter",
+  "services": {
+    "DatabaseCenter": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DatabaseCenterClient",
+          "rpcs": {
+            "AggregateIssueStats": {
+              "methods": [
+                "aggregateIssueStats"
+              ]
+            },
+            "QueryProducts": {
+              "methods": [
+                "queryProducts",
+                "queryProductsStream",
+                "queryProductsAsync"
+              ]
+            },
+            "AggregateFleet": {
+              "methods": [
+                "aggregateFleet",
+                "aggregateFleetStream",
+                "aggregateFleetAsync"
+              ]
+            },
+            "QueryDatabaseResourceGroups": {
+              "methods": [
+                "queryDatabaseResourceGroups",
+                "queryDatabaseResourceGroupsStream",
+                "queryDatabaseResourceGroupsAsync"
+              ]
+            },
+            "QueryIssues": {
+              "methods": [
+                "queryIssues",
+                "queryIssuesStream",
+                "queryIssuesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DatabaseCenterClient",
+          "rpcs": {
+            "AggregateIssueStats": {
+              "methods": [
+                "aggregateIssueStats"
+              ]
+            },
+            "QueryProducts": {
+              "methods": [
+                "queryProducts",
+                "queryProductsStream",
+                "queryProductsAsync"
+              ]
+            },
+            "AggregateFleet": {
+              "methods": [
+                "aggregateFleet",
+                "aggregateFleetStream",
+                "aggregateFleetAsync"
+              ]
+            },
+            "QueryDatabaseResourceGroups": {
+              "methods": [
+                "queryDatabaseResourceGroups",
+                "queryDatabaseResourceGroupsStream",
+                "queryDatabaseResourceGroupsAsync"
+              ]
+            },
+            "QueryIssues": {
+              "methods": [
+                "queryIssues",
+                "queryIssuesStream",
+                "queryIssuesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

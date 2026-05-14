@@ -115,12 +115,6 @@ export class MemorystoreClient {
     this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
-    if (!opts) {
-      opts = {fallback: true};
-    } else {
-      opts.fallback = opts.fallback ?? true;
-    }
     const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 

@@ -444,7 +444,7 @@ export class ReasoningEngineExecutionServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const reasoningEngineExecutionServiceStubMethods =
-        ['queryReasoningEngine', 'streamQueryReasoningEngine', 'asyncQueryReasoningEngine'];
+        ['queryReasoningEngine', 'streamQueryReasoningEngine', 'asyncQueryReasoningEngine', 'cancelAsyncQueryReasoningEngine'];
     for (const methodName of reasoningEngineExecutionServiceStubMethods) {
       const callPromise = this.reasoningEngineExecutionServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -648,6 +648,107 @@ export class ReasoningEngineExecutionServiceClient {
         {}|undefined
       ]) => {
         this._log.info('queryReasoningEngine response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Cancels an AsyncQueryReasoningEngine operation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the ReasoningEngine resource to use.
+ *   Format:
+ *   `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+ * @param {string} request.operationName
+ *   Required. The name of the longrunning operation returned from
+ *   AsyncQueryReasoningEngine.
+ *   Format:
+ *   `projects/{project}/locations/{location}/operations/{operation}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1.CancelAsyncQueryReasoningEngineResponse|CancelAsyncQueryReasoningEngineResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reasoning_engine_execution_service.cancel_async_query_reasoning_engine.js</caption>
+ * region_tag:aiplatform_v1_generated_ReasoningEngineExecutionService_CancelAsyncQueryReasoningEngine_async
+ */
+  cancelAsyncQueryReasoningEngine(
+      request?: protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|undefined, {}|undefined
+      ]>;
+  cancelAsyncQueryReasoningEngine(
+      request: protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelAsyncQueryReasoningEngine(
+      request: protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|null|undefined,
+          {}|null|undefined>): void;
+  cancelAsyncQueryReasoningEngine(
+      request?: protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+          protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('cancelAsyncQueryReasoningEngine request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('cancelAsyncQueryReasoningEngine response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.cancelAsyncQueryReasoningEngine(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineResponse,
+        protos.google.cloud.aiplatform.v1.ICancelAsyncQueryReasoningEngineRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('cancelAsyncQueryReasoningEngine response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

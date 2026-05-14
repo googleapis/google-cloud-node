@@ -3830,6 +3830,20 @@
                         }
                       ]
                     },
+                    "FindGroupChats": {
+                      "requestType": "FindGroupChatsRequest",
+                      "responseType": "FindGroupChatsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/spaces:findGroupChats"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/spaces:findGroupChats"
+                          }
+                        }
+                      ]
+                    },
                     "CreateMembership": {
                       "requestType": "CreateMembershipRequest",
                       "responseType": "Membership",
@@ -4670,6 +4684,13 @@
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
+                    "silent": {
+                      "type": "bool",
+                      "id": 46,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
                     "clientAssignedMessageId": {
                       "type": "string",
                       "id": 32,
@@ -5058,6 +5079,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "createMessageNotificationOptions": {
+                      "type": "CreateMessageNotificationOptions",
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -5066,6 +5094,23 @@
                         "MESSAGE_REPLY_OPTION_UNSPECIFIED": 0,
                         "REPLY_MESSAGE_FALLBACK_TO_NEW_THREAD": 1,
                         "REPLY_MESSAGE_OR_FAIL": 2
+                      }
+                    }
+                  }
+                },
+                "CreateMessageNotificationOptions": {
+                  "fields": {
+                    "notificationType": {
+                      "type": "NotificationType",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "NotificationType": {
+                      "values": {
+                        "NOTIFICATION_TYPE_NONE": 0,
+                        "NOTIFICATION_TYPE_FORCE_NOTIFY": 2,
+                        "NOTIFICATION_TYPE_SILENT": 3
                       }
                     }
                   }
@@ -6052,6 +6097,49 @@
                     }
                   }
                 },
+                "FindGroupChatsRequest": {
+                  "fields": {
+                    "users": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "spaceView": {
+                      "type": "SpaceView",
+                      "id": 4
+                    }
+                  }
+                },
+                "FindGroupChatsResponse": {
+                  "fields": {
+                    "spaces": {
+                      "rule": "repeated",
+                      "type": "Space",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
                 "UpdateSpaceRequest": {
                   "fields": {
                     "space": {
@@ -6161,6 +6249,13 @@
                       "type": "Space",
                       "id": 1
                     }
+                  }
+                },
+                "SpaceView": {
+                  "values": {
+                    "SPACE_VIEW_UNSPECIFIED": 0,
+                    "SPACE_VIEW_RESOURCE_NAME_ONLY": 3,
+                    "SPACE_VIEW_EXPANDED": 4
                   }
                 },
                 "HistoryState": {
