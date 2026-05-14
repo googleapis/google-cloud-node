@@ -31,7 +31,7 @@ jobs:
         working-directory: handwritten/bigtable
     strategy:
       matrix:
-        node: [ 18, 20 ]
+        node: [ 18, 20, 22, 24, 26 ]
     steps:
     - uses: actions/checkout@v4
     - uses: actions/checkout@v4

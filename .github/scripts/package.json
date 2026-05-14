@@ -10,7 +10,7 @@
     "author": "Google Inc.",
     "license": "Apache-2.0",
     "engines": {
-        "node": ">=14"
+        "node": ">=18"
     },
     "dependencies": {
         "js-yaml": "^4.1.0"
