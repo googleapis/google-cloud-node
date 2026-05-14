@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.24.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.23.1...chat-v0.24.0) (2026-05-14)
+
+
+### Features
+
+* [chat] Support force notify and silent notification option for CreateMessage ([#8239](https://github.com/googleapis/google-cloud-node/issues/8239)) ([ea2e21e](https://github.com/googleapis/google-cloud-node/commit/ea2e21e9ebe1790507d87b03e925ee63e6b7aff9))
+
 ## [0.23.1](https://github.com/googleapis/google-cloud-node/compare/chat-v0.23.0...chat-v0.23.1) (2026-05-01)
 
 

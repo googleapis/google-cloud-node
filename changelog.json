@@ -4,6 +4,86 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "d67ad568b13e6b12c4d16b9b34dbde41b6eac4a5",
+          "message": "[container] add confidential instance type and hyperdisk support to GKE API",
+          "issues": [
+            "8257"
+          ]
+        }
+      ],
+      "version": "6.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "397a11dd-93f4-4e8c-9007-5d62d6104e9c",
+      "createTime": "2026-05-14T00:02:24.695Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9641d3641c304e1779a4a0ef83a6482c552c66b1",
+          "message": "[lineage] A new method SearchLineageStreaming is added",
+          "issues": [
+            "8238"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "9641d3641c304e1779a4a0ef83a6482c552c66b1",
+          "message": "SearchLinks can now accept multiple source and target entity references as search criteria",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "9641d3641c304e1779a4a0ef83a6482c552c66b1",
+          "message": "Added support for column level lineage information to be passed and returned from the Lineage service",
+          "issues": []
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "28dcc11d-c7ce-4ce8-aa81-2e03bc0d99c5",
+      "createTime": "2026-05-14T00:02:24.667Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "33fbecc5b7df0d2a5e336ccc6b276c2074a0dc04",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20260422 (#1192)",
+          "issues": [
+            "8248"
+          ]
+        }
+      ],
+      "version": "6.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "32268bac-731c-4a03-a7cf-4bb61eab94c9",
+      "createTime": "2026-05-14T00:02:24.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ea2e21e9ebe1790507d87b03e925ee63e6b7aff9",
+          "message": "[chat] Support force notify and silent notification option for CreateMessage",
+          "issues": [
+            "8239"
+          ]
+        }
+      ],
+      "version": "0.24.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "1499a20b-085b-476f-b0dd-828c7f09658f",
+      "createTime": "2026-05-14T00:02:24.593Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "a63b61d13c1651deb62b3903292f3bd1c7f4d614",
           "message": "For bigquery-storage add protobufjs to depend",
@@ -78704,5 +78784,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-05-13T17:03:24.079Z"
+  "updateTime": "2026-05-14T00:02:24.695Z"
 }
