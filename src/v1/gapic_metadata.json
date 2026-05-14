@@ -1,0 +1,27 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.spanner.executor.v1",
+  "libraryPackage": "@google-cloud/executor",
+  "services": {
+    "SpannerExecutorProxy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SpannerExecutorProxyClient",
+          "rpcs": {
+            "ExecuteActionAsync": {
+              "methods": [
+                "executeActionAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SpannerExecutorProxyClient",
+          "rpcs": {}
+        }
+      }
+    }
+  }
+}

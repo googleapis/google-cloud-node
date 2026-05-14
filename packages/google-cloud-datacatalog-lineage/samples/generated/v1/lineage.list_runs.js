@@ -33,14 +33,14 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of runs to return. The service may return
+   *  Optional. The maximum number of runs to return. The service may return
    *  fewer than this value. If unspecified, at most 50 runs are
    *  returned. The maximum value is 100; values greater than 100 are cut to
    *  100.
    */
   // const pageSize = 1234
   /**
-   *  The page token received from a previous `ListRuns` call. Specify
+   *  Optional. The page token received from a previous `ListRuns` call. Specify
    *  it to get the next page.
    *  When paginating, all other parameters specified in this call must
    *  match the parameters of the call that provided the page token.

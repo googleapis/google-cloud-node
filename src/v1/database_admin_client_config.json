@@ -1,0 +1,169 @@
+{
+  "interfaces": {
+    "google.spanner.admin.database.v1.DatabaseAdmin": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "e9fafda332ce8a1702dc1575de3ca81c4feb4799": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 32000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "ListDatabases": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "CreateDatabase": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDatabase": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "UpdateDatabase": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "UpdateDatabaseDdl": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "DropDatabase": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "GetDatabaseDdl": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "SetIamPolicy": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetIamPolicy": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "TestIamPermissions": {
+          "timeout_millis": 30000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateBackup": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CopyBackup": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetBackup": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "UpdateBackup": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "DeleteBackup": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "ListBackups": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "RestoreDatabase": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDatabaseOperations": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "ListBackupOperations": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "ListDatabaseRoles": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "AddSplitPoints": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "CreateBackupSchedule": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "GetBackupSchedule": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "UpdateBackupSchedule": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "DeleteBackupSchedule": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "ListBackupSchedules": {
+          "timeout_millis": 3600000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "e9fafda332ce8a1702dc1575de3ca81c4feb4799"
+        },
+        "InternalUpdateGraphOperation": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}

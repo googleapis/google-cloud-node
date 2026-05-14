@@ -46,6 +46,10 @@ service ReasoningEngineExecutionService {
       post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:query"
       body: "*"
       additional_bindings {
+        post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}:query"
+        body: "*"
+      }
+      additional_bindings {
         post: "/v1beta1/{name=reasoningEngines/*}:query"
         body: "*"
       }
@@ -58,6 +62,10 @@ service ReasoningEngineExecutionService {
     option (google.api.http) = {
       post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:streamQuery"
       body: "*"
+      additional_bindings {
+        post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*/runtimeRevisions/*}:streamQuery"
+        body: "*"
+      }
       additional_bindings {
         post: "/v1beta1/{name=reasoningEngines/*}:streamQuery"
         body: "*"
@@ -79,6 +87,19 @@ service ReasoningEngineExecutionService {
     option (google.longrunning.operation_info) = {
       response_type: "AsyncQueryReasoningEngineResponse"
       metadata_type: "AsyncQueryReasoningEngineOperationMetadata"
+    };
+  }
+
+  // Cancels an AsyncQueryReasoningEngine operation.
+  rpc CancelAsyncQueryReasoningEngine(CancelAsyncQueryReasoningEngineRequest)
+      returns (CancelAsyncQueryReasoningEngineResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/{name=projects/*/locations/*/reasoningEngines/*}:cancelAsyncQuery"
+      body: "*"
+      additional_bindings {
+        post: "/v1beta1/{name=reasoningEngines/*}:cancelAsyncQuery"
+        body: "*"
+      }
     };
   }
 }
@@ -164,3 +185,27 @@ message AsyncQueryReasoningEngineResponse {
   // Output Cloud Storage URI for the Async query.
   string output_gcs_uri = 1;
 }
+
+// Request message for
+// [ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine][google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine].
+message CancelAsyncQueryReasoningEngineRequest {
+  // Required. The name of the ReasoningEngine resource to use.
+  // Format:
+  // `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "aiplatform.googleapis.com/ReasoningEngine"
+    }
+  ];
+
+  // Required. The name of the longrunning operation returned from
+  // AsyncQueryReasoningEngine.
+  // Format:
+  // `projects/{project}/locations/{location}/operations/{operation}`
+  string operation_name = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response message for
+// [ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine][google.cloud.aiplatform.v1beta1.ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine].
+message CancelAsyncQueryReasoningEngineResponse {}

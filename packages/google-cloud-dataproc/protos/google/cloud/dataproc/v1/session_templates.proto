@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +34,9 @@ option java_package = "com.google.cloud.dataproc.v1";
 service SessionTemplateController {
   option (google.api.default_host) = "dataproc.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/cloud-platform";
+      "https://www.googleapis.com/auth/cloud-platform,"
+      "https://www.googleapis.com/auth/dataproc,"
+      "https://www.googleapis.com/auth/dataproc.read-only";
 
   // Create a session template synchronously.
   rpc CreateSessionTemplate(CreateSessionTemplateRequest)
@@ -168,8 +170,11 @@ message SessionTemplate {
     pattern: "projects/{project}/locations/{location}/sessionTemplates/{template}"
   };
 
-  // Required. The resource name of the session template.
-  string name = 1 [(google.api.field_behavior) = REQUIRED];
+  // Required. Identifier. The resource name of the session template.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.field_behavior) = IDENTIFIER
+  ];
 
   // Optional. Brief description of the template.
   string description = 9 [(google.api.field_behavior) = OPTIONAL];
@@ -183,7 +188,7 @@ message SessionTemplate {
     // Optional. Jupyter session config.
     JupyterConfig jupyter_session = 3 [(google.api.field_behavior) = OPTIONAL];
 
-    // Optional. Spark Connect session config.
+    // Optional. Spark connect session config.
     SparkConnectConfig spark_connect_session = 11
         [(google.api.field_behavior) = OPTIONAL];
   }

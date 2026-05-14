@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {PrivilegedAccessManagerClient} from './privileged_access_manager_client';
+export { PrivilegedAccessManagerClient } from './privileged_access_manager_client';

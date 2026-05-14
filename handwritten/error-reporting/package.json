@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/error-reporting",
   "description": "Error Reporting Client Library for Node.js",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -70,7 +70,7 @@
     "typescript": "^5.9.3",
     "uuid": "^8.3.2"
   },
-"overrides": {
+  "overrides": {
     "undici": "5.28.4",
     "tablesort": "5.6.0",
     "cheerio": "1.0.0"

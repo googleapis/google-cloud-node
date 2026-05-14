@@ -62,11 +62,24 @@ describe('tests for templates', () => {
       folderName: 'google-cloud-keymanagement',
     });
 
-    snapshot(readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8'));
     snapshot(
-      readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8'),
+      readFileSync(join(templateDirWrite, '.OwlBot.yaml'), 'utf8').replace(
+        /\r\n/g,
+        '\n',
+      ),
     );
-    snapshot(readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8'));
+    snapshot(
+      readFileSync(join(templateDirWrite, '.repo-metadata.json'), 'utf8').replace(
+        /\r\n/g,
+        '\n',
+      ),
+    );
+    snapshot(
+      readFileSync(join(templateDirWrite, 'LICENSE'), 'utf8').replace(
+        /\r\n/g,
+        '\n',
+      ),
+    );
     const packageJson = JSON.parse(
       readFileSync(join(templateDirWrite, 'package.json'), 'utf8'),
     );
