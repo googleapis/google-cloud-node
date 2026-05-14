@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudRedisClusterClient} from './cloud_redis_cluster_client';
+export { CloudRedisClusterClient } from './cloud_redis_cluster_client';

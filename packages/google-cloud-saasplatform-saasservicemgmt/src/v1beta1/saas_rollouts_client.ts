@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +53,7 @@ export class SaasRolloutsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('saasservicemgmt');
@@ -57,10 +66,10 @@ export class SaasRolloutsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  saasRolloutsStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  saasRolloutsStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SaasRolloutsClient.
@@ -101,21 +110,42 @@ export class SaasRolloutsClient {
    *     const client = new SaasRolloutsClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SaasRolloutsClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'saasservicemgmt.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -140,7 +170,7 @@ export class SaasRolloutsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -154,15 +184,11 @@ export class SaasRolloutsClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,34 +210,34 @@ export class SaasRolloutsClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       releasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/releases/{release}'
+        'projects/{project}/locations/{location}/releases/{release}',
       ),
       rolloutPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/rollouts/{rollout_id}'
+        'projects/{project}/locations/{location}/rollouts/{rollout_id}',
       ),
       rolloutKindPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/rolloutKinds/{rollout_kind_id}'
+        'projects/{project}/locations/{location}/rolloutKinds/{rollout_kind_id}',
       ),
       saasPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/saas/{saas}'
+        'projects/{project}/locations/{location}/saas/{saas}',
       ),
       tenantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tenants/{tenant}'
+        'projects/{project}/locations/{location}/tenants/{tenant}',
       ),
       unitPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/units/{unit}'
+        'projects/{project}/locations/{location}/units/{unit}',
       ),
       unitKindPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/unitKinds/{unitKind}'
+        'projects/{project}/locations/{location}/unitKinds/{unitKind}',
       ),
       unitOperationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/unitOperations/{unitOperation}'
+        'projects/{project}/locations/{location}/unitOperations/{unitOperation}',
       ),
     };
 
@@ -219,16 +245,25 @@ export class SaasRolloutsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listRollouts:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rollouts'),
-      listRolloutKinds:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'rolloutKinds')
+      listRollouts: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rollouts',
+      ),
+      listRolloutKinds: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'rolloutKinds',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -259,37 +294,52 @@ export class SaasRolloutsClient {
     // Put together the "service stub" for
     // google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts.
     this.saasRolloutsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.saasplatform.saasservicemgmt.v1beta1.SaasRollouts',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.saasplatform.saasservicemgmt
+            .v1beta1.SaasRollouts,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const saasRolloutsStubMethods =
-        ['listRollouts', 'getRollout', 'createRollout', 'updateRollout', 'deleteRollout', 'listRolloutKinds', 'getRolloutKind', 'createRolloutKind', 'updateRolloutKind', 'deleteRolloutKind'];
+    const saasRolloutsStubMethods = [
+      'listRollouts',
+      'getRollout',
+      'createRollout',
+      'updateRollout',
+      'deleteRollout',
+      'listRolloutKinds',
+      'getRolloutKind',
+      'createRolloutKind',
+      'updateRolloutKind',
+      'deleteRolloutKind',
+    ];
     for (const methodName of saasRolloutsStubMethods) {
       const callPromise = this.saasRolloutsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -304,8 +354,14 @@ export class SaasRolloutsClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'saasservicemgmt.googleapis.com';
   }
@@ -316,8 +372,14 @@ export class SaasRolloutsClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'saasservicemgmt.googleapis.com';
   }
@@ -348,9 +410,7 @@ export class SaasRolloutsClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -359,8 +419,9 @@ export class SaasRolloutsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -371,991 +432,1408 @@ export class SaasRolloutsClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieve a single rollout.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.get_rollout.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_GetRollout_async
- */
+  /**
+   * Retrieve a single rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.get_rollout.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_GetRollout_async
+   */
   getRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRollout request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRollout response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRollout(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRollout response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRollout(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRollout response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new rollout.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout.
- * @param {string} request.rolloutId
- *   Required. The ID value for the new rollout.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout} request.rollout
- *   Required. The desired state for the rollout.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.create_rollout.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_CreateRollout_async
- */
+  /**
+   * Create a new rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout.
+   * @param {string} request.rolloutId
+   *   Required. The ID value for the new rollout.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout} request.rollout
+   *   Required. The desired state for the rollout.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.create_rollout.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_CreateRollout_async
+   */
   createRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createRollout request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRollout response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createRollout(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createRollout response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createRollout(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRollout response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single rollout.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout} request.rollout
- *   Required. The desired state for the rollout.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   Rollout resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   Rollout will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.update_rollout.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_UpdateRollout_async
- */
+  /**
+   * Update a single rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout} request.rollout
+   *   Required. The desired state for the rollout.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   Rollout resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   Rollout will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.update_rollout.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_UpdateRollout_async
+   */
   updateRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'rollout.name': request.rollout!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'rollout.name': request.rollout!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateRollout request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRollout response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateRollout(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateRollout response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateRollout(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRollout response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single rollout.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the rollout. This is
- *   used with state-changing methods to prevent accidental overwrites when
- *   multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the rollout. The Any wildcard (`*`) requires that the resource
- *   must already exists, and the Not Any wildcard (`!*`) requires that it must
- *   not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.delete_rollout.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_DeleteRollout_async
- */
+  /**
+   * Delete a single rollout.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the rollout. This is
+   *   used with state-changing methods to prevent accidental overwrites when
+   *   multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the rollout. The Any wildcard (`*`) requires that the resource
+   *   must already exists, and the Not Any wildcard (`!*`) requires that it must
+   *   not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.delete_rollout.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_DeleteRollout_async
+   */
   deleteRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRollout(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRollout(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteRollout request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRollout response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteRollout(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteRollout response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteRollout(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRollout response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieve a single rollout kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.get_rollout_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_GetRolloutKind_async
- */
+  /**
+   * Retrieve a single rollout kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.get_rollout_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_GetRolloutKind_async
+   */
   getRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRolloutKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRolloutKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRolloutKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRolloutKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRolloutKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IGetRolloutKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRolloutKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Create a new rollout kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout kind.
- * @param {string} request.rolloutKindId
- *   Required. The ID value for the new rollout kind.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind} request.rolloutKind
- *   Required. The desired state for the rollout kind.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.create_rollout_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_CreateRolloutKind_async
- */
+  /**
+   * Create a new rollout kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout kind.
+   * @param {string} request.rolloutKindId
+   *   Required. The ID value for the new rollout kind.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind} request.rolloutKind
+   *   Required. The desired state for the rollout kind.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.create_rollout_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_CreateRolloutKind_async
+   */
   createRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createRolloutKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createRolloutKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createRolloutKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createRolloutKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createRolloutKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.ICreateRolloutKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createRolloutKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a single rollout kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind} request.rolloutKind
- *   Required. The desired state for the rollout kind.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Field mask is used to specify the fields to be overwritten in the
- *   RolloutKind resource by the update.
- *
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *
- *   If the user does not provide a mask then all fields in the
- *   RolloutKind will be overwritten.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.update_rollout_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_UpdateRolloutKind_async
- */
+  /**
+   * Update a single rollout kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind} request.rolloutKind
+   *   Required. The desired state for the rollout kind.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Field mask is used to specify the fields to be overwritten in the
+   *   RolloutKind resource by the update.
+   *
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask then all fields in the
+   *   RolloutKind will be overwritten.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.update_rollout_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_UpdateRolloutKind_async
+   */
   updateRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
-      callback: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
+    callback: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'rollout_kind.name': request.rolloutKind!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'rollout_kind.name': request.rolloutKind!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateRolloutKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateRolloutKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateRolloutKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateRolloutKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateRolloutKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IUpdateRolloutKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRolloutKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a single rollout kind.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the resource within a service.
- * @param {string} request.etag
- *   The etag known to the client for the expected state of the rollout kind.
- *   This is used with state-changing methods to prevent accidental overwrites
- *   when multiple user agents might be acting in parallel on the same resource.
- *
- *   An etag wildcard provide optimistic concurrency based on the expected
- *   existence of the rollout kind. The Any wildcard (`*`) requires that the
- *   resource must already exists, and the Not Any wildcard (`!*`) requires that
- *   it must not.
- * @param {boolean} request.validateOnly
- *   If "validate_only" is set to true, the service will try to validate
- *   that this request would succeed, but will not actually make changes.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID
- *   so that if you must retry your request, the server will know to ignore
- *   the request if it has already been completed. The server will guarantee
- *   that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and the
- *   request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.delete_rollout_kind.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_DeleteRolloutKind_async
- */
+  /**
+   * Delete a single rollout kind.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the resource within a service.
+   * @param {string} request.etag
+   *   The etag known to the client for the expected state of the rollout kind.
+   *   This is used with state-changing methods to prevent accidental overwrites
+   *   when multiple user agents might be acting in parallel on the same resource.
+   *
+   *   An etag wildcard provide optimistic concurrency based on the expected
+   *   existence of the rollout kind. The Any wildcard (`*`) requires that the
+   *   resource must already exists, and the Not Any wildcard (`!*`) requires that
+   *   it must not.
+   * @param {boolean} request.validateOnly
+   *   If "validate_only" is set to true, the service will try to validate
+   *   that this request would succeed, but will not actually make changes.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.delete_rollout_kind.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_DeleteRolloutKind_async
+   */
   deleteRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRolloutKind(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRolloutKind(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteRolloutKind request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteRolloutKind response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteRolloutKind(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteRolloutKind response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteRolloutKind(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IDeleteRolloutKindRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRolloutKind response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Retrieve a collection of rollouts.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout.
- * @param {number} request.pageSize
- *   The maximum number of rollouts to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listRolloutsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of rollouts.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout.
+   * @param {number} request.pageSize
+   *   The maximum number of rollouts to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRolloutsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRollouts(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse,
+    ]
+  >;
   listRollouts(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout
+    >,
+  ): void;
   listRollouts(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout
+    >,
+  ): void;
   listRollouts(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRollouts values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1364,204 +1842,233 @@ export class SaasRolloutsClient {
     this._log.info('listRollouts request %j', request);
     return this.innerApiCalls
       .listRollouts(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse
-      ]) => {
-        this._log.info('listRollouts values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsResponse,
+        ]) => {
+          this._log.info('listRollouts values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listRollouts`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout.
- * @param {number} request.pageSize
- *   The maximum number of rollouts to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listRolloutsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listRollouts`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout.
+   * @param {number} request.pageSize
+   *   The maximum number of rollouts to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRolloutsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRolloutsStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRollouts stream %j', request);
     return this.descriptors.page.listRollouts.createStream(
       this.innerApiCalls.listRollouts as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listRollouts`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout.
- * @param {number} request.pageSize
- *   The maximum number of rollouts to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.list_rollouts.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_ListRollouts_async
- */
+  /**
+   * Equivalent to `listRollouts`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout.
+   * @param {number} request.pageSize
+   *   The maximum number of rollouts to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.Rollout|Rollout}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.list_rollouts.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_ListRollouts_async
+   */
   listRolloutsAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRollouts'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRollouts iterate %j', request);
     return this.descriptors.page.listRollouts.asyncIterate(
       this.innerApiCalls['listRollouts'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRollout>;
   }
- /**
- * Retrieve a collection of rollout kinds.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout kind.
- * @param {number} request.pageSize
- *   The maximum number of rollout kinds to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listRolloutKindsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieve a collection of rollout kinds.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout kind.
+   * @param {number} request.pageSize
+   *   The maximum number of rollout kinds to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRolloutKindsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRolloutKinds(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
-      ]>;
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse,
+    ]
+  >;
   listRolloutKinds(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind
+    >,
+  ): void;
   listRolloutKinds(
-      request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind>): void;
+    request: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind
+    >,
+  ): void;
   listRolloutKinds(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind>,
-      callback?: PaginationCallback<
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse|null|undefined,
-          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind>):
-      Promise<[
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
-      ]>|void {
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+      | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
+      | null
+      | undefined,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind[],
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest | null,
+      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse|null|undefined,
-      protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+          | protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
+          | null
+          | undefined,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRolloutKinds values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1570,119 +2077,124 @@ export class SaasRolloutsClient {
     this._log.info('listRolloutKinds request %j', request);
     return this.innerApiCalls
       .listRolloutKinds(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind[],
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest|null,
-        protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse
-      ]) => {
-        this._log.info('listRolloutKinds values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind[],
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest | null,
+          protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsResponse,
+        ]) => {
+          this._log.info('listRolloutKinds values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listRolloutKinds`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout kind.
- * @param {number} request.pageSize
- *   The maximum number of rollout kinds to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listRolloutKindsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listRolloutKinds`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout kind.
+   * @param {number} request.pageSize
+   *   The maximum number of rollout kinds to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRolloutKindsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRolloutKindsStream(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRolloutKinds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRolloutKinds stream %j', request);
     return this.descriptors.page.listRolloutKinds.createStream(
       this.innerApiCalls.listRolloutKinds as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listRolloutKinds`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent of the rollout kind.
- * @param {number} request.pageSize
- *   The maximum number of rollout kinds to send per page.
- * @param {string} request.pageToken
- *   The page token: If the next_page_token from a previous response
- *   is provided, this request will send the subsequent page.
- * @param {string} request.filter
- *   Filter the list as specified in https://google.aip.dev/160.
- * @param {string} request.orderBy
- *   Order results as specified in https://google.aip.dev/132.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/saas_rollouts.list_rollout_kinds.js</caption>
- * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_ListRolloutKinds_async
- */
+  /**
+   * Equivalent to `listRolloutKinds`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the rollout kind.
+   * @param {number} request.pageSize
+   *   The maximum number of rollout kinds to send per page.
+   * @param {string} request.pageToken
+   *   The page token: If the next_page_token from a previous response
+   *   is provided, this request will send the subsequent page.
+   * @param {string} request.filter
+   *   Filter the list as specified in https://google.aip.dev/160.
+   * @param {string} request.orderBy
+   *   Order results as specified in https://google.aip.dev/132.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.RolloutKind|RolloutKind}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/saas_rollouts.list_rollout_kinds.js</caption>
+   * region_tag:saasservicemgmt_v1beta1_generated_SaasRollouts_ListRolloutKinds_async
+   */
   listRolloutKindsAsync(
-      request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind>{
+    request?: protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IListRolloutKindsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRolloutKinds'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRolloutKinds iterate %j', request);
     return this.descriptors.page.listRolloutKinds.asyncIterate(
       this.innerApiCalls['listRolloutKinds'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.saasplatform.saasservicemgmt.v1beta1.IRolloutKind>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1717,12 +2229,11 @@ export class SaasRolloutsClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1755,7 +2266,7 @@ export class SaasRolloutsClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1771,7 +2282,7 @@ export class SaasRolloutsClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1806,7 +2317,7 @@ export class SaasRolloutsClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1831,7 +2342,7 @@ export class SaasRolloutsClient {
    * @param {string} release
    * @returns {string} Resource name string.
    */
-  releasePath(project:string,location:string,release:string) {
+  releasePath(project: string, location: string, release: string) {
     return this.pathTemplates.releasePathTemplate.render({
       project: project,
       location: location,
@@ -1880,7 +2391,7 @@ export class SaasRolloutsClient {
    * @param {string} rollout_id
    * @returns {string} Resource name string.
    */
-  rolloutPath(project:string,location:string,rolloutId:string) {
+  rolloutPath(project: string, location: string, rolloutId: string) {
     return this.pathTemplates.rolloutPathTemplate.render({
       project: project,
       location: location,
@@ -1929,7 +2440,7 @@ export class SaasRolloutsClient {
    * @param {string} rollout_kind_id
    * @returns {string} Resource name string.
    */
-  rolloutKindPath(project:string,location:string,rolloutKindId:string) {
+  rolloutKindPath(project: string, location: string, rolloutKindId: string) {
     return this.pathTemplates.rolloutKindPathTemplate.render({
       project: project,
       location: location,
@@ -1945,7 +2456,8 @@ export class SaasRolloutsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRolloutKindName(rolloutKindName: string) {
-    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName).project;
+    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName)
+      .project;
   }
 
   /**
@@ -1956,7 +2468,8 @@ export class SaasRolloutsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRolloutKindName(rolloutKindName: string) {
-    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName).location;
+    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName)
+      .location;
   }
 
   /**
@@ -1967,7 +2480,8 @@ export class SaasRolloutsClient {
    * @returns {string} A string representing the rollout_kind_id.
    */
   matchRolloutKindIdFromRolloutKindName(rolloutKindName: string) {
-    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName).rollout_kind_id;
+    return this.pathTemplates.rolloutKindPathTemplate.match(rolloutKindName)
+      .rollout_kind_id;
   }
 
   /**
@@ -1978,7 +2492,7 @@ export class SaasRolloutsClient {
    * @param {string} saas
    * @returns {string} Resource name string.
    */
-  saasPath(project:string,location:string,saas:string) {
+  saasPath(project: string, location: string, saas: string) {
     return this.pathTemplates.saasPathTemplate.render({
       project: project,
       location: location,
@@ -2027,7 +2541,7 @@ export class SaasRolloutsClient {
    * @param {string} tenant
    * @returns {string} Resource name string.
    */
-  tenantPath(project:string,location:string,tenant:string) {
+  tenantPath(project: string, location: string, tenant: string) {
     return this.pathTemplates.tenantPathTemplate.render({
       project: project,
       location: location,
@@ -2076,7 +2590,7 @@ export class SaasRolloutsClient {
    * @param {string} unit
    * @returns {string} Resource name string.
    */
-  unitPath(project:string,location:string,unit:string) {
+  unitPath(project: string, location: string, unit: string) {
     return this.pathTemplates.unitPathTemplate.render({
       project: project,
       location: location,
@@ -2125,7 +2639,7 @@ export class SaasRolloutsClient {
    * @param {string} unitKind
    * @returns {string} Resource name string.
    */
-  unitKindPath(project:string,location:string,unitKind:string) {
+  unitKindPath(project: string, location: string, unitKind: string) {
     return this.pathTemplates.unitKindPathTemplate.render({
       project: project,
       location: location,
@@ -2174,7 +2688,7 @@ export class SaasRolloutsClient {
    * @param {string} unitOperation
    * @returns {string} Resource name string.
    */
-  unitOperationPath(project:string,location:string,unitOperation:string) {
+  unitOperationPath(project: string, location: string, unitOperation: string) {
     return this.pathTemplates.unitOperationPathTemplate.render({
       project: project,
       location: location,
@@ -2190,7 +2704,8 @@ export class SaasRolloutsClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromUnitOperationName(unitOperationName: string) {
-    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName).project;
+    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName)
+      .project;
   }
 
   /**
@@ -2201,7 +2716,8 @@ export class SaasRolloutsClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromUnitOperationName(unitOperationName: string) {
-    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName).location;
+    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName)
+      .location;
   }
 
   /**
@@ -2212,7 +2728,8 @@ export class SaasRolloutsClient {
    * @returns {string} A string representing the unitOperation.
    */
   matchUnitOperationFromUnitOperationName(unitOperationName: string) {
-    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName).unitOperation;
+    return this.pathTemplates.unitOperationPathTemplate.match(unitOperationName)
+      .unitOperation;
   }
 
   /**
@@ -2223,11 +2740,13 @@ export class SaasRolloutsClient {
    */
   close(): Promise<void> {
     if (this.saasRolloutsStub && !this._terminated) {
-      return this.saasRolloutsStub.then(stub => {
+      return this.saasRolloutsStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

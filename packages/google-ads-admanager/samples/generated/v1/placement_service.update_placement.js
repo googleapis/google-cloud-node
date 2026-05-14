@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(placement, updateMask) {
+function main(placement) {
   // [START admanager_v1_generated_PlacementService_UpdatePlacement_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -36,7 +36,7 @@ function main(placement, updateMask) {
    */
   // const placement = {}
   /**
-   *  Required. The list of fields to update.
+   *  Optional. The list of fields to update.
    */
   // const updateMask = {}
 
@@ -50,7 +50,6 @@ function main(placement, updateMask) {
     // Construct request
     const request = {
       placement,
-      updateMask,
     };
 
     // Run request
