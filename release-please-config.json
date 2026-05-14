@@ -233,7 +233,8 @@
     "packages/google-cloud-datacatalog-lineage-configmanagement": {},
     "packages/google-cloud-appoptimize": {},
     "packages/google-devicesandservices-health": {},
-    "packages/google-cloud-databasecenter": {}
+    "packages/google-cloud-databasecenter": {},
+    "handwritten/google-cloud-dns": {}
   },
   "plugins": [
     {

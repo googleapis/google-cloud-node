@@ -5,7 +5,7 @@
 # [Cloud DNS: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/dns.svg)](https://www.npmjs.org/package/@google-cloud/dns)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/dns.svg)](https://www.npmjs.com/package/@google-cloud/dns)
 
 
 
@@ -81,7 +81,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dns/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dns/samples/quickstart.js,packages/google-cloud-dns/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/google-cloud-dns/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/google-cloud-dns/samples/quickstart.js,packages/google-cloud-dns/samples/README.md) |
 
 
 
@@ -152,6 +152,3 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=dns.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
