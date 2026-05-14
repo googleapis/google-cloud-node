@@ -4555,6 +4555,181 @@ describe('v1.ChatServiceClient', () => {
         });
     });
 
+    describe('findGroupChats', () => {
+        it('invokes findGroupChats without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.FindGroupChatsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+            ];
+            client.innerApiCalls.findGroupChats = stubSimpleCall(expectedResponse);
+            const [response] = await client.findGroupChats(request);
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes findGroupChats without error using callback', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.FindGroupChatsRequest()
+            );const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+            ];
+            client.innerApiCalls.findGroupChats = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.findGroupChats(
+                    request,
+                    (err?: Error|null, result?: protos.google.chat.v1.ISpace[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+        });
+
+        it('invokes findGroupChats with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.FindGroupChatsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.findGroupChats = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.findGroupChats(request), expectedError);
+        });
+
+        it('invokes findGroupChatsStream without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.FindGroupChatsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+            ];
+            client.descriptors.page.findGroupChats.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.findGroupChatsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.chat.v1.Space[] = [];
+                stream.on('data', (response: protos.google.chat.v1.Space) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.findGroupChats.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.findGroupChats, request));
+        });
+
+        it('invokes findGroupChatsStream with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.FindGroupChatsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.findGroupChats.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.findGroupChatsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.chat.v1.Space[] = [];
+                stream.on('data', (response: protos.google.chat.v1.Space) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.findGroupChats.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.findGroupChats, request));
+        });
+
+        it('uses async iteration with findGroupChats without error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.FindGroupChatsRequest()
+            );
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+              generateSampleMessage(new protos.google.chat.v1.Space()),
+            ];
+            client.descriptors.page.findGroupChats.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.chat.v1.ISpace[] = [];
+            const iterable = client.findGroupChatsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.findGroupChats.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+
+        it('uses async iteration with findGroupChats with error', async () => {
+            const client = new chatserviceModule.v1.ChatServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.chat.v1.FindGroupChatsRequest()
+            );
+            const expectedError = new Error('expected');
+            client.descriptors.page.findGroupChats.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.findGroupChatsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.chat.v1.ISpace[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.findGroupChats.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+        });
+    });
+
     describe('listReactions', () => {
         it('invokes listReactions without error', async () => {
             const client = new chatserviceModule.v1.ChatServiceClient({

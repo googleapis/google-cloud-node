@@ -394,7 +394,9 @@ export class SessionControllerClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/dataproc',
+      'https://www.googleapis.com/auth/dataproc.read-only'
     ];
   }
 

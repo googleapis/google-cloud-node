@@ -5841,6 +5841,60 @@ describe('v1beta1.FeatureOnlineStoreAdminServiceClient', () => {
             });
         });
 
+        describe('reasoningEngineRuntimeRevision', async () => {
+            const fakePath = "/rendered/path/reasoningEngineRuntimeRevision";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                reasoning_engine: "reasoningEngineValue",
+                runtime_revision: "runtimeRevisionValue",
+            };
+            const client = new featureonlinestoreadminserviceModule.v1beta1.FeatureOnlineStoreAdminServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('reasoningEngineRuntimeRevisionPath', () => {
+                const result = client.reasoningEngineRuntimeRevisionPath("projectValue", "locationValue", "reasoningEngineValue", "runtimeRevisionValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchProjectFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchLocationFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchReasoningEngineFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchReasoningEngineFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "reasoningEngineValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName', () => {
+                const result = client.matchRuntimeRevisionFromReasoningEngineRuntimeRevisionName(fakePath);
+                assert.strictEqual(result, "runtimeRevisionValue");
+                assert((client.pathTemplates.reasoningEngineRuntimeRevisionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('savedQuery', async () => {
             const fakePath = "/rendered/path/savedQuery";
             const expectedParameters = {

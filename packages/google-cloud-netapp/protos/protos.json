@@ -3012,6 +3012,13 @@
                         "UNIFIED": 2
                       }
                     },
+                    "ScaleType": {
+                      "values": {
+                        "SCALE_TYPE_UNSPECIFIED": 0,
+                        "SCALE_TYPE_DEFAULT": 1,
+                        "SCALE_TYPE_SCALEOUT": 2
+                      }
+                    },
                     "HybridReplicationSchedule": {
                       "values": {
                         "HYBRID_REPLICATION_SCHEDULE_UNSPECIFIED": 0,
@@ -4757,6 +4764,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "largeCapacityConfig": {
+                          "type": "LargeCapacityConfig",
+                          "id": 46,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "cloneDetails": {
                           "type": "CloneDetails",
                           "id": 47,
@@ -4805,6 +4819,17 @@
                             "ERROR": 7,
                             "PREPARING": 8,
                             "READ_ONLY": 9
+                          }
+                        }
+                      }
+                    },
+                    "LargeCapacityConfig": {
+                      "fields": {
+                        "constituentCount": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -6410,6 +6435,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "scaleType": {
+                          "type": "ScaleType",
+                          "id": 38,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
