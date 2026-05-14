@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +52,7 @@ export class ReportServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('reports');
@@ -58,8 +65,8 @@ export class ReportServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  reportServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  reportServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ReportServiceClient.
@@ -100,21 +107,42 @@ export class ReportServiceClient {
    *     const client = new ReportServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ReportServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +167,7 @@ export class ReportServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class ReportServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -177,14 +202,20 @@ export class ReportServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      search:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'results')
+      search: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'results',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.shopping.merchant.reports.v1alpha.ReportService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.shopping.merchant.reports.v1alpha.ReportService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -215,37 +246,41 @@ export class ReportServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.reports.v1alpha.ReportService.
     this.reportServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.reports.v1alpha.ReportService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.reports.v1alpha.ReportService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.shopping.merchant.reports.v1alpha.ReportService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.reports.v1alpha
+            .ReportService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const reportServiceStubMethods =
-        ['search'];
+    const reportServiceStubMethods = ['search'];
     for (const methodName of reportServiceStubMethods) {
       const callPromise = this.reportServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -260,8 +295,14 @@ export class ReportServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -272,8 +313,14 @@ export class ReportServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -304,9 +351,7 @@ export class ReportServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/content'
-    ];
+    return ['https://www.googleapis.com/auth/content'];
   }
 
   getProjectId(): Promise<string>;
@@ -315,8 +360,9 @@ export class ReportServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -328,100 +374,125 @@ export class ReportServiceClient {
   // -- Service calls --
   // -------------------
 
- /**
- * Retrieves a report defined by a search query. The response might contain
- * fewer rows than specified by `page_size`. Rely on `next_page_token` to
- * determine if there are more rows to be requested.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Id of the account making the call. Must be a standalone account
- *   or an MCA subaccount. Format: accounts/{account}
- * @param {string} request.query
- *   Required. Query that defines a report to be retrieved.
- *
- *   For details on how to construct your query, see the Query Language
- *   guide. For the full list of available tables and fields, see the Available
- *   fields.
- * @param {number} [request.pageSize]
- *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
- *   1000. Values above 5000 are coerced to 5000.
- * @param {string} [request.pageToken]
- *   Optional. Token of the page to retrieve. If not specified, the first page
- *   of results is returned. In order to request the next page of results, the
- *   value obtained from `next_page_token` in the previous response should be
- *   used.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.shopping.merchant.reports.v1alpha.ReportRow|ReportRow}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Retrieves a report defined by a search query. The response might contain
+   * fewer rows than specified by `page_size`. Rely on `next_page_token` to
+   * determine if there are more rows to be requested.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Id of the account making the call. Must be a standalone account
+   *   or an MCA subaccount. Format: accounts/{account}
+   * @param {string} request.query
+   *   Required. Query that defines a report to be retrieved.
+   *
+   *   For details on how to construct your query, see the Query Language
+   *   guide. For the full list of available tables and fields, see the Available
+   *   fields.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
+   *   1000. Values above 5000 are coerced to 5000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token of the page to retrieve. If not specified, the first page
+   *   of results is returned. In order to request the next page of results, the
+   *   value obtained from `next_page_token` in the previous response should be
+   *   used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.shopping.merchant.reports.v1alpha.ReportRow|ReportRow}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   search(
-      request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.reports.v1alpha.IReportRow[],
-        protos.google.shopping.merchant.reports.v1alpha.ISearchRequest|null,
-        protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
-      ]>;
+    request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.reports.v1alpha.IReportRow[],
+      protos.google.shopping.merchant.reports.v1alpha.ISearchRequest | null,
+      protos.google.shopping.merchant.reports.v1alpha.ISearchResponse,
+    ]
+  >;
   search(
-      request: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-          protos.google.shopping.merchant.reports.v1alpha.ISearchResponse|null|undefined,
-          protos.google.shopping.merchant.reports.v1alpha.IReportRow>): void;
+    request: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+      | protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.reports.v1alpha.IReportRow
+    >,
+  ): void;
   search(
-      request: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-      callback: PaginationCallback<
-          protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-          protos.google.shopping.merchant.reports.v1alpha.ISearchResponse|null|undefined,
-          protos.google.shopping.merchant.reports.v1alpha.IReportRow>): void;
+    request: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+      | protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.reports.v1alpha.IReportRow
+    >,
+  ): void;
   search(
-      request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-          protos.google.shopping.merchant.reports.v1alpha.ISearchResponse|null|undefined,
-          protos.google.shopping.merchant.reports.v1alpha.IReportRow>,
-      callback?: PaginationCallback<
-          protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-          protos.google.shopping.merchant.reports.v1alpha.ISearchResponse|null|undefined,
-          protos.google.shopping.merchant.reports.v1alpha.IReportRow>):
-      Promise<[
-        protos.google.shopping.merchant.reports.v1alpha.IReportRow[],
-        protos.google.shopping.merchant.reports.v1alpha.ISearchRequest|null,
-        protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
-      ]>|void {
+          | protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.reports.v1alpha.IReportRow
+        >,
+    callback?: PaginationCallback<
+      protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+      | protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.reports.v1alpha.IReportRow
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.reports.v1alpha.IReportRow[],
+      protos.google.shopping.merchant.reports.v1alpha.ISearchRequest | null,
+      protos.google.shopping.merchant.reports.v1alpha.ISearchResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-      protos.google.shopping.merchant.reports.v1alpha.ISearchResponse|null|undefined,
-      protos.google.shopping.merchant.reports.v1alpha.IReportRow>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+          | protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.reports.v1alpha.IReportRow
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('search values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -430,128 +501,132 @@ export class ReportServiceClient {
     this._log.info('search request %j', request);
     return this.innerApiCalls
       .search(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.shopping.merchant.reports.v1alpha.IReportRow[],
-        protos.google.shopping.merchant.reports.v1alpha.ISearchRequest|null,
-        protos.google.shopping.merchant.reports.v1alpha.ISearchResponse
-      ]) => {
-        this._log.info('search values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.reports.v1alpha.IReportRow[],
+          protos.google.shopping.merchant.reports.v1alpha.ISearchRequest | null,
+          protos.google.shopping.merchant.reports.v1alpha.ISearchResponse,
+        ]) => {
+          this._log.info('search values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `search`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Id of the account making the call. Must be a standalone account
- *   or an MCA subaccount. Format: accounts/{account}
- * @param {string} request.query
- *   Required. Query that defines a report to be retrieved.
- *
- *   For details on how to construct your query, see the Query Language
- *   guide. For the full list of available tables and fields, see the Available
- *   fields.
- * @param {number} [request.pageSize]
- *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
- *   1000. Values above 5000 are coerced to 5000.
- * @param {string} [request.pageToken]
- *   Optional. Token of the page to retrieve. If not specified, the first page
- *   of results is returned. In order to request the next page of results, the
- *   value obtained from `next_page_token` in the previous response should be
- *   used.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.shopping.merchant.reports.v1alpha.ReportRow|ReportRow} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `search`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Id of the account making the call. Must be a standalone account
+   *   or an MCA subaccount. Format: accounts/{account}
+   * @param {string} request.query
+   *   Required. Query that defines a report to be retrieved.
+   *
+   *   For details on how to construct your query, see the Query Language
+   *   guide. For the full list of available tables and fields, see the Available
+   *   fields.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
+   *   1000. Values above 5000 are coerced to 5000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token of the page to retrieve. If not specified, the first page
+   *   of results is returned. In order to request the next page of results, the
+   *   value obtained from `next_page_token` in the previous response should be
+   *   used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.reports.v1alpha.ReportRow|ReportRow} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   searchStream(
-      request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('search stream %j', request);
     return this.descriptors.page.search.createStream(
       this.innerApiCalls.search as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `search`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Id of the account making the call. Must be a standalone account
- *   or an MCA subaccount. Format: accounts/{account}
- * @param {string} request.query
- *   Required. Query that defines a report to be retrieved.
- *
- *   For details on how to construct your query, see the Query Language
- *   guide. For the full list of available tables and fields, see the Available
- *   fields.
- * @param {number} [request.pageSize]
- *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
- *   1000. Values above 5000 are coerced to 5000.
- * @param {string} [request.pageToken]
- *   Optional. Token of the page to retrieve. If not specified, the first page
- *   of results is returned. In order to request the next page of results, the
- *   value obtained from `next_page_token` in the previous response should be
- *   used.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.shopping.merchant.reports.v1alpha.ReportRow|ReportRow}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1alpha/report_service.search.js</caption>
- * region_tag:merchantapi_v1alpha_generated_ReportService_Search_async
- */
+  /**
+   * Equivalent to `search`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Id of the account making the call. Must be a standalone account
+   *   or an MCA subaccount. Format: accounts/{account}
+   * @param {string} request.query
+   *   Required. Query that defines a report to be retrieved.
+   *
+   *   For details on how to construct your query, see the Query Language
+   *   guide. For the full list of available tables and fields, see the Available
+   *   fields.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `ReportRows` to retrieve in a single page. Defaults to
+   *   1000. Values above 5000 are coerced to 5000.
+   * @param {string} [request.pageToken]
+   *   Optional. Token of the page to retrieve. If not specified, the first page
+   *   of results is returned. In order to request the next page of results, the
+   *   value obtained from `next_page_token` in the previous response should be
+   *   used.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.shopping.merchant.reports.v1alpha.ReportRow|ReportRow}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/report_service.search.js</caption>
+   * region_tag:merchantapi_v1alpha_generated_ReportService_Search_async
+   */
   searchAsync(
-      request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.shopping.merchant.reports.v1alpha.IReportRow>{
+    request?: protos.google.shopping.merchant.reports.v1alpha.ISearchRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.shopping.merchant.reports.v1alpha.IReportRow> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('search iterate %j', request);
     return this.descriptors.page.search.asyncIterate(
       this.innerApiCalls['search'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.shopping.merchant.reports.v1alpha.IReportRow>;
   }
 
@@ -563,7 +638,7 @@ export class ReportServiceClient {
    */
   close(): Promise<void> {
     if (this.reportServiceStub && !this._terminated) {
-      return this.reportServiceStub.then(stub => {
+      return this.reportServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -48,6 +48,7 @@ export interface ConformanceTestOptions {
 
 export async function addLifecycleRuleInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await addLifecycleRule(options);
 }
@@ -77,6 +78,7 @@ export async function addLifecycleRule(options: ConformanceTestOptions) {
 }
 
 export async function combineInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   return await combine(options);
@@ -210,6 +212,7 @@ export async function deleteBucket(options: ConformanceTestOptions) {
 
 export async function deleteLabelsInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await deleteLabels(options);
 }
@@ -231,6 +234,7 @@ export async function deleteLabels(options: ConformanceTestOptions) {
 
 export async function disableRequesterPaysInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await disableRequesterPays(options);
 }
@@ -251,6 +255,7 @@ export async function disableRequesterPays(options: ConformanceTestOptions) {
 }
 
 export async function enableLoggingInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   return await enableLogging(options);
@@ -277,6 +282,7 @@ export async function enableLogging(options: ConformanceTestOptions) {
 }
 
 export async function enableRequesterPaysInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   return await enableRequesterPays(options);
@@ -394,6 +400,7 @@ export async function lock(options: ConformanceTestOptions) {
 
 export async function bucketMakePrivateInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await bucketMakePrivate(options);
 }
@@ -424,6 +431,7 @@ export async function bucketMakePublic(options: ConformanceTestOptions) {
 
 export async function removeRetentionPeriodInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await removeRetentionPeriod(options);
 }
@@ -445,6 +453,7 @@ export async function removeRetentionPeriod(options: ConformanceTestOptions) {
 
 export async function setCorsConfigurationInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await setCorsConfiguration(options);
 }
@@ -465,6 +474,7 @@ export async function setCorsConfiguration(options: ConformanceTestOptions) {
 }
 
 export async function setLabelsInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   return await setLabels(options);
@@ -488,6 +498,7 @@ export async function setLabels(options: ConformanceTestOptions) {
 }
 
 export async function bucketSetMetadataInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   return await bucketSetMetadata(options);
@@ -515,6 +526,7 @@ export async function bucketSetMetadata(options: ConformanceTestOptions) {
 
 export async function setRetentionPeriodInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await setRetentionPeriod(options);
 }
@@ -538,6 +550,7 @@ export async function setRetentionPeriod(options: ConformanceTestOptions) {
 }
 
 export async function bucketSetStorageClassInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   return await bucketSetStorageClass(options);
@@ -694,6 +707,7 @@ export async function createReadStream(options: ConformanceTestOptions) {
 
 export async function createResumableUploadInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await createResumableUpload(options);
 }
@@ -716,6 +730,7 @@ export async function createResumableUpload(options: ConformanceTestOptions) {
 }
 
 export async function fileDeleteInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   const requestOptions: StorageRequestOptions = {
@@ -816,6 +831,7 @@ export async function isPublic(options: ConformanceTestOptions) {
 }
 
 export async function fileMakePrivateInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   const requestOptions: StorageRequestOptions = {
@@ -936,6 +952,7 @@ export async function rotateEncryptionKey(options: ConformanceTestOptions) {
 
 export async function saveResumableInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await saveResumable(options);
 }
@@ -1003,6 +1020,7 @@ export async function saveResumable(options: ConformanceTestOptions) {
 
 export async function saveMultipartInstancePrecondition(
   options: ConformanceTestOptions,
+  options: ConformanceTestOptions,
 ) {
   return await saveMultipart(options);
 }
@@ -1044,6 +1062,7 @@ export async function saveMultipart(options: ConformanceTestOptions) {
 }
 
 export async function setMetadataInstancePrecondition(
+  options: ConformanceTestOptions,
   options: ConformanceTestOptions,
 ) {
   const metadata = {
