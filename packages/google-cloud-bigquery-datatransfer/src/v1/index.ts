@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DataTransferServiceClient} from './data_transfer_service_client';
+export { DataTransferServiceClient } from './data_transfer_service_client';

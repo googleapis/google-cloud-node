@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {EventarcClient} from './eventarc_client';
+export { EventarcClient } from './eventarc_client';

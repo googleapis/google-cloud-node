@@ -19,3080 +19,4031 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as datatableserviceModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf} from 'google-gax';
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.DataTableServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          datatableserviceModule.v1.DataTableServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'chronicle.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          datatableserviceModule.v1.DataTableServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'chronicle.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'chronicle.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new datatableserviceModule.v1.DataTableServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'chronicle.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new datatableserviceModule.v1.DataTableServiceClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'chronicle.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
-
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = datatableserviceModule.v1.DataTableServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'chronicle.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = datatableserviceModule.v1.DataTableServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-        }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'chronicle.example.com');
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new datatableserviceModule.v1.DataTableServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
         });
+      });
+    });
 
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'chronicle.example.com');
-        });
+    it('has port', () => {
+      const port = datatableserviceModule.v1.DataTableServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new datatableserviceModule.v1.DataTableServiceClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'chronicle.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('should create a client with no option', () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient();
+      assert(client);
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new datatableserviceModule.v1.DataTableServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'chronicle.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
-        }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new datatableserviceModule.v1.DataTableServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
+    it('should create a client with gRPC fallback', () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        fallback: true,
+      });
+      assert(client);
+    });
 
-        it('has port', () => {
-            const port = datatableserviceModule.v1.DataTableServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.dataTableServiceStub, undefined);
+      await client.initialize();
+      assert(client.dataTableServiceStub);
+    });
 
-        it('should create a client with no option', () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.dataTableServiceStub, undefined);
-            await client.initialize();
-            assert(client.dataTableServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.dataTableServiceStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.dataTableServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
+    it('has close method for the initialized client', (done) => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.dataTableServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('createDataTable', () => {
-        it('invokes createDataTable without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTable()
-            );
-            client.innerApiCalls.createDataTable = stubSimpleCall(expectedResponse);
-            const [response] = await client.createDataTable(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataTable without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTable()
-            );
-            client.innerApiCalls.createDataTable = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createDataTable(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTable|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataTable with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createDataTable = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createDataTable(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataTable with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.createDataTable(request), expectedError);
+    it('has close method for the non-initialized client', (done) => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.dataTableServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('getDataTable', () => {
-        it('invokes getDataTable without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTable()
-            );
-            client.innerApiCalls.getDataTable = stubSimpleCall(expectedResponse);
-            const [response] = await client.getDataTable(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTable without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTable()
-            );
-            client.innerApiCalls.getDataTable = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getDataTable(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTable|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTable with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getDataTable = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getDataTable(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTable with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getDataTable(request), expectedError);
-        });
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
 
-    describe('updateDataTable', () => {
-        it('invokes updateDataTable without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRequest()
-            );
-            request.dataTable ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRequest', ['dataTable', 'name']);
-            request.dataTable.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_table.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTable()
-            );
-            client.innerApiCalls.updateDataTable = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateDataTable(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
         });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
 
-        it('invokes updateDataTable without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRequest()
-            );
-            request.dataTable ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRequest', ['dataTable', 'name']);
-            request.dataTable.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_table.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTable()
-            );
-            client.innerApiCalls.updateDataTable = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateDataTable(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTable|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataTable with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRequest()
-            );
-            request.dataTable ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRequest', ['dataTable', 'name']);
-            request.dataTable.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_table.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateDataTable = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateDataTable(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataTable with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRequest()
-            );
-            request.dataTable ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRequest', ['dataTable', 'name']);
-            request.dataTable.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.updateDataTable(request), expectedError);
-        });
+  describe('createDataTable', () => {
+    it('invokes createDataTable without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTable(),
+      );
+      client.innerApiCalls.createDataTable = stubSimpleCall(expectedResponse);
+      const [response] = await client.createDataTable(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('deleteDataTable', () => {
-        it('invokes deleteDataTable without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteDataTable = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteDataTable(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteDataTable without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteDataTable = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteDataTable(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteDataTable with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteDataTable = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteDataTable(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteDataTable as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataTable as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteDataTable with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteDataTable(request), expectedError);
-        });
-    });
-
-    describe('createDataTableRow', () => {
-        it('invokes createDataTableRow without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRowRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableRow()
-            );
-            client.innerApiCalls.createDataTableRow = stubSimpleCall(expectedResponse);
-            const [response] = await client.createDataTableRow(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataTableRow without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRowRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableRow()
-            );
-            client.innerApiCalls.createDataTableRow = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createDataTableRow(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTableRow|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataTableRow with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRowRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createDataTableRow = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createDataTableRow(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createDataTableRow with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateDataTableRowRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.createDataTableRow(request), expectedError);
-        });
-    });
-
-    describe('updateDataTableRow', () => {
-        it('invokes updateDataTableRow without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest()
-            );
-            request.dataTableRow ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRowRequest', ['dataTableRow', 'name']);
-            request.dataTableRow.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_table_row.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableRow()
-            );
-            client.innerApiCalls.updateDataTableRow = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateDataTableRow(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataTableRow without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest()
-            );
-            request.dataTableRow ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRowRequest', ['dataTableRow', 'name']);
-            request.dataTableRow.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_table_row.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableRow()
-            );
-            client.innerApiCalls.updateDataTableRow = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateDataTableRow(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTableRow|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataTableRow with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest()
-            );
-            request.dataTableRow ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRowRequest', ['dataTableRow', 'name']);
-            request.dataTableRow.name = defaultValue1;
-            const expectedHeaderRequestParams = `data_table_row.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateDataTableRow = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateDataTableRow(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateDataTableRow with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest()
-            );
-            request.dataTableRow ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateDataTableRowRequest', ['dataTableRow', 'name']);
-            request.dataTableRow.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.updateDataTableRow(request), expectedError);
-        });
-    });
-
-    describe('getDataTableRow', () => {
-        it('invokes getDataTableRow without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableRow()
-            );
-            client.innerApiCalls.getDataTableRow = stubSimpleCall(expectedResponse);
-            const [response] = await client.getDataTableRow(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTableRow without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableRow()
-            );
-            client.innerApiCalls.getDataTableRow = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getDataTableRow(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTableRow|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTableRow with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getDataTableRow = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getDataTableRow(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTableRow with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getDataTableRow(request), expectedError);
-        });
-    });
-
-    describe('deleteDataTableRow', () => {
-        it('invokes deleteDataTableRow without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteDataTableRow = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteDataTableRow(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteDataTableRow without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteDataTableRow = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteDataTableRow(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteDataTableRow with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteDataTableRow = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteDataTableRow(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteDataTableRow as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteDataTableRow as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteDataTableRow with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteDataTableRowRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteDataTableRow(request), expectedError);
-        });
-    });
-
-    describe('bulkCreateDataTableRows', () => {
-        it('invokes bulkCreateDataTableRows without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkCreateDataTableRows = stubSimpleCall(expectedResponse);
-            const [response] = await client.bulkCreateDataTableRows(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkCreateDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkCreateDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkCreateDataTableRows without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkCreateDataTableRows = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.bulkCreateDataTableRows(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkCreateDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkCreateDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkCreateDataTableRows with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.bulkCreateDataTableRows = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.bulkCreateDataTableRows(request), expectedError);
-            const actualRequest = (client.innerApiCalls.bulkCreateDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkCreateDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkCreateDataTableRows with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.bulkCreateDataTableRows(request), expectedError);
-        });
-    });
-
-    describe('bulkGetDataTableRows', () => {
-        it('invokes bulkGetDataTableRows without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkGetDataTableRows = stubSimpleCall(expectedResponse);
-            const [response] = await client.bulkGetDataTableRows(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkGetDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkGetDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkGetDataTableRows without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkGetDataTableRows = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.bulkGetDataTableRows(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkGetDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkGetDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkGetDataTableRows with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.bulkGetDataTableRows = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.bulkGetDataTableRows(request), expectedError);
-            const actualRequest = (client.innerApiCalls.bulkGetDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkGetDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkGetDataTableRows with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.bulkGetDataTableRows(request), expectedError);
-        });
-    });
-
-    describe('bulkReplaceDataTableRows', () => {
-        it('invokes bulkReplaceDataTableRows without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkReplaceDataTableRows = stubSimpleCall(expectedResponse);
-            const [response] = await client.bulkReplaceDataTableRows(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkReplaceDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkReplaceDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkReplaceDataTableRows without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkReplaceDataTableRows = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.bulkReplaceDataTableRows(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkReplaceDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkReplaceDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkReplaceDataTableRows with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.bulkReplaceDataTableRows = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.bulkReplaceDataTableRows(request), expectedError);
-            const actualRequest = (client.innerApiCalls.bulkReplaceDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkReplaceDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkReplaceDataTableRows with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.bulkReplaceDataTableRows(request), expectedError);
-        });
-    });
-
-    describe('bulkUpdateDataTableRows', () => {
-        it('invokes bulkUpdateDataTableRows without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkUpdateDataTableRows = stubSimpleCall(expectedResponse);
-            const [response] = await client.bulkUpdateDataTableRows(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkUpdateDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkUpdateDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkUpdateDataTableRows without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse()
-            );
-            client.innerApiCalls.bulkUpdateDataTableRows = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.bulkUpdateDataTableRows(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.bulkUpdateDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkUpdateDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkUpdateDataTableRows with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.bulkUpdateDataTableRows = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.bulkUpdateDataTableRows(request), expectedError);
-            const actualRequest = (client.innerApiCalls.bulkUpdateDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.bulkUpdateDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes bulkUpdateDataTableRows with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.bulkUpdateDataTableRows(request), expectedError);
-        });
-    });
-
-    describe('getDataTableOperationErrors', () => {
-        it('invokes getDataTableOperationErrors without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableOperationErrors()
-            );
-            client.innerApiCalls.getDataTableOperationErrors = stubSimpleCall(expectedResponse);
-            const [response] = await client.getDataTableOperationErrors(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataTableOperationErrors as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTableOperationErrors as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTableOperationErrors without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DataTableOperationErrors()
-            );
-            client.innerApiCalls.getDataTableOperationErrors = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getDataTableOperationErrors(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTableOperationErrors|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getDataTableOperationErrors as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTableOperationErrors as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTableOperationErrors with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getDataTableOperationErrors = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getDataTableOperationErrors(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getDataTableOperationErrors as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getDataTableOperationErrors as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getDataTableOperationErrors with closed client', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getDataTableOperationErrors(request), expectedError);
-        });
-    });
-
-    describe('listDataTables', () => {
-        it('invokes listDataTables without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTablesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTablesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-            ];
-            client.innerApiCalls.listDataTables = stubSimpleCall(expectedResponse);
-            const [response] = await client.listDataTables(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listDataTables as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataTables as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listDataTables without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTablesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTablesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-            ];
-            client.innerApiCalls.listDataTables = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listDataTables(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTable[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listDataTables as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataTables as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listDataTables with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTablesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTablesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listDataTables = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listDataTables(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listDataTables as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataTables as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listDataTablesStream without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTablesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTablesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-            ];
-            client.descriptors.page.listDataTables.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listDataTablesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.chronicle.v1.DataTable[] = [];
-                stream.on('data', (response: protos.google.cloud.chronicle.v1.DataTable) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listDataTables.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listDataTables, request));
-            assert(
-                (client.descriptors.page.listDataTables.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listDataTablesStream with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTablesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTablesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listDataTables.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listDataTablesStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.chronicle.v1.DataTable[] = [];
-                stream.on('data', (response: protos.google.cloud.chronicle.v1.DataTable) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listDataTables.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listDataTables, request));
-            assert(
-                (client.descriptors.page.listDataTables.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listDataTables without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTablesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTablesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
-            ];
-            client.descriptors.page.listDataTables.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.chronicle.v1.IDataTable[] = [];
-            const iterable = client.listDataTablesAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes createDataTable without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTable(),
+      );
+      client.innerApiCalls.createDataTable =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createDataTable(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTable | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listDataTables with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTablesRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTablesRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listDataTables.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listDataTablesAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.chronicle.v1.IDataTable[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('listDataTableRows', () => {
-        it('invokes listDataTableRows without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-            ];
-            client.innerApiCalls.listDataTableRows = stubSimpleCall(expectedResponse);
-            const [response] = await client.listDataTableRows(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    it('invokes createDataTable with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDataTable = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createDataTable(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listDataTableRows without error using callback', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-            ];
-            client.innerApiCalls.listDataTableRows = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listDataTableRows(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IDataTableRow[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+    it('invokes createDataTable with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.createDataTable(request), expectedError);
+    });
+  });
 
-        it('invokes listDataTableRows with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listDataTableRows = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listDataTableRows(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listDataTableRows as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listDataTableRows as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
+  describe('getDataTable', () => {
+    it('invokes getDataTable without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTable(),
+      );
+      client.innerApiCalls.getDataTable = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDataTable(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-        it('invokes listDataTableRowsStream without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-            ];
-            client.descriptors.page.listDataTableRows.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listDataTableRowsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.chronicle.v1.DataTableRow[] = [];
-                stream.on('data', (response: protos.google.cloud.chronicle.v1.DataTableRow) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listDataTableRows.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listDataTableRows, request));
-            assert(
-                (client.descriptors.page.listDataTableRows.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listDataTableRowsStream with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listDataTableRows.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listDataTableRowsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.chronicle.v1.DataTableRow[] = [];
-                stream.on('data', (response: protos.google.cloud.chronicle.v1.DataTableRow) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listDataTableRows.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listDataTableRows, request));
-            assert(
-                (client.descriptors.page.listDataTableRows.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listDataTableRows without error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTableRow()),
-            ];
-            client.descriptors.page.listDataTableRows.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.chronicle.v1.IDataTableRow[] = [];
-            const iterable = client.listDataTableRowsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getDataTable without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTable(),
+      );
+      client.innerApiCalls.getDataTable =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDataTable(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTable | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listDataTableRows with error', async () => {
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListDataTableRowsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listDataTableRows.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listDataTableRowsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.chronicle.v1.IDataTableRow[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('Path templates', () => {
-
-        describe('bigQueryExport', async () => {
-            const fakePath = "/rendered/path/bigQueryExport";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.bigQueryExportPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.bigQueryExportPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('bigQueryExportPath', () => {
-                const result = client.bigQueryExportPath("projectValue", "locationValue", "instanceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromBigQueryExportName', () => {
-                const result = client.matchProjectFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromBigQueryExportName', () => {
-                const result = client.matchLocationFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromBigQueryExportName', () => {
-                const result = client.matchInstanceFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dashboardChart', async () => {
-            const fakePath = "/rendered/path/dashboardChart";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                chart: "chartValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dashboardChartPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dashboardChartPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dashboardChartPath', () => {
-                const result = client.dashboardChartPath("projectValue", "locationValue", "instanceValue", "chartValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dashboardChartPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDashboardChartName', () => {
-                const result = client.matchProjectFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDashboardChartName', () => {
-                const result = client.matchLocationFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDashboardChartName', () => {
-                const result = client.matchInstanceFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchChartFromDashboardChartName', () => {
-                const result = client.matchChartFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "chartValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dashboardQuery', async () => {
-            const fakePath = "/rendered/path/dashboardQuery";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                query: "queryValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dashboardQueryPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dashboardQueryPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dashboardQueryPath', () => {
-                const result = client.dashboardQueryPath("projectValue", "locationValue", "instanceValue", "queryValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dashboardQueryPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDashboardQueryName', () => {
-                const result = client.matchProjectFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDashboardQueryName', () => {
-                const result = client.matchLocationFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDashboardQueryName', () => {
-                const result = client.matchInstanceFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchQueryFromDashboardQueryName', () => {
-                const result = client.matchQueryFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "queryValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataAccessLabel', async () => {
-            const fakePath = "/rendered/path/dataAccessLabel";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_access_label: "dataAccessLabelValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataAccessLabelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataAccessLabelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataAccessLabelPath', () => {
-                const result = client.dataAccessLabelPath("projectValue", "locationValue", "instanceValue", "dataAccessLabelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataAccessLabelName', () => {
-                const result = client.matchProjectFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataAccessLabelName', () => {
-                const result = client.matchLocationFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataAccessLabelName', () => {
-                const result = client.matchInstanceFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataAccessLabelFromDataAccessLabelName', () => {
-                const result = client.matchDataAccessLabelFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "dataAccessLabelValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataAccessScope', async () => {
-            const fakePath = "/rendered/path/dataAccessScope";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_access_scope: "dataAccessScopeValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataAccessScopePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataAccessScopePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataAccessScopePath', () => {
-                const result = client.dataAccessScopePath("projectValue", "locationValue", "instanceValue", "dataAccessScopeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataAccessScopePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataAccessScopeName', () => {
-                const result = client.matchProjectFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataAccessScopeName', () => {
-                const result = client.matchLocationFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataAccessScopeName', () => {
-                const result = client.matchInstanceFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataAccessScopeFromDataAccessScopeName', () => {
-                const result = client.matchDataAccessScopeFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "dataAccessScopeValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTable', async () => {
-            const fakePath = "/rendered/path/dataTable";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table: "dataTableValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTablePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTablePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTablePath', () => {
-                const result = client.dataTablePath("projectValue", "locationValue", "instanceValue", "dataTableValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTablePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableName', () => {
-                const result = client.matchProjectFromDataTableName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableName', () => {
-                const result = client.matchLocationFromDataTableName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableName', () => {
-                const result = client.matchInstanceFromDataTableName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableFromDataTableName', () => {
-                const result = client.matchDataTableFromDataTableName(fakePath);
-                assert.strictEqual(result, "dataTableValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTableOperationErrors', async () => {
-            const fakePath = "/rendered/path/dataTableOperationErrors";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table_operation_errors: "dataTableOperationErrorsValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTableOperationErrorsPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTableOperationErrorsPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTableOperationErrorsPath', () => {
-                const result = client.dataTableOperationErrorsPath("projectValue", "locationValue", "instanceValue", "dataTableOperationErrorsValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableOperationErrorsName', () => {
-                const result = client.matchProjectFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableOperationErrorsName', () => {
-                const result = client.matchLocationFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableOperationErrorsName', () => {
-                const result = client.matchInstanceFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableOperationErrorsFromDataTableOperationErrorsName', () => {
-                const result = client.matchDataTableOperationErrorsFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "dataTableOperationErrorsValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTableRow', async () => {
-            const fakePath = "/rendered/path/dataTableRow";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table: "dataTableValue",
-                data_table_row: "dataTableRowValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTableRowPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTableRowPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTableRowPath', () => {
-                const result = client.dataTableRowPath("projectValue", "locationValue", "instanceValue", "dataTableValue", "dataTableRowValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTableRowPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableRowName', () => {
-                const result = client.matchProjectFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableRowName', () => {
-                const result = client.matchLocationFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableRowName', () => {
-                const result = client.matchInstanceFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableFromDataTableRowName', () => {
-                const result = client.matchDataTableFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "dataTableValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableRowFromDataTableRowName', () => {
-                const result = client.matchDataTableRowFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "dataTableRowValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featuredContentNativeDashboard', async () => {
-            const fakePath = "/rendered/path/featuredContentNativeDashboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                featured_content_native_dashboard: "featuredContentNativeDashboardValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featuredContentNativeDashboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featuredContentNativeDashboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featuredContentNativeDashboardPath', () => {
-                const result = client.featuredContentNativeDashboardPath("projectValue", "locationValue", "instanceValue", "featuredContentNativeDashboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchProjectFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchLocationFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchInstanceFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "featuredContentNativeDashboardValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('instance', async () => {
-            const fakePath = "/rendered/path/instance";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.instancePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.instancePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('instancePath', () => {
-                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromInstanceName', () => {
-                const result = client.matchProjectFromInstanceName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromInstanceName', () => {
-                const result = client.matchLocationFromInstanceName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromInstanceName', () => {
-                const result = client.matchInstanceFromInstanceName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('locationPath', () => {
-                const result = client.locationPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromLocationName', () => {
-                const result = client.matchProjectFromLocationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromLocationName', () => {
-                const result = client.matchLocationFromLocationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('nativeDashboard', async () => {
-            const fakePath = "/rendered/path/nativeDashboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                dashboard: "dashboardValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nativeDashboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nativeDashboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nativeDashboardPath', () => {
-                const result = client.nativeDashboardPath("projectValue", "locationValue", "instanceValue", "dashboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nativeDashboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNativeDashboardName', () => {
-                const result = client.matchProjectFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNativeDashboardName', () => {
-                const result = client.matchLocationFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromNativeDashboardName', () => {
-                const result = client.matchInstanceFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDashboardFromNativeDashboardName', () => {
-                const result = client.matchDashboardFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "dashboardValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('referenceList', async () => {
-            const fakePath = "/rendered/path/referenceList";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                reference_list: "referenceListValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.referenceListPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.referenceListPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('referenceListPath', () => {
-                const result = client.referenceListPath("projectValue", "locationValue", "instanceValue", "referenceListValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.referenceListPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromReferenceListName', () => {
-                const result = client.matchProjectFromReferenceListName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromReferenceListName', () => {
-                const result = client.matchLocationFromReferenceListName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromReferenceListName', () => {
-                const result = client.matchInstanceFromReferenceListName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReferenceListFromReferenceListName', () => {
-                const result = client.matchReferenceListFromReferenceListName(fakePath);
-                assert.strictEqual(result, "referenceListValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('retrohunt', async () => {
-            const fakePath = "/rendered/path/retrohunt";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-                retrohunt: "retrohuntValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.retrohuntPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.retrohuntPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('retrohuntPath', () => {
-                const result = client.retrohuntPath("projectValue", "locationValue", "instanceValue", "ruleValue", "retrohuntValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.retrohuntPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRetrohuntName', () => {
-                const result = client.matchProjectFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRetrohuntName', () => {
-                const result = client.matchLocationFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRetrohuntName', () => {
-                const result = client.matchInstanceFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRetrohuntName', () => {
-                const result = client.matchRuleFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRetrohuntFromRetrohuntName', () => {
-                const result = client.matchRetrohuntFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "retrohuntValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('rule', async () => {
-            const fakePath = "/rendered/path/rule";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.rulePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.rulePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('rulePath', () => {
-                const result = client.rulePath("projectValue", "locationValue", "instanceValue", "ruleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.rulePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRuleName', () => {
-                const result = client.matchProjectFromRuleName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRuleName', () => {
-                const result = client.matchLocationFromRuleName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRuleName', () => {
-                const result = client.matchInstanceFromRuleName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRuleName', () => {
-                const result = client.matchRuleFromRuleName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('ruleDeployment', async () => {
-            const fakePath = "/rendered/path/ruleDeployment";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.ruleDeploymentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.ruleDeploymentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('ruleDeploymentPath', () => {
-                const result = client.ruleDeploymentPath("projectValue", "locationValue", "instanceValue", "ruleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRuleDeploymentName', () => {
-                const result = client.matchProjectFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRuleDeploymentName', () => {
-                const result = client.matchLocationFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRuleDeploymentName', () => {
-                const result = client.matchInstanceFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRuleDeploymentName', () => {
-                const result = client.matchRuleFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('watchlist', async () => {
-            const fakePath = "/rendered/path/watchlist";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                watchlist: "watchlistValue",
-            };
-            const client = new datatableserviceModule.v1.DataTableServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.watchlistPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.watchlistPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('watchlistPath', () => {
-                const result = client.watchlistPath("projectValue", "locationValue", "instanceValue", "watchlistValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.watchlistPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromWatchlistName', () => {
-                const result = client.matchProjectFromWatchlistName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromWatchlistName', () => {
-                const result = client.matchLocationFromWatchlistName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromWatchlistName', () => {
-                const result = client.matchInstanceFromWatchlistName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchWatchlistFromWatchlistName', () => {
-                const result = client.matchWatchlistFromWatchlistName(fakePath);
-                assert.strictEqual(result, "watchlistValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    it('invokes getDataTable with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDataTable = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getDataTable(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
+
+    it('invokes getDataTable with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getDataTable(request), expectedError);
+    });
+  });
+
+  describe('updateDataTable', () => {
+    it('invokes updateDataTable without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRequest(),
+      );
+      request.dataTable ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRequest',
+        ['dataTable', 'name'],
+      );
+      request.dataTable.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_table.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTable(),
+      );
+      client.innerApiCalls.updateDataTable = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateDataTable(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataTable without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRequest(),
+      );
+      request.dataTable ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRequest',
+        ['dataTable', 'name'],
+      );
+      request.dataTable.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_table.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTable(),
+      );
+      client.innerApiCalls.updateDataTable =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateDataTable(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTable | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataTable with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRequest(),
+      );
+      request.dataTable ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRequest',
+        ['dataTable', 'name'],
+      );
+      request.dataTable.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_table.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDataTable = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateDataTable(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataTable with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRequest(),
+      );
+      request.dataTable ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRequest',
+        ['dataTable', 'name'],
+      );
+      request.dataTable.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateDataTable(request), expectedError);
+    });
+  });
+
+  describe('deleteDataTable', () => {
+    it('invokes deleteDataTable without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteDataTable = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteDataTable(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDataTable without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteDataTable =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteDataTable(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDataTable with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDataTable = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteDataTable(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteDataTable as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataTable as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDataTable with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteDataTable(request), expectedError);
+    });
+  });
+
+  describe('createDataTableRow', () => {
+    it('invokes createDataTableRow without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRowRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableRow(),
+      );
+      client.innerApiCalls.createDataTableRow =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createDataTableRow(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDataTableRow without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRowRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableRow(),
+      );
+      client.innerApiCalls.createDataTableRow =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createDataTableRow(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTableRow | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDataTableRow with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRowRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createDataTableRow = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createDataTableRow(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createDataTableRow with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateDataTableRowRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.createDataTableRow(request), expectedError);
+    });
+  });
+
+  describe('updateDataTableRow', () => {
+    it('invokes updateDataTableRow without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest(),
+      );
+      request.dataTableRow ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRowRequest',
+        ['dataTableRow', 'name'],
+      );
+      request.dataTableRow.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_table_row.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableRow(),
+      );
+      client.innerApiCalls.updateDataTableRow =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateDataTableRow(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataTableRow without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest(),
+      );
+      request.dataTableRow ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRowRequest',
+        ['dataTableRow', 'name'],
+      );
+      request.dataTableRow.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_table_row.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableRow(),
+      );
+      client.innerApiCalls.updateDataTableRow =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateDataTableRow(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTableRow | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataTableRow with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest(),
+      );
+      request.dataTableRow ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRowRequest',
+        ['dataTableRow', 'name'],
+      );
+      request.dataTableRow.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_table_row.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateDataTableRow = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateDataTableRow(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateDataTableRow with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateDataTableRowRequest(),
+      );
+      request.dataTableRow ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateDataTableRowRequest',
+        ['dataTableRow', 'name'],
+      );
+      request.dataTableRow.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateDataTableRow(request), expectedError);
+    });
+  });
+
+  describe('getDataTableRow', () => {
+    it('invokes getDataTableRow without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableRow(),
+      );
+      client.innerApiCalls.getDataTableRow = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDataTableRow(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataTableRow without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableRow(),
+      );
+      client.innerApiCalls.getDataTableRow =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDataTableRow(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTableRow | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataTableRow with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDataTableRow = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getDataTableRow(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataTableRow with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getDataTableRow(request), expectedError);
+    });
+  });
+
+  describe('deleteDataTableRow', () => {
+    it('invokes deleteDataTableRow without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteDataTableRow =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteDataTableRow(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDataTableRow without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteDataTableRow =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteDataTableRow(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDataTableRow with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteDataTableRow = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteDataTableRow(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteDataTableRow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataTableRow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteDataTableRow with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteDataTableRowRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteDataTableRowRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteDataTableRow(request), expectedError);
+    });
+  });
+
+  describe('bulkCreateDataTableRows', () => {
+    it('invokes bulkCreateDataTableRows without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkCreateDataTableRows =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.bulkCreateDataTableRows(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkCreateDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkCreateDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkCreateDataTableRows without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkCreateDataTableRows =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkCreateDataTableRows(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IBulkCreateDataTableRowsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkCreateDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkCreateDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkCreateDataTableRows with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkCreateDataTableRows = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.bulkCreateDataTableRows(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.bulkCreateDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkCreateDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkCreateDataTableRows with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkCreateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.bulkCreateDataTableRows(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('bulkGetDataTableRows', () => {
+    it('invokes bulkGetDataTableRows without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkGetDataTableRows =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.bulkGetDataTableRows(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkGetDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkGetDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkGetDataTableRows without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkGetDataTableRows =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkGetDataTableRows(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IBulkGetDataTableRowsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkGetDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkGetDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkGetDataTableRows with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkGetDataTableRows = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.bulkGetDataTableRows(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.bulkGetDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkGetDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkGetDataTableRows with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkGetDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.bulkGetDataTableRows(request), expectedError);
+    });
+  });
+
+  describe('bulkReplaceDataTableRows', () => {
+    it('invokes bulkReplaceDataTableRows without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkReplaceDataTableRows =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.bulkReplaceDataTableRows(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkReplaceDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkReplaceDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkReplaceDataTableRows without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkReplaceDataTableRows =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkReplaceDataTableRows(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IBulkReplaceDataTableRowsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkReplaceDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkReplaceDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkReplaceDataTableRows with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkReplaceDataTableRows = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.bulkReplaceDataTableRows(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.bulkReplaceDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkReplaceDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkReplaceDataTableRows with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkReplaceDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.bulkReplaceDataTableRows(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('bulkUpdateDataTableRows', () => {
+    it('invokes bulkUpdateDataTableRows without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkUpdateDataTableRows =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.bulkUpdateDataTableRows(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkUpdateDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkUpdateDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkUpdateDataTableRows without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsResponse(),
+      );
+      client.innerApiCalls.bulkUpdateDataTableRows =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.bulkUpdateDataTableRows(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IBulkUpdateDataTableRowsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.bulkUpdateDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkUpdateDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkUpdateDataTableRows with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.bulkUpdateDataTableRows = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.bulkUpdateDataTableRows(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.bulkUpdateDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkUpdateDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes bulkUpdateDataTableRows with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.BulkUpdateDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.bulkUpdateDataTableRows(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('getDataTableOperationErrors', () => {
+    it('invokes getDataTableOperationErrors without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableOperationErrors(),
+      );
+      client.innerApiCalls.getDataTableOperationErrors =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getDataTableOperationErrors(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataTableOperationErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTableOperationErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataTableOperationErrors without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DataTableOperationErrors(),
+      );
+      client.innerApiCalls.getDataTableOperationErrors =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDataTableOperationErrors(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTableOperationErrors | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getDataTableOperationErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTableOperationErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataTableOperationErrors with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDataTableOperationErrors = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.getDataTableOperationErrors(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.getDataTableOperationErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataTableOperationErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getDataTableOperationErrors with closed client', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetDataTableOperationErrorsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.getDataTableOperationErrors(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('listDataTables', () => {
+    it('invokes listDataTables without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTablesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTablesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+      ];
+      client.innerApiCalls.listDataTables = stubSimpleCall(expectedResponse);
+      const [response] = await client.listDataTables(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDataTables as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataTables as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataTables without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTablesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTablesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+      ];
+      client.innerApiCalls.listDataTables =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDataTables(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTable[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDataTables as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataTables as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataTables with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTablesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTablesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDataTables = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listDataTables(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listDataTables as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataTables as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataTablesStream without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTablesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTablesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+      ];
+      client.descriptors.page.listDataTables.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDataTablesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.chronicle.v1.DataTable[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.chronicle.v1.DataTable) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listDataTables.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDataTables, request),
+      );
+      assert(
+        (client.descriptors.page.listDataTables.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listDataTablesStream with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTablesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTablesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDataTables.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDataTablesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.chronicle.v1.DataTable[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.chronicle.v1.DataTable) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listDataTables.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDataTables, request),
+      );
+      assert(
+        (client.descriptors.page.listDataTables.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listDataTables without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTablesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTablesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.DataTable()),
+      ];
+      client.descriptors.page.listDataTables.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.chronicle.v1.IDataTable[] = [];
+      const iterable = client.listDataTablesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDataTables.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listDataTables with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTablesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTablesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDataTables.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDataTablesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.chronicle.v1.IDataTable[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDataTables.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listDataTables.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('listDataTableRows', () => {
+    it('invokes listDataTableRows without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+      ];
+      client.innerApiCalls.listDataTableRows = stubSimpleCall(expectedResponse);
+      const [response] = await client.listDataTableRows(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataTableRows without error using callback', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+      ];
+      client.innerApiCalls.listDataTableRows =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listDataTableRows(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IDataTableRow[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataTableRows with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listDataTableRows = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listDataTableRows(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listDataTableRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataTableRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listDataTableRowsStream without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+      ];
+      client.descriptors.page.listDataTableRows.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listDataTableRowsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.chronicle.v1.DataTableRow[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.chronicle.v1.DataTableRow) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listDataTableRows.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDataTableRows, request),
+      );
+      assert(
+        (client.descriptors.page.listDataTableRows.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listDataTableRowsStream with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDataTableRows.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listDataTableRowsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.chronicle.v1.DataTableRow[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.chronicle.v1.DataTableRow) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listDataTableRows.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listDataTableRows, request),
+      );
+      assert(
+        (client.descriptors.page.listDataTableRows.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listDataTableRows without error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.chronicle.v1.DataTableRow(),
+        ),
+      ];
+      client.descriptors.page.listDataTableRows.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.chronicle.v1.IDataTableRow[] = [];
+      const iterable = client.listDataTableRowsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDataTableRows.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listDataTableRows with error', async () => {
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListDataTableRowsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListDataTableRowsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listDataTableRows.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listDataTableRowsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.chronicle.v1.IDataTableRow[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listDataTableRows.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listDataTableRows.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('bigQueryExport', async () => {
+      const fakePath = '/rendered/path/bigQueryExport';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.bigQueryExportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.bigQueryExportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('bigQueryExportPath', () => {
+        const result = client.bigQueryExportPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBigQueryExportName', () => {
+        const result = client.matchProjectFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBigQueryExportName', () => {
+        const result = client.matchLocationFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromBigQueryExportName', () => {
+        const result = client.matchInstanceFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dashboardChart', async () => {
+      const fakePath = '/rendered/path/dashboardChart';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        chart: 'chartValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dashboardChartPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dashboardChartPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dashboardChartPath', () => {
+        const result = client.dashboardChartPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'chartValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDashboardChartName', () => {
+        const result = client.matchProjectFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDashboardChartName', () => {
+        const result = client.matchLocationFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDashboardChartName', () => {
+        const result = client.matchInstanceFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChartFromDashboardChartName', () => {
+        const result = client.matchChartFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'chartValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dashboardQuery', async () => {
+      const fakePath = '/rendered/path/dashboardQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        query: 'queryValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dashboardQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dashboardQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dashboardQueryPath', () => {
+        const result = client.dashboardQueryPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'queryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDashboardQueryName', () => {
+        const result = client.matchProjectFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDashboardQueryName', () => {
+        const result = client.matchLocationFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDashboardQueryName', () => {
+        const result = client.matchInstanceFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchQueryFromDashboardQueryName', () => {
+        const result = client.matchQueryFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'queryValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataAccessLabel', async () => {
+      const fakePath = '/rendered/path/dataAccessLabel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_access_label: 'dataAccessLabelValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataAccessLabelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAccessLabelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAccessLabelPath', () => {
+        const result = client.dataAccessLabelPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataAccessLabelValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataAccessLabelName', () => {
+        const result = client.matchProjectFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataAccessLabelName', () => {
+        const result = client.matchLocationFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataAccessLabelName', () => {
+        const result = client.matchInstanceFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataAccessLabelFromDataAccessLabelName', () => {
+        const result =
+          client.matchDataAccessLabelFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'dataAccessLabelValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataAccessScope', async () => {
+      const fakePath = '/rendered/path/dataAccessScope';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_access_scope: 'dataAccessScopeValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataAccessScopePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAccessScopePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAccessScopePath', () => {
+        const result = client.dataAccessScopePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataAccessScopeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataAccessScopeName', () => {
+        const result = client.matchProjectFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataAccessScopeName', () => {
+        const result = client.matchLocationFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataAccessScopeName', () => {
+        const result = client.matchInstanceFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataAccessScopeFromDataAccessScopeName', () => {
+        const result =
+          client.matchDataAccessScopeFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'dataAccessScopeValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTable', async () => {
+      const fakePath = '/rendered/path/dataTable';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table: 'dataTableValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataTablePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTablePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTablePath', () => {
+        const result = client.dataTablePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableName', () => {
+        const result = client.matchProjectFromDataTableName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableName', () => {
+        const result = client.matchLocationFromDataTableName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableName', () => {
+        const result = client.matchInstanceFromDataTableName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableFromDataTableName', () => {
+        const result = client.matchDataTableFromDataTableName(fakePath);
+        assert.strictEqual(result, 'dataTableValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTableOperationErrors', async () => {
+      const fakePath = '/rendered/path/dataTableOperationErrors';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table_operation_errors: 'dataTableOperationErrorsValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataTableOperationErrorsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTableOperationErrorsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTableOperationErrorsPath', () => {
+        const result = client.dataTableOperationErrorsPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableOperationErrorsValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchProjectFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchLocationFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchInstanceFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableOperationErrorsFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchDataTableOperationErrorsFromDataTableOperationErrorsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'dataTableOperationErrorsValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTableRow', async () => {
+      const fakePath = '/rendered/path/dataTableRow';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table: 'dataTableValue',
+        data_table_row: 'dataTableRowValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataTableRowPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTableRowPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTableRowPath', () => {
+        const result = client.dataTableRowPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableValue',
+          'dataTableRowValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableRowName', () => {
+        const result = client.matchProjectFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableRowName', () => {
+        const result = client.matchLocationFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableRowName', () => {
+        const result = client.matchInstanceFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableFromDataTableRowName', () => {
+        const result = client.matchDataTableFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'dataTableValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableRowFromDataTableRowName', () => {
+        const result = client.matchDataTableRowFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'dataTableRowValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('featuredContentNativeDashboard', async () => {
+      const fakePath = '/rendered/path/featuredContentNativeDashboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        featured_content_native_dashboard:
+          'featuredContentNativeDashboardValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.featuredContentNativeDashboardPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.featuredContentNativeDashboardPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('featuredContentNativeDashboardPath', () => {
+        const result = client.featuredContentNativeDashboardPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'featuredContentNativeDashboardValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchProjectFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchLocationFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchInstanceFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'featuredContentNativeDashboardValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('instance', async () => {
+      const fakePath = '/rendered/path/instance';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.instancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.instancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('instancePath', () => {
+        const result = client.instancePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.instancePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInstanceName', () => {
+        const result = client.matchProjectFromInstanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromInstanceName', () => {
+        const result = client.matchLocationFromInstanceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromInstanceName', () => {
+        const result = client.matchInstanceFromInstanceName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('nativeDashboard', async () => {
+      const fakePath = '/rendered/path/nativeDashboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        dashboard: 'dashboardValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.nativeDashboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeDashboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeDashboardPath', () => {
+        const result = client.nativeDashboardPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dashboardValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromNativeDashboardName', () => {
+        const result = client.matchProjectFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromNativeDashboardName', () => {
+        const result = client.matchLocationFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromNativeDashboardName', () => {
+        const result = client.matchInstanceFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDashboardFromNativeDashboardName', () => {
+        const result = client.matchDashboardFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'dashboardValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('project', async () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('referenceList', async () => {
+      const fakePath = '/rendered/path/referenceList';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        reference_list: 'referenceListValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.referenceListPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.referenceListPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('referenceListPath', () => {
+        const result = client.referenceListPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'referenceListValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromReferenceListName', () => {
+        const result = client.matchProjectFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromReferenceListName', () => {
+        const result = client.matchLocationFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromReferenceListName', () => {
+        const result = client.matchInstanceFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReferenceListFromReferenceListName', () => {
+        const result = client.matchReferenceListFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'referenceListValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('retrohunt', async () => {
+      const fakePath = '/rendered/path/retrohunt';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+        retrohunt: 'retrohuntValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.retrohuntPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.retrohuntPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('retrohuntPath', () => {
+        const result = client.retrohuntPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+          'retrohuntValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRetrohuntName', () => {
+        const result = client.matchProjectFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRetrohuntName', () => {
+        const result = client.matchLocationFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRetrohuntName', () => {
+        const result = client.matchInstanceFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRetrohuntName', () => {
+        const result = client.matchRuleFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRetrohuntFromRetrohuntName', () => {
+        const result = client.matchRetrohuntFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'retrohuntValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('rule', async () => {
+      const fakePath = '/rendered/path/rule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.rulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.rulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('rulePath', () => {
+        const result = client.rulePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.rulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleName', () => {
+        const result = client.matchProjectFromRuleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleName', () => {
+        const result = client.matchLocationFromRuleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleName', () => {
+        const result = client.matchInstanceFromRuleName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRuleName', () => {
+        const result = client.matchRuleFromRuleName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('ruleDeployment', async () => {
+      const fakePath = '/rendered/path/ruleDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.ruleDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ruleDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ruleDeploymentPath', () => {
+        const result = client.ruleDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleDeploymentName', () => {
+        const result = client.matchProjectFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleDeploymentName', () => {
+        const result = client.matchLocationFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleDeploymentName', () => {
+        const result = client.matchInstanceFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRuleDeploymentName', () => {
+        const result = client.matchRuleFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('watchlist', async () => {
+      const fakePath = '/rendered/path/watchlist';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        watchlist: 'watchlistValue',
+      };
+      const client = new datatableserviceModule.v1.DataTableServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.watchlistPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.watchlistPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('watchlistPath', () => {
+        const result = client.watchlistPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'watchlistValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromWatchlistName', () => {
+        const result = client.matchProjectFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromWatchlistName', () => {
+        const result = client.matchLocationFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromWatchlistName', () => {
+        const result = client.matchInstanceFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchWatchlistFromWatchlistName', () => {
+        const result = client.matchWatchlistFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'watchlistValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });

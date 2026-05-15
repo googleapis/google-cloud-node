@@ -19,1459 +19,2040 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as bigqueryexportserviceModule from '../src';
 
-import {protobuf} from 'google-gax';
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v1.BigQueryExportServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          bigqueryexportserviceModule.v1.BigQueryExportServiceClient
+            .servicePath;
+        assert.strictEqual(servicePath, 'chronicle.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          bigqueryexportserviceModule.v1.BigQueryExportServiceClient
+            .apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          universeDomain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'chronicle.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          universe_domain: 'example.com',
+        });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'chronicle.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'chronicle.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
-        });
-
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = bigqueryexportserviceModule.v1.BigQueryExportServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'chronicle.googleapis.com');
-                assert(stub.called);
-                stub.restore();
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client =
+            new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+              universeDomain: 'configured.example.com',
             });
-
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = bigqueryexportserviceModule.v1.BigQueryExportServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-        }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'chronicle.example.com');
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'chronicle.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
-
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'chronicle.example.com');
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
         });
+      });
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'chronicle.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('has port', () => {
+      const port =
+        bigqueryexportserviceModule.v1.BigQueryExportServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'chronicle.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
-        }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
+    it('should create a client with no option', () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          fallback: true,
         });
+      assert(client);
+    });
 
-        it('has port', () => {
-            const port = bigqueryexportserviceModule.v1.BigQueryExportServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      assert.strictEqual(client.bigQueryExportServiceStub, undefined);
+      await client.initialize();
+      assert(client.bigQueryExportServiceStub);
+    });
 
-        it('should create a client with no option', () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient();
-            assert(client);
+    it('has close method for the initialized client', (done) => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.bigQueryExportServiceStub, undefined);
-            await client.initialize();
-            assert(client.bigQueryExportServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.bigQueryExportServiceStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.bigQueryExportServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.bigQueryExportServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('getBigQueryExport', () => {
-        it('invokes getBigQueryExport without error', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetBigQueryExportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BigQueryExport()
-            );
-            client.innerApiCalls.getBigQueryExport = stubSimpleCall(expectedResponse);
-            const [response] = await client.getBigQueryExport(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('has close method for the non-initialized client', (done) => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('invokes getBigQueryExport without error using callback', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetBigQueryExportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BigQueryExport()
-            );
-            client.innerApiCalls.getBigQueryExport = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getBigQueryExport(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IBigQueryExport|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getBigQueryExport with error', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetBigQueryExportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getBigQueryExport = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getBigQueryExport(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getBigQueryExport with closed client', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetBigQueryExportRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getBigQueryExport(request), expectedError);
+      assert.strictEqual(client.bigQueryExportServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('updateBigQueryExport', () => {
-        it('invokes updateBigQueryExport without error', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest()
-            );
-            request.bigQueryExport ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
-            request.bigQueryExport.name = defaultValue1;
-            const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BigQueryExport()
-            );
-            client.innerApiCalls.updateBigQueryExport = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateBigQueryExport(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('invokes updateBigQueryExport without error using callback', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest()
-            );
-            request.bigQueryExport ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
-            request.bigQueryExport.name = defaultValue1;
-            const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BigQueryExport()
-            );
-            client.innerApiCalls.updateBigQueryExport = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateBigQueryExport(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IBigQueryExport|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateBigQueryExport with error', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest()
-            );
-            request.bigQueryExport ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
-            request.bigQueryExport.name = defaultValue1;
-            const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateBigQueryExport = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateBigQueryExport(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateBigQueryExport with closed client', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest()
-            );
-            request.bigQueryExport ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateBigQueryExportRequest', ['bigQueryExport', 'name']);
-            request.bigQueryExport.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.updateBigQueryExport(request), expectedError);
-        });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
 
-    describe('provisionBigQueryExport', () => {
-        it('invokes provisionBigQueryExport without error', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BigQueryExport()
-            );
-            client.innerApiCalls.provisionBigQueryExport = stubSimpleCall(expectedResponse);
-            const [response] = await client.provisionBigQueryExport(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.provisionBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.provisionBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
 
-        it('invokes provisionBigQueryExport without error using callback', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.BigQueryExport()
-            );
-            client.innerApiCalls.provisionBigQueryExport = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.provisionBigQueryExport(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IBigQueryExport|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.provisionBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.provisionBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+  describe('getBigQueryExport', () => {
+    it('invokes getBigQueryExport without error', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        it('invokes provisionBigQueryExport with error', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.provisionBigQueryExport = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.provisionBigQueryExport(request), expectedError);
-            const actualRequest = (client.innerApiCalls.provisionBigQueryExport as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.provisionBigQueryExport as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes provisionBigQueryExport with closed client', async () => {
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.provisionBigQueryExport(request), expectedError);
-        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetBigQueryExportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BigQueryExport(),
+      );
+      client.innerApiCalls.getBigQueryExport = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBigQueryExport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('Path templates', () => {
-
-        describe('bigQueryExport', async () => {
-            const fakePath = "/rendered/path/bigQueryExport";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.bigQueryExportPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.bigQueryExportPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('bigQueryExportPath', () => {
-                const result = client.bigQueryExportPath("projectValue", "locationValue", "instanceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromBigQueryExportName', () => {
-                const result = client.matchProjectFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromBigQueryExportName', () => {
-                const result = client.matchLocationFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromBigQueryExportName', () => {
-                const result = client.matchInstanceFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
+    it('invokes getBigQueryExport without error using callback', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
         });
-
-        describe('dashboardChart', async () => {
-            const fakePath = "/rendered/path/dashboardChart";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                chart: "chartValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dashboardChartPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dashboardChartPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dashboardChartPath', () => {
-                const result = client.dashboardChartPath("projectValue", "locationValue", "instanceValue", "chartValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dashboardChartPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDashboardChartName', () => {
-                const result = client.matchProjectFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDashboardChartName', () => {
-                const result = client.matchLocationFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDashboardChartName', () => {
-                const result = client.matchInstanceFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchChartFromDashboardChartName', () => {
-                const result = client.matchChartFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "chartValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dashboardQuery', async () => {
-            const fakePath = "/rendered/path/dashboardQuery";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                query: "queryValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dashboardQueryPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dashboardQueryPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dashboardQueryPath', () => {
-                const result = client.dashboardQueryPath("projectValue", "locationValue", "instanceValue", "queryValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dashboardQueryPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDashboardQueryName', () => {
-                const result = client.matchProjectFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDashboardQueryName', () => {
-                const result = client.matchLocationFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDashboardQueryName', () => {
-                const result = client.matchInstanceFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchQueryFromDashboardQueryName', () => {
-                const result = client.matchQueryFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "queryValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataAccessLabel', async () => {
-            const fakePath = "/rendered/path/dataAccessLabel";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_access_label: "dataAccessLabelValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataAccessLabelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataAccessLabelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataAccessLabelPath', () => {
-                const result = client.dataAccessLabelPath("projectValue", "locationValue", "instanceValue", "dataAccessLabelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataAccessLabelName', () => {
-                const result = client.matchProjectFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataAccessLabelName', () => {
-                const result = client.matchLocationFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataAccessLabelName', () => {
-                const result = client.matchInstanceFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataAccessLabelFromDataAccessLabelName', () => {
-                const result = client.matchDataAccessLabelFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "dataAccessLabelValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataAccessScope', async () => {
-            const fakePath = "/rendered/path/dataAccessScope";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_access_scope: "dataAccessScopeValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataAccessScopePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataAccessScopePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataAccessScopePath', () => {
-                const result = client.dataAccessScopePath("projectValue", "locationValue", "instanceValue", "dataAccessScopeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataAccessScopePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataAccessScopeName', () => {
-                const result = client.matchProjectFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataAccessScopeName', () => {
-                const result = client.matchLocationFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataAccessScopeName', () => {
-                const result = client.matchInstanceFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataAccessScopeFromDataAccessScopeName', () => {
-                const result = client.matchDataAccessScopeFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "dataAccessScopeValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTable', async () => {
-            const fakePath = "/rendered/path/dataTable";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table: "dataTableValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTablePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTablePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTablePath', () => {
-                const result = client.dataTablePath("projectValue", "locationValue", "instanceValue", "dataTableValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTablePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableName', () => {
-                const result = client.matchProjectFromDataTableName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableName', () => {
-                const result = client.matchLocationFromDataTableName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableName', () => {
-                const result = client.matchInstanceFromDataTableName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableFromDataTableName', () => {
-                const result = client.matchDataTableFromDataTableName(fakePath);
-                assert.strictEqual(result, "dataTableValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTableOperationErrors', async () => {
-            const fakePath = "/rendered/path/dataTableOperationErrors";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table_operation_errors: "dataTableOperationErrorsValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTableOperationErrorsPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTableOperationErrorsPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTableOperationErrorsPath', () => {
-                const result = client.dataTableOperationErrorsPath("projectValue", "locationValue", "instanceValue", "dataTableOperationErrorsValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableOperationErrorsName', () => {
-                const result = client.matchProjectFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableOperationErrorsName', () => {
-                const result = client.matchLocationFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableOperationErrorsName', () => {
-                const result = client.matchInstanceFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableOperationErrorsFromDataTableOperationErrorsName', () => {
-                const result = client.matchDataTableOperationErrorsFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "dataTableOperationErrorsValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTableRow', async () => {
-            const fakePath = "/rendered/path/dataTableRow";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table: "dataTableValue",
-                data_table_row: "dataTableRowValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTableRowPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTableRowPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTableRowPath', () => {
-                const result = client.dataTableRowPath("projectValue", "locationValue", "instanceValue", "dataTableValue", "dataTableRowValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTableRowPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableRowName', () => {
-                const result = client.matchProjectFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableRowName', () => {
-                const result = client.matchLocationFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableRowName', () => {
-                const result = client.matchInstanceFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableFromDataTableRowName', () => {
-                const result = client.matchDataTableFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "dataTableValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableRowFromDataTableRowName', () => {
-                const result = client.matchDataTableRowFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "dataTableRowValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featuredContentNativeDashboard', async () => {
-            const fakePath = "/rendered/path/featuredContentNativeDashboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                featured_content_native_dashboard: "featuredContentNativeDashboardValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featuredContentNativeDashboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featuredContentNativeDashboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featuredContentNativeDashboardPath', () => {
-                const result = client.featuredContentNativeDashboardPath("projectValue", "locationValue", "instanceValue", "featuredContentNativeDashboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchProjectFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchLocationFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchInstanceFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "featuredContentNativeDashboardValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('instance', async () => {
-            const fakePath = "/rendered/path/instance";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.instancePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.instancePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('instancePath', () => {
-                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromInstanceName', () => {
-                const result = client.matchProjectFromInstanceName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromInstanceName', () => {
-                const result = client.matchLocationFromInstanceName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromInstanceName', () => {
-                const result = client.matchInstanceFromInstanceName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('locationPath', () => {
-                const result = client.locationPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromLocationName', () => {
-                const result = client.matchProjectFromLocationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromLocationName', () => {
-                const result = client.matchLocationFromLocationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('nativeDashboard', async () => {
-            const fakePath = "/rendered/path/nativeDashboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                dashboard: "dashboardValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nativeDashboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nativeDashboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nativeDashboardPath', () => {
-                const result = client.nativeDashboardPath("projectValue", "locationValue", "instanceValue", "dashboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nativeDashboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNativeDashboardName', () => {
-                const result = client.matchProjectFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNativeDashboardName', () => {
-                const result = client.matchLocationFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromNativeDashboardName', () => {
-                const result = client.matchInstanceFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDashboardFromNativeDashboardName', () => {
-                const result = client.matchDashboardFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "dashboardValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('referenceList', async () => {
-            const fakePath = "/rendered/path/referenceList";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                reference_list: "referenceListValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.referenceListPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.referenceListPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('referenceListPath', () => {
-                const result = client.referenceListPath("projectValue", "locationValue", "instanceValue", "referenceListValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.referenceListPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromReferenceListName', () => {
-                const result = client.matchProjectFromReferenceListName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromReferenceListName', () => {
-                const result = client.matchLocationFromReferenceListName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromReferenceListName', () => {
-                const result = client.matchInstanceFromReferenceListName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReferenceListFromReferenceListName', () => {
-                const result = client.matchReferenceListFromReferenceListName(fakePath);
-                assert.strictEqual(result, "referenceListValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('retrohunt', async () => {
-            const fakePath = "/rendered/path/retrohunt";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-                retrohunt: "retrohuntValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.retrohuntPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.retrohuntPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('retrohuntPath', () => {
-                const result = client.retrohuntPath("projectValue", "locationValue", "instanceValue", "ruleValue", "retrohuntValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.retrohuntPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRetrohuntName', () => {
-                const result = client.matchProjectFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRetrohuntName', () => {
-                const result = client.matchLocationFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRetrohuntName', () => {
-                const result = client.matchInstanceFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRetrohuntName', () => {
-                const result = client.matchRuleFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRetrohuntFromRetrohuntName', () => {
-                const result = client.matchRetrohuntFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "retrohuntValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('rule', async () => {
-            const fakePath = "/rendered/path/rule";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.rulePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.rulePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('rulePath', () => {
-                const result = client.rulePath("projectValue", "locationValue", "instanceValue", "ruleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.rulePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRuleName', () => {
-                const result = client.matchProjectFromRuleName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRuleName', () => {
-                const result = client.matchLocationFromRuleName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRuleName', () => {
-                const result = client.matchInstanceFromRuleName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRuleName', () => {
-                const result = client.matchRuleFromRuleName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('ruleDeployment', async () => {
-            const fakePath = "/rendered/path/ruleDeployment";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.ruleDeploymentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.ruleDeploymentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('ruleDeploymentPath', () => {
-                const result = client.ruleDeploymentPath("projectValue", "locationValue", "instanceValue", "ruleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRuleDeploymentName', () => {
-                const result = client.matchProjectFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRuleDeploymentName', () => {
-                const result = client.matchLocationFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRuleDeploymentName', () => {
-                const result = client.matchInstanceFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRuleDeploymentName', () => {
-                const result = client.matchRuleFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('watchlist', async () => {
-            const fakePath = "/rendered/path/watchlist";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                watchlist: "watchlistValue",
-            };
-            const client = new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.watchlistPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.watchlistPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('watchlistPath', () => {
-                const result = client.watchlistPath("projectValue", "locationValue", "instanceValue", "watchlistValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.watchlistPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromWatchlistName', () => {
-                const result = client.matchProjectFromWatchlistName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromWatchlistName', () => {
-                const result = client.matchLocationFromWatchlistName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromWatchlistName', () => {
-                const result = client.matchInstanceFromWatchlistName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchWatchlistFromWatchlistName', () => {
-                const result = client.matchWatchlistFromWatchlistName(fakePath);
-                assert.strictEqual(result, "watchlistValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetBigQueryExportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BigQueryExport(),
+      );
+      client.innerApiCalls.getBigQueryExport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBigQueryExport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IBigQueryExport | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
+
+    it('invokes getBigQueryExport with error', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetBigQueryExportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBigQueryExport = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getBigQueryExport(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBigQueryExport with closed client', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetBigQueryExportRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getBigQueryExport(request), expectedError);
+    });
+  });
+
+  describe('updateBigQueryExport', () => {
+    it('invokes updateBigQueryExport without error', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest(),
+      );
+      request.bigQueryExport ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateBigQueryExportRequest',
+        ['bigQueryExport', 'name'],
+      );
+      request.bigQueryExport.name = defaultValue1;
+      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BigQueryExport(),
+      );
+      client.innerApiCalls.updateBigQueryExport =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateBigQueryExport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBigQueryExport without error using callback', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest(),
+      );
+      request.bigQueryExport ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateBigQueryExportRequest',
+        ['bigQueryExport', 'name'],
+      );
+      request.bigQueryExport.name = defaultValue1;
+      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BigQueryExport(),
+      );
+      client.innerApiCalls.updateBigQueryExport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateBigQueryExport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IBigQueryExport | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBigQueryExport with error', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest(),
+      );
+      request.bigQueryExport ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateBigQueryExportRequest',
+        ['bigQueryExport', 'name'],
+      );
+      request.bigQueryExport.name = defaultValue1;
+      const expectedHeaderRequestParams = `big_query_export.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBigQueryExport = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateBigQueryExport(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBigQueryExport with closed client', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateBigQueryExportRequest(),
+      );
+      request.bigQueryExport ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateBigQueryExportRequest',
+        ['bigQueryExport', 'name'],
+      );
+      request.bigQueryExport.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateBigQueryExport(request), expectedError);
+    });
+  });
+
+  describe('provisionBigQueryExport', () => {
+    it('invokes provisionBigQueryExport without error', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BigQueryExport(),
+      );
+      client.innerApiCalls.provisionBigQueryExport =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.provisionBigQueryExport(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.provisionBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.provisionBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes provisionBigQueryExport without error using callback', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.BigQueryExport(),
+      );
+      client.innerApiCalls.provisionBigQueryExport =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.provisionBigQueryExport(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IBigQueryExport | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.provisionBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.provisionBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes provisionBigQueryExport with error', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.provisionBigQueryExport = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.provisionBigQueryExport(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.provisionBigQueryExport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.provisionBigQueryExport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes provisionBigQueryExport with closed client', async () => {
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ProvisionBigQueryExportRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(
+        client.provisionBigQueryExport(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('bigQueryExport', async () => {
+      const fakePath = '/rendered/path/bigQueryExport';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.bigQueryExportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.bigQueryExportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('bigQueryExportPath', () => {
+        const result = client.bigQueryExportPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBigQueryExportName', () => {
+        const result = client.matchProjectFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBigQueryExportName', () => {
+        const result = client.matchLocationFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromBigQueryExportName', () => {
+        const result = client.matchInstanceFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dashboardChart', async () => {
+      const fakePath = '/rendered/path/dashboardChart';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        chart: 'chartValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.dashboardChartPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dashboardChartPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dashboardChartPath', () => {
+        const result = client.dashboardChartPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'chartValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDashboardChartName', () => {
+        const result = client.matchProjectFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDashboardChartName', () => {
+        const result = client.matchLocationFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDashboardChartName', () => {
+        const result = client.matchInstanceFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChartFromDashboardChartName', () => {
+        const result = client.matchChartFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'chartValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dashboardQuery', async () => {
+      const fakePath = '/rendered/path/dashboardQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        query: 'queryValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.dashboardQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dashboardQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dashboardQueryPath', () => {
+        const result = client.dashboardQueryPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'queryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDashboardQueryName', () => {
+        const result = client.matchProjectFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDashboardQueryName', () => {
+        const result = client.matchLocationFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDashboardQueryName', () => {
+        const result = client.matchInstanceFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchQueryFromDashboardQueryName', () => {
+        const result = client.matchQueryFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'queryValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataAccessLabel', async () => {
+      const fakePath = '/rendered/path/dataAccessLabel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_access_label: 'dataAccessLabelValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.dataAccessLabelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAccessLabelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAccessLabelPath', () => {
+        const result = client.dataAccessLabelPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataAccessLabelValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataAccessLabelName', () => {
+        const result = client.matchProjectFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataAccessLabelName', () => {
+        const result = client.matchLocationFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataAccessLabelName', () => {
+        const result = client.matchInstanceFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataAccessLabelFromDataAccessLabelName', () => {
+        const result =
+          client.matchDataAccessLabelFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'dataAccessLabelValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataAccessScope', async () => {
+      const fakePath = '/rendered/path/dataAccessScope';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_access_scope: 'dataAccessScopeValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.dataAccessScopePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAccessScopePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAccessScopePath', () => {
+        const result = client.dataAccessScopePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataAccessScopeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataAccessScopeName', () => {
+        const result = client.matchProjectFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataAccessScopeName', () => {
+        const result = client.matchLocationFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataAccessScopeName', () => {
+        const result = client.matchInstanceFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataAccessScopeFromDataAccessScopeName', () => {
+        const result =
+          client.matchDataAccessScopeFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'dataAccessScopeValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTable', async () => {
+      const fakePath = '/rendered/path/dataTable';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table: 'dataTableValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.dataTablePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTablePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTablePath', () => {
+        const result = client.dataTablePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableName', () => {
+        const result = client.matchProjectFromDataTableName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableName', () => {
+        const result = client.matchLocationFromDataTableName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableName', () => {
+        const result = client.matchInstanceFromDataTableName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableFromDataTableName', () => {
+        const result = client.matchDataTableFromDataTableName(fakePath);
+        assert.strictEqual(result, 'dataTableValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTableOperationErrors', async () => {
+      const fakePath = '/rendered/path/dataTableOperationErrors';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table_operation_errors: 'dataTableOperationErrorsValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.dataTableOperationErrorsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTableOperationErrorsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTableOperationErrorsPath', () => {
+        const result = client.dataTableOperationErrorsPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableOperationErrorsValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchProjectFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchLocationFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchInstanceFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableOperationErrorsFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchDataTableOperationErrorsFromDataTableOperationErrorsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'dataTableOperationErrorsValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTableRow', async () => {
+      const fakePath = '/rendered/path/dataTableRow';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table: 'dataTableValue',
+        data_table_row: 'dataTableRowValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.dataTableRowPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTableRowPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTableRowPath', () => {
+        const result = client.dataTableRowPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableValue',
+          'dataTableRowValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableRowName', () => {
+        const result = client.matchProjectFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableRowName', () => {
+        const result = client.matchLocationFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableRowName', () => {
+        const result = client.matchInstanceFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableFromDataTableRowName', () => {
+        const result = client.matchDataTableFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'dataTableValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableRowFromDataTableRowName', () => {
+        const result = client.matchDataTableRowFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'dataTableRowValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('featuredContentNativeDashboard', async () => {
+      const fakePath = '/rendered/path/featuredContentNativeDashboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        featured_content_native_dashboard:
+          'featuredContentNativeDashboardValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.featuredContentNativeDashboardPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.featuredContentNativeDashboardPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('featuredContentNativeDashboardPath', () => {
+        const result = client.featuredContentNativeDashboardPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'featuredContentNativeDashboardValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchProjectFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchLocationFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchInstanceFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'featuredContentNativeDashboardValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('instance', async () => {
+      const fakePath = '/rendered/path/instance';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.instancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.instancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('instancePath', () => {
+        const result = client.instancePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.instancePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInstanceName', () => {
+        const result = client.matchProjectFromInstanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromInstanceName', () => {
+        const result = client.matchLocationFromInstanceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromInstanceName', () => {
+        const result = client.matchInstanceFromInstanceName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('nativeDashboard', async () => {
+      const fakePath = '/rendered/path/nativeDashboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        dashboard: 'dashboardValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.nativeDashboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeDashboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeDashboardPath', () => {
+        const result = client.nativeDashboardPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dashboardValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromNativeDashboardName', () => {
+        const result = client.matchProjectFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromNativeDashboardName', () => {
+        const result = client.matchLocationFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromNativeDashboardName', () => {
+        const result = client.matchInstanceFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDashboardFromNativeDashboardName', () => {
+        const result = client.matchDashboardFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'dashboardValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('project', async () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('referenceList', async () => {
+      const fakePath = '/rendered/path/referenceList';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        reference_list: 'referenceListValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.referenceListPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.referenceListPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('referenceListPath', () => {
+        const result = client.referenceListPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'referenceListValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromReferenceListName', () => {
+        const result = client.matchProjectFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromReferenceListName', () => {
+        const result = client.matchLocationFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromReferenceListName', () => {
+        const result = client.matchInstanceFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReferenceListFromReferenceListName', () => {
+        const result = client.matchReferenceListFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'referenceListValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('retrohunt', async () => {
+      const fakePath = '/rendered/path/retrohunt';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+        retrohunt: 'retrohuntValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.retrohuntPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.retrohuntPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('retrohuntPath', () => {
+        const result = client.retrohuntPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+          'retrohuntValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRetrohuntName', () => {
+        const result = client.matchProjectFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRetrohuntName', () => {
+        const result = client.matchLocationFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRetrohuntName', () => {
+        const result = client.matchInstanceFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRetrohuntName', () => {
+        const result = client.matchRuleFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRetrohuntFromRetrohuntName', () => {
+        const result = client.matchRetrohuntFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'retrohuntValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('rule', async () => {
+      const fakePath = '/rendered/path/rule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.rulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.rulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('rulePath', () => {
+        const result = client.rulePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.rulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleName', () => {
+        const result = client.matchProjectFromRuleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleName', () => {
+        const result = client.matchLocationFromRuleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleName', () => {
+        const result = client.matchInstanceFromRuleName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRuleName', () => {
+        const result = client.matchRuleFromRuleName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('ruleDeployment', async () => {
+      const fakePath = '/rendered/path/ruleDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.ruleDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ruleDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ruleDeploymentPath', () => {
+        const result = client.ruleDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleDeploymentName', () => {
+        const result = client.matchProjectFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleDeploymentName', () => {
+        const result = client.matchLocationFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleDeploymentName', () => {
+        const result = client.matchInstanceFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRuleDeploymentName', () => {
+        const result = client.matchRuleFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('watchlist', async () => {
+      const fakePath = '/rendered/path/watchlist';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        watchlist: 'watchlistValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.watchlistPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.watchlistPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('watchlistPath', () => {
+        const result = client.watchlistPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'watchlistValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromWatchlistName', () => {
+        const result = client.matchProjectFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromWatchlistName', () => {
+        const result = client.matchLocationFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromWatchlistName', () => {
+        const result = client.matchInstanceFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchWatchlistFromWatchlistName', () => {
+        const result = client.matchWatchlistFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'watchlistValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });
