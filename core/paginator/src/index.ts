@@ -156,7 +156,7 @@ export class Paginator {
     }
 
     if (typeof query === 'object') {
-      query = structuredClone(query);
+      query = (structuredClone(query) ?? {}) as ParsedArguments;
 
       // Check if the user only asked for a certain amount of results.
       if (query.maxResults && typeof query.maxResults === 'number') {
@@ -186,7 +186,7 @@ export class Paginator {
       callback,
     } as ParsedArguments;
 
-    parsedArguments.streamOptions = structuredClone(parsedArguments.query);
+    parsedArguments.streamOptions = (parsedArguments.query && typeof parsedArguments.query === 'object') ? structuredClone(parsedArguments.query) : {};
     delete parsedArguments.streamOptions.autoPaginate;
     delete parsedArguments.streamOptions.maxResults;
     delete parsedArguments.streamOptions.pageSize;
