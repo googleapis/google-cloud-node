@@ -16,14 +16,14 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BigQueryExportServiceClient} from './big_query_export_service_client';
-export {DashboardChartServiceClient} from './dashboard_chart_service_client';
-export {DashboardQueryServiceClient} from './dashboard_query_service_client';
-export {DataAccessControlServiceClient} from './data_access_control_service_client';
-export {DataTableServiceClient} from './data_table_service_client';
-export {EntityServiceClient} from './entity_service_client';
-export {FeaturedContentNativeDashboardServiceClient} from './featured_content_native_dashboard_service_client';
-export {InstanceServiceClient} from './instance_service_client';
-export {NativeDashboardServiceClient} from './native_dashboard_service_client';
-export {ReferenceListServiceClient} from './reference_list_service_client';
-export {RuleServiceClient} from './rule_service_client';
+export { BigQueryExportServiceClient } from './big_query_export_service_client';
+export { DashboardChartServiceClient } from './dashboard_chart_service_client';
+export { DashboardQueryServiceClient } from './dashboard_query_service_client';
+export { DataAccessControlServiceClient } from './data_access_control_service_client';
+export { DataTableServiceClient } from './data_table_service_client';
+export { EntityServiceClient } from './entity_service_client';
+export { FeaturedContentNativeDashboardServiceClient } from './featured_content_native_dashboard_service_client';
+export { InstanceServiceClient } from './instance_service_client';
+export { NativeDashboardServiceClient } from './native_dashboard_service_client';
+export { ReferenceListServiceClient } from './reference_list_service_client';
+export { RuleServiceClient } from './rule_service_client';
