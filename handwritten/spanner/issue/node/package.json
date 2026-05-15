@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "description": "Raw gRPC benchmark for Spanner",
   "main": "raw_grpc_benchmark.js",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
-    "@google-cloud/spanner": "8.7.1",
+    "@google-cloud/spanner": "file:../..",
     "@grpc/grpc-js": "^1.10.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   }
 }

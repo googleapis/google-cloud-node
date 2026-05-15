@@ -22,6 +22,6 @@ COPY --from=local-lib /tmp/google-cloud-spanner.tgz /tmp/google-cloud-spanner.tg
 RUN npm install --omit=dev /tmp/google-cloud-spanner.tgz \
  && npm cache clean --force \
  && node -e "console.log(require('@google-cloud/spanner/package.json').version)"
-COPY --chown=node:node --chmod=0444 issue/benchmark-insert-repl.ts ./benchmark-insert-repl.mts
+COPY --chown=node:node --chmod=0444 issue/node/benchmark-insert-repl.ts ./benchmark-insert-repl.mts
 USER node
 ENTRYPOINT ["/app/node_modules/.bin/tsx", "/app/benchmark-insert-repl.mts"]

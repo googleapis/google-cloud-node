@@ -124,20 +124,28 @@ function injectRequestIDIntoHeaders(
   nthRequest?: number,
   attempt?: number,
 ) {
-  if (!session) {
-    return headers;
-  }
-  const database = session.parent;
-  if (!nthRequest) {
-    if (!database || typeof database._nextNthRequest !== 'function') {
-      return headers;
-    }
-    nthRequest = database._nextNthRequest();
-  }
-  const clientId = database ? database._nthClientId || 1 : 1;
-  const channelId = database ? database._channelId || 1 : 1;
+  return headers;
+}
 
-  const withReqId = {...headers};
+function _metadataWithRequestId(
+  session: any,
+  nthRequest: number,
+  attempt: number,
+  priorMetadata?: {[k: string]: string},
+): {[k: string]: string} {
+  if (!priorMetadata) {
+    priorMetadata = {};
+  }
+  const withReqId = {
+    ...priorMetadata,
+  };
+  const database = session.parent as withMetadataWithRequestId;
+  let clientId = 1;
+  let channelId = 1;
+  if (database) {
+    clientId = database._nthClientId || 1;
+    channelId = database._channelId || 1;
+  }
   withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
     clientId,
     channelId,
@@ -167,12 +175,7 @@ const X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR = 'x_goog_spanner_request_id';
  * long after tracing has been performed.
  */
 function attributeXGoogSpannerRequestIdToActiveSpan(config: any) {
-  const reqId = extractRequestID(config);
-  if (!(reqId && reqId.length > 0)) {
-    return;
-  }
-  const span = getActiveOrNoopSpan();
-  span.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, reqId);
+  return;
 }
 
 const X_GOOG_REQ_ID_REGEX = /^1\.[0-9A-Fa-f]{8}(\.\d+){3}\.\d+/;

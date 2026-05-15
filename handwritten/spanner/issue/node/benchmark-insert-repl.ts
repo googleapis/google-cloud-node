@@ -34,15 +34,15 @@ const DB_SCHEMA = process.env.DB_SCHEMA || 'tracking'
 const POOL_OPTIONS = process.env.POOL_OPTIONS
   ? JSON.parse(process.env.POOL_OPTIONS)
   : {
-      max: 20,
-      min: 1,
-      incStep: 5,
-      maxIdle: 1,
-      idlesAfter: 1,
-      keepAlive: 10,
-      acquireTimeout: 10_000,
-      fail: false,
-    }
+    max: 400,
+    // min: 1,
+    // incStep: 5,
+    // maxIdle: 1,
+    // idlesAfter: 1,
+    // keepAlive: 10,
+    // acquireTimeout: 10_000,
+    // fail: false,
+  }
 
 async function runBenchmark() {
   // Dynamic imports for REPL compatibility
@@ -285,9 +285,13 @@ async function runBenchmark() {
       2,
     )
 
+    const spannerVersion = (spanner as any).options?.libVersion || 'NA'
+
     console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
     console.log('  Benchmark Summary')
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
+    console.log(`  Spanner SDK Version: ${spannerVersion}`)
+    console.log(`  SPANNER_DISABLE_BUILTIN_METRICS: ${process.env.SPANNER_DISABLE_BUILTIN_METRICS}`)
     console.log(`  Total Batches:      ${INSERT_COUNT}`)
     console.log(`  Batch Size:         ${BATCH_COUNT}`)
     console.log(`  Total Records:      ${totalRecords}`)
@@ -320,7 +324,10 @@ async function runBenchmark() {
 }
 
 // Export for REPL usage
-;(globalThis as any).runBenchmark = runBenchmark
+; (globalThis as any).runBenchmark = runBenchmark
 console.log('✓ Benchmark loaded. Run with: await runBenchmark()')
 
-await runBenchmark()
+runBenchmark().catch((err) => {
+  console.error("Unhandled fatal exception in main context:", err);
+  process.exit(1);
+});

@@ -5,6 +5,6 @@ ARG SPANNER_VERSION=8.7.1
 RUN npm init -y \
  && npm install --omit=dev "@google-cloud/spanner@${SPANNER_VERSION}" @grpc/grpc-js tsx \
  && npm cache clean --force
-COPY --chown=node:node --chmod=0444 issue/benchmark-insert-repl.ts ./benchmark-insert-repl.mts
+COPY --chown=node:node --chmod=0444 issue/node/benchmark-insert-repl.ts ./benchmark-insert-repl.mts
 USER node
 ENTRYPOINT ["/app/node_modules/.bin/tsx", "/app/benchmark-insert-repl.mts"]

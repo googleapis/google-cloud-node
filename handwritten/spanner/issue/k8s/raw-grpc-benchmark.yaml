@@ -15,6 +15,13 @@ spec:
         - name: benchmark
           image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-raw-grpc-node:latest
           imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "Starting Raw gRPC CPU Profiler benchmark..."
+              node --cpu-prof --cpu-prof-dir=/tmp --cpu-prof-name=k8s-raw-grpc.cpuprofile /app/raw_grpc_benchmark.js
+              echo "✓ Benchmark finished! Sleeping for 1 hour so you can kubectl cp the profile..."
+              sleep 3600
           resources:
             requests:
               cpu: "1"

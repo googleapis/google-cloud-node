@@ -15,6 +15,13 @@ spec:
         - name: benchmark
           image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-insert-node:release-8.7.1
           imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "Starting V8 CPU Profiler benchmark with tsx..."
+              /app/node_modules/.bin/tsx --cpu-prof --cpu-prof-dir=/tmp --cpu-prof-name=k8s-insert.cpuprofile /app/benchmark-insert-repl.mts
+              echo "✓ Benchmark finished! Sleeping for 1 hour so you can kubectl cp the profile..."
+              sleep 3600
           resources:
             requests:
               cpu: "1"
@@ -43,5 +50,5 @@ spec:
               value: "jack_henry_db"
             - name: DB_SCHEMA
               value: "tracking"
-            - name: SPANNER_DISABLE_BUILT_IN_METRICS
+            - name: SPANNER_DISABLE_BUILTIN_METRICS
               value: "true"
