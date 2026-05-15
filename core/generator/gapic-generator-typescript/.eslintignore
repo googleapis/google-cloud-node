@@ -1,11 +1,11 @@
 **/node_modules
 **/coverage
 **/.coverage
-test/fixtures
-build/
-docs/
-protos/
-system-test/
-samples/generated/
+**/test/fixtures
+**/build
+**/docs
+**/protos
+**/system-test
+**/samples/generated
 bazel-gapic-generator-typescript/
 test-fixtures/
