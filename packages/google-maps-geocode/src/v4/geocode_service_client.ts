@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +49,7 @@ export class GeocodeServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geocode');
@@ -57,8 +62,8 @@ export class GeocodeServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  geocodeServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  geocodeServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of GeocodeServiceClient.
@@ -99,21 +104,42 @@ export class GeocodeServiceClient {
    *     const client = new GeocodeServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof GeocodeServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'geocoding-backend.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -138,7 +164,7 @@ export class GeocodeServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -152,10 +178,7 @@ export class GeocodeServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -174,8 +197,11 @@ export class GeocodeServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.maps.geocode.v4.GeocodeService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.maps.geocode.v4.GeocodeService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -206,36 +232,44 @@ export class GeocodeServiceClient {
     // Put together the "service stub" for
     // google.maps.geocode.v4.GeocodeService.
     this.geocodeServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.maps.geocode.v4.GeocodeService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.maps.geocode.v4.GeocodeService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.maps.geocode.v4.GeocodeService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const geocodeServiceStubMethods =
-        ['geocodeAddress', 'geocodeLocation', 'geocodePlace'];
+    const geocodeServiceStubMethods = [
+      'geocodeAddress',
+      'geocodeLocation',
+      'geocodePlace',
+    ];
     for (const methodName of geocodeServiceStubMethods) {
       const callPromise = this.geocodeServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -250,8 +284,14 @@ export class GeocodeServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geocoding-backend.googleapis.com';
   }
@@ -262,8 +302,14 @@ export class GeocodeServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geocoding-backend.googleapis.com';
   }
@@ -299,7 +345,7 @@ export class GeocodeServiceClient {
       'https://www.googleapis.com/auth/maps-platform.geocode',
       'https://www.googleapis.com/auth/maps-platform.geocode.address',
       'https://www.googleapis.com/auth/maps-platform.geocode.location',
-      'https://www.googleapis.com/auth/maps-platform.geocode.place'
+      'https://www.googleapis.com/auth/maps-platform.geocode.place',
     ];
   }
 
@@ -309,8 +355,9 @@ export class GeocodeServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -321,326 +368,423 @@ export class GeocodeServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * This method performs an address geocode, which maps an address to a
- * LatLng. It also provides structured information about the address.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.addressQuery
- *   The unstructured address to geocode.
- * @param {google.type.PostalAddress} request.address
- *   The structured address to geocode in postal address format.
- * @param {google.maps.geocode.v4.GeocodeAddressRequest.LocationBias} [request.locationBias]
- *   Optional. The region to search. This location serves as a bias which means
- *   results around the given location are preferred.
- * @param {string} [request.languageCode]
- *   Optional. Language in which the results should be returned.
- * @param {string} [request.regionCode]
- *   Optional. Region code. The region code, specified as a ccTLD ("top-level
- *   domain") two-character value. The parameter affects results based on
- *   applicable law. This parameter will also influence, but not fully restrict,
- *   results from the service.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.GeocodeAddressResponse|GeocodeAddressResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/geocode_service.geocode_address.js</caption>
- * region_tag:geocoding-backend_v4_generated_GeocodeService_GeocodeAddress_async
- */
+  /**
+   * This method performs an address geocode, which maps an address to a
+   * LatLng. It also provides structured information about the address.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.addressQuery
+   *   The unstructured address to geocode.
+   * @param {google.type.PostalAddress} request.address
+   *   The structured address to geocode in postal address format.
+   * @param {google.maps.geocode.v4.GeocodeAddressRequest.LocationBias} [request.locationBias]
+   *   Optional. The region to search. This location serves as a bias which means
+   *   results around the given location are preferred.
+   * @param {string} [request.languageCode]
+   *   Optional. Language in which the results should be returned.
+   * @param {string} [request.regionCode]
+   *   Optional. Region code. The region code, specified as a ccTLD ("top-level
+   *   domain") two-character value. The parameter affects results based on
+   *   applicable law. This parameter will also influence, but not fully restrict,
+   *   results from the service.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.GeocodeAddressResponse|GeocodeAddressResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/geocode_service.geocode_address.js</caption>
+   * region_tag:geocoding-backend_v4_generated_GeocodeService_GeocodeAddress_async
+   */
   geocodeAddress(
-      request?: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-        protos.google.maps.geocode.v4.IGeocodeAddressRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.IGeocodeAddressResponse,
+      protos.google.maps.geocode.v4.IGeocodeAddressRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   geocodeAddress(
-      request: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-          protos.google.maps.geocode.v4.IGeocodeAddressRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.geocode.v4.IGeocodeAddressResponse,
+      protos.google.maps.geocode.v4.IGeocodeAddressRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   geocodeAddress(
-      request: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
-      callback: Callback<
-          protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-          protos.google.maps.geocode.v4.IGeocodeAddressRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
+    callback: Callback<
+      protos.google.maps.geocode.v4.IGeocodeAddressResponse,
+      protos.google.maps.geocode.v4.IGeocodeAddressRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   geocodeAddress(
-      request?: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.geocode.v4.IGeocodeAddressRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-          protos.google.maps.geocode.v4.IGeocodeAddressRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-          protos.google.maps.geocode.v4.IGeocodeAddressRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-        protos.google.maps.geocode.v4.IGeocodeAddressRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.geocode.v4.IGeocodeAddressRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.geocode.v4.IGeocodeAddressResponse,
+      protos.google.maps.geocode.v4.IGeocodeAddressRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.IGeocodeAddressResponse,
+      protos.google.maps.geocode.v4.IGeocodeAddressRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'address_query': request.addressQuery ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        address_query: request.addressQuery ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('geocodeAddress request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-        protos.google.maps.geocode.v4.IGeocodeAddressRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.geocode.v4.IGeocodeAddressResponse,
+          | protos.google.maps.geocode.v4.IGeocodeAddressRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('geocodeAddress response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.geocodeAddress(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.geocode.v4.IGeocodeAddressResponse,
-        protos.google.maps.geocode.v4.IGeocodeAddressRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('geocodeAddress response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .geocodeAddress(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.geocode.v4.IGeocodeAddressResponse,
+          protos.google.maps.geocode.v4.IGeocodeAddressRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('geocodeAddress response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * This method performs a location geocode, which maps a LatLng to an
- * address. It also provides structured information about the address.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.locationQuery
- *   The location in the format of "lat,lng" string. For example,
- *   "64.7611872,-18.4705364".
- * @param {google.type.LatLng} request.location
- *   The location in the structured format.
- * @param {string} [request.languageCode]
- *   Optional. Language in which the results should be returned.
- * @param {string} [request.regionCode]
- *   Optional. Region code. The region code, specified as a ccTLD ("top-level
- *   domain") two-character value. The parameter affects results based on
- *   applicable law.
- * @param {string[]} [request.types]
- *   Optional. A set of type tags to restrict the results. Results that do not
- *   have any of the specified types are removed.
- *
- *   For the complete list of possible values, see Table A and Table B at
- *   https://developers.google.com/maps/documentation/places/web-service/place-types.
- * @param {number[]} [request.granularity]
- *   Optional. A filter of one or more location granularity enums.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.GeocodeLocationResponse|GeocodeLocationResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/geocode_service.geocode_location.js</caption>
- * region_tag:geocoding-backend_v4_generated_GeocodeService_GeocodeLocation_async
- */
+  /**
+   * This method performs a location geocode, which maps a LatLng to an
+   * address. It also provides structured information about the address.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.locationQuery
+   *   The location in the format of "lat,lng" string. For example,
+   *   "64.7611872,-18.4705364".
+   * @param {google.type.LatLng} request.location
+   *   The location in the structured format.
+   * @param {string} [request.languageCode]
+   *   Optional. Language in which the results should be returned.
+   * @param {string} [request.regionCode]
+   *   Optional. Region code. The region code, specified as a ccTLD ("top-level
+   *   domain") two-character value. The parameter affects results based on
+   *   applicable law.
+   * @param {string[]} [request.types]
+   *   Optional. A set of type tags to restrict the results. Results that do not
+   *   have any of the specified types are removed.
+   *
+   *   For the complete list of possible values, see Table A and Table B at
+   *   https://developers.google.com/maps/documentation/places/web-service/place-types.
+   * @param {number[]} [request.granularity]
+   *   Optional. A filter of one or more location granularity enums.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.GeocodeLocationResponse|GeocodeLocationResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/geocode_service.geocode_location.js</caption>
+   * region_tag:geocoding-backend_v4_generated_GeocodeService_GeocodeLocation_async
+   */
   geocodeLocation(
-      request?: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-        protos.google.maps.geocode.v4.IGeocodeLocationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.IGeocodeLocationResponse,
+      protos.google.maps.geocode.v4.IGeocodeLocationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   geocodeLocation(
-      request: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-          protos.google.maps.geocode.v4.IGeocodeLocationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.geocode.v4.IGeocodeLocationResponse,
+      protos.google.maps.geocode.v4.IGeocodeLocationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   geocodeLocation(
-      request: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
-      callback: Callback<
-          protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-          protos.google.maps.geocode.v4.IGeocodeLocationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
+    callback: Callback<
+      protos.google.maps.geocode.v4.IGeocodeLocationResponse,
+      protos.google.maps.geocode.v4.IGeocodeLocationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   geocodeLocation(
-      request?: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.geocode.v4.IGeocodeLocationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-          protos.google.maps.geocode.v4.IGeocodeLocationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-          protos.google.maps.geocode.v4.IGeocodeLocationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-        protos.google.maps.geocode.v4.IGeocodeLocationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.geocode.v4.IGeocodeLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.geocode.v4.IGeocodeLocationResponse,
+      protos.google.maps.geocode.v4.IGeocodeLocationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.IGeocodeLocationResponse,
+      protos.google.maps.geocode.v4.IGeocodeLocationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'location_query': request.locationQuery ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        location_query: request.locationQuery ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('geocodeLocation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-        protos.google.maps.geocode.v4.IGeocodeLocationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.geocode.v4.IGeocodeLocationResponse,
+          | protos.google.maps.geocode.v4.IGeocodeLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('geocodeLocation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.geocodeLocation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.geocode.v4.IGeocodeLocationResponse,
-        protos.google.maps.geocode.v4.IGeocodeLocationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('geocodeLocation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .geocodeLocation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.geocode.v4.IGeocodeLocationResponse,
+          protos.google.maps.geocode.v4.IGeocodeLocationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('geocodeLocation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * This method performs a geocode lookup using a place ID.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.place
- *   Required. Place identifier to geocode in the format of places/{place}.
- * @param {string} [request.languageCode]
- *   Optional. Language in which the results should be returned.
- * @param {string} [request.regionCode]
- *   Optional. Region code. The region code, specified as a ccTLD ("top-level
- *   domain") two-character value. The parameter affects results based on
- *   applicable law.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.GeocodeResult|GeocodeResult}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v4/geocode_service.geocode_place.js</caption>
- * region_tag:geocoding-backend_v4_generated_GeocodeService_GeocodePlace_async
- */
+  /**
+   * This method performs a geocode lookup using a place ID.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.place
+   *   Required. Place identifier to geocode in the format of places/{place}.
+   * @param {string} [request.languageCode]
+   *   Optional. Language in which the results should be returned.
+   * @param {string} [request.regionCode]
+   *   Optional. Region code. The region code, specified as a ccTLD ("top-level
+   *   domain") two-character value. The parameter affects results based on
+   *   applicable law.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.geocode.v4.GeocodeResult|GeocodeResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v4/geocode_service.geocode_place.js</caption>
+   * region_tag:geocoding-backend_v4_generated_GeocodeService_GeocodePlace_async
+   */
   geocodePlace(
-      request?: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.geocode.v4.IGeocodeResult,
-        protos.google.maps.geocode.v4.IGeocodePlaceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.IGeocodeResult,
+      protos.google.maps.geocode.v4.IGeocodePlaceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   geocodePlace(
-      request: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.geocode.v4.IGeocodeResult,
-          protos.google.maps.geocode.v4.IGeocodePlaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.geocode.v4.IGeocodeResult,
+      protos.google.maps.geocode.v4.IGeocodePlaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   geocodePlace(
-      request: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
-      callback: Callback<
-          protos.google.maps.geocode.v4.IGeocodeResult,
-          protos.google.maps.geocode.v4.IGeocodePlaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
+    callback: Callback<
+      protos.google.maps.geocode.v4.IGeocodeResult,
+      protos.google.maps.geocode.v4.IGeocodePlaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   geocodePlace(
-      request?: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.geocode.v4.IGeocodePlaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.geocode.v4.IGeocodeResult,
-          protos.google.maps.geocode.v4.IGeocodePlaceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.geocode.v4.IGeocodeResult,
-          protos.google.maps.geocode.v4.IGeocodePlaceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.geocode.v4.IGeocodeResult,
-        protos.google.maps.geocode.v4.IGeocodePlaceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.maps.geocode.v4.IGeocodePlaceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.geocode.v4.IGeocodeResult,
+      protos.google.maps.geocode.v4.IGeocodePlaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.geocode.v4.IGeocodeResult,
+      protos.google.maps.geocode.v4.IGeocodePlaceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'place': request.place ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        place: request.place ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('geocodePlace request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.geocode.v4.IGeocodeResult,
-        protos.google.maps.geocode.v4.IGeocodePlaceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.geocode.v4.IGeocodeResult,
+          protos.google.maps.geocode.v4.IGeocodePlaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('geocodePlace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.geocodePlace(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.geocode.v4.IGeocodeResult,
-        protos.google.maps.geocode.v4.IGeocodePlaceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('geocodePlace response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .geocodePlace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.geocode.v4.IGeocodeResult,
+          protos.google.maps.geocode.v4.IGeocodePlaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('geocodePlace response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.
@@ -650,7 +794,7 @@ export class GeocodeServiceClient {
    */
   close(): Promise<void> {
     if (this.geocodeServiceStub && !this._terminated) {
-      return this.geocodeServiceStub.then(stub => {
+      return this.geocodeServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

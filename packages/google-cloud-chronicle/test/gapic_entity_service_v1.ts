@@ -19,1859 +19,2482 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as entityserviceModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf} from 'google-gax';
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
-const root = protobuf.Root.fromJSON(require('../protos/protos.json')).resolveAll();
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json'),
+).resolveAll();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTypeDefaultValue(typeName: string, fields: string[]) {
-    let type = root.lookupType(typeName) as protobuf.Type;
-    for (const field of fields.slice(0, -1)) {
-        type = type.fields[field]?.resolvedType as protobuf.Type;
-    }
-    return type.fields[fields[fields.length - 1]]?.defaultValue;
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
 }
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject,
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error,
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    const pagingStub = sinon.stub();
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-        }
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
     }
-    const transformStub = error ? sinon.stub().callsArgWith(2, error) : pagingStub;
-    const mockStream = new PassThrough({
-        objectMode: true,
-        transform: transformStub,
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
     });
-    // trigger as many responses as needed
-    if (responses) {
-        for (let i = 0; i < responses.length; ++i) {
-            setImmediate(() => { mockStream.write({}); });
-        }
-        setImmediate(() => { mockStream.end(); });
-    } else {
-        setImmediate(() => { mockStream.write({}); });
-        setImmediate(() => { mockStream.end(); });
-    }
-    return sinon.stub().returns(mockStream);
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
-function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?: Error) {
-    let counter = 0;
-    const asyncIterable = {
-        [Symbol.asyncIterator]() {
-            return {
-                async next() {
-                    if (error) {
-                        return Promise.reject(error);
-                    }
-                    if (counter >= responses!.length) {
-                        return Promise.resolve({done: true, value: undefined});
-                    }
-                    return Promise.resolve({done: false, value: responses![counter++]});
-                }
-            };
-        }
-    };
-    return sinon.stub().returns(asyncIterable);
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error,
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({ done: true, value: undefined });
+          }
+          return Promise.resolve({ done: false, value: responses![counter++] });
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v1.EntityServiceClient', () => {
-    describe('Common methods', () => {
-        it('has apiEndpoint', () => {
-            const client = new entityserviceModule.v1.EntityServiceClient();
-            const apiEndpoint = client.apiEndpoint;
-            assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+  describe('Common methods', () => {
+    it('has apiEndpoint', () => {
+      const client = new entityserviceModule.v1.EntityServiceClient();
+      const apiEndpoint = client.apiEndpoint;
+      assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+    });
+
+    it('has universeDomain', () => {
+      const client = new entityserviceModule.v1.EntityServiceClient();
+      const universeDomain = client.universeDomain;
+      assert.strictEqual(universeDomain, 'googleapis.com');
+    });
+
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      it('throws DeprecationWarning if static servicePath is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const servicePath =
+          entityserviceModule.v1.EntityServiceClient.servicePath;
+        assert.strictEqual(servicePath, 'chronicle.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+
+      it('throws DeprecationWarning if static apiEndpoint is used', () => {
+        const stub = sinon.stub(process, 'emitWarning');
+        const apiEndpoint =
+          entityserviceModule.v1.EntityServiceClient.apiEndpoint;
+        assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
+        assert(stub.called);
+        stub.restore();
+      });
+    }
+    it('sets apiEndpoint according to universe domain camelCase', () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        universeDomain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'chronicle.example.com');
+    });
+
+    it('sets apiEndpoint according to universe domain snakeCase', () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        universe_domain: 'example.com',
+      });
+      const servicePath = client.apiEndpoint;
+      assert.strictEqual(servicePath, 'chronicle.example.com');
+    });
+
+    if (typeof process === 'object' && 'env' in process) {
+      describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
+        it('sets apiEndpoint from environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new entityserviceModule.v1.EntityServiceClient();
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'chronicle.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
 
-        it('has universeDomain', () => {
-            const client = new entityserviceModule.v1.EntityServiceClient();
-            const universeDomain = client.universeDomain;
-            assert.strictEqual(universeDomain, "googleapis.com");
+        it('value configured in code has priority over environment variable', () => {
+          const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
+          const client = new entityserviceModule.v1.EntityServiceClient({
+            universeDomain: 'configured.example.com',
+          });
+          const servicePath = client.apiEndpoint;
+          assert.strictEqual(servicePath, 'chronicle.configured.example.com');
+          if (saved) {
+            process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
+          } else {
+            delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
+          }
         });
-
-        if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-            it('throws DeprecationWarning if static servicePath is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const servicePath = entityserviceModule.v1.EntityServiceClient.servicePath;
-                assert.strictEqual(servicePath, 'chronicle.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-
-            it('throws DeprecationWarning if static apiEndpoint is used', () => {
-                const stub = sinon.stub(process, 'emitWarning');
-                const apiEndpoint = entityserviceModule.v1.EntityServiceClient.apiEndpoint;
-                assert.strictEqual(apiEndpoint, 'chronicle.googleapis.com');
-                assert(stub.called);
-                stub.restore();
-            });
-        }
-        it('sets apiEndpoint according to universe domain camelCase', () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({universeDomain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'chronicle.example.com');
+      });
+    }
+    it('does not allow setting both universeDomain and universe_domain', () => {
+      assert.throws(() => {
+        new entityserviceModule.v1.EntityServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
         });
+      });
+    });
 
-        it('sets apiEndpoint according to universe domain snakeCase', () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({universe_domain: 'example.com'});
-            const servicePath = client.apiEndpoint;
-            assert.strictEqual(servicePath, 'chronicle.example.com');
-        });
+    it('has port', () => {
+      const port = entityserviceModule.v1.EntityServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-        if (typeof process === 'object' && 'env' in process) {
-            describe('GOOGLE_CLOUD_UNIVERSE_DOMAIN environment variable', () => {
-                it('sets apiEndpoint from environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new entityserviceModule.v1.EntityServiceClient();
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'chronicle.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
+    it('should create a client with no option', () => {
+      const client = new entityserviceModule.v1.EntityServiceClient();
+      assert(client);
+    });
 
-                it('value configured in code has priority over environment variable', () => {
-                    const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-                    const client = new entityserviceModule.v1.EntityServiceClient({universeDomain: 'configured.example.com'});
-                    const servicePath = client.apiEndpoint;
-                    assert.strictEqual(servicePath, 'chronicle.configured.example.com');
-                    if (saved) {
-                        process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = saved;
-                    } else {
-                        delete process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
-                    }
-                });
-            });
-        }
-        it('does not allow setting both universeDomain and universe_domain', () => {
-            assert.throws(() => { new entityserviceModule.v1.EntityServiceClient({universe_domain: 'example.com', universeDomain: 'example.net'}); });
-        });
+    it('should create a client with gRPC fallback', () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        fallback: true,
+      });
+      assert(client);
+    });
 
-        it('has port', () => {
-            const port = entityserviceModule.v1.EntityServiceClient.port;
-            assert(port);
-            assert(typeof port === 'number');
-        });
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.entityServiceStub, undefined);
+      await client.initialize();
+      assert(client.entityServiceStub);
+    });
 
-        it('should create a client with no option', () => {
-            const client = new entityserviceModule.v1.EntityServiceClient();
-            assert(client);
-        });
-
-        it('should create a client with gRPC fallback', () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                fallback: true,
-            });
-            assert(client);
-        });
-
-        it('has initialize method and supports deferred initialization', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.entityServiceStub, undefined);
-            await client.initialize();
-            assert(client.entityServiceStub);
-        });
-
-        it('has close method for the initialized client', done => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.initialize().catch(err => {throw err});
-            assert(client.entityServiceStub);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has close method for the non-initialized client', done => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            assert.strictEqual(client.entityServiceStub, undefined);
-            client.close().then(() => {
-                done();
-            }).catch(err => {throw err});
-        });
-
-        it('has getProjectId method', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-            const result = await client.getProjectId();
-            assert.strictEqual(result, fakeProjectId);
-            assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-        });
-
-        it('has getProjectId method with callback', async () => {
-            const fakeProjectId = 'fake-project-id';
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-            const promise = new Promise((resolve, reject) => {
-                client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(projectId);
-                    }
-                });
-            });
-            const result = await promise;
-            assert.strictEqual(result, fakeProjectId);
+    it('has close method for the initialized client', (done) => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.initialize().catch((err) => {
+        throw err;
+      });
+      assert(client.entityServiceStub);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('getWatchlist', () => {
-        it('invokes getWatchlist without error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.Watchlist()
-            );
-            client.innerApiCalls.getWatchlist = stubSimpleCall(expectedResponse);
-            const [response] = await client.getWatchlist(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getWatchlist without error using callback', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.Watchlist()
-            );
-            client.innerApiCalls.getWatchlist = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getWatchlist(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IWatchlist|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.getWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getWatchlist with error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getWatchlist = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getWatchlist(request), expectedError);
-            const actualRequest = (client.innerApiCalls.getWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.getWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes getWatchlist with closed client', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.GetWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.GetWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.getWatchlist(request), expectedError);
+    it('has close method for the non-initialized client', (done) => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.entityServiceStub, undefined);
+      client
+        .close()
+        .then(() => {
+          done();
+        })
+        .catch((err) => {
+          throw err;
         });
     });
 
-    describe('createWatchlist', () => {
-        it('invokes createWatchlist without error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateWatchlistRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.Watchlist()
-            );
-            client.innerApiCalls.createWatchlist = stubSimpleCall(expectedResponse);
-            const [response] = await client.createWatchlist(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createWatchlist without error using callback', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateWatchlistRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.Watchlist()
-            );
-            client.innerApiCalls.createWatchlist = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.createWatchlist(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IWatchlist|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.createWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createWatchlist with error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateWatchlistRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.createWatchlist = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.createWatchlist(request), expectedError);
-            const actualRequest = (client.innerApiCalls.createWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.createWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes createWatchlist with closed client', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.CreateWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.CreateWatchlistRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.createWatchlist(request), expectedError);
-        });
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
     });
 
-    describe('updateWatchlist', () => {
-        it('invokes updateWatchlist without error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest()
-            );
-            request.watchlist ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateWatchlistRequest', ['watchlist', 'name']);
-            request.watchlist.name = defaultValue1;
-            const expectedHeaderRequestParams = `watchlist.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.Watchlist()
-            );
-            client.innerApiCalls.updateWatchlist = stubSimpleCall(expectedResponse);
-            const [response] = await client.updateWatchlist(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
         });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
+  });
 
-        it('invokes updateWatchlist without error using callback', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest()
-            );
-            request.watchlist ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateWatchlistRequest', ['watchlist', 'name']);
-            request.watchlist.name = defaultValue1;
-            const expectedHeaderRequestParams = `watchlist.name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.Watchlist()
-            );
-            client.innerApiCalls.updateWatchlist = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.updateWatchlist(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IWatchlist|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.updateWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateWatchlist with error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest()
-            );
-            request.watchlist ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateWatchlistRequest', ['watchlist', 'name']);
-            request.watchlist.name = defaultValue1;
-            const expectedHeaderRequestParams = `watchlist.name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.updateWatchlist = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.updateWatchlist(request), expectedError);
-            const actualRequest = (client.innerApiCalls.updateWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.updateWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes updateWatchlist with closed client', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest()
-            );
-            request.watchlist ??= {};
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.UpdateWatchlistRequest', ['watchlist', 'name']);
-            request.watchlist.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.updateWatchlist(request), expectedError);
-        });
+  describe('getWatchlist', () => {
+    it('invokes getWatchlist without error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.Watchlist(),
+      );
+      client.innerApiCalls.getWatchlist = stubSimpleCall(expectedResponse);
+      const [response] = await client.getWatchlist(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('deleteWatchlist', () => {
-        it('invokes deleteWatchlist without error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteWatchlist = stubSimpleCall(expectedResponse);
-            const [response] = await client.deleteWatchlist(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteWatchlist without error using callback', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedResponse = generateSampleMessage(
-              new protos.google.protobuf.Empty()
-            );
-            client.innerApiCalls.deleteWatchlist = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.deleteWatchlist(
-                    request,
-                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.deleteWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteWatchlist with error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.deleteWatchlist = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.deleteWatchlist(request), expectedError);
-            const actualRequest = (client.innerApiCalls.deleteWatchlist as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.deleteWatchlist as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes deleteWatchlist with closed client', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.DeleteWatchlistRequest', ['name']);
-            request.name = defaultValue1;
-            const expectedError = new Error('The client has already been closed.');
-            client.close().catch(err => {throw err});
-            await assert.rejects(client.deleteWatchlist(request), expectedError);
-        });
-    });
-
-    describe('listWatchlists', () => {
-        it('invokes listWatchlists without error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListWatchlistsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListWatchlistsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-            ];
-            client.innerApiCalls.listWatchlists = stubSimpleCall(expectedResponse);
-            const [response] = await client.listWatchlists(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listWatchlists as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listWatchlists as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listWatchlists without error using callback', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListWatchlistsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListWatchlistsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-            ];
-            client.innerApiCalls.listWatchlists = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listWatchlists(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.chronicle.v1.IWatchlist[]|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            const actualRequest = (client.innerApiCalls.listWatchlists as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listWatchlists as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listWatchlists with error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListWatchlistsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListWatchlistsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listWatchlists = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listWatchlists(request), expectedError);
-            const actualRequest = (client.innerApiCalls.listWatchlists as SinonStub)
-                .getCall(0).args[0];
-            assert.deepStrictEqual(actualRequest, request);
-            const actualHeaderRequestParams = (client.innerApiCalls.listWatchlists as SinonStub)
-                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-        });
-
-        it('invokes listWatchlistsStream without error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListWatchlistsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListWatchlistsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-            ];
-            client.descriptors.page.listWatchlists.createStream = stubPageStreamingCall(expectedResponse);
-            const stream = client.listWatchlistsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.chronicle.v1.Watchlist[] = [];
-                stream.on('data', (response: protos.google.cloud.chronicle.v1.Watchlist) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            const responses = await promise;
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert((client.descriptors.page.listWatchlists.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listWatchlists, request));
-            assert(
-                (client.descriptors.page.listWatchlists.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('invokes listWatchlistsStream with error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListWatchlistsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListWatchlistsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listWatchlists.createStream = stubPageStreamingCall(undefined, expectedError);
-            const stream = client.listWatchlistsStream(request);
-            const promise = new Promise((resolve, reject) => {
-                const responses: protos.google.cloud.chronicle.v1.Watchlist[] = [];
-                stream.on('data', (response: protos.google.cloud.chronicle.v1.Watchlist) => {
-                    responses.push(response);
-                });
-                stream.on('end', () => {
-                    resolve(responses);
-                });
-                stream.on('error', (err: Error) => {
-                    reject(err);
-                });
-            });
-            await assert.rejects(promise, expectedError);
-            assert((client.descriptors.page.listWatchlists.createStream as SinonStub)
-                .getCall(0).calledWith(client.innerApiCalls.listWatchlists, request));
-            assert(
-                (client.descriptors.page.listWatchlists.createStream as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                         expectedHeaderRequestParams
-                    ) 
-            );
-        });
-
-        it('uses async iteration with listWatchlists without error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListWatchlistsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListWatchlistsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedResponse = [
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-              generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
-            ];
-            client.descriptors.page.listWatchlists.asyncIterate = stubAsyncIterationCall(expectedResponse);
-            const responses: protos.google.cloud.chronicle.v1.IWatchlist[] = [];
-            const iterable = client.listWatchlistsAsync(request);
-            for await (const resource of iterable) {
-                responses.push(resource!);
+    it('invokes getWatchlist without error using callback', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.Watchlist(),
+      );
+      client.innerApiCalls.getWatchlist =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getWatchlist(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IWatchlist | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
             }
-            assert.deepStrictEqual(responses, expectedResponse);
-            assert.deepStrictEqual(
-                (client.descriptors.page.listWatchlists.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listWatchlists.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
-
-        it('uses async iteration with listWatchlists with error', async () => {
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            const request = generateSampleMessage(
-              new protos.google.cloud.chronicle.v1.ListWatchlistsRequest()
-            );
-            const defaultValue1 =
-              getTypeDefaultValue('.google.cloud.chronicle.v1.ListWatchlistsRequest', ['parent']);
-            request.parent = defaultValue1;
-            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
-            const expectedError = new Error('expected');
-            client.descriptors.page.listWatchlists.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
-            const iterable = client.listWatchlistsAsync(request);
-            await assert.rejects(async () => {
-                const responses: protos.google.cloud.chronicle.v1.IWatchlist[] = [];
-                for await (const resource of iterable) {
-                    responses.push(resource!);
-                }
-            });
-            assert.deepStrictEqual(
-                (client.descriptors.page.listWatchlists.asyncIterate as SinonStub)
-                    .getCall(0).args[1], request);
-            assert(
-                (client.descriptors.page.listWatchlists.asyncIterate as SinonStub)
-                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
-                        expectedHeaderRequestParams
-                    )
-            );
-        });
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    describe('Path templates', () => {
-
-        describe('bigQueryExport', async () => {
-            const fakePath = "/rendered/path/bigQueryExport";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.bigQueryExportPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.bigQueryExportPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('bigQueryExportPath', () => {
-                const result = client.bigQueryExportPath("projectValue", "locationValue", "instanceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromBigQueryExportName', () => {
-                const result = client.matchProjectFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromBigQueryExportName', () => {
-                const result = client.matchLocationFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromBigQueryExportName', () => {
-                const result = client.matchInstanceFromBigQueryExportName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dashboardChart', async () => {
-            const fakePath = "/rendered/path/dashboardChart";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                chart: "chartValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dashboardChartPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dashboardChartPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dashboardChartPath', () => {
-                const result = client.dashboardChartPath("projectValue", "locationValue", "instanceValue", "chartValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dashboardChartPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDashboardChartName', () => {
-                const result = client.matchProjectFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDashboardChartName', () => {
-                const result = client.matchLocationFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDashboardChartName', () => {
-                const result = client.matchInstanceFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchChartFromDashboardChartName', () => {
-                const result = client.matchChartFromDashboardChartName(fakePath);
-                assert.strictEqual(result, "chartValue");
-                assert((client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dashboardQuery', async () => {
-            const fakePath = "/rendered/path/dashboardQuery";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                query: "queryValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dashboardQueryPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dashboardQueryPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dashboardQueryPath', () => {
-                const result = client.dashboardQueryPath("projectValue", "locationValue", "instanceValue", "queryValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dashboardQueryPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDashboardQueryName', () => {
-                const result = client.matchProjectFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDashboardQueryName', () => {
-                const result = client.matchLocationFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDashboardQueryName', () => {
-                const result = client.matchInstanceFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchQueryFromDashboardQueryName', () => {
-                const result = client.matchQueryFromDashboardQueryName(fakePath);
-                assert.strictEqual(result, "queryValue");
-                assert((client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataAccessLabel', async () => {
-            const fakePath = "/rendered/path/dataAccessLabel";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_access_label: "dataAccessLabelValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataAccessLabelPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataAccessLabelPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataAccessLabelPath', () => {
-                const result = client.dataAccessLabelPath("projectValue", "locationValue", "instanceValue", "dataAccessLabelValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataAccessLabelName', () => {
-                const result = client.matchProjectFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataAccessLabelName', () => {
-                const result = client.matchLocationFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataAccessLabelName', () => {
-                const result = client.matchInstanceFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataAccessLabelFromDataAccessLabelName', () => {
-                const result = client.matchDataAccessLabelFromDataAccessLabelName(fakePath);
-                assert.strictEqual(result, "dataAccessLabelValue");
-                assert((client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataAccessScope', async () => {
-            const fakePath = "/rendered/path/dataAccessScope";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_access_scope: "dataAccessScopeValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataAccessScopePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataAccessScopePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataAccessScopePath', () => {
-                const result = client.dataAccessScopePath("projectValue", "locationValue", "instanceValue", "dataAccessScopeValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataAccessScopePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataAccessScopeName', () => {
-                const result = client.matchProjectFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataAccessScopeName', () => {
-                const result = client.matchLocationFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataAccessScopeName', () => {
-                const result = client.matchInstanceFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataAccessScopeFromDataAccessScopeName', () => {
-                const result = client.matchDataAccessScopeFromDataAccessScopeName(fakePath);
-                assert.strictEqual(result, "dataAccessScopeValue");
-                assert((client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTable', async () => {
-            const fakePath = "/rendered/path/dataTable";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table: "dataTableValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTablePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTablePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTablePath', () => {
-                const result = client.dataTablePath("projectValue", "locationValue", "instanceValue", "dataTableValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTablePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableName', () => {
-                const result = client.matchProjectFromDataTableName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableName', () => {
-                const result = client.matchLocationFromDataTableName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableName', () => {
-                const result = client.matchInstanceFromDataTableName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableFromDataTableName', () => {
-                const result = client.matchDataTableFromDataTableName(fakePath);
-                assert.strictEqual(result, "dataTableValue");
-                assert((client.pathTemplates.dataTablePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTableOperationErrors', async () => {
-            const fakePath = "/rendered/path/dataTableOperationErrors";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table_operation_errors: "dataTableOperationErrorsValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTableOperationErrorsPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTableOperationErrorsPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTableOperationErrorsPath', () => {
-                const result = client.dataTableOperationErrorsPath("projectValue", "locationValue", "instanceValue", "dataTableOperationErrorsValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableOperationErrorsName', () => {
-                const result = client.matchProjectFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableOperationErrorsName', () => {
-                const result = client.matchLocationFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableOperationErrorsName', () => {
-                const result = client.matchInstanceFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableOperationErrorsFromDataTableOperationErrorsName', () => {
-                const result = client.matchDataTableOperationErrorsFromDataTableOperationErrorsName(fakePath);
-                assert.strictEqual(result, "dataTableOperationErrorsValue");
-                assert((client.pathTemplates.dataTableOperationErrorsPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('dataTableRow', async () => {
-            const fakePath = "/rendered/path/dataTableRow";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                data_table: "dataTableValue",
-                data_table_row: "dataTableRowValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.dataTableRowPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.dataTableRowPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('dataTableRowPath', () => {
-                const result = client.dataTableRowPath("projectValue", "locationValue", "instanceValue", "dataTableValue", "dataTableRowValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.dataTableRowPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromDataTableRowName', () => {
-                const result = client.matchProjectFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromDataTableRowName', () => {
-                const result = client.matchLocationFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromDataTableRowName', () => {
-                const result = client.matchInstanceFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableFromDataTableRowName', () => {
-                const result = client.matchDataTableFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "dataTableValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDataTableRowFromDataTableRowName', () => {
-                const result = client.matchDataTableRowFromDataTableRowName(fakePath);
-                assert.strictEqual(result, "dataTableRowValue");
-                assert((client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('featuredContentNativeDashboard', async () => {
-            const fakePath = "/rendered/path/featuredContentNativeDashboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                featured_content_native_dashboard: "featuredContentNativeDashboardValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.featuredContentNativeDashboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.featuredContentNativeDashboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('featuredContentNativeDashboardPath', () => {
-                const result = client.featuredContentNativeDashboardPath("projectValue", "locationValue", "instanceValue", "featuredContentNativeDashboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchProjectFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchLocationFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchInstanceFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName', () => {
-                const result = client.matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(fakePath);
-                assert.strictEqual(result, "featuredContentNativeDashboardValue");
-                assert((client.pathTemplates.featuredContentNativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('instance', async () => {
-            const fakePath = "/rendered/path/instance";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.instancePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.instancePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('instancePath', () => {
-                const result = client.instancePath("projectValue", "locationValue", "instanceValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.instancePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromInstanceName', () => {
-                const result = client.matchProjectFromInstanceName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromInstanceName', () => {
-                const result = client.matchLocationFromInstanceName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromInstanceName', () => {
-                const result = client.matchInstanceFromInstanceName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.instancePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('location', async () => {
-            const fakePath = "/rendered/path/location";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.locationPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.locationPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('locationPath', () => {
-                const result = client.locationPath("projectValue", "locationValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.locationPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromLocationName', () => {
-                const result = client.matchProjectFromLocationName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromLocationName', () => {
-                const result = client.matchLocationFromLocationName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.locationPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('nativeDashboard', async () => {
-            const fakePath = "/rendered/path/nativeDashboard";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                dashboard: "dashboardValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.nativeDashboardPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.nativeDashboardPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('nativeDashboardPath', () => {
-                const result = client.nativeDashboardPath("projectValue", "locationValue", "instanceValue", "dashboardValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.nativeDashboardPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromNativeDashboardName', () => {
-                const result = client.matchProjectFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromNativeDashboardName', () => {
-                const result = client.matchLocationFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromNativeDashboardName', () => {
-                const result = client.matchInstanceFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchDashboardFromNativeDashboardName', () => {
-                const result = client.matchDashboardFromNativeDashboardName(fakePath);
-                assert.strictEqual(result, "dashboardValue");
-                assert((client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('project', async () => {
-            const fakePath = "/rendered/path/project";
-            const expectedParameters = {
-                project: "projectValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.projectPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.projectPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('projectPath', () => {
-                const result = client.projectPath("projectValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.projectPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromProjectName', () => {
-                const result = client.matchProjectFromProjectName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.projectPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('referenceList', async () => {
-            const fakePath = "/rendered/path/referenceList";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                reference_list: "referenceListValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.referenceListPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.referenceListPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('referenceListPath', () => {
-                const result = client.referenceListPath("projectValue", "locationValue", "instanceValue", "referenceListValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.referenceListPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromReferenceListName', () => {
-                const result = client.matchProjectFromReferenceListName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromReferenceListName', () => {
-                const result = client.matchLocationFromReferenceListName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromReferenceListName', () => {
-                const result = client.matchInstanceFromReferenceListName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchReferenceListFromReferenceListName', () => {
-                const result = client.matchReferenceListFromReferenceListName(fakePath);
-                assert.strictEqual(result, "referenceListValue");
-                assert((client.pathTemplates.referenceListPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('retrohunt', async () => {
-            const fakePath = "/rendered/path/retrohunt";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-                retrohunt: "retrohuntValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.retrohuntPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.retrohuntPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('retrohuntPath', () => {
-                const result = client.retrohuntPath("projectValue", "locationValue", "instanceValue", "ruleValue", "retrohuntValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.retrohuntPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRetrohuntName', () => {
-                const result = client.matchProjectFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRetrohuntName', () => {
-                const result = client.matchLocationFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRetrohuntName', () => {
-                const result = client.matchInstanceFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRetrohuntName', () => {
-                const result = client.matchRuleFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRetrohuntFromRetrohuntName', () => {
-                const result = client.matchRetrohuntFromRetrohuntName(fakePath);
-                assert.strictEqual(result, "retrohuntValue");
-                assert((client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('rule', async () => {
-            const fakePath = "/rendered/path/rule";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.rulePathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.rulePathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('rulePath', () => {
-                const result = client.rulePath("projectValue", "locationValue", "instanceValue", "ruleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.rulePathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRuleName', () => {
-                const result = client.matchProjectFromRuleName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRuleName', () => {
-                const result = client.matchLocationFromRuleName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRuleName', () => {
-                const result = client.matchInstanceFromRuleName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRuleName', () => {
-                const result = client.matchRuleFromRuleName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.rulePathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('ruleDeployment', async () => {
-            const fakePath = "/rendered/path/ruleDeployment";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                rule: "ruleValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.ruleDeploymentPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.ruleDeploymentPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('ruleDeploymentPath', () => {
-                const result = client.ruleDeploymentPath("projectValue", "locationValue", "instanceValue", "ruleValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromRuleDeploymentName', () => {
-                const result = client.matchProjectFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromRuleDeploymentName', () => {
-                const result = client.matchLocationFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromRuleDeploymentName', () => {
-                const result = client.matchInstanceFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchRuleFromRuleDeploymentName', () => {
-                const result = client.matchRuleFromRuleDeploymentName(fakePath);
-                assert.strictEqual(result, "ruleValue");
-                assert((client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
-
-        describe('watchlist', async () => {
-            const fakePath = "/rendered/path/watchlist";
-            const expectedParameters = {
-                project: "projectValue",
-                location: "locationValue",
-                instance: "instanceValue",
-                watchlist: "watchlistValue",
-            };
-            const client = new entityserviceModule.v1.EntityServiceClient({
-                credentials: {client_email: 'bogus', private_key: 'bogus'},
-                projectId: 'bogus',
-            });
-            await client.initialize();
-            client.pathTemplates.watchlistPathTemplate.render =
-                sinon.stub().returns(fakePath);
-            client.pathTemplates.watchlistPathTemplate.match =
-                sinon.stub().returns(expectedParameters);
-
-            it('watchlistPath', () => {
-                const result = client.watchlistPath("projectValue", "locationValue", "instanceValue", "watchlistValue");
-                assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.watchlistPathTemplate.render as SinonStub)
-                    .getCall(-1).calledWith(expectedParameters));
-            });
-
-            it('matchProjectFromWatchlistName', () => {
-                const result = client.matchProjectFromWatchlistName(fakePath);
-                assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchLocationFromWatchlistName', () => {
-                const result = client.matchLocationFromWatchlistName(fakePath);
-                assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchInstanceFromWatchlistName', () => {
-                const result = client.matchInstanceFromWatchlistName(fakePath);
-                assert.strictEqual(result, "instanceValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-
-            it('matchWatchlistFromWatchlistName', () => {
-                const result = client.matchWatchlistFromWatchlistName(fakePath);
-                assert.strictEqual(result, "watchlistValue");
-                assert((client.pathTemplates.watchlistPathTemplate.match as SinonStub)
-                    .getCall(-1).calledWith(fakePath));
-            });
-        });
+    it('invokes getWatchlist with error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getWatchlist = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getWatchlist(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
+
+    it('invokes getWatchlist with closed client', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.GetWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.GetWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.getWatchlist(request), expectedError);
+    });
+  });
+
+  describe('createWatchlist', () => {
+    it('invokes createWatchlist without error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateWatchlistRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.Watchlist(),
+      );
+      client.innerApiCalls.createWatchlist = stubSimpleCall(expectedResponse);
+      const [response] = await client.createWatchlist(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createWatchlist without error using callback', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateWatchlistRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.Watchlist(),
+      );
+      client.innerApiCalls.createWatchlist =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createWatchlist(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IWatchlist | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createWatchlist with error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateWatchlistRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createWatchlist = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createWatchlist(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createWatchlist with closed client', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.CreateWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.CreateWatchlistRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.createWatchlist(request), expectedError);
+    });
+  });
+
+  describe('updateWatchlist', () => {
+    it('invokes updateWatchlist without error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest(),
+      );
+      request.watchlist ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateWatchlistRequest',
+        ['watchlist', 'name'],
+      );
+      request.watchlist.name = defaultValue1;
+      const expectedHeaderRequestParams = `watchlist.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.Watchlist(),
+      );
+      client.innerApiCalls.updateWatchlist = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateWatchlist(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateWatchlist without error using callback', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest(),
+      );
+      request.watchlist ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateWatchlistRequest',
+        ['watchlist', 'name'],
+      );
+      request.watchlist.name = defaultValue1;
+      const expectedHeaderRequestParams = `watchlist.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.Watchlist(),
+      );
+      client.innerApiCalls.updateWatchlist =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateWatchlist(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IWatchlist | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateWatchlist with error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest(),
+      );
+      request.watchlist ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateWatchlistRequest',
+        ['watchlist', 'name'],
+      );
+      request.watchlist.name = defaultValue1;
+      const expectedHeaderRequestParams = `watchlist.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateWatchlist = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateWatchlist(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateWatchlist with closed client', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.UpdateWatchlistRequest(),
+      );
+      request.watchlist ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.UpdateWatchlistRequest',
+        ['watchlist', 'name'],
+      );
+      request.watchlist.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.updateWatchlist(request), expectedError);
+    });
+  });
+
+  describe('deleteWatchlist', () => {
+    it('invokes deleteWatchlist without error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteWatchlist = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteWatchlist(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteWatchlist without error using callback', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty(),
+      );
+      client.innerApiCalls.deleteWatchlist =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteWatchlist(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteWatchlist with error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteWatchlist = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteWatchlist(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteWatchlist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWatchlist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteWatchlist with closed client', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.DeleteWatchlistRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.DeleteWatchlistRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch((err) => {
+        throw err;
+      });
+      await assert.rejects(client.deleteWatchlist(request), expectedError);
+    });
+  });
+
+  describe('listWatchlists', () => {
+    it('invokes listWatchlists without error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListWatchlistsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListWatchlistsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+      ];
+      client.innerApiCalls.listWatchlists = stubSimpleCall(expectedResponse);
+      const [response] = await client.listWatchlists(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listWatchlists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWatchlists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listWatchlists without error using callback', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListWatchlistsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListWatchlistsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+      ];
+      client.innerApiCalls.listWatchlists =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listWatchlists(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.chronicle.v1.IWatchlist[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listWatchlists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWatchlists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listWatchlists with error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListWatchlistsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListWatchlistsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listWatchlists = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listWatchlists(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listWatchlists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWatchlists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listWatchlistsStream without error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListWatchlistsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListWatchlistsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+      ];
+      client.descriptors.page.listWatchlists.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listWatchlistsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.chronicle.v1.Watchlist[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.chronicle.v1.Watchlist) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listWatchlists.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listWatchlists, request),
+      );
+      assert(
+        (client.descriptors.page.listWatchlists.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('invokes listWatchlistsStream with error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListWatchlistsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListWatchlistsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listWatchlists.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listWatchlistsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.chronicle.v1.Watchlist[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.chronicle.v1.Watchlist) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listWatchlists.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listWatchlists, request),
+      );
+      assert(
+        (client.descriptors.page.listWatchlists.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listWatchlists without error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListWatchlistsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListWatchlistsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+        generateSampleMessage(new protos.google.cloud.chronicle.v1.Watchlist()),
+      ];
+      client.descriptors.page.listWatchlists.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.chronicle.v1.IWatchlist[] = [];
+      const iterable = client.listWatchlistsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listWatchlists.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listWatchlists.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+
+    it('uses async iteration with listWatchlists with error', async () => {
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.chronicle.v1.ListWatchlistsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.chronicle.v1.ListWatchlistsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listWatchlists.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listWatchlistsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.chronicle.v1.IWatchlist[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listWatchlists.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listWatchlists.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams),
+      );
+    });
+  });
+
+  describe('Path templates', () => {
+    describe('bigQueryExport', async () => {
+      const fakePath = '/rendered/path/bigQueryExport';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.bigQueryExportPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.bigQueryExportPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('bigQueryExportPath', () => {
+        const result = client.bigQueryExportPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBigQueryExportName', () => {
+        const result = client.matchProjectFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBigQueryExportName', () => {
+        const result = client.matchLocationFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromBigQueryExportName', () => {
+        const result = client.matchInstanceFromBigQueryExportName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.bigQueryExportPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dashboardChart', async () => {
+      const fakePath = '/rendered/path/dashboardChart';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        chart: 'chartValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dashboardChartPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dashboardChartPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dashboardChartPath', () => {
+        const result = client.dashboardChartPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'chartValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDashboardChartName', () => {
+        const result = client.matchProjectFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDashboardChartName', () => {
+        const result = client.matchLocationFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDashboardChartName', () => {
+        const result = client.matchInstanceFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchChartFromDashboardChartName', () => {
+        const result = client.matchChartFromDashboardChartName(fakePath);
+        assert.strictEqual(result, 'chartValue');
+        assert(
+          (client.pathTemplates.dashboardChartPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dashboardQuery', async () => {
+      const fakePath = '/rendered/path/dashboardQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        query: 'queryValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dashboardQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dashboardQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dashboardQueryPath', () => {
+        const result = client.dashboardQueryPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'queryValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDashboardQueryName', () => {
+        const result = client.matchProjectFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDashboardQueryName', () => {
+        const result = client.matchLocationFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDashboardQueryName', () => {
+        const result = client.matchInstanceFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchQueryFromDashboardQueryName', () => {
+        const result = client.matchQueryFromDashboardQueryName(fakePath);
+        assert.strictEqual(result, 'queryValue');
+        assert(
+          (client.pathTemplates.dashboardQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataAccessLabel', async () => {
+      const fakePath = '/rendered/path/dataAccessLabel';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_access_label: 'dataAccessLabelValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataAccessLabelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAccessLabelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAccessLabelPath', () => {
+        const result = client.dataAccessLabelPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataAccessLabelValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataAccessLabelName', () => {
+        const result = client.matchProjectFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataAccessLabelName', () => {
+        const result = client.matchLocationFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataAccessLabelName', () => {
+        const result = client.matchInstanceFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataAccessLabelFromDataAccessLabelName', () => {
+        const result =
+          client.matchDataAccessLabelFromDataAccessLabelName(fakePath);
+        assert.strictEqual(result, 'dataAccessLabelValue');
+        assert(
+          (client.pathTemplates.dataAccessLabelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataAccessScope', async () => {
+      const fakePath = '/rendered/path/dataAccessScope';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_access_scope: 'dataAccessScopeValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataAccessScopePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataAccessScopePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataAccessScopePath', () => {
+        const result = client.dataAccessScopePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataAccessScopeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataAccessScopeName', () => {
+        const result = client.matchProjectFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataAccessScopeName', () => {
+        const result = client.matchLocationFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataAccessScopeName', () => {
+        const result = client.matchInstanceFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataAccessScopeFromDataAccessScopeName', () => {
+        const result =
+          client.matchDataAccessScopeFromDataAccessScopeName(fakePath);
+        assert.strictEqual(result, 'dataAccessScopeValue');
+        assert(
+          (client.pathTemplates.dataAccessScopePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTable', async () => {
+      const fakePath = '/rendered/path/dataTable';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table: 'dataTableValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataTablePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTablePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTablePath', () => {
+        const result = client.dataTablePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableName', () => {
+        const result = client.matchProjectFromDataTableName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableName', () => {
+        const result = client.matchLocationFromDataTableName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableName', () => {
+        const result = client.matchInstanceFromDataTableName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableFromDataTableName', () => {
+        const result = client.matchDataTableFromDataTableName(fakePath);
+        assert.strictEqual(result, 'dataTableValue');
+        assert(
+          (client.pathTemplates.dataTablePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTableOperationErrors', async () => {
+      const fakePath = '/rendered/path/dataTableOperationErrors';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table_operation_errors: 'dataTableOperationErrorsValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataTableOperationErrorsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTableOperationErrorsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTableOperationErrorsPath', () => {
+        const result = client.dataTableOperationErrorsPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableOperationErrorsValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchProjectFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchLocationFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchInstanceFromDataTableOperationErrorsName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableOperationErrorsFromDataTableOperationErrorsName', () => {
+        const result =
+          client.matchDataTableOperationErrorsFromDataTableOperationErrorsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'dataTableOperationErrorsValue');
+        assert(
+          (
+            client.pathTemplates.dataTableOperationErrorsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('dataTableRow', async () => {
+      const fakePath = '/rendered/path/dataTableRow';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        data_table: 'dataTableValue',
+        data_table_row: 'dataTableRowValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.dataTableRowPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.dataTableRowPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('dataTableRowPath', () => {
+        const result = client.dataTableRowPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dataTableValue',
+          'dataTableRowValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromDataTableRowName', () => {
+        const result = client.matchProjectFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromDataTableRowName', () => {
+        const result = client.matchLocationFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromDataTableRowName', () => {
+        const result = client.matchInstanceFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableFromDataTableRowName', () => {
+        const result = client.matchDataTableFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'dataTableValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDataTableRowFromDataTableRowName', () => {
+        const result = client.matchDataTableRowFromDataTableRowName(fakePath);
+        assert.strictEqual(result, 'dataTableRowValue');
+        assert(
+          (client.pathTemplates.dataTableRowPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('featuredContentNativeDashboard', async () => {
+      const fakePath = '/rendered/path/featuredContentNativeDashboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        featured_content_native_dashboard:
+          'featuredContentNativeDashboardValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.featuredContentNativeDashboardPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.featuredContentNativeDashboardPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('featuredContentNativeDashboardPath', () => {
+        const result = client.featuredContentNativeDashboardPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'featuredContentNativeDashboardValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchProjectFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchLocationFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchInstanceFromFeaturedContentNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName', () => {
+        const result =
+          client.matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'featuredContentNativeDashboardValue');
+        assert(
+          (
+            client.pathTemplates.featuredContentNativeDashboardPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('instance', async () => {
+      const fakePath = '/rendered/path/instance';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.instancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.instancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('instancePath', () => {
+        const result = client.instancePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.instancePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInstanceName', () => {
+        const result = client.matchProjectFromInstanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromInstanceName', () => {
+        const result = client.matchLocationFromInstanceName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromInstanceName', () => {
+        const result = client.matchInstanceFromInstanceName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('location', async () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('nativeDashboard', async () => {
+      const fakePath = '/rendered/path/nativeDashboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        dashboard: 'dashboardValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.nativeDashboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.nativeDashboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('nativeDashboardPath', () => {
+        const result = client.nativeDashboardPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'dashboardValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromNativeDashboardName', () => {
+        const result = client.matchProjectFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromNativeDashboardName', () => {
+        const result = client.matchLocationFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromNativeDashboardName', () => {
+        const result = client.matchInstanceFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchDashboardFromNativeDashboardName', () => {
+        const result = client.matchDashboardFromNativeDashboardName(fakePath);
+        assert.strictEqual(result, 'dashboardValue');
+        assert(
+          (client.pathTemplates.nativeDashboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('project', async () => {
+      const fakePath = '/rendered/path/project';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.projectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectPath', () => {
+        const result = client.projectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectName', () => {
+        const result = client.matchProjectFromProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('referenceList', async () => {
+      const fakePath = '/rendered/path/referenceList';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        reference_list: 'referenceListValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.referenceListPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.referenceListPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('referenceListPath', () => {
+        const result = client.referenceListPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'referenceListValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromReferenceListName', () => {
+        const result = client.matchProjectFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromReferenceListName', () => {
+        const result = client.matchLocationFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromReferenceListName', () => {
+        const result = client.matchInstanceFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchReferenceListFromReferenceListName', () => {
+        const result = client.matchReferenceListFromReferenceListName(fakePath);
+        assert.strictEqual(result, 'referenceListValue');
+        assert(
+          (client.pathTemplates.referenceListPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('retrohunt', async () => {
+      const fakePath = '/rendered/path/retrohunt';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+        retrohunt: 'retrohuntValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.retrohuntPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.retrohuntPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('retrohuntPath', () => {
+        const result = client.retrohuntPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+          'retrohuntValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRetrohuntName', () => {
+        const result = client.matchProjectFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRetrohuntName', () => {
+        const result = client.matchLocationFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRetrohuntName', () => {
+        const result = client.matchInstanceFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRetrohuntName', () => {
+        const result = client.matchRuleFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRetrohuntFromRetrohuntName', () => {
+        const result = client.matchRetrohuntFromRetrohuntName(fakePath);
+        assert.strictEqual(result, 'retrohuntValue');
+        assert(
+          (client.pathTemplates.retrohuntPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('rule', async () => {
+      const fakePath = '/rendered/path/rule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.rulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.rulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('rulePath', () => {
+        const result = client.rulePath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.rulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleName', () => {
+        const result = client.matchProjectFromRuleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleName', () => {
+        const result = client.matchLocationFromRuleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleName', () => {
+        const result = client.matchInstanceFromRuleName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRuleName', () => {
+        const result = client.matchRuleFromRuleName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.rulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('ruleDeployment', async () => {
+      const fakePath = '/rendered/path/ruleDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule: 'ruleValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.ruleDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ruleDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ruleDeploymentPath', () => {
+        const result = client.ruleDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleDeploymentName', () => {
+        const result = client.matchProjectFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleDeploymentName', () => {
+        const result = client.matchLocationFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleDeploymentName', () => {
+        const result = client.matchInstanceFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleFromRuleDeploymentName', () => {
+        const result = client.matchRuleFromRuleDeploymentName(fakePath);
+        assert.strictEqual(result, 'ruleValue');
+        assert(
+          (client.pathTemplates.ruleDeploymentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('watchlist', async () => {
+      const fakePath = '/rendered/path/watchlist';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        watchlist: 'watchlistValue',
+      };
+      const client = new entityserviceModule.v1.EntityServiceClient({
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.watchlistPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.watchlistPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('watchlistPath', () => {
+        const result = client.watchlistPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'watchlistValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromWatchlistName', () => {
+        const result = client.matchProjectFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromWatchlistName', () => {
+        const result = client.matchLocationFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromWatchlistName', () => {
+        const result = client.matchInstanceFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchWatchlistFromWatchlistName', () => {
+        const result = client.matchWatchlistFromWatchlistName(fakePath);
+        assert.strictEqual(result, 'watchlistValue');
+        assert(
+          (client.pathTemplates.watchlistPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+  });
 });

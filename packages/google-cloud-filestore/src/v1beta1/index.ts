@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudFilestoreManagerClient} from './cloud_filestore_manager_client';
+export { CloudFilestoreManagerClient } from './cloud_filestore_manager_client';

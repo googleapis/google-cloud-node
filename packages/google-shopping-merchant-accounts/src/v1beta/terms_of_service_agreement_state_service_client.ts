@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +49,7 @@ export class TermsOfServiceAgreementStateServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('accounts');
@@ -57,9 +62,11 @@ export class TermsOfServiceAgreementStateServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  termsOfServiceAgreementStateServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  termsOfServiceAgreementStateServiceStub?: Promise<{
+    [name: string]: Function;
+  }>;
 
   /**
    * Construct an instance of TermsOfServiceAgreementStateServiceClient.
@@ -100,21 +107,43 @@ export class TermsOfServiceAgreementStateServiceClient {
    *     const client = new TermsOfServiceAgreementStateServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof TermsOfServiceAgreementStateServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof TermsOfServiceAgreementStateServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +168,7 @@ export class TermsOfServiceAgreementStateServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +182,7 @@ export class TermsOfServiceAgreementStateServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,71 +204,75 @@ export class TermsOfServiceAgreementStateServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       accountPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}'
+        'accounts/{account}',
       ),
       accountIssuePathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/issues/{issue}'
+        'accounts/{account}/issues/{issue}',
       ),
       accountTaxPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/accounttax/{tax}'
+        'accounts/{account}/accounttax/{tax}',
       ),
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/autofeedSettings'
+        'accounts/{account}/autofeedSettings',
       ),
       automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/automaticImprovements'
+        'accounts/{account}/automaticImprovements',
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/businessIdentity'
+        'accounts/{account}/businessIdentity',
       ),
       businessInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/businessInfo'
+        'accounts/{account}/businessInfo',
       ),
       checkoutSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/programs/{program}/checkoutSettings'
+        'accounts/{account}/programs/{program}/checkoutSettings',
       ),
       emailPreferencesPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/users/{email}/emailPreferences'
+        'accounts/{account}/users/{email}/emailPreferences',
       ),
       gbpAccountPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/gbpAccounts/{gbp_account}'
+        'accounts/{account}/gbpAccounts/{gbp_account}',
       ),
       homepagePathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/homepage'
+        'accounts/{account}/homepage',
       ),
       lfpProviderPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/omnichannelSettings/{omnichannel_setting}/lfpProviders/{lfp_provider}'
+        'accounts/{account}/omnichannelSettings/{omnichannel_setting}/lfpProviders/{lfp_provider}',
       ),
       omnichannelSettingPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/omnichannelSettings/{omnichannel_setting}'
+        'accounts/{account}/omnichannelSettings/{omnichannel_setting}',
       ),
       onlineReturnPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/onlineReturnPolicies/{return_policy}'
+        'accounts/{account}/onlineReturnPolicies/{return_policy}',
       ),
       programPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/programs/{program}'
+        'accounts/{account}/programs/{program}',
       ),
       regionPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/regions/{region}'
+        'accounts/{account}/regions/{region}',
       ),
       shippingSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/shippingSettings'
+        'accounts/{account}/shippingSettings',
       ),
       termsOfServicePathTemplate: new this._gaxModule.PathTemplate(
-        'termsOfService/{version}'
+        'termsOfService/{version}',
       ),
-      termsOfServiceAgreementStatePathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/termsOfServiceAgreementStates/{identifier}'
-      ),
+      termsOfServiceAgreementStatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'accounts/{account}/termsOfServiceAgreementStates/{identifier}',
+        ),
       userPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/users/{email}'
+        'accounts/{account}/users/{email}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -273,36 +303,44 @@ export class TermsOfServiceAgreementStateServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService.
     this.termsOfServiceAgreementStateServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementStateService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.accounts.v1beta
+            .TermsOfServiceAgreementStateService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const termsOfServiceAgreementStateServiceStubMethods =
-        ['getTermsOfServiceAgreementState', 'retrieveForApplicationTermsOfServiceAgreementState'];
+    const termsOfServiceAgreementStateServiceStubMethods = [
+      'getTermsOfServiceAgreementState',
+      'retrieveForApplicationTermsOfServiceAgreementState',
+    ];
     for (const methodName of termsOfServiceAgreementStateServiceStubMethods) {
       const callPromise = this.termsOfServiceAgreementStateServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -317,8 +355,14 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -329,8 +373,14 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -361,9 +411,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/content'
-    ];
+    return ['https://www.googleapis.com/auth/content'];
   }
 
   getProjectId(): Promise<string>;
@@ -372,8 +420,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -384,193 +433,310 @@ export class TermsOfServiceAgreementStateServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Returns the state of a terms of service agreement.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the terms of service version.
- *   Format: `accounts/{account}/termsOfServiceAgreementState/{identifier}`
- *   The identifier format is: `{TermsOfServiceKind}-{country}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState|TermsOfServiceAgreementState}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/terms_of_service_agreement_state_service.get_terms_of_service_agreement_state.js</caption>
- * region_tag:merchantapi_v1beta_generated_TermsOfServiceAgreementStateService_GetTermsOfServiceAgreementState_async
- */
+  /**
+   * Returns the state of a terms of service agreement.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the terms of service version.
+   *   Format: `accounts/{account}/termsOfServiceAgreementState/{identifier}`
+   *   The identifier format is: `{TermsOfServiceKind}-{country}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState|TermsOfServiceAgreementState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/terms_of_service_agreement_state_service.get_terms_of_service_agreement_state.js</caption>
+   * region_tag:merchantapi_v1beta_generated_TermsOfServiceAgreementStateService_GetTermsOfServiceAgreementState_async
+   */
   getTermsOfServiceAgreementState(
-      request?: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getTermsOfServiceAgreementState(
-      request: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTermsOfServiceAgreementState(
-      request: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTermsOfServiceAgreementState(
-      request?: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getTermsOfServiceAgreementState request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTermsOfServiceAgreementState response %j', response);
+          this._log.info(
+            'getTermsOfServiceAgreementState response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getTermsOfServiceAgreementState(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getTermsOfServiceAgreementState response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getTermsOfServiceAgreementState(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IGetTermsOfServiceAgreementStateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'getTermsOfServiceAgreementState response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves the state of the agreement for the application terms of service.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The account for which to get a TermsOfServiceAgreementState
- *   Format: `accounts/{account}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState|TermsOfServiceAgreementState}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state.js</caption>
- * region_tag:merchantapi_v1beta_generated_TermsOfServiceAgreementStateService_RetrieveForApplicationTermsOfServiceAgreementState_async
- */
+  /**
+   * Retrieves the state of the agreement for the application terms of service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account for which to get a TermsOfServiceAgreementState
+   *   Format: `accounts/{account}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.TermsOfServiceAgreementState|TermsOfServiceAgreementState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/terms_of_service_agreement_state_service.retrieve_for_application_terms_of_service_agreement_state.js</caption>
+   * region_tag:merchantapi_v1beta_generated_TermsOfServiceAgreementStateService_RetrieveForApplicationTermsOfServiceAgreementState_async
+   */
   retrieveForApplicationTermsOfServiceAgreementState(
-      request?: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   retrieveForApplicationTermsOfServiceAgreementState(
-      request: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveForApplicationTermsOfServiceAgreementState(
-      request: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   retrieveForApplicationTermsOfServiceAgreementState(
-      request?: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-          protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    this._log.info('retrieveForApplicationTermsOfServiceAgreementState request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    this._log.info(
+      'retrieveForApplicationTermsOfServiceAgreementState request %j',
+      request,
+    );
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+          | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('retrieveForApplicationTermsOfServiceAgreementState response %j', response);
+          this._log.info(
+            'retrieveForApplicationTermsOfServiceAgreementState response %j',
+            response,
+          );
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.retrieveForApplicationTermsOfServiceAgreementState(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
-        protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('retrieveForApplicationTermsOfServiceAgreementState response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .retrieveForApplicationTermsOfServiceAgreementState(
+        request,
+        options,
+        wrappedCallback,
+      )
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1beta.ITermsOfServiceAgreementState,
+          (
+            | protos.google.shopping.merchant.accounts.v1beta.IRetrieveForApplicationTermsOfServiceAgreementStateRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'retrieveForApplicationTermsOfServiceAgreementState response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
@@ -586,7 +752,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account:string) {
+  accountPath(account: string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -610,7 +776,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} issue
    * @returns {string} Resource name string.
    */
-  accountIssuePath(account:string,issue:string) {
+  accountIssuePath(account: string, issue: string) {
     return this.pathTemplates.accountIssuePathTemplate.render({
       account: account,
       issue: issue,
@@ -625,7 +791,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).account;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
+      .account;
   }
 
   /**
@@ -636,7 +803,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the issue.
    */
   matchIssueFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).issue;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
+      .issue;
   }
 
   /**
@@ -646,7 +814,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} tax
    * @returns {string} Resource name string.
    */
-  accountTaxPath(account:string,tax:string) {
+  accountTaxPath(account: string, tax: string) {
     return this.pathTemplates.accountTaxPathTemplate.render({
       account: account,
       tax: tax,
@@ -661,7 +829,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountTaxName(accountTaxName: string) {
-    return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).account;
+    return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName)
+      .account;
   }
 
   /**
@@ -681,7 +850,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  autofeedSettingsPath(account:string) {
+  autofeedSettingsPath(account: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.render({
       account: account,
     });
@@ -695,7 +864,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
-    return this.pathTemplates.autofeedSettingsPathTemplate.match(autofeedSettingsName).account;
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(
+      autofeedSettingsName,
+    ).account;
   }
 
   /**
@@ -704,7 +875,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  automaticImprovementsPath(account:string) {
+  automaticImprovementsPath(account: string) {
     return this.pathTemplates.automaticImprovementsPathTemplate.render({
       account: account,
     });
@@ -718,7 +889,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
-    return this.pathTemplates.automaticImprovementsPathTemplate.match(automaticImprovementsName).account;
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName,
+    ).account;
   }
 
   /**
@@ -727,7 +900,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessIdentityPath(account:string) {
+  businessIdentityPath(account: string) {
     return this.pathTemplates.businessIdentityPathTemplate.render({
       account: account,
     });
@@ -741,7 +914,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessIdentityName(businessIdentityName: string) {
-    return this.pathTemplates.businessIdentityPathTemplate.match(businessIdentityName).account;
+    return this.pathTemplates.businessIdentityPathTemplate.match(
+      businessIdentityName,
+    ).account;
   }
 
   /**
@@ -750,7 +925,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessInfoPath(account:string) {
+  businessInfoPath(account: string) {
     return this.pathTemplates.businessInfoPathTemplate.render({
       account: account,
     });
@@ -764,7 +939,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessInfoName(businessInfoName: string) {
-    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName).account;
+    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName)
+      .account;
   }
 
   /**
@@ -774,7 +950,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} program
    * @returns {string} Resource name string.
    */
-  checkoutSettingsPath(account:string,program:string) {
+  checkoutSettingsPath(account: string, program: string) {
     return this.pathTemplates.checkoutSettingsPathTemplate.render({
       account: account,
       program: program,
@@ -789,7 +965,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromCheckoutSettingsName(checkoutSettingsName: string) {
-    return this.pathTemplates.checkoutSettingsPathTemplate.match(checkoutSettingsName).account;
+    return this.pathTemplates.checkoutSettingsPathTemplate.match(
+      checkoutSettingsName,
+    ).account;
   }
 
   /**
@@ -800,7 +978,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the program.
    */
   matchProgramFromCheckoutSettingsName(checkoutSettingsName: string) {
-    return this.pathTemplates.checkoutSettingsPathTemplate.match(checkoutSettingsName).program;
+    return this.pathTemplates.checkoutSettingsPathTemplate.match(
+      checkoutSettingsName,
+    ).program;
   }
 
   /**
@@ -810,7 +990,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  emailPreferencesPath(account:string,email:string) {
+  emailPreferencesPath(account: string, email: string) {
     return this.pathTemplates.emailPreferencesPathTemplate.render({
       account: account,
       email: email,
@@ -825,7 +1005,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).account;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(
+      emailPreferencesName,
+    ).account;
   }
 
   /**
@@ -836,7 +1018,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the email.
    */
   matchEmailFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).email;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(
+      emailPreferencesName,
+    ).email;
   }
 
   /**
@@ -846,7 +1030,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} gbp_account
    * @returns {string} Resource name string.
    */
-  gbpAccountPath(account:string,gbpAccount:string) {
+  gbpAccountPath(account: string, gbpAccount: string) {
     return this.pathTemplates.gbpAccountPathTemplate.render({
       account: account,
       gbp_account: gbpAccount,
@@ -861,7 +1045,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
+      .account;
   }
 
   /**
@@ -872,7 +1057,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the gbp_account.
    */
   matchGbpAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).gbp_account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
+      .gbp_account;
   }
 
   /**
@@ -881,7 +1067,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  homepagePath(account:string) {
+  homepagePath(account: string) {
     return this.pathTemplates.homepagePathTemplate.render({
       account: account,
     });
@@ -906,7 +1092,11 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} lfp_provider
    * @returns {string} Resource name string.
    */
-  lfpProviderPath(account:string,omnichannelSetting:string,lfpProvider:string) {
+  lfpProviderPath(
+    account: string,
+    omnichannelSetting: string,
+    lfpProvider: string,
+  ) {
     return this.pathTemplates.lfpProviderPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -922,7 +1112,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).account;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .account;
   }
 
   /**
@@ -933,7 +1124,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the omnichannel_setting.
    */
   matchOmnichannelSettingFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).omnichannel_setting;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .omnichannel_setting;
   }
 
   /**
@@ -944,7 +1136,8 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the lfp_provider.
    */
   matchLfpProviderFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).lfp_provider;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .lfp_provider;
   }
 
   /**
@@ -954,7 +1147,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} omnichannel_setting
    * @returns {string} Resource name string.
    */
-  omnichannelSettingPath(account:string,omnichannelSetting:string) {
+  omnichannelSettingPath(account: string, omnichannelSetting: string) {
     return this.pathTemplates.omnichannelSettingPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -969,7 +1162,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOmnichannelSettingName(omnichannelSettingName: string) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).account;
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(
+      omnichannelSettingName,
+    ).account;
   }
 
   /**
@@ -979,8 +1174,12 @@ export class TermsOfServiceAgreementStateServiceClient {
    *   A fully-qualified path representing OmnichannelSetting resource.
    * @returns {string} A string representing the omnichannel_setting.
    */
-  matchOmnichannelSettingFromOmnichannelSettingName(omnichannelSettingName: string) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).omnichannel_setting;
+  matchOmnichannelSettingFromOmnichannelSettingName(
+    omnichannelSettingName: string,
+  ) {
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(
+      omnichannelSettingName,
+    ).omnichannel_setting;
   }
 
   /**
@@ -990,7 +1189,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} return_policy
    * @returns {string} Resource name string.
    */
-  onlineReturnPolicyPath(account:string,returnPolicy:string) {
+  onlineReturnPolicyPath(account: string, returnPolicy: string) {
     return this.pathTemplates.onlineReturnPolicyPathTemplate.render({
       account: account,
       return_policy: returnPolicy,
@@ -1005,7 +1204,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).account;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
+      onlineReturnPolicyName,
+    ).account;
   }
 
   /**
@@ -1016,7 +1217,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the return_policy.
    */
   matchReturnPolicyFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).return_policy;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
+      onlineReturnPolicyName,
+    ).return_policy;
   }
 
   /**
@@ -1026,7 +1229,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} program
    * @returns {string} Resource name string.
    */
-  programPath(account:string,program:string) {
+  programPath(account: string, program: string) {
     return this.pathTemplates.programPathTemplate.render({
       account: account,
       program: program,
@@ -1062,7 +1265,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} region
    * @returns {string} Resource name string.
    */
-  regionPath(account:string,region:string) {
+  regionPath(account: string, region: string) {
     return this.pathTemplates.regionPathTemplate.render({
       account: account,
       region: region,
@@ -1097,7 +1300,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  shippingSettingsPath(account:string) {
+  shippingSettingsPath(account: string) {
     return this.pathTemplates.shippingSettingsPathTemplate.render({
       account: account,
     });
@@ -1111,7 +1314,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromShippingSettingsName(shippingSettingsName: string) {
-    return this.pathTemplates.shippingSettingsPathTemplate.match(shippingSettingsName).account;
+    return this.pathTemplates.shippingSettingsPathTemplate.match(
+      shippingSettingsName,
+    ).account;
   }
 
   /**
@@ -1120,7 +1325,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  termsOfServicePath(version:string) {
+  termsOfServicePath(version: string) {
     return this.pathTemplates.termsOfServicePathTemplate.render({
       version: version,
     });
@@ -1134,7 +1339,9 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromTermsOfServiceName(termsOfServiceName: string) {
-    return this.pathTemplates.termsOfServicePathTemplate.match(termsOfServiceName).version;
+    return this.pathTemplates.termsOfServicePathTemplate.match(
+      termsOfServiceName,
+    ).version;
   }
 
   /**
@@ -1144,7 +1351,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} identifier
    * @returns {string} Resource name string.
    */
-  termsOfServiceAgreementStatePath(account:string,identifier:string) {
+  termsOfServiceAgreementStatePath(account: string, identifier: string) {
     return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.render({
       account: account,
       identifier: identifier,
@@ -1158,8 +1365,12 @@ export class TermsOfServiceAgreementStateServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the account.
    */
-  matchAccountFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).account;
+  matchAccountFromTermsOfServiceAgreementStateName(
+    termsOfServiceAgreementStateName: string,
+  ) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
+      termsOfServiceAgreementStateName,
+    ).account;
   }
 
   /**
@@ -1169,8 +1380,12 @@ export class TermsOfServiceAgreementStateServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the identifier.
    */
-  matchIdentifierFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).identifier;
+  matchIdentifierFromTermsOfServiceAgreementStateName(
+    termsOfServiceAgreementStateName: string,
+  ) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
+      termsOfServiceAgreementStateName,
+    ).identifier;
   }
 
   /**
@@ -1180,7 +1395,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  userPath(account:string,email:string) {
+  userPath(account: string, email: string) {
     return this.pathTemplates.userPathTemplate.render({
       account: account,
       email: email,
@@ -1217,7 +1432,7 @@ export class TermsOfServiceAgreementStateServiceClient {
    */
   close(): Promise<void> {
     if (this.termsOfServiceAgreementStateServiceStub && !this._terminated) {
-      return this.termsOfServiceAgreementStateServiceStub.then(stub => {
+      return this.termsOfServiceAgreementStateServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

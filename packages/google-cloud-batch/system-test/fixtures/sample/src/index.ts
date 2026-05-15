@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {BatchServiceClient} from '@google-cloud/batch';
+import { BatchServiceClient } from '@google-cloud/batch';
 
 // check that the client class type name can be used
 function doStuffWithBatchServiceClient(client: BatchServiceClient) {
