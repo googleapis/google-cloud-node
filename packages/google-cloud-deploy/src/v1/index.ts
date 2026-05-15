@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {CloudDeployClient} from './cloud_deploy_client';
+export { CloudDeployClient } from './cloud_deploy_client';

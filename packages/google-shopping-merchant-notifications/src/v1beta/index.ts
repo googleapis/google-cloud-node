@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {NotificationsApiServiceClient} from './notifications_api_service_client';
+export { NotificationsApiServiceClient } from './notifications_api_service_client';

@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {LocalInventoryServiceClient} from './local_inventory_service_client';
-export {RegionalInventoryServiceClient} from './regional_inventory_service_client';
+export { LocalInventoryServiceClient } from './local_inventory_service_client';
+export { RegionalInventoryServiceClient } from './regional_inventory_service_client';
