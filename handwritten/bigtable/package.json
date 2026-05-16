@@ -25,11 +25,12 @@
   "types": "./build/src/index.d.ts",
   "files": [
     "build/protos",
+    "!build/protos/**/*.proto",
     "build/src",
     "!**/*.map"
   ],
   "scripts": {
-    "compile": "tsc -p . && cp -r proto* build/ && cp -r testproxy/proto* build/testproxy/",
+    "compile": "tsc -p . && cp -r proto* build/ && rm -rf build/protos/google && cp -r testproxy/proto* build/testproxy/",
     "compile-protos": "compileProtos src && sh testproxy/compile-protos.sh",
     "predocs": "npm run compile",
     "docs": "jsdoc -c .jsdoc.js",

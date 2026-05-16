@@ -24,11 +24,12 @@
   "main": "build/src/index.js",
   "files": [
     "build/protos",
+    "!build/protos/**/*.proto",
     "build/src"
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r proto* build/ && cp -r system-test/data build/system-test",
+    "compile": "tsc -p . && cp -r proto* build/ && rm -rf build/protos/google && cp -r system-test/data build/system-test",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",

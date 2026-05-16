@@ -11,8 +11,9 @@
   "description": "Phishing Protection API client for Node.js",
   "main": "build/src/index.js",
   "files": [
-    "build/protos",
     "build/src",
+    "build/protos",
+    "!build/protos/**/*.proto",
     "!build/src/**/*.map"
   ],
   "keywords": [
@@ -51,7 +52,7 @@
   },
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/",
+    "compile": "tsc -p . && cp -r protos build/ && rm -rf build/protos/google",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
