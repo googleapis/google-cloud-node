@@ -34,6 +34,7 @@
     "build/esm",
     "build/cjs",
     "build/protos",
+    "!build/protos/**/*.proto",
     "!build/esm/**/*.map",
     "!build/cjs/**/*.map"
   ],
