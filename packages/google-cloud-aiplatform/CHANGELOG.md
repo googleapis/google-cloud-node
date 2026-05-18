@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.8.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.8.0...aiplatform-v6.8.1) (2026-05-18)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
 ## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.7.0...aiplatform-v6.8.0) (2026-05-12)
 
 
