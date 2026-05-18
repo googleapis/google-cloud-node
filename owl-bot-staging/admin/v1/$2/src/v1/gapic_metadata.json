@@ -1,0 +1,351 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.firestore.admin.v1",
+  "libraryPackage": "@google-cloud/firestore-admin",
+  "services": {
+    "FirestoreAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FirestoreAdminClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "GetField": {
+              "methods": [
+                "getField"
+              ]
+            },
+            "GetDatabase": {
+              "methods": [
+                "getDatabase"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases"
+              ]
+            },
+            "CreateUserCreds": {
+              "methods": [
+                "createUserCreds"
+              ]
+            },
+            "GetUserCreds": {
+              "methods": [
+                "getUserCreds"
+              ]
+            },
+            "ListUserCreds": {
+              "methods": [
+                "listUserCreds"
+              ]
+            },
+            "EnableUserCreds": {
+              "methods": [
+                "enableUserCreds"
+              ]
+            },
+            "DisableUserCreds": {
+              "methods": [
+                "disableUserCreds"
+              ]
+            },
+            "ResetUserPassword": {
+              "methods": [
+                "resetUserPassword"
+              ]
+            },
+            "DeleteUserCreds": {
+              "methods": [
+                "deleteUserCreds"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "CreateBackupSchedule": {
+              "methods": [
+                "createBackupSchedule"
+              ]
+            },
+            "GetBackupSchedule": {
+              "methods": [
+                "getBackupSchedule"
+              ]
+            },
+            "ListBackupSchedules": {
+              "methods": [
+                "listBackupSchedules"
+              ]
+            },
+            "UpdateBackupSchedule": {
+              "methods": [
+                "updateBackupSchedule"
+              ]
+            },
+            "DeleteBackupSchedule": {
+              "methods": [
+                "deleteBackupSchedule"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "UpdateField": {
+              "methods": [
+                "updateField"
+              ]
+            },
+            "ExportDocuments": {
+              "methods": [
+                "exportDocuments"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
+              ]
+            },
+            "BulkDeleteDocuments": {
+              "methods": [
+                "bulkDeleteDocuments"
+              ]
+            },
+            "CreateDatabase": {
+              "methods": [
+                "createDatabase"
+              ]
+            },
+            "UpdateDatabase": {
+              "methods": [
+                "updateDatabase"
+              ]
+            },
+            "DeleteDatabase": {
+              "methods": [
+                "deleteDatabase"
+              ]
+            },
+            "RestoreDatabase": {
+              "methods": [
+                "restoreDatabase"
+              ]
+            },
+            "CloneDatabase": {
+              "methods": [
+                "cloneDatabase"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            },
+            "ListFields": {
+              "methods": [
+                "listFields",
+                "listFieldsStream",
+                "listFieldsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FirestoreAdminClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "GetField": {
+              "methods": [
+                "getField"
+              ]
+            },
+            "GetDatabase": {
+              "methods": [
+                "getDatabase"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "listDatabases"
+              ]
+            },
+            "CreateUserCreds": {
+              "methods": [
+                "createUserCreds"
+              ]
+            },
+            "GetUserCreds": {
+              "methods": [
+                "getUserCreds"
+              ]
+            },
+            "ListUserCreds": {
+              "methods": [
+                "listUserCreds"
+              ]
+            },
+            "EnableUserCreds": {
+              "methods": [
+                "enableUserCreds"
+              ]
+            },
+            "DisableUserCreds": {
+              "methods": [
+                "disableUserCreds"
+              ]
+            },
+            "ResetUserPassword": {
+              "methods": [
+                "resetUserPassword"
+              ]
+            },
+            "DeleteUserCreds": {
+              "methods": [
+                "deleteUserCreds"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "CreateBackupSchedule": {
+              "methods": [
+                "createBackupSchedule"
+              ]
+            },
+            "GetBackupSchedule": {
+              "methods": [
+                "getBackupSchedule"
+              ]
+            },
+            "ListBackupSchedules": {
+              "methods": [
+                "listBackupSchedules"
+              ]
+            },
+            "UpdateBackupSchedule": {
+              "methods": [
+                "updateBackupSchedule"
+              ]
+            },
+            "DeleteBackupSchedule": {
+              "methods": [
+                "deleteBackupSchedule"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "UpdateField": {
+              "methods": [
+                "updateField"
+              ]
+            },
+            "ExportDocuments": {
+              "methods": [
+                "exportDocuments"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "importDocuments"
+              ]
+            },
+            "BulkDeleteDocuments": {
+              "methods": [
+                "bulkDeleteDocuments"
+              ]
+            },
+            "CreateDatabase": {
+              "methods": [
+                "createDatabase"
+              ]
+            },
+            "UpdateDatabase": {
+              "methods": [
+                "updateDatabase"
+              ]
+            },
+            "DeleteDatabase": {
+              "methods": [
+                "deleteDatabase"
+              ]
+            },
+            "RestoreDatabase": {
+              "methods": [
+                "restoreDatabase"
+              ]
+            },
+            "CloneDatabase": {
+              "methods": [
+                "cloneDatabase"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            },
+            "ListFields": {
+              "methods": [
+                "listFields",
+                "listFieldsStream",
+                "listFieldsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

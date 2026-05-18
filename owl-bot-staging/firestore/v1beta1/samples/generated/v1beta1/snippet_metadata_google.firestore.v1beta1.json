@@ -1,0 +1,803 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-firestore",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.firestore.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_GetDocument_async",
+      "title": "Firestore getDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a single document.",
+      "canonical": true,
+      "file": "firestore.get_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDocument",
+        "fullName": "google.firestore.v1beta1.Firestore.GetDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mask",
+            "type": ".google.firestore.v1beta1.DocumentMask"
+          },
+          {
+            "name": "transaction",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "read_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.Document",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "GetDocument",
+          "fullName": "google.firestore.v1beta1.Firestore.GetDocument",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_ListDocuments_async",
+      "title": "Firestore listDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists documents.",
+      "canonical": true,
+      "file": "firestore.list_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 102,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDocuments",
+        "fullName": "google.firestore.v1beta1.Firestore.ListDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "collection_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mask",
+            "type": ".google.firestore.v1beta1.DocumentMask"
+          },
+          {
+            "name": "transaction",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "read_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "show_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.ListDocumentsResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "ListDocuments",
+          "fullName": "google.firestore.v1beta1.Firestore.ListDocuments",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_UpdateDocument_async",
+      "title": "Firestore updateDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates or inserts a document.",
+      "canonical": true,
+      "file": "firestore.update_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDocument",
+        "fullName": "google.firestore.v1beta1.Firestore.UpdateDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "document",
+            "type": ".google.firestore.v1beta1.Document"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.firestore.v1beta1.DocumentMask"
+          },
+          {
+            "name": "mask",
+            "type": ".google.firestore.v1beta1.DocumentMask"
+          },
+          {
+            "name": "current_document",
+            "type": ".google.firestore.v1beta1.Precondition"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.Document",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "UpdateDocument",
+          "fullName": "google.firestore.v1beta1.Firestore.UpdateDocument",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_DeleteDocument_async",
+      "title": "Firestore deleteDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a document.",
+      "canonical": true,
+      "file": "firestore.delete_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDocument",
+        "fullName": "google.firestore.v1beta1.Firestore.DeleteDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "current_document",
+            "type": ".google.firestore.v1beta1.Precondition"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "DeleteDocument",
+          "fullName": "google.firestore.v1beta1.Firestore.DeleteDocument",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_BatchGetDocuments_async",
+      "title": "Firestore batchGetDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets multiple documents. Documents returned by this method are not guaranteed to be returned in the same order that they were requested.",
+      "canonical": true,
+      "file": "firestore.batch_get_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchGetDocuments",
+        "fullName": "google.firestore.v1beta1.Firestore.BatchGetDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "documents",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "mask",
+            "type": ".google.firestore.v1beta1.DocumentMask"
+          },
+          {
+            "name": "transaction",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "new_transaction",
+            "type": ".google.firestore.v1beta1.TransactionOptions"
+          },
+          {
+            "name": "read_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.BatchGetDocumentsResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "BatchGetDocuments",
+          "fullName": "google.firestore.v1beta1.Firestore.BatchGetDocuments",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_BeginTransaction_async",
+      "title": "Firestore beginTransaction Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts a new transaction.",
+      "canonical": true,
+      "file": "firestore.begin_transaction.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BeginTransaction",
+        "fullName": "google.firestore.v1beta1.Firestore.BeginTransaction",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.firestore.v1beta1.TransactionOptions"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.BeginTransactionResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "BeginTransaction",
+          "fullName": "google.firestore.v1beta1.Firestore.BeginTransaction",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_Commit_async",
+      "title": "Firestore commit Sample",
+      "origin": "API_DEFINITION",
+      "description": " Commits a transaction, while optionally updating documents.",
+      "canonical": true,
+      "file": "firestore.commit.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Commit",
+        "fullName": "google.firestore.v1beta1.Firestore.Commit",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "writes",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "transaction",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.CommitResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "Commit",
+          "fullName": "google.firestore.v1beta1.Firestore.Commit",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_Rollback_async",
+      "title": "Firestore rollback Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rolls back a transaction.",
+      "canonical": true,
+      "file": "firestore.rollback.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Rollback",
+        "fullName": "google.firestore.v1beta1.Firestore.Rollback",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "transaction",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "Rollback",
+          "fullName": "google.firestore.v1beta1.Firestore.Rollback",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_RunQuery_async",
+      "title": "Firestore runQuery Sample",
+      "origin": "API_DEFINITION",
+      "description": " Runs a query.",
+      "canonical": true,
+      "file": "firestore.run_query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunQuery",
+        "fullName": "google.firestore.v1beta1.Firestore.RunQuery",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "structured_query",
+            "type": ".google.firestore.v1beta1.StructuredQuery"
+          },
+          {
+            "name": "transaction",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "new_transaction",
+            "type": ".google.firestore.v1beta1.TransactionOptions"
+          },
+          {
+            "name": "read_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.RunQueryResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "RunQuery",
+          "fullName": "google.firestore.v1beta1.Firestore.RunQuery",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_PartitionQuery_async",
+      "title": "Firestore partitionQuery Sample",
+      "origin": "API_DEFINITION",
+      "description": " Partitions a query by returning partition cursors that can be used to run the query in parallel. The returned partition cursors are split points that can be used by RunQuery as starting/end points for the query results.",
+      "canonical": true,
+      "file": "firestore.partition_query.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 97,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PartitionQuery",
+        "fullName": "google.firestore.v1beta1.Firestore.PartitionQuery",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "structured_query",
+            "type": ".google.firestore.v1beta1.StructuredQuery"
+          },
+          {
+            "name": "partition_count",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.PartitionQueryResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "PartitionQuery",
+          "fullName": "google.firestore.v1beta1.Firestore.PartitionQuery",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_Write_async",
+      "title": "Firestore write Sample",
+      "origin": "API_DEFINITION",
+      "description": " Streams batches of document updates and deletes, in order.",
+      "canonical": true,
+      "file": "firestore.write.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Write",
+        "fullName": "google.firestore.v1beta1.Firestore.Write",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "stream_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "writes",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "stream_token",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.WriteResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "Write",
+          "fullName": "google.firestore.v1beta1.Firestore.Write",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_Listen_async",
+      "title": "Firestore listen Sample",
+      "origin": "API_DEFINITION",
+      "description": " Listens to changes.",
+      "canonical": true,
+      "file": "firestore.listen.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Listen",
+        "fullName": "google.firestore.v1beta1.Firestore.Listen",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "add_target",
+            "type": ".google.firestore.v1beta1.Target"
+          },
+          {
+            "name": "remove_target",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.ListenResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "Listen",
+          "fullName": "google.firestore.v1beta1.Firestore.Listen",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_ListCollectionIds_async",
+      "title": "Firestore listCollectionIds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the collection IDs underneath a document.",
+      "canonical": true,
+      "file": "firestore.list_collection_ids.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCollectionIds",
+        "fullName": "google.firestore.v1beta1.Firestore.ListCollectionIds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.ListCollectionIdsResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "ListCollectionIds",
+          "fullName": "google.firestore.v1beta1.Firestore.ListCollectionIds",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_BatchWrite_async",
+      "title": "Firestore batchWrite Sample",
+      "origin": "API_DEFINITION",
+      "description": " Applies a batch of write operations. The BatchWrite method does not apply the write operations atomically and can apply them out of order. Method does not allow more than one write per document. Each write succeeds or fails independently. See the [BatchWriteResponse][google.firestore.v1beta1.BatchWriteResponse] for the success status of each write. If you require an atomically applied set of writes, use [Commit][google.firestore.v1beta1.Firestore.Commit] instead.",
+      "canonical": true,
+      "file": "firestore.batch_write.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchWrite",
+        "fullName": "google.firestore.v1beta1.Firestore.BatchWrite",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "writes",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.BatchWriteResponse",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "BatchWrite",
+          "fullName": "google.firestore.v1beta1.Firestore.BatchWrite",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1beta1_generated_Firestore_CreateDocument_async",
+      "title": "Firestore createDocument Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new document.",
+      "canonical": true,
+      "file": "firestore.create_document.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDocument",
+        "fullName": "google.firestore.v1beta1.Firestore.CreateDocument",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "collection_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "document_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "document",
+            "type": ".google.firestore.v1beta1.Document"
+          },
+          {
+            "name": "mask",
+            "type": ".google.firestore.v1beta1.DocumentMask"
+          }
+        ],
+        "resultType": ".google.firestore.v1beta1.Document",
+        "client": {
+          "shortName": "FirestoreClient",
+          "fullName": "google.firestore.v1beta1.FirestoreClient"
+        },
+        "method": {
+          "shortName": "CreateDocument",
+          "fullName": "google.firestore.v1beta1.Firestore.CreateDocument",
+          "service": {
+            "shortName": "Firestore",
+            "fullName": "google.firestore.v1beta1.Firestore"
+          }
+        }
+      }
+    }
+  ]
+}

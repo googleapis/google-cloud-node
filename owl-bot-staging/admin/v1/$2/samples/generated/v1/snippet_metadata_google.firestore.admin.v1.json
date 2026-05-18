@@ -1,0 +1,1435 @@
+{
+  "clientLibrary": {
+    "name": "nodejs-admin",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.firestore.admin.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_CreateIndex_async",
+      "title": "FirestoreAdmin createIndex Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a composite index. This returns a [google.longrunning.Operation][google.longrunning.Operation] which may be used to track the status of the creation. The metadata for the operation will be the type [IndexOperationMetadata][google.firestore.admin.v1.IndexOperationMetadata].",
+      "canonical": true,
+      "file": "firestore_admin.create_index.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateIndex",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateIndex",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "index",
+            "type": ".google.firestore.admin.v1.Index"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "CreateIndex",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateIndex",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ListIndexes_async",
+      "title": "FirestoreAdmin listIndexes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists composite indexes.",
+      "canonical": true,
+      "file": "firestore_admin.list_indexes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListIndexes",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListIndexes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.ListIndexesResponse",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ListIndexes",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListIndexes",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_GetIndex_async",
+      "title": "FirestoreAdmin getIndex Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a composite index.",
+      "canonical": true,
+      "file": "firestore_admin.get_index.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIndex",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetIndex",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.Index",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "GetIndex",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetIndex",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_DeleteIndex_async",
+      "title": "FirestoreAdmin deleteIndex Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a composite index.",
+      "canonical": true,
+      "file": "firestore_admin.delete_index.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteIndex",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteIndex",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "DeleteIndex",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteIndex",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_GetField_async",
+      "title": "FirestoreAdmin getField Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the metadata and configuration for a Field.",
+      "canonical": true,
+      "file": "firestore_admin.get_field.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetField",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetField",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.Field",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "GetField",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetField",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_UpdateField_async",
+      "title": "FirestoreAdmin updateField Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a field configuration. Currently, field updates apply only to single field index configuration. However, calls to [FirestoreAdmin.UpdateField][google.firestore.admin.v1.FirestoreAdmin.UpdateField] should provide a field mask to avoid changing any configuration that the caller isn't aware of. The field mask should be specified as: `{ paths: \"index_config\" }`. This call returns a [google.longrunning.Operation][google.longrunning.Operation] which may be used to track the status of the field update. The metadata for the operation will be the type [FieldOperationMetadata][google.firestore.admin.v1.FieldOperationMetadata]. To configure the default field settings for the database, use the special `Field` with resource name: `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*`.",
+      "canonical": true,
+      "file": "firestore_admin.update_field.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateField",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.UpdateField",
+        "async": true,
+        "parameters": [
+          {
+            "name": "field",
+            "type": ".google.firestore.admin.v1.Field"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "UpdateField",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.UpdateField",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ListFields_async",
+      "title": "FirestoreAdmin listFields Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the field configuration and metadata for this database. Currently, [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields] only supports listing fields that have been explicitly overridden. To issue this query, call [FirestoreAdmin.ListFields][google.firestore.admin.v1.FirestoreAdmin.ListFields] with the filter set to `indexConfig.usesAncestorConfig:false` or `ttlConfig:*`.",
+      "canonical": true,
+      "file": "firestore_admin.list_fields.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFields",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListFields",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.ListFieldsResponse",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ListFields",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListFields",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ExportDocuments_async",
+      "title": "FirestoreAdmin exportDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports a copy of all or a subset of documents from Google Cloud Firestore to another storage system, such as Google Cloud Storage. Recent updates to documents may not be reflected in the export. The export occurs in the background and its progress can be monitored and managed via the Operation resource that is created. The output of an export may only be used once the associated operation is done. If an export operation is cancelled before completion it may leave partial data behind in Google Cloud Storage. For more details on export behavior and output format, refer to: https://cloud.google.com/firestore/docs/manage-data/export-import",
+      "canonical": true,
+      "file": "firestore_admin.export_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportDocuments",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ExportDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "collection_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "output_uri_prefix",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "namespace_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "snapshot_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ExportDocuments",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ExportDocuments",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ImportDocuments_async",
+      "title": "FirestoreAdmin importDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports documents into Google Cloud Firestore. Existing documents with the same name are overwritten. The import occurs in the background and its progress can be monitored and managed via the Operation resource that is created. If an ImportDocuments operation is cancelled, it is possible that a subset of the data has already been imported to Cloud Firestore.",
+      "canonical": true,
+      "file": "firestore_admin.import_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportDocuments",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ImportDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "collection_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "input_uri_prefix",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "namespace_ids",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ImportDocuments",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ImportDocuments",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_BulkDeleteDocuments_async",
+      "title": "FirestoreAdmin bulkDeleteDocuments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Bulk deletes a subset of documents from Google Cloud Firestore. Documents created or updated after the underlying system starts to process the request will not be deleted. The bulk delete occurs in the background and its progress can be monitored and managed via the Operation resource that is created. For more details on bulk delete behavior, refer to: https://cloud.google.com/firestore/docs/manage-data/bulk-delete",
+      "canonical": true,
+      "file": "firestore_admin.bulk_delete_documents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BulkDeleteDocuments",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.BulkDeleteDocuments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "collection_ids",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "namespace_ids",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "BulkDeleteDocuments",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.BulkDeleteDocuments",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_CreateDatabase_async",
+      "title": "FirestoreAdmin createDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a database.",
+      "canonical": true,
+      "file": "firestore_admin.create_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDatabase",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "database",
+            "type": ".google.firestore.admin.v1.Database"
+          },
+          {
+            "name": "database_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "CreateDatabase",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateDatabase",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_GetDatabase_async",
+      "title": "FirestoreAdmin getDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information about a database.",
+      "canonical": true,
+      "file": "firestore_admin.get_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDatabase",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.Database",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "GetDatabase",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetDatabase",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ListDatabases_async",
+      "title": "FirestoreAdmin listDatabases Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all the databases in the project.",
+      "canonical": true,
+      "file": "firestore_admin.list_databases.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDatabases",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListDatabases",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "show_deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.ListDatabasesResponse",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ListDatabases",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListDatabases",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_UpdateDatabase_async",
+      "title": "FirestoreAdmin updateDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a database.",
+      "canonical": true,
+      "file": "firestore_admin.update_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDatabase",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.UpdateDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "database",
+            "type": ".google.firestore.admin.v1.Database"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "UpdateDatabase",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.UpdateDatabase",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_DeleteDatabase_async",
+      "title": "FirestoreAdmin deleteDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a database.",
+      "canonical": true,
+      "file": "firestore_admin.delete_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDatabase",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "DeleteDatabase",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteDatabase",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_CreateUserCreds_async",
+      "title": "FirestoreAdmin createUserCreds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a user creds.",
+      "canonical": true,
+      "file": "firestore_admin.create_user_creds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateUserCreds",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateUserCreds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_creds",
+            "type": ".google.firestore.admin.v1.UserCreds"
+          },
+          {
+            "name": "user_creds_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.UserCreds",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "CreateUserCreds",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateUserCreds",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_GetUserCreds_async",
+      "title": "FirestoreAdmin getUserCreds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a user creds resource. Note that the returned resource does not contain the secret value itself.",
+      "canonical": true,
+      "file": "firestore_admin.get_user_creds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetUserCreds",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetUserCreds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.UserCreds",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "GetUserCreds",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetUserCreds",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ListUserCreds_async",
+      "title": "FirestoreAdmin listUserCreds Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all user creds in the database. Note that the returned resource does not contain the secret value itself.",
+      "canonical": true,
+      "file": "firestore_admin.list_user_creds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListUserCreds",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListUserCreds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.ListUserCredsResponse",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ListUserCreds",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListUserCreds",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_EnableUserCreds_async",
+      "title": "FirestoreAdmin enableUserCreds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enables a user creds. No-op if the user creds are already enabled.",
+      "canonical": true,
+      "file": "firestore_admin.enable_user_creds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EnableUserCreds",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.EnableUserCreds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.UserCreds",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "EnableUserCreds",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.EnableUserCreds",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_DisableUserCreds_async",
+      "title": "FirestoreAdmin disableUserCreds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Disables a user creds. No-op if the user creds are already disabled.",
+      "canonical": true,
+      "file": "firestore_admin.disable_user_creds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DisableUserCreds",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.DisableUserCreds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.UserCreds",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "DisableUserCreds",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.DisableUserCreds",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ResetUserPassword_async",
+      "title": "FirestoreAdmin resetUserPassword Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resets the password of a user creds.",
+      "canonical": true,
+      "file": "firestore_admin.reset_user_password.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResetUserPassword",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ResetUserPassword",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.UserCreds",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ResetUserPassword",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ResetUserPassword",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_DeleteUserCreds_async",
+      "title": "FirestoreAdmin deleteUserCreds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a user creds.",
+      "canonical": true,
+      "file": "firestore_admin.delete_user_creds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteUserCreds",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteUserCreds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "DeleteUserCreds",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteUserCreds",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_GetBackup_async",
+      "title": "FirestoreAdmin getBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information about a backup.",
+      "canonical": true,
+      "file": "firestore_admin.get_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackup",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.Backup",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "GetBackup",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetBackup",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ListBackups_async",
+      "title": "FirestoreAdmin listBackups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the backups.",
+      "canonical": true,
+      "file": "firestore_admin.list_backups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackups",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListBackups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.ListBackupsResponse",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ListBackups",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListBackups",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_DeleteBackup_async",
+      "title": "FirestoreAdmin deleteBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a backup.",
+      "canonical": true,
+      "file": "firestore_admin.delete_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackup",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "DeleteBackup",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteBackup",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_RestoreDatabase_async",
+      "title": "FirestoreAdmin restoreDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new database by restoring from an existing backup. The new database must be in the same cloud region or multi-region location as the existing backup. This behaves similar to [FirestoreAdmin.CreateDatabase][google.firestore.admin.v1.FirestoreAdmin.CreateDatabase] except instead of creating a new empty database, a new database is created with the database type, index configuration, and documents from an existing backup. The [long-running operation][google.longrunning.Operation] can be used to track the progress of the restore, with the Operation's [metadata][google.longrunning.Operation.metadata] field type being the [RestoreDatabaseMetadata][google.firestore.admin.v1.RestoreDatabaseMetadata]. The [response][google.longrunning.Operation.response] type is the [Database][google.firestore.admin.v1.Database] if the restore was successful. The new database is not readable or writeable until the LRO has completed.",
+      "canonical": true,
+      "file": "firestore_admin.restore_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreDatabase",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.RestoreDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "database_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "encryption_config",
+            "type": ".google.firestore.admin.v1.Database.EncryptionConfig"
+          },
+          {
+            "name": "tags",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "RestoreDatabase",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.RestoreDatabase",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_CreateBackupSchedule_async",
+      "title": "FirestoreAdmin createBackupSchedule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a backup schedule on a database. At most two backup schedules can be configured on a database, one daily backup schedule and one weekly backup schedule.",
+      "canonical": true,
+      "file": "firestore_admin.create_backup_schedule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBackupSchedule",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateBackupSchedule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup_schedule",
+            "type": ".google.firestore.admin.v1.BackupSchedule"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.BackupSchedule",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "CreateBackupSchedule",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.CreateBackupSchedule",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_GetBackupSchedule_async",
+      "title": "FirestoreAdmin getBackupSchedule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information about a backup schedule.",
+      "canonical": true,
+      "file": "firestore_admin.get_backup_schedule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackupSchedule",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetBackupSchedule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.BackupSchedule",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "GetBackupSchedule",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.GetBackupSchedule",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_ListBackupSchedules_async",
+      "title": "FirestoreAdmin listBackupSchedules Sample",
+      "origin": "API_DEFINITION",
+      "description": " List backup schedules.",
+      "canonical": true,
+      "file": "firestore_admin.list_backup_schedules.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackupSchedules",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListBackupSchedules",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.ListBackupSchedulesResponse",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "ListBackupSchedules",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.ListBackupSchedules",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_UpdateBackupSchedule_async",
+      "title": "FirestoreAdmin updateBackupSchedule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a backup schedule.",
+      "canonical": true,
+      "file": "firestore_admin.update_backup_schedule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBackupSchedule",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.UpdateBackupSchedule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "backup_schedule",
+            "type": ".google.firestore.admin.v1.BackupSchedule"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.firestore.admin.v1.BackupSchedule",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "UpdateBackupSchedule",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.UpdateBackupSchedule",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_DeleteBackupSchedule_async",
+      "title": "FirestoreAdmin deleteBackupSchedule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a backup schedule.",
+      "canonical": true,
+      "file": "firestore_admin.delete_backup_schedule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackupSchedule",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteBackupSchedule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "DeleteBackupSchedule",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.DeleteBackupSchedule",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "firestore_v1_generated_FirestoreAdmin_CloneDatabase_async",
+      "title": "FirestoreAdmin cloneDatabase Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new database by cloning an existing one. The new database must be in the same cloud region or multi-region location as the existing database. This behaves similar to [FirestoreAdmin.CreateDatabase][google.firestore.admin.v1.FirestoreAdmin.CreateDatabase] except instead of creating a new empty database, a new database is created with the database type, index configuration, and documents from an existing database. The [long-running operation][google.longrunning.Operation] can be used to track the progress of the clone, with the Operation's [metadata][google.longrunning.Operation.metadata] field type being the [CloneDatabaseMetadata][google.firestore.admin.v1.CloneDatabaseMetadata]. The [response][google.longrunning.Operation.response] type is the [Database][google.firestore.admin.v1.Database] if the clone was successful. The new database is not readable or writeable until the LRO has completed.",
+      "canonical": true,
+      "file": "firestore_admin.clone_database.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CloneDatabase",
+        "fullName": "google.firestore.admin.v1.FirestoreAdmin.CloneDatabase",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "database_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "pitr_snapshot",
+            "type": ".google.firestore.admin.v1.PitrSnapshot"
+          },
+          {
+            "name": "encryption_config",
+            "type": ".google.firestore.admin.v1.Database.EncryptionConfig"
+          },
+          {
+            "name": "tags",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "FirestoreAdminClient",
+          "fullName": "google.firestore.admin.v1.FirestoreAdminClient"
+        },
+        "method": {
+          "shortName": "CloneDatabase",
+          "fullName": "google.firestore.admin.v1.FirestoreAdmin.CloneDatabase",
+          "service": {
+            "shortName": "FirestoreAdmin",
+            "fullName": "google.firestore.admin.v1.FirestoreAdmin"
+          }
+        }
+      }
+    }
+  ]
+}
