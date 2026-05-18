@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class NativeDashboardServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('chronicle');
@@ -57,9 +64,9 @@ export class NativeDashboardServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  nativeDashboardServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  nativeDashboardServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of NativeDashboardServiceClient.
@@ -100,21 +107,43 @@ export class NativeDashboardServiceClient {
    *     const client = new NativeDashboardServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof NativeDashboardServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof NativeDashboardServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'chronicle.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +168,7 @@ export class NativeDashboardServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +182,7 @@ export class NativeDashboardServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,58 +204,59 @@ export class NativeDashboardServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       bigQueryExportPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/bigQueryExport'
+        'projects/{project}/locations/{location}/instances/{instance}/bigQueryExport',
       ),
       dashboardChartPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}'
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}',
       ),
       dashboardQueryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}'
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}',
       ),
       dataAccessLabelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}',
       ),
       dataAccessScopePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}',
       ),
       dataTablePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}',
       ),
       dataTableOperationErrorsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}',
       ),
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}',
       ),
-      featuredContentNativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}'
-      ),
+      featuredContentNativeDashboardPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
+        ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}'
+        'projects/{project}/locations/{location}/instances/{instance}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       nativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}'
+        'projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       referenceListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}'
+        'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}',
       ),
       retrohuntPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}',
       ),
       rulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}',
       ),
       ruleDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}'
+        'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
       ),
     };
 
@@ -237,14 +264,20 @@ export class NativeDashboardServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listNativeDashboards:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'nativeDashboards')
+      listNativeDashboards: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nativeDashboards',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.chronicle.v1.NativeDashboardService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.chronicle.v1.NativeDashboardService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -275,37 +308,54 @@ export class NativeDashboardServiceClient {
     // Put together the "service stub" for
     // google.cloud.chronicle.v1.NativeDashboardService.
     this.nativeDashboardServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.chronicle.v1.NativeDashboardService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.chronicle.v1.NativeDashboardService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.chronicle.v1.NativeDashboardService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.chronicle.v1
+            .NativeDashboardService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const nativeDashboardServiceStubMethods =
-        ['createNativeDashboard', 'getNativeDashboard', 'listNativeDashboards', 'updateNativeDashboard', 'duplicateNativeDashboard', 'deleteNativeDashboard', 'addChart', 'removeChart', 'editChart', 'duplicateChart', 'exportNativeDashboards', 'importNativeDashboards'];
+    const nativeDashboardServiceStubMethods = [
+      'createNativeDashboard',
+      'getNativeDashboard',
+      'listNativeDashboards',
+      'updateNativeDashboard',
+      'duplicateNativeDashboard',
+      'deleteNativeDashboard',
+      'addChart',
+      'removeChart',
+      'editChart',
+      'duplicateChart',
+      'exportNativeDashboards',
+      'importNativeDashboards',
+    ];
     for (const methodName of nativeDashboardServiceStubMethods) {
       const callPromise = this.nativeDashboardServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -320,8 +370,14 @@ export class NativeDashboardServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'chronicle.googleapis.com';
   }
@@ -332,8 +388,14 @@ export class NativeDashboardServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'chronicle.googleapis.com';
   }
@@ -367,7 +429,7 @@ export class NativeDashboardServiceClient {
     return [
       'https://www.googleapis.com/auth/chronicle',
       'https://www.googleapis.com/auth/chronicle.readonly',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -377,8 +439,9 @@ export class NativeDashboardServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -389,1204 +452,1700 @@ export class NativeDashboardServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Create a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this dashboard will be created.
- *   Format: projects/{project}/locations/{location}/instances/{instance}
- * @param {google.cloud.chronicle.v1.NativeDashboard} request.nativeDashboard
- *   Required. The dashboard to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.create_native_dashboard.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_CreateNativeDashboard_async
- */
+  /**
+   * Create a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this dashboard will be created.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {google.cloud.chronicle.v1.NativeDashboard} request.nativeDashboard
+   *   Required. The dashboard to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.create_native_dashboard.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_CreateNativeDashboard_async
+   */
   createNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      (
+        | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      (
+        | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createNativeDashboard request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createNativeDashboard(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createNativeDashboard response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createNativeDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          (
+            | protos.google.cloud.chronicle.v1.ICreateNativeDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createNativeDashboard response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The dashboard name to fetch.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
- *   Optional. View indicates the scope of fields to populate when returning the
- *   dashboard resource. If unspecified, defaults to the basic view.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.get_native_dashboard.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_GetNativeDashboard_async
- */
+  /**
+   * Get a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The dashboard name to fetch.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
+   *   Optional. View indicates the scope of fields to populate when returning the
+   *   dashboard resource. If unspecified, defaults to the basic view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.get_native_dashboard.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_GetNativeDashboard_async
+   */
   getNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getNativeDashboard request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          | protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getNativeDashboard(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getNativeDashboard response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getNativeDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          (
+            | protos.google.cloud.chronicle.v1.IGetNativeDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getNativeDashboard response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Update a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.chronicle.v1.NativeDashboard} request.nativeDashboard
- *   Required. The dashboard to update.
- *
- *   The dashboard's `name` field is used to identify the dashboard to update.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. LINT.IfChange(update_mask_values)
- *   The list of fields to update.
- *   Supported paths are -
- *   display_name
- *   description
- *   definition.filters
- *   definition.charts
- *   type
- *   access
- *   dashboard_user_data.is_pinned
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.update_native_dashboard.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_UpdateNativeDashboard_async
- */
+  /**
+   * Update a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.chronicle.v1.NativeDashboard} request.nativeDashboard
+   *   Required. The dashboard to update.
+   *
+   *   The dashboard's `name` field is used to identify the dashboard to update.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. LINT.IfChange(update_mask_values)
+   *   The list of fields to update.
+   *   Supported paths are -
+   *   display_name
+   *   description
+   *   definition.filters
+   *   definition.charts
+   *   type
+   *   access
+   *   dashboard_user_data.is_pinned
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.update_native_dashboard.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_UpdateNativeDashboard_async
+   */
   updateNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      (
+        | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      (
+        | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'native_dashboard.name': request.nativeDashboard!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'native_dashboard.name': request.nativeDashboard!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateNativeDashboard request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateNativeDashboard(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateNativeDashboard response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateNativeDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          (
+            | protos.google.cloud.chronicle.v1.IUpdateNativeDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNativeDashboard response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Duplicate a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The dashboard name to duplicate.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {google.cloud.chronicle.v1.NativeDashboard} request.nativeDashboard
- *   Required. Any fields that need modification can be passed through this like
- *   name, description etc.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.duplicate_native_dashboard.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_DuplicateNativeDashboard_async
- */
+  /**
+   * Duplicate a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The dashboard name to duplicate.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {google.cloud.chronicle.v1.NativeDashboard} request.nativeDashboard
+   *   Required. Any fields that need modification can be passed through this like
+   *   name, description etc.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.duplicate_native_dashboard.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_DuplicateNativeDashboard_async
+   */
   duplicateNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      (
+        | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   duplicateNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   duplicateNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   duplicateNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      (
+        | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('duplicateNativeDashboard request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('duplicateNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.duplicateNativeDashboard(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('duplicateNativeDashboard response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .duplicateNativeDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          (
+            | protos.google.cloud.chronicle.v1.IDuplicateNativeDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('duplicateNativeDashboard response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Delete a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The dashboard name to delete.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.delete_native_dashboard.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_DeleteNativeDashboard_async
- */
+  /**
+   * Delete a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The dashboard name to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.delete_native_dashboard.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_DeleteNativeDashboard_async
+   */
   deleteNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteNativeDashboard(
-      request: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteNativeDashboard(
-      request?: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteNativeDashboard request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteNativeDashboard response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteNativeDashboard(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteNativeDashboard response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteNativeDashboard(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.chronicle.v1.IDeleteNativeDashboardRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteNativeDashboard response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Add chart in a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The dashboard name to add chart in.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {google.cloud.chronicle.v1.DashboardQuery} [request.dashboardQuery]
- *   Optional. Query used to create the chart.
- * @param {google.cloud.chronicle.v1.DashboardChart} request.dashboardChart
- *   Required. Chart to be added to the dashboard.
- * @param {google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout} request.chartLayout
- *   Required. ChartLayout for newly added chart.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.AddChartResponse|AddChartResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.add_chart.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_AddChart_async
- */
+  /**
+   * Add chart in a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The dashboard name to add chart in.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {google.cloud.chronicle.v1.DashboardQuery} [request.dashboardQuery]
+   *   Optional. Query used to create the chart.
+   * @param {google.cloud.chronicle.v1.DashboardChart} request.dashboardChart
+   *   Required. Chart to be added to the dashboard.
+   * @param {google.cloud.chronicle.v1.DashboardDefinition.ChartConfig.ChartLayout} request.chartLayout
+   *   Required. ChartLayout for newly added chart.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.AddChartResponse|AddChartResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.add_chart.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_AddChart_async
+   */
   addChart(
-      request?: protos.google.cloud.chronicle.v1.IAddChartRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IAddChartResponse,
-        protos.google.cloud.chronicle.v1.IAddChartRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IAddChartRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IAddChartResponse,
+      protos.google.cloud.chronicle.v1.IAddChartRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   addChart(
-      request: protos.google.cloud.chronicle.v1.IAddChartRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IAddChartResponse,
-          protos.google.cloud.chronicle.v1.IAddChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IAddChartRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IAddChartResponse,
+      protos.google.cloud.chronicle.v1.IAddChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   addChart(
-      request: protos.google.cloud.chronicle.v1.IAddChartRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IAddChartResponse,
-          protos.google.cloud.chronicle.v1.IAddChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IAddChartRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IAddChartResponse,
+      protos.google.cloud.chronicle.v1.IAddChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   addChart(
-      request?: protos.google.cloud.chronicle.v1.IAddChartRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IAddChartRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IAddChartResponse,
-          protos.google.cloud.chronicle.v1.IAddChartRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IAddChartResponse,
-          protos.google.cloud.chronicle.v1.IAddChartRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IAddChartResponse,
-        protos.google.cloud.chronicle.v1.IAddChartRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.chronicle.v1.IAddChartRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IAddChartResponse,
+      protos.google.cloud.chronicle.v1.IAddChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IAddChartResponse,
+      protos.google.cloud.chronicle.v1.IAddChartRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('addChart request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IAddChartResponse,
-        protos.google.cloud.chronicle.v1.IAddChartRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IAddChartResponse,
+          protos.google.cloud.chronicle.v1.IAddChartRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('addChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.addChart(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IAddChartResponse,
-        protos.google.cloud.chronicle.v1.IAddChartRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('addChart response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .addChart(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IAddChartResponse,
+          protos.google.cloud.chronicle.v1.IAddChartRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addChart response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Remove chart from a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The dashboard name to remove chart from.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {string} request.dashboardChart
- *   Required. The dashboard chart name to remove.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.remove_chart.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_RemoveChart_async
- */
+  /**
+   * Remove chart from a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The dashboard name to remove chart from.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {string} request.dashboardChart
+   *   Required. The dashboard chart name to remove.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.remove_chart.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_RemoveChart_async
+   */
   removeChart(
-      request?: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IRemoveChartRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      protos.google.cloud.chronicle.v1.IRemoveChartRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   removeChart(
-      request: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IRemoveChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      protos.google.cloud.chronicle.v1.IRemoveChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   removeChart(
-      request: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IRemoveChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      protos.google.cloud.chronicle.v1.IRemoveChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   removeChart(
-      request?: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IRemoveChartRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IRemoveChartRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.INativeDashboard,
-          protos.google.cloud.chronicle.v1.IRemoveChartRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IRemoveChartRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IRemoveChartRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      protos.google.cloud.chronicle.v1.IRemoveChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard,
+      protos.google.cloud.chronicle.v1.IRemoveChartRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('removeChart request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IRemoveChartRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          | protos.google.cloud.chronicle.v1.IRemoveChartRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('removeChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.removeChart(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.INativeDashboard,
-        protos.google.cloud.chronicle.v1.IRemoveChartRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('removeChart response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .removeChart(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.INativeDashboard,
+          protos.google.cloud.chronicle.v1.IRemoveChartRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removeChart response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Edit chart in a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The dashboard name to edit chart in.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {google.cloud.chronicle.v1.DashboardQuery} [request.dashboardQuery]
- *   Optional. Query for the edited chart.
- * @param {google.cloud.chronicle.v1.DashboardChart} [request.dashboardChart]
- *   Optional. Edited chart.
- * @param {google.protobuf.FieldMask} request.editMask
- *   Required. The list of fields to edit for chart and query.
- *   Supported paths in chart are -
- *   dashboard_chart.display_name
- *   dashboard_chart.description
- *   dashboard_chart.chart_datasource.data_sources
- *   dashboard_chart.visualization
- *   dashboard_chart.visualization.button
- *   dashboard_chart.visualization.markdown
- *   dashboard_chart.drill_down_config
- *   Supported paths in query are -
- *   dashboard_query.query
- *   dashboard_query.input
- * @param {number[]} [request.languageFeatures]
- *   Optional. Language Features present in the query.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.EditChartResponse|EditChartResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.edit_chart.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_EditChart_async
- */
+  /**
+   * Edit chart in a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The dashboard name to edit chart in.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {google.cloud.chronicle.v1.DashboardQuery} [request.dashboardQuery]
+   *   Optional. Query for the edited chart.
+   * @param {google.cloud.chronicle.v1.DashboardChart} [request.dashboardChart]
+   *   Optional. Edited chart.
+   * @param {google.protobuf.FieldMask} request.editMask
+   *   Required. The list of fields to edit for chart and query.
+   *   Supported paths in chart are -
+   *   dashboard_chart.display_name
+   *   dashboard_chart.description
+   *   dashboard_chart.chart_datasource.data_sources
+   *   dashboard_chart.visualization
+   *   dashboard_chart.visualization.button
+   *   dashboard_chart.visualization.markdown
+   *   dashboard_chart.drill_down_config
+   *   Supported paths in query are -
+   *   dashboard_query.query
+   *   dashboard_query.input
+   * @param {number[]} [request.languageFeatures]
+   *   Optional. Language Features present in the query.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.EditChartResponse|EditChartResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.edit_chart.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_EditChart_async
+   */
   editChart(
-      request?: protos.google.cloud.chronicle.v1.IEditChartRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IEditChartResponse,
-        protos.google.cloud.chronicle.v1.IEditChartRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IEditChartRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IEditChartResponse,
+      protos.google.cloud.chronicle.v1.IEditChartRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   editChart(
-      request: protos.google.cloud.chronicle.v1.IEditChartRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IEditChartResponse,
-          protos.google.cloud.chronicle.v1.IEditChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IEditChartRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IEditChartResponse,
+      protos.google.cloud.chronicle.v1.IEditChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   editChart(
-      request: protos.google.cloud.chronicle.v1.IEditChartRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IEditChartResponse,
-          protos.google.cloud.chronicle.v1.IEditChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IEditChartRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IEditChartResponse,
+      protos.google.cloud.chronicle.v1.IEditChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   editChart(
-      request?: protos.google.cloud.chronicle.v1.IEditChartRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IEditChartRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IEditChartResponse,
-          protos.google.cloud.chronicle.v1.IEditChartRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IEditChartResponse,
-          protos.google.cloud.chronicle.v1.IEditChartRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IEditChartResponse,
-        protos.google.cloud.chronicle.v1.IEditChartRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.chronicle.v1.IEditChartRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IEditChartResponse,
+      protos.google.cloud.chronicle.v1.IEditChartRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IEditChartResponse,
+      protos.google.cloud.chronicle.v1.IEditChartRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('editChart request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IEditChartResponse,
-        protos.google.cloud.chronicle.v1.IEditChartRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IEditChartResponse,
+          protos.google.cloud.chronicle.v1.IEditChartRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('editChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.editChart(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IEditChartResponse,
-        protos.google.cloud.chronicle.v1.IEditChartRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('editChart response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .editChart(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IEditChartResponse,
+          protos.google.cloud.chronicle.v1.IEditChartRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('editChart response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Duplicate chart in a dashboard.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The dashboard name that involves chart duplication.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
- * @param {string} request.dashboardChart
- *   Required. The dashboard chart name to duplicate.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DuplicateChartResponse|DuplicateChartResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.duplicate_chart.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_DuplicateChart_async
- */
+  /**
+   * Duplicate chart in a dashboard.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The dashboard name that involves chart duplication.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}
+   * @param {string} request.dashboardChart
+   *   Required. The dashboard chart name to duplicate.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DuplicateChartResponse|DuplicateChartResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.duplicate_chart.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_DuplicateChart_async
+   */
   duplicateChart(
-      request?: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-        protos.google.cloud.chronicle.v1.IDuplicateChartRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
+      protos.google.cloud.chronicle.v1.IDuplicateChartRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   duplicateChart(
-      request: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-          protos.google.cloud.chronicle.v1.IDuplicateChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
+      | protos.google.cloud.chronicle.v1.IDuplicateChartRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   duplicateChart(
-      request: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-          protos.google.cloud.chronicle.v1.IDuplicateChartRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
+      | protos.google.cloud.chronicle.v1.IDuplicateChartRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   duplicateChart(
-      request?: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IDuplicateChartRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-          protos.google.cloud.chronicle.v1.IDuplicateChartRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-          protos.google.cloud.chronicle.v1.IDuplicateChartRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-        protos.google.cloud.chronicle.v1.IDuplicateChartRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IDuplicateChartRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
+      | protos.google.cloud.chronicle.v1.IDuplicateChartRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
+      protos.google.cloud.chronicle.v1.IDuplicateChartRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('duplicateChart request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-        protos.google.cloud.chronicle.v1.IDuplicateChartRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
+          | protos.google.cloud.chronicle.v1.IDuplicateChartRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('duplicateChart response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.duplicateChart(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
-        protos.google.cloud.chronicle.v1.IDuplicateChartRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('duplicateChart response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .duplicateChart(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IDuplicateChartResponse,
+          protos.google.cloud.chronicle.v1.IDuplicateChartRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('duplicateChart response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Exports the dashboards.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource that the dashboards to be exported belong to.
- *   Format: projects/{project}/locations/{location}/instances/{instance}
- * @param {string[]} request.names
- *   Required. The resource names of the dashboards to export.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ExportNativeDashboardsResponse|ExportNativeDashboardsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.export_native_dashboards.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_ExportNativeDashboards_async
- */
+  /**
+   * Exports the dashboards.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource that the dashboards to be exported belong to.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {string[]} request.names
+   *   Required. The resource names of the dashboards to export.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ExportNativeDashboardsResponse|ExportNativeDashboardsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.export_native_dashboards.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_ExportNativeDashboards_async
+   */
   exportNativeDashboards(
-      request?: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
+      (
+        | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   exportNativeDashboards(
-      request: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
+      | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportNativeDashboards(
-      request: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
+      | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportNativeDashboards(
-      request?: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
+      | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
+      (
+        | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('exportNativeDashboards request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
+          | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('exportNativeDashboards response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.exportNativeDashboards(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('exportNativeDashboards response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .exportNativeDashboards(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IExportNativeDashboardsResponse,
+          (
+            | protos.google.cloud.chronicle.v1.IExportNativeDashboardsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('exportNativeDashboards response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Imports the dashboards.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource where this dashboard will be created.
- *   Format: projects/{project}/locations/{location}/instances/{instance}
- * @param {google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource} request.source
- *   Required. The data will imported from this proto.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ImportNativeDashboardsResponse|ImportNativeDashboardsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.import_native_dashboards.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_ImportNativeDashboards_async
- */
+  /**
+   * Imports the dashboards.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this dashboard will be created.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {google.cloud.chronicle.v1.ImportNativeDashboardsInlineSource} request.source
+   *   Required. The data will imported from this proto.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ImportNativeDashboardsResponse|ImportNativeDashboardsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.import_native_dashboards.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_ImportNativeDashboards_async
+   */
   importNativeDashboards(
-      request?: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
+      (
+        | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   importNativeDashboards(
-      request: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
+      | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importNativeDashboards(
-      request: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
+      | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importNativeDashboards(
-      request?: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-          protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
+      | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
+      (
+        | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('importNativeDashboards request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
+          | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('importNativeDashboards response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.importNativeDashboards(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
-        protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('importNativeDashboards response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .importNativeDashboards(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IImportNativeDashboardsResponse,
+          (
+            | protos.google.cloud.chronicle.v1.IImportNativeDashboardsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('importNativeDashboards response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * List all dashboards.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent owning this dashboard collection.
- *   Format: projects/{project}/locations/{location}/instances/{instance}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of dashboards to return. The service may
- *   return fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDashboards` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDashboards` must
- *   match the call that provided the page token.
- * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
- *   Optional. View indicates the scope of fields to populate when returning the
- *   dashboard resource. If unspecified, defaults to the basic view.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listNativeDashboardsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * List all dashboards.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent owning this dashboard collection.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of dashboards to return. The service may
+   *   return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDashboards` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDashboards` must
+   *   match the call that provided the page token.
+   * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
+   *   Optional. View indicates the scope of fields to populate when returning the
+   *   dashboard resource. If unspecified, defaults to the basic view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNativeDashboardsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNativeDashboards(
-      request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard[],
-        protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest|null,
-        protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard[],
+      protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest | null,
+      protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse,
+    ]
+  >;
   listNativeDashboards(
-      request: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-          protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.INativeDashboard>): void;
+    request: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+      | protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.chronicle.v1.INativeDashboard
+    >,
+  ): void;
   listNativeDashboards(
-      request: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-          protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.INativeDashboard>): void;
+    request: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+      | protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.chronicle.v1.INativeDashboard
+    >,
+  ): void;
   listNativeDashboards(
-      request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-          protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.INativeDashboard>,
-      callback?: PaginationCallback<
-          protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-          protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse|null|undefined,
-          protos.google.cloud.chronicle.v1.INativeDashboard>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.INativeDashboard[],
-        protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest|null,
-        protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
+          | null
+          | undefined,
+          protos.google.cloud.chronicle.v1.INativeDashboard
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+      | protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
+      | null
+      | undefined,
+      protos.google.cloud.chronicle.v1.INativeDashboard
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.INativeDashboard[],
+      protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest | null,
+      protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-      protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse|null|undefined,
-      protos.google.cloud.chronicle.v1.INativeDashboard>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+          | protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
+          | null
+          | undefined,
+          protos.google.cloud.chronicle.v1.INativeDashboard
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listNativeDashboards values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1595,124 +2154,128 @@ export class NativeDashboardServiceClient {
     this._log.info('listNativeDashboards request %j', request);
     return this.innerApiCalls
       .listNativeDashboards(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.chronicle.v1.INativeDashboard[],
-        protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest|null,
-        protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse
-      ]) => {
-        this._log.info('listNativeDashboards values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.chronicle.v1.INativeDashboard[],
+          protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest | null,
+          protos.google.cloud.chronicle.v1.IListNativeDashboardsResponse,
+        ]) => {
+          this._log.info('listNativeDashboards values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listNativeDashboards`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent owning this dashboard collection.
- *   Format: projects/{project}/locations/{location}/instances/{instance}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of dashboards to return. The service may
- *   return fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDashboards` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDashboards` must
- *   match the call that provided the page token.
- * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
- *   Optional. View indicates the scope of fields to populate when returning the
- *   dashboard resource. If unspecified, defaults to the basic view.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listNativeDashboardsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listNativeDashboards`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent owning this dashboard collection.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of dashboards to return. The service may
+   *   return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDashboards` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDashboards` must
+   *   match the call that provided the page token.
+   * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
+   *   Optional. View indicates the scope of fields to populate when returning the
+   *   dashboard resource. If unspecified, defaults to the basic view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNativeDashboardsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listNativeDashboardsStream(
-      request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNativeDashboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNativeDashboards stream %j', request);
     return this.descriptors.page.listNativeDashboards.createStream(
       this.innerApiCalls.listNativeDashboards as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listNativeDashboards`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent owning this dashboard collection.
- *   Format: projects/{project}/locations/{location}/instances/{instance}
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of dashboards to return. The service may
- *   return fewer than this value.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDashboards` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDashboards` must
- *   match the call that provided the page token.
- * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
- *   Optional. View indicates the scope of fields to populate when returning the
- *   dashboard resource. If unspecified, defaults to the basic view.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/native_dashboard_service.list_native_dashboards.js</caption>
- * region_tag:chronicle_v1_generated_NativeDashboardService_ListNativeDashboards_async
- */
+  /**
+   * Equivalent to `listNativeDashboards`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent owning this dashboard collection.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of dashboards to return. The service may
+   *   return fewer than this value.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDashboards` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDashboards` must
+   *   match the call that provided the page token.
+   * @param {google.cloud.chronicle.v1.NativeDashboardView} [request.view]
+   *   Optional. View indicates the scope of fields to populate when returning the
+   *   dashboard resource. If unspecified, defaults to the basic view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.chronicle.v1.NativeDashboard|NativeDashboard}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_dashboard_service.list_native_dashboards.js</caption>
+   * region_tag:chronicle_v1_generated_NativeDashboardService_ListNativeDashboards_async
+   */
   listNativeDashboardsAsync(
-      request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.chronicle.v1.INativeDashboard>{
+    request?: protos.google.cloud.chronicle.v1.IListNativeDashboardsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.chronicle.v1.INativeDashboard> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listNativeDashboards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listNativeDashboards iterate %j', request);
     return this.descriptors.page.listNativeDashboards.asyncIterate(
       this.innerApiCalls['listNativeDashboards'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.chronicle.v1.INativeDashboard>;
   }
   // --------------------
@@ -1727,7 +2290,7 @@ export class NativeDashboardServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  bigQueryExportPath(project:string,location:string,instance:string) {
+  bigQueryExportPath(project: string, location: string, instance: string) {
     return this.pathTemplates.bigQueryExportPathTemplate.render({
       project: project,
       location: location,
@@ -1743,7 +2306,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).project;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).project;
   }
 
   /**
@@ -1754,7 +2319,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).location;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).location;
   }
 
   /**
@@ -1765,7 +2332,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).instance;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).instance;
   }
 
   /**
@@ -1777,7 +2346,12 @@ export class NativeDashboardServiceClient {
    * @param {string} chart
    * @returns {string} Resource name string.
    */
-  dashboardChartPath(project:string,location:string,instance:string,chart:string) {
+  dashboardChartPath(
+    project: string,
+    location: string,
+    instance: string,
+    chart: string,
+  ) {
     return this.pathTemplates.dashboardChartPathTemplate.render({
       project: project,
       location: location,
@@ -1794,7 +2368,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).project;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).project;
   }
 
   /**
@@ -1805,7 +2381,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).location;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).location;
   }
 
   /**
@@ -1816,7 +2394,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).instance;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).instance;
   }
 
   /**
@@ -1827,7 +2407,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the chart.
    */
   matchChartFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).chart;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).chart;
   }
 
   /**
@@ -1839,7 +2421,12 @@ export class NativeDashboardServiceClient {
    * @param {string} query
    * @returns {string} Resource name string.
    */
-  dashboardQueryPath(project:string,location:string,instance:string,query:string) {
+  dashboardQueryPath(
+    project: string,
+    location: string,
+    instance: string,
+    query: string,
+  ) {
     return this.pathTemplates.dashboardQueryPathTemplate.render({
       project: project,
       location: location,
@@ -1856,7 +2443,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).project;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).project;
   }
 
   /**
@@ -1867,7 +2456,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).location;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).location;
   }
 
   /**
@@ -1878,7 +2469,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).instance;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).instance;
   }
 
   /**
@@ -1889,7 +2482,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the query.
    */
   matchQueryFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).query;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).query;
   }
 
   /**
@@ -1901,7 +2496,12 @@ export class NativeDashboardServiceClient {
    * @param {string} data_access_label
    * @returns {string} Resource name string.
    */
-  dataAccessLabelPath(project:string,location:string,instance:string,dataAccessLabel:string) {
+  dataAccessLabelPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataAccessLabel: string,
+  ) {
     return this.pathTemplates.dataAccessLabelPathTemplate.render({
       project: project,
       location: location,
@@ -1918,7 +2518,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).project;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).project;
   }
 
   /**
@@ -1929,7 +2531,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).location;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).location;
   }
 
   /**
@@ -1940,7 +2544,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).instance;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).instance;
   }
 
   /**
@@ -1951,7 +2557,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the data_access_label.
    */
   matchDataAccessLabelFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).data_access_label;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).data_access_label;
   }
 
   /**
@@ -1963,7 +2571,12 @@ export class NativeDashboardServiceClient {
    * @param {string} data_access_scope
    * @returns {string} Resource name string.
    */
-  dataAccessScopePath(project:string,location:string,instance:string,dataAccessScope:string) {
+  dataAccessScopePath(
+    project: string,
+    location: string,
+    instance: string,
+    dataAccessScope: string,
+  ) {
     return this.pathTemplates.dataAccessScopePathTemplate.render({
       project: project,
       location: location,
@@ -1980,7 +2593,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).project;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).project;
   }
 
   /**
@@ -1991,7 +2606,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).location;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).location;
   }
 
   /**
@@ -2002,7 +2619,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).instance;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).instance;
   }
 
   /**
@@ -2013,7 +2632,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the data_access_scope.
    */
   matchDataAccessScopeFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).data_access_scope;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).data_access_scope;
   }
 
   /**
@@ -2025,7 +2646,12 @@ export class NativeDashboardServiceClient {
    * @param {string} data_table
    * @returns {string} Resource name string.
    */
-  dataTablePath(project:string,location:string,instance:string,dataTable:string) {
+  dataTablePath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTable: string,
+  ) {
     return this.pathTemplates.dataTablePathTemplate.render({
       project: project,
       location: location,
@@ -2042,7 +2668,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).project;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .project;
   }
 
   /**
@@ -2053,7 +2680,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).location;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .location;
   }
 
   /**
@@ -2064,7 +2692,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).instance;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .instance;
   }
 
   /**
@@ -2075,7 +2704,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the data_table.
    */
   matchDataTableFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).data_table;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .data_table;
   }
 
   /**
@@ -2087,7 +2717,12 @@ export class NativeDashboardServiceClient {
    * @param {string} data_table_operation_errors
    * @returns {string} Resource name string.
    */
-  dataTableOperationErrorsPath(project:string,location:string,instance:string,dataTableOperationErrors:string) {
+  dataTableOperationErrorsPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTableOperationErrors: string,
+  ) {
     return this.pathTemplates.dataTableOperationErrorsPathTemplate.render({
       project: project,
       location: location,
@@ -2103,8 +2738,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).project;
+  matchProjectFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).project;
   }
 
   /**
@@ -2114,8 +2753,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).location;
+  matchLocationFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).location;
   }
 
   /**
@@ -2125,8 +2768,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the instance.
    */
-  matchInstanceFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).instance;
+  matchInstanceFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).instance;
   }
 
   /**
@@ -2136,8 +2783,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the data_table_operation_errors.
    */
-  matchDataTableOperationErrorsFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).data_table_operation_errors;
+  matchDataTableOperationErrorsFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).data_table_operation_errors;
   }
 
   /**
@@ -2150,7 +2801,13 @@ export class NativeDashboardServiceClient {
    * @param {string} data_table_row
    * @returns {string} Resource name string.
    */
-  dataTableRowPath(project:string,location:string,instance:string,dataTable:string,dataTableRow:string) {
+  dataTableRowPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTable: string,
+    dataTableRow: string,
+  ) {
     return this.pathTemplates.dataTableRowPathTemplate.render({
       project: project,
       location: location,
@@ -2168,7 +2825,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).project;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .project;
   }
 
   /**
@@ -2179,7 +2837,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).location;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .location;
   }
 
   /**
@@ -2190,7 +2849,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).instance;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .instance;
   }
 
   /**
@@ -2201,7 +2861,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the data_table.
    */
   matchDataTableFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .data_table;
   }
 
   /**
@@ -2212,7 +2873,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the data_table_row.
    */
   matchDataTableRowFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table_row;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .data_table_row;
   }
 
   /**
@@ -2224,13 +2886,20 @@ export class NativeDashboardServiceClient {
    * @param {string} featured_content_native_dashboard
    * @returns {string} Resource name string.
    */
-  featuredContentNativeDashboardPath(project:string,location:string,instance:string,featuredContentNativeDashboard:string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.render({
-      project: project,
-      location: location,
-      instance: instance,
-      featured_content_native_dashboard: featuredContentNativeDashboard,
-    });
+  featuredContentNativeDashboardPath(
+    project: string,
+    location: string,
+    instance: string,
+    featuredContentNativeDashboard: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        featured_content_native_dashboard: featuredContentNativeDashboard,
+      },
+    );
   }
 
   /**
@@ -2240,8 +2909,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).project;
+  matchProjectFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).project;
   }
 
   /**
@@ -2251,8 +2924,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).location;
+  matchLocationFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).location;
   }
 
   /**
@@ -2262,8 +2939,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the instance.
    */
-  matchInstanceFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).instance;
+  matchInstanceFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).instance;
   }
 
   /**
@@ -2273,8 +2954,12 @@ export class NativeDashboardServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the featured_content_native_dashboard.
    */
-  matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).featured_content_native_dashboard;
+  matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).featured_content_native_dashboard;
   }
 
   /**
@@ -2285,7 +2970,7 @@ export class NativeDashboardServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,instance:string) {
+  instancePath(project: string, location: string, instance: string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -2333,7 +3018,7 @@ export class NativeDashboardServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2371,7 +3056,12 @@ export class NativeDashboardServiceClient {
    * @param {string} dashboard
    * @returns {string} Resource name string.
    */
-  nativeDashboardPath(project:string,location:string,instance:string,dashboard:string) {
+  nativeDashboardPath(
+    project: string,
+    location: string,
+    instance: string,
+    dashboard: string,
+  ) {
     return this.pathTemplates.nativeDashboardPathTemplate.render({
       project: project,
       location: location,
@@ -2388,7 +3078,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).project;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).project;
   }
 
   /**
@@ -2399,7 +3091,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).location;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).location;
   }
 
   /**
@@ -2410,7 +3104,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).instance;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).instance;
   }
 
   /**
@@ -2421,7 +3117,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the dashboard.
    */
   matchDashboardFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).dashboard;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).dashboard;
   }
 
   /**
@@ -2430,7 +3128,7 @@ export class NativeDashboardServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2456,7 +3154,12 @@ export class NativeDashboardServiceClient {
    * @param {string} reference_list
    * @returns {string} Resource name string.
    */
-  referenceListPath(project:string,location:string,instance:string,referenceList:string) {
+  referenceListPath(
+    project: string,
+    location: string,
+    instance: string,
+    referenceList: string,
+  ) {
     return this.pathTemplates.referenceListPathTemplate.render({
       project: project,
       location: location,
@@ -2473,7 +3176,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).project;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .project;
   }
 
   /**
@@ -2484,7 +3188,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).location;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .location;
   }
 
   /**
@@ -2495,7 +3200,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).instance;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .instance;
   }
 
   /**
@@ -2506,7 +3212,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the reference_list.
    */
   matchReferenceListFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).reference_list;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .reference_list;
   }
 
   /**
@@ -2519,7 +3226,13 @@ export class NativeDashboardServiceClient {
    * @param {string} retrohunt
    * @returns {string} Resource name string.
    */
-  retrohuntPath(project:string,location:string,instance:string,rule:string,retrohunt:string) {
+  retrohuntPath(
+    project: string,
+    location: string,
+    instance: string,
+    rule: string,
+    retrohunt: string,
+  ) {
     return this.pathTemplates.retrohuntPathTemplate.render({
       project: project,
       location: location,
@@ -2537,7 +3250,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).project;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .project;
   }
 
   /**
@@ -2548,7 +3262,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).location;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .location;
   }
 
   /**
@@ -2559,7 +3274,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).instance;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .instance;
   }
 
   /**
@@ -2581,7 +3297,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the retrohunt.
    */
   matchRetrohuntFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).retrohunt;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .retrohunt;
   }
 
   /**
@@ -2593,7 +3310,7 @@ export class NativeDashboardServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(project:string,location:string,instance:string,rule:string) {
+  rulePath(project: string, location: string, instance: string, rule: string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -2655,7 +3372,12 @@ export class NativeDashboardServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  ruleDeploymentPath(project:string,location:string,instance:string,rule:string) {
+  ruleDeploymentPath(
+    project: string,
+    location: string,
+    instance: string,
+    rule: string,
+  ) {
     return this.pathTemplates.ruleDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -2672,7 +3394,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).project;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).project;
   }
 
   /**
@@ -2683,7 +3407,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).location;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).location;
   }
 
   /**
@@ -2694,7 +3420,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).instance;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).instance;
   }
 
   /**
@@ -2705,7 +3433,9 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the rule.
    */
   matchRuleFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).rule;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).rule;
   }
 
   /**
@@ -2717,7 +3447,12 @@ export class NativeDashboardServiceClient {
    * @param {string} watchlist
    * @returns {string} Resource name string.
    */
-  watchlistPath(project:string,location:string,instance:string,watchlist:string) {
+  watchlistPath(
+    project: string,
+    location: string,
+    instance: string,
+    watchlist: string,
+  ) {
     return this.pathTemplates.watchlistPathTemplate.render({
       project: project,
       location: location,
@@ -2734,7 +3469,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).project;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .project;
   }
 
   /**
@@ -2745,7 +3481,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).location;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .location;
   }
 
   /**
@@ -2756,7 +3493,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).instance;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .instance;
   }
 
   /**
@@ -2767,7 +3505,8 @@ export class NativeDashboardServiceClient {
    * @returns {string} A string representing the watchlist.
    */
   matchWatchlistFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).watchlist;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .watchlist;
   }
 
   /**
@@ -2778,7 +3517,7 @@ export class NativeDashboardServiceClient {
    */
   close(): Promise<void> {
     if (this.nativeDashboardServiceStub && !this._terminated) {
-      return this.nativeDashboardServiceStub.then(stub => {
+      return this.nativeDashboardServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

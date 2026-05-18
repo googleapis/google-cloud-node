@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +49,7 @@ export class DashboardQueryServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('chronicle');
@@ -57,9 +62,9 @@ export class DashboardQueryServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  dashboardQueryServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  dashboardQueryServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DashboardQueryServiceClient.
@@ -100,21 +105,43 @@ export class DashboardQueryServiceClient {
    *     const client = new DashboardQueryServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof DashboardQueryServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    const staticMembers = this
+      .constructor as typeof DashboardQueryServiceClient;
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'chronicle.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +166,7 @@ export class DashboardQueryServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +180,7 @@ export class DashboardQueryServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,65 +202,69 @@ export class DashboardQueryServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       bigQueryExportPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/bigQueryExport'
+        'projects/{project}/locations/{location}/instances/{instance}/bigQueryExport',
       ),
       dashboardChartPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}'
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardCharts/{chart}',
       ),
       dashboardQueryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}'
+        'projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}',
       ),
       dataAccessLabelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataAccessLabels/{data_access_label}',
       ),
       dataAccessScopePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataAccessScopes/{data_access_scope}',
       ),
       dataTablePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}',
       ),
       dataTableOperationErrorsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTableOperationErrors/{data_table_operation_errors}',
       ),
       dataTableRowPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}'
+        'projects/{project}/locations/{location}/instances/{instance}/dataTables/{data_table}/dataTableRows/{data_table_row}',
       ),
-      featuredContentNativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}'
-      ),
+      featuredContentNativeDashboardPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/instances/{instance}/contentHub/featuredContentNativeDashboards/{featured_content_native_dashboard}',
+        ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}'
+        'projects/{project}/locations/{location}/instances/{instance}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       nativeDashboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}'
+        'projects/{project}/locations/{location}/instances/{instance}/nativeDashboards/{dashboard}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       referenceListPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}'
+        'projects/{project}/locations/{location}/instances/{instance}/referenceLists/{reference_list}',
       ),
       retrohuntPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/retrohunts/{retrohunt}',
       ),
       rulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}',
       ),
       ruleDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment'
+        'projects/{project}/locations/{location}/instances/{instance}/rules/{rule}/deployment',
       ),
       watchlistPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}'
+        'projects/{project}/locations/{location}/instances/{instance}/watchlists/{watchlist}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.chronicle.v1.DashboardQueryService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.chronicle.v1.DashboardQueryService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -267,36 +295,43 @@ export class DashboardQueryServiceClient {
     // Put together the "service stub" for
     // google.cloud.chronicle.v1.DashboardQueryService.
     this.dashboardQueryServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.chronicle.v1.DashboardQueryService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.chronicle.v1.DashboardQueryService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.chronicle.v1.DashboardQueryService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dashboardQueryServiceStubMethods =
-        ['getDashboardQuery', 'executeDashboardQuery'];
+    const dashboardQueryServiceStubMethods = [
+      'getDashboardQuery',
+      'executeDashboardQuery',
+    ];
     for (const methodName of dashboardQueryServiceStubMethods) {
       const callPromise = this.dashboardQueryServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -311,8 +346,14 @@ export class DashboardQueryServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'chronicle.googleapis.com';
   }
@@ -323,8 +364,14 @@ export class DashboardQueryServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'chronicle.googleapis.com';
   }
@@ -358,7 +405,7 @@ export class DashboardQueryServiceClient {
     return [
       'https://www.googleapis.com/auth/chronicle',
       'https://www.googleapis.com/auth/chronicle.readonly',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -368,8 +415,9 @@ export class DashboardQueryServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -380,206 +428,298 @@ export class DashboardQueryServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Get a dashboard query.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the dashboardQuery to retrieve.
- *   Format:
- *   projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DashboardQuery|DashboardQuery}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dashboard_query_service.get_dashboard_query.js</caption>
- * region_tag:chronicle_v1_generated_DashboardQueryService_GetDashboardQuery_async
- */
+  /**
+   * Get a dashboard query.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the dashboardQuery to retrieve.
+   *   Format:
+   *   projects/{project}/locations/{location}/instances/{instance}/dashboardQueries/{query}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.DashboardQuery|DashboardQuery}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dashboard_query_service.get_dashboard_query.js</caption>
+   * region_tag:chronicle_v1_generated_DashboardQueryService_GetDashboardQuery_async
+   */
   getDashboardQuery(
-      request?: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IDashboardQuery,
-        protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IDashboardQuery,
+      protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getDashboardQuery(
-      request: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IDashboardQuery,
-          protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IDashboardQuery,
+      | protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDashboardQuery(
-      request: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IDashboardQuery,
-          protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IDashboardQuery,
+      | protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDashboardQuery(
-      request?: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IDashboardQuery,
-          protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IDashboardQuery,
-          protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IDashboardQuery,
-        protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IDashboardQuery,
+      | protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IDashboardQuery,
+      protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDashboardQuery request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IDashboardQuery,
-        protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IDashboardQuery,
+          | protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDashboardQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDashboardQuery(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IDashboardQuery,
-        protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDashboardQuery response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDashboardQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IDashboardQuery,
+          (
+            | protos.google.cloud.chronicle.v1.IGetDashboardQueryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getDashboardQuery response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Execute a query and return the data.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent, under which to run this dashboardQuery.
- *   Format: projects/{project}/locations/{location}/instances/{instance}
- * @param {google.cloud.chronicle.v1.DashboardQuery} request.query
- *   Required. The query to execute and get results back for.
- *   QueryID or 'query', 'input.time_window' fields will be used. Use
- *   'native_dashboard' and 'dashboard_chart' fields if it is an in-dashboard
- *   query.
- * @param {number[]} [request.filters]
- *   Optional. Dashboard level filters other than query string.
- * @param {boolean} [request.clearCache]
- *   Optional. When true, the backend would read from the database, rather than
- *   fetching data directly from the cache.
- * @param {boolean} [request.usePreviousTimeRange]
- *   Optional. When true, the backend will execute the query against the
- *   previous time range of the query.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ExecuteDashboardQueryResponse|ExecuteDashboardQueryResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dashboard_query_service.execute_dashboard_query.js</caption>
- * region_tag:chronicle_v1_generated_DashboardQueryService_ExecuteDashboardQuery_async
- */
+  /**
+   * Execute a query and return the data.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, under which to run this dashboardQuery.
+   *   Format: projects/{project}/locations/{location}/instances/{instance}
+   * @param {google.cloud.chronicle.v1.DashboardQuery} request.query
+   *   Required. The query to execute and get results back for.
+   *   QueryID or 'query', 'input.time_window' fields will be used. Use
+   *   'native_dashboard' and 'dashboard_chart' fields if it is an in-dashboard
+   *   query.
+   * @param {number[]} [request.filters]
+   *   Optional. Dashboard level filters other than query string.
+   * @param {boolean} [request.clearCache]
+   *   Optional. When true, the backend would read from the database, rather than
+   *   fetching data directly from the cache.
+   * @param {boolean} [request.usePreviousTimeRange]
+   *   Optional. When true, the backend will execute the query against the
+   *   previous time range of the query.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.chronicle.v1.ExecuteDashboardQueryResponse|ExecuteDashboardQueryResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dashboard_query_service.execute_dashboard_query.js</caption>
+   * region_tag:chronicle_v1_generated_DashboardQueryService_ExecuteDashboardQuery_async
+   */
   executeDashboardQuery(
-      request?: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
+      (
+        | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   executeDashboardQuery(
-      request: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
+      | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   executeDashboardQuery(
-      request: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
-      callback: Callback<
-          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
+    callback: Callback<
+      protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
+      | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   executeDashboardQuery(
-      request?: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
+      | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
+      (
+        | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('executeDashboardQuery request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
+          | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('executeDashboardQuery response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.executeDashboardQuery(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
-        protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('executeDashboardQuery response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .executeDashboardQuery(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.chronicle.v1.IExecuteDashboardQueryResponse,
+          (
+            | protos.google.cloud.chronicle.v1.IExecuteDashboardQueryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('executeDashboardQuery response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
@@ -597,7 +737,7 @@ export class DashboardQueryServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  bigQueryExportPath(project:string,location:string,instance:string) {
+  bigQueryExportPath(project: string, location: string, instance: string) {
     return this.pathTemplates.bigQueryExportPathTemplate.render({
       project: project,
       location: location,
@@ -613,7 +753,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).project;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).project;
   }
 
   /**
@@ -624,7 +766,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).location;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).location;
   }
 
   /**
@@ -635,7 +779,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromBigQueryExportName(bigQueryExportName: string) {
-    return this.pathTemplates.bigQueryExportPathTemplate.match(bigQueryExportName).instance;
+    return this.pathTemplates.bigQueryExportPathTemplate.match(
+      bigQueryExportName,
+    ).instance;
   }
 
   /**
@@ -647,7 +793,12 @@ export class DashboardQueryServiceClient {
    * @param {string} chart
    * @returns {string} Resource name string.
    */
-  dashboardChartPath(project:string,location:string,instance:string,chart:string) {
+  dashboardChartPath(
+    project: string,
+    location: string,
+    instance: string,
+    chart: string,
+  ) {
     return this.pathTemplates.dashboardChartPathTemplate.render({
       project: project,
       location: location,
@@ -664,7 +815,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).project;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).project;
   }
 
   /**
@@ -675,7 +828,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).location;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).location;
   }
 
   /**
@@ -686,7 +841,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).instance;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).instance;
   }
 
   /**
@@ -697,7 +854,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the chart.
    */
   matchChartFromDashboardChartName(dashboardChartName: string) {
-    return this.pathTemplates.dashboardChartPathTemplate.match(dashboardChartName).chart;
+    return this.pathTemplates.dashboardChartPathTemplate.match(
+      dashboardChartName,
+    ).chart;
   }
 
   /**
@@ -709,7 +868,12 @@ export class DashboardQueryServiceClient {
    * @param {string} query
    * @returns {string} Resource name string.
    */
-  dashboardQueryPath(project:string,location:string,instance:string,query:string) {
+  dashboardQueryPath(
+    project: string,
+    location: string,
+    instance: string,
+    query: string,
+  ) {
     return this.pathTemplates.dashboardQueryPathTemplate.render({
       project: project,
       location: location,
@@ -726,7 +890,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).project;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).project;
   }
 
   /**
@@ -737,7 +903,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).location;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).location;
   }
 
   /**
@@ -748,7 +916,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).instance;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).instance;
   }
 
   /**
@@ -759,7 +929,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the query.
    */
   matchQueryFromDashboardQueryName(dashboardQueryName: string) {
-    return this.pathTemplates.dashboardQueryPathTemplate.match(dashboardQueryName).query;
+    return this.pathTemplates.dashboardQueryPathTemplate.match(
+      dashboardQueryName,
+    ).query;
   }
 
   /**
@@ -771,7 +943,12 @@ export class DashboardQueryServiceClient {
    * @param {string} data_access_label
    * @returns {string} Resource name string.
    */
-  dataAccessLabelPath(project:string,location:string,instance:string,dataAccessLabel:string) {
+  dataAccessLabelPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataAccessLabel: string,
+  ) {
     return this.pathTemplates.dataAccessLabelPathTemplate.render({
       project: project,
       location: location,
@@ -788,7 +965,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).project;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).project;
   }
 
   /**
@@ -799,7 +978,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).location;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).location;
   }
 
   /**
@@ -810,7 +991,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).instance;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).instance;
   }
 
   /**
@@ -821,7 +1004,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the data_access_label.
    */
   matchDataAccessLabelFromDataAccessLabelName(dataAccessLabelName: string) {
-    return this.pathTemplates.dataAccessLabelPathTemplate.match(dataAccessLabelName).data_access_label;
+    return this.pathTemplates.dataAccessLabelPathTemplate.match(
+      dataAccessLabelName,
+    ).data_access_label;
   }
 
   /**
@@ -833,7 +1018,12 @@ export class DashboardQueryServiceClient {
    * @param {string} data_access_scope
    * @returns {string} Resource name string.
    */
-  dataAccessScopePath(project:string,location:string,instance:string,dataAccessScope:string) {
+  dataAccessScopePath(
+    project: string,
+    location: string,
+    instance: string,
+    dataAccessScope: string,
+  ) {
     return this.pathTemplates.dataAccessScopePathTemplate.render({
       project: project,
       location: location,
@@ -850,7 +1040,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).project;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).project;
   }
 
   /**
@@ -861,7 +1053,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).location;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).location;
   }
 
   /**
@@ -872,7 +1066,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).instance;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).instance;
   }
 
   /**
@@ -883,7 +1079,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the data_access_scope.
    */
   matchDataAccessScopeFromDataAccessScopeName(dataAccessScopeName: string) {
-    return this.pathTemplates.dataAccessScopePathTemplate.match(dataAccessScopeName).data_access_scope;
+    return this.pathTemplates.dataAccessScopePathTemplate.match(
+      dataAccessScopeName,
+    ).data_access_scope;
   }
 
   /**
@@ -895,7 +1093,12 @@ export class DashboardQueryServiceClient {
    * @param {string} data_table
    * @returns {string} Resource name string.
    */
-  dataTablePath(project:string,location:string,instance:string,dataTable:string) {
+  dataTablePath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTable: string,
+  ) {
     return this.pathTemplates.dataTablePathTemplate.render({
       project: project,
       location: location,
@@ -912,7 +1115,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).project;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .project;
   }
 
   /**
@@ -923,7 +1127,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).location;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .location;
   }
 
   /**
@@ -934,7 +1139,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).instance;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .instance;
   }
 
   /**
@@ -945,7 +1151,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the data_table.
    */
   matchDataTableFromDataTableName(dataTableName: string) {
-    return this.pathTemplates.dataTablePathTemplate.match(dataTableName).data_table;
+    return this.pathTemplates.dataTablePathTemplate.match(dataTableName)
+      .data_table;
   }
 
   /**
@@ -957,7 +1164,12 @@ export class DashboardQueryServiceClient {
    * @param {string} data_table_operation_errors
    * @returns {string} Resource name string.
    */
-  dataTableOperationErrorsPath(project:string,location:string,instance:string,dataTableOperationErrors:string) {
+  dataTableOperationErrorsPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTableOperationErrors: string,
+  ) {
     return this.pathTemplates.dataTableOperationErrorsPathTemplate.render({
       project: project,
       location: location,
@@ -973,8 +1185,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).project;
+  matchProjectFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).project;
   }
 
   /**
@@ -984,8 +1200,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).location;
+  matchLocationFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).location;
   }
 
   /**
@@ -995,8 +1215,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the instance.
    */
-  matchInstanceFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).instance;
+  matchInstanceFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).instance;
   }
 
   /**
@@ -1006,8 +1230,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing DataTableOperationErrors resource.
    * @returns {string} A string representing the data_table_operation_errors.
    */
-  matchDataTableOperationErrorsFromDataTableOperationErrorsName(dataTableOperationErrorsName: string) {
-    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(dataTableOperationErrorsName).data_table_operation_errors;
+  matchDataTableOperationErrorsFromDataTableOperationErrorsName(
+    dataTableOperationErrorsName: string,
+  ) {
+    return this.pathTemplates.dataTableOperationErrorsPathTemplate.match(
+      dataTableOperationErrorsName,
+    ).data_table_operation_errors;
   }
 
   /**
@@ -1020,7 +1248,13 @@ export class DashboardQueryServiceClient {
    * @param {string} data_table_row
    * @returns {string} Resource name string.
    */
-  dataTableRowPath(project:string,location:string,instance:string,dataTable:string,dataTableRow:string) {
+  dataTableRowPath(
+    project: string,
+    location: string,
+    instance: string,
+    dataTable: string,
+    dataTableRow: string,
+  ) {
     return this.pathTemplates.dataTableRowPathTemplate.render({
       project: project,
       location: location,
@@ -1038,7 +1272,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).project;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .project;
   }
 
   /**
@@ -1049,7 +1284,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).location;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .location;
   }
 
   /**
@@ -1060,7 +1296,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).instance;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .instance;
   }
 
   /**
@@ -1071,7 +1308,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the data_table.
    */
   matchDataTableFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .data_table;
   }
 
   /**
@@ -1082,7 +1320,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the data_table_row.
    */
   matchDataTableRowFromDataTableRowName(dataTableRowName: string) {
-    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName).data_table_row;
+    return this.pathTemplates.dataTableRowPathTemplate.match(dataTableRowName)
+      .data_table_row;
   }
 
   /**
@@ -1094,13 +1333,20 @@ export class DashboardQueryServiceClient {
    * @param {string} featured_content_native_dashboard
    * @returns {string} Resource name string.
    */
-  featuredContentNativeDashboardPath(project:string,location:string,instance:string,featuredContentNativeDashboard:string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.render({
-      project: project,
-      location: location,
-      instance: instance,
-      featured_content_native_dashboard: featuredContentNativeDashboard,
-    });
+  featuredContentNativeDashboardPath(
+    project: string,
+    location: string,
+    instance: string,
+    featuredContentNativeDashboard: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        instance: instance,
+        featured_content_native_dashboard: featuredContentNativeDashboard,
+      },
+    );
   }
 
   /**
@@ -1110,8 +1356,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).project;
+  matchProjectFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).project;
   }
 
   /**
@@ -1121,8 +1371,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).location;
+  matchLocationFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).location;
   }
 
   /**
@@ -1132,8 +1386,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the instance.
    */
-  matchInstanceFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).instance;
+  matchInstanceFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).instance;
   }
 
   /**
@@ -1143,8 +1401,12 @@ export class DashboardQueryServiceClient {
    *   A fully-qualified path representing FeaturedContentNativeDashboard resource.
    * @returns {string} A string representing the featured_content_native_dashboard.
    */
-  matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(featuredContentNativeDashboardName: string) {
-    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(featuredContentNativeDashboardName).featured_content_native_dashboard;
+  matchFeaturedContentNativeDashboardFromFeaturedContentNativeDashboardName(
+    featuredContentNativeDashboardName: string,
+  ) {
+    return this.pathTemplates.featuredContentNativeDashboardPathTemplate.match(
+      featuredContentNativeDashboardName,
+    ).featured_content_native_dashboard;
   }
 
   /**
@@ -1155,7 +1417,7 @@ export class DashboardQueryServiceClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,instance:string) {
+  instancePath(project: string, location: string, instance: string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -1203,7 +1465,7 @@ export class DashboardQueryServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1241,7 +1503,12 @@ export class DashboardQueryServiceClient {
    * @param {string} dashboard
    * @returns {string} Resource name string.
    */
-  nativeDashboardPath(project:string,location:string,instance:string,dashboard:string) {
+  nativeDashboardPath(
+    project: string,
+    location: string,
+    instance: string,
+    dashboard: string,
+  ) {
     return this.pathTemplates.nativeDashboardPathTemplate.render({
       project: project,
       location: location,
@@ -1258,7 +1525,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).project;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).project;
   }
 
   /**
@@ -1269,7 +1538,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).location;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).location;
   }
 
   /**
@@ -1280,7 +1551,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).instance;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).instance;
   }
 
   /**
@@ -1291,7 +1564,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the dashboard.
    */
   matchDashboardFromNativeDashboardName(nativeDashboardName: string) {
-    return this.pathTemplates.nativeDashboardPathTemplate.match(nativeDashboardName).dashboard;
+    return this.pathTemplates.nativeDashboardPathTemplate.match(
+      nativeDashboardName,
+    ).dashboard;
   }
 
   /**
@@ -1300,7 +1575,7 @@ export class DashboardQueryServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1326,7 +1601,12 @@ export class DashboardQueryServiceClient {
    * @param {string} reference_list
    * @returns {string} Resource name string.
    */
-  referenceListPath(project:string,location:string,instance:string,referenceList:string) {
+  referenceListPath(
+    project: string,
+    location: string,
+    instance: string,
+    referenceList: string,
+  ) {
     return this.pathTemplates.referenceListPathTemplate.render({
       project: project,
       location: location,
@@ -1343,7 +1623,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).project;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .project;
   }
 
   /**
@@ -1354,7 +1635,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).location;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .location;
   }
 
   /**
@@ -1365,7 +1647,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).instance;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .instance;
   }
 
   /**
@@ -1376,7 +1659,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the reference_list.
    */
   matchReferenceListFromReferenceListName(referenceListName: string) {
-    return this.pathTemplates.referenceListPathTemplate.match(referenceListName).reference_list;
+    return this.pathTemplates.referenceListPathTemplate.match(referenceListName)
+      .reference_list;
   }
 
   /**
@@ -1389,7 +1673,13 @@ export class DashboardQueryServiceClient {
    * @param {string} retrohunt
    * @returns {string} Resource name string.
    */
-  retrohuntPath(project:string,location:string,instance:string,rule:string,retrohunt:string) {
+  retrohuntPath(
+    project: string,
+    location: string,
+    instance: string,
+    rule: string,
+    retrohunt: string,
+  ) {
     return this.pathTemplates.retrohuntPathTemplate.render({
       project: project,
       location: location,
@@ -1407,7 +1697,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).project;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .project;
   }
 
   /**
@@ -1418,7 +1709,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).location;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .location;
   }
 
   /**
@@ -1429,7 +1721,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).instance;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .instance;
   }
 
   /**
@@ -1451,7 +1744,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the retrohunt.
    */
   matchRetrohuntFromRetrohuntName(retrohuntName: string) {
-    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName).retrohunt;
+    return this.pathTemplates.retrohuntPathTemplate.match(retrohuntName)
+      .retrohunt;
   }
 
   /**
@@ -1463,7 +1757,7 @@ export class DashboardQueryServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  rulePath(project:string,location:string,instance:string,rule:string) {
+  rulePath(project: string, location: string, instance: string, rule: string) {
     return this.pathTemplates.rulePathTemplate.render({
       project: project,
       location: location,
@@ -1525,7 +1819,12 @@ export class DashboardQueryServiceClient {
    * @param {string} rule
    * @returns {string} Resource name string.
    */
-  ruleDeploymentPath(project:string,location:string,instance:string,rule:string) {
+  ruleDeploymentPath(
+    project: string,
+    location: string,
+    instance: string,
+    rule: string,
+  ) {
     return this.pathTemplates.ruleDeploymentPathTemplate.render({
       project: project,
       location: location,
@@ -1542,7 +1841,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).project;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).project;
   }
 
   /**
@@ -1553,7 +1854,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).location;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).location;
   }
 
   /**
@@ -1564,7 +1867,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).instance;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).instance;
   }
 
   /**
@@ -1575,7 +1880,9 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the rule.
    */
   matchRuleFromRuleDeploymentName(ruleDeploymentName: string) {
-    return this.pathTemplates.ruleDeploymentPathTemplate.match(ruleDeploymentName).rule;
+    return this.pathTemplates.ruleDeploymentPathTemplate.match(
+      ruleDeploymentName,
+    ).rule;
   }
 
   /**
@@ -1587,7 +1894,12 @@ export class DashboardQueryServiceClient {
    * @param {string} watchlist
    * @returns {string} Resource name string.
    */
-  watchlistPath(project:string,location:string,instance:string,watchlist:string) {
+  watchlistPath(
+    project: string,
+    location: string,
+    instance: string,
+    watchlist: string,
+  ) {
     return this.pathTemplates.watchlistPathTemplate.render({
       project: project,
       location: location,
@@ -1604,7 +1916,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).project;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .project;
   }
 
   /**
@@ -1615,7 +1928,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).location;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .location;
   }
 
   /**
@@ -1626,7 +1940,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the instance.
    */
   matchInstanceFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).instance;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .instance;
   }
 
   /**
@@ -1637,7 +1952,8 @@ export class DashboardQueryServiceClient {
    * @returns {string} A string representing the watchlist.
    */
   matchWatchlistFromWatchlistName(watchlistName: string) {
-    return this.pathTemplates.watchlistPathTemplate.match(watchlistName).watchlist;
+    return this.pathTemplates.watchlistPathTemplate.match(watchlistName)
+      .watchlist;
   }
 
   /**
@@ -1648,7 +1964,7 @@ export class DashboardQueryServiceClient {
    */
   close(): Promise<void> {
     if (this.dashboardQueryServiceStub && !this._terminated) {
-      return this.dashboardQueryServiceStub.then(stub => {
+      return this.dashboardQueryServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

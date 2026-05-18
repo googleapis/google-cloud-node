@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ConfigManagementServiceClient} from '@google-cloud/configmanagement';
+import { ConfigManagementServiceClient } from '@google-cloud/configmanagement';
 
 // check that the client class type name can be used
-function doStuffWithConfigManagementServiceClient(client: ConfigManagementServiceClient) {
+function doStuffWithConfigManagementServiceClient(
+  client: ConfigManagementServiceClient,
+) {
   client.close();
 }
 

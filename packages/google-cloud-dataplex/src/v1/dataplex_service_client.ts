@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -48,7 +59,7 @@ export class DataplexServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataplex');
@@ -61,11 +72,11 @@ export class DataplexServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  dataplexServiceStub?: Promise<{[name: string]: Function}>;
+  dataplexServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DataplexServiceClient.
@@ -106,21 +117,42 @@ export class DataplexServiceClient {
    *     const client = new DataplexServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataplexServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'dataplex.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -145,7 +177,7 @@ export class DataplexServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -159,15 +191,11 @@ export class DataplexServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -189,100 +217,102 @@ export class DataplexServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       aspectTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}'
+        'projects/{project}/locations/{location}/aspectTypes/{aspect_type}',
       ),
       assetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}',
       ),
       contentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/content/{content}'
+        'projects/{project}/locations/{location}/lakes/{lake}/content/{content}',
       ),
       dataAssetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}'
+        'projects/{project}/locations/{location}/dataProducts/{data_product}/dataAssets/{data_asset}',
       ),
       dataAttributePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}'
+        'projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}',
       ),
       dataAttributeBindingPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}'
+        'projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}',
       ),
       dataProductPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataProducts/{data_product}'
+        'projects/{project}/locations/{location}/dataProducts/{data_product}',
       ),
       dataScanPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}'
+        'projects/{project}/locations/{location}/dataScans/{dataScan}',
       ),
       dataScanJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}'
+        'projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}',
       ),
       dataTaxonomyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}'
+        'projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}',
       ),
       encryptionConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}'
+        'organizations/{organization}/locations/{location}/encryptionConfigs/{encryption_config}',
       ),
       entityPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}',
       ),
       entryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}',
       ),
       entryGroupPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}',
       ),
       entryLinkPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}'
+        'projects/{project}/locations/{location}/entryGroups/{entry_group}/entryLinks/{entry_link}',
       ),
       entryTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/entryTypes/{entry_type}'
+        'projects/{project}/locations/{location}/entryTypes/{entry_type}',
       ),
       environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}'
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}',
       ),
       glossaryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}',
       ),
       glossaryCategoryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}/categories/{glossary_category}',
       ),
       glossaryTermPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}'
+        'projects/{project}/locations/{location}/glossaries/{glossary}/terms/{glossary_term}',
       ),
       jobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}'
+        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}/jobs/{job}',
       ),
       lakePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}'
+        'projects/{project}/locations/{location}/lakes/{lake}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       metadataFeedPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}'
+        'projects/{project}/locations/{location}/metadataFeeds/{metadata_feed}',
       ),
       metadataJobPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}'
+        'projects/{project}/locations/{location}/metadataJobs/{metadataJob}',
       ),
       partitionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}/partitions/{partition}',
       ),
       projectLocationLakeActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}'
+        'projects/{project}/locations/{location}/lakes/{lake}/actions/{action}',
       ),
-      projectLocationLakeZoneActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}'
-      ),
-      projectLocationLakeZoneAssetActionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}'
-      ),
+      projectLocationLakeZoneActionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/actions/{action}',
+        ),
+      projectLocationLakeZoneAssetActionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/assets/{asset}/actions/{action}',
+        ),
       sessionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}'
+        'projects/{project}/locations/{location}/lakes/{lake}/environments/{environment}/sessions/{session}',
       ),
       taskPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}'
+        'projects/{project}/locations/{location}/lakes/{lake}/tasks/{task}',
       ),
       zonePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}'
+        'projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}',
       ),
     };
 
@@ -290,22 +320,46 @@ export class DataplexServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listLakes:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lakes'),
-      listLakeActions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'actions'),
-      listZones:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'zones'),
-      listZoneActions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'actions'),
-      listAssets:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assets'),
-      listAssetActions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'actions'),
-      listTasks:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tasks'),
-      listJobs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'jobs')
+      listLakes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'lakes',
+      ),
+      listLakeActions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'actions',
+      ),
+      listZones: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'zones',
+      ),
+      listZoneActions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'actions',
+      ),
+      listAssets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'assets',
+      ),
+      listAssetActions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'actions',
+      ),
+      listTasks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tasks',
+      ),
+      listJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'jobs',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -314,124 +368,428 @@ export class DataplexServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',additional_bindings: [{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',},{get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',},{get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',body: '*',},{post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',body: '*',}],
-      },{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',additional_bindings: [{post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',body: '*',}],
-      },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v1/{name=organizations/*/locations/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/lakes/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataScans/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/entryGroups/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/governanceRules/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/changeRequests/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=projects/*/locations/*/dataProducts/*}:getIamPolicy',
+            },
+            {
+              get: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/lakes/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:setIamPolicy',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/lakes/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/zones/*/assets/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/tasks/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataScans/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataTaxonomies/*/attributes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataAttributeBindings/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryLinkTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/aspectTypes/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/entryGroups/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/governanceRules/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/categories/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/glossaries/*/terms/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/changeRequests/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=organizations/*/locations/*/encryptionConfigs/*}:testIamPermissions',
+              body: '*',
+            },
+            {
+              post: '/v1/{resource=projects/*/locations/*/dataProducts/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { delete: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v1/{name=organizations/*/locations/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createLakeResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Lake') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Lake',
+    ) as gax.protobuf.Type;
     const createLakeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateLakeResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Lake') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Lake',
+    ) as gax.protobuf.Type;
     const updateLakeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteLakeResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteLakeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createZoneResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Zone') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Zone',
+    ) as gax.protobuf.Type;
     const createZoneMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateZoneResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Zone') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Zone',
+    ) as gax.protobuf.Type;
     const updateZoneMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteZoneResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteZoneMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createAssetResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Asset') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Asset',
+    ) as gax.protobuf.Type;
     const createAssetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateAssetResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Asset') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Asset',
+    ) as gax.protobuf.Type;
     const updateAssetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteAssetResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteAssetMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createTaskResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Task') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Task',
+    ) as gax.protobuf.Type;
     const createTaskMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateTaskResponse = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.Task') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.Task',
+    ) as gax.protobuf.Type;
     const updateTaskMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteTaskResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteTaskMetadata = protoFilesRoot.lookup(
-      '.google.cloud.dataplex.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.dataplex.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createLake: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createLakeResponse.decode.bind(createLakeResponse),
-        createLakeMetadata.decode.bind(createLakeMetadata)),
+        createLakeMetadata.decode.bind(createLakeMetadata),
+      ),
       updateLake: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateLakeResponse.decode.bind(updateLakeResponse),
-        updateLakeMetadata.decode.bind(updateLakeMetadata)),
+        updateLakeMetadata.decode.bind(updateLakeMetadata),
+      ),
       deleteLake: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteLakeResponse.decode.bind(deleteLakeResponse),
-        deleteLakeMetadata.decode.bind(deleteLakeMetadata)),
+        deleteLakeMetadata.decode.bind(deleteLakeMetadata),
+      ),
       createZone: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createZoneResponse.decode.bind(createZoneResponse),
-        createZoneMetadata.decode.bind(createZoneMetadata)),
+        createZoneMetadata.decode.bind(createZoneMetadata),
+      ),
       updateZone: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateZoneResponse.decode.bind(updateZoneResponse),
-        updateZoneMetadata.decode.bind(updateZoneMetadata)),
+        updateZoneMetadata.decode.bind(updateZoneMetadata),
+      ),
       deleteZone: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteZoneResponse.decode.bind(deleteZoneResponse),
-        deleteZoneMetadata.decode.bind(deleteZoneMetadata)),
+        deleteZoneMetadata.decode.bind(deleteZoneMetadata),
+      ),
       createAsset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAssetResponse.decode.bind(createAssetResponse),
-        createAssetMetadata.decode.bind(createAssetMetadata)),
+        createAssetMetadata.decode.bind(createAssetMetadata),
+      ),
       updateAsset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateAssetResponse.decode.bind(updateAssetResponse),
-        updateAssetMetadata.decode.bind(updateAssetMetadata)),
+        updateAssetMetadata.decode.bind(updateAssetMetadata),
+      ),
       deleteAsset: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAssetResponse.decode.bind(deleteAssetResponse),
-        deleteAssetMetadata.decode.bind(deleteAssetMetadata)),
+        deleteAssetMetadata.decode.bind(deleteAssetMetadata),
+      ),
       createTask: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createTaskResponse.decode.bind(createTaskResponse),
-        createTaskMetadata.decode.bind(createTaskMetadata)),
+        createTaskMetadata.decode.bind(createTaskMetadata),
+      ),
       updateTask: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateTaskResponse.decode.bind(updateTaskResponse),
-        updateTaskMetadata.decode.bind(updateTaskMetadata)),
+        updateTaskMetadata.decode.bind(updateTaskMetadata),
+      ),
       deleteTask: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteTaskResponse.decode.bind(deleteTaskResponse),
-        deleteTaskMetadata.decode.bind(deleteTaskMetadata))
+        deleteTaskMetadata.decode.bind(deleteTaskMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.dataplex.v1.DataplexService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.dataplex.v1.DataplexService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -462,28 +820,61 @@ export class DataplexServiceClient {
     // Put together the "service stub" for
     // google.cloud.dataplex.v1.DataplexService.
     this.dataplexServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.dataplex.v1.DataplexService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.dataplex.v1.DataplexService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.dataplex.v1.DataplexService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataplexServiceStubMethods =
-        ['createLake', 'updateLake', 'deleteLake', 'listLakes', 'getLake', 'listLakeActions', 'createZone', 'updateZone', 'deleteZone', 'listZones', 'getZone', 'listZoneActions', 'createAsset', 'updateAsset', 'deleteAsset', 'listAssets', 'getAsset', 'listAssetActions', 'createTask', 'updateTask', 'deleteTask', 'listTasks', 'getTask', 'listJobs', 'runTask', 'getJob', 'cancelJob'];
+    const dataplexServiceStubMethods = [
+      'createLake',
+      'updateLake',
+      'deleteLake',
+      'listLakes',
+      'getLake',
+      'listLakeActions',
+      'createZone',
+      'updateZone',
+      'deleteZone',
+      'listZones',
+      'getZone',
+      'listZoneActions',
+      'createAsset',
+      'updateAsset',
+      'deleteAsset',
+      'listAssets',
+      'getAsset',
+      'listAssetActions',
+      'createTask',
+      'updateTask',
+      'deleteTask',
+      'listTasks',
+      'getTask',
+      'listJobs',
+      'runTask',
+      'getJob',
+      'cancelJob',
+    ];
     for (const methodName of dataplexServiceStubMethods) {
       const callPromise = this.dataplexServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -493,7 +884,7 @@ export class DataplexServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -508,8 +899,14 @@ export class DataplexServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataplex.googleapis.com';
   }
@@ -520,8 +917,14 @@ export class DataplexServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'dataplex.googleapis.com';
   }
@@ -552,9 +955,7 @@ export class DataplexServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -563,8 +964,9 @@ export class DataplexServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -575,2149 +977,3118 @@ export class DataplexServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves a lake resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Lake|Lake}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.get_lake.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_GetLake_async
- */
+  /**
+   * Retrieves a lake resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Lake|Lake}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.get_lake.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_GetLake_async
+   */
   getLake(
-      request?: protos.google.cloud.dataplex.v1.IGetLakeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ILake,
-        protos.google.cloud.dataplex.v1.IGetLakeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGetLakeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ILake,
+      protos.google.cloud.dataplex.v1.IGetLakeRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getLake(
-      request: protos.google.cloud.dataplex.v1.IGetLakeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.ILake,
-          protos.google.cloud.dataplex.v1.IGetLakeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetLakeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.ILake,
+      protos.google.cloud.dataplex.v1.IGetLakeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getLake(
-      request: protos.google.cloud.dataplex.v1.IGetLakeRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.ILake,
-          protos.google.cloud.dataplex.v1.IGetLakeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetLakeRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.ILake,
+      protos.google.cloud.dataplex.v1.IGetLakeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getLake(
-      request?: protos.google.cloud.dataplex.v1.IGetLakeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGetLakeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.ILake,
-          protos.google.cloud.dataplex.v1.IGetLakeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.ILake,
-          protos.google.cloud.dataplex.v1.IGetLakeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ILake,
-        protos.google.cloud.dataplex.v1.IGetLakeRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IGetLakeRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.ILake,
+      protos.google.cloud.dataplex.v1.IGetLakeRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ILake,
+      protos.google.cloud.dataplex.v1.IGetLakeRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getLake request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.ILake,
-        protos.google.cloud.dataplex.v1.IGetLakeRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.ILake,
+          protos.google.cloud.dataplex.v1.IGetLakeRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getLake response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getLake(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.ILake,
-        protos.google.cloud.dataplex.v1.IGetLakeRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getLake response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getLake(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.ILake,
+          protos.google.cloud.dataplex.v1.IGetLakeRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getLake response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves a zone resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Zone|Zone}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.get_zone.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_GetZone_async
- */
+  /**
+   * Retrieves a zone resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Zone|Zone}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.get_zone.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_GetZone_async
+   */
   getZone(
-      request?: protos.google.cloud.dataplex.v1.IGetZoneRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IZone,
-        protos.google.cloud.dataplex.v1.IGetZoneRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGetZoneRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IZone,
+      protos.google.cloud.dataplex.v1.IGetZoneRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getZone(
-      request: protos.google.cloud.dataplex.v1.IGetZoneRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IZone,
-          protos.google.cloud.dataplex.v1.IGetZoneRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IZone,
+      protos.google.cloud.dataplex.v1.IGetZoneRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getZone(
-      request: protos.google.cloud.dataplex.v1.IGetZoneRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IZone,
-          protos.google.cloud.dataplex.v1.IGetZoneRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetZoneRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IZone,
+      protos.google.cloud.dataplex.v1.IGetZoneRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getZone(
-      request?: protos.google.cloud.dataplex.v1.IGetZoneRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGetZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IZone,
-          protos.google.cloud.dataplex.v1.IGetZoneRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IZone,
-          protos.google.cloud.dataplex.v1.IGetZoneRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IZone,
-        protos.google.cloud.dataplex.v1.IGetZoneRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IGetZoneRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IZone,
+      protos.google.cloud.dataplex.v1.IGetZoneRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IZone,
+      protos.google.cloud.dataplex.v1.IGetZoneRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getZone request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IZone,
-        protos.google.cloud.dataplex.v1.IGetZoneRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IZone,
+          protos.google.cloud.dataplex.v1.IGetZoneRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getZone response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getZone(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IZone,
-        protos.google.cloud.dataplex.v1.IGetZoneRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getZone response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IZone,
+          protos.google.cloud.dataplex.v1.IGetZoneRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getZone response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves an asset resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the asset:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Asset|Asset}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.get_asset.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_GetAsset_async
- */
+  /**
+   * Retrieves an asset resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the asset:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Asset|Asset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.get_asset.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_GetAsset_async
+   */
   getAsset(
-      request?: protos.google.cloud.dataplex.v1.IGetAssetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAsset,
-        protos.google.cloud.dataplex.v1.IGetAssetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGetAssetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAsset,
+      protos.google.cloud.dataplex.v1.IGetAssetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAsset(
-      request: protos.google.cloud.dataplex.v1.IGetAssetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IAsset,
-          protos.google.cloud.dataplex.v1.IGetAssetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetAssetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IAsset,
+      protos.google.cloud.dataplex.v1.IGetAssetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAsset(
-      request: protos.google.cloud.dataplex.v1.IGetAssetRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IAsset,
-          protos.google.cloud.dataplex.v1.IGetAssetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetAssetRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IAsset,
+      protos.google.cloud.dataplex.v1.IGetAssetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAsset(
-      request?: protos.google.cloud.dataplex.v1.IGetAssetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGetAssetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IAsset,
-          protos.google.cloud.dataplex.v1.IGetAssetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IAsset,
-          protos.google.cloud.dataplex.v1.IGetAssetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAsset,
-        protos.google.cloud.dataplex.v1.IGetAssetRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IGetAssetRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IAsset,
+      protos.google.cloud.dataplex.v1.IGetAssetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAsset,
+      protos.google.cloud.dataplex.v1.IGetAssetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAsset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IAsset,
-        protos.google.cloud.dataplex.v1.IGetAssetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IAsset,
+          protos.google.cloud.dataplex.v1.IGetAssetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAsset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAsset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IAsset,
-        protos.google.cloud.dataplex.v1.IGetAssetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAsset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IAsset,
+          protos.google.cloud.dataplex.v1.IGetAssetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAsset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get task resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the task:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Task|Task}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.get_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_GetTask_async
- */
+  /**
+   * Get task resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the task:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Task|Task}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.get_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_GetTask_async
+   */
   getTask(
-      request?: protos.google.cloud.dataplex.v1.IGetTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ITask,
-        protos.google.cloud.dataplex.v1.IGetTaskRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGetTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ITask,
+      protos.google.cloud.dataplex.v1.IGetTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getTask(
-      request: protos.google.cloud.dataplex.v1.IGetTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.ITask,
-          protos.google.cloud.dataplex.v1.IGetTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.ITask,
+      protos.google.cloud.dataplex.v1.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTask(
-      request: protos.google.cloud.dataplex.v1.IGetTaskRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.ITask,
-          protos.google.cloud.dataplex.v1.IGetTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetTaskRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.ITask,
+      protos.google.cloud.dataplex.v1.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTask(
-      request?: protos.google.cloud.dataplex.v1.IGetTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGetTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.ITask,
-          protos.google.cloud.dataplex.v1.IGetTaskRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.ITask,
-          protos.google.cloud.dataplex.v1.IGetTaskRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ITask,
-        protos.google.cloud.dataplex.v1.IGetTaskRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IGetTaskRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.ITask,
+      protos.google.cloud.dataplex.v1.IGetTaskRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ITask,
+      protos.google.cloud.dataplex.v1.IGetTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getTask request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.ITask,
-        protos.google.cloud.dataplex.v1.IGetTaskRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.ITask,
+          protos.google.cloud.dataplex.v1.IGetTaskRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTask response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getTask(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.ITask,
-        protos.google.cloud.dataplex.v1.IGetTaskRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getTask response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.ITask,
+          protos.google.cloud.dataplex.v1.IGetTaskRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTask response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Run an on demand execution of a Task.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the task:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
- * @param {number[]} [request.labels]
- *   Optional. User-defined labels for the task. If the map is left empty, the
- *   task will run with existing labels from task definition. If the map
- *   contains an entry with a new key, the same will be added to existing set of
- *   labels. If the map contains an entry with an existing label key in task
- *   definition, the task will run with new label value for that entry. Clearing
- *   an existing label will require label value to be explicitly set to a hyphen
- *   "-". The label value cannot be empty.
- * @param {number[]} [request.args]
- *   Optional. Execution spec arguments. If the map is left empty, the task will
- *   run with existing execution spec args from task definition. If the map
- *   contains an entry with a new key, the same will be added to existing set of
- *   args. If the map contains an entry with an existing arg key in task
- *   definition, the task will run with new arg value for that entry. Clearing
- *   an existing arg will require arg value to be explicitly set to a hyphen
- *   "-". The arg value cannot be empty.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.RunTaskResponse|RunTaskResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.run_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_RunTask_async
- */
+  /**
+   * Run an on demand execution of a Task.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the task:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+   * @param {number[]} [request.labels]
+   *   Optional. User-defined labels for the task. If the map is left empty, the
+   *   task will run with existing labels from task definition. If the map
+   *   contains an entry with a new key, the same will be added to existing set of
+   *   labels. If the map contains an entry with an existing label key in task
+   *   definition, the task will run with new label value for that entry. Clearing
+   *   an existing label will require label value to be explicitly set to a hyphen
+   *   "-". The label value cannot be empty.
+   * @param {number[]} [request.args]
+   *   Optional. Execution spec arguments. If the map is left empty, the task will
+   *   run with existing execution spec args from task definition. If the map
+   *   contains an entry with a new key, the same will be added to existing set of
+   *   args. If the map contains an entry with an existing arg key in task
+   *   definition, the task will run with new arg value for that entry. Clearing
+   *   an existing arg will require arg value to be explicitly set to a hyphen
+   *   "-". The arg value cannot be empty.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.RunTaskResponse|RunTaskResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.run_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_RunTask_async
+   */
   runTask(
-      request?: protos.google.cloud.dataplex.v1.IRunTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IRunTaskResponse,
-        protos.google.cloud.dataplex.v1.IRunTaskRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   runTask(
-      request: protos.google.cloud.dataplex.v1.IRunTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IRunTaskResponse,
-          protos.google.cloud.dataplex.v1.IRunTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runTask(
-      request: protos.google.cloud.dataplex.v1.IRunTaskRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IRunTaskResponse,
-          protos.google.cloud.dataplex.v1.IRunTaskRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runTask(
-      request?: protos.google.cloud.dataplex.v1.IRunTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IRunTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IRunTaskResponse,
-          protos.google.cloud.dataplex.v1.IRunTaskRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IRunTaskResponse,
-          protos.google.cloud.dataplex.v1.IRunTaskRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IRunTaskResponse,
-        protos.google.cloud.dataplex.v1.IRunTaskRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IRunTaskResponse,
+      protos.google.cloud.dataplex.v1.IRunTaskRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('runTask request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IRunTaskResponse,
-        protos.google.cloud.dataplex.v1.IRunTaskRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IRunTaskResponse,
+          protos.google.cloud.dataplex.v1.IRunTaskRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('runTask response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.runTask(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IRunTaskResponse,
-        protos.google.cloud.dataplex.v1.IRunTaskRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('runTask response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .runTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IRunTaskResponse,
+          protos.google.cloud.dataplex.v1.IRunTaskRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runTask response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get job resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the job:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}/jobs/{job_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Job|Job}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.get_job.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_GetJob_async
- */
+  /**
+   * Get job resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the job:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}/jobs/{job_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataplex.v1.Job|Job}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.get_job.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_GetJob_async
+   */
   getJob(
-      request?: protos.google.cloud.dataplex.v1.IGetJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IJob,
-        protos.google.cloud.dataplex.v1.IGetJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IGetJobRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IJob,
+      protos.google.cloud.dataplex.v1.IGetJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getJob(
-      request: protos.google.cloud.dataplex.v1.IGetJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IJob,
-          protos.google.cloud.dataplex.v1.IGetJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IJob,
+      protos.google.cloud.dataplex.v1.IGetJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getJob(
-      request: protos.google.cloud.dataplex.v1.IGetJobRequest,
-      callback: Callback<
-          protos.google.cloud.dataplex.v1.IJob,
-          protos.google.cloud.dataplex.v1.IGetJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IGetJobRequest,
+    callback: Callback<
+      protos.google.cloud.dataplex.v1.IJob,
+      protos.google.cloud.dataplex.v1.IGetJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getJob(
-      request?: protos.google.cloud.dataplex.v1.IGetJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.IGetJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.dataplex.v1.IJob,
-          protos.google.cloud.dataplex.v1.IGetJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.dataplex.v1.IJob,
-          protos.google.cloud.dataplex.v1.IGetJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IJob,
-        protos.google.cloud.dataplex.v1.IGetJobRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IGetJobRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataplex.v1.IJob,
+      protos.google.cloud.dataplex.v1.IGetJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IJob,
+      protos.google.cloud.dataplex.v1.IGetJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.dataplex.v1.IJob,
-        protos.google.cloud.dataplex.v1.IGetJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataplex.v1.IJob,
+          protos.google.cloud.dataplex.v1.IGetJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.dataplex.v1.IJob,
-        protos.google.cloud.dataplex.v1.IGetJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getJob response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataplex.v1.IJob,
+          protos.google.cloud.dataplex.v1.IGetJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getJob response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Cancel jobs running for the task resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the job:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/task/{task_id}/job/{job_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.cancel_job.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CancelJob_async
- */
+  /**
+   * Cancel jobs running for the task resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the job:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/task/{task_id}/job/{job_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.cancel_job.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CancelJob_async
+   */
   cancelJob(
-      request?: protos.google.cloud.dataplex.v1.ICancelJobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.ICancelJobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.ICancelJobRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataplex.v1.ICancelJobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   cancelJob(
-      request: protos.google.cloud.dataplex.v1.ICancelJobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.ICancelJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICancelJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataplex.v1.ICancelJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   cancelJob(
-      request: protos.google.cloud.dataplex.v1.ICancelJobRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.ICancelJobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICancelJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataplex.v1.ICancelJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   cancelJob(
-      request?: protos.google.cloud.dataplex.v1.ICancelJobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.dataplex.v1.ICancelJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.ICancelJobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.dataplex.v1.ICancelJobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.ICancelJobRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.dataplex.v1.ICancelJobRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataplex.v1.ICancelJobRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dataplex.v1.ICancelJobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('cancelJob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.ICancelJobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.ICancelJobRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('cancelJob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.cancelJob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.dataplex.v1.ICancelJobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('cancelJob response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .cancelJob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.dataplex.v1.ICancelJobRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('cancelJob response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a lake resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the lake location, of the form:
- *   projects/{project_number}/locations/{location_id}
- *   where `location_id` refers to a Google Cloud region.
- * @param {string} request.lakeId
- *   Required. Lake identifier.
- *   This ID will be used to generate names such as database and dataset names
- *   when publishing metadata to Hive Metastore and BigQuery.
- *   * Must contain only lowercase letters, numbers and hyphens.
- *   * Must start with a letter.
- *   * Must end with a number or a letter.
- *   * Must be between 1-63 characters.
- *   * Must be unique within the customer project / location.
- * @param {google.cloud.dataplex.v1.Lake} request.lake
- *   Required. Lake resource
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_lake.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateLake_async
- */
+  /**
+   * Creates a lake resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the lake location, of the form:
+   *   projects/{project_number}/locations/{location_id}
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {string} request.lakeId
+   *   Required. Lake identifier.
+   *   This ID will be used to generate names such as database and dataset names
+   *   when publishing metadata to Hive Metastore and BigQuery.
+   *   * Must contain only lowercase letters, numbers and hyphens.
+   *   * Must start with a letter.
+   *   * Must end with a number or a letter.
+   *   * Must be between 1-63 characters.
+   *   * Must be unique within the customer project / location.
+   * @param {google.cloud.dataplex.v1.Lake} request.lake
+   *   Required. Lake resource
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_lake.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateLake_async
+   */
   createLake(
-      request?: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createLake(
-      request: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createLake(
-      request: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createLake(
-      request?: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.ICreateLakeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ILake,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ILake,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createLake response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createLake request %j', request);
-    return this.innerApiCalls.createLake(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createLake response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createLake(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.ILake,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLake response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createLake()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_lake.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateLake_async
- */
-  async checkCreateLakeProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Lake, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createLake()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_lake.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateLake_async
+   */
+  async checkCreateLakeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Lake,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('createLake long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createLake, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Lake, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createLake,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Lake,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a lake resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update.
- * @param {google.cloud.dataplex.v1.Lake} request.lake
- *   Required. Update description.
- *   Only fields specified in `update_mask` are updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_lake.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateLake_async
- */
+  /**
+   * Updates a lake resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   * @param {google.cloud.dataplex.v1.Lake} request.lake
+   *   Required. Update description.
+   *   Only fields specified in `update_mask` are updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_lake.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateLake_async
+   */
   updateLake(
-      request?: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateLake(
-      request: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLake(
-      request: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateLake(
-      request?: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IUpdateLakeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ILake,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ILake,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'lake.name': request.lake!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'lake.name': request.lake!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ILake,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateLake response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateLake request %j', request);
-    return this.innerApiCalls.updateLake(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.ILake, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateLake response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateLake(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.ILake,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLake response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateLake()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_lake.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateLake_async
- */
-  async checkUpdateLakeProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Lake, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateLake()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_lake.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateLake_async
+   */
+  async checkUpdateLakeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Lake,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateLake long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateLake, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Lake, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateLake,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Lake,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a lake resource. All zones within the lake must be deleted before
- * the lake can be deleted.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_lake.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteLake_async
- */
+  /**
+   * Deletes a lake resource. All zones within the lake must be deleted before
+   * the lake can be deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_lake.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteLake_async
+   */
   deleteLake(
-      request?: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteLake(
-      request: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteLake(
-      request: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteLake(
-      request?: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IDeleteLakeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteLake response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteLake request %j', request);
-    return this.innerApiCalls.deleteLake(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteLake response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteLake(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLake response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteLake()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_lake.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteLake_async
- */
-  async checkDeleteLakeProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteLake()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_lake.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteLake_async
+   */
+  async checkDeleteLakeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteLake long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteLake, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteLake,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a zone resource within a lake.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {string} request.zoneId
- *   Required. Zone identifier.
- *   This ID will be used to generate names such as database and dataset names
- *   when publishing metadata to Hive Metastore and BigQuery.
- *   * Must contain only lowercase letters, numbers and hyphens.
- *   * Must start with a letter.
- *   * Must end with a number or a letter.
- *   * Must be between 1-63 characters.
- *   * Must be unique across all lakes from all locations in a project.
- *   * Must not be one of the reserved IDs (i.e. "default", "global-temp")
- * @param {google.cloud.dataplex.v1.Zone} request.zone
- *   Required. Zone resource.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_zone.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateZone_async
- */
+  /**
+   * Creates a zone resource within a lake.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {string} request.zoneId
+   *   Required. Zone identifier.
+   *   This ID will be used to generate names such as database and dataset names
+   *   when publishing metadata to Hive Metastore and BigQuery.
+   *   * Must contain only lowercase letters, numbers and hyphens.
+   *   * Must start with a letter.
+   *   * Must end with a number or a letter.
+   *   * Must be between 1-63 characters.
+   *   * Must be unique across all lakes from all locations in a project.
+   *   * Must not be one of the reserved IDs (i.e. "default", "global-temp")
+   * @param {google.cloud.dataplex.v1.Zone} request.zone
+   *   Required. Zone resource.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_zone.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateZone_async
+   */
   createZone(
-      request?: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createZone(
-      request: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createZone(
-      request: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createZone(
-      request?: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.ICreateZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IZone,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IZone,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createZone response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createZone request %j', request);
-    return this.innerApiCalls.createZone(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createZone response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IZone,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createZone()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_zone.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateZone_async
- */
-  async checkCreateZoneProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Zone, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createZone()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_zone.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateZone_async
+   */
+  async checkCreateZoneProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Zone,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('createZone long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createZone, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Zone, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createZone,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Zone,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a zone resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update.
- * @param {google.cloud.dataplex.v1.Zone} request.zone
- *   Required. Update description.
- *   Only fields specified in `update_mask` are updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_zone.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateZone_async
- */
+  /**
+   * Updates a zone resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   * @param {google.cloud.dataplex.v1.Zone} request.zone
+   *   Required. Update description.
+   *   Only fields specified in `update_mask` are updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_zone.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateZone_async
+   */
   updateZone(
-      request?: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateZone(
-      request: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateZone(
-      request: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateZone(
-      request?: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IUpdateZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IZone,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IZone,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'zone.name': request.zone!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'zone.name': request.zone!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IZone,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateZone response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateZone request %j', request);
-    return this.innerApiCalls.updateZone(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.IZone, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateZone response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IZone,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateZone()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_zone.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateZone_async
- */
-  async checkUpdateZoneProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Zone, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateZone()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_zone.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateZone_async
+   */
+  async checkUpdateZoneProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Zone,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateZone long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateZone, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Zone, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateZone,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Zone,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a zone resource. All assets within a zone must be deleted before
- * the zone can be deleted.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_zone.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteZone_async
- */
+  /**
+   * Deletes a zone resource. All assets within a zone must be deleted before
+   * the zone can be deleted.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_zone.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteZone_async
+   */
   deleteZone(
-      request?: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteZone(
-      request: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteZone(
-      request: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteZone(
-      request?: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IDeleteZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteZone response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteZone request %j', request);
-    return this.innerApiCalls.deleteZone(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteZone response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteZone()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_zone.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteZone_async
- */
-  async checkDeleteZoneProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteZone()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_zone.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteZone_async
+   */
+  async checkDeleteZoneProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteZone long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteZone, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteZone,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Creates an asset resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {string} request.assetId
- *   Required. Asset identifier.
- *   This ID will be used to generate names such as table names when publishing
- *   metadata to Hive Metastore and BigQuery.
- *   * Must contain only lowercase letters, numbers and hyphens.
- *   * Must start with a letter.
- *   * Must end with a number or a letter.
- *   * Must be between 1-63 characters.
- *   * Must be unique within the zone.
- * @param {google.cloud.dataplex.v1.Asset} request.asset
- *   Required. Asset resource.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_asset.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateAsset_async
- */
+  /**
+   * Creates an asset resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {string} request.assetId
+   *   Required. Asset identifier.
+   *   This ID will be used to generate names such as table names when publishing
+   *   metadata to Hive Metastore and BigQuery.
+   *   * Must contain only lowercase letters, numbers and hyphens.
+   *   * Must start with a letter.
+   *   * Must end with a number or a letter.
+   *   * Must be between 1-63 characters.
+   *   * Must be unique within the zone.
+   * @param {google.cloud.dataplex.v1.Asset} request.asset
+   *   Required. Asset resource.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_asset.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateAsset_async
+   */
   createAsset(
-      request?: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createAsset(
-      request: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAsset(
-      request: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAsset(
-      request?: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.ICreateAssetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAsset,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAsset,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createAsset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createAsset request %j', request);
-    return this.innerApiCalls.createAsset(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createAsset response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAsset,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAsset response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createAsset()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_asset.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateAsset_async
- */
-  async checkCreateAssetProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Asset, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createAsset()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_asset.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateAsset_async
+   */
+  async checkCreateAssetProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Asset,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('createAsset long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createAsset, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Asset, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createAsset,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Asset,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an asset resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update.
- * @param {google.cloud.dataplex.v1.Asset} request.asset
- *   Required. Update description.
- *   Only fields specified in `update_mask` are updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_asset.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateAsset_async
- */
+  /**
+   * Updates an asset resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   * @param {google.cloud.dataplex.v1.Asset} request.asset
+   *   Required. Update description.
+   *   Only fields specified in `update_mask` are updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_asset.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateAsset_async
+   */
   updateAsset(
-      request?: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateAsset(
-      request: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAsset(
-      request: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAsset(
-      request?: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IUpdateAssetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAsset,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.IAsset,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'asset.name': request.asset!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'asset.name': request.asset!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAsset,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateAsset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateAsset request %j', request);
-    return this.innerApiCalls.updateAsset(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.IAsset, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateAsset response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.IAsset,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAsset response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateAsset()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_asset.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateAsset_async
- */
-  async checkUpdateAssetProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Asset, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateAsset()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_asset.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateAsset_async
+   */
+  async checkUpdateAssetProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Asset,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateAsset long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateAsset, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Asset, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAsset,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Asset,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes an asset resource. The referenced storage resource is detached
- * (default) or deleted based on the associated Lifecycle policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the asset:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_asset.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteAsset_async
- */
+  /**
+   * Deletes an asset resource. The referenced storage resource is detached
+   * (default) or deleted based on the associated Lifecycle policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the asset:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_asset.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteAsset_async
+   */
   deleteAsset(
-      request?: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAsset(
-      request: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAsset(
-      request: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAsset(
-      request?: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IDeleteAssetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteAsset response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteAsset request %j', request);
-    return this.innerApiCalls.deleteAsset(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteAsset response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteAsset(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAsset response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteAsset()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_asset.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteAsset_async
- */
-  async checkDeleteAssetProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteAsset()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_asset.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteAsset_async
+   */
+  async checkDeleteAssetProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteAsset long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteAsset, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAsset,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a task resource within a lake.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {string} request.taskId
- *   Required. Task identifier.
- * @param {google.cloud.dataplex.v1.Task} request.task
- *   Required. Task resource.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateTask_async
- */
+  /**
+   * Creates a task resource within a lake.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {string} request.taskId
+   *   Required. Task identifier.
+   * @param {google.cloud.dataplex.v1.Task} request.task
+   *   Required. Task resource.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateTask_async
+   */
   createTask(
-      request?: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createTask(
-      request: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTask(
-      request: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTask(
-      request?: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.ICreateTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ITask,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ITask,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createTask response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createTask request %j', request);
-    return this.innerApiCalls.createTask(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createTask response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.ITask,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTask response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createTask()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.create_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_CreateTask_async
- */
-  async checkCreateTaskProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Task, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createTask()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.create_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_CreateTask_async
+   */
+  async checkCreateTaskProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Task,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('createTask long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createTask, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Task, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createTask,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Task,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Update the task resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Required. Mask of fields to update.
- * @param {google.cloud.dataplex.v1.Task} request.task
- *   Required. Update description.
- *   Only fields specified in `update_mask` are updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. Only validate the request, but do not perform mutations.
- *   The default is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateTask_async
- */
+  /**
+   * Update the task resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Mask of fields to update.
+   * @param {google.cloud.dataplex.v1.Task} request.task
+   *   Required. Update description.
+   *   Only fields specified in `update_mask` are updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. Only validate the request, but do not perform mutations.
+   *   The default is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateTask_async
+   */
   updateTask(
-      request?: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateTask(
-      request: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTask(
-      request: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTask(
-      request?: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IUpdateTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ITask,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataplex.v1.ITask,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'task.name': request.task!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'task.name': request.task!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataplex.v1.ITask,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateTask response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateTask request %j', request);
-    return this.innerApiCalls.updateTask(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.dataplex.v1.ITask, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateTask response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataplex.v1.ITask,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTask response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateTask()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.update_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_UpdateTask_async
- */
-  async checkUpdateTaskProgress(name: string): Promise<LROperation<protos.google.cloud.dataplex.v1.Task, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateTask()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.update_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_UpdateTask_async
+   */
+  async checkUpdateTaskProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataplex.v1.Task,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateTask long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateTask, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.dataplex.v1.Task, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateTask,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataplex.v1.Task,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
-/**
- * Delete the task resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the task:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/task/{task_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteTask_async
- */
+  /**
+   * Delete the task resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the task:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/task/{task_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteTask_async
+   */
   deleteTask(
-      request?: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteTask(
-      request: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTask(
-      request: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTask(
-      request?: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.dataplex.v1.IDeleteTaskRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataplex.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteTask response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteTask request %j', request);
-    return this.innerApiCalls.deleteTask(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.dataplex.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteTask response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteTask(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataplex.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTask response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteTask()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.delete_task.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_DeleteTask_async
- */
-  async checkDeleteTaskProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteTask()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.delete_task.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_DeleteTask_async
+   */
+  async checkDeleteTaskProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteTask long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteTask, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.dataplex.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteTask,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataplex.v1.OperationMetadata
+    >;
   }
- /**
- * Lists lake resources in a project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the lake location, of the form:
- *   `projects/{project_number}/locations/{location_id}`
- *   where `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of Lakes to return. The service may return fewer
- *   than this value. If unspecified, at most 10 lakes will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListLakes` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListLakes` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Lake|Lake}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listLakesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists lake resources in a project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the lake location, of the form:
+   *   `projects/{project_number}/locations/{location_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Lakes to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 lakes will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListLakes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListLakes` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Lake|Lake}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listLakesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listLakes(
-      request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ILake[],
-        protos.google.cloud.dataplex.v1.IListLakesRequest|null,
-        protos.google.cloud.dataplex.v1.IListLakesResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ILake[],
+      protos.google.cloud.dataplex.v1.IListLakesRequest | null,
+      protos.google.cloud.dataplex.v1.IListLakesResponse,
+    ]
+  >;
   listLakes(
-      request: protos.google.cloud.dataplex.v1.IListLakesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListLakesRequest,
-          protos.google.cloud.dataplex.v1.IListLakesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ILake>): void;
+    request: protos.google.cloud.dataplex.v1.IListLakesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListLakesRequest,
+      protos.google.cloud.dataplex.v1.IListLakesResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ILake
+    >,
+  ): void;
   listLakes(
-      request: protos.google.cloud.dataplex.v1.IListLakesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListLakesRequest,
-          protos.google.cloud.dataplex.v1.IListLakesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ILake>): void;
+    request: protos.google.cloud.dataplex.v1.IListLakesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListLakesRequest,
+      protos.google.cloud.dataplex.v1.IListLakesResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ILake
+    >,
+  ): void;
   listLakes(
-      request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListLakesRequest,
-          protos.google.cloud.dataplex.v1.IListLakesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ILake>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListLakesRequest,
-          protos.google.cloud.dataplex.v1.IListLakesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ILake>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ILake[],
-        protos.google.cloud.dataplex.v1.IListLakesRequest|null,
-        protos.google.cloud.dataplex.v1.IListLakesResponse
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IListLakesResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.ILake
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListLakesRequest,
+      protos.google.cloud.dataplex.v1.IListLakesResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ILake
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ILake[],
+      protos.google.cloud.dataplex.v1.IListLakesRequest | null,
+      protos.google.cloud.dataplex.v1.IListLakesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListLakesRequest,
-      protos.google.cloud.dataplex.v1.IListLakesResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.ILake>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListLakesRequest,
+          protos.google.cloud.dataplex.v1.IListLakesResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.ILake
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listLakes values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2726,215 +4097,238 @@ export class DataplexServiceClient {
     this._log.info('listLakes request %j', request);
     return this.innerApiCalls
       .listLakes(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.ILake[],
-        protos.google.cloud.dataplex.v1.IListLakesRequest|null,
-        protos.google.cloud.dataplex.v1.IListLakesResponse
-      ]) => {
-        this._log.info('listLakes values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.ILake[],
+          protos.google.cloud.dataplex.v1.IListLakesRequest | null,
+          protos.google.cloud.dataplex.v1.IListLakesResponse,
+        ]) => {
+          this._log.info('listLakes values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listLakes`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the lake location, of the form:
- *   `projects/{project_number}/locations/{location_id}`
- *   where `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of Lakes to return. The service may return fewer
- *   than this value. If unspecified, at most 10 lakes will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListLakes` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListLakes` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Lake|Lake} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listLakesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listLakes`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the lake location, of the form:
+   *   `projects/{project_number}/locations/{location_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Lakes to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 lakes will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListLakes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListLakes` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Lake|Lake} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listLakesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listLakesStream(
-      request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listLakes stream %j', request);
     return this.descriptors.page.listLakes.createStream(
       this.innerApiCalls.listLakes as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listLakes`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the lake location, of the form:
- *   `projects/{project_number}/locations/{location_id}`
- *   where `location_id` refers to a Google Cloud region.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of Lakes to return. The service may return fewer
- *   than this value. If unspecified, at most 10 lakes will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListLakes` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListLakes` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Lake|Lake}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_lakes.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListLakes_async
- */
+  /**
+   * Equivalent to `listLakes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the lake location, of the form:
+   *   `projects/{project_number}/locations/{location_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Lakes to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 lakes will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListLakes` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListLakes` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Lake|Lake}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_lakes.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListLakes_async
+   */
   listLakesAsync(
-      request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.ILake>{
+    request?: protos.google.cloud.dataplex.v1.IListLakesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.ILake> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listLakes iterate %j', request);
     return this.descriptors.page.listLakes.asyncIterate(
       this.innerApiCalls['listLakes'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.ILake>;
   }
- /**
- * Lists action resources in a lake.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListLakeActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListLakeActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Action|Action}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listLakeActionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists action resources in a lake.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListLakeActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListLakeActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Action|Action}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listLakeActionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listLakeActions(
-      request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListLakeActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAction[],
+      protos.google.cloud.dataplex.v1.IListLakeActionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
+    ]
+  >;
   listLakeActions(
-      request: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>): void;
+    request: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): void;
   listLakeActions(
-      request: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>): void;
+    request: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): void;
   listLakeActions(
-      request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListLakeActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IListActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAction
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAction[],
+      protos.google.cloud.dataplex.v1.IListLakeActionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-      protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IAction>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+          | protos.google.cloud.dataplex.v1.IListActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAction
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listLakeActions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2943,210 +4337,229 @@ export class DataplexServiceClient {
     this._log.info('listLakeActions request %j', request);
     return this.innerApiCalls
       .listLakeActions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListLakeActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]) => {
-        this._log.info('listLakeActions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IAction[],
+          protos.google.cloud.dataplex.v1.IListLakeActionsRequest | null,
+          protos.google.cloud.dataplex.v1.IListActionsResponse,
+        ]) => {
+          this._log.info('listLakeActions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listLakeActions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListLakeActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListLakeActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Action|Action} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listLakeActionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listLakeActions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListLakeActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListLakeActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Action|Action} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listLakeActionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listLakeActionsStream(
-      request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listLakeActions stream %j', request);
     return this.descriptors.page.listLakeActions.createStream(
       this.innerApiCalls.listLakeActions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listLakeActions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListLakeActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListLakeActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Action|Action}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_lake_actions.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListLakeActions_async
- */
+  /**
+   * Equivalent to `listLakeActions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListLakeActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListLakeActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Action|Action}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_lake_actions.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListLakeActions_async
+   */
   listLakeActionsAsync(
-      request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IAction>{
+    request?: protos.google.cloud.dataplex.v1.IListLakeActionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IAction> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listLakeActions iterate %j', request);
     return this.descriptors.page.listLakeActions.asyncIterate(
       this.innerApiCalls['listLakeActions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAction>;
   }
- /**
- * Lists zone resources in a lake.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of zones to return. The service may return fewer
- *   than this value. If unspecified, at most 10 zones will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZones` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListZones` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Zone|Zone}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listZonesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists zone resources in a lake.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of zones to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 zones will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZones` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZones` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Zone|Zone}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listZonesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listZones(
-      request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IZone[],
-        protos.google.cloud.dataplex.v1.IListZonesRequest|null,
-        protos.google.cloud.dataplex.v1.IListZonesResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IZone[],
+      protos.google.cloud.dataplex.v1.IListZonesRequest | null,
+      protos.google.cloud.dataplex.v1.IListZonesResponse,
+    ]
+  >;
   listZones(
-      request: protos.google.cloud.dataplex.v1.IListZonesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListZonesRequest,
-          protos.google.cloud.dataplex.v1.IListZonesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IZone>): void;
+    request: protos.google.cloud.dataplex.v1.IListZonesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListZonesRequest,
+      protos.google.cloud.dataplex.v1.IListZonesResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IZone
+    >,
+  ): void;
   listZones(
-      request: protos.google.cloud.dataplex.v1.IListZonesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListZonesRequest,
-          protos.google.cloud.dataplex.v1.IListZonesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IZone>): void;
+    request: protos.google.cloud.dataplex.v1.IListZonesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListZonesRequest,
+      protos.google.cloud.dataplex.v1.IListZonesResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IZone
+    >,
+  ): void;
   listZones(
-      request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListZonesRequest,
-          protos.google.cloud.dataplex.v1.IListZonesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IZone>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListZonesRequest,
-          protos.google.cloud.dataplex.v1.IListZonesResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IZone>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IZone[],
-        protos.google.cloud.dataplex.v1.IListZonesRequest|null,
-        protos.google.cloud.dataplex.v1.IListZonesResponse
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IListZonesResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.IZone
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListZonesRequest,
+      protos.google.cloud.dataplex.v1.IListZonesResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IZone
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IZone[],
+      protos.google.cloud.dataplex.v1.IListZonesRequest | null,
+      protos.google.cloud.dataplex.v1.IListZonesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListZonesRequest,
-      protos.google.cloud.dataplex.v1.IListZonesResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IZone>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListZonesRequest,
+          protos.google.cloud.dataplex.v1.IListZonesResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.IZone
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listZones values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3155,213 +4568,236 @@ export class DataplexServiceClient {
     this._log.info('listZones request %j', request);
     return this.innerApiCalls
       .listZones(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IZone[],
-        protos.google.cloud.dataplex.v1.IListZonesRequest|null,
-        protos.google.cloud.dataplex.v1.IListZonesResponse
-      ]) => {
-        this._log.info('listZones values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IZone[],
+          protos.google.cloud.dataplex.v1.IListZonesRequest | null,
+          protos.google.cloud.dataplex.v1.IListZonesResponse,
+        ]) => {
+          this._log.info('listZones values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listZones`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of zones to return. The service may return fewer
- *   than this value. If unspecified, at most 10 zones will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZones` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListZones` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Zone|Zone} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listZonesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listZones`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of zones to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 zones will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZones` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZones` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Zone|Zone} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listZonesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listZonesStream(
-      request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listZones stream %j', request);
     return this.descriptors.page.listZones.createStream(
       this.innerApiCalls.listZones as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listZones`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of zones to return. The service may return fewer
- *   than this value. If unspecified, at most 10 zones will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZones` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListZones` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Zone|Zone}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_zones.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListZones_async
- */
+  /**
+   * Equivalent to `listZones`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of zones to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 zones will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZones` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZones` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Zone|Zone}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_zones.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListZones_async
+   */
   listZonesAsync(
-      request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IZone>{
+    request?: protos.google.cloud.dataplex.v1.IListZonesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IZone> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listZones iterate %j', request);
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IZone>;
   }
- /**
- * Lists action resources in a zone.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZoneActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListZoneActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Action|Action}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listZoneActionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists action resources in a zone.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZoneActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListZoneActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Action|Action}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listZoneActionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listZoneActions(
-      request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListZoneActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAction[],
+      protos.google.cloud.dataplex.v1.IListZoneActionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
+    ]
+  >;
   listZoneActions(
-      request: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>): void;
+    request: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): void;
   listZoneActions(
-      request: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>): void;
+    request: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): void;
   listZoneActions(
-      request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListZoneActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IListActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAction
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAction[],
+      protos.google.cloud.dataplex.v1.IListZoneActionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-      protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IAction>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+          | protos.google.cloud.dataplex.v1.IListActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAction
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listZoneActions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3370,211 +4806,234 @@ export class DataplexServiceClient {
     this._log.info('listZoneActions request %j', request);
     return this.innerApiCalls
       .listZoneActions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListZoneActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]) => {
-        this._log.info('listZoneActions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IAction[],
+          protos.google.cloud.dataplex.v1.IListZoneActionsRequest | null,
+          protos.google.cloud.dataplex.v1.IListActionsResponse,
+        ]) => {
+          this._log.info('listZoneActions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listZoneActions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZoneActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListZoneActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Action|Action} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listZoneActionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listZoneActions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZoneActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListZoneActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Action|Action} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listZoneActionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listZoneActionsStream(
-      request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listZoneActions stream %j', request);
     return this.descriptors.page.listZoneActions.createStream(
       this.innerApiCalls.listZoneActions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listZoneActions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZoneActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListZoneActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Action|Action}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_zone_actions.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListZoneActions_async
- */
+  /**
+   * Equivalent to `listZoneActions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZoneActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListZoneActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Action|Action}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_zone_actions.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListZoneActions_async
+   */
   listZoneActionsAsync(
-      request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IAction>{
+    request?: protos.google.cloud.dataplex.v1.IListZoneActionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IAction> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listZoneActions iterate %j', request);
     return this.descriptors.page.listZoneActions.asyncIterate(
       this.innerApiCalls['listZoneActions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAction>;
   }
- /**
- * Lists asset resources in a zone.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of asset to return. The service may return fewer
- *   than this value. If unspecified, at most 10 assets will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListAssets` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListAssets` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Asset|Asset}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAssetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists asset resources in a zone.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of asset to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 assets will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListAssets` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListAssets` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Asset|Asset}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAssetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAssets(
-      request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAsset[],
-        protos.google.cloud.dataplex.v1.IListAssetsRequest|null,
-        protos.google.cloud.dataplex.v1.IListAssetsResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAsset[],
+      protos.google.cloud.dataplex.v1.IListAssetsRequest | null,
+      protos.google.cloud.dataplex.v1.IListAssetsResponse,
+    ]
+  >;
   listAssets(
-      request: protos.google.cloud.dataplex.v1.IListAssetsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListAssetsRequest,
-          protos.google.cloud.dataplex.v1.IListAssetsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAsset>): void;
+    request: protos.google.cloud.dataplex.v1.IListAssetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListAssetsRequest,
+      protos.google.cloud.dataplex.v1.IListAssetsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAsset
+    >,
+  ): void;
   listAssets(
-      request: protos.google.cloud.dataplex.v1.IListAssetsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListAssetsRequest,
-          protos.google.cloud.dataplex.v1.IListAssetsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAsset>): void;
+    request: protos.google.cloud.dataplex.v1.IListAssetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListAssetsRequest,
+      protos.google.cloud.dataplex.v1.IListAssetsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAsset
+    >,
+  ): void;
   listAssets(
-      request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListAssetsRequest,
-          protos.google.cloud.dataplex.v1.IListAssetsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAsset>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListAssetsRequest,
-          protos.google.cloud.dataplex.v1.IListAssetsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAsset>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAsset[],
-        protos.google.cloud.dataplex.v1.IListAssetsRequest|null,
-        protos.google.cloud.dataplex.v1.IListAssetsResponse
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IListAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAsset
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListAssetsRequest,
+      protos.google.cloud.dataplex.v1.IListAssetsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAsset
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAsset[],
+      protos.google.cloud.dataplex.v1.IListAssetsRequest | null,
+      protos.google.cloud.dataplex.v1.IListAssetsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListAssetsRequest,
-      protos.google.cloud.dataplex.v1.IListAssetsResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IAsset>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListAssetsRequest,
+          | protos.google.cloud.dataplex.v1.IListAssetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAsset
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAssets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3583,215 +5042,238 @@ export class DataplexServiceClient {
     this._log.info('listAssets request %j', request);
     return this.innerApiCalls
       .listAssets(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IAsset[],
-        protos.google.cloud.dataplex.v1.IListAssetsRequest|null,
-        protos.google.cloud.dataplex.v1.IListAssetsResponse
-      ]) => {
-        this._log.info('listAssets values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IAsset[],
+          protos.google.cloud.dataplex.v1.IListAssetsRequest | null,
+          protos.google.cloud.dataplex.v1.IListAssetsResponse,
+        ]) => {
+          this._log.info('listAssets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAssets`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of asset to return. The service may return fewer
- *   than this value. If unspecified, at most 10 assets will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListAssets` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListAssets` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Asset|Asset} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAssetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAssets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of asset to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 assets will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListAssets` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListAssets` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Asset|Asset} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAssetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAssetsStream(
-      request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAssets stream %j', request);
     return this.descriptors.page.listAssets.createStream(
       this.innerApiCalls.listAssets as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAssets`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent zone:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of asset to return. The service may return fewer
- *   than this value. If unspecified, at most 10 assets will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListAssets` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListAssets` must match the call that provided the page
- *   token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_assets.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListAssets_async
- */
+  /**
+   * Equivalent to `listAssets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent zone:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of asset to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 assets will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListAssets` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListAssets` must match the call that provided the page
+   *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Asset|Asset}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_assets.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListAssets_async
+   */
   listAssetsAsync(
-      request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IAsset>{
+    request?: protos.google.cloud.dataplex.v1.IListAssetsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IAsset> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAssets iterate %j', request);
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAsset>;
   }
- /**
- * Lists action resources in an asset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent asset:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListAssetActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListAssetActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Action|Action}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAssetActionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists action resources in an asset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent asset:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListAssetActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListAssetActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Action|Action}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAssetActionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAssetActions(
-      request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListAssetActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAction[],
+      protos.google.cloud.dataplex.v1.IListAssetActionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
+    ]
+  >;
   listAssetActions(
-      request: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>): void;
+    request: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): void;
   listAssetActions(
-      request: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>): void;
+    request: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): void;
   listAssetActions(
-      request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-          protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IAction>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListAssetActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]>|void {
+          | protos.google.cloud.dataplex.v1.IListActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAction
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+      protos.google.cloud.dataplex.v1.IListActionsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IAction
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IAction[],
+      protos.google.cloud.dataplex.v1.IListAssetActionsRequest | null,
+      protos.google.cloud.dataplex.v1.IListActionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-      protos.google.cloud.dataplex.v1.IListActionsResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IAction>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+          | protos.google.cloud.dataplex.v1.IListActionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataplex.v1.IAction
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAssetActions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3800,210 +5282,229 @@ export class DataplexServiceClient {
     this._log.info('listAssetActions request %j', request);
     return this.innerApiCalls
       .listAssetActions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IAction[],
-        protos.google.cloud.dataplex.v1.IListAssetActionsRequest|null,
-        protos.google.cloud.dataplex.v1.IListActionsResponse
-      ]) => {
-        this._log.info('listAssetActions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IAction[],
+          protos.google.cloud.dataplex.v1.IListAssetActionsRequest | null,
+          protos.google.cloud.dataplex.v1.IListActionsResponse,
+        ]) => {
+          this._log.info('listAssetActions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAssetActions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent asset:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListAssetActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListAssetActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Action|Action} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAssetActionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAssetActions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent asset:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListAssetActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListAssetActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Action|Action} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAssetActionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAssetActionsStream(
-      request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAssetActions stream %j', request);
     return this.descriptors.page.listAssetActions.createStream(
       this.innerApiCalls.listAssetActions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAssetActions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent asset:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of actions to return. The service may return fewer
- *   than this value. If unspecified, at most 10 actions will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListAssetActions` call.
- *   Provide this to retrieve the subsequent page. When paginating, all other
- *   parameters provided to `ListAssetActions` must match the call that provided
- *   the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Action|Action}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_asset_actions.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListAssetActions_async
- */
+  /**
+   * Equivalent to `listAssetActions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent asset:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/assets/{asset_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of actions to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 actions will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListAssetActions` call.
+   *   Provide this to retrieve the subsequent page. When paginating, all other
+   *   parameters provided to `ListAssetActions` must match the call that provided
+   *   the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Action|Action}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_asset_actions.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListAssetActions_async
+   */
   listAssetActionsAsync(
-      request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IAction>{
+    request?: protos.google.cloud.dataplex.v1.IListAssetActionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IAction> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAssetActions iterate %j', request);
     return this.descriptors.page.listAssetActions.asyncIterate(
       this.innerApiCalls['listAssetActions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAction>;
   }
- /**
- * Lists tasks under the given lake.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of tasks to return. The service may return fewer
- *   than this value. If unspecified, at most 10 tasks will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZones` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListZones` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Task|Task}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listTasksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists tasks under the given lake.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of tasks to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 tasks will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZones` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZones` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Task|Task}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listTasksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTasks(
-      request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ITask[],
-        protos.google.cloud.dataplex.v1.IListTasksRequest|null,
-        protos.google.cloud.dataplex.v1.IListTasksResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ITask[],
+      protos.google.cloud.dataplex.v1.IListTasksRequest | null,
+      protos.google.cloud.dataplex.v1.IListTasksResponse,
+    ]
+  >;
   listTasks(
-      request: protos.google.cloud.dataplex.v1.IListTasksRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListTasksRequest,
-          protos.google.cloud.dataplex.v1.IListTasksResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ITask>): void;
+    request: protos.google.cloud.dataplex.v1.IListTasksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListTasksRequest,
+      protos.google.cloud.dataplex.v1.IListTasksResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ITask
+    >,
+  ): void;
   listTasks(
-      request: protos.google.cloud.dataplex.v1.IListTasksRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListTasksRequest,
-          protos.google.cloud.dataplex.v1.IListTasksResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ITask>): void;
+    request: protos.google.cloud.dataplex.v1.IListTasksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListTasksRequest,
+      protos.google.cloud.dataplex.v1.IListTasksResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ITask
+    >,
+  ): void;
   listTasks(
-      request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListTasksRequest,
-          protos.google.cloud.dataplex.v1.IListTasksResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ITask>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListTasksRequest,
-          protos.google.cloud.dataplex.v1.IListTasksResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.ITask>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.ITask[],
-        protos.google.cloud.dataplex.v1.IListTasksRequest|null,
-        protos.google.cloud.dataplex.v1.IListTasksResponse
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IListTasksResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.ITask
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListTasksRequest,
+      protos.google.cloud.dataplex.v1.IListTasksResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.ITask
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.ITask[],
+      protos.google.cloud.dataplex.v1.IListTasksRequest | null,
+      protos.google.cloud.dataplex.v1.IListTasksResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListTasksRequest,
-      protos.google.cloud.dataplex.v1.IListTasksResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.ITask>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListTasksRequest,
+          protos.google.cloud.dataplex.v1.IListTasksResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.ITask
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTasks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4012,213 +5513,232 @@ export class DataplexServiceClient {
     this._log.info('listTasks request %j', request);
     return this.innerApiCalls
       .listTasks(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.ITask[],
-        protos.google.cloud.dataplex.v1.IListTasksRequest|null,
-        protos.google.cloud.dataplex.v1.IListTasksResponse
-      ]) => {
-        this._log.info('listTasks values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.ITask[],
+          protos.google.cloud.dataplex.v1.IListTasksRequest | null,
+          protos.google.cloud.dataplex.v1.IListTasksResponse,
+        ]) => {
+          this._log.info('listTasks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listTasks`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of tasks to return. The service may return fewer
- *   than this value. If unspecified, at most 10 tasks will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZones` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListZones` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Task|Task} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listTasksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listTasks`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of tasks to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 tasks will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZones` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZones` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Task|Task} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listTasksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTasksStream(
-      request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTasks stream %j', request);
     return this.descriptors.page.listTasks.createStream(
       this.innerApiCalls.listTasks as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listTasks`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent lake:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of tasks to return. The service may return fewer
- *   than this value. If unspecified, at most 10 tasks will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListZones` call. Provide
- *   this to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListZones` must match the call that provided the page token.
- * @param {string} [request.filter]
- *   Optional. Filter request.
- * @param {string} [request.orderBy]
- *   Optional. Order by fields for the result.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Task|Task}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_tasks.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListTasks_async
- */
+  /**
+   * Equivalent to `listTasks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent lake:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of tasks to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 tasks will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListZones` call. Provide
+   *   this to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListZones` must match the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Task|Task}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_tasks.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListTasks_async
+   */
   listTasksAsync(
-      request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.ITask>{
+    request?: protos.google.cloud.dataplex.v1.IListTasksRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.ITask> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTasks iterate %j', request);
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.ITask>;
   }
- /**
- * Lists Jobs under the given task.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent environment:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of jobs to return. The service may return fewer
- *   than this value. If unspecified, at most 10 jobs will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListJobs` call. Provide this
- *   to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListJobs` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Job|Job}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Jobs under the given task.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of jobs to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 jobs will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListJobs` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListJobs` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataplex.v1.Job|Job}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listJobs(
-      request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IJob[],
-        protos.google.cloud.dataplex.v1.IListJobsRequest|null,
-        protos.google.cloud.dataplex.v1.IListJobsResponse
-      ]>;
+    request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IJob[],
+      protos.google.cloud.dataplex.v1.IListJobsRequest | null,
+      protos.google.cloud.dataplex.v1.IListJobsResponse,
+    ]
+  >;
   listJobs(
-      request: protos.google.cloud.dataplex.v1.IListJobsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListJobsRequest,
-          protos.google.cloud.dataplex.v1.IListJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IJob>): void;
+    request: protos.google.cloud.dataplex.v1.IListJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListJobsRequest,
+      protos.google.cloud.dataplex.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IJob
+    >,
+  ): void;
   listJobs(
-      request: protos.google.cloud.dataplex.v1.IListJobsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListJobsRequest,
-          protos.google.cloud.dataplex.v1.IListJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IJob>): void;
+    request: protos.google.cloud.dataplex.v1.IListJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListJobsRequest,
+      protos.google.cloud.dataplex.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IJob
+    >,
+  ): void;
   listJobs(
-      request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.dataplex.v1.IListJobsRequest,
-          protos.google.cloud.dataplex.v1.IListJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IJob>,
-      callback?: PaginationCallback<
-          protos.google.cloud.dataplex.v1.IListJobsRequest,
-          protos.google.cloud.dataplex.v1.IListJobsResponse|null|undefined,
-          protos.google.cloud.dataplex.v1.IJob>):
-      Promise<[
-        protos.google.cloud.dataplex.v1.IJob[],
-        protos.google.cloud.dataplex.v1.IListJobsRequest|null,
-        protos.google.cloud.dataplex.v1.IListJobsResponse
-      ]>|void {
+          protos.google.cloud.dataplex.v1.IListJobsResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.IJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataplex.v1.IListJobsRequest,
+      protos.google.cloud.dataplex.v1.IListJobsResponse | null | undefined,
+      protos.google.cloud.dataplex.v1.IJob
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataplex.v1.IJob[],
+      protos.google.cloud.dataplex.v1.IListJobsRequest | null,
+      protos.google.cloud.dataplex.v1.IListJobsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.dataplex.v1.IListJobsRequest,
-      protos.google.cloud.dataplex.v1.IListJobsResponse|null|undefined,
-      protos.google.cloud.dataplex.v1.IJob>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataplex.v1.IListJobsRequest,
+          protos.google.cloud.dataplex.v1.IListJobsResponse | null | undefined,
+          protos.google.cloud.dataplex.v1.IJob
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listJobs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4227,121 +5747,126 @@ export class DataplexServiceClient {
     this._log.info('listJobs request %j', request);
     return this.innerApiCalls
       .listJobs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.dataplex.v1.IJob[],
-        protos.google.cloud.dataplex.v1.IListJobsRequest|null,
-        protos.google.cloud.dataplex.v1.IListJobsResponse
-      ]) => {
-        this._log.info('listJobs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataplex.v1.IJob[],
+          protos.google.cloud.dataplex.v1.IListJobsRequest | null,
+          protos.google.cloud.dataplex.v1.IListJobsResponse,
+        ]) => {
+          this._log.info('listJobs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listJobs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent environment:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of jobs to return. The service may return fewer
- *   than this value. If unspecified, at most 10 jobs will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListJobs` call. Provide this
- *   to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListJobs` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Job|Job} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listJobsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listJobs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of jobs to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 jobs will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListJobs` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListJobs` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataplex.v1.Job|Job} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listJobsStream(
-      request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listJobs stream %j', request);
     return this.descriptors.page.listJobs.createStream(
       this.innerApiCalls.listJobs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listJobs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the parent environment:
- *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of jobs to return. The service may return fewer
- *   than this value. If unspecified, at most 10 jobs will be returned. The
- *   maximum value is 1000; values above 1000 will be coerced to 1000.
- * @param {string} [request.pageToken]
- *   Optional. Page token received from a previous `ListJobs` call. Provide this
- *   to retrieve the subsequent page. When paginating, all other parameters
- *   provided to `ListJobs` must match the call that provided the page
- *   token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.dataplex.v1.Job|Job}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/dataplex_service.list_jobs.js</caption>
- * region_tag:dataplex_v1_generated_DataplexService_ListJobs_async
- */
+  /**
+   * Equivalent to `listJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent environment:
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of jobs to return. The service may return fewer
+   *   than this value. If unspecified, at most 10 jobs will be returned. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListJobs` call. Provide this
+   *   to retrieve the subsequent page. When paginating, all other parameters
+   *   provided to `ListJobs` must match the call that provided the page
+   *   token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataplex.v1.Job|Job}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/dataplex_service.list_jobs.js</caption>
+   * region_tag:dataplex_v1_generated_DataplexService_ListJobs_async
+   */
   listJobsAsync(
-      request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.dataplex.v1.IJob>{
+    request?: protos.google.cloud.dataplex.v1.IListJobsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataplex.v1.IJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listJobs iterate %j', request);
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IJob>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -4376,12 +5901,11 @@ export class DataplexServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -4414,12 +5938,12 @@ export class DataplexServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -4462,22 +5986,22 @@ export class DataplexServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4512,15 +6036,15 @@ export class DataplexServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4554,7 +6078,7 @@ export class DataplexServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -4567,25 +6091,24 @@ export class DataplexServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -4624,22 +6147,22 @@ export class DataplexServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -4655,7 +6178,7 @@ export class DataplexServiceClient {
    * @param {string} aspect_type
    * @returns {string} Resource name string.
    */
-  aspectTypePath(project:string,location:string,aspectType:string) {
+  aspectTypePath(project: string, location: string, aspectType: string) {
     return this.pathTemplates.aspectTypePathTemplate.render({
       project: project,
       location: location,
@@ -4671,7 +6194,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).project;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .project;
   }
 
   /**
@@ -4682,7 +6206,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).location;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .location;
   }
 
   /**
@@ -4693,7 +6218,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the aspect_type.
    */
   matchAspectTypeFromAspectTypeName(aspectTypeName: string) {
-    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName).aspect_type;
+    return this.pathTemplates.aspectTypePathTemplate.match(aspectTypeName)
+      .aspect_type;
   }
 
   /**
@@ -4706,7 +6232,13 @@ export class DataplexServiceClient {
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(project:string,location:string,lake:string,zone:string,asset:string) {
+  assetPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    asset: string,
+  ) {
     return this.pathTemplates.assetPathTemplate.render({
       project: project,
       location: location,
@@ -4780,7 +6312,12 @@ export class DataplexServiceClient {
    * @param {string} content
    * @returns {string} Resource name string.
    */
-  contentPath(project:string,location:string,lake:string,content:string) {
+  contentPath(
+    project: string,
+    location: string,
+    lake: string,
+    content: string,
+  ) {
     return this.pathTemplates.contentPathTemplate.render({
       project: project,
       location: location,
@@ -4842,7 +6379,12 @@ export class DataplexServiceClient {
    * @param {string} data_asset
    * @returns {string} Resource name string.
    */
-  dataAssetPath(project:string,location:string,dataProduct:string,dataAsset:string) {
+  dataAssetPath(
+    project: string,
+    location: string,
+    dataProduct: string,
+    dataAsset: string,
+  ) {
     return this.pathTemplates.dataAssetPathTemplate.render({
       project: project,
       location: location,
@@ -4859,7 +6401,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).project;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .project;
   }
 
   /**
@@ -4870,7 +6413,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).location;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .location;
   }
 
   /**
@@ -4881,7 +6425,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the data_product.
    */
   matchDataProductFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_product;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .data_product;
   }
 
   /**
@@ -4892,7 +6437,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the data_asset.
    */
   matchDataAssetFromDataAssetName(dataAssetName: string) {
-    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName).data_asset;
+    return this.pathTemplates.dataAssetPathTemplate.match(dataAssetName)
+      .data_asset;
   }
 
   /**
@@ -4904,7 +6450,12 @@ export class DataplexServiceClient {
    * @param {string} data_attribute_id
    * @returns {string} Resource name string.
    */
-  dataAttributePath(project:string,location:string,dataTaxonomy:string,dataAttributeId:string) {
+  dataAttributePath(
+    project: string,
+    location: string,
+    dataTaxonomy: string,
+    dataAttributeId: string,
+  ) {
     return this.pathTemplates.dataAttributePathTemplate.render({
       project: project,
       location: location,
@@ -4921,7 +6472,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).project;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .project;
   }
 
   /**
@@ -4932,7 +6484,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).location;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .location;
   }
 
   /**
@@ -4943,7 +6496,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the dataTaxonomy.
    */
   matchDataTaxonomyFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).dataTaxonomy;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .dataTaxonomy;
   }
 
   /**
@@ -4954,7 +6508,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the data_attribute_id.
    */
   matchDataAttributeIdFromDataAttributeName(dataAttributeName: string) {
-    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName).data_attribute_id;
+    return this.pathTemplates.dataAttributePathTemplate.match(dataAttributeName)
+      .data_attribute_id;
   }
 
   /**
@@ -4965,7 +6520,11 @@ export class DataplexServiceClient {
    * @param {string} data_attribute_binding_id
    * @returns {string} Resource name string.
    */
-  dataAttributeBindingPath(project:string,location:string,dataAttributeBindingId:string) {
+  dataAttributeBindingPath(
+    project: string,
+    location: string,
+    dataAttributeBindingId: string,
+  ) {
     return this.pathTemplates.dataAttributeBindingPathTemplate.render({
       project: project,
       location: location,
@@ -4981,7 +6540,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).project;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).project;
   }
 
   /**
@@ -4992,7 +6553,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).location;
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).location;
   }
 
   /**
@@ -5002,8 +6565,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing DataAttributeBinding resource.
    * @returns {string} A string representing the data_attribute_binding_id.
    */
-  matchDataAttributeBindingIdFromDataAttributeBindingName(dataAttributeBindingName: string) {
-    return this.pathTemplates.dataAttributeBindingPathTemplate.match(dataAttributeBindingName).data_attribute_binding_id;
+  matchDataAttributeBindingIdFromDataAttributeBindingName(
+    dataAttributeBindingName: string,
+  ) {
+    return this.pathTemplates.dataAttributeBindingPathTemplate.match(
+      dataAttributeBindingName,
+    ).data_attribute_binding_id;
   }
 
   /**
@@ -5014,7 +6581,7 @@ export class DataplexServiceClient {
    * @param {string} data_product
    * @returns {string} Resource name string.
    */
-  dataProductPath(project:string,location:string,dataProduct:string) {
+  dataProductPath(project: string, location: string, dataProduct: string) {
     return this.pathTemplates.dataProductPathTemplate.render({
       project: project,
       location: location,
@@ -5030,7 +6597,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).project;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .project;
   }
 
   /**
@@ -5041,7 +6609,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).location;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .location;
   }
 
   /**
@@ -5052,7 +6621,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the data_product.
    */
   matchDataProductFromDataProductName(dataProductName: string) {
-    return this.pathTemplates.dataProductPathTemplate.match(dataProductName).data_product;
+    return this.pathTemplates.dataProductPathTemplate.match(dataProductName)
+      .data_product;
   }
 
   /**
@@ -5063,7 +6633,7 @@ export class DataplexServiceClient {
    * @param {string} dataScan
    * @returns {string} Resource name string.
    */
-  dataScanPath(project:string,location:string,dataScan:string) {
+  dataScanPath(project: string, location: string, dataScan: string) {
     return this.pathTemplates.dataScanPathTemplate.render({
       project: project,
       location: location,
@@ -5113,7 +6683,12 @@ export class DataplexServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  dataScanJobPath(project:string,location:string,dataScan:string,job:string) {
+  dataScanJobPath(
+    project: string,
+    location: string,
+    dataScan: string,
+    job: string,
+  ) {
     return this.pathTemplates.dataScanJobPathTemplate.render({
       project: project,
       location: location,
@@ -5130,7 +6705,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).project;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .project;
   }
 
   /**
@@ -5141,7 +6717,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).location;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .location;
   }
 
   /**
@@ -5152,7 +6729,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the dataScan.
    */
   matchDataScanFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).dataScan;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .dataScan;
   }
 
   /**
@@ -5163,7 +6741,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the job.
    */
   matchJobFromDataScanJobName(dataScanJobName: string) {
-    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName).job;
+    return this.pathTemplates.dataScanJobPathTemplate.match(dataScanJobName)
+      .job;
   }
 
   /**
@@ -5174,7 +6753,7 @@ export class DataplexServiceClient {
    * @param {string} data_taxonomy_id
    * @returns {string} Resource name string.
    */
-  dataTaxonomyPath(project:string,location:string,dataTaxonomyId:string) {
+  dataTaxonomyPath(project: string, location: string, dataTaxonomyId: string) {
     return this.pathTemplates.dataTaxonomyPathTemplate.render({
       project: project,
       location: location,
@@ -5190,7 +6769,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).project;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .project;
   }
 
   /**
@@ -5201,7 +6781,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).location;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .location;
   }
 
   /**
@@ -5212,7 +6793,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the data_taxonomy_id.
    */
   matchDataTaxonomyIdFromDataTaxonomyName(dataTaxonomyName: string) {
-    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName).data_taxonomy_id;
+    return this.pathTemplates.dataTaxonomyPathTemplate.match(dataTaxonomyName)
+      .data_taxonomy_id;
   }
 
   /**
@@ -5223,7 +6805,11 @@ export class DataplexServiceClient {
    * @param {string} encryption_config
    * @returns {string} Resource name string.
    */
-  encryptionConfigPath(organization:string,location:string,encryptionConfig:string) {
+  encryptionConfigPath(
+    organization: string,
+    location: string,
+    encryptionConfig: string,
+  ) {
     return this.pathTemplates.encryptionConfigPathTemplate.render({
       organization: organization,
       location: location,
@@ -5239,7 +6825,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).organization;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).organization;
   }
 
   /**
@@ -5250,7 +6838,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).location;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).location;
   }
 
   /**
@@ -5261,7 +6851,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the encryption_config.
    */
   matchEncryptionConfigFromEncryptionConfigName(encryptionConfigName: string) {
-    return this.pathTemplates.encryptionConfigPathTemplate.match(encryptionConfigName).encryption_config;
+    return this.pathTemplates.encryptionConfigPathTemplate.match(
+      encryptionConfigName,
+    ).encryption_config;
   }
 
   /**
@@ -5274,7 +6866,13 @@ export class DataplexServiceClient {
    * @param {string} entity
    * @returns {string} Resource name string.
    */
-  entityPath(project:string,location:string,lake:string,zone:string,entity:string) {
+  entityPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    entity: string,
+  ) {
     return this.pathTemplates.entityPathTemplate.render({
       project: project,
       location: location,
@@ -5348,7 +6946,12 @@ export class DataplexServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  entryPath(project:string,location:string,entryGroup:string,entry:string) {
+  entryPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entry: string,
+  ) {
     return this.pathTemplates.entryPathTemplate.render({
       project: project,
       location: location,
@@ -5409,7 +7012,7 @@ export class DataplexServiceClient {
    * @param {string} entry_group
    * @returns {string} Resource name string.
    */
-  entryGroupPath(project:string,location:string,entryGroup:string) {
+  entryGroupPath(project: string, location: string, entryGroup: string) {
     return this.pathTemplates.entryGroupPathTemplate.render({
       project: project,
       location: location,
@@ -5425,7 +7028,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).project;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .project;
   }
 
   /**
@@ -5436,7 +7040,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).location;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .location;
   }
 
   /**
@@ -5447,7 +7052,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryGroupName(entryGroupName: string) {
-    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName).entry_group;
+    return this.pathTemplates.entryGroupPathTemplate.match(entryGroupName)
+      .entry_group;
   }
 
   /**
@@ -5459,7 +7065,12 @@ export class DataplexServiceClient {
    * @param {string} entry_link
    * @returns {string} Resource name string.
    */
-  entryLinkPath(project:string,location:string,entryGroup:string,entryLink:string) {
+  entryLinkPath(
+    project: string,
+    location: string,
+    entryGroup: string,
+    entryLink: string,
+  ) {
     return this.pathTemplates.entryLinkPathTemplate.render({
       project: project,
       location: location,
@@ -5476,7 +7087,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).project;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .project;
   }
 
   /**
@@ -5487,7 +7099,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).location;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .location;
   }
 
   /**
@@ -5498,7 +7111,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the entry_group.
    */
   matchEntryGroupFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_group;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .entry_group;
   }
 
   /**
@@ -5509,7 +7123,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the entry_link.
    */
   matchEntryLinkFromEntryLinkName(entryLinkName: string) {
-    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName).entry_link;
+    return this.pathTemplates.entryLinkPathTemplate.match(entryLinkName)
+      .entry_link;
   }
 
   /**
@@ -5520,7 +7135,7 @@ export class DataplexServiceClient {
    * @param {string} entry_type
    * @returns {string} Resource name string.
    */
-  entryTypePath(project:string,location:string,entryType:string) {
+  entryTypePath(project: string, location: string, entryType: string) {
     return this.pathTemplates.entryTypePathTemplate.render({
       project: project,
       location: location,
@@ -5536,7 +7151,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).project;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .project;
   }
 
   /**
@@ -5547,7 +7163,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).location;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .location;
   }
 
   /**
@@ -5558,7 +7175,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the entry_type.
    */
   matchEntryTypeFromEntryTypeName(entryTypeName: string) {
-    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName).entry_type;
+    return this.pathTemplates.entryTypePathTemplate.match(entryTypeName)
+      .entry_type;
   }
 
   /**
@@ -5570,7 +7188,12 @@ export class DataplexServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(project:string,location:string,lake:string,environment:string) {
+  environmentPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string,
+  ) {
     return this.pathTemplates.environmentPathTemplate.render({
       project: project,
       location: location,
@@ -5587,7 +7210,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).project;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .project;
   }
 
   /**
@@ -5598,7 +7222,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).location;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .location;
   }
 
   /**
@@ -5609,7 +7234,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the lake.
    */
   matchLakeFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).lake;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .lake;
   }
 
   /**
@@ -5620,7 +7246,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**
@@ -5631,7 +7258,7 @@ export class DataplexServiceClient {
    * @param {string} glossary
    * @returns {string} Resource name string.
    */
-  glossaryPath(project:string,location:string,glossary:string) {
+  glossaryPath(project: string, location: string, glossary: string) {
     return this.pathTemplates.glossaryPathTemplate.render({
       project: project,
       location: location,
@@ -5681,7 +7308,12 @@ export class DataplexServiceClient {
    * @param {string} glossary_category
    * @returns {string} Resource name string.
    */
-  glossaryCategoryPath(project:string,location:string,glossary:string,glossaryCategory:string) {
+  glossaryCategoryPath(
+    project: string,
+    location: string,
+    glossary: string,
+    glossaryCategory: string,
+  ) {
     return this.pathTemplates.glossaryCategoryPathTemplate.render({
       project: project,
       location: location,
@@ -5698,7 +7330,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).project;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).project;
   }
 
   /**
@@ -5709,7 +7343,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).location;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).location;
   }
 
   /**
@@ -5720,7 +7356,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the glossary.
    */
   matchGlossaryFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).glossary;
   }
 
   /**
@@ -5731,7 +7369,9 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the glossary_category.
    */
   matchGlossaryCategoryFromGlossaryCategoryName(glossaryCategoryName: string) {
-    return this.pathTemplates.glossaryCategoryPathTemplate.match(glossaryCategoryName).glossary_category;
+    return this.pathTemplates.glossaryCategoryPathTemplate.match(
+      glossaryCategoryName,
+    ).glossary_category;
   }
 
   /**
@@ -5743,7 +7383,12 @@ export class DataplexServiceClient {
    * @param {string} glossary_term
    * @returns {string} Resource name string.
    */
-  glossaryTermPath(project:string,location:string,glossary:string,glossaryTerm:string) {
+  glossaryTermPath(
+    project: string,
+    location: string,
+    glossary: string,
+    glossaryTerm: string,
+  ) {
     return this.pathTemplates.glossaryTermPathTemplate.render({
       project: project,
       location: location,
@@ -5760,7 +7405,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).project;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .project;
   }
 
   /**
@@ -5771,7 +7417,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).location;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .location;
   }
 
   /**
@@ -5782,7 +7429,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the glossary.
    */
   matchGlossaryFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .glossary;
   }
 
   /**
@@ -5793,7 +7441,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the glossary_term.
    */
   matchGlossaryTermFromGlossaryTermName(glossaryTermName: string) {
-    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName).glossary_term;
+    return this.pathTemplates.glossaryTermPathTemplate.match(glossaryTermName)
+      .glossary_term;
   }
 
   /**
@@ -5806,7 +7455,13 @@ export class DataplexServiceClient {
    * @param {string} job
    * @returns {string} Resource name string.
    */
-  jobPath(project:string,location:string,lake:string,task:string,job:string) {
+  jobPath(
+    project: string,
+    location: string,
+    lake: string,
+    task: string,
+    job: string,
+  ) {
     return this.pathTemplates.jobPathTemplate.render({
       project: project,
       location: location,
@@ -5879,7 +7534,7 @@ export class DataplexServiceClient {
    * @param {string} lake
    * @returns {string} Resource name string.
    */
-  lakePath(project:string,location:string,lake:string) {
+  lakePath(project: string, location: string, lake: string) {
     return this.pathTemplates.lakePathTemplate.render({
       project: project,
       location: location,
@@ -5927,7 +7582,7 @@ export class DataplexServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -5964,7 +7619,7 @@ export class DataplexServiceClient {
    * @param {string} metadata_feed
    * @returns {string} Resource name string.
    */
-  metadataFeedPath(project:string,location:string,metadataFeed:string) {
+  metadataFeedPath(project: string, location: string, metadataFeed: string) {
     return this.pathTemplates.metadataFeedPathTemplate.render({
       project: project,
       location: location,
@@ -5980,7 +7635,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).project;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .project;
   }
 
   /**
@@ -5991,7 +7647,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).location;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .location;
   }
 
   /**
@@ -6002,7 +7659,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the metadata_feed.
    */
   matchMetadataFeedFromMetadataFeedName(metadataFeedName: string) {
-    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName).metadata_feed;
+    return this.pathTemplates.metadataFeedPathTemplate.match(metadataFeedName)
+      .metadata_feed;
   }
 
   /**
@@ -6013,7 +7671,7 @@ export class DataplexServiceClient {
    * @param {string} metadataJob
    * @returns {string} Resource name string.
    */
-  metadataJobPath(project:string,location:string,metadataJob:string) {
+  metadataJobPath(project: string, location: string, metadataJob: string) {
     return this.pathTemplates.metadataJobPathTemplate.render({
       project: project,
       location: location,
@@ -6029,7 +7687,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).project;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .project;
   }
 
   /**
@@ -6040,7 +7699,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).location;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .location;
   }
 
   /**
@@ -6051,7 +7711,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the metadataJob.
    */
   matchMetadataJobFromMetadataJobName(metadataJobName: string) {
-    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName).metadataJob;
+    return this.pathTemplates.metadataJobPathTemplate.match(metadataJobName)
+      .metadataJob;
   }
 
   /**
@@ -6065,7 +7726,14 @@ export class DataplexServiceClient {
    * @param {string} partition
    * @returns {string} Resource name string.
    */
-  partitionPath(project:string,location:string,lake:string,zone:string,entity:string,partition:string) {
+  partitionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    entity: string,
+    partition: string,
+  ) {
     return this.pathTemplates.partitionPathTemplate.render({
       project: project,
       location: location,
@@ -6084,7 +7752,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).project;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .project;
   }
 
   /**
@@ -6095,7 +7764,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).location;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .location;
   }
 
   /**
@@ -6139,7 +7809,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the partition.
    */
   matchPartitionFromPartitionName(partitionName: string) {
-    return this.pathTemplates.partitionPathTemplate.match(partitionName).partition;
+    return this.pathTemplates.partitionPathTemplate.match(partitionName)
+      .partition;
   }
 
   /**
@@ -6151,7 +7822,12 @@ export class DataplexServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeActionPath(project:string,location:string,lake:string,action:string) {
+  projectLocationLakeActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    action: string,
+  ) {
     return this.pathTemplates.projectLocationLakeActionPathTemplate.render({
       project: project,
       location: location,
@@ -6167,8 +7843,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).project;
+  matchProjectFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).project;
   }
 
   /**
@@ -6178,8 +7858,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).location;
+  matchLocationFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).location;
   }
 
   /**
@@ -6189,8 +7873,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).lake;
+  matchLakeFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).lake;
   }
 
   /**
@@ -6200,8 +7888,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeActionName(projectLocationLakeActionName: string) {
-    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(projectLocationLakeActionName).action;
+  matchActionFromProjectLocationLakeActionName(
+    projectLocationLakeActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeActionPathTemplate.match(
+      projectLocationLakeActionName,
+    ).action;
   }
 
   /**
@@ -6214,7 +7906,13 @@ export class DataplexServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneActionPath(project:string,location:string,lake:string,zone:string,action:string) {
+  projectLocationLakeZoneActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    action: string,
+  ) {
     return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.render({
       project: project,
       location: location,
@@ -6231,8 +7929,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).project;
+  matchProjectFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).project;
   }
 
   /**
@@ -6242,8 +7944,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).location;
+  matchLocationFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).location;
   }
 
   /**
@@ -6253,8 +7959,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).lake;
+  matchLakeFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).lake;
   }
 
   /**
@@ -6264,8 +7974,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).zone;
+  matchZoneFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).zone;
   }
 
   /**
@@ -6275,8 +7989,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneActionName(projectLocationLakeZoneActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(projectLocationLakeZoneActionName).action;
+  matchActionFromProjectLocationLakeZoneActionName(
+    projectLocationLakeZoneActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneActionPathTemplate.match(
+      projectLocationLakeZoneActionName,
+    ).action;
   }
 
   /**
@@ -6290,15 +8008,24 @@ export class DataplexServiceClient {
    * @param {string} action
    * @returns {string} Resource name string.
    */
-  projectLocationLakeZoneAssetActionPath(project:string,location:string,lake:string,zone:string,asset:string,action:string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render({
-      project: project,
-      location: location,
-      lake: lake,
-      zone: zone,
-      asset: asset,
-      action: action,
-    });
+  projectLocationLakeZoneAssetActionPath(
+    project: string,
+    location: string,
+    lake: string,
+    zone: string,
+    asset: string,
+    action: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        lake: lake,
+        zone: zone,
+        asset: asset,
+        action: action,
+      },
+    );
   }
 
   /**
@@ -6308,8 +8035,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).project;
+  matchProjectFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).project;
   }
 
   /**
@@ -6319,8 +8050,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).location;
+  matchLocationFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).location;
   }
 
   /**
@@ -6330,8 +8065,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the lake.
    */
-  matchLakeFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).lake;
+  matchLakeFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).lake;
   }
 
   /**
@@ -6341,8 +8080,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the zone.
    */
-  matchZoneFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).zone;
+  matchZoneFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).zone;
   }
 
   /**
@@ -6352,8 +8095,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).asset;
+  matchAssetFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).asset;
   }
 
   /**
@@ -6363,8 +8110,12 @@ export class DataplexServiceClient {
    *   A fully-qualified path representing project_location_lake_zone_asset_action resource.
    * @returns {string} A string representing the action.
    */
-  matchActionFromProjectLocationLakeZoneAssetActionName(projectLocationLakeZoneAssetActionName: string) {
-    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(projectLocationLakeZoneAssetActionName).action;
+  matchActionFromProjectLocationLakeZoneAssetActionName(
+    projectLocationLakeZoneAssetActionName: string,
+  ) {
+    return this.pathTemplates.projectLocationLakeZoneAssetActionPathTemplate.match(
+      projectLocationLakeZoneAssetActionName,
+    ).action;
   }
 
   /**
@@ -6377,7 +8128,13 @@ export class DataplexServiceClient {
    * @param {string} session
    * @returns {string} Resource name string.
    */
-  sessionPath(project:string,location:string,lake:string,environment:string,session:string) {
+  sessionPath(
+    project: string,
+    location: string,
+    lake: string,
+    environment: string,
+    session: string,
+  ) {
     return this.pathTemplates.sessionPathTemplate.render({
       project: project,
       location: location,
@@ -6428,7 +8185,8 @@ export class DataplexServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromSessionName(sessionName: string) {
-    return this.pathTemplates.sessionPathTemplate.match(sessionName).environment;
+    return this.pathTemplates.sessionPathTemplate.match(sessionName)
+      .environment;
   }
 
   /**
@@ -6451,7 +8209,7 @@ export class DataplexServiceClient {
    * @param {string} task
    * @returns {string} Resource name string.
    */
-  taskPath(project:string,location:string,lake:string,task:string) {
+  taskPath(project: string, location: string, lake: string, task: string) {
     return this.pathTemplates.taskPathTemplate.render({
       project: project,
       location: location,
@@ -6513,7 +8271,7 @@ export class DataplexServiceClient {
    * @param {string} zone
    * @returns {string} Resource name string.
    */
-  zonePath(project:string,location:string,lake:string,zone:string) {
+  zonePath(project: string, location: string, lake: string, zone: string) {
     return this.pathTemplates.zonePathTemplate.render({
       project: project,
       location: location,
@@ -6574,11 +8332,13 @@ export class DataplexServiceClient {
    */
   close(): Promise<void> {
     if (this.dataplexServiceStub && !this._terminated) {
-      return this.dataplexServiceStub.then(stub => {
+      return this.dataplexServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

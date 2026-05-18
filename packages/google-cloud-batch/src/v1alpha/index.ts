@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {BatchServiceClient} from './batch_service_client';
+export { BatchServiceClient } from './batch_service_client';

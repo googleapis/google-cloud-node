@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.6.0...memorystore-v0.6.1) (2026-05-12)
+
+
+### Bug Fixes
+
+* [memorystore] Synchronize new proto/yaml changes. ([#8142](https://github.com/googleapis/google-cloud-node/issues/8142)) ([a9e9ef6](https://github.com/googleapis/google-cloud-node/commit/a9e9ef64da9396313a9fb4d49caeeb33ba934230))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/memorystore-v0.5.0...memorystore-v0.6.0) (2026-05-01)
 
 

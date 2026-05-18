@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import { SinonStub } from 'sinon';
+import { describe, it } from 'mocha';
 import * as storageModule from '../src';
 
-import {PassThrough} from 'stream';
+import { PassThrough } from 'stream';
 
-import {protobuf} from 'google-gax';
+import { protobuf } from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  ).toObject(instance as protobuf.Message<T>, { defaults: true });
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
+            return Promise.resolve({ done: true, value: undefined });
           }
-          return Promise.resolve({done: false, value: responses![counter++]});
+          return Promise.resolve({ done: false, value: responses![counter++] });
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2.StorageClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.storageStub, undefined);
@@ -245,12 +245,12 @@ describe('v2.StorageClient', () => {
       assert(client.storageStub);
     });
 
-    it('has close method for the initialized client', done => {
+    it('has close method for the initialized client', (done) => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
-      client.initialize().catch(err => {
+      client.initialize().catch((err) => {
         throw err;
       });
       assert(client.storageStub);
@@ -259,14 +259,14 @@ describe('v2.StorageClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', done => {
+    it('has close method for the non-initialized client', (done) => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       assert.strictEqual(client.storageStub, undefined);
@@ -275,7 +275,7 @@ describe('v2.StorageClient', () => {
         .then(() => {
           done();
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v2.StorageClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v2.StorageClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v2.StorageClient', () => {
   describe('deleteBucket', () => {
     it('invokes deleteBucket without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -346,7 +346,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes deleteBucket without error using callback', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes deleteBucket with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes deleteBucket with closed client', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v2.StorageClient', () => {
       // path template: {bucket=**}
       request.name = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.deleteBucket(request), expectedError);
@@ -438,7 +438,7 @@ describe('v2.StorageClient', () => {
   describe('getBucket', () => {
     it('invokes getBucket without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes getBucket without error using callback', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -510,7 +510,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes getBucket with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -535,7 +535,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes getBucket with closed client', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v2.StorageClient', () => {
       // path template: {bucket=**}
       request.name = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.getBucket(request), expectedError);
@@ -555,7 +555,7 @@ describe('v2.StorageClient', () => {
   describe('createBucket', () => {
     it('invokes createBucket without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes createBucket without error using callback', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes createBucket with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes createBucket with closed client', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -677,7 +677,7 @@ describe('v2.StorageClient', () => {
       // path template: {project=**}
       request.bucket.project = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.createBucket(request), expectedError);
@@ -687,7 +687,7 @@ describe('v2.StorageClient', () => {
   describe('lockBucketRetentionPolicy', () => {
     it('invokes lockBucketRetentionPolicy without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -716,7 +716,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes lockBucketRetentionPolicy without error using callback', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes lockBucketRetentionPolicy with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -791,7 +791,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes lockBucketRetentionPolicy with closed client', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -801,7 +801,7 @@ describe('v2.StorageClient', () => {
       // path template: {bucket=**}
       request.bucket = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(
@@ -814,7 +814,7 @@ describe('v2.StorageClient', () => {
   describe('updateBucket', () => {
     it('invokes updateBucket without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes updateBucket without error using callback', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes updateBucket with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes updateBucket with closed client', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v2.StorageClient', () => {
       // path template: {bucket=**}
       request.bucket.name = 'value';
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch(err => {
+      client.close().catch((err) => {
         throw err;
       });
       await assert.rejects(client.updateBucket(request), expectedError);
@@ -938,7 +938,7 @@ describe('v2.StorageClient', () => {
   describe('listBuckets', () => {
     it('invokes listBuckets without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes listBuckets without error using callback', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes listBuckets with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes listBucketsStream without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1090,7 +1090,7 @@ describe('v2.StorageClient', () => {
 
     it('invokes listBucketsStream with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v2.StorageClient', () => {
 
     it('uses async iteration with listBuckets without error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v2.StorageClient', () => {
 
     it('uses async iteration with listBuckets with error', async () => {
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1221,7 +1221,7 @@ describe('v2.StorageClient', () => {
         bucket: 'bucketValue',
       };
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v2.StorageClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v2.StorageClient', () => {
         project: 'projectValue',
       };
       const client = new storageModule.v2.StorageClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        credentials: { client_email: 'bogus', private_key: 'bogus' },
         projectId: 'bogus',
       });
       await client.initialize();

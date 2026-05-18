@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +56,7 @@ export class AgentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('ces');
@@ -58,11 +69,11 @@ export class AgentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  agentServiceStub?: Promise<{[name: string]: Function}>;
+  agentServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of AgentServiceClient.
@@ -103,21 +114,42 @@ export class AgentServiceClient {
    *     const client = new AgentServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AgentServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'ces.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +174,7 @@ export class AgentServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,15 +188,11 @@ export class AgentServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -186,46 +214,46 @@ export class AgentServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}'
+        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}',
       ),
       appPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}'
+        'projects/{project}/locations/{location}/apps/{app}',
       ),
       appVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/versions/{version}'
+        'projects/{project}/locations/{location}/apps/{app}/versions/{version}',
       ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}'
+        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}',
       ),
       conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}'
+        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}',
       ),
       examplePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/examples/{example}'
+        'projects/{project}/locations/{location}/apps/{app}/examples/{example}',
       ),
       guardrailPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}'
+        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       omnichannelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/omnichannels/{omnichannel}'
+        'projects/{project}/locations/{location}/omnichannels/{omnichannel}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securitySettings'
+        'projects/{project}/locations/{location}/securitySettings',
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}'
+        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}',
       ),
       toolsetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}'
+        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}',
       ),
     };
 
@@ -233,26 +261,56 @@ export class AgentServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listApps:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'apps'),
-      listAgents:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'agents'),
-      listExamples:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'examples'),
-      listTools:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tools'),
-      listConversations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'conversations'),
-      listGuardrails:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'guardrails'),
-      listDeployments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'deployments'),
-      listToolsets:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'toolsets'),
-      listAppVersions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'appVersions'),
-      listChangelogs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'changelogs')
+      listApps: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'apps',
+      ),
+      listAgents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'agents',
+      ),
+      listExamples: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'examples',
+      ),
+      listTools: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'tools',
+      ),
+      listConversations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'conversations',
+      ),
+      listGuardrails: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'guardrails',
+      ),
+      listDeployments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'deployments',
+      ),
+      listToolsets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'toolsets',
+      ),
+      listAppVersions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'appVersions',
+      ),
+      listChangelogs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'changelogs',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -261,69 +319,122 @@ export class AgentServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createAppResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.App') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.App',
+    ) as gax.protobuf.Type;
     const createAppMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteAppResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteAppMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const exportAppResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.ExportAppResponse') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.ExportAppResponse',
+    ) as gax.protobuf.Type;
     const exportAppMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const importAppResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.ImportAppResponse') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.ImportAppResponse',
+    ) as gax.protobuf.Type;
     const importAppMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const batchDeleteConversationsResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.BatchDeleteConversationsResponse') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.BatchDeleteConversationsResponse',
+    ) as gax.protobuf.Type;
     const batchDeleteConversationsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const restoreAppVersionResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.RestoreAppVersionResponse') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.RestoreAppVersionResponse',
+    ) as gax.protobuf.Type;
     const restoreAppVersionMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createApp: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAppResponse.decode.bind(createAppResponse),
-        createAppMetadata.decode.bind(createAppMetadata)),
+        createAppMetadata.decode.bind(createAppMetadata),
+      ),
       deleteApp: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteAppResponse.decode.bind(deleteAppResponse),
-        deleteAppMetadata.decode.bind(deleteAppMetadata)),
+        deleteAppMetadata.decode.bind(deleteAppMetadata),
+      ),
       exportApp: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportAppResponse.decode.bind(exportAppResponse),
-        exportAppMetadata.decode.bind(exportAppMetadata)),
+        exportAppMetadata.decode.bind(exportAppMetadata),
+      ),
       importApp: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importAppResponse.decode.bind(importAppResponse),
-        importAppMetadata.decode.bind(importAppMetadata)),
+        importAppMetadata.decode.bind(importAppMetadata),
+      ),
       batchDeleteConversations: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        batchDeleteConversationsResponse.decode.bind(batchDeleteConversationsResponse),
-        batchDeleteConversationsMetadata.decode.bind(batchDeleteConversationsMetadata)),
+        batchDeleteConversationsResponse.decode.bind(
+          batchDeleteConversationsResponse,
+        ),
+        batchDeleteConversationsMetadata.decode.bind(
+          batchDeleteConversationsMetadata,
+        ),
+      ),
       restoreAppVersion: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         restoreAppVersionResponse.decode.bind(restoreAppVersionResponse),
-        restoreAppVersionMetadata.decode.bind(restoreAppVersionMetadata))
+        restoreAppVersionMetadata.decode.bind(restoreAppVersionMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.ces.v1.AgentService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.ces.v1.AgentService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -354,28 +465,82 @@ export class AgentServiceClient {
     // Put together the "service stub" for
     // google.cloud.ces.v1.AgentService.
     this.agentServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.ces.v1.AgentService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.ces.v1.AgentService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.ces.v1.AgentService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const agentServiceStubMethods =
-        ['listApps', 'getApp', 'createApp', 'updateApp', 'deleteApp', 'exportApp', 'importApp', 'listAgents', 'getAgent', 'createAgent', 'updateAgent', 'deleteAgent', 'listExamples', 'getExample', 'createExample', 'updateExample', 'deleteExample', 'listTools', 'getTool', 'listConversations', 'getConversation', 'deleteConversation', 'batchDeleteConversations', 'createTool', 'updateTool', 'deleteTool', 'listGuardrails', 'getGuardrail', 'createGuardrail', 'updateGuardrail', 'deleteGuardrail', 'listDeployments', 'getDeployment', 'createDeployment', 'updateDeployment', 'deleteDeployment', 'listToolsets', 'getToolset', 'createToolset', 'updateToolset', 'deleteToolset', 'listAppVersions', 'getAppVersion', 'createAppVersion', 'deleteAppVersion', 'restoreAppVersion', 'listChangelogs', 'getChangelog'];
+    const agentServiceStubMethods = [
+      'listApps',
+      'getApp',
+      'createApp',
+      'updateApp',
+      'deleteApp',
+      'exportApp',
+      'importApp',
+      'listAgents',
+      'getAgent',
+      'createAgent',
+      'updateAgent',
+      'deleteAgent',
+      'listExamples',
+      'getExample',
+      'createExample',
+      'updateExample',
+      'deleteExample',
+      'listTools',
+      'getTool',
+      'listConversations',
+      'getConversation',
+      'deleteConversation',
+      'batchDeleteConversations',
+      'createTool',
+      'updateTool',
+      'deleteTool',
+      'listGuardrails',
+      'getGuardrail',
+      'createGuardrail',
+      'updateGuardrail',
+      'deleteGuardrail',
+      'listDeployments',
+      'getDeployment',
+      'createDeployment',
+      'updateDeployment',
+      'deleteDeployment',
+      'listToolsets',
+      'getToolset',
+      'createToolset',
+      'updateToolset',
+      'deleteToolset',
+      'listAppVersions',
+      'getAppVersion',
+      'createAppVersion',
+      'deleteAppVersion',
+      'restoreAppVersion',
+      'listChangelogs',
+      'getChangelog',
+    ];
     for (const methodName of agentServiceStubMethods) {
       const callPromise = this.agentServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -385,7 +550,7 @@ export class AgentServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -400,8 +565,14 @@ export class AgentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -412,8 +583,14 @@ export class AgentServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -446,7 +623,7 @@ export class AgentServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/ces',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -456,8 +633,9 @@ export class AgentServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -468,3944 +646,5315 @@ export class AgentServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of the specified app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the app to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.App|App}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetApp_async
- */
+  /**
+   * Gets details of the specified app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the app to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.App|App}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetApp_async
+   */
   getApp(
-      request?: protos.google.cloud.ces.v1.IGetAppRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IGetAppRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetAppRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IGetAppRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getApp(
-      request: protos.google.cloud.ces.v1.IGetAppRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IGetAppRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetAppRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IGetAppRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getApp(
-      request: protos.google.cloud.ces.v1.IGetAppRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IGetAppRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetAppRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IGetAppRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getApp(
-      request?: protos.google.cloud.ces.v1.IGetAppRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetAppRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IGetAppRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IGetAppRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IGetAppRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetAppRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IGetAppRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IGetAppRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getApp request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IGetAppRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IApp,
+          protos.google.cloud.ces.v1.IGetAppRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getApp response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getApp(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IGetAppRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getApp response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getApp(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IApp,
+          protos.google.cloud.ces.v1.IGetAppRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getApp response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1.App} request.app
- *   Required. The app to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.App|App}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.update_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_UpdateApp_async
- */
+  /**
+   * Updates the specified app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1.App} request.app
+   *   Required. The app to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.App|App}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.update_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_UpdateApp_async
+   */
   updateApp(
-      request?: protos.google.cloud.ces.v1.IUpdateAppRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IUpdateAppRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IUpdateAppRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IUpdateAppRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateApp(
-      request: protos.google.cloud.ces.v1.IUpdateAppRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IUpdateAppRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateAppRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IUpdateAppRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateApp(
-      request: protos.google.cloud.ces.v1.IUpdateAppRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IUpdateAppRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateAppRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IUpdateAppRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateApp(
-      request?: protos.google.cloud.ces.v1.IUpdateAppRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IUpdateAppRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IUpdateAppRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IApp,
-          protos.google.cloud.ces.v1.IUpdateAppRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IUpdateAppRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IUpdateAppRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IUpdateAppRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IApp,
+      protos.google.cloud.ces.v1.IUpdateAppRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'app.name': request.app!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'app.name': request.app!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateApp request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IUpdateAppRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IApp,
+          protos.google.cloud.ces.v1.IUpdateAppRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateApp response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateApp(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IApp,
-        protos.google.cloud.ces.v1.IUpdateAppRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateApp response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateApp(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IApp,
+          protos.google.cloud.ces.v1.IUpdateAppRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateApp response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the agent to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Agent|Agent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_agent.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetAgent_async
- */
+  /**
+   * Gets details of the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the agent to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Agent|Agent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_agent.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetAgent_async
+   */
   getAgent(
-      request?: protos.google.cloud.ces.v1.IGetAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IGetAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IGetAgentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAgent(
-      request: protos.google.cloud.ces.v1.IGetAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IGetAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IGetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAgent(
-      request: protos.google.cloud.ces.v1.IGetAgentRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IGetAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetAgentRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IGetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAgent(
-      request?: protos.google.cloud.ces.v1.IGetAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IGetAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IGetAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IGetAgentRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetAgentRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IGetAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IGetAgentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IGetAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IAgent,
+          protos.google.cloud.ces.v1.IGetAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IGetAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IAgent,
+          protos.google.cloud.ces.v1.IGetAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new agent in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to create an agent in.
- * @param {string} [request.agentId]
- *   Optional. The ID to use for the agent, which will become the final
- *   component of the agent's resource name. If not provided, a unique ID will
- *   be automatically assigned for the agent.
- * @param {google.cloud.ces.v1.Agent} request.agent
- *   Required. The agent to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Agent|Agent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_agent.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateAgent_async
- */
+  /**
+   * Creates a new agent in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to create an agent in.
+   * @param {string} [request.agentId]
+   *   Optional. The ID to use for the agent, which will become the final
+   *   component of the agent's resource name. If not provided, a unique ID will
+   *   be automatically assigned for the agent.
+   * @param {google.cloud.ces.v1.Agent} request.agent
+   *   Required. The agent to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Agent|Agent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_agent.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateAgent_async
+   */
   createAgent(
-      request?: protos.google.cloud.ces.v1.ICreateAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.ICreateAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.ICreateAgentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createAgent(
-      request: protos.google.cloud.ces.v1.ICreateAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.ICreateAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.ICreateAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAgent(
-      request: protos.google.cloud.ces.v1.ICreateAgentRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.ICreateAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateAgentRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.ICreateAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAgent(
-      request?: protos.google.cloud.ces.v1.ICreateAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.ICreateAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.ICreateAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.ICreateAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.ICreateAgentRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.ICreateAgentRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.ICreateAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.ICreateAgentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.ICreateAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IAgent,
+          protos.google.cloud.ces.v1.ICreateAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.ICreateAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IAgent,
+          protos.google.cloud.ces.v1.ICreateAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1.Agent} request.agent
- *   Required. The agent to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Agent|Agent}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.update_agent.js</caption>
- * region_tag:ces_v1_generated_AgentService_UpdateAgent_async
- */
+  /**
+   * Updates the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1.Agent} request.agent
+   *   Required. The agent to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Agent|Agent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.update_agent.js</caption>
+   * region_tag:ces_v1_generated_AgentService_UpdateAgent_async
+   */
   updateAgent(
-      request?: protos.google.cloud.ces.v1.IUpdateAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IUpdateAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IUpdateAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IUpdateAgentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateAgent(
-      request: protos.google.cloud.ces.v1.IUpdateAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IUpdateAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IUpdateAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAgent(
-      request: protos.google.cloud.ces.v1.IUpdateAgentRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IUpdateAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateAgentRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IUpdateAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateAgent(
-      request?: protos.google.cloud.ces.v1.IUpdateAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IUpdateAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IUpdateAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IAgent,
-          protos.google.cloud.ces.v1.IUpdateAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IUpdateAgentRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IUpdateAgentRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IUpdateAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent,
+      protos.google.cloud.ces.v1.IUpdateAgentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'agent.name': request.agent!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'agent.name': request.agent!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IUpdateAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IAgent,
+          protos.google.cloud.ces.v1.IUpdateAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IAgent,
-        protos.google.cloud.ces.v1.IUpdateAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IAgent,
+          protos.google.cloud.ces.v1.IUpdateAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified agent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the agent to delete.
- * @param {boolean} [request.force]
- *   Optional. Indicates whether to forcefully delete the agent, even if it is
- *   still referenced by other app/agents/examples.
- *
- *   *  If `force = false`, the deletion fails if other agents/examples
- *   reference it.
- *   *  If `force = true`, delete the agent and remove it from all referencing
- *   apps/agents/examples.
- * @param {string} [request.etag]
- *   Optional. The current etag of the agent. If an etag is not provided, the
- *   deletion will overwrite any concurrent changes. If an etag is provided and
- *   does not match the current etag of the agent, deletion will be blocked and
- *   an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_agent.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteAgent_async
- */
+  /**
+   * Deletes the specified agent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the agent to delete.
+   * @param {boolean} [request.force]
+   *   Optional. Indicates whether to forcefully delete the agent, even if it is
+   *   still referenced by other app/agents/examples.
+   *
+   *   *  If `force = false`, the deletion fails if other agents/examples
+   *   reference it.
+   *   *  If `force = true`, delete the agent and remove it from all referencing
+   *   apps/agents/examples.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the agent. If an etag is not provided, the
+   *   deletion will overwrite any concurrent changes. If an etag is provided and
+   *   does not match the current etag of the agent, deletion will be blocked and
+   *   an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_agent.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteAgent_async
+   */
   deleteAgent(
-      request?: protos.google.cloud.ces.v1.IDeleteAgentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAgentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteAgentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAgentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAgent(
-      request: protos.google.cloud.ces.v1.IDeleteAgentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteAgentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAgent(
-      request: protos.google.cloud.ces.v1.IDeleteAgentRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteAgentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAgent(
-      request?: protos.google.cloud.ces.v1.IDeleteAgentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteAgentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAgentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAgentRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IDeleteAgentRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAgentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAgentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteAgent request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAgentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteAgentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAgent response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteAgent(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAgentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteAgent response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteAgent(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteAgentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAgent response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified example.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the example to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Example|Example}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_example.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetExample_async
- */
+  /**
+   * Gets details of the specified example.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the example to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Example|Example}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_example.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetExample_async
+   */
   getExample(
-      request?: protos.google.cloud.ces.v1.IGetExampleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IGetExampleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetExampleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IGetExampleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getExample(
-      request: protos.google.cloud.ces.v1.IGetExampleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IGetExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetExampleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IGetExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getExample(
-      request: protos.google.cloud.ces.v1.IGetExampleRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IGetExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetExampleRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IGetExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getExample(
-      request?: protos.google.cloud.ces.v1.IGetExampleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetExampleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IGetExampleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IGetExampleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IGetExampleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetExampleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IGetExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IGetExampleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getExample request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IGetExampleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IExample,
+          protos.google.cloud.ces.v1.IGetExampleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getExample(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IGetExampleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getExample response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getExample(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IExample,
+          protos.google.cloud.ces.v1.IGetExampleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getExample response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new example in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to create an example in.
- * @param {string} [request.exampleId]
- *   Optional. The ID to use for the example, which will become the final
- *   component of the example's resource name. If not provided, a unique ID will
- *   be automatically assigned for the example.
- * @param {google.cloud.ces.v1.Example} request.example
- *   Required. The example to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Example|Example}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_example.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateExample_async
- */
+  /**
+   * Creates a new example in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to create an example in.
+   * @param {string} [request.exampleId]
+   *   Optional. The ID to use for the example, which will become the final
+   *   component of the example's resource name. If not provided, a unique ID will
+   *   be automatically assigned for the example.
+   * @param {google.cloud.ces.v1.Example} request.example
+   *   Required. The example to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Example|Example}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_example.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateExample_async
+   */
   createExample(
-      request?: protos.google.cloud.ces.v1.ICreateExampleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.ICreateExampleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateExampleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.ICreateExampleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createExample(
-      request: protos.google.cloud.ces.v1.ICreateExampleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.ICreateExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateExampleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.ICreateExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createExample(
-      request: protos.google.cloud.ces.v1.ICreateExampleRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.ICreateExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateExampleRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.ICreateExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createExample(
-      request?: protos.google.cloud.ces.v1.ICreateExampleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.ICreateExampleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.ICreateExampleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.ICreateExampleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.ICreateExampleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.ICreateExampleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.ICreateExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.ICreateExampleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createExample request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.ICreateExampleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IExample,
+          protos.google.cloud.ces.v1.ICreateExampleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createExample(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.ICreateExampleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createExample response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createExample(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IExample,
+          protos.google.cloud.ces.v1.ICreateExampleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createExample response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified example.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1.Example} request.example
- *   Required. The example to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Example|Example}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.update_example.js</caption>
- * region_tag:ces_v1_generated_AgentService_UpdateExample_async
- */
+  /**
+   * Updates the specified example.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1.Example} request.example
+   *   Required. The example to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Example|Example}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.update_example.js</caption>
+   * region_tag:ces_v1_generated_AgentService_UpdateExample_async
+   */
   updateExample(
-      request?: protos.google.cloud.ces.v1.IUpdateExampleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IUpdateExampleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IUpdateExampleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IUpdateExampleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateExample(
-      request: protos.google.cloud.ces.v1.IUpdateExampleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IUpdateExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateExampleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IUpdateExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateExample(
-      request: protos.google.cloud.ces.v1.IUpdateExampleRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IUpdateExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateExampleRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IUpdateExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateExample(
-      request?: protos.google.cloud.ces.v1.IUpdateExampleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IUpdateExampleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IUpdateExampleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IExample,
-          protos.google.cloud.ces.v1.IUpdateExampleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IUpdateExampleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IUpdateExampleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IUpdateExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample,
+      protos.google.cloud.ces.v1.IUpdateExampleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'example.name': request.example!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'example.name': request.example!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateExample request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IUpdateExampleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IExample,
+          protos.google.cloud.ces.v1.IUpdateExampleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateExample(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IExample,
-        protos.google.cloud.ces.v1.IUpdateExampleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateExample response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateExample(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IExample,
+          protos.google.cloud.ces.v1.IUpdateExampleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExample response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified example.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the example to delete.
- * @param {string} [request.etag]
- *   Optional. The current etag of the example. If an etag is not provided, the
- *   deletion will overwrite any concurrent changes. If an etag is provided and
- *   does not match the current etag of the example, deletion will be blocked
- *   and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_example.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteExample_async
- */
+  /**
+   * Deletes the specified example.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the example to delete.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the example. If an etag is not provided, the
+   *   deletion will overwrite any concurrent changes. If an etag is provided and
+   *   does not match the current etag of the example, deletion will be blocked
+   *   and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_example.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteExample_async
+   */
   deleteExample(
-      request?: protos.google.cloud.ces.v1.IDeleteExampleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteExampleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteExampleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteExampleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteExample(
-      request: protos.google.cloud.ces.v1.IDeleteExampleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteExampleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteExample(
-      request: protos.google.cloud.ces.v1.IDeleteExampleRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteExampleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteExampleRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteExample(
-      request?: protos.google.cloud.ces.v1.IDeleteExampleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteExampleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteExampleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteExampleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteExampleRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IDeleteExampleRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteExampleRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteExampleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteExample request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteExampleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteExampleRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteExample response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteExample(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteExampleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteExample response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteExample(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteExampleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExample response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified tool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the tool to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Tool|Tool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_tool.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetTool_async
- */
+  /**
+   * Gets details of the specified tool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the tool to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Tool|Tool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_tool.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetTool_async
+   */
   getTool(
-      request?: protos.google.cloud.ces.v1.IGetToolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IGetToolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetToolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IGetToolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getTool(
-      request: protos.google.cloud.ces.v1.IGetToolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IGetToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetToolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IGetToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTool(
-      request: protos.google.cloud.ces.v1.IGetToolRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IGetToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetToolRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IGetToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getTool(
-      request?: protos.google.cloud.ces.v1.IGetToolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetToolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IGetToolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IGetToolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IGetToolRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetToolRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IGetToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IGetToolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getTool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IGetToolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.ITool,
+          protos.google.cloud.ces.v1.IGetToolRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getTool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IGetToolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getTool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.ITool,
+          protos.google.cloud.ces.v1.IGetToolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getTool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified conversation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the conversation to retrieve.
- * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
- *   Optional. Indicate the source of the conversation. If not set, all source
- *   will be searched.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Conversation|Conversation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_conversation.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetConversation_async
- */
+  /**
+   * Gets details of the specified conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the conversation to retrieve.
+   * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
+   *   Optional. Indicate the source of the conversation. If not set, all source
+   *   will be searched.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_conversation.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetConversation_async
+   */
   getConversation(
-      request?: protos.google.cloud.ces.v1.IGetConversationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IConversation,
-        protos.google.cloud.ces.v1.IGetConversationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetConversationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IConversation,
+      protos.google.cloud.ces.v1.IGetConversationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getConversation(
-      request: protos.google.cloud.ces.v1.IGetConversationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IConversation,
-          protos.google.cloud.ces.v1.IGetConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IConversation,
+      protos.google.cloud.ces.v1.IGetConversationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getConversation(
-      request: protos.google.cloud.ces.v1.IGetConversationRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IConversation,
-          protos.google.cloud.ces.v1.IGetConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetConversationRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IConversation,
+      protos.google.cloud.ces.v1.IGetConversationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getConversation(
-      request?: protos.google.cloud.ces.v1.IGetConversationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IConversation,
-          protos.google.cloud.ces.v1.IGetConversationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IConversation,
-          protos.google.cloud.ces.v1.IGetConversationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IConversation,
-        protos.google.cloud.ces.v1.IGetConversationRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetConversationRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IConversation,
+      protos.google.cloud.ces.v1.IGetConversationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IConversation,
+      protos.google.cloud.ces.v1.IGetConversationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getConversation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IConversation,
-        protos.google.cloud.ces.v1.IGetConversationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IConversation,
+          protos.google.cloud.ces.v1.IGetConversationRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConversation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getConversation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IConversation,
-        protos.google.cloud.ces.v1.IGetConversationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getConversation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IConversation,
+          protos.google.cloud.ces.v1.IGetConversationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified conversation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the conversation to delete.
- * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
- *   Optional. Indicate the source of the conversation. If not set, Source.Live
- *   will be applied by default.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_conversation.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteConversation_async
- */
+  /**
+   * Deletes the specified conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the conversation to delete.
+   * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
+   *   Optional. Indicate the source of the conversation. If not set, Source.Live
+   *   will be applied by default.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_conversation.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteConversation_async
+   */
   deleteConversation(
-      request?: protos.google.cloud.ces.v1.IDeleteConversationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteConversationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteConversationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteConversationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteConversation(
-      request: protos.google.cloud.ces.v1.IDeleteConversationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteConversationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteConversation(
-      request: protos.google.cloud.ces.v1.IDeleteConversationRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteConversationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteConversationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteConversation(
-      request?: protos.google.cloud.ces.v1.IDeleteConversationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteConversationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteConversationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteConversationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteConversation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteConversationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteConversation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteConversation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteConversationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteConversation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteConversationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new tool in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to create a tool in.
- * @param {string} [request.toolId]
- *   Optional. The ID to use for the tool, which will become the final component
- *   of the tool's resource name. If not provided, a unique ID will be
- *   automatically assigned for the tool.
- * @param {google.cloud.ces.v1.Tool} request.tool
- *   Required. The tool to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Tool|Tool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_tool.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateTool_async
- */
+  /**
+   * Creates a new tool in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to create a tool in.
+   * @param {string} [request.toolId]
+   *   Optional. The ID to use for the tool, which will become the final component
+   *   of the tool's resource name. If not provided, a unique ID will be
+   *   automatically assigned for the tool.
+   * @param {google.cloud.ces.v1.Tool} request.tool
+   *   Required. The tool to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Tool|Tool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_tool.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateTool_async
+   */
   createTool(
-      request?: protos.google.cloud.ces.v1.ICreateToolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.ICreateToolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateToolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.ICreateToolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createTool(
-      request: protos.google.cloud.ces.v1.ICreateToolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.ICreateToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateToolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.ICreateToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTool(
-      request: protos.google.cloud.ces.v1.ICreateToolRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.ICreateToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateToolRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.ICreateToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createTool(
-      request?: protos.google.cloud.ces.v1.ICreateToolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.ICreateToolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.ICreateToolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.ICreateToolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.ICreateToolRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.ICreateToolRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.ICreateToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.ICreateToolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createTool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.ICreateToolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.ITool,
+          protos.google.cloud.ces.v1.ICreateToolRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createTool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.ICreateToolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createTool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.ITool,
+          protos.google.cloud.ces.v1.ICreateToolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createTool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified tool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1.Tool} request.tool
- *   Required. The tool to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Tool|Tool}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.update_tool.js</caption>
- * region_tag:ces_v1_generated_AgentService_UpdateTool_async
- */
+  /**
+   * Updates the specified tool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1.Tool} request.tool
+   *   Required. The tool to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Tool|Tool}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.update_tool.js</caption>
+   * region_tag:ces_v1_generated_AgentService_UpdateTool_async
+   */
   updateTool(
-      request?: protos.google.cloud.ces.v1.IUpdateToolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IUpdateToolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IUpdateToolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IUpdateToolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateTool(
-      request: protos.google.cloud.ces.v1.IUpdateToolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IUpdateToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateToolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IUpdateToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTool(
-      request: protos.google.cloud.ces.v1.IUpdateToolRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IUpdateToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateToolRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IUpdateToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateTool(
-      request?: protos.google.cloud.ces.v1.IUpdateToolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IUpdateToolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IUpdateToolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.ITool,
-          protos.google.cloud.ces.v1.IUpdateToolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IUpdateToolRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IUpdateToolRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IUpdateToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool,
+      protos.google.cloud.ces.v1.IUpdateToolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'tool.name': request.tool!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'tool.name': request.tool!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateTool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IUpdateToolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.ITool,
+          protos.google.cloud.ces.v1.IUpdateToolRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateTool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.ITool,
-        protos.google.cloud.ces.v1.IUpdateToolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateTool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.ITool,
+          protos.google.cloud.ces.v1.IUpdateToolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateTool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified tool.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the tool to delete.
- * @param {boolean} [request.force]
- *   Optional. Indicates whether to forcefully delete the tool, even if it is
- *   still referenced by agents/examples.
- *
- *   *  If `force = false`, the deletion will fail if any agents still
- *   reference the tool.
- *   *  If `force = true`, all existing references from agents will be removed
- *   and the tool will be deleted.
- * @param {string} [request.etag]
- *   Optional. The current etag of the tool. If an etag is not provided, the
- *   deletion will overwrite any concurrent changes. If an etag is provided and
- *   does not match the current etag of the tool, deletion will be blocked and
- *   an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_tool.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteTool_async
- */
+  /**
+   * Deletes the specified tool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the tool to delete.
+   * @param {boolean} [request.force]
+   *   Optional. Indicates whether to forcefully delete the tool, even if it is
+   *   still referenced by agents/examples.
+   *
+   *   *  If `force = false`, the deletion will fail if any agents still
+   *   reference the tool.
+   *   *  If `force = true`, all existing references from agents will be removed
+   *   and the tool will be deleted.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the tool. If an etag is not provided, the
+   *   deletion will overwrite any concurrent changes. If an etag is provided and
+   *   does not match the current etag of the tool, deletion will be blocked and
+   *   an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_tool.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteTool_async
+   */
   deleteTool(
-      request?: protos.google.cloud.ces.v1.IDeleteToolRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteToolRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteTool(
-      request: protos.google.cloud.ces.v1.IDeleteToolRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteToolRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTool(
-      request: protos.google.cloud.ces.v1.IDeleteToolRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteToolRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteTool(
-      request?: protos.google.cloud.ces.v1.IDeleteToolRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteToolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IDeleteToolRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteTool request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteToolRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteTool response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteTool(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteTool response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteTool(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteToolRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTool response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified guardrail.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the guardrail to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_guardrail.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetGuardrail_async
- */
+  /**
+   * Gets details of the specified guardrail.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the guardrail to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_guardrail.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetGuardrail_async
+   */
   getGuardrail(
-      request?: protos.google.cloud.ces.v1.IGetGuardrailRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IGetGuardrailRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetGuardrailRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IGetGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getGuardrail(
-      request: protos.google.cloud.ces.v1.IGetGuardrailRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IGetGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetGuardrailRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IGetGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getGuardrail(
-      request: protos.google.cloud.ces.v1.IGetGuardrailRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IGetGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetGuardrailRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IGetGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getGuardrail(
-      request?: protos.google.cloud.ces.v1.IGetGuardrailRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetGuardrailRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IGetGuardrailRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IGetGuardrailRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IGetGuardrailRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IGetGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IGetGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getGuardrail request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IGetGuardrailRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IGuardrail,
+          protos.google.cloud.ces.v1.IGetGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getGuardrail response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getGuardrail(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IGetGuardrailRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getGuardrail response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getGuardrail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IGuardrail,
+          protos.google.cloud.ces.v1.IGetGuardrailRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getGuardrail response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new guardrail in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to create a guardrail in.
- * @param {string} [request.guardrailId]
- *   Optional. The ID to use for the guardrail, which will become the final
- *   component of the guardrail's resource name. If not provided, a unique ID
- *   will be automatically assigned for the guardrail.
- * @param {google.cloud.ces.v1.Guardrail} request.guardrail
- *   Required. The guardrail to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_guardrail.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateGuardrail_async
- */
+  /**
+   * Creates a new guardrail in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to create a guardrail in.
+   * @param {string} [request.guardrailId]
+   *   Optional. The ID to use for the guardrail, which will become the final
+   *   component of the guardrail's resource name. If not provided, a unique ID
+   *   will be automatically assigned for the guardrail.
+   * @param {google.cloud.ces.v1.Guardrail} request.guardrail
+   *   Required. The guardrail to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_guardrail.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateGuardrail_async
+   */
   createGuardrail(
-      request?: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.ICreateGuardrailRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.ICreateGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createGuardrail(
-      request: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.ICreateGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.ICreateGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createGuardrail(
-      request: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.ICreateGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.ICreateGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createGuardrail(
-      request?: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.ICreateGuardrailRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.ICreateGuardrailRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.ICreateGuardrailRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.ICreateGuardrailRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.ICreateGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.ICreateGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.ICreateGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createGuardrail request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.ICreateGuardrailRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IGuardrail,
+          protos.google.cloud.ces.v1.ICreateGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createGuardrail response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createGuardrail(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.ICreateGuardrailRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createGuardrail response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createGuardrail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IGuardrail,
+          protos.google.cloud.ces.v1.ICreateGuardrailRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createGuardrail response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified guardrail.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1.Guardrail} request.guardrail
- *   Required. The guardrail to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.update_guardrail.js</caption>
- * region_tag:ces_v1_generated_AgentService_UpdateGuardrail_async
- */
+  /**
+   * Updates the specified guardrail.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1.Guardrail} request.guardrail
+   *   Required. The guardrail to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.update_guardrail.js</caption>
+   * region_tag:ces_v1_generated_AgentService_UpdateGuardrail_async
+   */
   updateGuardrail(
-      request?: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IUpdateGuardrailRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IUpdateGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateGuardrail(
-      request: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IUpdateGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IUpdateGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateGuardrail(
-      request: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IUpdateGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IUpdateGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateGuardrail(
-      request?: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IUpdateGuardrailRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IUpdateGuardrailRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IGuardrail,
-          protos.google.cloud.ces.v1.IUpdateGuardrailRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IUpdateGuardrailRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IUpdateGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IUpdateGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail,
+      protos.google.cloud.ces.v1.IUpdateGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'guardrail.name': request.guardrail!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'guardrail.name': request.guardrail!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateGuardrail request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IUpdateGuardrailRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IGuardrail,
+          protos.google.cloud.ces.v1.IUpdateGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateGuardrail response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateGuardrail(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IGuardrail,
-        protos.google.cloud.ces.v1.IUpdateGuardrailRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateGuardrail response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateGuardrail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IGuardrail,
+          protos.google.cloud.ces.v1.IUpdateGuardrailRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateGuardrail response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified guardrail.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the guardrail to delete.
- * @param {boolean} [request.force]
- *   Optional. Indicates whether to forcefully delete the guardrail, even if it
- *   is still referenced by app/agents.
- *
- *   *  If `force = false`, the deletion fails if any apps/agents still
- *   reference the guardrail.
- *   *  If `force = true`, all existing references from apps/agents will be
- *   removed and the guardrail will be deleted.
- * @param {string} [request.etag]
- *   Optional. The current etag of the guardrail. If an etag is not provided,
- *   the deletion will overwrite any concurrent changes. If an etag is provided
- *   and does not match the current etag of the guardrail, deletion will be
- *   blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_guardrail.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteGuardrail_async
- */
+  /**
+   * Deletes the specified guardrail.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the guardrail to delete.
+   * @param {boolean} [request.force]
+   *   Optional. Indicates whether to forcefully delete the guardrail, even if it
+   *   is still referenced by app/agents.
+   *
+   *   *  If `force = false`, the deletion fails if any apps/agents still
+   *   reference the guardrail.
+   *   *  If `force = true`, all existing references from apps/agents will be
+   *   removed and the guardrail will be deleted.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the guardrail. If an etag is not provided,
+   *   the deletion will overwrite any concurrent changes. If an etag is provided
+   *   and does not match the current etag of the guardrail, deletion will be
+   *   blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_guardrail.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteGuardrail_async
+   */
   deleteGuardrail(
-      request?: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteGuardrailRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteGuardrail(
-      request: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteGuardrail(
-      request: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteGuardrailRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteGuardrail(
-      request?: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteGuardrailRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteGuardrailRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteGuardrailRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteGuardrailRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IDeleteGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteGuardrailRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteGuardrailRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteGuardrail request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteGuardrailRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteGuardrailRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteGuardrail response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteGuardrail(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteGuardrailRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteGuardrail response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteGuardrail(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteGuardrailRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteGuardrail response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified deployment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the deployment.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_deployment.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetDeployment_async
- */
+  /**
+   * Gets details of the specified deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the deployment.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_deployment.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetDeployment_async
+   */
   getDeployment(
-      request?: protos.google.cloud.ces.v1.IGetDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IGetDeploymentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IGetDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getDeployment(
-      request: protos.google.cloud.ces.v1.IGetDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IGetDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDeployment(
-      request: protos.google.cloud.ces.v1.IGetDeploymentRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IGetDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getDeployment(
-      request?: protos.google.cloud.ces.v1.IGetDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IGetDeploymentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IGetDeploymentRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetDeploymentRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IGetDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IGetDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getDeployment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IGetDeploymentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IDeployment,
+          protos.google.cloud.ces.v1.IGetDeploymentRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getDeployment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IGetDeploymentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getDeployment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IDeployment,
+          protos.google.cloud.ces.v1.IGetDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new deployment in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent app.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string} [request.deploymentId]
- *   Optional. The ID to use for the deployment, which will become the final
- *   component of the deployment's resource name. If not provided, a unique ID
- *   will be automatically assigned for the deployment.
- * @param {google.cloud.ces.v1.Deployment} request.deployment
- *   Required. The deployment to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_deployment.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateDeployment_async
- */
+  /**
+   * Creates a new deployment in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent app.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string} [request.deploymentId]
+   *   Optional. The ID to use for the deployment, which will become the final
+   *   component of the deployment's resource name. If not provided, a unique ID
+   *   will be automatically assigned for the deployment.
+   * @param {google.cloud.ces.v1.Deployment} request.deployment
+   *   Required. The deployment to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_deployment.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateDeployment_async
+   */
   createDeployment(
-      request?: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.ICreateDeploymentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.ICreateDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createDeployment(
-      request: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.ICreateDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.ICreateDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDeployment(
-      request: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.ICreateDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.ICreateDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createDeployment(
-      request?: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.ICreateDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.ICreateDeploymentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.ICreateDeploymentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.ICreateDeploymentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1.ICreateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.ICreateDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.ICreateDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createDeployment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.ICreateDeploymentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IDeployment,
+          | protos.google.cloud.ces.v1.ICreateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createDeployment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.ICreateDeploymentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createDeployment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IDeployment,
+          protos.google.cloud.ces.v1.ICreateDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified deployment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1.Deployment} request.deployment
- *   Required. The deployment to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.update_deployment.js</caption>
- * region_tag:ces_v1_generated_AgentService_UpdateDeployment_async
- */
+  /**
+   * Updates the specified deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1.Deployment} request.deployment
+   *   Required. The deployment to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.update_deployment.js</caption>
+   * region_tag:ces_v1_generated_AgentService_UpdateDeployment_async
+   */
   updateDeployment(
-      request?: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IUpdateDeploymentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IUpdateDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateDeployment(
-      request: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IUpdateDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IUpdateDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDeployment(
-      request: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IUpdateDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IUpdateDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateDeployment(
-      request?: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IUpdateDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IUpdateDeploymentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IDeployment,
-          protos.google.cloud.ces.v1.IUpdateDeploymentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IUpdateDeploymentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1.IUpdateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IUpdateDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment,
+      protos.google.cloud.ces.v1.IUpdateDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'deployment.name': request.deployment!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'deployment.name': request.deployment!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateDeployment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IUpdateDeploymentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IDeployment,
+          | protos.google.cloud.ces.v1.IUpdateDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateDeployment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IDeployment,
-        protos.google.cloud.ces.v1.IUpdateDeploymentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateDeployment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IDeployment,
+          protos.google.cloud.ces.v1.IUpdateDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified deployment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the deployment to delete.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}`
- * @param {string} [request.etag]
- *   Optional. The etag of the deployment.
- *   If an etag is provided and does not match the current etag of the
- *   deployment, deletion will be blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_deployment.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteDeployment_async
- */
+  /**
+   * Deletes the specified deployment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the deployment to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}`
+   * @param {string} [request.etag]
+   *   Optional. The etag of the deployment.
+   *   If an etag is provided and does not match the current etag of the
+   *   deployment, deletion will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_deployment.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteDeployment_async
+   */
   deleteDeployment(
-      request?: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteDeploymentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteDeployment(
-      request: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDeployment(
-      request: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteDeploymentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteDeployment(
-      request?: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteDeploymentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteDeploymentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteDeploymentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteDeploymentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1.IDeleteDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteDeploymentRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteDeploymentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteDeployment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteDeploymentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1.IDeleteDeploymentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteDeployment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteDeployment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteDeploymentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteDeployment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteDeployment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteDeploymentRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDeployment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified toolset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the toolset to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_toolset.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetToolset_async
- */
+  /**
+   * Gets details of the specified toolset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the toolset to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_toolset.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetToolset_async
+   */
   getToolset(
-      request?: protos.google.cloud.ces.v1.IGetToolsetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IGetToolsetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetToolsetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IGetToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getToolset(
-      request: protos.google.cloud.ces.v1.IGetToolsetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IGetToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetToolsetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IGetToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getToolset(
-      request: protos.google.cloud.ces.v1.IGetToolsetRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IGetToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetToolsetRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IGetToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getToolset(
-      request?: protos.google.cloud.ces.v1.IGetToolsetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetToolsetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IGetToolsetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IGetToolsetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IGetToolsetRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetToolsetRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IGetToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IGetToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getToolset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IGetToolsetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IToolset,
+          protos.google.cloud.ces.v1.IGetToolsetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getToolset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getToolset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IGetToolsetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getToolset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getToolset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IToolset,
+          protos.google.cloud.ces.v1.IGetToolsetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getToolset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new toolset in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to create a toolset in.
- * @param {string} [request.toolsetId]
- *   Optional. The ID to use for the toolset, which will become the final
- *   component of the toolset's resource name. If not provided, a unique ID will
- *   be automatically assigned for the toolset.
- * @param {google.cloud.ces.v1.Toolset} request.toolset
- *   Required. The toolset to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_toolset.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateToolset_async
- */
+  /**
+   * Creates a new toolset in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to create a toolset in.
+   * @param {string} [request.toolsetId]
+   *   Optional. The ID to use for the toolset, which will become the final
+   *   component of the toolset's resource name. If not provided, a unique ID will
+   *   be automatically assigned for the toolset.
+   * @param {google.cloud.ces.v1.Toolset} request.toolset
+   *   Required. The toolset to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_toolset.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateToolset_async
+   */
   createToolset(
-      request?: protos.google.cloud.ces.v1.ICreateToolsetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.ICreateToolsetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateToolsetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.ICreateToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createToolset(
-      request: protos.google.cloud.ces.v1.ICreateToolsetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.ICreateToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateToolsetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.ICreateToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createToolset(
-      request: protos.google.cloud.ces.v1.ICreateToolsetRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.ICreateToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateToolsetRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.ICreateToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createToolset(
-      request?: protos.google.cloud.ces.v1.ICreateToolsetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.ICreateToolsetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.ICreateToolsetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.ICreateToolsetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.ICreateToolsetRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.ICreateToolsetRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.ICreateToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.ICreateToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createToolset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.ICreateToolsetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IToolset,
+          protos.google.cloud.ces.v1.ICreateToolsetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createToolset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createToolset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.ICreateToolsetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createToolset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createToolset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IToolset,
+          protos.google.cloud.ces.v1.ICreateToolsetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createToolset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates the specified toolset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1.Toolset} request.toolset
- *   Required. The toolset to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.update_toolset.js</caption>
- * region_tag:ces_v1_generated_AgentService_UpdateToolset_async
- */
+  /**
+   * Updates the specified toolset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1.Toolset} request.toolset
+   *   Required. The toolset to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.update_toolset.js</caption>
+   * region_tag:ces_v1_generated_AgentService_UpdateToolset_async
+   */
   updateToolset(
-      request?: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IUpdateToolsetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IUpdateToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateToolset(
-      request: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IUpdateToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IUpdateToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateToolset(
-      request: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IUpdateToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IUpdateToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateToolset(
-      request?: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IUpdateToolsetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IUpdateToolsetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IToolset,
-          protos.google.cloud.ces.v1.IUpdateToolsetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IUpdateToolsetRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IUpdateToolsetRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IUpdateToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset,
+      protos.google.cloud.ces.v1.IUpdateToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'toolset.name': request.toolset!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'toolset.name': request.toolset!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateToolset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IUpdateToolsetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IToolset,
+          protos.google.cloud.ces.v1.IUpdateToolsetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateToolset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateToolset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IToolset,
-        protos.google.cloud.ces.v1.IUpdateToolsetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateToolset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateToolset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IToolset,
+          protos.google.cloud.ces.v1.IUpdateToolsetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateToolset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified toolset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the toolset to delete.
- * @param {boolean} [request.force]
- *   Optional. Indicates whether to forcefully delete the toolset, even if it is
- *   still referenced by app/agents.
- *
- *   *  If `force = false`, the deletion fails if any agents still
- *   reference the toolset.
- *   *  If `force = true`, all existing references from agents will be
- *   removed and the toolset will be deleted.
- * @param {string} [request.etag]
- *   Optional. The current etag of the toolset. If an etag is not provided, the
- *   deletion will overwrite any concurrent changes. If an etag is provided and
- *   does not match the current etag of the toolset, deletion will be blocked
- *   and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_toolset.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteToolset_async
- */
+  /**
+   * Deletes the specified toolset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the toolset to delete.
+   * @param {boolean} [request.force]
+   *   Optional. Indicates whether to forcefully delete the toolset, even if it is
+   *   still referenced by app/agents.
+   *
+   *   *  If `force = false`, the deletion fails if any agents still
+   *   reference the toolset.
+   *   *  If `force = true`, all existing references from agents will be
+   *   removed and the toolset will be deleted.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the toolset. If an etag is not provided, the
+   *   deletion will overwrite any concurrent changes. If an etag is provided and
+   *   does not match the current etag of the toolset, deletion will be blocked
+   *   and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_toolset.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteToolset_async
+   */
   deleteToolset(
-      request?: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolsetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteToolset(
-      request: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteToolset(
-      request: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolsetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteToolset(
-      request?: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteToolsetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolsetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteToolsetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolsetRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IDeleteToolsetRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolsetRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteToolsetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteToolset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolsetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteToolsetRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteToolset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteToolset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteToolsetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteToolset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteToolset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteToolsetRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteToolset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified app version.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the app version to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_app_version.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetAppVersion_async
- */
+  /**
+   * Gets details of the specified app version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the app version to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_app_version.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetAppVersion_async
+   */
   getAppVersion(
-      request?: protos.google.cloud.ces.v1.IGetAppVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.IGetAppVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetAppVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.IGetAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getAppVersion(
-      request: protos.google.cloud.ces.v1.IGetAppVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.IGetAppVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetAppVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.IGetAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAppVersion(
-      request: protos.google.cloud.ces.v1.IGetAppVersionRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.IGetAppVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetAppVersionRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.IGetAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getAppVersion(
-      request?: protos.google.cloud.ces.v1.IGetAppVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetAppVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.IGetAppVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.IGetAppVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.IGetAppVersionRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetAppVersionRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.IGetAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.IGetAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getAppVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.IGetAppVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IAppVersion,
+          protos.google.cloud.ces.v1.IGetAppVersionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getAppVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getAppVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.IGetAppVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getAppVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getAppVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IAppVersion,
+          protos.google.cloud.ces.v1.IGetAppVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getAppVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a new app version in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to create an app version in.
- * @param {string} [request.appVersionId]
- *   Optional. The ID to use for the app version, which will become the final
- *   component of the app version's resource name. If not provided, a unique ID
- *   will be automatically assigned for the app version.
- * @param {google.cloud.ces.v1.AppVersion} request.appVersion
- *   Required. The app version to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_app_version.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateAppVersion_async
- */
+  /**
+   * Creates a new app version in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to create an app version in.
+   * @param {string} [request.appVersionId]
+   *   Optional. The ID to use for the app version, which will become the final
+   *   component of the app version's resource name. If not provided, a unique ID
+   *   will be automatically assigned for the app version.
+   * @param {google.cloud.ces.v1.AppVersion} request.appVersion
+   *   Required. The app version to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_app_version.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateAppVersion_async
+   */
   createAppVersion(
-      request?: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.ICreateAppVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.ICreateAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createAppVersion(
-      request: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.ICreateAppVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.ICreateAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAppVersion(
-      request: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.ICreateAppVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.ICreateAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createAppVersion(
-      request?: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.ICreateAppVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.ICreateAppVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IAppVersion,
-          protos.google.cloud.ces.v1.ICreateAppVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.ICreateAppVersionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1.ICreateAppVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.ICreateAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAppVersion,
+      protos.google.cloud.ces.v1.ICreateAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createAppVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.ICreateAppVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IAppVersion,
+          | protos.google.cloud.ces.v1.ICreateAppVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createAppVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createAppVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IAppVersion,
-        protos.google.cloud.ces.v1.ICreateAppVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createAppVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createAppVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IAppVersion,
+          protos.google.cloud.ces.v1.ICreateAppVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createAppVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes the specified app version.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the app version to delete.
- * @param {string} [request.etag]
- *   Optional. The current etag of the app version. If an etag is not provided,
- *   the deletion will overwrite any concurrent changes. If an etag is provided
- *   and does not match the current etag of the app version, deletion will be
- *   blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_app_version.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteAppVersion_async
- */
+  /**
+   * Deletes the specified app version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the app version to delete.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the app version. If an etag is not provided,
+   *   the deletion will overwrite any concurrent changes. If an etag is provided
+   *   and does not match the current etag of the app version, deletion will be
+   *   blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_app_version.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteAppVersion_async
+   */
   deleteAppVersion(
-      request?: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAppVersionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteAppVersion(
-      request: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAppVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAppVersion(
-      request: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAppVersionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteAppVersion(
-      request?: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IDeleteAppVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAppVersionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1.IDeleteAppVersionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAppVersionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1.IDeleteAppVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAppVersionRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1.IDeleteAppVersionRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteAppVersion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAppVersionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1.IDeleteAppVersionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteAppVersion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteAppVersion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1.IDeleteAppVersionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteAppVersion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteAppVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1.IDeleteAppVersionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAppVersion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets the specified changelog.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the changelog to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Changelog|Changelog}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.get_changelog.js</caption>
- * region_tag:ces_v1_generated_AgentService_GetChangelog_async
- */
+  /**
+   * Gets the specified changelog.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the changelog to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1.Changelog|Changelog}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.get_changelog.js</caption>
+   * region_tag:ces_v1_generated_AgentService_GetChangelog_async
+   */
   getChangelog(
-      request?: protos.google.cloud.ces.v1.IGetChangelogRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IChangelog,
-        protos.google.cloud.ces.v1.IGetChangelogRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IGetChangelogRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IChangelog,
+      protos.google.cloud.ces.v1.IGetChangelogRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getChangelog(
-      request: protos.google.cloud.ces.v1.IGetChangelogRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IChangelog,
-          protos.google.cloud.ces.v1.IGetChangelogRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetChangelogRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IChangelog,
+      protos.google.cloud.ces.v1.IGetChangelogRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getChangelog(
-      request: protos.google.cloud.ces.v1.IGetChangelogRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1.IChangelog,
-          protos.google.cloud.ces.v1.IGetChangelogRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IGetChangelogRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1.IChangelog,
+      protos.google.cloud.ces.v1.IGetChangelogRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getChangelog(
-      request?: protos.google.cloud.ces.v1.IGetChangelogRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1.IGetChangelogRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1.IChangelog,
-          protos.google.cloud.ces.v1.IGetChangelogRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1.IChangelog,
-          protos.google.cloud.ces.v1.IGetChangelogRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1.IChangelog,
-        protos.google.cloud.ces.v1.IGetChangelogRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.ces.v1.IGetChangelogRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1.IChangelog,
+      protos.google.cloud.ces.v1.IGetChangelogRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IChangelog,
+      protos.google.cloud.ces.v1.IGetChangelogRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getChangelog request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1.IChangelog,
-        protos.google.cloud.ces.v1.IGetChangelogRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1.IChangelog,
+          protos.google.cloud.ces.v1.IGetChangelogRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getChangelog response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getChangelog(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1.IChangelog,
-        protos.google.cloud.ces.v1.IGetChangelogRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getChangelog response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getChangelog(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1.IChangelog,
+          protos.google.cloud.ces.v1.IGetChangelogRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getChangelog response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new app in the given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the location to create an app in.
- * @param {string} [request.appId]
- *   Optional. The ID to use for the app, which will become the final component
- *   of the app's resource name. If not provided, a unique ID will be
- *   automatically assigned for the app.
- * @param {google.cloud.ces.v1.App} request.app
- *   Required. The app to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateApp_async
- */
+  /**
+   * Creates a new app in the given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to create an app in.
+   * @param {string} [request.appId]
+   *   Optional. The ID to use for the app, which will become the final component
+   *   of the app's resource name. If not provided, a unique ID will be
+   *   automatically assigned for the app.
+   * @param {google.cloud.ces.v1.App} request.app
+   *   Required. The app to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateApp_async
+   */
   createApp(
-      request?: protos.google.cloud.ces.v1.ICreateAppRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.ICreateAppRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IApp,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createApp(
-      request: protos.google.cloud.ces.v1.ICreateAppRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateAppRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IApp,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createApp(
-      request: protos.google.cloud.ces.v1.ICreateAppRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.ICreateAppRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IApp,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createApp(
-      request?: protos.google.cloud.ces.v1.ICreateAppRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1.ICreateAppRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IApp,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IApp,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IApp,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IApp,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createApp response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createApp request %j', request);
-    return this.innerApiCalls.createApp(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1.IApp, protos.google.cloud.ces.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createApp response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createApp(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1.IApp,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createApp response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createApp()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.create_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_CreateApp_async
- */
-  async checkCreateAppProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1.App, protos.google.cloud.ces.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createApp()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.create_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_CreateApp_async
+   */
+  async checkCreateAppProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1.App,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >
+  > {
     this._log.info('createApp long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createApp, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1.App, protos.google.cloud.ces.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createApp,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1.App,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes the specified app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the app to delete.
- * @param {string} [request.etag]
- *   Optional. The current etag of the app. If an etag is not provided, the
- *   deletion will overwrite any concurrent changes. If an etag is provided and
- *   does not match the current etag of the app, deletion will be blocked and an
- *   ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteApp_async
- */
+  /**
+   * Deletes the specified app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the app to delete.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the app. If an etag is not provided, the
+   *   deletion will overwrite any concurrent changes. If an etag is provided and
+   *   does not match the current etag of the app, deletion will be blocked and an
+   *   ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteApp_async
+   */
   deleteApp(
-      request?: protos.google.cloud.ces.v1.IDeleteAppRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IDeleteAppRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteApp(
-      request: protos.google.cloud.ces.v1.IDeleteAppRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteAppRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteApp(
-      request: protos.google.cloud.ces.v1.IDeleteAppRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IDeleteAppRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteApp(
-      request?: protos.google.cloud.ces.v1.IDeleteAppRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1.IDeleteAppRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteApp response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteApp request %j', request);
-    return this.innerApiCalls.deleteApp(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteApp response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteApp(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteApp response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteApp()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.delete_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_DeleteApp_async
- */
-  async checkDeleteAppProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.ces.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteApp()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.delete_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_DeleteApp_async
+   */
+  async checkDeleteAppProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteApp long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteApp, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.ces.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteApp,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >;
   }
-/**
- * Exports the specified app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the app to export.
- * @param {google.cloud.ces.v1.ExportAppRequest.ExportFormat} request.exportFormat
- *   Required. The format to export the app in.
- * @param {string} [request.gcsUri]
- *   Optional. The [Google Cloud
- *   Storage](https://cloud.google.com/storage/docs/) URI to which to export the
- *   app. The format of this URI must be `gs://<bucket-name>/<object-name>`. The
- *   exported app archive will be written directly to the specified GCS object.
- * @param {string} [request.appVersion]
- *   Optional. The resource name of the app version to export.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/versions/{version}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.export_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_ExportApp_async
- */
+  /**
+   * Exports the specified app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the app to export.
+   * @param {google.cloud.ces.v1.ExportAppRequest.ExportFormat} request.exportFormat
+   *   Required. The format to export the app in.
+   * @param {string} [request.gcsUri]
+   *   Optional. The [Google Cloud
+   *   Storage](https://cloud.google.com/storage/docs/) URI to which to export the
+   *   app. The format of this URI must be `gs://<bucket-name>/<object-name>`. The
+   *   exported app archive will be written directly to the specified GCS object.
+   * @param {string} [request.appVersion]
+   *   Optional. The resource name of the app version to export.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/versions/{version}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.export_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ExportApp_async
+   */
   exportApp(
-      request?: protos.google.cloud.ces.v1.IExportAppRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IExportAppRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IExportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   exportApp(
-      request: protos.google.cloud.ces.v1.IExportAppRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IExportAppRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IExportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportApp(
-      request: protos.google.cloud.ces.v1.IExportAppRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IExportAppRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IExportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportApp(
-      request?: protos.google.cloud.ces.v1.IExportAppRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1.IExportAppRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IExportAppResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IExportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IExportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IExportAppResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportApp response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportApp request %j', request);
-    return this.innerApiCalls.exportApp(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1.IExportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('exportApp response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .exportApp(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1.IExportAppResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportApp response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `exportApp()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.export_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_ExportApp_async
- */
-  async checkExportAppProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1.ExportAppResponse, protos.google.cloud.ces.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `exportApp()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.export_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ExportApp_async
+   */
+  async checkExportAppProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1.ExportAppResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >
+  > {
     this._log.info('exportApp long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportApp, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1.ExportAppResponse, protos.google.cloud.ces.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportApp,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1.ExportAppResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >;
   }
-/**
- * Imports the specified app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.gcsUri
- *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
- *   from which to import app. The format of this URI must be
- *   `gs://<bucket-name>/<object-name>`.
- * @param {Buffer} request.appContent
- *   Raw bytes representing the compressed zip file with the app folder
- *   structure.
- * @param {string} request.parent
- *   Required. The parent resource name with the location of the app to import.
- * @param {string} [request.displayName]
- *   Optional. The display name of the app to import.
- *   * If the app is created on import, and the display name is specified,
- *   the imported app will use this display name. If a conflict is detected
- *   with an existing app, a timestamp will be appended to the display name
- *   to make it unique.
- *   * If the app is a reimport, this field should not be set. Providing a
- *   display name during reimport will result in an INVALID_ARGUMENT error.
- * @param {string} [request.appId]
- *   Optional. The ID to use for the imported app.
- *   *  If not specified, a unique ID will be automatically assigned for
- *   the app.
- *   *  Otherwise, the imported app will use this ID as the final component of
- *   its resource name. If an app with the same ID already exists at the
- *   specified location in the project, the content of the existing app will be
- *   replaced.
- * @param {google.cloud.ces.v1.ImportAppRequest.ImportOptions} [request.importOptions]
- *   Optional. Options governing the import process for the app.
- * @param {boolean} [request.ignoreAppLock]
- *   Optional. Flag for overriding the app lock during import.
- *   If set to true, the import process will ignore the app lock.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.import_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_ImportApp_async
- */
+  /**
+   * Imports the specified app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.gcsUri
+   *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+   *   from which to import app. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   * @param {Buffer} request.appContent
+   *   Raw bytes representing the compressed zip file with the app folder
+   *   structure.
+   * @param {string} request.parent
+   *   Required. The parent resource name with the location of the app to import.
+   * @param {string} [request.displayName]
+   *   Optional. The display name of the app to import.
+   *   * If the app is created on import, and the display name is specified,
+   *   the imported app will use this display name. If a conflict is detected
+   *   with an existing app, a timestamp will be appended to the display name
+   *   to make it unique.
+   *   * If the app is a reimport, this field should not be set. Providing a
+   *   display name during reimport will result in an INVALID_ARGUMENT error.
+   * @param {string} [request.appId]
+   *   Optional. The ID to use for the imported app.
+   *   *  If not specified, a unique ID will be automatically assigned for
+   *   the app.
+   *   *  Otherwise, the imported app will use this ID as the final component of
+   *   its resource name. If an app with the same ID already exists at the
+   *   specified location in the project, the content of the existing app will be
+   *   replaced.
+   * @param {google.cloud.ces.v1.ImportAppRequest.ImportOptions} [request.importOptions]
+   *   Optional. Options governing the import process for the app.
+   * @param {boolean} [request.ignoreAppLock]
+   *   Optional. Flag for overriding the app lock during import.
+   *   If set to true, the import process will ignore the app lock.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.import_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ImportApp_async
+   */
   importApp(
-      request?: protos.google.cloud.ces.v1.IImportAppRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IImportAppRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IImportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   importApp(
-      request: protos.google.cloud.ces.v1.IImportAppRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IImportAppRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IImportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importApp(
-      request: protos.google.cloud.ces.v1.IImportAppRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IImportAppRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IImportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importApp(
-      request?: protos.google.cloud.ces.v1.IImportAppRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1.IImportAppRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IImportAppResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IImportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IImportAppResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IImportAppResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importApp response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importApp request %j', request);
-    return this.innerApiCalls.importApp(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1.IImportAppResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('importApp response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .importApp(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1.IImportAppResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importApp response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `importApp()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.import_app.js</caption>
- * region_tag:ces_v1_generated_AgentService_ImportApp_async
- */
-  async checkImportAppProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1.ImportAppResponse, protos.google.cloud.ces.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `importApp()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.import_app.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ImportApp_async
+   */
+  async checkImportAppProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1.ImportAppResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >
+  > {
     this._log.info('importApp long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importApp, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1.ImportAppResponse, protos.google.cloud.ces.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importApp,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1.ImportAppResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >;
   }
-/**
- * Batch deletes the specified conversations.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to delete conversations from.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string[]} request.conversations
- *   Required. The resource names of the conversations to delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.batch_delete_conversations.js</caption>
- * region_tag:ces_v1_generated_AgentService_BatchDeleteConversations_async
- */
+  /**
+   * Batch deletes the specified conversations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to delete conversations from.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string[]} request.conversations
+   *   Required. The resource names of the conversations to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.batch_delete_conversations.js</caption>
+   * region_tag:ces_v1_generated_AgentService_BatchDeleteConversations_async
+   */
   batchDeleteConversations(
-      request?: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   batchDeleteConversations(
-      request: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeleteConversations(
-      request: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchDeleteConversations(
-      request?: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1.IBatchDeleteConversationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('batchDeleteConversations response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchDeleteConversations request %j', request);
-    return this.innerApiCalls.batchDeleteConversations(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('batchDeleteConversations response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .batchDeleteConversations(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1.IBatchDeleteConversationsResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteConversations response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `batchDeleteConversations()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.batch_delete_conversations.js</caption>
- * region_tag:ces_v1_generated_AgentService_BatchDeleteConversations_async
- */
-  async checkBatchDeleteConversationsProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1.BatchDeleteConversationsResponse, protos.google.cloud.ces.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `batchDeleteConversations()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.batch_delete_conversations.js</caption>
+   * region_tag:ces_v1_generated_AgentService_BatchDeleteConversations_async
+   */
+  async checkBatchDeleteConversationsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1.BatchDeleteConversationsResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >
+  > {
     this._log.info('batchDeleteConversations long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchDeleteConversations, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1.BatchDeleteConversationsResponse, protos.google.cloud.ces.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchDeleteConversations,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1.BatchDeleteConversationsResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >;
   }
-/**
- * Restores the specified app version.
- * This will create a new app version from the current draft app and overwrite
- * the current draft with the specified app version.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the app version to restore.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.restore_app_version.js</caption>
- * region_tag:ces_v1_generated_AgentService_RestoreAppVersion_async
- */
+  /**
+   * Restores the specified app version.
+   * This will create a new app version from the current draft app and overwrite
+   * the current draft with the specified app version.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the app version to restore.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.restore_app_version.js</caption>
+   * region_tag:ces_v1_generated_AgentService_RestoreAppVersion_async
+   */
   restoreAppVersion(
-      request?: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   restoreAppVersion(
-      request: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   restoreAppVersion(
-      request: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   restoreAppVersion(
-      request?: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1.IRestoreAppVersionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+        protos.google.cloud.ces.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('restoreAppVersion response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('restoreAppVersion request %j', request);
-    return this.innerApiCalls.restoreAppVersion(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1.IRestoreAppVersionResponse, protos.google.cloud.ces.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('restoreAppVersion response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .restoreAppVersion(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1.IRestoreAppVersionResponse,
+            protos.google.cloud.ces.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreAppVersion response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `restoreAppVersion()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.restore_app_version.js</caption>
- * region_tag:ces_v1_generated_AgentService_RestoreAppVersion_async
- */
-  async checkRestoreAppVersionProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1.RestoreAppVersionResponse, protos.google.cloud.ces.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `restoreAppVersion()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.restore_app_version.js</caption>
+   * region_tag:ces_v1_generated_AgentService_RestoreAppVersion_async
+   */
+  async checkRestoreAppVersionProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1.RestoreAppVersionResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >
+  > {
     this._log.info('restoreAppVersion long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.restoreAppVersion, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1.RestoreAppVersionResponse, protos.google.cloud.ces.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.restoreAppVersion,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1.RestoreAppVersionResponse,
+      protos.google.cloud.ces.v1.OperationMetadata
+    >;
   }
- /**
- * Lists apps in the given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the location to list apps from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAppsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListApps|AgentService.ListApps} call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the apps.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.App|App}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAppsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists apps in the given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to list apps from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAppsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListApps|AgentService.ListApps} call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the apps.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.App|App}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAppsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listApps(
-      request?: protos.google.cloud.ces.v1.IListAppsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IApp[],
-        protos.google.cloud.ces.v1.IListAppsRequest|null,
-        protos.google.cloud.ces.v1.IListAppsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListAppsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IApp[],
+      protos.google.cloud.ces.v1.IListAppsRequest | null,
+      protos.google.cloud.ces.v1.IListAppsResponse,
+    ]
+  >;
   listApps(
-      request: protos.google.cloud.ces.v1.IListAppsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAppsRequest,
-          protos.google.cloud.ces.v1.IListAppsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IApp>): void;
+    request: protos.google.cloud.ces.v1.IListAppsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAppsRequest,
+      protos.google.cloud.ces.v1.IListAppsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IApp
+    >,
+  ): void;
   listApps(
-      request: protos.google.cloud.ces.v1.IListAppsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAppsRequest,
-          protos.google.cloud.ces.v1.IListAppsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IApp>): void;
+    request: protos.google.cloud.ces.v1.IListAppsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAppsRequest,
+      protos.google.cloud.ces.v1.IListAppsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IApp
+    >,
+  ): void;
   listApps(
-      request?: protos.google.cloud.ces.v1.IListAppsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListAppsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListAppsRequest,
-          protos.google.cloud.ces.v1.IListAppsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IApp>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAppsRequest,
-          protos.google.cloud.ces.v1.IListAppsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IApp>):
-      Promise<[
-        protos.google.cloud.ces.v1.IApp[],
-        protos.google.cloud.ces.v1.IListAppsRequest|null,
-        protos.google.cloud.ces.v1.IListAppsResponse
-      ]>|void {
+          protos.google.cloud.ces.v1.IListAppsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IApp
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAppsRequest,
+      protos.google.cloud.ces.v1.IListAppsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IApp
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IApp[],
+      protos.google.cloud.ces.v1.IListAppsRequest | null,
+      protos.google.cloud.ces.v1.IListAppsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListAppsRequest,
-      protos.google.cloud.ces.v1.IListAppsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IApp>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListAppsRequest,
+          protos.google.cloud.ces.v1.IListAppsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IApp
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listApps values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4414,220 +5963,239 @@ export class AgentServiceClient {
     this._log.info('listApps request %j', request);
     return this.innerApiCalls
       .listApps(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IApp[],
-        protos.google.cloud.ces.v1.IListAppsRequest|null,
-        protos.google.cloud.ces.v1.IListAppsResponse
-      ]) => {
-        this._log.info('listApps values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IApp[],
+          protos.google.cloud.ces.v1.IListAppsRequest | null,
+          protos.google.cloud.ces.v1.IListAppsResponse,
+        ]) => {
+          this._log.info('listApps values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listApps`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the location to list apps from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAppsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListApps|AgentService.ListApps} call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the apps.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.App|App} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAppsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listApps`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to list apps from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAppsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListApps|AgentService.ListApps} call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the apps.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.App|App} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAppsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAppsStream(
-      request?: protos.google.cloud.ces.v1.IListAppsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListAppsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listApps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listApps stream %j', request);
     return this.descriptors.page.listApps.createStream(
       this.innerApiCalls.listApps as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listApps`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the location to list apps from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAppsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListApps|AgentService.ListApps} call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the apps.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.App|App}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_apps.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListApps_async
- */
+  /**
+   * Equivalent to `listApps`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the location to list apps from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAppsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListApps|AgentService.ListApps} call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the apps.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.App|App}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_apps.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListApps_async
+   */
   listAppsAsync(
-      request?: protos.google.cloud.ces.v1.IListAppsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IApp>{
+    request?: protos.google.cloud.ces.v1.IListAppsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IApp> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listApps'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listApps iterate %j', request);
     return this.descriptors.page.listApps.asyncIterate(
       this.innerApiCalls['listApps'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IApp>;
   }
- /**
- * Lists agents in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list agents from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAgentsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListAgents|AgentService.ListAgents}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the agents.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Agent|Agent}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists agents in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list agents from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAgentsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListAgents|AgentService.ListAgents}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the agents.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Agent|Agent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAgents(
-      request?: protos.google.cloud.ces.v1.IListAgentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent[],
-        protos.google.cloud.ces.v1.IListAgentsRequest|null,
-        protos.google.cloud.ces.v1.IListAgentsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListAgentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent[],
+      protos.google.cloud.ces.v1.IListAgentsRequest | null,
+      protos.google.cloud.ces.v1.IListAgentsResponse,
+    ]
+  >;
   listAgents(
-      request: protos.google.cloud.ces.v1.IListAgentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAgentsRequest,
-          protos.google.cloud.ces.v1.IListAgentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAgent>): void;
+    request: protos.google.cloud.ces.v1.IListAgentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAgentsRequest,
+      protos.google.cloud.ces.v1.IListAgentsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IAgent
+    >,
+  ): void;
   listAgents(
-      request: protos.google.cloud.ces.v1.IListAgentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAgentsRequest,
-          protos.google.cloud.ces.v1.IListAgentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAgent>): void;
+    request: protos.google.cloud.ces.v1.IListAgentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAgentsRequest,
+      protos.google.cloud.ces.v1.IListAgentsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IAgent
+    >,
+  ): void;
   listAgents(
-      request?: protos.google.cloud.ces.v1.IListAgentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListAgentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListAgentsRequest,
-          protos.google.cloud.ces.v1.IListAgentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAgent>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAgentsRequest,
-          protos.google.cloud.ces.v1.IListAgentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAgent>):
-      Promise<[
-        protos.google.cloud.ces.v1.IAgent[],
-        protos.google.cloud.ces.v1.IListAgentsRequest|null,
-        protos.google.cloud.ces.v1.IListAgentsResponse
-      ]>|void {
+          protos.google.cloud.ces.v1.IListAgentsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IAgent
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAgentsRequest,
+      protos.google.cloud.ces.v1.IListAgentsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IAgent
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAgent[],
+      protos.google.cloud.ces.v1.IListAgentsRequest | null,
+      protos.google.cloud.ces.v1.IListAgentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListAgentsRequest,
-      protos.google.cloud.ces.v1.IListAgentsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IAgent>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListAgentsRequest,
+          protos.google.cloud.ces.v1.IListAgentsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IAgent
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAgents values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4636,222 +6204,241 @@ export class AgentServiceClient {
     this._log.info('listAgents request %j', request);
     return this.innerApiCalls
       .listAgents(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IAgent[],
-        protos.google.cloud.ces.v1.IListAgentsRequest|null,
-        protos.google.cloud.ces.v1.IListAgentsResponse
-      ]) => {
-        this._log.info('listAgents values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IAgent[],
+          protos.google.cloud.ces.v1.IListAgentsRequest | null,
+          protos.google.cloud.ces.v1.IListAgentsResponse,
+        ]) => {
+          this._log.info('listAgents values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAgents`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list agents from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAgentsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListAgents|AgentService.ListAgents}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the agents.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Agent|Agent} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAgentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAgents`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list agents from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAgentsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListAgents|AgentService.ListAgents}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the agents.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Agent|Agent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAgentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAgentsStream(
-      request?: protos.google.cloud.ces.v1.IListAgentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListAgentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAgents stream %j', request);
     return this.descriptors.page.listAgents.createStream(
       this.innerApiCalls.listAgents as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAgents`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list agents from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAgentsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListAgents|AgentService.ListAgents}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the agents.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Agent|Agent}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_agents.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListAgents_async
- */
+  /**
+   * Equivalent to `listAgents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list agents from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAgentsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListAgents|AgentService.ListAgents}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the agents.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Agent|Agent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_agents.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListAgents_async
+   */
   listAgentsAsync(
-      request?: protos.google.cloud.ces.v1.IListAgentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IAgent>{
+    request?: protos.google.cloud.ces.v1.IListAgentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IAgent> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAgents iterate %j', request);
     return this.descriptors.page.listAgents.asyncIterate(
       this.innerApiCalls['listAgents'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IAgent>;
   }
- /**
- * Lists examples in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list examples from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListExamplesResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListExamples|AgentService.ListExamples}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the examples.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Example|Example}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listExamplesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists examples in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list examples from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListExamplesResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListExamples|AgentService.ListExamples}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the examples.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Example|Example}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExamplesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listExamples(
-      request?: protos.google.cloud.ces.v1.IListExamplesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample[],
-        protos.google.cloud.ces.v1.IListExamplesRequest|null,
-        protos.google.cloud.ces.v1.IListExamplesResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListExamplesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample[],
+      protos.google.cloud.ces.v1.IListExamplesRequest | null,
+      protos.google.cloud.ces.v1.IListExamplesResponse,
+    ]
+  >;
   listExamples(
-      request: protos.google.cloud.ces.v1.IListExamplesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListExamplesRequest,
-          protos.google.cloud.ces.v1.IListExamplesResponse|null|undefined,
-          protos.google.cloud.ces.v1.IExample>): void;
+    request: protos.google.cloud.ces.v1.IListExamplesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListExamplesRequest,
+      protos.google.cloud.ces.v1.IListExamplesResponse | null | undefined,
+      protos.google.cloud.ces.v1.IExample
+    >,
+  ): void;
   listExamples(
-      request: protos.google.cloud.ces.v1.IListExamplesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListExamplesRequest,
-          protos.google.cloud.ces.v1.IListExamplesResponse|null|undefined,
-          protos.google.cloud.ces.v1.IExample>): void;
+    request: protos.google.cloud.ces.v1.IListExamplesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListExamplesRequest,
+      protos.google.cloud.ces.v1.IListExamplesResponse | null | undefined,
+      protos.google.cloud.ces.v1.IExample
+    >,
+  ): void;
   listExamples(
-      request?: protos.google.cloud.ces.v1.IListExamplesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListExamplesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListExamplesRequest,
-          protos.google.cloud.ces.v1.IListExamplesResponse|null|undefined,
-          protos.google.cloud.ces.v1.IExample>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListExamplesRequest,
-          protos.google.cloud.ces.v1.IListExamplesResponse|null|undefined,
-          protos.google.cloud.ces.v1.IExample>):
-      Promise<[
-        protos.google.cloud.ces.v1.IExample[],
-        protos.google.cloud.ces.v1.IListExamplesRequest|null,
-        protos.google.cloud.ces.v1.IListExamplesResponse
-      ]>|void {
+          protos.google.cloud.ces.v1.IListExamplesResponse | null | undefined,
+          protos.google.cloud.ces.v1.IExample
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListExamplesRequest,
+      protos.google.cloud.ces.v1.IListExamplesResponse | null | undefined,
+      protos.google.cloud.ces.v1.IExample
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IExample[],
+      protos.google.cloud.ces.v1.IListExamplesRequest | null,
+      protos.google.cloud.ces.v1.IListExamplesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListExamplesRequest,
-      protos.google.cloud.ces.v1.IListExamplesResponse|null|undefined,
-      protos.google.cloud.ces.v1.IExample>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListExamplesRequest,
+          protos.google.cloud.ces.v1.IListExamplesResponse | null | undefined,
+          protos.google.cloud.ces.v1.IExample
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listExamples values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4860,222 +6447,241 @@ export class AgentServiceClient {
     this._log.info('listExamples request %j', request);
     return this.innerApiCalls
       .listExamples(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IExample[],
-        protos.google.cloud.ces.v1.IListExamplesRequest|null,
-        protos.google.cloud.ces.v1.IListExamplesResponse
-      ]) => {
-        this._log.info('listExamples values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IExample[],
+          protos.google.cloud.ces.v1.IListExamplesRequest | null,
+          protos.google.cloud.ces.v1.IListExamplesResponse,
+        ]) => {
+          this._log.info('listExamples values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listExamples`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list examples from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListExamplesResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListExamples|AgentService.ListExamples}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the examples.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Example|Example} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listExamplesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listExamples`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list examples from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListExamplesResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListExamples|AgentService.ListExamples}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the examples.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Example|Example} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExamplesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listExamplesStream(
-      request?: protos.google.cloud.ces.v1.IListExamplesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListExamplesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExamples stream %j', request);
     return this.descriptors.page.listExamples.createStream(
       this.innerApiCalls.listExamples as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listExamples`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list examples from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListExamplesResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListExamples|AgentService.ListExamples}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the examples.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Example|Example}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_examples.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListExamples_async
- */
+  /**
+   * Equivalent to `listExamples`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list examples from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListExamplesResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListExamples|AgentService.ListExamples}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the examples.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Example|Example}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_examples.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListExamples_async
+   */
   listExamplesAsync(
-      request?: protos.google.cloud.ces.v1.IListExamplesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IExample>{
+    request?: protos.google.cloud.ces.v1.IListExamplesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IExample> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listExamples'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listExamples iterate %j', request);
     return this.descriptors.page.listExamples.asyncIterate(
       this.innerApiCalls['listExamples'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IExample>;
   }
- /**
- * Lists tools in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list tools from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListToolsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListTools|AgentService.ListTools} call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the tools. Use
- *   "include_system_tools=true" to include system tools in the response. See
- *   https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Tool|Tool}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listToolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists tools in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list tools from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListToolsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListTools|AgentService.ListTools} call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the tools. Use
+   *   "include_system_tools=true" to include system tools in the response. See
+   *   https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Tool|Tool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listToolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listTools(
-      request?: protos.google.cloud.ces.v1.IListToolsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool[],
-        protos.google.cloud.ces.v1.IListToolsRequest|null,
-        protos.google.cloud.ces.v1.IListToolsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListToolsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool[],
+      protos.google.cloud.ces.v1.IListToolsRequest | null,
+      protos.google.cloud.ces.v1.IListToolsResponse,
+    ]
+  >;
   listTools(
-      request: protos.google.cloud.ces.v1.IListToolsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListToolsRequest,
-          protos.google.cloud.ces.v1.IListToolsResponse|null|undefined,
-          protos.google.cloud.ces.v1.ITool>): void;
+    request: protos.google.cloud.ces.v1.IListToolsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListToolsRequest,
+      protos.google.cloud.ces.v1.IListToolsResponse | null | undefined,
+      protos.google.cloud.ces.v1.ITool
+    >,
+  ): void;
   listTools(
-      request: protos.google.cloud.ces.v1.IListToolsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListToolsRequest,
-          protos.google.cloud.ces.v1.IListToolsResponse|null|undefined,
-          protos.google.cloud.ces.v1.ITool>): void;
+    request: protos.google.cloud.ces.v1.IListToolsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListToolsRequest,
+      protos.google.cloud.ces.v1.IListToolsResponse | null | undefined,
+      protos.google.cloud.ces.v1.ITool
+    >,
+  ): void;
   listTools(
-      request?: protos.google.cloud.ces.v1.IListToolsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListToolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListToolsRequest,
-          protos.google.cloud.ces.v1.IListToolsResponse|null|undefined,
-          protos.google.cloud.ces.v1.ITool>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListToolsRequest,
-          protos.google.cloud.ces.v1.IListToolsResponse|null|undefined,
-          protos.google.cloud.ces.v1.ITool>):
-      Promise<[
-        protos.google.cloud.ces.v1.ITool[],
-        protos.google.cloud.ces.v1.IListToolsRequest|null,
-        protos.google.cloud.ces.v1.IListToolsResponse
-      ]>|void {
+          protos.google.cloud.ces.v1.IListToolsResponse | null | undefined,
+          protos.google.cloud.ces.v1.ITool
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListToolsRequest,
+      protos.google.cloud.ces.v1.IListToolsResponse | null | undefined,
+      protos.google.cloud.ces.v1.ITool
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.ITool[],
+      protos.google.cloud.ces.v1.IListToolsRequest | null,
+      protos.google.cloud.ces.v1.IListToolsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListToolsRequest,
-      protos.google.cloud.ces.v1.IListToolsResponse|null|undefined,
-      protos.google.cloud.ces.v1.ITool>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListToolsRequest,
+          protos.google.cloud.ces.v1.IListToolsResponse | null | undefined,
+          protos.google.cloud.ces.v1.ITool
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listTools values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5084,225 +6690,248 @@ export class AgentServiceClient {
     this._log.info('listTools request %j', request);
     return this.innerApiCalls
       .listTools(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.ITool[],
-        protos.google.cloud.ces.v1.IListToolsRequest|null,
-        protos.google.cloud.ces.v1.IListToolsResponse
-      ]) => {
-        this._log.info('listTools values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.ITool[],
+          protos.google.cloud.ces.v1.IListToolsRequest | null,
+          protos.google.cloud.ces.v1.IListToolsResponse,
+        ]) => {
+          this._log.info('listTools values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listTools`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list tools from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListToolsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListTools|AgentService.ListTools} call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the tools. Use
- *   "include_system_tools=true" to include system tools in the response. See
- *   https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Tool|Tool} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listToolsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listTools`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list tools from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListToolsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListTools|AgentService.ListTools} call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the tools. Use
+   *   "include_system_tools=true" to include system tools in the response. See
+   *   https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Tool|Tool} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listToolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listToolsStream(
-      request?: protos.google.cloud.ces.v1.IListToolsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListToolsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTools stream %j', request);
     return this.descriptors.page.listTools.createStream(
       this.innerApiCalls.listTools as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listTools`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list tools from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListToolsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListTools|AgentService.ListTools} call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the tools. Use
- *   "include_system_tools=true" to include system tools in the response. See
- *   https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Tool|Tool}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_tools.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListTools_async
- */
+  /**
+   * Equivalent to `listTools`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list tools from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListToolsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListTools|AgentService.ListTools} call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the tools. Use
+   *   "include_system_tools=true" to include system tools in the response. See
+   *   https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Tool|Tool}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_tools.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListTools_async
+   */
   listToolsAsync(
-      request?: protos.google.cloud.ces.v1.IListToolsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.ITool>{
+    request?: protos.google.cloud.ces.v1.IListToolsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.ITool> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listTools'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listTools iterate %j', request);
     return this.descriptors.page.listTools.asyncIterate(
       this.innerApiCalls['listTools'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.ITool>;
   }
- /**
- * Lists conversations in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list conversations from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListConversationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListConversations|AgentService.ListConversations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the conversations.
- *   See https://google.aip.dev/160 for more details.
- * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
- *   Optional. Indicate the source of the conversation. If not set, Source.Live
- *   will be applied by default. Will be deprecated in favor of `sources` field.
- * @param {number[]} [request.sources]
- *   Optional. Indicate the sources of the conversations. If not set, all
- *   available sources will be applied by default.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Conversation|Conversation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listConversationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists conversations in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list conversations from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListConversationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListConversations|AgentService.ListConversations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the conversations.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
+   *   Optional. Indicate the source of the conversation. If not set, Source.Live
+   *   will be applied by default. Will be deprecated in favor of `sources` field.
+   * @param {number[]} [request.sources]
+   *   Optional. Indicate the sources of the conversations. If not set, all
+   *   available sources will be applied by default.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Conversation|Conversation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConversationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listConversations(
-      request?: protos.google.cloud.ces.v1.IListConversationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IConversation[],
-        protos.google.cloud.ces.v1.IListConversationsRequest|null,
-        protos.google.cloud.ces.v1.IListConversationsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListConversationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IConversation[],
+      protos.google.cloud.ces.v1.IListConversationsRequest | null,
+      protos.google.cloud.ces.v1.IListConversationsResponse,
+    ]
+  >;
   listConversations(
-      request: protos.google.cloud.ces.v1.IListConversationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListConversationsRequest,
-          protos.google.cloud.ces.v1.IListConversationsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IConversation>): void;
+    request: protos.google.cloud.ces.v1.IListConversationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListConversationsRequest,
+      protos.google.cloud.ces.v1.IListConversationsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IConversation
+    >,
+  ): void;
   listConversations(
-      request: protos.google.cloud.ces.v1.IListConversationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListConversationsRequest,
-          protos.google.cloud.ces.v1.IListConversationsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IConversation>): void;
+    request: protos.google.cloud.ces.v1.IListConversationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListConversationsRequest,
+      protos.google.cloud.ces.v1.IListConversationsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IConversation
+    >,
+  ): void;
   listConversations(
-      request?: protos.google.cloud.ces.v1.IListConversationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListConversationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListConversationsRequest,
-          protos.google.cloud.ces.v1.IListConversationsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IConversation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListConversationsRequest,
-          protos.google.cloud.ces.v1.IListConversationsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IConversation>):
-      Promise<[
-        protos.google.cloud.ces.v1.IConversation[],
-        protos.google.cloud.ces.v1.IListConversationsRequest|null,
-        protos.google.cloud.ces.v1.IListConversationsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1.IConversation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListConversationsRequest,
+      protos.google.cloud.ces.v1.IListConversationsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IConversation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IConversation[],
+      protos.google.cloud.ces.v1.IListConversationsRequest | null,
+      protos.google.cloud.ces.v1.IListConversationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListConversationsRequest,
-      protos.google.cloud.ces.v1.IListConversationsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IConversation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListConversationsRequest,
+          | protos.google.cloud.ces.v1.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1.IConversation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConversations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5311,228 +6940,247 @@ export class AgentServiceClient {
     this._log.info('listConversations request %j', request);
     return this.innerApiCalls
       .listConversations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IConversation[],
-        protos.google.cloud.ces.v1.IListConversationsRequest|null,
-        protos.google.cloud.ces.v1.IListConversationsResponse
-      ]) => {
-        this._log.info('listConversations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IConversation[],
+          protos.google.cloud.ces.v1.IListConversationsRequest | null,
+          protos.google.cloud.ces.v1.IListConversationsResponse,
+        ]) => {
+          this._log.info('listConversations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listConversations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list conversations from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListConversationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListConversations|AgentService.ListConversations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the conversations.
- *   See https://google.aip.dev/160 for more details.
- * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
- *   Optional. Indicate the source of the conversation. If not set, Source.Live
- *   will be applied by default. Will be deprecated in favor of `sources` field.
- * @param {number[]} [request.sources]
- *   Optional. Indicate the sources of the conversations. If not set, all
- *   available sources will be applied by default.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Conversation|Conversation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listConversationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listConversations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list conversations from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListConversationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListConversations|AgentService.ListConversations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the conversations.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
+   *   Optional. Indicate the source of the conversation. If not set, Source.Live
+   *   will be applied by default. Will be deprecated in favor of `sources` field.
+   * @param {number[]} [request.sources]
+   *   Optional. Indicate the sources of the conversations. If not set, all
+   *   available sources will be applied by default.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Conversation|Conversation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listConversationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listConversationsStream(
-      request?: protos.google.cloud.ces.v1.IListConversationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListConversationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listConversations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list conversations from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListConversationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListConversations|AgentService.ListConversations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the conversations.
- *   See https://google.aip.dev/160 for more details.
- * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
- *   Optional. Indicate the source of the conversation. If not set, Source.Live
- *   will be applied by default. Will be deprecated in favor of `sources` field.
- * @param {number[]} [request.sources]
- *   Optional. Indicate the sources of the conversations. If not set, all
- *   available sources will be applied by default.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_conversations.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListConversations_async
- */
+  /**
+   * Equivalent to `listConversations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list conversations from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListConversationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListConversations|AgentService.ListConversations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the conversations.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {google.cloud.ces.v1.Conversation.Source} [request.source]
+   *   Optional. Indicate the source of the conversation. If not set, Source.Live
+   *   will be applied by default. Will be deprecated in favor of `sources` field.
+   * @param {number[]} [request.sources]
+   *   Optional. Indicate the sources of the conversations. If not set, all
+   *   available sources will be applied by default.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_conversations.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListConversations_async
+   */
   listConversationsAsync(
-      request?: protos.google.cloud.ces.v1.IListConversationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IConversation>{
+    request?: protos.google.cloud.ces.v1.IListConversationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IConversation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IConversation>;
   }
- /**
- * Lists guardrails in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list guardrails from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListGuardrailsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListGuardrails|AgentService.ListGuardrails}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the guardrails.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listGuardrailsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists guardrails in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list guardrails from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListGuardrailsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListGuardrails|AgentService.ListGuardrails}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the guardrails.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGuardrailsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listGuardrails(
-      request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail[],
-        protos.google.cloud.ces.v1.IListGuardrailsRequest|null,
-        protos.google.cloud.ces.v1.IListGuardrailsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail[],
+      protos.google.cloud.ces.v1.IListGuardrailsRequest | null,
+      protos.google.cloud.ces.v1.IListGuardrailsResponse,
+    ]
+  >;
   listGuardrails(
-      request: protos.google.cloud.ces.v1.IListGuardrailsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListGuardrailsRequest,
-          protos.google.cloud.ces.v1.IListGuardrailsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IGuardrail>): void;
+    request: protos.google.cloud.ces.v1.IListGuardrailsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListGuardrailsRequest,
+      protos.google.cloud.ces.v1.IListGuardrailsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IGuardrail
+    >,
+  ): void;
   listGuardrails(
-      request: protos.google.cloud.ces.v1.IListGuardrailsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListGuardrailsRequest,
-          protos.google.cloud.ces.v1.IListGuardrailsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IGuardrail>): void;
+    request: protos.google.cloud.ces.v1.IListGuardrailsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListGuardrailsRequest,
+      protos.google.cloud.ces.v1.IListGuardrailsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IGuardrail
+    >,
+  ): void;
   listGuardrails(
-      request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListGuardrailsRequest,
-          protos.google.cloud.ces.v1.IListGuardrailsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IGuardrail>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListGuardrailsRequest,
-          protos.google.cloud.ces.v1.IListGuardrailsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IGuardrail>):
-      Promise<[
-        protos.google.cloud.ces.v1.IGuardrail[],
-        protos.google.cloud.ces.v1.IListGuardrailsRequest|null,
-        protos.google.cloud.ces.v1.IListGuardrailsResponse
-      ]>|void {
+          protos.google.cloud.ces.v1.IListGuardrailsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IGuardrail
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListGuardrailsRequest,
+      protos.google.cloud.ces.v1.IListGuardrailsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IGuardrail
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IGuardrail[],
+      protos.google.cloud.ces.v1.IListGuardrailsRequest | null,
+      protos.google.cloud.ces.v1.IListGuardrailsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListGuardrailsRequest,
-      protos.google.cloud.ces.v1.IListGuardrailsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IGuardrail>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListGuardrailsRequest,
+          protos.google.cloud.ces.v1.IListGuardrailsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IGuardrail
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listGuardrails values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5541,223 +7189,246 @@ export class AgentServiceClient {
     this._log.info('listGuardrails request %j', request);
     return this.innerApiCalls
       .listGuardrails(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IGuardrail[],
-        protos.google.cloud.ces.v1.IListGuardrailsRequest|null,
-        protos.google.cloud.ces.v1.IListGuardrailsResponse
-      ]) => {
-        this._log.info('listGuardrails values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IGuardrail[],
+          protos.google.cloud.ces.v1.IListGuardrailsRequest | null,
+          protos.google.cloud.ces.v1.IListGuardrailsResponse,
+        ]) => {
+          this._log.info('listGuardrails values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listGuardrails`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list guardrails from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListGuardrailsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListGuardrails|AgentService.ListGuardrails}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the guardrails.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listGuardrailsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listGuardrails`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list guardrails from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListGuardrailsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListGuardrails|AgentService.ListGuardrails}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the guardrails.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Guardrail|Guardrail} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGuardrailsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listGuardrailsStream(
-      request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listGuardrails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listGuardrails stream %j', request);
     return this.descriptors.page.listGuardrails.createStream(
       this.innerApiCalls.listGuardrails as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listGuardrails`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list guardrails from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListGuardrailsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListGuardrails|AgentService.ListGuardrails}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the guardrails.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_guardrails.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListGuardrails_async
- */
+  /**
+   * Equivalent to `listGuardrails`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list guardrails from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListGuardrailsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListGuardrails|AgentService.ListGuardrails}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the guardrails.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Guardrail|Guardrail}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_guardrails.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListGuardrails_async
+   */
   listGuardrailsAsync(
-      request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IGuardrail>{
+    request?: protos.google.cloud.ces.v1.IListGuardrailsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IGuardrail> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listGuardrails'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listGuardrails iterate %j', request);
     return this.descriptors.page.listGuardrails.asyncIterate(
       this.innerApiCalls['listGuardrails'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IGuardrail>;
   }
- /**
- * Lists deployments in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent app.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of deployments to return. The service may
- *   return fewer than this value. If unspecified, at most 50 deployments will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDeployments` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDeployments` must
- *   match the call that provided the page token.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists deployments in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent app.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of deployments to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 deployments will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDeployments` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDeployments` must
+   *   match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Deployment|Deployment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDeployments(
-      request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment[],
-        protos.google.cloud.ces.v1.IListDeploymentsRequest|null,
-        protos.google.cloud.ces.v1.IListDeploymentsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment[],
+      protos.google.cloud.ces.v1.IListDeploymentsRequest | null,
+      protos.google.cloud.ces.v1.IListDeploymentsResponse,
+    ]
+  >;
   listDeployments(
-      request: protos.google.cloud.ces.v1.IListDeploymentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListDeploymentsRequest,
-          protos.google.cloud.ces.v1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IDeployment>): void;
+    request: protos.google.cloud.ces.v1.IListDeploymentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListDeploymentsRequest,
+      protos.google.cloud.ces.v1.IListDeploymentsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IDeployment
+    >,
+  ): void;
   listDeployments(
-      request: protos.google.cloud.ces.v1.IListDeploymentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListDeploymentsRequest,
-          protos.google.cloud.ces.v1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IDeployment>): void;
+    request: protos.google.cloud.ces.v1.IListDeploymentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListDeploymentsRequest,
+      protos.google.cloud.ces.v1.IListDeploymentsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IDeployment
+    >,
+  ): void;
   listDeployments(
-      request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListDeploymentsRequest,
-          protos.google.cloud.ces.v1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IDeployment>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListDeploymentsRequest,
-          protos.google.cloud.ces.v1.IListDeploymentsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IDeployment>):
-      Promise<[
-        protos.google.cloud.ces.v1.IDeployment[],
-        protos.google.cloud.ces.v1.IListDeploymentsRequest|null,
-        protos.google.cloud.ces.v1.IListDeploymentsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1.IListDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1.IDeployment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListDeploymentsRequest,
+      protos.google.cloud.ces.v1.IListDeploymentsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IDeployment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IDeployment[],
+      protos.google.cloud.ces.v1.IListDeploymentsRequest | null,
+      protos.google.cloud.ces.v1.IListDeploymentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListDeploymentsRequest,
-      protos.google.cloud.ces.v1.IListDeploymentsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IDeployment>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListDeploymentsRequest,
+          | protos.google.cloud.ces.v1.IListDeploymentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1.IDeployment
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listDeployments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5766,224 +7437,243 @@ export class AgentServiceClient {
     this._log.info('listDeployments request %j', request);
     return this.innerApiCalls
       .listDeployments(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IDeployment[],
-        protos.google.cloud.ces.v1.IListDeploymentsRequest|null,
-        protos.google.cloud.ces.v1.IListDeploymentsResponse
-      ]) => {
-        this._log.info('listDeployments values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IDeployment[],
+          protos.google.cloud.ces.v1.IListDeploymentsRequest | null,
+          protos.google.cloud.ces.v1.IListDeploymentsResponse,
+        ]) => {
+          this._log.info('listDeployments values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listDeployments`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent app.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of deployments to return. The service may
- *   return fewer than this value. If unspecified, at most 50 deployments will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDeployments` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDeployments` must
- *   match the call that provided the page token.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listDeploymentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listDeployments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent app.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of deployments to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 deployments will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDeployments` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDeployments` must
+   *   match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Deployment|Deployment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDeploymentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listDeploymentsStream(
-      request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDeployments stream %j', request);
     return this.descriptors.page.listDeployments.createStream(
       this.innerApiCalls.listDeployments as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listDeployments`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent app.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of deployments to return. The service may
- *   return fewer than this value. If unspecified, at most 50 deployments will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListDeployments` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListDeployments` must
- *   match the call that provided the page token.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_deployments.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListDeployments_async
- */
+  /**
+   * Equivalent to `listDeployments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent app.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of deployments to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 deployments will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDeployments` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListDeployments` must
+   *   match the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Deployment|Deployment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_deployments.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListDeployments_async
+   */
   listDeploymentsAsync(
-      request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IDeployment>{
+    request?: protos.google.cloud.ces.v1.IListDeploymentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IDeployment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listDeployments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listDeployments iterate %j', request);
     return this.descriptors.page.listDeployments.asyncIterate(
       this.innerApiCalls['listDeployments'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IDeployment>;
   }
- /**
- * Lists toolsets in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list toolsets from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListToolsetsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListToolsets|AgentService.ListToolsets}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the toolsets.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listToolsetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists toolsets in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list toolsets from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListToolsetsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListToolsets|AgentService.ListToolsets}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the toolsets.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Toolset|Toolset}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listToolsetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listToolsets(
-      request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset[],
-        protos.google.cloud.ces.v1.IListToolsetsRequest|null,
-        protos.google.cloud.ces.v1.IListToolsetsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset[],
+      protos.google.cloud.ces.v1.IListToolsetsRequest | null,
+      protos.google.cloud.ces.v1.IListToolsetsResponse,
+    ]
+  >;
   listToolsets(
-      request: protos.google.cloud.ces.v1.IListToolsetsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListToolsetsRequest,
-          protos.google.cloud.ces.v1.IListToolsetsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IToolset>): void;
+    request: protos.google.cloud.ces.v1.IListToolsetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListToolsetsRequest,
+      protos.google.cloud.ces.v1.IListToolsetsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IToolset
+    >,
+  ): void;
   listToolsets(
-      request: protos.google.cloud.ces.v1.IListToolsetsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListToolsetsRequest,
-          protos.google.cloud.ces.v1.IListToolsetsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IToolset>): void;
+    request: protos.google.cloud.ces.v1.IListToolsetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListToolsetsRequest,
+      protos.google.cloud.ces.v1.IListToolsetsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IToolset
+    >,
+  ): void;
   listToolsets(
-      request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListToolsetsRequest,
-          protos.google.cloud.ces.v1.IListToolsetsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IToolset>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListToolsetsRequest,
-          protos.google.cloud.ces.v1.IListToolsetsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IToolset>):
-      Promise<[
-        protos.google.cloud.ces.v1.IToolset[],
-        protos.google.cloud.ces.v1.IListToolsetsRequest|null,
-        protos.google.cloud.ces.v1.IListToolsetsResponse
-      ]>|void {
+          protos.google.cloud.ces.v1.IListToolsetsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IToolset
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListToolsetsRequest,
+      protos.google.cloud.ces.v1.IListToolsetsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IToolset
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IToolset[],
+      protos.google.cloud.ces.v1.IListToolsetsRequest | null,
+      protos.google.cloud.ces.v1.IListToolsetsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListToolsetsRequest,
-      protos.google.cloud.ces.v1.IListToolsetsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IToolset>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListToolsetsRequest,
+          protos.google.cloud.ces.v1.IListToolsetsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IToolset
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listToolsets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5992,222 +7682,245 @@ export class AgentServiceClient {
     this._log.info('listToolsets request %j', request);
     return this.innerApiCalls
       .listToolsets(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IToolset[],
-        protos.google.cloud.ces.v1.IListToolsetsRequest|null,
-        protos.google.cloud.ces.v1.IListToolsetsResponse
-      ]) => {
-        this._log.info('listToolsets values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IToolset[],
+          protos.google.cloud.ces.v1.IListToolsetsRequest | null,
+          protos.google.cloud.ces.v1.IListToolsetsResponse,
+        ]) => {
+          this._log.info('listToolsets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listToolsets`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list toolsets from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListToolsetsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListToolsets|AgentService.ListToolsets}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the toolsets.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listToolsetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listToolsets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list toolsets from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListToolsetsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListToolsets|AgentService.ListToolsets}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the toolsets.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Toolset|Toolset} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listToolsetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listToolsetsStream(
-      request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listToolsets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listToolsets stream %j', request);
     return this.descriptors.page.listToolsets.createStream(
       this.innerApiCalls.listToolsets as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listToolsets`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list toolsets from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListToolsetsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListToolsets|AgentService.ListToolsets}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the toolsets.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Toolset|Toolset}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_toolsets.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListToolsets_async
- */
+  /**
+   * Equivalent to `listToolsets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list toolsets from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListToolsetsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListToolsets|AgentService.ListToolsets}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the toolsets.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Toolset|Toolset}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_toolsets.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListToolsets_async
+   */
   listToolsetsAsync(
-      request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IToolset>{
+    request?: protos.google.cloud.ces.v1.IListToolsetsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IToolset> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listToolsets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listToolsets iterate %j', request);
     return this.descriptors.page.listToolsets.asyncIterate(
       this.innerApiCalls['listToolsets'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IToolset>;
   }
- /**
- * Lists all app versions in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list app versions from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAppVersionsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListAppVersions|AgentService.ListAppVersions}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the app versions.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listAppVersionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all app versions in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list app versions from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAppVersionsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListAppVersions|AgentService.ListAppVersions}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the app versions.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAppVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAppVersions(
-      request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IAppVersion[],
-        protos.google.cloud.ces.v1.IListAppVersionsRequest|null,
-        protos.google.cloud.ces.v1.IListAppVersionsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAppVersion[],
+      protos.google.cloud.ces.v1.IListAppVersionsRequest | null,
+      protos.google.cloud.ces.v1.IListAppVersionsResponse,
+    ]
+  >;
   listAppVersions(
-      request: protos.google.cloud.ces.v1.IListAppVersionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAppVersionsRequest,
-          protos.google.cloud.ces.v1.IListAppVersionsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAppVersion>): void;
+    request: protos.google.cloud.ces.v1.IListAppVersionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAppVersionsRequest,
+      protos.google.cloud.ces.v1.IListAppVersionsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IAppVersion
+    >,
+  ): void;
   listAppVersions(
-      request: protos.google.cloud.ces.v1.IListAppVersionsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAppVersionsRequest,
-          protos.google.cloud.ces.v1.IListAppVersionsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAppVersion>): void;
+    request: protos.google.cloud.ces.v1.IListAppVersionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAppVersionsRequest,
+      protos.google.cloud.ces.v1.IListAppVersionsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IAppVersion
+    >,
+  ): void;
   listAppVersions(
-      request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListAppVersionsRequest,
-          protos.google.cloud.ces.v1.IListAppVersionsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAppVersion>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListAppVersionsRequest,
-          protos.google.cloud.ces.v1.IListAppVersionsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IAppVersion>):
-      Promise<[
-        protos.google.cloud.ces.v1.IAppVersion[],
-        protos.google.cloud.ces.v1.IListAppVersionsRequest|null,
-        protos.google.cloud.ces.v1.IListAppVersionsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1.IListAppVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1.IAppVersion
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListAppVersionsRequest,
+      protos.google.cloud.ces.v1.IListAppVersionsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IAppVersion
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IAppVersion[],
+      protos.google.cloud.ces.v1.IListAppVersionsRequest | null,
+      protos.google.cloud.ces.v1.IListAppVersionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListAppVersionsRequest,
-      protos.google.cloud.ces.v1.IListAppVersionsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IAppVersion>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListAppVersionsRequest,
+          | protos.google.cloud.ces.v1.IListAppVersionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1.IAppVersion
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listAppVersions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6216,236 +7929,255 @@ export class AgentServiceClient {
     this._log.info('listAppVersions request %j', request);
     return this.innerApiCalls
       .listAppVersions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IAppVersion[],
-        protos.google.cloud.ces.v1.IListAppVersionsRequest|null,
-        protos.google.cloud.ces.v1.IListAppVersionsResponse
-      ]) => {
-        this._log.info('listAppVersions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IAppVersion[],
+          protos.google.cloud.ces.v1.IListAppVersionsRequest | null,
+          protos.google.cloud.ces.v1.IListAppVersionsResponse,
+        ]) => {
+          this._log.info('listAppVersions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listAppVersions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list app versions from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAppVersionsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListAppVersions|AgentService.ListAppVersions}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the app versions.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.AppVersion|AppVersion} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listAppVersionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listAppVersions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list app versions from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAppVersionsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListAppVersions|AgentService.ListAppVersions}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the app versions.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.AppVersion|AppVersion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAppVersionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listAppVersionsStream(
-      request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAppVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAppVersions stream %j', request);
     return this.descriptors.page.listAppVersions.createStream(
       this.innerApiCalls.listAppVersions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listAppVersions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list app versions from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListAppVersionsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListAppVersions|AgentService.ListAppVersions}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the app versions.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_app_versions.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListAppVersions_async
- */
+  /**
+   * Equivalent to `listAppVersions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list app versions from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListAppVersionsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListAppVersions|AgentService.ListAppVersions}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the app versions.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.AppVersion|AppVersion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_app_versions.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListAppVersions_async
+   */
   listAppVersionsAsync(
-      request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IAppVersion>{
+    request?: protos.google.cloud.ces.v1.IListAppVersionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IAppVersion> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listAppVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listAppVersions iterate %j', request);
     return this.descriptors.page.listAppVersions.asyncIterate(
       this.innerApiCalls['listAppVersions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IAppVersion>;
   }
- /**
- * Lists the changelogs of the specified app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list changelogs from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListChangelogsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListChangelogs|AgentService.ListChangelogs}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the changelogs.
- *   See https://google.aip.dev/160 for more details.
- *
- *   The filter string can be used to filter by `action`, `resource_type`,
- *   `resource_name`, `author`, and `create_time`.
- *   The `:` comparator can be used for case-insensitive partial matching on
- *   string fields, while `=` performs an exact case-sensitive match.
- *
- *   Examples:
- *   * `action:update` (case-insensitive partial match)
- *   * `action="Create"` (case-sensitive exact match)
- *   * `resource_type:agent`
- *   * `resource_name:my-agent`
- *   * `author:me@example.com`
- *   * `create_time > "2025-01-01T00:00:00Z"`
- *   * `create_time <= "2025-01-01T00:00:00Z" AND resource_type:tool`
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Changelog|Changelog}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listChangelogsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the changelogs of the specified app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list changelogs from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListChangelogsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListChangelogs|AgentService.ListChangelogs}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the changelogs.
+   *   See https://google.aip.dev/160 for more details.
+   *
+   *   The filter string can be used to filter by `action`, `resource_type`,
+   *   `resource_name`, `author`, and `create_time`.
+   *   The `:` comparator can be used for case-insensitive partial matching on
+   *   string fields, while `=` performs an exact case-sensitive match.
+   *
+   *   Examples:
+   *   * `action:update` (case-insensitive partial match)
+   *   * `action="Create"` (case-sensitive exact match)
+   *   * `resource_type:agent`
+   *   * `resource_name:my-agent`
+   *   * `author:me@example.com`
+   *   * `create_time > "2025-01-01T00:00:00Z"`
+   *   * `create_time <= "2025-01-01T00:00:00Z" AND resource_type:tool`
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1.Changelog|Changelog}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listChangelogsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listChangelogs(
-      request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1.IChangelog[],
-        protos.google.cloud.ces.v1.IListChangelogsRequest|null,
-        protos.google.cloud.ces.v1.IListChangelogsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IChangelog[],
+      protos.google.cloud.ces.v1.IListChangelogsRequest | null,
+      protos.google.cloud.ces.v1.IListChangelogsResponse,
+    ]
+  >;
   listChangelogs(
-      request: protos.google.cloud.ces.v1.IListChangelogsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListChangelogsRequest,
-          protos.google.cloud.ces.v1.IListChangelogsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IChangelog>): void;
+    request: protos.google.cloud.ces.v1.IListChangelogsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListChangelogsRequest,
+      protos.google.cloud.ces.v1.IListChangelogsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IChangelog
+    >,
+  ): void;
   listChangelogs(
-      request: protos.google.cloud.ces.v1.IListChangelogsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1.IListChangelogsRequest,
-          protos.google.cloud.ces.v1.IListChangelogsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IChangelog>): void;
+    request: protos.google.cloud.ces.v1.IListChangelogsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1.IListChangelogsRequest,
+      protos.google.cloud.ces.v1.IListChangelogsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IChangelog
+    >,
+  ): void;
   listChangelogs(
-      request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1.IListChangelogsRequest,
-          protos.google.cloud.ces.v1.IListChangelogsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IChangelog>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1.IListChangelogsRequest,
-          protos.google.cloud.ces.v1.IListChangelogsResponse|null|undefined,
-          protos.google.cloud.ces.v1.IChangelog>):
-      Promise<[
-        protos.google.cloud.ces.v1.IChangelog[],
-        protos.google.cloud.ces.v1.IListChangelogsRequest|null,
-        protos.google.cloud.ces.v1.IListChangelogsResponse
-      ]>|void {
+          protos.google.cloud.ces.v1.IListChangelogsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IChangelog
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1.IListChangelogsRequest,
+      protos.google.cloud.ces.v1.IListChangelogsResponse | null | undefined,
+      protos.google.cloud.ces.v1.IChangelog
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1.IChangelog[],
+      protos.google.cloud.ces.v1.IListChangelogsRequest | null,
+      protos.google.cloud.ces.v1.IListChangelogsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1.IListChangelogsRequest,
-      protos.google.cloud.ces.v1.IListChangelogsResponse|null|undefined,
-      protos.google.cloud.ces.v1.IChangelog>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1.IListChangelogsRequest,
+          protos.google.cloud.ces.v1.IListChangelogsResponse | null | undefined,
+          protos.google.cloud.ces.v1.IChangelog
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listChangelogs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6454,159 +8186,164 @@ export class AgentServiceClient {
     this._log.info('listChangelogs request %j', request);
     return this.innerApiCalls
       .listChangelogs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1.IChangelog[],
-        protos.google.cloud.ces.v1.IListChangelogsRequest|null,
-        protos.google.cloud.ces.v1.IListChangelogsResponse
-      ]) => {
-        this._log.info('listChangelogs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1.IChangelog[],
+          protos.google.cloud.ces.v1.IListChangelogsRequest | null,
+          protos.google.cloud.ces.v1.IListChangelogsResponse,
+        ]) => {
+          this._log.info('listChangelogs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listChangelogs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list changelogs from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListChangelogsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListChangelogs|AgentService.ListChangelogs}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the changelogs.
- *   See https://google.aip.dev/160 for more details.
- *
- *   The filter string can be used to filter by `action`, `resource_type`,
- *   `resource_name`, `author`, and `create_time`.
- *   The `:` comparator can be used for case-insensitive partial matching on
- *   string fields, while `=` performs an exact case-sensitive match.
- *
- *   Examples:
- *   * `action:update` (case-insensitive partial match)
- *   * `action="Create"` (case-sensitive exact match)
- *   * `resource_type:agent`
- *   * `resource_name:my-agent`
- *   * `author:me@example.com`
- *   * `create_time > "2025-01-01T00:00:00Z"`
- *   * `create_time <= "2025-01-01T00:00:00Z" AND resource_type:tool`
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Changelog|Changelog} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listChangelogsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listChangelogs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list changelogs from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListChangelogsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListChangelogs|AgentService.ListChangelogs}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the changelogs.
+   *   See https://google.aip.dev/160 for more details.
+   *
+   *   The filter string can be used to filter by `action`, `resource_type`,
+   *   `resource_name`, `author`, and `create_time`.
+   *   The `:` comparator can be used for case-insensitive partial matching on
+   *   string fields, while `=` performs an exact case-sensitive match.
+   *
+   *   Examples:
+   *   * `action:update` (case-insensitive partial match)
+   *   * `action="Create"` (case-sensitive exact match)
+   *   * `resource_type:agent`
+   *   * `resource_name:my-agent`
+   *   * `author:me@example.com`
+   *   * `create_time > "2025-01-01T00:00:00Z"`
+   *   * `create_time <= "2025-01-01T00:00:00Z" AND resource_type:tool`
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1.Changelog|Changelog} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listChangelogsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listChangelogsStream(
-      request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listChangelogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listChangelogs stream %j', request);
     return this.descriptors.page.listChangelogs.createStream(
       this.innerApiCalls.listChangelogs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listChangelogs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list changelogs from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1.ListChangelogsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1.AgentService.ListChangelogs|AgentService.ListChangelogs}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the changelogs.
- *   See https://google.aip.dev/160 for more details.
- *
- *   The filter string can be used to filter by `action`, `resource_type`,
- *   `resource_name`, `author`, and `create_time`.
- *   The `:` comparator can be used for case-insensitive partial matching on
- *   string fields, while `=` performs an exact case-sensitive match.
- *
- *   Examples:
- *   * `action:update` (case-insensitive partial match)
- *   * `action="Create"` (case-sensitive exact match)
- *   * `resource_type:agent`
- *   * `resource_name:my-agent`
- *   * `author:me@example.com`
- *   * `create_time > "2025-01-01T00:00:00Z"`
- *   * `create_time <= "2025-01-01T00:00:00Z" AND resource_type:tool`
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time" is supported.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1.Changelog|Changelog}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/agent_service.list_changelogs.js</caption>
- * region_tag:ces_v1_generated_AgentService_ListChangelogs_async
- */
+  /**
+   * Equivalent to `listChangelogs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list changelogs from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1.ListChangelogsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1.AgentService.ListChangelogs|AgentService.ListChangelogs}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the changelogs.
+   *   See https://google.aip.dev/160 for more details.
+   *
+   *   The filter string can be used to filter by `action`, `resource_type`,
+   *   `resource_name`, `author`, and `create_time`.
+   *   The `:` comparator can be used for case-insensitive partial matching on
+   *   string fields, while `=` performs an exact case-sensitive match.
+   *
+   *   Examples:
+   *   * `action:update` (case-insensitive partial match)
+   *   * `action="Create"` (case-sensitive exact match)
+   *   * `resource_type:agent`
+   *   * `resource_name:my-agent`
+   *   * `author:me@example.com`
+   *   * `create_time > "2025-01-01T00:00:00Z"`
+   *   * `create_time <= "2025-01-01T00:00:00Z" AND resource_type:tool`
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time" is supported.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1.Changelog|Changelog}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/agent_service.list_changelogs.js</caption>
+   * region_tag:ces_v1_generated_AgentService_ListChangelogs_async
+   */
   listChangelogsAsync(
-      request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1.IChangelog>{
+    request?: protos.google.cloud.ces.v1.IListChangelogsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1.IChangelog> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listChangelogs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listChangelogs iterate %j', request);
     return this.descriptors.page.listChangelogs.asyncIterate(
       this.innerApiCalls['listChangelogs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1.IChangelog>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -6641,12 +8378,11 @@ export class AgentServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -6679,12 +8415,12 @@ export class AgentServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -6727,22 +8463,22 @@ export class AgentServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -6777,15 +8513,15 @@ export class AgentServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -6819,7 +8555,7 @@ export class AgentServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -6832,25 +8568,24 @@ export class AgentServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -6889,22 +8624,22 @@ export class AgentServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -6921,7 +8656,7 @@ export class AgentServiceClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project:string,location:string,app:string,agent:string) {
+  agentPath(project: string, location: string, app: string, agent: string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -6982,7 +8717,7 @@ export class AgentServiceClient {
    * @param {string} app
    * @returns {string} Resource name string.
    */
-  appPath(project:string,location:string,app:string) {
+  appPath(project: string, location: string, app: string) {
     return this.pathTemplates.appPathTemplate.render({
       project: project,
       location: location,
@@ -7032,7 +8767,12 @@ export class AgentServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  appVersionPath(project:string,location:string,app:string,version:string) {
+  appVersionPath(
+    project: string,
+    location: string,
+    app: string,
+    version: string,
+  ) {
     return this.pathTemplates.appVersionPathTemplate.render({
       project: project,
       location: location,
@@ -7049,7 +8789,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).project;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .project;
   }
 
   /**
@@ -7060,7 +8801,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).location;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .location;
   }
 
   /**
@@ -7082,7 +8824,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).version;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .version;
   }
 
   /**
@@ -7094,7 +8837,12 @@ export class AgentServiceClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(project:string,location:string,app:string,changelog:string) {
+  changelogPath(
+    project: string,
+    location: string,
+    app: string,
+    changelog: string,
+  ) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -7111,7 +8859,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .project;
   }
 
   /**
@@ -7122,7 +8871,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .location;
   }
 
   /**
@@ -7144,7 +8894,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .changelog;
   }
 
   /**
@@ -7156,7 +8907,12 @@ export class AgentServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(project:string,location:string,app:string,conversation:string) {
+  conversationPath(
+    project: string,
+    location: string,
+    app: string,
+    conversation: string,
+  ) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -7173,7 +8929,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
   }
 
   /**
@@ -7184,7 +8941,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
   }
 
   /**
@@ -7195,7 +8953,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).app;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .app;
   }
 
   /**
@@ -7206,7 +8965,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**
@@ -7218,7 +8978,12 @@ export class AgentServiceClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,app:string,deployment:string) {
+  deploymentPath(
+    project: string,
+    location: string,
+    app: string,
+    deployment: string,
+  ) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -7235,7 +9000,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -7246,7 +9012,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -7268,7 +9035,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -7280,7 +9048,7 @@ export class AgentServiceClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(project:string,location:string,app:string,example:string) {
+  examplePath(project: string, location: string, app: string, example: string) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       location: location,
@@ -7342,7 +9110,12 @@ export class AgentServiceClient {
    * @param {string} guardrail
    * @returns {string} Resource name string.
    */
-  guardrailPath(project:string,location:string,app:string,guardrail:string) {
+  guardrailPath(
+    project: string,
+    location: string,
+    app: string,
+    guardrail: string,
+  ) {
     return this.pathTemplates.guardrailPathTemplate.render({
       project: project,
       location: location,
@@ -7359,7 +9132,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).project;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .project;
   }
 
   /**
@@ -7370,7 +9144,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).location;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .location;
   }
 
   /**
@@ -7392,7 +9167,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the guardrail.
    */
   matchGuardrailFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).guardrail;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .guardrail;
   }
 
   /**
@@ -7402,7 +9178,7 @@ export class AgentServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -7439,7 +9215,7 @@ export class AgentServiceClient {
    * @param {string} omnichannel
    * @returns {string} Resource name string.
    */
-  omnichannelPath(project:string,location:string,omnichannel:string) {
+  omnichannelPath(project: string, location: string, omnichannel: string) {
     return this.pathTemplates.omnichannelPathTemplate.render({
       project: project,
       location: location,
@@ -7455,7 +9231,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).project;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .project;
   }
 
   /**
@@ -7466,7 +9243,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).location;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .location;
   }
 
   /**
@@ -7477,7 +9255,8 @@ export class AgentServiceClient {
    * @returns {string} A string representing the omnichannel.
    */
   matchOmnichannelFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).omnichannel;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .omnichannel;
   }
 
   /**
@@ -7486,7 +9265,7 @@ export class AgentServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -7510,7 +9289,7 @@ export class AgentServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(project:string,location:string) {
+  securitySettingsPath(project: string, location: string) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -7525,7 +9304,9 @@ export class AgentServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).project;
   }
 
   /**
@@ -7536,7 +9317,9 @@ export class AgentServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).location;
   }
 
   /**
@@ -7548,7 +9331,7 @@ export class AgentServiceClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project:string,location:string,app:string,tool:string) {
+  toolPath(project: string, location: string, app: string, tool: string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -7610,7 +9393,7 @@ export class AgentServiceClient {
    * @param {string} toolset
    * @returns {string} Resource name string.
    */
-  toolsetPath(project:string,location:string,app:string,toolset:string) {
+  toolsetPath(project: string, location: string, app: string, toolset: string) {
     return this.pathTemplates.toolsetPathTemplate.render({
       project: project,
       location: location,
@@ -7671,11 +9454,13 @@ export class AgentServiceClient {
    */
   close(): Promise<void> {
     if (this.agentServiceStub && !this._terminated) {
-      return this.agentServiceStub.then(stub => {
+      return this.agentServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

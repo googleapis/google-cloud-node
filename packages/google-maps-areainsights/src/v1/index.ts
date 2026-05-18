@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AreaInsightsClient} from './area_insights_client';
+export { AreaInsightsClient } from './area_insights_client';

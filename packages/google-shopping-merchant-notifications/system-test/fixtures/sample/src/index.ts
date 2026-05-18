@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {NotificationsApiServiceClient} from '@google-shopping/notifications';
+import { NotificationsApiServiceClient } from '@google-shopping/notifications';
 
 // check that the client class type name can be used
-function doStuffWithNotificationsApiServiceClient(client: NotificationsApiServiceClient) {
+function doStuffWithNotificationsApiServiceClient(
+  client: NotificationsApiServiceClient,
+) {
   client.close();
 }
 

@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@ syntax = "proto3";
 
 package google.ads.admanager.v1;
 
+import "google/ads/admanager/v1/application_enums.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 
@@ -41,7 +42,53 @@ message Application {
   // Format: `networks/{network_code}/applications/{application_id}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
-  // Optional. The display name of the application. This attribute is required
-  // and has a maximum length of 80 characters.
-  optional string display_name = 4 [(google.api.field_behavior) = OPTIONAL];
+  // Required. The display name of the application.
+  optional string display_name = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The app store ID of the app to claim.
+  optional string app_store_id = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The app stores the application belongs to. This attribute is
+  // mutable to allow for third party app store linking.
+  repeated ApplicationStoreEnum.ApplicationStore app_stores = 7
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. The archival status of the application.
+  //
+  // When true, an application cannot be targeted and will not serve ads,
+  // regardless of its `status`.
+  optional bool archived = 8 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The name of the application on the app store.
+  optional string app_store_display_name = 9
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The application code used to identify the app in the SDK.
+  //
+  // Note that the UI refers to this as "App ID".
+  optional string application_code = 10
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The name of the developer of the application.
+  optional string developer = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The platform the application runs on.
+  optional ApplicationPlatformEnum.ApplicationPlatform platform = 12
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Whether the application is free on the app store it belongs
+  // to.
+  optional bool free = 13 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The download URL of the application on the app store it
+  // belongs to.
+  optional string download_url = 14 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The approval status for the application.
+  optional ApplicationApprovalStatusEnum.ApplicationApprovalStatus
+      approval_status = 15 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The webview claiming status for the application.
+  optional WebviewClaimingStatusEnum.WebviewClaimingStatus
+      webview_claiming_status = 16 [(google.api.field_behavior) = OUTPUT_ONLY];
 }

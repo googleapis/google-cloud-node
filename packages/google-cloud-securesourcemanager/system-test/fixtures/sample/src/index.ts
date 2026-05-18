@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {SecureSourceManagerClient} from '@google-cloud/securesourcemanager';
+import { SecureSourceManagerClient } from '@google-cloud/securesourcemanager';
 
 // check that the client class type name can be used
-function doStuffWithSecureSourceManagerClient(client: SecureSourceManagerClient) {
+function doStuffWithSecureSourceManagerClient(
+  client: SecureSourceManagerClient,
+) {
   client.close();
 }
 
