@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+  // [START dataform_v1_generated_Dataform_DeleteFolder_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,38 +29,29 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository's name.
+   *  Required. The Folder's name.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. If set to true, child resources of this repository (compilation
-   *  results and workflow invocations) will also be deleted. Otherwise, the
-   *  request will only succeed if the repository has no child resources.
-   *  **Note:** *This flag doesn't support deletion of workspaces, release
-   *  configs or workflow configs. If any of such resources exists in the
-   *  repository, the request will fail.*.
-   */
-  // const force = true
 
   // Imports the Dataform library
-  const {DataformClient} = require('@google-cloud/dataform').v1beta1;
+  const {DataformClient} = require('@google-cloud/dataform').v1;
 
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callDeleteRepository() {
+  async function callDeleteFolder() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dataformClient.deleteRepository(request);
+    const response = await dataformClient.deleteFolder(request);
     console.log(response);
   }
 
-  callDeleteRepository();
-  // [END dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+  callDeleteFolder();
+  // [END dataform_v1_generated_Dataform_DeleteFolder_async]
 }
 
 process.on('unhandledRejection', err => {

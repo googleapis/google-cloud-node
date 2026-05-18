@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+function main(resource) {
+  // [START dataform_v1_generated_Dataform_GetIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,38 +29,35 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository's name.
+   *  REQUIRED: The resource for which the policy is being requested.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const name = 'abc123'
+  // const resource = 'abc123'
   /**
-   *  Optional. If set to true, child resources of this repository (compilation
-   *  results and workflow invocations) will also be deleted. Otherwise, the
-   *  request will only succeed if the repository has no child resources.
-   *  **Note:** *This flag doesn't support deletion of workspaces, release
-   *  configs or workflow configs. If any of such resources exists in the
-   *  repository, the request will fail.*.
+   *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *  `GetIamPolicy`.
    */
-  // const force = true
+  // const options = {}
 
   // Imports the Dataform library
-  const {DataformClient} = require('@google-cloud/dataform').v1beta1;
+  const {DataformClient} = require('@google-cloud/dataform').v1;
 
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callDeleteRepository() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
-      name,
+      resource,
     };
 
     // Run request
-    const response = await dataformClient.deleteRepository(request);
+    const response = await dataformClient.getIamPolicy(request);
     console.log(response);
   }
 
-  callDeleteRepository();
-  // [END dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+  callGetIamPolicy();
+  // [END dataform_v1_generated_Dataform_GetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

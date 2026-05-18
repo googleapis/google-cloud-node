@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+function main(resource, policy) {
+  // [START dataform_v1beta1_generated_Dataform_SetIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,24 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository's name.
+   *  REQUIRED: The resource for which the policy is being specified.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const name = 'abc123'
+  // const resource = 'abc123'
   /**
-   *  Optional. If set to true, child resources of this repository (compilation
-   *  results and workflow invocations) will also be deleted. Otherwise, the
-   *  request will only succeed if the repository has no child resources.
-   *  **Note:** *This flag doesn't support deletion of workspaces, release
-   *  configs or workflow configs. If any of such resources exists in the
-   *  repository, the request will fail.*.
+   *  REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *  the policy is limited to a few 10s of KB. An empty policy is a
+   *  valid policy but certain Cloud Platform services (such as Projects)
+   *  might reject them.
    */
-  // const force = true
+  // const policy = {}
+  /**
+   *  OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *  the fields in the mask will be modified. If no mask is provided, the
+   *  following default mask is used:
+   *  `paths: "bindings, etag"`
+   */
+  // const updateMask = {}
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
@@ -48,19 +54,20 @@ function main(name) {
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callDeleteRepository() {
+  async function callSetIamPolicy() {
     // Construct request
     const request = {
-      name,
+      resource,
+      policy,
     };
 
     // Run request
-    const response = await dataformClient.deleteRepository(request);
+    const response = await dataformClient.setIamPolicy(request);
     console.log(response);
   }
 
-  callDeleteRepository();
-  // [END dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+  callSetIamPolicy();
+  // [END dataform_v1beta1_generated_Dataform_SetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

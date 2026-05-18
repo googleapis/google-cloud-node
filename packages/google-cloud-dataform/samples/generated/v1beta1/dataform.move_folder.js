@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+  // [START dataform_v1beta1_generated_Dataform_MoveFolder_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,18 +29,15 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The repository's name.
+   *  Required. The full resource name of the Folder to move.
    */
   // const name = 'abc123'
   /**
-   *  Optional. If set to true, child resources of this repository (compilation
-   *  results and workflow invocations) will also be deleted. Otherwise, the
-   *  request will only succeed if the repository has no child resources.
-   *  **Note:** *This flag doesn't support deletion of workspaces, release
-   *  configs or workflow configs. If any of such resources exists in the
-   *  repository, the request will fail.*.
+   *  Optional. The name of the Folder, TeamFolder, or root location to move the
+   *  Folder to. Can be in the format of: "" to move into the root User folder,
+   *  `projects/* /locations/* /folders/*`, `projects/* /locations/* /teamFolders/*`
    */
-  // const force = true
+  // const destinationContainingFolder = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;
@@ -48,19 +45,20 @@ function main(name) {
   // Instantiates a client
   const dataformClient = new DataformClient();
 
-  async function callDeleteRepository() {
+  async function callMoveFolder() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await dataformClient.deleteRepository(request);
+    const [operation] = await dataformClient.moveFolder(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeleteRepository();
-  // [END dataform_v1beta1_generated_Dataform_DeleteRepository_async]
+  callMoveFolder();
+  // [END dataform_v1beta1_generated_Dataform_MoveFolder_async]
 }
 
 process.on('unhandledRejection', err => {
