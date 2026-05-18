@@ -1,4 +1,4 @@
-// Copyright 2024 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,9 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import {Transform} from 'stream';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,9 +53,11 @@ export class ConfigServiceV2Client {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
+  private _log = logging.log('logging');
+
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {
     page: {},
@@ -63,10 +66,10 @@ export class ConfigServiceV2Client {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  configServiceV2Stub?: Promise<{[name: string]: Function}>;
+  configServiceV2Stub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ConfigServiceV2Client.
@@ -90,7 +93,7 @@ export class ConfigServiceV2Client {
    *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
    *     the environment variable GCLOUD_PROJECT for your project ID. If your
    *     app is running in an environment which supports
-   *     {@link https://developers.google.com/identity/protocols/application-default-credentials Application Default Credentials},
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
@@ -142,7 +145,7 @@ export class ConfigServiceV2Client {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -345,7 +348,7 @@ export class ConfigServiceV2Client {
       ),
     };
 
-    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
@@ -383,20 +386,20 @@ export class ConfigServiceV2Client {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v2/{name=*/*/locations/*/operations/*}',
           additional_bindings: [
-            {get: '/v2/{name=projects/*/locations/*/operations/*}'},
-            {get: '/v2/{name=organizations/*/locations/*/operations/*}'},
-            {get: '/v2/{name=folders/*/locations/*/operations/*}'},
-            {get: '/v2/{name=billingAccounts/*/locations/*/operations/*}'},
+            { get: '/v2/{name=projects/*/locations/*/operations/*}' },
+            { get: '/v2/{name=organizations/*/locations/*/operations/*}' },
+            { get: '/v2/{name=folders/*/locations/*/operations/*}' },
+            { get: '/v2/{name=billingAccounts/*/locations/*/operations/*}' },
           ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v2/{name=*/*/locations/*}/operations',
           additional_bindings: [
-            {get: '/v2/{name=projects/*/locations/*}/operations'},
-            {get: '/v2/{name=organizations/*/locations/*}/operations'},
-            {get: '/v2/{name=folders/*/locations/*}/operations'},
-            {get: '/v2/{name=billingAccounts/*/locations/*}/operations'},
+            { get: '/v2/{name=projects/*/locations/*}/operations' },
+            { get: '/v2/{name=organizations/*/locations/*}/operations' },
+            { get: '/v2/{name=folders/*/locations/*}/operations' },
+            { get: '/v2/{name=billingAccounts/*/locations/*}/operations' },
           ],
         },
       ];
@@ -468,7 +471,7 @@ export class ConfigServiceV2Client {
       'google.logging.v2.ConfigServiceV2',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      { 'x-goog-api-client': clientHeader.join(' ') },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -508,7 +511,7 @@ export class ConfigServiceV2Client {
           (this._protos as any).google.logging.v2.ConfigServiceV2,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{[method: string]: Function}>;
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -548,7 +551,7 @@ export class ConfigServiceV2Client {
     ];
     for (const methodName of configServiceV2StubMethods) {
       const callPromise = this.configServiceV2Stub.then(
-        stub =>
+        (stub) =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -755,8 +758,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getBucket(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getBucket request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogBucket,
+          protos.google.logging.v2.IGetBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBucket response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogBucket,
+          protos.google.logging.v2.IGetBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates a log bucket that can be used to store log entries. After a bucket
@@ -852,8 +897,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBucket(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createBucket request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogBucket,
+          protos.google.logging.v2.ICreateBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createBucket response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogBucket,
+          protos.google.logging.v2.ICreateBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates a log bucket.
@@ -959,8 +1046,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBucket(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateBucket request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogBucket,
+          protos.google.logging.v2.IUpdateBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateBucket response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogBucket,
+          protos.google.logging.v2.IUpdateBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes a log bucket.
@@ -1054,8 +1183,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteBucket(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteBucket request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteBucket response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Undeletes a log bucket. A bucket that has been deleted can be undeleted
@@ -1146,8 +1317,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.undeleteBucket(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('undeleteBucket request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IUndeleteBucketRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('undeleteBucket response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .undeleteBucket(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IUndeleteBucketRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('undeleteBucket response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets a view on a log bucket..
@@ -1234,8 +1447,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getView(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogView,
+          protos.google.logging.v2.IGetViewRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogView,
+          protos.google.logging.v2.IGetViewRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getView response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates a view over log entries in a log bucket. A bucket may contain a
@@ -1329,8 +1584,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createView(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogView,
+          protos.google.logging.v2.ICreateViewRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogView,
+          protos.google.logging.v2.ICreateViewRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createView response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates a view on a log bucket. This method replaces the following fields
@@ -1432,8 +1729,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateView(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogView,
+          protos.google.logging.v2.IUpdateViewRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogView,
+          protos.google.logging.v2.IUpdateViewRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateView response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes a view on a log bucket.
@@ -1523,8 +1862,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteView(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteView request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteViewRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteView response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteView(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteViewRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteView response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets a sink.
@@ -1614,8 +1995,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         sink_name: request.sinkName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSink(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getSink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogSink,
+          protos.google.logging.v2.IGetSinkRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogSink,
+          protos.google.logging.v2.IGetSinkRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSink response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates a sink that exports specified log entries to a destination. The
@@ -1725,8 +2148,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createSink(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createSink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogSink,
+          protos.google.logging.v2.ICreateSinkRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createSink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createSink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogSink,
+          protos.google.logging.v2.ICreateSinkRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSink response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates a sink. This method replaces the following fields in the existing
@@ -1853,8 +2318,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         sink_name: request.sinkName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSink(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateSink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogSink,
+          protos.google.logging.v2.IUpdateSinkRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogSink,
+          protos.google.logging.v2.IUpdateSinkRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSink response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes a sink. If the sink has a unique `writer_identity`, then that
@@ -1946,8 +2453,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         sink_name: request.sinkName ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteSink(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteSink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteSinkRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteSink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteSink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteSinkRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteSink response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets a link.
@@ -2033,8 +2582,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getLink(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getLink request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILink,
+          protos.google.logging.v2.IGetLinkRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLink response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILink,
+          protos.google.logging.v2.IGetLinkRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getLink response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets the description of an exclusion in the _Default sink.
@@ -2124,8 +2715,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getExclusion(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getExclusion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogExclusion,
+          protos.google.logging.v2.IGetExclusionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExclusion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExclusion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogExclusion,
+          protos.google.logging.v2.IGetExclusionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getExclusion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Creates a new exclusion in the _Default sink in a specified parent
@@ -2221,8 +2854,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createExclusion(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('createExclusion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogExclusion,
+          protos.google.logging.v2.ICreateExclusionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createExclusion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createExclusion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogExclusion,
+          protos.google.logging.v2.ICreateExclusionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createExclusion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Changes one or more properties of an existing exclusion in the _Default
@@ -2325,8 +3000,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateExclusion(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateExclusion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ILogExclusion,
+          protos.google.logging.v2.IUpdateExclusionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateExclusion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateExclusion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ILogExclusion,
+          protos.google.logging.v2.IUpdateExclusionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateExclusion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Deletes an exclusion in the _Default sink.
@@ -2416,8 +3133,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteExclusion(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('deleteExclusion request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteExclusionRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteExclusion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteExclusion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.logging.v2.IDeleteExclusionRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteExclusion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets the Logging CMEK settings for the given resource.
@@ -2521,8 +3280,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getCmekSettings(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getCmekSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ICmekSettings,
+          protos.google.logging.v2.IGetCmekSettingsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getCmekSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getCmekSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ICmekSettings,
+          protos.google.logging.v2.IGetCmekSettingsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getCmekSettings response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates the Log Router CMEK settings for the given resource.
@@ -2646,8 +3447,52 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateCmekSettings(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateCmekSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ICmekSettings,
+          | protos.google.logging.v2.IUpdateCmekSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateCmekSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateCmekSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ICmekSettings,
+          protos.google.logging.v2.IUpdateCmekSettingsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCmekSettings response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Gets the Log Router settings for the given resource.
@@ -2751,8 +3596,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.getSettings(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('getSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ISettings,
+          protos.google.logging.v2.IGetSettingsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ISettings,
+          protos.google.logging.v2.IGetSettingsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSettings response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
   /**
    * Updates the Log Router settings for the given resource.
@@ -2872,8 +3759,50 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateSettings(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('updateSettings request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.logging.v2.ISettings,
+          protos.google.logging.v2.IUpdateSettingsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateSettings response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateSettings(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.logging.v2.ISettings,
+          protos.google.logging.v2.IUpdateSettingsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSettings response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
   }
 
   /**
@@ -2991,8 +3920,40 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createBucketAsync(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.logging.v2.ILogBucket,
+            protos.google.logging.v2.IBucketMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createBucketAsync response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createBucketAsync request %j', request);
+    return this.innerApiCalls
+      .createBucketAsync(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.logging.v2.ILogBucket,
+            protos.google.logging.v2.IBucketMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBucketAsync response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `createBucketAsync()`.
@@ -3013,9 +3974,10 @@ export class ConfigServiceV2Client {
       protos.google.logging.v2.BucketMetadata
     >
   > {
+    this._log.info('createBucketAsync long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3152,8 +4114,40 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.updateBucketAsync(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.logging.v2.ILogBucket,
+            protos.google.logging.v2.IBucketMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBucketAsync response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBucketAsync request %j', request);
+    return this.innerApiCalls
+      .updateBucketAsync(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.logging.v2.ILogBucket,
+            protos.google.logging.v2.IBucketMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBucketAsync response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `updateBucketAsync()`.
@@ -3174,9 +4168,10 @@ export class ConfigServiceV2Client {
       protos.google.logging.v2.BucketMetadata
     >
   > {
+    this._log.info('updateBucketAsync long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3301,8 +4296,40 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.createLink(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.logging.v2.ILink,
+            protos.google.logging.v2.ILinkMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createLink response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createLink request %j', request);
+    return this.innerApiCalls
+      .createLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.logging.v2.ILink,
+            protos.google.logging.v2.ILinkMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLink response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `createLink()`.
@@ -3323,9 +4350,10 @@ export class ConfigServiceV2Client {
       protos.google.logging.v2.LinkMetadata
     >
   > {
+    this._log.info('createLink long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3443,8 +4471,40 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.deleteLink(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.logging.v2.ILinkMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteLink response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteLink request %j', request);
+    return this.innerApiCalls
+      .deleteLink(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.logging.v2.ILinkMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteLink response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `deleteLink()`.
@@ -3465,9 +4525,10 @@ export class ConfigServiceV2Client {
       protos.google.logging.v2.LinkMetadata
     >
   > {
+    this._log.info('deleteLink long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3584,8 +4645,40 @@ export class ConfigServiceV2Client {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize();
-    return this.innerApiCalls.copyLogEntries(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.logging.v2.ICopyLogEntriesResponse,
+            protos.google.logging.v2.ICopyLogEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('copyLogEntries response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('copyLogEntries request %j', request);
+    return this.innerApiCalls
+      .copyLogEntries(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.logging.v2.ICopyLogEntriesResponse,
+            protos.google.logging.v2.ICopyLogEntriesMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('copyLogEntries response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
   /**
    * Check the status of the long running operation returned by `copyLogEntries()`.
@@ -3606,9 +4699,10 @@ export class ConfigServiceV2Client {
       protos.google.logging.v2.CopyLogEntriesMetadata
     >
   > {
+    this._log.info('copyLogEntries long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name},
+        { name },
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3721,12 +4815,38 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listBuckets(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListBucketsRequest,
+          protos.google.logging.v2.IListBucketsResponse | null | undefined,
+          protos.google.logging.v2.ILogBucket
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBuckets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBuckets request %j', request);
+    return this.innerApiCalls
+      .listBuckets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.logging.v2.ILogBucket[],
+          protos.google.logging.v2.IListBucketsRequest | null,
+          protos.google.logging.v2.IListBucketsResponse,
+        ]) => {
+          this._log.info('listBuckets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listBuckets`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3774,7 +4894,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listBuckets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listBuckets stream %j', request);
     return this.descriptors.page.listBuckets.createStream(
       this.innerApiCalls.listBuckets as GaxCall,
       request,
@@ -3834,7 +4957,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listBuckets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listBuckets iterate %j', request);
     return this.descriptors.page.listBuckets.asyncIterate(
       this.innerApiCalls['listBuckets'] as GaxCall,
       request as {},
@@ -3935,12 +5061,38 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listViews(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListViewsRequest,
+          protos.google.logging.v2.IListViewsResponse | null | undefined,
+          protos.google.logging.v2.ILogView
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listViews values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listViews request %j', request);
+    return this.innerApiCalls
+      .listViews(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.logging.v2.ILogView[],
+          protos.google.logging.v2.IListViewsRequest | null,
+          protos.google.logging.v2.IListViewsResponse,
+        ]) => {
+          this._log.info('listViews values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listViews`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -3982,7 +5134,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listViews stream %j', request);
     return this.descriptors.page.listViews.createStream(
       this.innerApiCalls.listViews as GaxCall,
       request,
@@ -4036,7 +5191,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listViews iterate %j', request);
     return this.descriptors.page.listViews.asyncIterate(
       this.innerApiCalls['listViews'] as GaxCall,
       request as {},
@@ -4139,12 +5297,38 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listSinks(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListSinksRequest,
+          protos.google.logging.v2.IListSinksResponse | null | undefined,
+          protos.google.logging.v2.ILogSink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listSinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listSinks request %j', request);
+    return this.innerApiCalls
+      .listSinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.logging.v2.ILogSink[],
+          protos.google.logging.v2.IListSinksRequest | null,
+          protos.google.logging.v2.IListSinksResponse,
+        ]) => {
+          this._log.info('listSinks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listSinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4188,7 +5372,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listSinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listSinks stream %j', request);
     return this.descriptors.page.listSinks.createStream(
       this.innerApiCalls.listSinks as GaxCall,
       request,
@@ -4244,7 +5431,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listSinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listSinks iterate %j', request);
     return this.descriptors.page.listSinks.asyncIterate(
       this.innerApiCalls['listSinks'] as GaxCall,
       request as {},
@@ -4344,12 +5534,38 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listLinks(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListLinksRequest,
+          protos.google.logging.v2.IListLinksResponse | null | undefined,
+          protos.google.logging.v2.ILink
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLinks values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLinks request %j', request);
+    return this.innerApiCalls
+      .listLinks(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.logging.v2.ILink[],
+          protos.google.logging.v2.IListLinksRequest | null,
+          protos.google.logging.v2.IListLinksResponse,
+        ]) => {
+          this._log.info('listLinks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listLinks`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4390,7 +5606,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLinks stream %j', request);
     return this.descriptors.page.listLinks.createStream(
       this.innerApiCalls.listLinks as GaxCall,
       request,
@@ -4443,7 +5662,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listLinks iterate %j', request);
     return this.descriptors.page.listLinks.asyncIterate(
       this.innerApiCalls['listLinks'] as GaxCall,
       request as {},
@@ -4546,12 +5768,38 @@ export class ConfigServiceV2Client {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize();
-    return this.innerApiCalls.listExclusions(request, options, callback);
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.logging.v2.IListExclusionsRequest,
+          protos.google.logging.v2.IListExclusionsResponse | null | undefined,
+          protos.google.logging.v2.ILogExclusion
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExclusions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExclusions request %j', request);
+    return this.innerApiCalls
+      .listExclusions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.logging.v2.ILogExclusion[],
+          protos.google.logging.v2.IListExclusionsRequest | null,
+          protos.google.logging.v2.IListExclusionsResponse,
+        ]) => {
+          this._log.info('listExclusions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Equivalent to `listExclusions`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -4595,7 +5843,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listExclusions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listExclusions stream %j', request);
     return this.descriptors.page.listExclusions.createStream(
       this.innerApiCalls.listExclusions as GaxCall,
       request,
@@ -4651,7 +5902,10 @@ export class ConfigServiceV2Client {
       });
     const defaultCallSettings = this._defaults['listExclusions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
+    this.initialize().catch((err) => {
+      throw err;
+    });
+    this._log.info('listExclusions iterate %j', request);
     return this.descriptors.page.listExclusions.asyncIterate(
       this.innerApiCalls['listExclusions'] as GaxCall,
       request as {},
@@ -4690,7 +5944,7 @@ export class ConfigServiceV2Client {
    */
   getOperation(
     request: protos.google.longrunning.GetOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.longrunning.Operation,
@@ -4703,6 +5957,20 @@ export class ConfigServiceV2Client {
       {} | null | undefined
     >,
   ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4738,7 +6006,14 @@ export class ConfigServiceV2Client {
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
     options?: gax.CallOptions,
-  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4774,11 +6049,11 @@ export class ConfigServiceV2Client {
    */
   cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
-          protos.google.protobuf.Empty,
           protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
           {} | undefined | null
         >,
     callback?: Callback<
@@ -4787,9 +6062,22 @@ export class ConfigServiceV2Client {
       {} | undefined | null
     >,
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -4817,7 +6105,7 @@ export class ConfigServiceV2Client {
    */
   deleteOperation(
     request: protos.google.longrunning.DeleteOperationRequest,
-    options?:
+    optionsOrCallback?:
       | gax.CallOptions
       | Callback<
           protos.google.protobuf.Empty,
@@ -4830,6 +6118,20 @@ export class ConfigServiceV2Client {
       {} | null | undefined
     >,
   ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -6541,10 +7843,11 @@ export class ConfigServiceV2Client {
    */
   close(): Promise<void> {
     if (this.configServiceV2Stub && !this._terminated) {
-      return this.configServiceV2Stub.then(stub => {
+      return this.configServiceV2Stub.then((stub) => {
+        this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.operationsClient.close();
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

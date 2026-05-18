@@ -158,7 +158,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 111,
+          "end": 116,
           "type": "FULL"
         }
       ],
@@ -182,6 +182,10 @@
           {
             "name": "type",
             "type": ".google.bigtable.admin.v2.Instance.Type"
+          },
+          {
+            "name": "edition",
+            "type": ".google.bigtable.admin.v2.Instance.Edition"
           },
           {
             "name": "labels",
@@ -2620,7 +2624,7 @@
       }
     },
     {
-      "regionTag": "bigtableadmin_v2_generated_BigtableTableAdmin_RestoreTable_async",
+      "regionTag": "bigtableadmin_v2_generated_BigtableTableAdmin_RestoreTable_async_internal",
       "title": "bigtable restoreTable Sample",
       "origin": "API_DEFINITION",
       "description": " Create a new table by restoring from a completed backup.  The returned table [long-running operation][google.longrunning.Operation] can be used to track the progress of the operation, and to cancel it.  The [metadata][google.longrunning.Operation.metadata] field type is [RestoreTableMetadata][google.bigtable.admin.v2.RestoreTableMetadata].  The [response][google.longrunning.Operation.response] type is [Table][google.bigtable.admin.v2.Table], if successful.",

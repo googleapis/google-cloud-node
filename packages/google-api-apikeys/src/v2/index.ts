@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ApiKeysClient} from './api_keys_client';
+export { ApiKeysClient } from './api_keys_client';
