@@ -330,22 +330,11 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
   if (status && [401, 405, 412].includes(status)) return false;
 
   // Optimized Precondition Check
-  let bodyEtag = false;
-  try {
-    const parsedBody = typeof data === 'string' ? JSON.parse(data) : data;
-    if (parsedBody && parsedBody.etag) {
-      bodyEtag = true;
-    }
-  } catch (e) {
-    // If parsing fails, we treat it as no etag and move on
-    bodyEtag = false;
-  }
-
   const hasPrecondition = !!(
     params.ifGenerationMatch !== undefined ||
     params.ifMetagenerationMatch !== undefined ||
     params.ifSourceGenerationMatch !== undefined ||
-    bodyEtag
+    (config as any).hasPrecondition
   );
 
   // Granular Idempotency Logic

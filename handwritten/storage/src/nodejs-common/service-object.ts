@@ -16,7 +16,6 @@
 import {promisifyAll} from '@google-cloud/promisify';
 import {EventEmitter} from 'events';
 import {util} from './util.js';
-import {Bucket} from '../bucket.js';
 import {StorageRequestOptions, StorageTransport} from '../storage-transport.js';
 import {
   GaxiosError,
@@ -293,8 +292,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       (typeof this.methods.delete === 'object' && this.methods.delete) || {};
 
     let url = `${this.baseUrl}/${this.id}`;
-    if (this.parent instanceof Bucket) {
-      url = `${this.parent.baseUrl}/${this.parent.id}${url}`;
+    if (this.parent && this.parent.constructor.name === 'Bucket') {
+      url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
     this.storageTransport
@@ -440,8 +439,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       {};
 
     let url = `${this.baseUrl}/${this.id}`;
-    if (this.parent instanceof Bucket) {
-      url = `${this.parent.baseUrl}/${this.parent.id}${url}`;
+    if (this.parent && this.parent.constructor.name === 'Bucket') {
+      url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -513,8 +512,8 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       {};
 
     let url = `${this.baseUrl}/${this.name}`;
-    if (this.parent instanceof Bucket) {
-      url = `${this.parent.baseUrl}/${this.parent.name}${url}`;
+    if (this.parent && this.parent.constructor.name === 'Bucket') {
+      url = `${this.parent.baseUrl}/${(this.parent as any).name}${url}`;
     }
 
     const body = Object.assign({}, methodConfig.reqOpts?.body, metadata);
