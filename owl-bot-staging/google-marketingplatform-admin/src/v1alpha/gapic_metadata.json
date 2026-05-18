@@ -1,0 +1,111 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.marketingplatform.admin.v1alpha",
+  "libraryPackage": "@google-ads/marketing-platform-admin",
+  "services": {
+    "MarketingplatformAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MarketingplatformAdminServiceClient",
+          "rpcs": {
+            "GetOrganization": {
+              "methods": [
+                "getOrganization"
+              ]
+            },
+            "FindSalesPartnerManagedClients": {
+              "methods": [
+                "findSalesPartnerManagedClients"
+              ]
+            },
+            "CreateAnalyticsAccountLink": {
+              "methods": [
+                "createAnalyticsAccountLink"
+              ]
+            },
+            "DeleteAnalyticsAccountLink": {
+              "methods": [
+                "deleteAnalyticsAccountLink"
+              ]
+            },
+            "SetPropertyServiceLevel": {
+              "methods": [
+                "setPropertyServiceLevel"
+              ]
+            },
+            "ReportPropertyUsage": {
+              "methods": [
+                "reportPropertyUsage"
+              ]
+            },
+            "ListOrganizations": {
+              "methods": [
+                "listOrganizations",
+                "listOrganizationsStream",
+                "listOrganizationsAsync"
+              ]
+            },
+            "ListAnalyticsAccountLinks": {
+              "methods": [
+                "listAnalyticsAccountLinks",
+                "listAnalyticsAccountLinksStream",
+                "listAnalyticsAccountLinksAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MarketingplatformAdminServiceClient",
+          "rpcs": {
+            "GetOrganization": {
+              "methods": [
+                "getOrganization"
+              ]
+            },
+            "FindSalesPartnerManagedClients": {
+              "methods": [
+                "findSalesPartnerManagedClients"
+              ]
+            },
+            "CreateAnalyticsAccountLink": {
+              "methods": [
+                "createAnalyticsAccountLink"
+              ]
+            },
+            "DeleteAnalyticsAccountLink": {
+              "methods": [
+                "deleteAnalyticsAccountLink"
+              ]
+            },
+            "SetPropertyServiceLevel": {
+              "methods": [
+                "setPropertyServiceLevel"
+              ]
+            },
+            "ReportPropertyUsage": {
+              "methods": [
+                "reportPropertyUsage"
+              ]
+            },
+            "ListOrganizations": {
+              "methods": [
+                "listOrganizations",
+                "listOrganizationsStream",
+                "listOrganizationsAsync"
+              ]
+            },
+            "ListAnalyticsAccountLinks": {
+              "methods": [
+                "listAnalyticsAccountLinks",
+                "listAnalyticsAccountLinksStream",
+                "listAnalyticsAccountLinksAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
