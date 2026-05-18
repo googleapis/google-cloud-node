@@ -43,6 +43,7 @@ import {
   IdentityPoolClient,
   PassThroughClient,
   AnyAuthClient,
+  GdchClient,
 } from '../src';
 import {CredentialBody} from '../src/auth/credentials';
 import * as envDetect from '../src/auth/envDetect';
@@ -547,6 +548,22 @@ describe('googleauth', () => {
       const json = createJwtJSON();
       const result = auth.fromJSON(json);
       assert.strictEqual(300000, (result as JWT).eagerRefreshThresholdMillis);
+    });
+
+    it('fromJSON should create GdchClient for GDCH type credentials', () => {
+      const json = {
+        type: 'gdch_credentials',
+        format_version: '1',
+        project: 'test-project',
+        private_key_id: 'key-id-123',
+        private_key: 'private-key-pem-content',
+        name: 'sa-name',
+        token_uri: 'https://token-server.local/token',
+      };
+      const result = auth.fromJSON(json);
+      assert.ok(result instanceof GdchClient);
+      assert.strictEqual((result as GdchClient).projectId, 'test-project');
+      assert.strictEqual((result as GdchClient).privateKey, 'private-key-pem-content');
     });
 
     it('fromStream should error on null stream', done => {

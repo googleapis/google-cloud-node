@@ -92,6 +92,10 @@ export {
   ExternalAccountAuthorizedUserClientOptions,
 } from './auth/externalAccountAuthorizedUserClient';
 export {PassThroughClient} from './auth/passthrough';
+export {
+  GdchClient,
+  GdchClientOptions,
+} from './auth/gdchclient';
 export * from './gtoken/googleToken';
 
 type ALL_EXPORTS = (typeof import('./'))[keyof typeof import('./')];

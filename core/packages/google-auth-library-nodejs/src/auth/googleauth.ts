@@ -42,6 +42,11 @@ import {
   ExternalAccountAuthorizedUserClient,
   ExternalAccountAuthorizedUserClientOptions,
 } from './externalAccountAuthorizedUserClient';
+import {
+  GdchClient,
+  GDCH_CREDENTIALS_TYPE,
+  GdchCredentialsInput,
+} from './gdchclient';
 import {originalOrCamelOptions} from '../util';
 import {AnyAuthClient, AnyAuthClientConstructor} from '..';
 
@@ -54,7 +59,8 @@ export type JSONClient =
   | UserRefreshClient
   | BaseExternalAccountClient
   | ExternalAccountAuthorizedUserClient
-  | Impersonated;
+  | Impersonated
+  | GdchClient;
 
 export interface ProjectIdCallback {
   (err?: Error | null, projectId?: string | null): void;
@@ -764,7 +770,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
    * @returns JWT or UserRefresh Client with data
    */
   fromJSON(
-    json: JWTInput | ImpersonatedJWTInput,
+    json: JWTInput | ImpersonatedJWTInput | GdchCredentialsInput,
     options: AuthClientOptions = {},
   ): JSONClient {
     let client: JSONClient;
@@ -789,11 +795,14 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
         ...json,
         ...options,
       } as ExternalAccountAuthorizedUserClientOptions);
+    } else if (json.type === GDCH_CREDENTIALS_TYPE) {
+      client = new GdchClient(options);
+      client.fromJSON(json as GdchCredentialsInput);
     } else {
       (options as JWTOptions).scopes = this.scopes;
       client = new JWT(options);
       this.setGapicJWTValues(client);
-      client.fromJSON(json);
+      client.fromJSON(json as JWTInput);
     }
 
     if (preferredUniverseDomain) {
