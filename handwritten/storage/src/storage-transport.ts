@@ -58,6 +58,7 @@ export interface StorageRequestOptions extends GaxiosOptions {
   projectId?: string;
   queryParameters?: StorageQueryParameters;
   shouldReturnStream?: boolean;
+  hasPrecondition?: boolean;
 }
 
 interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -146,10 +147,13 @@ export class StorageTransport {
     const headers = this.#prepareHeaders(reqOpts);
 
     // Interceptor Management
-    this.gaxiosInstance.interceptors.request.clear();
+    const requestGaxiosInstance = reqOpts.interceptors
+      ? new Gaxios()
+      : this.gaxiosInstance;
+
     if (reqOpts.interceptors) {
       for (const inter of reqOpts.interceptors) {
-        this.gaxiosInstance.interceptors.request.add(inter);
+        requestGaxiosInstance.interceptors.request.add(inter);
       }
     }
 
@@ -161,17 +165,37 @@ export class StorageTransport {
       ? urlString
       : new URL(urlString, this.baseUrl).toString();
 
+    const bodyStr = typeof reqOpts.body === 'string'
+      ? reqOpts.body
+      : (typeof reqOpts.data === 'string' ? reqOpts.data : '');
+
+    const hasPrecondition = !!(
+      reqOpts.hasPrecondition ||
+      reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
+      reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
+      reqOpts.queryParameters?.ifSourceGenerationMatch !== undefined ||
+      bodyStr.includes('"etag"')
+    );
+
     try {
       const requestPromise = this.authClient.request<T>({
+        adapter: async (opts: GaxiosOptions) => {
+          const innerOpts = {
+            ...opts,
+            adapter: undefined,
+          };
+          return requestGaxiosInstance.request(innerOpts);
+        },
         retryConfig: {
           retry: this.retryOptions.maxRetries,
           noResponseRetries: this.retryOptions.maxRetries,
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
           totalTimeout: this.retryOptions.totalTimeout,
-          shouldRetry: err => !!this.retryOptions.retryableErrorFn?.(err),
+          shouldRetry: (err: GaxiosError) => !!this.retryOptions.retryableErrorFn?.(err),
         },
         ...reqOpts,
+        hasPrecondition, // Pass flag to Gaxios / AuthClient options
         params: queryParameters,
         paramsSerializer: this.#paramsSerializer,
         headers,
@@ -186,13 +210,20 @@ export class StorageTransport {
             (status >= 200 && status < 300) || (isResumable && status === 308)
           );
         },
-      });
+      } as any);
 
       // Response Handling
+      const isPlainObject = (obj: any): boolean =>
+        obj !== null &&
+        typeof obj === 'object' &&
+        !(obj instanceof Buffer) &&
+        !(typeof obj.on === 'function') &&
+        !Array.isArray(obj);
+
       const responseHandler = (resp: GaxiosResponse<T>) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = resp.data as any;
-        if (data !== null && typeof data === 'object') {
+        if (isPlainObject(data)) {
           data.headers = resp.headers;
           data.status = resp.status;
           return data;

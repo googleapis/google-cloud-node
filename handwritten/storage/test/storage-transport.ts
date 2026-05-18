@@ -124,35 +124,39 @@ describe('Storage Transport', () => {
 
   it('should clear and add interceptors if provided', async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const interceptorStub: any = sandbox.stub();
+    const interceptorStub: any = {
+      resolved: sandbox.stub(),
+      rejected: sandbox.stub(),
+    };
     const reqOpts: StorageRequestOptions = {
       url: '/bucket/object',
       interceptors: [interceptorStub],
     };
 
-    const clearStub = sandbox.stub();
-    const addStub = sandbox.stub();
-    (authClientStub.request as sinon.SinonStub).resolves({data: {}});
-    const transportInstance = new Gaxios();
-    transportInstance.interceptors.request.clear = clearStub;
-    transportInstance.interceptors.request.add = addStub;
-
-    const transportWithMock = new StorageTransport({
-      apiEndpoint: baseUrl,
-      baseUrl,
-      authClient: authClientStub,
-      projectId: 'project-id',
-      retryOptions: transport['retryOptions'],
-      scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-      packageJson: {name: 'test-package', version: '1.0.0'},
-      gaxiosInstance: transportInstance,
+    let capturedGaxiosInstance: Gaxios | undefined;
+    const gaxiosRequestStub = sandbox.stub(Gaxios.prototype, 'request').callsFake(function(this: Gaxios, opts: any) {
+      capturedGaxiosInstance = this;
+      return Promise.resolve({ data: {} } as any);
     });
 
-    await transportWithMock.makeRequest(reqOpts);
+    const requestStub = authClientStub.request as sinon.SinonStub;
+    requestStub.resolves({data: {}});
+    await transport.makeRequest(reqOpts);
 
-    assert.strictEqual(clearStub.calledOnce, true);
-    assert.strictEqual(addStub.calledOnce, true);
-    assert.strictEqual(addStub.calledWith(interceptorStub), true);
+    assert.strictEqual(requestStub.calledOnce, true);
+    const calledWith = requestStub.getCall(0).args[0];
+    assert.ok(calledWith.adapter);
+
+    // Manually call the adapter (simulating what the real authClient request does)
+    await calledWith.adapter({ headers: {} });
+
+    assert.strictEqual(gaxiosRequestStub.calledOnce, true);
+    assert.ok(capturedGaxiosInstance);
+    const interceptorSet = capturedGaxiosInstance.interceptors.request as any as Set<any>;
+    assert.strictEqual(interceptorSet.size, 1);
+    const handlers = Array.from(interceptorSet);
+    assert.strictEqual(handlers[0].resolved, interceptorStub.resolved);
+    assert.strictEqual(handlers[0].rejected, interceptorStub.rejected);
   });
 
   it('should initialize a new GoogleAuth instance when authClient is not an instance of GoogleAuth', async () => {
