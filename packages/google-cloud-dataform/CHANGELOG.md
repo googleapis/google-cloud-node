@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.2.2...dataform-v2.3.0) (2026-05-18)
+
+
+### Features
+
+* Add folders and teamFolders related changes to v1 ([e9ad85f](https://github.com/googleapis/google-cloud-node/commit/e9ad85f0db9570343fb0625579fb9ee484280b59))
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs ([e9ad85f](https://github.com/googleapis/google-cloud-node/commit/e9ad85f0db9570343fb0625579fb9ee484280b59))
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
 ## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.2.1...dataform-v2.2.2) (2026-05-01)
 
 
