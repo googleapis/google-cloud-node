@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.3](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v3.1.2...maps-platform-datasets-v3.1.3) (2026-05-18)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
 ## [3.1.2](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v3.1.1...maps-platform-datasets-v3.1.2) (2026-05-01)
 
 

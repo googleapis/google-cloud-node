@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.6.2](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.6.1...dlp-v6.6.2) (2026-05-18)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
 ## [6.6.1](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.6.0...dlp-v6.6.1) (2026-05-01)
 
 
