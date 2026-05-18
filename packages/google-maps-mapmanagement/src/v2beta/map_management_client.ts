@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -57,7 +64,7 @@ export class MapManagementClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('mapmanagement');
@@ -70,9 +77,9 @@ export class MapManagementClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  mapManagementStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  mapManagementStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of MapManagementClient.
@@ -113,21 +120,42 @@ export class MapManagementClient {
    *     const client = new MapManagementClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MapManagementClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'mapmanagement.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -152,7 +180,7 @@ export class MapManagementClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -166,10 +194,7 @@ export class MapManagementClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -191,19 +216,19 @@ export class MapManagementClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       datasetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/datasets/{dataset}'
+        'projects/{project}/datasets/{dataset}',
       ),
       mapConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/mapConfigs/{map_config}'
+        'projects/{project}/mapConfigs/{map_config}',
       ),
       mapContextConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}'
+        'projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       styleConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/styleConfigs/{style_config}'
+        'projects/{project}/styleConfigs/{style_config}',
       ),
     };
 
@@ -211,18 +236,30 @@ export class MapManagementClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listMapConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mapConfigs'),
-      listStyleConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'styleConfigs'),
-      listMapContextConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'mapContextConfigs')
+      listMapConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mapConfigs',
+      ),
+      listStyleConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'styleConfigs',
+      ),
+      listMapContextConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mapContextConfigs',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.maps.mapmanagement.v2beta.MapManagement', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.maps.mapmanagement.v2beta.MapManagement',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -253,37 +290,56 @@ export class MapManagementClient {
     // Put together the "service stub" for
     // google.maps.mapmanagement.v2beta.MapManagement.
     this.mapManagementStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.maps.mapmanagement.v2beta.MapManagement') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.maps.mapmanagement.v2beta.MapManagement',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.maps.mapmanagement.v2beta.MapManagement,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const mapManagementStubMethods =
-        ['createMapConfig', 'getMapConfig', 'listMapConfigs', 'updateMapConfig', 'deleteMapConfig', 'createStyleConfig', 'getStyleConfig', 'listStyleConfigs', 'updateStyleConfig', 'deleteStyleConfig', 'createMapContextConfig', 'getMapContextConfig', 'listMapContextConfigs', 'updateMapContextConfig', 'deleteMapContextConfig'];
+    const mapManagementStubMethods = [
+      'createMapConfig',
+      'getMapConfig',
+      'listMapConfigs',
+      'updateMapConfig',
+      'deleteMapConfig',
+      'createStyleConfig',
+      'getStyleConfig',
+      'listStyleConfigs',
+      'updateStyleConfig',
+      'deleteStyleConfig',
+      'createMapContextConfig',
+      'getMapContextConfig',
+      'listMapContextConfigs',
+      'updateMapContextConfig',
+      'deleteMapContextConfig',
+    ];
     for (const methodName of mapManagementStubMethods) {
       const callPromise = this.mapManagementStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -298,8 +354,14 @@ export class MapManagementClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'mapmanagement.googleapis.com';
   }
@@ -310,8 +372,14 @@ export class MapManagementClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'mapmanagement.googleapis.com';
   }
@@ -342,9 +410,7 @@ export class MapManagementClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -353,8 +419,9 @@ export class MapManagementClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -365,1279 +432,1886 @@ export class MapManagementClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a MapConfig in a project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that will own the MapConfig.
- *   Format: `projects/{$my-project-id}`
- * @param {google.maps.mapmanagement.v2beta.MapConfig} request.mapConfig
- *   Required. The MapConfig to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.create_map_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_CreateMapConfig_async
- */
+  /**
+   * Creates a MapConfig in a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that will own the MapConfig.
+   *   Format: `projects/{$my-project-id}`
+   * @param {google.maps.mapmanagement.v2beta.MapConfig} request.mapConfig
+   *   Required. The MapConfig to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.create_map_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_CreateMapConfig_async
+   */
   createMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createMapConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IMapConfig,
+          | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createMapConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createMapConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createMapConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createMapConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IMapConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.ICreateMapConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createMapConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a MapConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the MapConfig.
- *   Format: `projects/{project}/mapConfigs/{map_config}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.get_map_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_GetMapConfig_async
- */
+  /**
+   * Gets a MapConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the MapConfig.
+   *   Format: `projects/{project}/mapConfigs/{map_config}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.get_map_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_GetMapConfig_async
+   */
   getMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMapConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IMapConfig,
+          | protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMapConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMapConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMapConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMapConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IMapConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IGetMapConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMapConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a MapConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.maps.mapmanagement.v2beta.MapConfig} request.mapConfig
- *   Required. The MapConfig to update.
- *
- *   The MapConfig's `name` field is used to identify the MapConfig to update.
- *   Format: `projects/{project}/mapConfigs/{map_config}`
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The specific field to update for the MapConfig. If not specified,
- *   the MapConfig will be updated in its entirety. Valid fields are:
- *
- *   * `display_name`
- *   * `description`
- *   * `map_features`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.update_map_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_UpdateMapConfig_async
- */
+  /**
+   * Updates a MapConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.maps.mapmanagement.v2beta.MapConfig} request.mapConfig
+   *   Required. The MapConfig to update.
+   *
+   *   The MapConfig's `name` field is used to identify the MapConfig to update.
+   *   Format: `projects/{project}/mapConfigs/{map_config}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The specific field to update for the MapConfig. If not specified,
+   *   the MapConfig will be updated in its entirety. Valid fields are:
+   *
+   *   * `display_name`
+   *   * `description`
+   *   * `map_features`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.update_map_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_UpdateMapConfig_async
+   */
   updateMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'map_config.name': request.mapConfig!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'map_config.name': request.mapConfig!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateMapConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IMapConfig,
+          | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateMapConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateMapConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IMapConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateMapConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateMapConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IMapConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IUpdateMapConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMapConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a MapConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the MapConfig to delete.
- *   Format: `projects/{project}/mapConfigs/{map_config}`
- * @param {boolean} [request.force]
- *   Optional. If set to true, any MapContextConfigs from this MapConfig will
- *   also be deleted. (Otherwise, the request will only work if the MapConfig
- *   has no MapContextConfigs.)
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.delete_map_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_DeleteMapConfig_async
- */
+  /**
+   * Deletes a MapConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the MapConfig to delete.
+   *   Format: `projects/{project}/mapConfigs/{map_config}`
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any MapContextConfigs from this MapConfig will
+   *   also be deleted. (Otherwise, the request will only work if the MapConfig
+   *   has no MapContextConfigs.)
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.delete_map_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_DeleteMapConfig_async
+   */
   deleteMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMapConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMapConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteMapConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteMapConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteMapConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteMapConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteMapConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IDeleteMapConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMapConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a StyleConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that will own the StyleConfig.
- *   Format: `projects/{project}`
- * @param {google.maps.mapmanagement.v2beta.StyleConfig} request.styleConfig
- *   Required. The StyleConfig to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.create_style_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_CreateStyleConfig_async
- */
+  /**
+   * Creates a StyleConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that will own the StyleConfig.
+   *   Format: `projects/{project}`
+   * @param {google.maps.mapmanagement.v2beta.StyleConfig} request.styleConfig
+   *   Required. The StyleConfig to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.create_style_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_CreateStyleConfig_async
+   */
   createStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createStyleConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+          | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createStyleConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createStyleConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createStyleConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createStyleConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.ICreateStyleConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createStyleConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a StyleConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the StyleConfig.
- *   Format: `projects/{project}/styleConfigs/{style_config}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.get_style_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_GetStyleConfig_async
- */
+  /**
+   * Gets a StyleConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the StyleConfig.
+   *   Format: `projects/{project}/styleConfigs/{style_config}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.get_style_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_GetStyleConfig_async
+   */
   getStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getStyleConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+          | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getStyleConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getStyleConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getStyleConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getStyleConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IGetStyleConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getStyleConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a StyleConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.maps.mapmanagement.v2beta.StyleConfig} request.styleConfig
- *   Required. The StyleConfig to update.
- *
- *   The StyleConfig's `name` field is used to identify the StyleConfig to
- *   update. Format: `projects/{project}/styleConfigs/{style_config}`
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update. If not specified, the StyleConfig
- *   will be updated in its entirety. Valid fields are:
- *
- *   * `display_name`
- *   * `description`
- *   * `json_style_sheet`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.update_style_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_UpdateStyleConfig_async
- */
+  /**
+   * Updates a StyleConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.maps.mapmanagement.v2beta.StyleConfig} request.styleConfig
+   *   Required. The StyleConfig to update.
+   *
+   *   The StyleConfig's `name` field is used to identify the StyleConfig to
+   *   update. Format: `projects/{project}/styleConfigs/{style_config}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update. If not specified, the StyleConfig
+   *   will be updated in its entirety. Valid fields are:
+   *
+   *   * `display_name`
+   *   * `description`
+   *   * `json_style_sheet`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.update_style_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_UpdateStyleConfig_async
+   */
   updateStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'style_config.name': request.styleConfig!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'style_config.name': request.styleConfig!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateStyleConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+          | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateStyleConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateStyleConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateStyleConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateStyleConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IUpdateStyleConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateStyleConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a StyleConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the StyleConfig to delete.
- *   Format: `projects/{project}/styleConfigs/{style_config}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.delete_style_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_DeleteStyleConfig_async
- */
+  /**
+   * Deletes a StyleConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the StyleConfig to delete.
+   *   Format: `projects/{project}/styleConfigs/{style_config}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.delete_style_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_DeleteStyleConfig_async
+   */
   deleteStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteStyleConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteStyleConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteStyleConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteStyleConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteStyleConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteStyleConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteStyleConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IDeleteStyleConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteStyleConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a MapContextConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent MapConfig that will own the MapContextConfig.
- *   Format: `projects/{project}/mapConfigs/{map_config}`
- * @param {google.maps.mapmanagement.v2beta.MapContextConfig} request.mapContextConfig
- *   Required. The MapContextConfig to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.create_map_context_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_CreateMapContextConfig_async
- */
+  /**
+   * Creates a MapContextConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent MapConfig that will own the MapContextConfig.
+   *   Format: `projects/{project}/mapConfigs/{map_config}`
+   * @param {google.maps.mapmanagement.v2beta.MapContextConfig} request.mapContextConfig
+   *   Required. The MapContextConfig to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.create_map_context_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_CreateMapContextConfig_async
+   */
   createMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createMapContextConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+          | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createMapContextConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createMapContextConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createMapContextConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createMapContextConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.ICreateMapContextConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createMapContextConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a MapContextConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the MapContextConfig.
- *   Format:
- *   `projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.get_map_context_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_GetMapContextConfig_async
- */
+  /**
+   * Gets a MapContextConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the MapContextConfig.
+   *   Format:
+   *   `projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.get_map_context_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_GetMapContextConfig_async
+   */
   getMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getMapContextConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+          | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getMapContextConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getMapContextConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getMapContextConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getMapContextConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IGetMapContextConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getMapContextConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a MapContextConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.maps.mapmanagement.v2beta.MapContextConfig} request.mapContextConfig
- *   Required. The MapContextConfig to update.
- *
- *   The MapContextConfig's `name` field is used to identify the
- *   MapContextConfig to update. Format:
- *   `projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}`
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. The list of fields to update. If not specified, the
- *   MapContextConfig will be updated in its entirety. Valid fields are:
- *
- *   * `display_name`
- *   * `alias`
- *   * `map_variants`
- *   * `style_config`
- *   * `dataset`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.update_map_context_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_UpdateMapContextConfig_async
- */
+  /**
+   * Updates a MapContextConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.maps.mapmanagement.v2beta.MapContextConfig} request.mapContextConfig
+   *   Required. The MapContextConfig to update.
+   *
+   *   The MapContextConfig's `name` field is used to identify the
+   *   MapContextConfig to update. Format:
+   *   `projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update. If not specified, the
+   *   MapContextConfig will be updated in its entirety. Valid fields are:
+   *
+   *   * `display_name`
+   *   * `alias`
+   *   * `map_variants`
+   *   * `style_config`
+   *   * `dataset`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.update_map_context_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_UpdateMapContextConfig_async
+   */
   updateMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
-      callback: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
+    callback: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-          protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'map_context_config.name': request.mapContextConfig!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'map_context_config.name': request.mapContextConfig!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateMapContextConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+          | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateMapContextConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateMapContextConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
-        protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateMapContextConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateMapContextConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IUpdateMapContextConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMapContextConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a MapContextConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the MapContextConfig to delete.
- *   Format:
- *   `projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.delete_map_context_config.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_DeleteMapContextConfig_async
- */
+  /**
+   * Deletes a MapContextConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the MapContextConfig to delete.
+   *   Format:
+   *   `projects/{project}/mapConfigs/{map_config}/mapContextConfigs/{map_context_config}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.delete_map_context_config.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_DeleteMapContextConfig_async
+   */
   deleteMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMapContextConfig(
-      request: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteMapContextConfig(
-      request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteMapContextConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteMapContextConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteMapContextConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteMapContextConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteMapContextConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.maps.mapmanagement.v2beta.IDeleteMapContextConfigRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMapContextConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists MapConfigs for a project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that owns the MapConfigs.
- *   Format: `projects/{project}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of MapConfigs to return. The service may
- *   return fewer than this value. If unspecified, at most 50 MapConfigs will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMapConfigs` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMapConfigs` must
- *   match the call that provided the page token.
- *   CURRENTLY UNSUPPORTED.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMapConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists MapConfigs for a project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that owns the MapConfigs.
+   *   Format: `projects/{project}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of MapConfigs to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 MapConfigs will be
+   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMapConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMapConfigs` must
+   *   match the call that provided the page token.
+   *   CURRENTLY UNSUPPORTED.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMapConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMapConfigs(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig[],
+      protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest | null,
+      protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse,
+    ]
+  >;
   listMapConfigs(
-      request: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapConfig>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IMapConfig
+    >,
+  ): void;
   listMapConfigs(
-      request: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapConfig>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IMapConfig
+    >,
+  ): void;
   listMapConfigs(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapConfig>,
-      callback?: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapConfig>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
+          | null
+          | undefined,
+          protos.google.maps.mapmanagement.v2beta.IMapConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IMapConfig
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapConfig[],
+      protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest | null,
+      protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-      protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse|null|undefined,
-      protos.google.maps.mapmanagement.v2beta.IMapConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+          | protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
+          | null
+          | undefined,
+          protos.google.maps.mapmanagement.v2beta.IMapConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMapConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1646,224 +2320,253 @@ export class MapManagementClient {
     this._log.info('listMapConfigs request %j', request);
     return this.innerApiCalls
       .listMapConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.maps.mapmanagement.v2beta.IMapConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse
-      ]) => {
-        this._log.info('listMapConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.maps.mapmanagement.v2beta.IMapConfig[],
+          protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest | null,
+          protos.google.maps.mapmanagement.v2beta.IListMapConfigsResponse,
+        ]) => {
+          this._log.info('listMapConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMapConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that owns the MapConfigs.
- *   Format: `projects/{project}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of MapConfigs to return. The service may
- *   return fewer than this value. If unspecified, at most 50 MapConfigs will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMapConfigs` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMapConfigs` must
- *   match the call that provided the page token.
- *   CURRENTLY UNSUPPORTED.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMapConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMapConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that owns the MapConfigs.
+   *   Format: `projects/{project}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of MapConfigs to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 MapConfigs will be
+   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMapConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMapConfigs` must
+   *   match the call that provided the page token.
+   *   CURRENTLY UNSUPPORTED.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMapConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMapConfigsStream(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMapConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMapConfigs stream %j', request);
     return this.descriptors.page.listMapConfigs.createStream(
       this.innerApiCalls.listMapConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMapConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that owns the MapConfigs.
- *   Format: `projects/{project}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of MapConfigs to return. The service may
- *   return fewer than this value. If unspecified, at most 50 MapConfigs will be
- *   returned. The maximum value is 1000; values above 1000 will be coerced to
- *   1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMapConfigs` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMapConfigs` must
- *   match the call that provided the page token.
- *   CURRENTLY UNSUPPORTED.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.list_map_configs.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_ListMapConfigs_async
- */
+  /**
+   * Equivalent to `listMapConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that owns the MapConfigs.
+   *   Format: `projects/{project}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of MapConfigs to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 MapConfigs will be
+   *   returned. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMapConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMapConfigs` must
+   *   match the call that provided the page token.
+   *   CURRENTLY UNSUPPORTED.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.maps.mapmanagement.v2beta.MapConfig|MapConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.list_map_configs.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_ListMapConfigs_async
+   */
   listMapConfigsAsync(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.maps.mapmanagement.v2beta.IMapConfig>{
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.maps.mapmanagement.v2beta.IMapConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMapConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMapConfigs iterate %j', request);
     return this.descriptors.page.listMapConfigs.asyncIterate(
       this.innerApiCalls['listMapConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.maps.mapmanagement.v2beta.IMapConfig>;
   }
- /**
- * Lists StyleConfigs.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that owns the StyleConfigs.
- *   Format: `projects/{project}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of StyleConfigs to return. The service may
- *   return fewer than this value. If unspecified, at most 50 StyleConfigs will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListStyleConfigs` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListStyleConfigs` must
- *   match the call that provided the page token.
- *   CURRENTLY UNSUPPORTED.
- * @param {string} [request.filter]
- *   Optional. Filter expression for the ListStyleConfigs call.
- *   Currently only supports filtering by display_name.
- *   For example: `display_name="My StyleConfig"` will return all StyleConfigs
- *   with the display name "My StyleConfig".
- * @param {google.maps.mapmanagement.v2beta.StyleConfigView} [request.view]
- *   Optional. The subset of the StyleConfig to return. If this is unset, the
- *   default behavior is to return the FULL view.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listStyleConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists StyleConfigs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that owns the StyleConfigs.
+   *   Format: `projects/{project}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of StyleConfigs to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 StyleConfigs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListStyleConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListStyleConfigs` must
+   *   match the call that provided the page token.
+   *   CURRENTLY UNSUPPORTED.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression for the ListStyleConfigs call.
+   *   Currently only supports filtering by display_name.
+   *   For example: `display_name="My StyleConfig"` will return all StyleConfigs
+   *   with the display name "My StyleConfig".
+   * @param {google.maps.mapmanagement.v2beta.StyleConfigView} [request.view]
+   *   Optional. The subset of the StyleConfig to return. If this is unset, the
+   *   default behavior is to return the FULL view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listStyleConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listStyleConfigs(
-      request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig[],
+      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest | null,
+      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse,
+    ]
+  >;
   listStyleConfigs(
-      request: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig
+    >,
+  ): void;
   listStyleConfigs(
-      request: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig
+    >,
+  ): void;
   listStyleConfigs(
-      request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig>,
-      callback?: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IStyleConfig>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
+          | null
+          | undefined,
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IStyleConfig[],
+      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest | null,
+      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-      protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse|null|undefined,
-      protos.google.maps.mapmanagement.v2beta.IStyleConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+          | protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
+          | null
+          | undefined,
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listStyleConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1872,231 +2575,260 @@ export class MapManagementClient {
     this._log.info('listStyleConfigs request %j', request);
     return this.innerApiCalls
       .listStyleConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.maps.mapmanagement.v2beta.IStyleConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse
-      ]) => {
-        this._log.info('listStyleConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.maps.mapmanagement.v2beta.IStyleConfig[],
+          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest | null,
+          protos.google.maps.mapmanagement.v2beta.IListStyleConfigsResponse,
+        ]) => {
+          this._log.info('listStyleConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listStyleConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that owns the StyleConfigs.
- *   Format: `projects/{project}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of StyleConfigs to return. The service may
- *   return fewer than this value. If unspecified, at most 50 StyleConfigs will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListStyleConfigs` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListStyleConfigs` must
- *   match the call that provided the page token.
- *   CURRENTLY UNSUPPORTED.
- * @param {string} [request.filter]
- *   Optional. Filter expression for the ListStyleConfigs call.
- *   Currently only supports filtering by display_name.
- *   For example: `display_name="My StyleConfig"` will return all StyleConfigs
- *   with the display name "My StyleConfig".
- * @param {google.maps.mapmanagement.v2beta.StyleConfigView} [request.view]
- *   Optional. The subset of the StyleConfig to return. If this is unset, the
- *   default behavior is to return the FULL view.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listStyleConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listStyleConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that owns the StyleConfigs.
+   *   Format: `projects/{project}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of StyleConfigs to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 StyleConfigs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListStyleConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListStyleConfigs` must
+   *   match the call that provided the page token.
+   *   CURRENTLY UNSUPPORTED.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression for the ListStyleConfigs call.
+   *   Currently only supports filtering by display_name.
+   *   For example: `display_name="My StyleConfig"` will return all StyleConfigs
+   *   with the display name "My StyleConfig".
+   * @param {google.maps.mapmanagement.v2beta.StyleConfigView} [request.view]
+   *   Optional. The subset of the StyleConfig to return. If this is unset, the
+   *   default behavior is to return the FULL view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listStyleConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listStyleConfigsStream(
-      request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listStyleConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listStyleConfigs stream %j', request);
     return this.descriptors.page.listStyleConfigs.createStream(
       this.innerApiCalls.listStyleConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listStyleConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent project that owns the StyleConfigs.
- *   Format: `projects/{project}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of StyleConfigs to return. The service may
- *   return fewer than this value. If unspecified, at most 50 StyleConfigs will
- *   be returned. The maximum value is 1000; values above 1000 will be coerced
- *   to 1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListStyleConfigs` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListStyleConfigs` must
- *   match the call that provided the page token.
- *   CURRENTLY UNSUPPORTED.
- * @param {string} [request.filter]
- *   Optional. Filter expression for the ListStyleConfigs call.
- *   Currently only supports filtering by display_name.
- *   For example: `display_name="My StyleConfig"` will return all StyleConfigs
- *   with the display name "My StyleConfig".
- * @param {google.maps.mapmanagement.v2beta.StyleConfigView} [request.view]
- *   Optional. The subset of the StyleConfig to return. If this is unset, the
- *   default behavior is to return the FULL view.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.list_style_configs.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_ListStyleConfigs_async
- */
+  /**
+   * Equivalent to `listStyleConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent project that owns the StyleConfigs.
+   *   Format: `projects/{project}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of StyleConfigs to return. The service may
+   *   return fewer than this value. If unspecified, at most 50 StyleConfigs will
+   *   be returned. The maximum value is 1000; values above 1000 will be coerced
+   *   to 1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListStyleConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListStyleConfigs` must
+   *   match the call that provided the page token.
+   *   CURRENTLY UNSUPPORTED.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression for the ListStyleConfigs call.
+   *   Currently only supports filtering by display_name.
+   *   For example: `display_name="My StyleConfig"` will return all StyleConfigs
+   *   with the display name "My StyleConfig".
+   * @param {google.maps.mapmanagement.v2beta.StyleConfigView} [request.view]
+   *   Optional. The subset of the StyleConfig to return. If this is unset, the
+   *   default behavior is to return the FULL view.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.maps.mapmanagement.v2beta.StyleConfig|StyleConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.list_style_configs.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_ListStyleConfigs_async
+   */
   listStyleConfigsAsync(
-      request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.maps.mapmanagement.v2beta.IStyleConfig>{
+    request?: protos.google.maps.mapmanagement.v2beta.IListStyleConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.maps.mapmanagement.v2beta.IStyleConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listStyleConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listStyleConfigs iterate %j', request);
     return this.descriptors.page.listStyleConfigs.asyncIterate(
       this.innerApiCalls['listStyleConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.maps.mapmanagement.v2beta.IStyleConfig>;
   }
- /**
- * Lists MapContextConfigs.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent MapConfig that owns the MapContextConfigs.
- *   Format: `projects/{project}/mapConfigs/{map_config}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of MapContextConfigs to return. The service
- *   may return fewer than this value. If unspecified, at most 50
- *   MapContextConfigs will be returned. The maximum value is 1000; values above
- *   1000 will be coerced to 1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMapContextConfigs`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMapContextConfigs`
- *   must match the call that provided the page token. CURRENTLY UNSUPPORTED.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMapContextConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists MapContextConfigs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent MapConfig that owns the MapContextConfigs.
+   *   Format: `projects/{project}/mapConfigs/{map_config}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of MapContextConfigs to return. The service
+   *   may return fewer than this value. If unspecified, at most 50
+   *   MapContextConfigs will be returned. The maximum value is 1000; values above
+   *   1000 will be coerced to 1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMapContextConfigs`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMapContextConfigs`
+   *   must match the call that provided the page token. CURRENTLY UNSUPPORTED.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMapContextConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMapContextConfigs(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
-      ]>;
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig[],
+      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest | null,
+      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse,
+    ]
+  >;
   listMapContextConfigs(
-      request: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig
+    >,
+  ): void;
   listMapContextConfigs(
-      request: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig>): void;
+    request: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig
+    >,
+  ): void;
   listMapContextConfigs(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig>,
-      callback?: PaginationCallback<
-          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse|null|undefined,
-          protos.google.maps.mapmanagement.v2beta.IMapContextConfig>):
-      Promise<[
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
-      ]>|void {
+          | protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
+          | null
+          | undefined,
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+      | protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
+      | null
+      | undefined,
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig
+    >,
+  ): Promise<
+    [
+      protos.google.maps.mapmanagement.v2beta.IMapContextConfig[],
+      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest | null,
+      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-      protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse|null|undefined,
-      protos.google.maps.mapmanagement.v2beta.IMapContextConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+          | protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
+          | null
+          | undefined,
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMapContextConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -2105,122 +2837,126 @@ export class MapManagementClient {
     this._log.info('listMapContextConfigs request %j', request);
     return this.innerApiCalls
       .listMapContextConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.maps.mapmanagement.v2beta.IMapContextConfig[],
-        protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest|null,
-        protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse
-      ]) => {
-        this._log.info('listMapContextConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.maps.mapmanagement.v2beta.IMapContextConfig[],
+          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest | null,
+          protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsResponse,
+        ]) => {
+          this._log.info('listMapContextConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMapContextConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent MapConfig that owns the MapContextConfigs.
- *   Format: `projects/{project}/mapConfigs/{map_config}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of MapContextConfigs to return. The service
- *   may return fewer than this value. If unspecified, at most 50
- *   MapContextConfigs will be returned. The maximum value is 1000; values above
- *   1000 will be coerced to 1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMapContextConfigs`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMapContextConfigs`
- *   must match the call that provided the page token. CURRENTLY UNSUPPORTED.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMapContextConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMapContextConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent MapConfig that owns the MapContextConfigs.
+   *   Format: `projects/{project}/mapConfigs/{map_config}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of MapContextConfigs to return. The service
+   *   may return fewer than this value. If unspecified, at most 50
+   *   MapContextConfigs will be returned. The maximum value is 1000; values above
+   *   1000 will be coerced to 1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMapContextConfigs`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMapContextConfigs`
+   *   must match the call that provided the page token. CURRENTLY UNSUPPORTED.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMapContextConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMapContextConfigsStream(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMapContextConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMapContextConfigs stream %j', request);
     return this.descriptors.page.listMapContextConfigs.createStream(
       this.innerApiCalls.listMapContextConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMapContextConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent MapConfig that owns the MapContextConfigs.
- *   Format: `projects/{project}/mapConfigs/{map_config}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of MapContextConfigs to return. The service
- *   may return fewer than this value. If unspecified, at most 50
- *   MapContextConfigs will be returned. The maximum value is 1000; values above
- *   1000 will be coerced to 1000. CURRENTLY UNSUPPORTED.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListMapContextConfigs`
- *   call. Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListMapContextConfigs`
- *   must match the call that provided the page token. CURRENTLY UNSUPPORTED.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2beta/map_management.list_map_context_configs.js</caption>
- * region_tag:mapmanagement_v2beta_generated_MapManagement_ListMapContextConfigs_async
- */
+  /**
+   * Equivalent to `listMapContextConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent MapConfig that owns the MapContextConfigs.
+   *   Format: `projects/{project}/mapConfigs/{map_config}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of MapContextConfigs to return. The service
+   *   may return fewer than this value. If unspecified, at most 50
+   *   MapContextConfigs will be returned. The maximum value is 1000; values above
+   *   1000 will be coerced to 1000. CURRENTLY UNSUPPORTED.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMapContextConfigs`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListMapContextConfigs`
+   *   must match the call that provided the page token. CURRENTLY UNSUPPORTED.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.maps.mapmanagement.v2beta.MapContextConfig|MapContextConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta/map_management.list_map_context_configs.js</caption>
+   * region_tag:mapmanagement_v2beta_generated_MapManagement_ListMapContextConfigs_async
+   */
   listMapContextConfigsAsync(
-      request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.maps.mapmanagement.v2beta.IMapContextConfig>{
+    request?: protos.google.maps.mapmanagement.v2beta.IListMapContextConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.maps.mapmanagement.v2beta.IMapContextConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMapContextConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMapContextConfigs iterate %j', request);
     return this.descriptors.page.listMapContextConfigs.asyncIterate(
       this.innerApiCalls['listMapContextConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.maps.mapmanagement.v2beta.IMapContextConfig>;
   }
   // --------------------
@@ -2234,7 +2970,7 @@ export class MapManagementClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project:string,dataset:string) {
+  datasetPath(project: string, dataset: string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       dataset: dataset,
@@ -2270,7 +3006,7 @@ export class MapManagementClient {
    * @param {string} map_config
    * @returns {string} Resource name string.
    */
-  mapConfigPath(project:string,mapConfig:string) {
+  mapConfigPath(project: string, mapConfig: string) {
     return this.pathTemplates.mapConfigPathTemplate.render({
       project: project,
       map_config: mapConfig,
@@ -2285,7 +3021,8 @@ export class MapManagementClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMapConfigName(mapConfigName: string) {
-    return this.pathTemplates.mapConfigPathTemplate.match(mapConfigName).project;
+    return this.pathTemplates.mapConfigPathTemplate.match(mapConfigName)
+      .project;
   }
 
   /**
@@ -2296,7 +3033,8 @@ export class MapManagementClient {
    * @returns {string} A string representing the map_config.
    */
   matchMapConfigFromMapConfigName(mapConfigName: string) {
-    return this.pathTemplates.mapConfigPathTemplate.match(mapConfigName).map_config;
+    return this.pathTemplates.mapConfigPathTemplate.match(mapConfigName)
+      .map_config;
   }
 
   /**
@@ -2307,7 +3045,11 @@ export class MapManagementClient {
    * @param {string} map_context_config
    * @returns {string} Resource name string.
    */
-  mapContextConfigPath(project:string,mapConfig:string,mapContextConfig:string) {
+  mapContextConfigPath(
+    project: string,
+    mapConfig: string,
+    mapContextConfig: string,
+  ) {
     return this.pathTemplates.mapContextConfigPathTemplate.render({
       project: project,
       map_config: mapConfig,
@@ -2323,7 +3065,9 @@ export class MapManagementClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromMapContextConfigName(mapContextConfigName: string) {
-    return this.pathTemplates.mapContextConfigPathTemplate.match(mapContextConfigName).project;
+    return this.pathTemplates.mapContextConfigPathTemplate.match(
+      mapContextConfigName,
+    ).project;
   }
 
   /**
@@ -2334,7 +3078,9 @@ export class MapManagementClient {
    * @returns {string} A string representing the map_config.
    */
   matchMapConfigFromMapContextConfigName(mapContextConfigName: string) {
-    return this.pathTemplates.mapContextConfigPathTemplate.match(mapContextConfigName).map_config;
+    return this.pathTemplates.mapContextConfigPathTemplate.match(
+      mapContextConfigName,
+    ).map_config;
   }
 
   /**
@@ -2345,7 +3091,9 @@ export class MapManagementClient {
    * @returns {string} A string representing the map_context_config.
    */
   matchMapContextConfigFromMapContextConfigName(mapContextConfigName: string) {
-    return this.pathTemplates.mapContextConfigPathTemplate.match(mapContextConfigName).map_context_config;
+    return this.pathTemplates.mapContextConfigPathTemplate.match(
+      mapContextConfigName,
+    ).map_context_config;
   }
 
   /**
@@ -2354,7 +3102,7 @@ export class MapManagementClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -2378,7 +3126,7 @@ export class MapManagementClient {
    * @param {string} style_config
    * @returns {string} Resource name string.
    */
-  styleConfigPath(project:string,styleConfig:string) {
+  styleConfigPath(project: string, styleConfig: string) {
     return this.pathTemplates.styleConfigPathTemplate.render({
       project: project,
       style_config: styleConfig,
@@ -2393,7 +3141,8 @@ export class MapManagementClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromStyleConfigName(styleConfigName: string) {
-    return this.pathTemplates.styleConfigPathTemplate.match(styleConfigName).project;
+    return this.pathTemplates.styleConfigPathTemplate.match(styleConfigName)
+      .project;
   }
 
   /**
@@ -2404,7 +3153,8 @@ export class MapManagementClient {
    * @returns {string} A string representing the style_config.
    */
   matchStyleConfigFromStyleConfigName(styleConfigName: string) {
-    return this.pathTemplates.styleConfigPathTemplate.match(styleConfigName).style_config;
+    return this.pathTemplates.styleConfigPathTemplate.match(styleConfigName)
+      .style_config;
   }
 
   /**
@@ -2415,7 +3165,7 @@ export class MapManagementClient {
    */
   close(): Promise<void> {
     if (this.mapManagementStub && !this._terminated) {
-      return this.mapManagementStub.then(stub => {
+      return this.mapManagementStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
