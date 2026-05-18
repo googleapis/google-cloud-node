@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.1](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.18.0...netapp-v0.18.1) (2026-05-18)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
 ## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.17.1...netapp-v0.18.0) (2026-05-12)
 
 
