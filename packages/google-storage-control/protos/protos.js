@@ -1496,9 +1496,9 @@
                                 object.name = "";
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.metageneration = options.longs === String ? "0" : 0;
+                                    object.metageneration = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.pendingRenameInfo = null;
@@ -1506,7 +1506,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.metageneration != null && message.hasOwnProperty("metageneration"))
-                                if (typeof message.metageneration === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
+                                else if (typeof message.metageneration === "number")
                                     object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                                 else
                                     object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
@@ -1828,7 +1830,9 @@
                                 object.name = "";
                             }
                             if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                                if (typeof message.ifMetagenerationMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationMatch === "number")
                                     object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                                 else
                                     object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -1836,7 +1840,9 @@
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
                             if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationNotMatch === "number")
                                     object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                                 else
                                     object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -2474,7 +2480,9 @@
                                 object.name = "";
                             }
                             if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                                if (typeof message.ifMetagenerationMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationMatch === "number")
                                     object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                                 else
                                     object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -2482,7 +2490,9 @@
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
                             if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationNotMatch === "number")
                                     object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                                 else
                                     object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -3467,7 +3477,9 @@
                                 object.destinationFolderId = "";
                             }
                             if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                                if (typeof message.ifMetagenerationMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationMatch === "number")
                                     object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                                 else
                                     object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -3475,7 +3487,9 @@
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
                             if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationNotMatch === "number")
                                     object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                                 else
                                     object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -3802,7 +3816,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                                if (typeof message.ifMetagenerationMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationMatch === "number")
                                     object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                                 else
                                     object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -3810,7 +3826,9 @@
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
                             if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationNotMatch === "number")
                                     object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                                 else
                                     object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -6010,16 +6028,18 @@
                                 object.name = "";
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.metageneration = options.longs === String ? "0" : 0;
+                                    object.metageneration = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 object.createTime = null;
                                 object.updateTime = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.metageneration != null && message.hasOwnProperty("metageneration"))
-                                if (typeof message.metageneration === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
+                                else if (typeof message.metageneration === "number")
                                     object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                                 else
                                     object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
@@ -6339,7 +6359,9 @@
                                 object.name = "";
                             }
                             if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                                if (typeof message.ifMetagenerationMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationMatch === "number")
                                     object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                                 else
                                     object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -6347,7 +6369,9 @@
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
                             if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationNotMatch === "number")
                                     object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                                 else
                                     object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -6983,7 +7007,9 @@
                                 object.name = "";
                             }
                             if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                                if (typeof message.ifMetagenerationMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationMatch === "number")
                                     object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                                 else
                                     object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -6991,7 +7017,9 @@
                                     object._ifMetagenerationMatch = "ifMetagenerationMatch";
                             }
                             if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                                if (typeof message.ifMetagenerationNotMatch === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                                else if (typeof message.ifMetagenerationNotMatch === "number")
                                     object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                                 else
                                     object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -15092,7 +15120,9 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -15100,7 +15130,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -15433,7 +15465,9 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -15441,7 +15475,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -16690,14 +16726,16 @@
                             object.bucket = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.ifMetagenerationMatch = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.ifMetagenerationMatch = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.ifMetagenerationMatch = options.longs === String ? "0" : 0;
+                                object.ifMetagenerationMatch = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
                         if (message.bucket != null && message.hasOwnProperty("bucket"))
                             object.bucket = message.bucket;
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch"))
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -17067,7 +17105,9 @@
                         if (message.bucket != null && message.hasOwnProperty("bucket"))
                             object.bucket = $root.google.storage.v2.Bucket.toObject(message.bucket, options);
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -17075,7 +17115,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -17553,7 +17595,9 @@
                                 object.sourceObjects[j] = $root.google.storage.v2.ComposeObjectRequest.SourceObject.toObject(message.sourceObjects[j], options);
                         }
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -17561,7 +17605,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -17847,15 +17893,17 @@
                                 object.name = "";
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.generation = options.longs === String ? "0" : 0;
+                                    object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 object.objectPreconditions = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.generation != null && message.hasOwnProperty("generation"))
-                                if (typeof message.generation === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                                else if (typeof message.generation === "number")
                                     object.generation = options.longs === String ? String(message.generation) : message.generation;
                                 else
                                     object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
@@ -18091,7 +18139,9 @@
                                     options = {};
                                 var object = {};
                                 if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                                    if (typeof message.ifGenerationMatch === "number")
+                                    if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                        object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                                    else if (typeof message.ifGenerationMatch === "number")
                                         object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                                     else
                                         object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -18538,9 +18588,9 @@
                             object.object = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.generation = options.longs === String ? "0" : 0;
+                                object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                         }
                         if (message.bucket != null && message.hasOwnProperty("bucket"))
@@ -18548,12 +18598,16 @@
                         if (message.object != null && message.hasOwnProperty("object"))
                             object.object = message.object;
                         if (message.generation != null && message.hasOwnProperty("generation"))
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -18561,7 +18615,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -18569,7 +18625,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -18577,7 +18635,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -19068,9 +19128,9 @@
                             object.object = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.generation = options.longs === String ? "0" : 0;
+                                object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                             object.restoreToken = "";
                         }
@@ -19079,12 +19139,16 @@
                         if (message.object != null && message.hasOwnProperty("object"))
                             object.object = message.object;
                         if (message.generation != null && message.hasOwnProperty("generation"))
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -19092,7 +19156,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -19100,7 +19166,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -19108,7 +19176,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -20052,19 +20122,19 @@
                             object.object = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.generation = options.longs === String ? "0" : 0;
+                                object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.readOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.readOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.readOffset = options.longs === String ? "0" : 0;
+                                object.readOffset = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.readLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.readLimit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.readLimit = options.longs === String ? "0" : 0;
+                                object.readLimit = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                         }
                         if (message.bucket != null && message.hasOwnProperty("bucket"))
@@ -20072,22 +20142,30 @@
                         if (message.object != null && message.hasOwnProperty("object"))
                             object.object = message.object;
                         if (message.generation != null && message.hasOwnProperty("generation"))
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
                         if (message.readOffset != null && message.hasOwnProperty("readOffset"))
-                            if (typeof message.readOffset === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.readOffset = typeof message.readOffset === "number" ? BigInt(message.readOffset) : $util.Long.fromBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0, false).toBigInt();
+                            else if (typeof message.readOffset === "number")
                                 object.readOffset = options.longs === String ? String(message.readOffset) : message.readOffset;
                             else
                                 object.readOffset = options.longs === String ? $util.Long.prototype.toString.call(message.readOffset) : options.longs === Number ? new $util.LongBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0).toNumber() : message.readOffset;
                         if (message.readLimit != null && message.hasOwnProperty("readLimit"))
-                            if (typeof message.readLimit === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.readLimit = typeof message.readLimit === "number" ? BigInt(message.readLimit) : $util.Long.fromBits(message.readLimit.low >>> 0, message.readLimit.high >>> 0, false).toBigInt();
+                            else if (typeof message.readLimit === "number")
                                 object.readLimit = options.longs === String ? String(message.readLimit) : message.readLimit;
                             else
                                 object.readLimit = options.longs === String ? $util.Long.prototype.toString.call(message.readLimit) : options.longs === Number ? new $util.LongBits(message.readLimit.low >>> 0, message.readLimit.high >>> 0).toNumber() : message.readLimit;
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -20095,7 +20173,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -20103,7 +20183,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -20111,7 +20193,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -20641,9 +20725,9 @@
                             object.object = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.generation = options.longs === String ? "0" : 0;
+                                object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                             object.restoreToken = "";
                         }
@@ -20652,12 +20736,16 @@
                         if (message.object != null && message.hasOwnProperty("object"))
                             object.object = message.object;
                         if (message.generation != null && message.hasOwnProperty("generation"))
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -20665,7 +20753,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -20673,7 +20763,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -20681,7 +20773,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -21539,9 +21633,9 @@
                             object.object = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.generation = options.longs === String ? "0" : 0;
+                                object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.commonObjectRequestParams = null;
                         }
                         if (message.bucket != null && message.hasOwnProperty("bucket"))
@@ -21549,12 +21643,16 @@
                         if (message.object != null && message.hasOwnProperty("object"))
                             object.object = message.object;
                         if (message.generation != null && message.hasOwnProperty("generation"))
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -21562,7 +21660,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -21570,7 +21670,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -21578,7 +21680,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -22729,7 +22833,9 @@
                                 object._writeHandle = "writeHandle";
                         }
                         if (message.generation != null && message.hasOwnProperty("generation")) {
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
@@ -23222,13 +23328,15 @@
                         if (options.defaults) {
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.readId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.readId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.readId = options.longs === String ? "0" : 0;
+                                object.readId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.status = null;
                         }
                         if (message.readId != null && message.hasOwnProperty("readId"))
-                            if (typeof message.readId === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.readId = typeof message.readId === "number" ? BigInt(message.readId) : $util.Long.fromBits(message.readId.low >>> 0, message.readId.high >>> 0, false).toBigInt();
+                            else if (typeof message.readId === "number")
                                 object.readId = options.longs === String ? String(message.readId) : message.readId;
                             else
                                 object.readId = options.longs === String ? $util.Long.prototype.toString.call(message.readId) : options.longs === Number ? new $util.LongBits(message.readId.low >>> 0, message.readId.high >>> 0).toNumber() : message.readId;
@@ -23511,32 +23619,38 @@
                         if (options.defaults) {
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.readOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.readOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.readOffset = options.longs === String ? "0" : 0;
+                                object.readOffset = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.readLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.readLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.readLength = options.longs === String ? "0" : 0;
+                                object.readLength = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.readId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.readId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.readId = options.longs === String ? "0" : 0;
+                                object.readId = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
                         if (message.readOffset != null && message.hasOwnProperty("readOffset"))
-                            if (typeof message.readOffset === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.readOffset = typeof message.readOffset === "number" ? BigInt(message.readOffset) : $util.Long.fromBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0, false).toBigInt();
+                            else if (typeof message.readOffset === "number")
                                 object.readOffset = options.longs === String ? String(message.readOffset) : message.readOffset;
                             else
                                 object.readOffset = options.longs === String ? $util.Long.prototype.toString.call(message.readOffset) : options.longs === Number ? new $util.LongBits(message.readOffset.low >>> 0, message.readOffset.high >>> 0).toNumber() : message.readOffset;
                         if (message.readLength != null && message.hasOwnProperty("readLength"))
-                            if (typeof message.readLength === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.readLength = typeof message.readLength === "number" ? BigInt(message.readLength) : $util.Long.fromBits(message.readLength.low >>> 0, message.readLength.high >>> 0, false).toBigInt();
+                            else if (typeof message.readLength === "number")
                                 object.readLength = options.longs === String ? String(message.readLength) : message.readLength;
                             else
                                 object.readLength = options.longs === String ? $util.Long.prototype.toString.call(message.readLength) : options.longs === Number ? new $util.LongBits(message.readLength.low >>> 0, message.readLength.high >>> 0).toNumber() : message.readLength;
                         if (message.readId != null && message.hasOwnProperty("readId"))
-                            if (typeof message.readId === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.readId = typeof message.readId === "number" ? BigInt(message.readId) : $util.Long.fromBits(message.readId.low >>> 0, message.readId.high >>> 0, false).toBigInt();
+                            else if (typeof message.readId === "number")
                                 object.readId = options.longs === String ? String(message.readId) : message.readId;
                             else
                                 object.readId = options.longs === String ? $util.Long.prototype.toString.call(message.readId) : options.longs === Number ? new $util.LongBits(message.readId.low >>> 0, message.readId.high >>> 0).toNumber() : message.readId;
@@ -24718,7 +24832,9 @@
                         if (message.resource != null && message.hasOwnProperty("resource"))
                             object.resource = $root.google.storage.v2.StorageObject.toObject(message.resource, options);
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -24726,7 +24842,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -24734,7 +24852,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -24742,7 +24862,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -24752,7 +24874,9 @@
                         if (message.predefinedAcl != null && message.hasOwnProperty("predefinedAcl"))
                             object.predefinedAcl = message.predefinedAcl;
                         if (message.objectSize != null && message.hasOwnProperty("objectSize")) {
-                            if (typeof message.objectSize === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.objectSize = typeof message.objectSize === "number" ? BigInt(message.objectSize) : $util.Long.fromBits(message.objectSize.low >>> 0, message.objectSize.high >>> 0, false).toBigInt();
+                            else if (typeof message.objectSize === "number")
                                 object.objectSize = options.longs === String ? String(message.objectSize) : message.objectSize;
                             else
                                 object.objectSize = options.longs === String ? $util.Long.prototype.toString.call(message.objectSize) : options.longs === Number ? new $util.LongBits(message.objectSize.low >>> 0, message.objectSize.high >>> 0).toNumber() : message.objectSize;
@@ -25163,9 +25287,9 @@
                         if (options.defaults) {
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.writeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.writeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.writeOffset = options.longs === String ? "0" : 0;
+                                object.writeOffset = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.objectChecksums = null;
                             object.finishWrite = false;
                             object.commonObjectRequestParams = null;
@@ -25181,7 +25305,9 @@
                                 object.firstMessage = "writeObjectSpec";
                         }
                         if (message.writeOffset != null && message.hasOwnProperty("writeOffset"))
-                            if (typeof message.writeOffset === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.writeOffset = typeof message.writeOffset === "number" ? BigInt(message.writeOffset) : $util.Long.fromBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0, false).toBigInt();
+                            else if (typeof message.writeOffset === "number")
                                 object.writeOffset = options.longs === String ? String(message.writeOffset) : message.writeOffset;
                             else
                                 object.writeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.writeOffset) : options.longs === Number ? new $util.LongBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0).toNumber() : message.writeOffset;
@@ -25491,7 +25617,9 @@
                         if (options.defaults)
                             object.persistedDataChecksums = null;
                         if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
-                            if (typeof message.persistedSize === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.persistedSize = typeof message.persistedSize === "number" ? BigInt(message.persistedSize) : $util.Long.fromBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0, false).toBigInt();
+                            else if (typeof message.persistedSize === "number")
                                 object.persistedSize = options.longs === String ? String(message.persistedSize) : message.persistedSize;
                             else
                                 object.persistedSize = options.longs === String ? $util.Long.prototype.toString.call(message.persistedSize) : options.longs === Number ? new $util.LongBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0).toNumber() : message.persistedSize;
@@ -25906,21 +26034,25 @@
                             object.object = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.generation = options.longs === String ? "0" : 0;
+                                object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
                         if (message.bucket != null && message.hasOwnProperty("bucket"))
                             object.bucket = message.bucket;
                         if (message.object != null && message.hasOwnProperty("object"))
                             object.object = message.object;
                         if (message.generation != null && message.hasOwnProperty("generation"))
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -25928,7 +26060,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -26414,9 +26548,9 @@
                         if (options.defaults) {
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.writeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.writeOffset = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.writeOffset = options.longs === String ? "0" : 0;
+                                object.writeOffset = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.objectChecksums = null;
                             object.stateLookup = false;
                             object.flush = false;
@@ -26434,7 +26568,9 @@
                                 object.firstMessage = "writeObjectSpec";
                         }
                         if (message.writeOffset != null && message.hasOwnProperty("writeOffset"))
-                            if (typeof message.writeOffset === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.writeOffset = typeof message.writeOffset === "number" ? BigInt(message.writeOffset) : $util.Long.fromBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0, false).toBigInt();
+                            else if (typeof message.writeOffset === "number")
                                 object.writeOffset = options.longs === String ? String(message.writeOffset) : message.writeOffset;
                             else
                                 object.writeOffset = options.longs === String ? $util.Long.prototype.toString.call(message.writeOffset) : options.longs === Number ? new $util.LongBits(message.writeOffset.low >>> 0, message.writeOffset.high >>> 0).toNumber() : message.writeOffset;
@@ -26787,7 +26923,9 @@
                         if (options.defaults)
                             object.persistedDataChecksums = null;
                         if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
-                            if (typeof message.persistedSize === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.persistedSize = typeof message.persistedSize === "number" ? BigInt(message.persistedSize) : $util.Long.fromBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0, false).toBigInt();
+                            else if (typeof message.persistedSize === "number")
                                 object.persistedSize = options.longs === String ? String(message.persistedSize) : message.persistedSize;
                             else
                                 object.persistedSize = options.longs === String ? $util.Long.prototype.toString.call(message.persistedSize) : options.longs === Number ? new $util.LongBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0).toNumber() : message.persistedSize;
@@ -27884,7 +28022,9 @@
                         if (options.defaults)
                             object.persistedDataChecksums = null;
                         if (message.persistedSize != null && message.hasOwnProperty("persistedSize")) {
-                            if (typeof message.persistedSize === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.persistedSize = typeof message.persistedSize === "number" ? BigInt(message.persistedSize) : $util.Long.fromBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0, false).toBigInt();
+                            else if (typeof message.persistedSize === "number")
                                 object.persistedSize = options.longs === String ? String(message.persistedSize) : message.persistedSize;
                             else
                                 object.persistedSize = options.longs === String ? $util.Long.prototype.toString.call(message.persistedSize) : options.longs === Number ? new $util.LongBits(message.persistedSize.low >>> 0, message.persistedSize.high >>> 0).toNumber() : message.persistedSize;
@@ -28716,15 +28856,15 @@
                             object.sourceObject = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.sourceGeneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.sourceGeneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.sourceGeneration = options.longs === String ? "0" : 0;
+                                object.sourceGeneration = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.rewriteToken = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.maxBytesRewrittenPerCall = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.maxBytesRewrittenPerCall = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.maxBytesRewrittenPerCall = options.longs === String ? "0" : 0;
+                                object.maxBytesRewrittenPerCall = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.copySourceEncryptionAlgorithm = "";
                             object.commonObjectRequestParams = null;
                             if (options.bytes === String)
@@ -28754,14 +28894,18 @@
                         if (message.sourceObject != null && message.hasOwnProperty("sourceObject"))
                             object.sourceObject = message.sourceObject;
                         if (message.sourceGeneration != null && message.hasOwnProperty("sourceGeneration"))
-                            if (typeof message.sourceGeneration === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.sourceGeneration = typeof message.sourceGeneration === "number" ? BigInt(message.sourceGeneration) : $util.Long.fromBits(message.sourceGeneration.low >>> 0, message.sourceGeneration.high >>> 0, false).toBigInt();
+                            else if (typeof message.sourceGeneration === "number")
                                 object.sourceGeneration = options.longs === String ? String(message.sourceGeneration) : message.sourceGeneration;
                             else
                                 object.sourceGeneration = options.longs === String ? $util.Long.prototype.toString.call(message.sourceGeneration) : options.longs === Number ? new $util.LongBits(message.sourceGeneration.low >>> 0, message.sourceGeneration.high >>> 0).toNumber() : message.sourceGeneration;
                         if (message.rewriteToken != null && message.hasOwnProperty("rewriteToken"))
                             object.rewriteToken = message.rewriteToken;
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -28769,7 +28913,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -28777,7 +28923,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -28785,7 +28933,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -28793,7 +28943,9 @@
                                 object._ifMetagenerationNotMatch = "ifMetagenerationNotMatch";
                         }
                         if (message.ifSourceGenerationMatch != null && message.hasOwnProperty("ifSourceGenerationMatch")) {
-                            if (typeof message.ifSourceGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceGenerationMatch = typeof message.ifSourceGenerationMatch === "number" ? BigInt(message.ifSourceGenerationMatch) : $util.Long.fromBits(message.ifSourceGenerationMatch.low >>> 0, message.ifSourceGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceGenerationMatch === "number")
                                 object.ifSourceGenerationMatch = options.longs === String ? String(message.ifSourceGenerationMatch) : message.ifSourceGenerationMatch;
                             else
                                 object.ifSourceGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceGenerationMatch.low >>> 0, message.ifSourceGenerationMatch.high >>> 0).toNumber() : message.ifSourceGenerationMatch;
@@ -28801,7 +28953,9 @@
                                 object._ifSourceGenerationMatch = "ifSourceGenerationMatch";
                         }
                         if (message.ifSourceGenerationNotMatch != null && message.hasOwnProperty("ifSourceGenerationNotMatch")) {
-                            if (typeof message.ifSourceGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceGenerationNotMatch = typeof message.ifSourceGenerationNotMatch === "number" ? BigInt(message.ifSourceGenerationNotMatch) : $util.Long.fromBits(message.ifSourceGenerationNotMatch.low >>> 0, message.ifSourceGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceGenerationNotMatch === "number")
                                 object.ifSourceGenerationNotMatch = options.longs === String ? String(message.ifSourceGenerationNotMatch) : message.ifSourceGenerationNotMatch;
                             else
                                 object.ifSourceGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceGenerationNotMatch.low >>> 0, message.ifSourceGenerationNotMatch.high >>> 0).toNumber() : message.ifSourceGenerationNotMatch;
@@ -28809,7 +28963,9 @@
                                 object._ifSourceGenerationNotMatch = "ifSourceGenerationNotMatch";
                         }
                         if (message.ifSourceMetagenerationMatch != null && message.hasOwnProperty("ifSourceMetagenerationMatch")) {
-                            if (typeof message.ifSourceMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceMetagenerationMatch = typeof message.ifSourceMetagenerationMatch === "number" ? BigInt(message.ifSourceMetagenerationMatch) : $util.Long.fromBits(message.ifSourceMetagenerationMatch.low >>> 0, message.ifSourceMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceMetagenerationMatch === "number")
                                 object.ifSourceMetagenerationMatch = options.longs === String ? String(message.ifSourceMetagenerationMatch) : message.ifSourceMetagenerationMatch;
                             else
                                 object.ifSourceMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceMetagenerationMatch.low >>> 0, message.ifSourceMetagenerationMatch.high >>> 0).toNumber() : message.ifSourceMetagenerationMatch;
@@ -28817,7 +28973,9 @@
                                 object._ifSourceMetagenerationMatch = "ifSourceMetagenerationMatch";
                         }
                         if (message.ifSourceMetagenerationNotMatch != null && message.hasOwnProperty("ifSourceMetagenerationNotMatch")) {
-                            if (typeof message.ifSourceMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceMetagenerationNotMatch = typeof message.ifSourceMetagenerationNotMatch === "number" ? BigInt(message.ifSourceMetagenerationNotMatch) : $util.Long.fromBits(message.ifSourceMetagenerationNotMatch.low >>> 0, message.ifSourceMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceMetagenerationNotMatch === "number")
                                 object.ifSourceMetagenerationNotMatch = options.longs === String ? String(message.ifSourceMetagenerationNotMatch) : message.ifSourceMetagenerationNotMatch;
                             else
                                 object.ifSourceMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceMetagenerationNotMatch.low >>> 0, message.ifSourceMetagenerationNotMatch.high >>> 0).toNumber() : message.ifSourceMetagenerationNotMatch;
@@ -28825,7 +28983,9 @@
                                 object._ifSourceMetagenerationNotMatch = "ifSourceMetagenerationNotMatch";
                         }
                         if (message.maxBytesRewrittenPerCall != null && message.hasOwnProperty("maxBytesRewrittenPerCall"))
-                            if (typeof message.maxBytesRewrittenPerCall === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.maxBytesRewrittenPerCall = typeof message.maxBytesRewrittenPerCall === "number" ? BigInt(message.maxBytesRewrittenPerCall) : $util.Long.fromBits(message.maxBytesRewrittenPerCall.low >>> 0, message.maxBytesRewrittenPerCall.high >>> 0, false).toBigInt();
+                            else if (typeof message.maxBytesRewrittenPerCall === "number")
                                 object.maxBytesRewrittenPerCall = options.longs === String ? String(message.maxBytesRewrittenPerCall) : message.maxBytesRewrittenPerCall;
                             else
                                 object.maxBytesRewrittenPerCall = options.longs === String ? $util.Long.prototype.toString.call(message.maxBytesRewrittenPerCall) : options.longs === Number ? new $util.LongBits(message.maxBytesRewrittenPerCall.low >>> 0, message.maxBytesRewrittenPerCall.high >>> 0).toNumber() : message.maxBytesRewrittenPerCall;
@@ -29162,25 +29322,29 @@
                         if (options.defaults) {
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.totalBytesRewritten = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.totalBytesRewritten = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.totalBytesRewritten = options.longs === String ? "0" : 0;
+                                object.totalBytesRewritten = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.objectSize = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.objectSize = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.objectSize = options.longs === String ? "0" : 0;
+                                object.objectSize = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.done = false;
                             object.rewriteToken = "";
                             object.resource = null;
                         }
                         if (message.totalBytesRewritten != null && message.hasOwnProperty("totalBytesRewritten"))
-                            if (typeof message.totalBytesRewritten === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.totalBytesRewritten = typeof message.totalBytesRewritten === "number" ? BigInt(message.totalBytesRewritten) : $util.Long.fromBits(message.totalBytesRewritten.low >>> 0, message.totalBytesRewritten.high >>> 0, false).toBigInt();
+                            else if (typeof message.totalBytesRewritten === "number")
                                 object.totalBytesRewritten = options.longs === String ? String(message.totalBytesRewritten) : message.totalBytesRewritten;
                             else
                                 object.totalBytesRewritten = options.longs === String ? $util.Long.prototype.toString.call(message.totalBytesRewritten) : options.longs === Number ? new $util.LongBits(message.totalBytesRewritten.low >>> 0, message.totalBytesRewritten.high >>> 0).toNumber() : message.totalBytesRewritten;
                         if (message.objectSize != null && message.hasOwnProperty("objectSize"))
-                            if (typeof message.objectSize === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.objectSize = typeof message.objectSize === "number" ? BigInt(message.objectSize) : $util.Long.fromBits(message.objectSize.low >>> 0, message.objectSize.high >>> 0, false).toBigInt();
+                            else if (typeof message.objectSize === "number")
                                 object.objectSize = options.longs === String ? String(message.objectSize) : message.objectSize;
                             else
                                 object.objectSize = options.longs === String ? $util.Long.prototype.toString.call(message.objectSize) : options.longs === Number ? new $util.LongBits(message.objectSize.low >>> 0, message.objectSize.high >>> 0).toNumber() : message.objectSize;
@@ -29739,7 +29903,9 @@
                         if (message.destinationObject != null && message.hasOwnProperty("destinationObject"))
                             object.destinationObject = message.destinationObject;
                         if (message.ifSourceGenerationMatch != null && message.hasOwnProperty("ifSourceGenerationMatch")) {
-                            if (typeof message.ifSourceGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceGenerationMatch = typeof message.ifSourceGenerationMatch === "number" ? BigInt(message.ifSourceGenerationMatch) : $util.Long.fromBits(message.ifSourceGenerationMatch.low >>> 0, message.ifSourceGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceGenerationMatch === "number")
                                 object.ifSourceGenerationMatch = options.longs === String ? String(message.ifSourceGenerationMatch) : message.ifSourceGenerationMatch;
                             else
                                 object.ifSourceGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceGenerationMatch.low >>> 0, message.ifSourceGenerationMatch.high >>> 0).toNumber() : message.ifSourceGenerationMatch;
@@ -29747,7 +29913,9 @@
                                 object._ifSourceGenerationMatch = "ifSourceGenerationMatch";
                         }
                         if (message.ifSourceGenerationNotMatch != null && message.hasOwnProperty("ifSourceGenerationNotMatch")) {
-                            if (typeof message.ifSourceGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceGenerationNotMatch = typeof message.ifSourceGenerationNotMatch === "number" ? BigInt(message.ifSourceGenerationNotMatch) : $util.Long.fromBits(message.ifSourceGenerationNotMatch.low >>> 0, message.ifSourceGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceGenerationNotMatch === "number")
                                 object.ifSourceGenerationNotMatch = options.longs === String ? String(message.ifSourceGenerationNotMatch) : message.ifSourceGenerationNotMatch;
                             else
                                 object.ifSourceGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceGenerationNotMatch.low >>> 0, message.ifSourceGenerationNotMatch.high >>> 0).toNumber() : message.ifSourceGenerationNotMatch;
@@ -29755,7 +29923,9 @@
                                 object._ifSourceGenerationNotMatch = "ifSourceGenerationNotMatch";
                         }
                         if (message.ifSourceMetagenerationMatch != null && message.hasOwnProperty("ifSourceMetagenerationMatch")) {
-                            if (typeof message.ifSourceMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceMetagenerationMatch = typeof message.ifSourceMetagenerationMatch === "number" ? BigInt(message.ifSourceMetagenerationMatch) : $util.Long.fromBits(message.ifSourceMetagenerationMatch.low >>> 0, message.ifSourceMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceMetagenerationMatch === "number")
                                 object.ifSourceMetagenerationMatch = options.longs === String ? String(message.ifSourceMetagenerationMatch) : message.ifSourceMetagenerationMatch;
                             else
                                 object.ifSourceMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceMetagenerationMatch.low >>> 0, message.ifSourceMetagenerationMatch.high >>> 0).toNumber() : message.ifSourceMetagenerationMatch;
@@ -29763,7 +29933,9 @@
                                 object._ifSourceMetagenerationMatch = "ifSourceMetagenerationMatch";
                         }
                         if (message.ifSourceMetagenerationNotMatch != null && message.hasOwnProperty("ifSourceMetagenerationNotMatch")) {
-                            if (typeof message.ifSourceMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifSourceMetagenerationNotMatch = typeof message.ifSourceMetagenerationNotMatch === "number" ? BigInt(message.ifSourceMetagenerationNotMatch) : $util.Long.fromBits(message.ifSourceMetagenerationNotMatch.low >>> 0, message.ifSourceMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifSourceMetagenerationNotMatch === "number")
                                 object.ifSourceMetagenerationNotMatch = options.longs === String ? String(message.ifSourceMetagenerationNotMatch) : message.ifSourceMetagenerationNotMatch;
                             else
                                 object.ifSourceMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifSourceMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifSourceMetagenerationNotMatch.low >>> 0, message.ifSourceMetagenerationNotMatch.high >>> 0).toNumber() : message.ifSourceMetagenerationNotMatch;
@@ -29771,7 +29943,9 @@
                                 object._ifSourceMetagenerationNotMatch = "ifSourceMetagenerationNotMatch";
                         }
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -29779,7 +29953,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -29787,7 +29963,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -29795,7 +29973,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -30760,7 +30940,9 @@
                         if (message.object != null && message.hasOwnProperty("object"))
                             object.object = $root.google.storage.v2.StorageObject.toObject(message.object, options);
                         if (message.ifGenerationMatch != null && message.hasOwnProperty("ifGenerationMatch")) {
-                            if (typeof message.ifGenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationMatch = typeof message.ifGenerationMatch === "number" ? BigInt(message.ifGenerationMatch) : $util.Long.fromBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationMatch === "number")
                                 object.ifGenerationMatch = options.longs === String ? String(message.ifGenerationMatch) : message.ifGenerationMatch;
                             else
                                 object.ifGenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationMatch.low >>> 0, message.ifGenerationMatch.high >>> 0).toNumber() : message.ifGenerationMatch;
@@ -30768,7 +30950,9 @@
                                 object._ifGenerationMatch = "ifGenerationMatch";
                         }
                         if (message.ifGenerationNotMatch != null && message.hasOwnProperty("ifGenerationNotMatch")) {
-                            if (typeof message.ifGenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifGenerationNotMatch = typeof message.ifGenerationNotMatch === "number" ? BigInt(message.ifGenerationNotMatch) : $util.Long.fromBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifGenerationNotMatch === "number")
                                 object.ifGenerationNotMatch = options.longs === String ? String(message.ifGenerationNotMatch) : message.ifGenerationNotMatch;
                             else
                                 object.ifGenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifGenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifGenerationNotMatch.low >>> 0, message.ifGenerationNotMatch.high >>> 0).toNumber() : message.ifGenerationNotMatch;
@@ -30776,7 +30960,9 @@
                                 object._ifGenerationNotMatch = "ifGenerationNotMatch";
                         }
                         if (message.ifMetagenerationMatch != null && message.hasOwnProperty("ifMetagenerationMatch")) {
-                            if (typeof message.ifMetagenerationMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationMatch = typeof message.ifMetagenerationMatch === "number" ? BigInt(message.ifMetagenerationMatch) : $util.Long.fromBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationMatch === "number")
                                 object.ifMetagenerationMatch = options.longs === String ? String(message.ifMetagenerationMatch) : message.ifMetagenerationMatch;
                             else
                                 object.ifMetagenerationMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationMatch.low >>> 0, message.ifMetagenerationMatch.high >>> 0).toNumber() : message.ifMetagenerationMatch;
@@ -30784,7 +30970,9 @@
                                 object._ifMetagenerationMatch = "ifMetagenerationMatch";
                         }
                         if (message.ifMetagenerationNotMatch != null && message.hasOwnProperty("ifMetagenerationNotMatch")) {
-                            if (typeof message.ifMetagenerationNotMatch === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.ifMetagenerationNotMatch = typeof message.ifMetagenerationNotMatch === "number" ? BigInt(message.ifMetagenerationNotMatch) : $util.Long.fromBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0, false).toBigInt();
+                            else if (typeof message.ifMetagenerationNotMatch === "number")
                                 object.ifMetagenerationNotMatch = options.longs === String ? String(message.ifMetagenerationNotMatch) : message.ifMetagenerationNotMatch;
                             else
                                 object.ifMetagenerationNotMatch = options.longs === String ? $util.Long.prototype.toString.call(message.ifMetagenerationNotMatch) : options.longs === Number ? new $util.LongBits(message.ifMetagenerationNotMatch.low >>> 0, message.ifMetagenerationNotMatch.high >>> 0).toNumber() : message.ifMetagenerationNotMatch;
@@ -32357,9 +32545,9 @@
                             object.project = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.metageneration = options.longs === String ? "0" : 0;
+                                object.metageneration = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.location = "";
                             object.locationType = "";
                             object.storageClass = "";
@@ -32391,7 +32579,9 @@
                         if (message.project != null && message.hasOwnProperty("project"))
                             object.project = message.project;
                         if (message.metageneration != null && message.hasOwnProperty("metageneration"))
-                            if (typeof message.metageneration === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
+                            else if (typeof message.metageneration === "number")
                                 object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                             else
                                 object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
@@ -41836,20 +42026,20 @@
                             object.bucket = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.generation = options.longs === String ? "0" : 0;
+                                object.generation = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.metageneration = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.metageneration = options.longs === String ? "0" : 0;
+                                object.metageneration = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.storageClass = "";
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.size = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.size = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.size = options.longs === String ? "0" : 0;
+                                object.size = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.contentEncoding = "";
                             object.contentDisposition = "";
                             object.cacheControl = "";
@@ -41877,19 +42067,25 @@
                         if (message.bucket != null && message.hasOwnProperty("bucket"))
                             object.bucket = message.bucket;
                         if (message.generation != null && message.hasOwnProperty("generation"))
-                            if (typeof message.generation === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.generation = typeof message.generation === "number" ? BigInt(message.generation) : $util.Long.fromBits(message.generation.low >>> 0, message.generation.high >>> 0, false).toBigInt();
+                            else if (typeof message.generation === "number")
                                 object.generation = options.longs === String ? String(message.generation) : message.generation;
                             else
                                 object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
                         if (message.metageneration != null && message.hasOwnProperty("metageneration"))
-                            if (typeof message.metageneration === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.metageneration = typeof message.metageneration === "number" ? BigInt(message.metageneration) : $util.Long.fromBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0, false).toBigInt();
+                            else if (typeof message.metageneration === "number")
                                 object.metageneration = options.longs === String ? String(message.metageneration) : message.metageneration;
                             else
                                 object.metageneration = options.longs === String ? $util.Long.prototype.toString.call(message.metageneration) : options.longs === Number ? new $util.LongBits(message.metageneration.low >>> 0, message.metageneration.high >>> 0).toNumber() : message.metageneration;
                         if (message.storageClass != null && message.hasOwnProperty("storageClass"))
                             object.storageClass = message.storageClass;
                         if (message.size != null && message.hasOwnProperty("size"))
-                            if (typeof message.size === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.size = typeof message.size === "number" ? BigInt(message.size) : $util.Long.fromBits(message.size.low >>> 0, message.size.high >>> 0, false).toBigInt();
+                            else if (typeof message.size === "number")
                                 object.size = options.longs === String ? String(message.size) : message.size;
                             else
                                 object.size = options.longs === String ? $util.Long.prototype.toString.call(message.size) : options.longs === Number ? new $util.LongBits(message.size.low >>> 0, message.size.high >>> 0).toNumber() : message.size;
@@ -43723,32 +43919,38 @@
                         if (options.defaults) {
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.start = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.start = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.start = options.longs === String ? "0" : 0;
+                                object.start = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.end = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.end = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.end = options.longs === String ? "0" : 0;
+                                object.end = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.completeLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.completeLength = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.completeLength = options.longs === String ? "0" : 0;
+                                object.completeLength = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         }
                         if (message.start != null && message.hasOwnProperty("start"))
-                            if (typeof message.start === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.start = typeof message.start === "number" ? BigInt(message.start) : $util.Long.fromBits(message.start.low >>> 0, message.start.high >>> 0, false).toBigInt();
+                            else if (typeof message.start === "number")
                                 object.start = options.longs === String ? String(message.start) : message.start;
                             else
                                 object.start = options.longs === String ? $util.Long.prototype.toString.call(message.start) : options.longs === Number ? new $util.LongBits(message.start.low >>> 0, message.start.high >>> 0).toNumber() : message.start;
                         if (message.end != null && message.hasOwnProperty("end"))
-                            if (typeof message.end === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.end = typeof message.end === "number" ? BigInt(message.end) : $util.Long.fromBits(message.end.low >>> 0, message.end.high >>> 0, false).toBigInt();
+                            else if (typeof message.end === "number")
                                 object.end = options.longs === String ? String(message.end) : message.end;
                             else
                                 object.end = options.longs === String ? $util.Long.prototype.toString.call(message.end) : options.longs === Number ? new $util.LongBits(message.end.low >>> 0, message.end.high >>> 0).toNumber() : message.end;
                         if (message.completeLength != null && message.hasOwnProperty("completeLength"))
-                            if (typeof message.completeLength === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.completeLength = typeof message.completeLength === "number" ? BigInt(message.completeLength) : $util.Long.fromBits(message.completeLength.low >>> 0, message.completeLength.high >>> 0, false).toBigInt();
+                            else if (typeof message.completeLength === "number")
                                 object.completeLength = options.longs === String ? String(message.completeLength) : message.completeLength;
                             else
                                 object.completeLength = options.longs === String ? $util.Long.prototype.toString.call(message.completeLength) : options.longs === Number ? new $util.LongBits(message.completeLength.low >>> 0, message.completeLength.high >>> 0).toNumber() : message.completeLength;
@@ -61762,14 +61964,14 @@
                         object.identifierValue = "";
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.positiveIntValue = options.longs === String ? "0" : 0;
+                            object.positiveIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.negativeIntValue = options.longs === String ? "0" : 0;
+                            object.negativeIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.doubleValue = 0;
                         if (options.bytes === String)
                             object.stringValue = "";
@@ -61788,12 +61990,16 @@
                     if (message.identifierValue != null && message.hasOwnProperty("identifierValue"))
                         object.identifierValue = message.identifierValue;
                     if (message.positiveIntValue != null && message.hasOwnProperty("positiveIntValue"))
-                        if (typeof message.positiveIntValue === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.positiveIntValue = typeof message.positiveIntValue === "number" ? BigInt(message.positiveIntValue) : $util.Long.fromBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0, true).toBigInt();
+                        else if (typeof message.positiveIntValue === "number")
                             object.positiveIntValue = options.longs === String ? String(message.positiveIntValue) : message.positiveIntValue;
                         else
                             object.positiveIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.positiveIntValue) : options.longs === Number ? new $util.LongBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0).toNumber(true) : message.positiveIntValue;
                     if (message.negativeIntValue != null && message.hasOwnProperty("negativeIntValue"))
-                        if (typeof message.negativeIntValue === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.negativeIntValue = typeof message.negativeIntValue === "number" ? BigInt(message.negativeIntValue) : $util.Long.fromBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0, false).toBigInt();
+                        else if (typeof message.negativeIntValue === "number")
                             object.negativeIntValue = options.longs === String ? String(message.negativeIntValue) : message.negativeIntValue;
                         else
                             object.negativeIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.negativeIntValue) : options.longs === Number ? new $util.LongBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0).toNumber() : message.negativeIntValue;
@@ -65206,13 +65412,15 @@
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
@@ -66133,13 +66341,15 @@
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
