@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [7.3.2](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.1...speech-v7.3.2) (2026-05-18)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
 ## [7.3.1](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.0...speech-v7.3.1) (2026-05-01)
 
 
