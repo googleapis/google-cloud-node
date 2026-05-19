@@ -160,16 +160,32 @@ export class StorageTransport {
       ? urlString
       : new URL(urlString, this.baseUrl).toString();
 
-    const bodyStr = typeof reqOpts.body === 'string'
-      ? reqOpts.body
-      : (typeof reqOpts.data === 'string' ? reqOpts.data : '');
+    // Safely extract and inspect the payload for an 'etag' property
+    let hasEtagInBody = false;
+    const payload = reqOpts.body || reqOpts.data;
 
+    if (payload !== null && typeof payload === 'object') {
+      // Handles plain JSON objects 
+      hasEtagInBody = 'etag' in payload;
+    } else if (typeof payload === 'string') {
+      // Handles stringified JSON without causing false positives on plain text
+      try {
+        const parsed = JSON.parse(payload);
+        hasEtagInBody = parsed !== null && typeof parsed === 'object' && 'etag' in parsed;
+      } catch (e) {
+        // If it's not valid JSON, it's just a raw string/file upload. 
+        // We safely ignore it to prevent false positives.
+        hasEtagInBody = false;
+      }
+    }
+
+    // Compute the final hasPrecondition flag
     const hasPrecondition = !!(
       reqOpts.hasPrecondition ||
       reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
       reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
       reqOpts.queryParameters?.ifSourceGenerationMatch !== undefined ||
-      bodyStr.includes('"etag"')
+      hasEtagInBody
     );
 
     try {
@@ -219,10 +235,19 @@ export class StorageTransport {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = resp.data as any;
         if (isPlainObject(data)) {
+          // Standard JSON responses: Mutate and return data
           data.headers = resp.headers;
           data.status = resp.status;
           return data;
         }
+        if (data !== null && typeof data === 'object') {
+          // Binary payloads (Buffer, Stream, etc.): Return raw data without mutating.
+          // This maintains backward compatibility for downloads.
+          return data;
+        }
+
+        // Primitives (strings, empty bodies, null): Return the full GaxiosResponse.
+        // This ensures resumable upload init calls can still read `resp.headers.location`.
         return resp;
       };
 
