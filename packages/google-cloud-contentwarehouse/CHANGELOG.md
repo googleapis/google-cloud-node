@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.4.2](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.4.1...contentwarehouse-v2.4.2) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [2.4.1](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.4.0...contentwarehouse-v2.4.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.3.0...contentwarehouse-v2.4.0) (2026-03-04)
+
+
+### Features
+
+* [contentwarehouse] Added a field for enabling image and table annotation for layout parser processor ([#7319](https://github.com/googleapis/google-cloud-node/issues/7319)) ([7eb5628](https://github.com/googleapis/google-cloud-node/commit/7eb5628e05f7592c7c3857035f82e9f44d8d4ef4))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.2.0...contentwarehouse-v2.3.0) (2025-10-13)
 
 
