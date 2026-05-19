@@ -59,6 +59,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | aggregate fleet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.aggregate_fleet.js) |
 | aggregate issue stats | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.aggregate_issue_stats.js) |
+| aggregate query stats | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.aggregate_query_stats.js) |
 | query database resource groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_database_resource_groups.js) |
 | query issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_issues.js) |
 | query products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_products.js) |
