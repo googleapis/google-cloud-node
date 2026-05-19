@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [6.2.3](https://github.com/googleapis/google-cloud-node/compare/tasks-v6.2.2...tasks-v6.2.3) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [6.2.2](https://github.com/googleapis/google-cloud-node/compare/tasks-v6.2.1...tasks-v6.2.2) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
 ## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/tasks-v6.2.0...tasks-v6.2.1) (2025-10-13)
 
 

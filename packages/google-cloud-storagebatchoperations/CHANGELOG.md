@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.4.0...storagebatchoperations-v0.4.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.3.0...storagebatchoperations-v0.4.0) (2026-05-01)
+
+
+### Features
+
+* [storagebatchoperations] add object custom contexts counters ([#8126](https://github.com/googleapis/google-cloud-node/issues/8126)) ([2c1a14b](https://github.com/googleapis/google-cloud-node/commit/2c1a14bfe030a22baa9cecf55e4b44e4a481470c))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.2.0...storagebatchoperations-v0.3.0) (2026-03-02)
+
+
+### Features
+
+* [storagebatchoperations] add new transformation `update_object_custom_context` ([#7309](https://github.com/googleapis/google-cloud-node/issues/7309)) ([4b8da3e](https://github.com/googleapis/google-cloud-node/commit/4b8da3eefef2c4af0f39f186b4d60257fa146eae))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.1...storagebatchoperations-v0.2.0) (2026-02-19)
+
+
+### Features
+
+* [storagebatchoperations] add QUEUED state to Storage Batch Operations API ([#7250](https://github.com/googleapis/google-cloud-node/issues/7250)) ([0bf04ff](https://github.com/googleapis/google-cloud-node/commit/0bf04ff629e4010a55463b0d960e65c07d8cf3ee))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/storagebatchoperations-v0.1.0...storagebatchoperations-v0.1.1) (2025-10-13)
 
 
