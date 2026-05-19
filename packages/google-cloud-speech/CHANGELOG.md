@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [7.3.2](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.1...speech-v7.3.2) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [7.3.1](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.0...speech-v7.3.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.2.1...speech-v7.3.0) (2026-03-02)
+
+
+### Features
+
+* Adds endpointing sensitivity to streaming recognition features ([#7270](https://github.com/googleapis/google-cloud-node/issues/7270)) ([4373c58](https://github.com/googleapis/google-cloud-node/commit/4373c581d895ad3785f1b3493bda83def6a0024c))
+
 ## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/speech-v7.2.0...speech-v7.2.1) (2025-10-13)
 
 
