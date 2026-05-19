@@ -61,6 +61,7 @@ if staging.is_dir():
             '.OwlBot.yaml',
             'samples/generated/v2/*',   # we don't want to encourage non-veneer use here.
             '.kokoro/samples-test.sh',  # get to green
+            '.kokoro/system-test.sh',
             '.kokoro/test.sh',
         ] + list(admin_files)
         logging.info(f"excluding files for non-admin: {excludes}")
@@ -170,6 +171,7 @@ s.copy(templates,destination="handwritten/bigtable", excludes=[
     '.github/sync-repo-settings.yaml',
     '.github/workflows/ci.yaml',
     '.kokoro/samples-test.sh',  # get to green
+    '.kokoro/system-test.sh',
     '.kokoro/test.sh',
     '.mocharc.js',
     'README.md'
