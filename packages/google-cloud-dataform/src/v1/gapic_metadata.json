@@ -10,6 +10,46 @@
         "grpc": {
           "libraryClient": "DataformClient",
           "rpcs": {
+            "GetTeamFolder": {
+              "methods": [
+                "getTeamFolder"
+              ]
+            },
+            "CreateTeamFolder": {
+              "methods": [
+                "createTeamFolder"
+              ]
+            },
+            "UpdateTeamFolder": {
+              "methods": [
+                "updateTeamFolder"
+              ]
+            },
+            "DeleteTeamFolder": {
+              "methods": [
+                "deleteTeamFolder"
+              ]
+            },
+            "GetFolder": {
+              "methods": [
+                "getFolder"
+              ]
+            },
+            "CreateFolder": {
+              "methods": [
+                "createFolder"
+              ]
+            },
+            "UpdateFolder": {
+              "methods": [
+                "updateFolder"
+              ]
+            },
+            "DeleteFolder": {
+              "methods": [
+                "deleteFolder"
+              ]
+            },
             "GetRepository": {
               "methods": [
                 "getRepository"
@@ -218,6 +258,69 @@
             "UpdateConfig": {
               "methods": [
                 "updateConfig"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "DeleteTeamFolderTree": {
+              "methods": [
+                "deleteTeamFolderTree"
+              ]
+            },
+            "DeleteFolderTree": {
+              "methods": [
+                "deleteFolderTree"
+              ]
+            },
+            "MoveFolder": {
+              "methods": [
+                "moveFolder"
+              ]
+            },
+            "MoveRepository": {
+              "methods": [
+                "moveRepository"
+              ]
+            },
+            "QueryTeamFolderContents": {
+              "methods": [
+                "queryTeamFolderContents",
+                "queryTeamFolderContentsStream",
+                "queryTeamFolderContentsAsync"
+              ]
+            },
+            "SearchTeamFolders": {
+              "methods": [
+                "searchTeamFolders",
+                "searchTeamFoldersStream",
+                "searchTeamFoldersAsync"
+              ]
+            },
+            "QueryFolderContents": {
+              "methods": [
+                "queryFolderContents",
+                "queryFolderContentsStream",
+                "queryFolderContentsAsync"
+              ]
+            },
+            "QueryUserRootContents": {
+              "methods": [
+                "queryUserRootContents",
+                "queryUserRootContentsStream",
+                "queryUserRootContentsAsync"
               ]
             },
             "ListRepositories": {
@@ -309,6 +412,46 @@
         "grpc-fallback": {
           "libraryClient": "DataformClient",
           "rpcs": {
+            "GetTeamFolder": {
+              "methods": [
+                "getTeamFolder"
+              ]
+            },
+            "CreateTeamFolder": {
+              "methods": [
+                "createTeamFolder"
+              ]
+            },
+            "UpdateTeamFolder": {
+              "methods": [
+                "updateTeamFolder"
+              ]
+            },
+            "DeleteTeamFolder": {
+              "methods": [
+                "deleteTeamFolder"
+              ]
+            },
+            "GetFolder": {
+              "methods": [
+                "getFolder"
+              ]
+            },
+            "CreateFolder": {
+              "methods": [
+                "createFolder"
+              ]
+            },
+            "UpdateFolder": {
+              "methods": [
+                "updateFolder"
+              ]
+            },
+            "DeleteFolder": {
+              "methods": [
+                "deleteFolder"
+              ]
+            },
             "GetRepository": {
               "methods": [
                 "getRepository"
@@ -517,6 +660,69 @@
             "UpdateConfig": {
               "methods": [
                 "updateConfig"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "DeleteTeamFolderTree": {
+              "methods": [
+                "deleteTeamFolderTree"
+              ]
+            },
+            "DeleteFolderTree": {
+              "methods": [
+                "deleteFolderTree"
+              ]
+            },
+            "MoveFolder": {
+              "methods": [
+                "moveFolder"
+              ]
+            },
+            "MoveRepository": {
+              "methods": [
+                "moveRepository"
+              ]
+            },
+            "QueryTeamFolderContents": {
+              "methods": [
+                "queryTeamFolderContents",
+                "queryTeamFolderContentsStream",
+                "queryTeamFolderContentsAsync"
+              ]
+            },
+            "SearchTeamFolders": {
+              "methods": [
+                "searchTeamFolders",
+                "searchTeamFoldersStream",
+                "searchTeamFoldersAsync"
+              ]
+            },
+            "QueryFolderContents": {
+              "methods": [
+                "queryFolderContents",
+                "queryFolderContentsStream",
+                "queryFolderContentsAsync"
+              ]
+            },
+            "QueryUserRootContents": {
+              "methods": [
+                "queryUserRootContents",
+                "queryUserRootContentsStream",
+                "queryUserRootContentsAsync"
               ]
             },
             "ListRepositories": {

@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// eslint-disable-next-line n/no-unpublished-import
-
 import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import * as path from 'path';
