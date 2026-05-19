@@ -1,5 +1,27 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.2.2...dataform-v2.3.0) (2026-05-19)
+
+
+### Features
+
+* Add folders and teamFolders related changes to v1 ([e9ad85f](https://github.com/googleapis/google-cloud-node/commit/e9ad85f0db9570343fb0625579fb9ee484280b59))
+* Update GCP Client Libraries in v1beta1 to support Folders, TeamFolders, and other relevant APIs ([e9ad85f](https://github.com/googleapis/google-cloud-node/commit/e9ad85f0db9570343fb0625579fb9ee484280b59))
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [2.2.2](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.2.1...dataform-v2.2.2) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [2.2.1](https://github.com/googleapis/google-cloud-node/compare/dataform-v2.2.0...dataform-v2.2.1) (2025-10-13)
 
 
