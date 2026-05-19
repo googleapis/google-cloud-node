@@ -12,13 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
-import {describe, it, beforeEach, afterEach} from 'mocha';
-import * as proxyquire from 'proxyquire';
-import * as sinon from 'sinon';
 import {PassThrough, Transform} from 'stream';
 import * as uuid from 'uuid';
-import * as P from '../src';
 import {paginator, ParsedArguments} from '../src';
 
 const util = {
@@ -27,29 +22,22 @@ const util = {
   },
 };
 
-class FakeResourceStream extends Transform {
-  calledWith: IArguments;
-  constructor() {
-    super({objectMode: true});
-    /* eslint-disable-next-line prefer-rest-params */
-    this.calledWith = arguments;
-  }
-}
+const mockCalledWith = jest.fn();
 
-const p = proxyquire('../src', {
-  './resource-stream': {ResourceStream: FakeResourceStream},
-}) as typeof P;
-
-const sandbox = sinon.createSandbox();
-
-// eslint-disable-next-line no-undef
-afterEach(() => {
-  sandbox.restore();
+jest.mock('../src/resource-stream', () => {
+  return {
+    ResourceStream: class FakeResourceStream extends Transform {
+      constructor(...args: any[]) {
+        super({objectMode: true});
+        mockCalledWith(args);
+      }
+    }
+  };
 });
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 function createFakeStream<T = any>() {
-  return new PassThrough({objectMode: true}) as P.ResourceStream<T>;
+  return new PassThrough({objectMode: true}) as any;
 }
 
 describe('paginator', () => {
@@ -70,13 +58,13 @@ describe('paginator', () => {
       const originalMethod = FakeClass.prototype.methodToExtend;
       paginator.extend(FakeClass, 'methodToExtend');
       const overwrittenMethod = FakeClass.prototype.methodToExtend;
-      assert.notStrictEqual(originalMethod, overwrittenMethod);
+      expect(originalMethod).not.toBe(overwrittenMethod);
     });
 
     it('should store the original method as a private member', () => {
       const originalMethod = FakeClass.prototype.methodToExtend;
       paginator.extend(FakeClass, 'methodToExtend');
-      assert.strictEqual(originalMethod, FakeClass.prototype.methodToExtend_);
+      expect(originalMethod).toBe(FakeClass.prototype.methodToExtend_);
     });
 
     it('should accept an array or string method names', () => {
@@ -84,20 +72,23 @@ describe('paginator', () => {
       const anotherMethod = FakeClass.prototype.anotherMethodToExtend;
       const methodsToExtend = ['methodToExtend', 'anotherMethodToExtend'];
       paginator.extend(FakeClass, methodsToExtend);
-      assert.notStrictEqual(originalMethod, FakeClass.prototype.methodToExtend);
-      assert.notStrictEqual(
-        anotherMethod,
+      expect(originalMethod).not.toBe(FakeClass.prototype.methodToExtend);
+      expect(anotherMethod).not.toBe(
         FakeClass.prototype.anotherMethodToExtend,
       );
     });
 
     it('should parse the arguments', done => {
-      sandbox.stub(paginator, 'parseArguments_').callsFake(args => {
-        assert.deepStrictEqual([].slice.call(args), [1, 2, 3]);
-        done();
+      jest.spyOn(paginator, 'parseArguments_').mockImplementation(args => {
+        try {
+          expect(Array.from(args)).toEqual([1, 2, 3]);
+          done();
+        } catch (e) {
+          done(e);
+        }
         return args as ParsedArguments;
       });
-      sandbox.stub(paginator, 'run_').callsFake(util.noop);
+      jest.spyOn(paginator, 'run_').mockImplementation(util.noop as any);
       paginator.extend(FakeClass, 'methodToExtend');
       FakeClass.prototype.methodToExtend(1, 2, 3);
     });
@@ -106,12 +97,16 @@ describe('paginator', () => {
       const expectedReturnValue = FakeClass.prototype.methodToExtend();
       const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
 
-      sandbox.stub(paginator, 'parseArguments_').returns(parsedArguments);
-      sandbox.stub(paginator, 'run_').callsFake((args, originalMethod) => {
-        assert.strictEqual(args, parsedArguments);
-        assert.strictEqual(originalMethod(), expectedReturnValue);
-        done();
-      });
+      jest.spyOn(paginator, 'parseArguments_').mockReturnValue(parsedArguments);
+      jest.spyOn(paginator, 'run_').mockImplementation(((args: any, originalMethod: any) => {
+        try {
+          expect(args).toBe(parsedArguments);
+          expect(originalMethod()).toBe(expectedReturnValue);
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any);
 
       paginator.extend(FakeClass, 'methodToExtend');
       FakeClass.prototype.methodToExtend();
@@ -126,10 +121,14 @@ describe('paginator', () => {
       const cls = new (FakeClass as any)();
       cls.uuid = uuid.v1();
 
-      sandbox.stub(paginator, 'run_').callsFake((_, originalMethod) => {
-        assert.strictEqual(originalMethod(), cls.uuid);
-        done();
-      });
+      jest.spyOn(paginator, 'run_').mockImplementation(((_: any, originalMethod: any) => {
+        try {
+          expect(originalMethod()).toBe(cls.uuid);
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any);
 
       paginator.extend(FakeClass, 'methodToExtend');
       cls.methodToExtend();
@@ -137,11 +136,9 @@ describe('paginator', () => {
 
     it('should return what the router returns', () => {
       const uniqueValue = 234;
-      sandbox.stub(paginator, 'run_').callsFake(() => {
-        return uniqueValue;
-      });
+      jest.spyOn(paginator, 'run_').mockReturnValue(uniqueValue as any);
       paginator.extend(FakeClass, 'methodToExtend');
-      assert.strictEqual(FakeClass.prototype.methodToExtend(), uniqueValue);
+      expect(FakeClass.prototype.methodToExtend()).toBe(uniqueValue);
     });
   });
 
@@ -152,32 +149,38 @@ describe('paginator', () => {
 
     it('should return a function', () => {
       const fakeStreamMethod = FakeClass.prototype.streamMethod;
-      assert.strictEqual(typeof fakeStreamMethod, 'function');
+      expect(typeof fakeStreamMethod).toBe('function');
     });
 
     it('should parse the arguments', done => {
       const fakeArgs = [1, 2, 3];
 
-      sandbox.stub(paginator, 'parseArguments_').callsFake(args => {
-        assert.deepStrictEqual(fakeArgs, [].slice.call(args));
-        done();
+      jest.spyOn(paginator, 'parseArguments_').mockImplementation(args => {
+        try {
+          expect(fakeArgs).toEqual(Array.from(args));
+          done();
+        } catch (e) {
+          done(e);
+        }
         return args as ParsedArguments;
       });
-      sandbox.stub(paginator, 'runAsStream_').callsFake(createFakeStream);
+      jest.spyOn(paginator, 'runAsStream_').mockImplementation(createFakeStream);
       FakeClass.prototype.streamMethod(...fakeArgs);
     });
 
     it('should run the method as a stream', done => {
       const parsedArguments = {a: 'b', c: 'd'} as ParsedArguments;
-      sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
-        return parsedArguments;
-      });
-      sandbox.stub(paginator, 'runAsStream_').callsFake((args, callback) => {
-        assert.strictEqual(args, parsedArguments);
-        assert.strictEqual(callback(), UUID);
-        setImmediate(done);
+      jest.spyOn(paginator, 'parseArguments_').mockReturnValue(parsedArguments);
+      jest.spyOn(paginator, 'runAsStream_').mockImplementation(((args: any, callback: any) => {
+        try {
+          expect(args).toBe(parsedArguments);
+          expect(callback()).toBe(UUID);
+          setImmediate(done);
+        } catch (e) {
+          done(e);
+        }
         return createFakeStream();
-      });
+      }) as any);
 
       FakeClass.prototype.streamMethod();
     });
@@ -187,14 +190,16 @@ describe('paginator', () => {
       FakeClass.prototype.methodToExtend = function () {
         return this;
       };
-      sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
-        return parsedArguments;
-      });
-      sandbox.stub(paginator, 'runAsStream_').callsFake((_, callback) => {
-        assert.strictEqual(callback(), FakeClass.prototype);
-        setImmediate(done);
+      jest.spyOn(paginator, 'parseArguments_').mockReturnValue(parsedArguments);
+      jest.spyOn(paginator, 'runAsStream_').mockImplementation(((_: any, callback: any) => {
+        try {
+          expect(callback()).toBe(FakeClass.prototype);
+          setImmediate(done);
+        } catch (e) {
+          done(e);
+        }
         return createFakeStream();
-      });
+      }) as any);
       FakeClass.prototype.streamMethod();
     });
 
@@ -205,23 +210,25 @@ describe('paginator', () => {
       FakeClass.prototype.methodToExtend_ = () => {
         return fakeValue;
       };
-      sandbox.stub(paginator, 'parseArguments_').callsFake(() => {
-        return parsedArguments;
-      });
-      sandbox.stub(paginator, 'runAsStream_').callsFake((_, callback) => {
-        assert.strictEqual(callback(), fakeValue);
-        setImmediate(done);
+      jest.spyOn(paginator, 'parseArguments_').mockReturnValue(parsedArguments);
+      jest.spyOn(paginator, 'runAsStream_').mockImplementation(((_: any, callback: any) => {
+        try {
+          expect(callback()).toBe(fakeValue);
+          setImmediate(done);
+        } catch (e) {
+          done(e);
+        }
         return createFakeStream();
-      });
+      }) as any);
       FakeClass.prototype.streamMethod();
     });
 
     it('should return a stream', () => {
       const fakeStream = createFakeStream();
-      sandbox.stub(paginator, 'parseArguments_').returns({});
-      sandbox.stub(paginator, 'runAsStream_').returns(fakeStream);
+      jest.spyOn(paginator, 'parseArguments_').mockReturnValue({} as any);
+      jest.spyOn(paginator, 'runAsStream_').mockReturnValue(fakeStream as any);
       const stream = FakeClass.prototype.streamMethod();
-      assert.strictEqual(fakeStream, stream);
+      expect(fakeStream).toBe(stream);
     });
   });
 
@@ -229,90 +236,90 @@ describe('paginator', () => {
     it('should set defaults', () => {
       const parsedArguments = paginator.parseArguments_([]);
 
-      assert.strictEqual(Object.keys(parsedArguments.query!).length, 0);
-      assert.strictEqual(parsedArguments.autoPaginate, true);
-      assert.strictEqual(parsedArguments.maxApiCalls, -1);
-      assert.strictEqual(parsedArguments.maxResults, -1);
-      assert.strictEqual(parsedArguments.callback, undefined);
+      expect(Object.keys(parsedArguments.query!).length).toBe(0);
+      expect(parsedArguments.autoPaginate).toBe(true);
+      expect(parsedArguments.maxApiCalls).toBe(-1);
+      expect(parsedArguments.maxResults).toBe(-1);
+      expect(parsedArguments.callback).toBeUndefined();
     });
 
     it('should detect a callback if first argument is a function', () => {
       const args = [util.noop];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.callback, args[0]);
+      expect(parsedArguments.callback).toBe(args[0]);
     });
 
     it('should use any other first argument as query', () => {
       const args = ['string'];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.query, args[0]);
+      expect(parsedArguments.query).toBe(args[0]);
     });
 
     it('should not make an undefined value the query', () => {
       const args = [undefined, util.noop];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.deepStrictEqual(parsedArguments.query, {});
+      expect(parsedArguments.query).toEqual({});
     });
 
     it('should detect a callback if last argument is a function', () => {
       const args = ['string', util.noop];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.callback, args[1]);
+      expect(parsedArguments.callback).toBe(args[1]);
     });
 
     it('should not assign a callback if a fn is not provided', () => {
       const args = ['string'];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.callback, undefined);
+      expect(parsedArguments.callback).toBeUndefined();
     });
 
     it('should set maxApiCalls from query.maxApiCalls', () => {
       const args = [{maxApiCalls: 10}];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.maxApiCalls, args[0].maxApiCalls);
-      assert.strictEqual(parsedArguments.query!.maxApiCalls, undefined);
+      expect(parsedArguments.maxApiCalls).toBe(args[0].maxApiCalls);
+      expect(parsedArguments.query!.maxApiCalls).toBeUndefined();
     });
 
     it('should set maxResults from query.maxResults', () => {
       const args = [{maxResults: 10}];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.maxResults, args[0].maxResults);
+      expect(parsedArguments.maxResults).toBe(args[0].maxResults);
     });
 
     it('should set maxResults from query.pageSize', () => {
       const args = [{pageSize: 10}];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.maxResults, args[0].pageSize);
+      expect(parsedArguments.maxResults).toBe(args[0].pageSize);
     });
 
     it('should set autoPaginate: false if there is a maxResults', () => {
       const args = [{maxResults: 10}, util.noop];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.autoPaginate, false);
+      expect(parsedArguments.autoPaginate).toBe(false);
     });
 
     it('should set autoPaginate: false query.autoPaginate', () => {
       const args = [{autoPaginate: false}, util.noop];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.autoPaginate, false);
+      expect(parsedArguments.autoPaginate).toBe(false);
     });
 
     it('should parse streamOptions', () => {
       const args = [{maxResults: 10, highWaterMark: 8}];
       const parsedArguments = paginator.parseArguments_(args);
 
-      assert.strictEqual(parsedArguments.maxResults, 10);
-      assert.deepStrictEqual(parsedArguments.streamOptions, {
+      expect(parsedArguments.maxResults).toBe(10);
+      expect(parsedArguments.streamOptions).toEqual({
         highWaterMark: 8,
       });
     });
@@ -327,13 +334,17 @@ describe('paginator', () => {
             callback: util.noop,
           };
 
-          sandbox
-            .stub(paginator, 'runAsStream_')
-            .callsFake((args, originalMethod) => {
-              assert.strictEqual(args, parsedArguments);
-              originalMethod();
+          jest
+            .spyOn(paginator, 'runAsStream_')
+            .mockImplementation(((args: any, originalMethod: any) => {
+              try {
+                expect(args).toBe(parsedArguments);
+                originalMethod();
+              } catch (e) {
+                done(e);
+              }
               return createFakeStream();
-            });
+            }) as any);
 
           paginator.run_(parsedArguments, done);
         });
@@ -344,17 +355,21 @@ describe('paginator', () => {
           const parsedArguments = {
             autoPaginate: true,
             callback(err: Error) {
-              assert.strictEqual(err, error);
-              done();
+              try {
+                expect(err).toBe(error);
+                done();
+              } catch (e) {
+                done(e);
+              }
             },
           };
 
-          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(() => {
             const stream = createFakeStream();
             setImmediate(() => {
               stream.emit('error', error);
             });
-            return stream;
+            return stream as any;
           });
 
           paginator.run_(parsedArguments, util.noop);
@@ -366,18 +381,22 @@ describe('paginator', () => {
           const parsedArguments = {
             autoPaginate: true,
             callback(err: Error, results_: {}) {
-              assert.deepStrictEqual(results_, results);
-              done();
+              try {
+                expect(results_).toEqual(results);
+                done();
+              } catch (e) {
+                done(e);
+              }
             },
           };
 
-          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(() => {
             const stream = createFakeStream();
             setImmediate(() => {
               results.forEach(result => stream.push(result));
               stream.push(null);
             });
-            return stream;
+            return stream as any;
           });
 
           paginator.run_(parsedArguments, util.noop);
@@ -396,22 +415,26 @@ describe('paginator', () => {
               fakeRes: {},
               anotherArg: number,
             ) {
-              assert.deepStrictEqual(results_, results);
-              assert.deepStrictEqual(query, undefined);
-              assert.deepStrictEqual(fakeRes, {msg: 'OK'});
-              assert.deepStrictEqual(anotherArg, 10);
-              done();
+              try {
+                expect(results_).toEqual(results);
+                expect(query).toBeUndefined();
+                expect(fakeRes).toEqual({msg: 'OK'});
+                expect(anotherArg).toBe(10);
+                done();
+              } catch (e) {
+                done(e);
+              }
             },
           };
 
-          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(() => {
             const stream = createFakeStream();
             setImmediate(() => {
               results.forEach(result => stream.push(result));
               stream.push(null);
-              stream._otherArgs = args;
+              (stream as any)._otherArgs = args;
             });
-            return stream;
+            return stream as any;
           });
 
           paginator.run_(parsedArguments, util.noop);
@@ -423,13 +446,17 @@ describe('paginator', () => {
           autoPaginate: true,
         };
         it('should call runAsStream_ when autoPaginate:true', done => {
-          sandbox
-            .stub(paginator, 'runAsStream_')
-            .callsFake((args, originalMethod) => {
-              assert.strictEqual(args, parsedArguments);
-              originalMethod();
+          jest
+            .spyOn(paginator, 'runAsStream_')
+            .mockImplementation(((args: any, originalMethod: any) => {
+              try {
+                expect(args).toBe(parsedArguments);
+                originalMethod();
+              } catch (e) {
+                done(e);
+              }
               return createFakeStream();
-            });
+            }) as any);
 
           paginator.run_(parsedArguments, done);
         });
@@ -437,35 +464,35 @@ describe('paginator', () => {
         it('should reject a promise on error', () => {
           const error = new Error('Error.');
 
-          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(() => {
             const stream = createFakeStream();
             setImmediate(() => {
               stream.emit('error', error);
             });
-            return stream;
+            return stream as any;
           });
 
-          paginator
+          return paginator
             .run_(parsedArguments, util.noop)
-            .then(util.noop, (err: Error) => assert.strictEqual(err, error));
+            .then(util.noop, (err: Error) => expect(err).toBe(error));
         });
 
         it('should resolve with all results on end', () => {
           const results = [{a: 1}, {b: 2}, {c: 3}];
 
-          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(() => {
             const stream = createFakeStream();
             setImmediate(() => {
               results.forEach(result => stream.push(result));
               stream.push(null);
             });
-            return stream;
+            return stream as any;
           });
 
-          paginator
+          return paginator
             .run_(parsedArguments, util.noop)
-            .then(([results_]: [1]) =>
-              assert.deepStrictEqual(results_, results),
+            .then(([results_]: any) =>
+              expect(results_).toEqual(results),
             );
         });
 
@@ -473,24 +500,28 @@ describe('paginator', () => {
           const results = [{a: 1}, {b: 2}, {c: 3}];
           const args: any[] = [{msg: 'OK'}, 10];
 
-          sandbox.stub(paginator, 'runAsStream_').callsFake(() => {
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(() => {
             const stream = createFakeStream();
             setImmediate(() => {
               results.forEach(result => stream.push(result));
               stream.push(null);
-              stream._otherArgs = args;
+              (stream as any)._otherArgs = args;
             });
-            return stream;
+            return stream as any;
           });
 
           paginator
             .run_(parsedArguments, util.noop)
-            .then(([results_, query_, fakeRes, anotherArg]: unknown[]) => {
-              assert.deepStrictEqual(results_, results);
-              assert.deepStrictEqual(query_, undefined);
-              assert.deepEqual(fakeRes, {msg: 'OK'});
-              assert.deepEqual(anotherArg, 10);
-              done();
+            .then(([results_, query_, fakeRes, anotherArg]: any) => {
+              try {
+                expect(results_).toEqual(results);
+                expect(query_).toBeUndefined();
+                expect(fakeRes).toEqual({msg: 'OK'});
+                expect(anotherArg).toBe(10);
+                done();
+              } catch (e) {
+                done(e);
+              }
             });
         });
       });
@@ -507,10 +538,14 @@ describe('paginator', () => {
             },
             callback: done,
           } as ParsedArguments;
-          sandbox.stub(paginator, 'runAsStream_').callsFake(createFakeStream);
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(createFakeStream);
           paginator.run_(parsedArguments, (query: {}, callback: () => void) => {
-            assert.deepStrictEqual(query, parsedArguments.query);
-            callback();
+            try {
+              expect(query).toEqual(parsedArguments.query);
+              callback();
+            } catch (e) {
+              done(e);
+            }
           });
         });
       });
@@ -524,9 +559,9 @@ describe('paginator', () => {
               c: 'd',
             },
           } as ParsedArguments;
-          sandbox.stub(paginator, 'runAsStream_').callsFake(createFakeStream);
+          jest.spyOn(paginator, 'runAsStream_').mockImplementation(createFakeStream);
           paginator.run_(parsedArguments, (query: {}) => {
-            assert.deepStrictEqual(query, parsedArguments.query);
+            expect(query).toEqual(parsedArguments.query);
           });
         });
       });
@@ -535,16 +570,13 @@ describe('paginator', () => {
     describe('runAsStream_', () => {
       it('should create a resource stream', () => {
         const fakeArgs = {};
-        const fakeFn = sandbox.spy();
-        const stream = p.paginator.runAsStream_(
+        const fakeFn = jest.fn();
+        paginator.runAsStream_(
           fakeArgs,
           fakeFn,
-        ) as unknown as FakeResourceStream;
+        );
 
-        assert(stream instanceof FakeResourceStream);
-        const [args, requestFn] = stream.calledWith;
-        assert.strictEqual(args, fakeArgs);
-        assert.strictEqual(requestFn, fakeFn);
+        expect(mockCalledWith).toHaveBeenCalledWith([fakeArgs, fakeFn]);
       });
     });
   });
