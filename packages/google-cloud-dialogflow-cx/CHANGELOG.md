@@ -1,5 +1,35 @@
 # Changelog
 
+## [5.8.2](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.1...dialogflow-cx-v5.8.2) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [5.8.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.8.0...dialogflow-cx-v5.8.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.7.0...dialogflow-cx-v5.8.0) (2026-04-08)
+
+
+### Features
+
+* [cx] updated v3 dialogflow client libraries with `dtmf_pattern` and `trace_blocks` ([#7846](https://github.com/googleapis/google-cloud-node/issues/7846)) ([24d9b56](https://github.com/googleapis/google-cloud-node/commit/24d9b56ef1840f2738920f4577d4f77fb0a5b8fd))
+
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.6.0...dialogflow-cx-v5.7.0) (2026-02-19)
+
+
+### Features
+
+* [cx] Add new value DETECT_INTENT_RESPONSE_VIEW_DEFAULT to enum DetectIntentResponseView ([3c18d2c](https://github.com/googleapis/google-cloud-node/commit/3c18d2c7d286ee0f5da9c83e5a929757ec3ab7f6))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.5.0...dialogflow-cx-v5.6.0) (2026-01-22)
 
 
