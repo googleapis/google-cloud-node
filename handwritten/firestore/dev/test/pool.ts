@@ -370,6 +370,55 @@ describe('Client pool', () => {
     operationPromises[0].resolve();
   });
 
+  it('garbage collects idle REST clients immediately upon transitioning to grpc', async () => {
+    let destructedClientsCount = 0;
+    const clientPool = new ClientPool<{}>(
+      10, // concurrentOperationLimit
+      1,  // maxIdleClients
+      () => {
+        return {};
+      },
+      async () => {
+        destructedClientsCount++;
+      }
+    );
+
+    const operationPromises = deferredPromises(2);
+
+    // 1. Start a REST operation
+    const restOperation = clientPool.run(
+      REQUEST_TAG,
+      USE_REST,
+      () => operationPromises[0].promise,
+    );
+
+    // 2. Resolve the REST operation so the REST client becomes idle
+    operationPromises[0].resolve();
+    await restOperation;
+
+    expect(clientPool.size).to.equal(1);
+    expect(destructedClientsCount).to.equal(0);
+
+    // 3. Start a GRPC operation. This should trigger the transition to GRPC.
+    // The idle REST client should be garbage collected immediately.
+    const grpcOperation = clientPool.run(
+      REQUEST_TAG,
+      USE_GRPC,
+      () => operationPromises[1].promise,
+    );
+
+    expect(destructedClientsCount).to.equal(1);
+    expect(clientPool.size).to.equal(1);
+
+    operationPromises[1].resolve();
+    await grpcOperation;
+
+    // 4. Since the REST client was GC'd, the GRPC client should NOT be GC'd
+    // because the idle capacity is only 10 (<= maxIdleCapacity of 10).
+    expect(clientPool.size).to.equal(1);
+    expect(destructedClientsCount).to.equal(1);
+  });
+
   it('bin packs operations', async () => {
     let clientCount = 0;
     const clientPool = new ClientPool<{count: number}>(2, 0, () => {
