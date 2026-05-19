@@ -1,5 +1,42 @@
 # Changelog
 
+## [2.6.2](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.6.1...kms-inventory-v2.6.2) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [2.6.1](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.6.0...kms-inventory-v2.6.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.5.0...kms-inventory-v2.6.0) (2026-04-14)
+
+
+### Features
+
+* [inventory] support external-μ in the Digest ([#8015](https://github.com/googleapis/google-cloud-node/issues/8015)) ([71be7d3](https://github.com/googleapis/google-cloud-node/commit/71be7d38a621ddbb5435115132aa98167a9231d3))
+
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.4.0...kms-inventory-v2.5.0) (2026-03-02)
+
+
+### Features
+
+* [inventory] Add support for project level key usage tracking ([34a3659](https://github.com/googleapis/google-cloud-node/commit/34a365988184038c96de95cf0d8bf4bb5d8a8ccf))
+
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.3.0...kms-inventory-v2.4.0) (2026-02-19)
+
+
+### Features
+
+* [inventory] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations ([#7240](https://github.com/googleapis/google-cloud-node/issues/7240)) ([a383b13](https://github.com/googleapis/google-cloud-node/commit/a383b135a8982a8857b465478d679a75e0b6e89e))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.2.1...kms-inventory-v2.3.0) (2026-01-22)
 
 
