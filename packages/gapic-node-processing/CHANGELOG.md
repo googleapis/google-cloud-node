@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.1.9](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.8...gapic-node-processing-v0.1.9) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [0.1.8](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.7...gapic-node-processing-v0.1.8) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+
+## [0.1.7](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.6...gapic-node-processing-v0.1.7) (2026-03-02)
+
+
+### Bug Fixes
+
+* Bug preventing apiPath generation when apiId includes letter v ([f1456f9](https://github.com/googleapis/google-cloud-node/commit/f1456f9e8bdd5c2b2d579d6a451036d98b8ee26e))
+* Bug preventing apiPath generation when apiId includes letter v ([6d705f4](https://github.com/googleapis/google-cloud-node/commit/6d705f413ead1e2adfe3dc1d703d4637ab36b6d9))
+* Bug preventing apiPath generation when apiId includes letter v ([76baebb](https://github.com/googleapis/google-cloud-node/commit/76baebbdc05758953af5550b71f3144a7eafbfb4))
+
 ## [0.1.6](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.5...gapic-node-processing-v0.1.6) (2025-10-24)
 
 

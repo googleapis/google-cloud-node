@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.24.1](https://github.com/googleapis/google-cloud-node/compare/chat-v0.24.0...chat-v0.24.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [0.24.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.23.1...chat-v0.24.0) (2026-05-14)
+
+
+### Features
+
+* [chat] Support force notify and silent notification option for CreateMessage ([#8239](https://github.com/googleapis/google-cloud-node/issues/8239)) ([ea2e21e](https://github.com/googleapis/google-cloud-node/commit/ea2e21e9ebe1790507d87b03e925ee63e6b7aff9))
+
+## [0.23.1](https://github.com/googleapis/google-cloud-node/compare/chat-v0.23.0...chat-v0.23.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [0.23.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.22.0...chat-v0.23.0) (2026-02-19)
+
+
+### Features
+
+* [chat] Addition of QuoteType enum, QuotedMessageSnapshot & ForwardMetadata in the QuotedMessageMetadata proto ([#7084](https://github.com/googleapis/google-cloud-node/issues/7084)) ([9f75b64](https://github.com/googleapis/google-cloud-node/commit/9f75b642a89a9739644f1aea2af00cacfe626224))
+
 ## [0.22.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.21.0...chat-v0.22.0) (2026-01-22)
 
 

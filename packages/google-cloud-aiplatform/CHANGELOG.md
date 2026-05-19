@@ -1,5 +1,63 @@
 # Changelog
 
+## [6.8.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.8.0...aiplatform-v6.8.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.7.0...aiplatform-v6.8.0) (2026-05-12)
+
+
+### Features
+
+* Release ReasoningEngineExecutionService.CancelAsyncQueryReasoningEngine v1beta1 API ([#8135](https://github.com/googleapis/google-cloud-node/issues/8135)) ([606d632](https://github.com/googleapis/google-cloud-node/commit/606d6324ba2bb3d11c44675825dd5b2aead69969))
+
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.6.0...aiplatform-v6.7.0) (2026-05-01)
+
+
+### Features
+
+* Add OnlineEvaluator API and update Evaluation API ([#8044](https://github.com/googleapis/google-cloud-node/issues/8044)) ([7c62c7d](https://github.com/googleapis/google-cloud-node/commit/7c62c7d69f706b65c7e73c50e81909c4d6f6ce0d))
+* New field CopyModelRequest.custome_service_account for Model Registry CopyModel BYOSA ([7c62c7d](https://github.com/googleapis/google-cloud-node/commit/7c62c7d69f706b65c7e73c50e81909c4d6f6ce0d))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.5.0...aiplatform-v6.6.0) (2026-04-14)
+
+
+### Features
+
+* A new field `evaluation_run` is added to message `.google.cloud.aiplatform.v1beta1.EvaluateDatasetRun` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* A new field `inference_generation_config` is added to message `.google.cloud.aiplatform.v1beta1.EvaluationConfig` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add AskContexts and AsyncRetrieveContexts APIs to VertexRagService ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add AskContexts and AsyncRetrieveContexts APIs to VertexRagService ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add custom memory id field to create memory v1beta1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add custom session id field to create session v1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add custom session id field to create session v1beta1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add image_spec to Reasoning Engine public protos ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add image_spec to Reasoning Engine public protos ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add new `embed_content_config` to message `EmbedContentRequest` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add new `embed_content_config` to message `EmbedContentRequest` ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add raw_event field to event proto v1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add raw_event field to event proto v1beta1 ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Add transcription fields to Session Service ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* RagMetadata and RagDataSchema concepts and Batch API definitions added for Preview ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+* Update the schema proto for the RagChunk with file_id and chunk_id to align with the vertex_rag_data.proto ([adee1ec](https://github.com/googleapis/google-cloud-node/commit/adee1ec57fc5feb09ae46d1c6103367e697094d7))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.4.0...aiplatform-v6.5.0) (2026-03-02)
+
+
+### Features
+
+* Add `traffic_type, tool_use_prompt_tokens_details` to message `GenerateContentResponse.UsageMetadata` ([#7266](https://github.com/googleapis/google-cloud-node/issues/7266)) ([9f91e05](https://github.com/googleapis/google-cloud-node/commit/9f91e0513bf7a60239aef5e4222993184c63fbb2))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v6.3.0...aiplatform-v6.4.0) (2026-02-03)
 
 
