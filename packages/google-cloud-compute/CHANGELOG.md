@@ -4,6 +4,56 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [6.11.1](https://github.com/googleapis/google-cloud-node/compare/compute-v6.11.0...compute-v6.11.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.10.0...compute-v6.11.0) (2026-05-14)
+
+
+### Features
+
+* [compute] Update Compute Engine v1beta API to revision 20260422 ([#1192](https://github.com/googleapis/google-cloud-node/issues/1192)) ([#8248](https://github.com/googleapis/google-cloud-node/issues/8248)) ([33fbecc](https://github.com/googleapis/google-cloud-node/commit/33fbecc5b7df0d2a5e336ccc6b276c2074a0dc04))
+
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.9.1...compute-v6.10.0) (2026-05-12)
+
+
+### Features
+
+* [compute] Update Compute Engine v1beta API to revision 20260410 ([#1184](https://github.com/googleapis/google-cloud-node/issues/1184)) ([#8113](https://github.com/googleapis/google-cloud-node/issues/8113)) ([cac8086](https://github.com/googleapis/google-cloud-node/commit/cac808691b071f0d8b87853cbbd9f4a2df224921))
+* Update Compute Engine v1 API to revision 20260331 ([cac8086](https://github.com/googleapis/google-cloud-node/commit/cac808691b071f0d8b87853cbbd9f4a2df224921))
+* Update Compute Engine v1 API to revision 20260410 ([#1185](https://github.com/googleapis/google-cloud-node/issues/1185)) ([cac8086](https://github.com/googleapis/google-cloud-node/commit/cac808691b071f0d8b87853cbbd9f4a2df224921))
+* Update Compute Engine v1beta API to revision 20260331 ([cac8086](https://github.com/googleapis/google-cloud-node/commit/cac808691b071f0d8b87853cbbd9f4a2df224921))
+
+## [6.9.1](https://github.com/googleapis/google-cloud-node/compare/compute-v6.9.0...compute-v6.9.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* **deps:** Update dependency nodemailer to v8 [security] ([#8065](https://github.com/googleapis/google-cloud-node/issues/8065)) ([c217daa](https://github.com/googleapis/google-cloud-node/commit/c217daa333cb1a4d8f9107915f5b2b3d19718ae0))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.8.0...compute-v6.9.0) (2026-03-18)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20260213 ([#7320](https://github.com/googleapis/google-cloud-node/issues/7320)) ([dc04e0c](https://github.com/googleapis/google-cloud-node/commit/dc04e0c2073ff7155b0f55342d8e9954c30cd173))
+* [compute] Update Compute Engine v1beta API to revision 20260227 (googleapis[#1164](https://github.com/googleapis/google-cloud-node/issues/1164)) ([#7555](https://github.com/googleapis/google-cloud-node/issues/7555)) ([6f9f14b](https://github.com/googleapis/google-cloud-node/commit/6f9f14bde85551f8259ccc5c49f92ffad282ca64))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.7.0...compute-v6.8.0) (2026-03-02)
+
+
+### Features
+
+* [compute] Update Compute Engine v1beta API to revision 20260106 ([#1147](https://github.com/googleapis/google-cloud-node/issues/1147)) ([#7272](https://github.com/googleapis/google-cloud-node/issues/7272)) ([2d1a22c](https://github.com/googleapis/google-cloud-node/commit/2d1a22c828cd8dfecb2083d3bc270210a79a41e3))
+* [compute] Update Compute Engine v1beta API to revision 20260213 ([#7296](https://github.com/googleapis/google-cloud-node/issues/7296)) ([1bacdf2](https://github.com/googleapis/google-cloud-node/commit/1bacdf222c3995c0b3e44d972c952645367e3fa0))
+
 ## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.6.0...compute-v6.7.0) (2026-01-16)
 
 
