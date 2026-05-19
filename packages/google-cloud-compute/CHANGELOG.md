@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.11.0...compute-v6.12.0) (2026-05-19)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+
 ## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.10.0...compute-v6.11.0) (2026-05-14)
 
 
