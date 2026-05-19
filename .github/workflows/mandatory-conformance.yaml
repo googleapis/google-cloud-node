@@ -24,7 +24,7 @@ on:
     - 'handwritten/bigtable/**'
 name: mandatory-conformance
 jobs:
-  mandatory-conformance:
+  conformance:
     runs-on: ubuntu-latest
     defaults:
       run:
