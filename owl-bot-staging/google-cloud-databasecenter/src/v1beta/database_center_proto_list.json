@@ -1,0 +1,11 @@
+[
+  "../../protos/google/cloud/databasecenter/v1beta/affiliation.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/machine_config.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/maintenance.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/metric_data.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/operation_error_type.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/product.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/service.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/signals.proto",
+  "../../protos/google/cloud/databasecenter/v1beta/suspension_reason.proto"
+]
