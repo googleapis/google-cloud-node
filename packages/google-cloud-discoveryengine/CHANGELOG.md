@@ -1,5 +1,42 @@
 # Changelog
 
+## [2.7.1](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.7.0...discoveryengine-v2.7.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.6.0...discoveryengine-v2.7.0) (2026-05-01)
+
+
+### Features
+
+* [discoveryengine] add AUTO condition to SearchAsYouTypeSpec in v1alpha and v1beta ([#8032](https://github.com/googleapis/google-cloud-node/issues/8032)) ([35ba856](https://github.com/googleapis/google-cloud-node/commit/35ba85651226491b08d3f62369fdcf1fe64d1e4b))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.3...discoveryengine-v2.6.0) (2026-03-25)
+
+
+### Features
+
+* [discoveryengine] Update DataStoreSpec and add BoostSpec to SearchService ([#7837](https://github.com/googleapis/google-cloud-node/issues/7837)) ([6943587](https://github.com/googleapis/google-cloud-node/commit/694358739b082ad17f42800b42e5dbbf4c2c975b))
+
+## [2.5.3](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.2...discoveryengine-v2.5.3) (2026-03-02)
+
+
+### Bug Fixes
+
+* Enable google-cloud-discoveryengine tests to run on windows ([a28d23f](https://github.com/googleapis/google-cloud-node/commit/a28d23fde5441c969b380dbd0dff0dc48836c01e))
+* Enable google-cloud-discoveryengine tests to run on windows ([23b81e4](https://github.com/googleapis/google-cloud-node/commit/23b81e4ae4c2dbe26f3731df4bd6cac9c687753b))
+* Try an alternative bash script for windows compatibility without an additional dependency ([f9b1ee9](https://github.com/googleapis/google-cloud-node/commit/f9b1ee9a92eb12f57a56db1bf591d3ec3afb4864))
+
 ## [2.5.2](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.5.1...discoveryengine-v2.5.2) (2025-10-21)
 
 

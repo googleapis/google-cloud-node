@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/kms-v5.5.0...kms-v5.5.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* **gapic-generator:** Trigger release after eslint config cleanup ([#8299](https://github.com/googleapis/google-cloud-node/issues/8299)) ([6f3b9a9](https://github.com/googleapis/google-cloud-node/commit/6f3b9a9d829ff66db2a6e4c123730461693cf973))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.4.0...kms-v5.5.0) (2026-05-01)
+
+
+### Features
+
+* [kms] support external-μ in the Digest ([#8014](https://github.com/googleapis/google-cloud-node/issues/8014)) ([048f3db](https://github.com/googleapis/google-cloud-node/commit/048f3db389c8c512c32f10e246ff0fc3e0626931))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.3.0...kms-v5.4.0) (2026-02-19)
+
+
+### Features
+
+* [kms] Add KeyProjectResolutionMode to AutokeyConfig to support project-level configurations ([#7239](https://github.com/googleapis/google-cloud-node/issues/7239)) ([9ad46e3](https://github.com/googleapis/google-cloud-node/commit/9ad46e3b539da1a300b9e689b19dd2307604b2cf))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/kms-v5.2.1...kms-v5.3.0) (2026-01-22)
 
 
