@@ -61,7 +61,6 @@ if staging.is_dir():
             '.OwlBot.yaml',
             'samples/generated/v2/*',   # we don't want to encourage non-veneer use here.
             '.kokoro/samples-test.sh',  # get to green
-            '.kokoro/system-test.sh',
             '.kokoro/test.sh',
         ] + list(admin_files)
         logging.info(f"excluding files for non-admin: {excludes}")
@@ -163,7 +162,7 @@ if staging.is_dir():
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_mono_repo_library(
-  relative_dir="handwritten/bigtable", 
+  relative_dir="handwritten/bigtable",
   source_location='build/src'
 )
 s.copy(templates,destination="handwritten/bigtable", excludes=[
@@ -171,7 +170,6 @@ s.copy(templates,destination="handwritten/bigtable", excludes=[
     '.github/sync-repo-settings.yaml',
     '.github/workflows/ci.yaml',
     '.kokoro/samples-test.sh',  # get to green
-    '.kokoro/system-test.sh',
     '.kokoro/test.sh',
     '.mocharc.js',
     'README.md'
