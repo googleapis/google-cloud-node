@@ -12,23 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import * as assert from 'assert';
+import {describe, it, beforeEach, afterEach} from 'mocha';
+import * as sinon from 'sinon';
 import {Transform} from 'stream';
 
 import {ResourceStream} from '../src/resource-stream';
 
 describe('ResourceStream', () => {
+  const sandbox = sinon.createSandbox();
+
   const config = {
     maxApiCalls: -1,
     maxResults: -1,
     query: {},
   };
 
-  let requestSpy: jest.Mock;
+  let requestSpy: sinon.SinonSpy;
   let stream: ResourceStream<{}>;
 
   beforeEach(() => {
-    requestSpy = jest.fn();
+    requestSpy = sandbox.spy();
     stream = new ResourceStream(config, requestSpy);
+  });
+
+  afterEach(() => {
+    sandbox.restore();
   });
 
   describe('instantiation', () => {
@@ -38,38 +47,38 @@ describe('ResourceStream', () => {
           streamOptions: {highWaterMark},
         },
         stream = new ResourceStream(options, requestSpy);
-      expect(stream.readableHighWaterMark).toBe(highWaterMark);
+      assert.strictEqual(stream.readableHighWaterMark, highWaterMark);
     });
 
     it('should set ended to false', () => {
-      expect(stream._ended).toBe(false);
+      assert.strictEqual(stream._ended, false);
     });
 
     it('should set reading to false', () => {
-      expect(stream._reading).toBe(false);
+      assert.strictEqual(stream._reading, false);
     });
 
     it('should set requestsMade to 0', () => {
-      expect(stream._requestsMade).toBe(0);
+      assert.strictEqual(stream._requestsMade, 0);
     });
 
     it('should localize the first query', () => {
-      expect(stream._nextQuery).toBe(config.query);
+      assert.strictEqual(stream._nextQuery, config.query);
     });
 
     it('should localize the request function', () => {
-      expect(stream._requestFn).toBe(requestSpy);
+      assert.strictEqual(stream._requestFn, requestSpy);
     });
 
     describe('maxApiCalls', () => {
       it('should localize maxApiCalls', () => {
         const maxApiCalls = 100;
         stream = new ResourceStream({maxApiCalls}, requestSpy);
-        expect(stream._maxApiCalls).toBe(maxApiCalls);
+        assert.strictEqual(stream._maxApiCalls, maxApiCalls);
       });
 
       it('should set it to Infinity if not specified', () => {
-        expect(stream._maxApiCalls).toBe(Infinity);
+        assert.strictEqual(stream._maxApiCalls, Infinity);
       });
     });
 
@@ -77,11 +86,11 @@ describe('ResourceStream', () => {
       it('should localize maxResults as resultsToSend', () => {
         const maxResults = 100;
         stream = new ResourceStream({maxResults}, requestSpy);
-        expect(stream._resultsToSend).toBe(maxResults);
+        assert.strictEqual(stream._resultsToSend, maxResults);
       });
 
       it('should set it to Infinity if not specified', () => {
-        expect(stream._resultsToSend).toBe(Infinity);
+        assert.strictEqual(stream._resultsToSend, Infinity);
       });
     });
   });
@@ -89,58 +98,56 @@ describe('ResourceStream', () => {
   describe('end', () => {
     it('should set ended to true', () => {
       stream.end();
-      expect(stream._ended).toBe(true);
+      assert.strictEqual(stream._ended, true);
     });
 
     it('should call through to super.end', () => {
-      const spy = jest.spyOn(Transform.prototype, 'end').mockImplementation(function (this: any) {
-        return this;
-      });
+      const stub = sandbox.stub(Transform.prototype, 'end');
 
       stream.end();
-      expect(spy).toHaveBeenCalledTimes(1);
+      assert.strictEqual(stub.callCount, 1);
     });
   });
 
   describe('_read', () => {
     it('should set reading to true', () => {
       stream._read();
-      expect(stream._reading).toBe(true);
+      assert.strictEqual(stream._reading, true);
     });
 
     it('should noop if already reading', () => {
       stream._read();
       stream._read();
 
-      expect(requestSpy).toHaveBeenCalledTimes(1);
+      assert.strictEqual(requestSpy.callCount, 1);
     });
 
     it('should pass in the query options', () => {
       stream._read();
 
-      const query = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][0];
-      expect(query).toBe(config.query);
+      const query = requestSpy.lastCall.args[0];
+      assert.strictEqual(query, config.query);
     });
 
     it('should destroy the stream if an error occurs', () => {
       const fakeError = new Error('err');
-      const spy = jest.spyOn(stream, 'destroy').mockImplementation(() => stream);
+      const stub = sandbox.stub(stream, 'destroy').withArgs(fakeError);
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(fakeError);
 
-      expect(spy).toHaveBeenCalledWith(fakeError);
+      assert.strictEqual(stub.callCount, 1);
     });
 
     it('should cache the next query', () => {
       const fakeQuery = {};
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, [], fakeQuery);
 
-      expect(stream._nextQuery).toBe(fakeQuery);
+      assert.strictEqual(stream._nextQuery, fakeQuery);
     });
 
     it('should cache the rest of the callback arguments', () => {
@@ -148,10 +155,10 @@ describe('ResourceStream', () => {
       const anotherArg = 10;
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, [], {}, fakeRes, anotherArg);
 
-      expect(stream._otherArgs).toEqual([fakeRes, anotherArg]);
+      assert.deepStrictEqual(stream._otherArgs, [fakeRes, anotherArg]);
     });
 
     it('should adjust the results to send counter', () => {
@@ -162,26 +169,26 @@ describe('ResourceStream', () => {
       stream = new ResourceStream({maxResults}, requestSpy);
       stream._read();
 
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, results);
 
-      expect(stream._resultsToSend).toBe(expected);
+      assert.strictEqual(stream._resultsToSend, expected);
     });
 
     it('should push in all the results', () => {
       // tslint:disable-next-line ban
       const results = Array(20).fill({});
-      const spy = jest.spyOn(stream, 'push').mockImplementation(() => true);
+      const stub = sandbox.stub(stream, 'push');
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, results, {});
 
-      expect(spy).toHaveBeenCalledTimes(results.length);
+      assert.strictEqual(stub.callCount, results.length);
 
       results.forEach((result, i) => {
-        const pushed = spy.mock.calls[i][0];
-        expect(pushed).toBe(result);
+        const pushed = stub.getCall(i).args[0];
+        assert.strictEqual(pushed, result);
       });
     });
 
@@ -192,20 +199,20 @@ describe('ResourceStream', () => {
       stream.on('data', () => stream.end());
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, results, {});
 
-      expect(requestSpy).toHaveBeenCalledTimes(1);
+      assert.strictEqual(requestSpy.callCount, 1);
     });
 
     it('should end the stream if there is no next query', () => {
-      const spy = jest.spyOn(stream, 'end').mockImplementation(() => stream);
+      const stub = sandbox.stub(stream, 'end');
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, []);
 
-      expect(spy).toHaveBeenCalledTimes(1);
+      assert.strictEqual(stub.callCount, 1);
     });
 
     it('should end the stream if max results is hit', () => {
@@ -213,79 +220,90 @@ describe('ResourceStream', () => {
       // tslint:disable-next-line ban
       const results = Array(maxResults).fill({});
       stream = new ResourceStream({maxResults}, requestSpy);
-      const spy = jest.spyOn(stream, 'end').mockImplementation(() => stream);
+      const stub = sandbox.stub(stream, 'end');
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, results, {});
 
-      expect(spy).toHaveBeenCalledTimes(1);
+      assert.strictEqual(stub.callCount, 1);
     });
 
     it('should end the stream if max api calls is hit', () => {
       const maxApiCalls = 1;
       stream = new ResourceStream({maxApiCalls}, requestSpy);
-      const spy = jest.spyOn(stream, 'end').mockImplementation(() => stream);
+      const stub = sandbox.stub(stream, 'end');
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, [], {});
 
-      expect(spy).toHaveBeenCalledTimes(1);
+      assert.strictEqual(stub.callCount, 1);
     });
 
     it('should stop reading if the buffer is full', () => {
-      jest.useFakeTimers();
+      const clock = sandbox.useFakeTimers();
 
       // tslint:disable-next-line ban
       const results = Array(stream.readableHighWaterMark).fill({});
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, results, {});
 
-      const spy = jest.spyOn(stream, '_read').mockImplementation(() => {});
-      jest.runAllTimers();
+      const stub = sandbox.stub(stream, '_read');
+      clock.runAll();
 
-      expect(spy).toHaveBeenCalledTimes(0);
-      jest.useRealTimers();
+      assert.strictEqual(stub.callCount, 0);
     });
 
     it('should stop reading if the stream ended', () => {
-      jest.useFakeTimers();
+      const clock = sandbox.useFakeTimers();
 
       stream.on('data', () => stream.end());
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, [{}], {});
 
-      const spy = jest.spyOn(stream, '_read').mockImplementation(() => {});
-      jest.runAllTimers();
+      const stub = sandbox.stub(stream, '_read');
+      clock.runAll();
 
-      expect(spy).toHaveBeenCalledTimes(0);
-      jest.useRealTimers();
+      assert.strictEqual(stub.callCount, 0);
     });
 
     it('should keep reading if not full/ended', () => {
-      jest.useFakeTimers();
+      // sinon adds a timer to `nextTick` by default beginning in v19
+      // manually specifying the timers like this replicates the behavior pre v19
+      const clock = sandbox.useFakeTimers({
+        toFake: [
+          'setTimeout',
+          'clearTimeout',
+          'setInterval',
+          'clearInterval',
+          'Date',
+          'setImmediate',
+          'clearImmediate',
+          'hrtime',
+          'performance',
+        ],
+      });
 
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, [{}], {});
 
-      const spy = jest.spyOn(stream, '_read').mockImplementation(() => {});
-      jest.runAllTimers();
+      const stub = sandbox.stub(stream, '_read');
+      clock.runAll();
 
-      expect(spy).toHaveBeenCalledTimes(1);
-      jest.useRealTimers();
+      assert.strictEqual(stub.callCount, 1);
     });
 
     it('should set reading to false inbetween reads', () => {
       stream._read();
-      const callback = requestSpy.mock.calls[requestSpy.mock.calls.length - 1][1];
+      const callback = requestSpy.lastCall.args[1];
       callback(null, [{}], {});
 
-      expect(stream._reading).toBe(false);
+      assert.strictEqual(stream._reading, false);
     });
 
     it('should destroy the stream if the request method throws', done => {
@@ -294,12 +312,8 @@ describe('ResourceStream', () => {
         throw error;
       };
       stream.on('error', err => {
-        try {
-          expect(err).toBe(error);
-          done();
-        } catch (e) {
-          done(e);
-        }
+        assert.strictEqual(err, error);
+        done();
       });
       stream._read();
     });
