@@ -18,7 +18,6 @@ import {ncp} from 'ncp';
 import * as os from 'os';
 import * as tmp from 'tmp';
 import {promisify} from 'util';
-import {describe, it, after} from 'mocha';
 
 const mvp = promisify(mv) as {} as (...args: string[]) => Promise<void>;
 const ncpp = promisify(ncp);
@@ -26,7 +25,7 @@ const keep = !!process.env.KEEP_TEMPDIRS;
 const stagingDir = tmp.dirSync({keep, unsafeCleanup: true});
 const stagingPath = stagingDir.name;
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../../package.json');
+const pkg = require('../package.json');
 const pkgName = 'google-cloud-common';
 const npm = os.platform() === 'win32' ? 'npm.cmd' : 'npm';
 
@@ -53,21 +52,25 @@ describe('install tests', () => {
    * Create a staging directory with temp fixtures used to test on a fresh
    * application.
    */
-  it('should be able to use the d.ts', async () => {
-    console.log(`${__filename} staging area: ${stagingPath}`);
-    await spawnp(npm, ['pack']);
-    const tarball = `${pkgName}-${pkg.version}.tgz`;
-    // stagingPath can be on another filesystem so fs.rename() will fail
-    // with EXDEV, hence we use `mv` module here.
-    await mvp(tarball, `${stagingPath}/${pkgName}.tgz`);
-    await ncpp('system-test/fixtures/kitchen', `${stagingPath}/`);
-    await spawnp(npm, ['install'], {cwd: `${stagingPath}/`});
-  }).timeout(120000);
+  it(
+    'should be able to use the d.ts',
+    async () => {
+      console.log(`${__filename} staging area: ${stagingPath}`);
+      await spawnp(npm, ['pack']);
+      const tarball = `${pkgName}-${pkg.version}.tgz`;
+      // stagingPath can be on another filesystem so fs.rename() will fail
+      // with EXDEV, hence we use `mv` module here.
+      await mvp(tarball, `${stagingPath}/${pkgName}.tgz`);
+      await ncpp('system-test/fixtures/kitchen', `${stagingPath}/`);
+      await spawnp(npm, ['install'], {cwd: `${stagingPath}/`});
+    },
+    120000,
+  );
 
   /**
    * CLEAN UP - remove the staging directory when done.
    */
-  after('cleanup staging', async () => {
+  afterAll(async () => {
     if (!keep) {
       stagingDir.removeCallback();
     }

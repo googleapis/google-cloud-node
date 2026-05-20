@@ -12,14 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
-import {describe, it, before, beforeEach, after} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
-import {Request} from 'teeny-request';
 import {AuthClient, GoogleAuth, OAuth2Client} from 'google-auth-library';
 
 import {Interceptor} from '../src';
+import {Service} from '../src/service';
 import {
   DEFAULT_PROJECT_ID_TOKEN,
   ServiceConfig,
@@ -31,36 +28,16 @@ import {
   MakeAuthenticatedRequest,
   MakeAuthenticatedRequestFactoryConfig,
   util,
-  Util,
 } from '../src/util';
 
-proxyquire.noPreserveCache();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const asAny = (o: any) => o as any;
 
 const fakeCfg = {} as ServiceConfig;
-
-const makeAuthRequestFactoryCache = util.makeAuthenticatedRequestFactory;
-let makeAuthenticatedRequestFactoryOverride:
-  | null
-  | ((
-      config: MakeAuthenticatedRequestFactoryConfig,
-    ) => MakeAuthenticatedRequest);
-
-util.makeAuthenticatedRequestFactory = function (
-  this: Util,
-  config: MakeAuthenticatedRequestFactoryConfig,
-) {
-  if (makeAuthenticatedRequestFactoryOverride) {
-    return makeAuthenticatedRequestFactoryOverride.call(this, config);
-  }
-  return makeAuthRequestFactoryCache.call(this, config);
-};
 
 describe('Service', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let service: any;
-  const Service = proxyquire('../src/service', {
-    './util': util,
-  }).Service;
 
   const CONFIG = {
     scopes: [],
@@ -83,56 +60,62 @@ describe('Service', () => {
   } as ServiceOptions;
 
   beforeEach(() => {
-    makeAuthenticatedRequestFactoryOverride = null;
     service = new Service(CONFIG, OPTIONS);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
   describe('instantiation', () => {
     it('should not require options', () => {
-      assert.doesNotThrow(() => {
+      expect(() => {
         new Service(CONFIG);
-      });
+      }).not.toThrow();
     });
 
     it('should create an authenticated request factory', () => {
       const authenticatedRequest = {} as MakeAuthenticatedRequest;
 
-      makeAuthenticatedRequestFactoryOverride = (
-        config: MakeAuthenticatedRequestFactoryConfig,
-      ) => {
-        const expectedConfig = extend({}, CONFIG, {
-          authClient: OPTIONS.authClient,
-          credentials: OPTIONS.credentials,
-          keyFile: OPTIONS.keyFilename,
-          email: OPTIONS.email,
-          projectIdRequired: CONFIG.projectIdRequired,
-          projectId: OPTIONS.projectId,
-          token: OPTIONS.token,
+      const spy = jest
+        .spyOn(util, 'makeAuthenticatedRequestFactory')
+        .mockImplementation((config: MakeAuthenticatedRequestFactoryConfig) => {
+          const expectedConfig = extend({}, CONFIG, {
+            authClient: OPTIONS.authClient,
+            credentials: OPTIONS.credentials,
+            keyFile: OPTIONS.keyFilename,
+            email: OPTIONS.email,
+            projectIdRequired: CONFIG.projectIdRequired,
+            projectId: OPTIONS.projectId,
+            token: OPTIONS.token,
+          });
+
+          expect(config).toEqual(expectedConfig);
+
+          return authenticatedRequest;
         });
 
-        assert.deepStrictEqual(config, expectedConfig);
-
-        return authenticatedRequest;
-      };
-
       const svc = new Service(CONFIG, OPTIONS);
-      assert.strictEqual(svc.makeAuthenticatedRequest, authenticatedRequest);
+      expect(asAny(svc).makeAuthenticatedRequest).toBe(authenticatedRequest);
+      expect(spy).toHaveBeenCalled();
     });
 
     it('should localize the authClient', () => {
       const authClient = {};
-      makeAuthenticatedRequestFactoryOverride = () => {
-        return {
-          authClient,
-        } as MakeAuthenticatedRequest;
-      };
+      jest
+        .spyOn(util, 'makeAuthenticatedRequestFactory')
+        .mockImplementation(() => {
+          return {
+            authClient,
+          } as MakeAuthenticatedRequest;
+        });
       const service = new Service(CONFIG, OPTIONS);
-      assert.strictEqual(service.authClient, authClient);
+      expect(asAny(service).authClient).toBe(authClient);
     });
 
     it('should localize the provided authClient', () => {
       const service = new Service(CONFIG, OPTIONS);
-      assert.strictEqual(service.authClient, OPTIONS.authClient);
+      expect(asAny(service).authClient).toBe(OPTIONS.authClient);
     });
 
     describe('`AuthClient` support', () => {
@@ -154,9 +137,9 @@ describe('Service', () => {
         const serviceObject = new Service({...CONFIG, authClient});
 
         // The custom `AuthClient` should be passed to `GoogleAuth` and used internally
-        const client = await serviceObject.authClient.getClient();
+        const client = await asAny(serviceObject).authClient.getClient();
 
-        assert.strictEqual(client, authClient);
+        expect(client).toBe(authClient);
       });
 
       it('should accept an `AuthClient` passed to options', async () => {
@@ -164,48 +147,50 @@ describe('Service', () => {
         const serviceObject = new Service(CONFIG, {authClient});
 
         // The custom `AuthClient` should be passed to `GoogleAuth` and used internally
-        const client = await serviceObject.authClient.getClient();
+        const client = await asAny(serviceObject).authClient.getClient();
 
-        assert.strictEqual(client, authClient);
+        expect(client).toBe(authClient);
       });
     });
 
     it('should localize the baseUrl', () => {
-      assert.strictEqual(service.baseUrl, CONFIG.baseUrl);
+      expect(service.baseUrl).toBe(CONFIG.baseUrl);
     });
 
     it('should localize the apiEndpoint', () => {
-      assert.strictEqual(service.apiEndpoint, CONFIG.apiEndpoint);
+      expect(service.apiEndpoint).toBe(CONFIG.apiEndpoint);
     });
 
     it('should default the timeout to undefined', () => {
-      assert.strictEqual(service.timeout, undefined);
+      expect(service.timeout).toBeUndefined();
     });
 
     it('should localize the timeout', () => {
       const timeout = 10000;
       const options = extend({}, OPTIONS, {timeout});
       const service = new Service(fakeCfg, options);
-      assert.strictEqual(service.timeout, timeout);
+      expect(asAny(service).timeout).toBe(timeout);
     });
 
     it('should localize the getCredentials method', () => {
       function getCredentials() {}
 
-      makeAuthenticatedRequestFactoryOverride = () => {
-        return {
-          authClient: {},
-          getCredentials,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any;
-      };
+      jest
+        .spyOn(util, 'makeAuthenticatedRequestFactory')
+        .mockImplementation(() => {
+          return {
+            authClient: {},
+            getCredentials,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any;
+        });
 
       const service = new Service(CONFIG, OPTIONS);
-      assert.strictEqual(service.getCredentials, getCredentials);
+      expect(asAny(service).getCredentials).toBe(getCredentials);
     });
 
     it('should default globalInterceptors to an empty array', () => {
-      assert.deepStrictEqual(service.globalInterceptors, []);
+      expect(asAny(service).globalInterceptors).toEqual([]);
     });
 
     it('should preserve the original global interceptors', () => {
@@ -213,33 +198,33 @@ describe('Service', () => {
       const options = extend({}, OPTIONS);
       options.interceptors_ = globalInterceptors;
       const service = new Service(fakeCfg, options);
-      assert.strictEqual(service.globalInterceptors, globalInterceptors);
+      expect(asAny(service).globalInterceptors).toBe(globalInterceptors);
     });
 
     it('should default interceptors to an empty array', () => {
-      assert.deepStrictEqual(service.interceptors, []);
+      expect(service.interceptors).toEqual([]);
     });
 
     it('should localize package.json', () => {
-      assert.strictEqual(service.packageJson, CONFIG.packageJson);
+      expect(service.packageJson).toBe(CONFIG.packageJson);
     });
 
     it('should localize the projectId', () => {
-      assert.strictEqual(service.projectId, OPTIONS.projectId);
+      expect(service.projectId).toBe(OPTIONS.projectId);
     });
 
     it('should default projectId with placeholder', () => {
       const service = new Service(fakeCfg, {});
-      assert.strictEqual(service.projectId, DEFAULT_PROJECT_ID_TOKEN);
+      expect(service.projectId).toBe(DEFAULT_PROJECT_ID_TOKEN);
     });
 
     it('should localize the projectIdRequired', () => {
-      assert.strictEqual(service.projectIdRequired, CONFIG.projectIdRequired);
+      expect(asAny(service).projectIdRequired).toBe(CONFIG.projectIdRequired);
     });
 
     it('should default projectIdRequired to true', () => {
       const service = new Service(fakeCfg, OPTIONS);
-      assert.strictEqual(service.projectIdRequired, true);
+      expect(asAny(service).projectIdRequired).toBe(true);
     });
 
     it('should disable forever agent for Cloud Function envs', () => {
@@ -249,8 +234,8 @@ describe('Service', () => {
 
       const interceptor = service.interceptors[0];
 
-      const modifiedReqOpts = interceptor.request({forever: true});
-      assert.strictEqual(modifiedReqOpts.forever, false);
+      const modifiedReqOpts = interceptor.request({forever: true} as any);
+      expect(modifiedReqOpts.forever).toBe(false);
     });
   });
 
@@ -293,7 +278,7 @@ describe('Service', () => {
       requestInterceptors.forEach((requestInterceptor: Function) => {
         Object.assign(reqOpts, requestInterceptor(reqOpts));
       });
-      assert.strictEqual(reqOpts.order, '1234');
+      expect(reqOpts.order).toBe('1234');
     });
 
     it('should not affect original interceptor arrays', () => {
@@ -311,11 +296,8 @@ describe('Service', () => {
 
       service.getRequestInterceptors();
 
-      assert.deepStrictEqual(
-        service.globalInterceptors,
-        originalGlobalInterceptors,
-      );
-      assert.deepStrictEqual(service.interceptors, originalLocalInterceptors);
+      expect(service.globalInterceptors).toEqual(originalGlobalInterceptors);
+      expect(service.interceptors).toEqual(originalLocalInterceptors);
     });
 
     it('should not call unrelated interceptors', () => {
@@ -341,9 +323,15 @@ describe('Service', () => {
         getProjectId() {
           done();
         },
-      };
+      } as any;
 
-      service.getProjectId(assert.ifError);
+      service.getProjectId((err: any) => {
+        try {
+          expect(err).toBeNull();
+        } catch (e) {
+          done(e);
+        }
+      });
     });
 
     it('should return error from auth client', done => {
@@ -353,11 +341,15 @@ describe('Service', () => {
         async getProjectId() {
           throw error;
         },
-      };
+      } as any;
 
-      service.getProjectId((err: Error) => {
-        assert.strictEqual(err, error);
-        done();
+      service.getProjectId((err: Error | null) => {
+        try {
+          expect(err).toBe(error);
+          done();
+        } catch (e) {
+          done(e);
+        }
       });
     });
 
@@ -365,24 +357,28 @@ describe('Service', () => {
       const service = new Service(fakeCfg, {});
       const projectId = 'detected-project-id';
 
-      service.authClient = {
+      asAny(service).authClient = {
         async getProjectId() {
           return projectId;
         },
-      };
+      } as any;
 
-      service.getProjectId((err: Error, projectId_: string) => {
-        assert.ifError(err);
-        assert.strictEqual(service.projectId, projectId);
-        assert.strictEqual(projectId_, projectId);
-        done();
+      service.getProjectId((err: Error | null, projectId_?: string) => {
+        try {
+          expect(err).toBeNull();
+          expect(service.projectId).toBe(projectId);
+          expect(projectId_).toBe(projectId);
+          done();
+        } catch (e) {
+          done(e);
+        }
       });
     });
 
     it('should return a promise if no callback is provided', () => {
       const value = {};
       service.getProjectIdAsync = () => value;
-      assert.strictEqual(service.getProjectId(), value);
+      expect(service.getProjectId()).toBe(value);
     });
   });
 
@@ -397,27 +393,44 @@ describe('Service', () => {
 
     it('should compose the correct request', done => {
       const expectedUri = [service.baseUrl, reqOpts.uri].join('/');
-      service.makeAuthenticatedRequest = (
+      service.makeAuthenticatedRequest = ((
         reqOpts_: DecorateRequestOptions,
         callback: BodyResponseCallback,
       ) => {
-        assert.notStrictEqual(reqOpts_, reqOpts);
-        assert.strictEqual(reqOpts_.uri, expectedUri);
-        assert.strictEqual(reqOpts.interceptors_, undefined);
-        callback(null); // done()
-      };
-      service.request_(reqOpts, () => done());
+        try {
+          expect(reqOpts_).not.toBe(reqOpts);
+          expect(reqOpts_.uri).toBe(expectedUri);
+          expect(reqOpts.interceptors_).toBeUndefined();
+          callback(null); // done()
+        } catch (e) {
+          callback(e as any);
+        }
+      }) as any;
+      asAny(service).request_(reqOpts, (err: any) => {
+        try {
+          expect(err).toBeNull();
+          done();
+        } catch (e) {
+          done(e);
+        }
+      });
     });
 
     it('should support absolute uris', done => {
       const expectedUri = 'http://www.google.com';
 
-      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.uri, expectedUri);
-        done();
-      };
+      service.makeAuthenticatedRequest = ((reqOpts: DecorateRequestOptions) => {
+        try {
+          expect(reqOpts.uri).toBe(expectedUri);
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
 
-      service.request_({uri: expectedUri}, assert.ifError);
+      asAny(service).request_({uri: expectedUri}, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     it('should trim slashes', done => {
@@ -427,12 +440,18 @@ describe('Service', () => {
 
       const expectedUri = [service.baseUrl, '1/2'].join('/');
 
-      service.makeAuthenticatedRequest = (reqOpts_: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts_.uri, expectedUri);
-        done();
-      };
+      service.makeAuthenticatedRequest = ((reqOpts_: DecorateRequestOptions) => {
+        try {
+          expect(reqOpts_.uri).toBe(expectedUri);
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
 
-      service.request_(reqOpts, assert.ifError);
+      asAny(service).request_(reqOpts, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     it('should replace path/:subpath with path:subpath', done => {
@@ -441,19 +460,31 @@ describe('Service', () => {
       };
 
       const expectedUri = service.baseUrl + reqOpts.uri;
-      service.makeAuthenticatedRequest = (reqOpts_: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts_.uri, expectedUri);
-        done();
-      };
-      service.request_(reqOpts, assert.ifError);
+      service.makeAuthenticatedRequest = ((reqOpts_: DecorateRequestOptions) => {
+        try {
+          expect(reqOpts_.uri).toBe(expectedUri);
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
+      asAny(service).request_(reqOpts, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     it('should not set timeout', done => {
-      service.makeAuthenticatedRequest = (reqOpts_: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts_.timeout, undefined);
-        done();
-      };
-      service.request_(reqOpts, assert.ifError);
+      service.makeAuthenticatedRequest = ((reqOpts_: DecorateRequestOptions) => {
+        try {
+          expect(reqOpts_.timeout).toBeUndefined();
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
+      asAny(service).request_(reqOpts, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     it('should set reqOpt.timeout', done => {
@@ -462,29 +493,42 @@ describe('Service', () => {
       const options = extend({}, OPTIONS, {timeout});
       const service = new Service(config, options);
 
-      service.makeAuthenticatedRequest = (reqOpts_: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts_.timeout, timeout);
-        done();
-      };
-      service.request_(reqOpts, assert.ifError);
+      asAny(service).makeAuthenticatedRequest = ((reqOpts_: DecorateRequestOptions) => {
+        try {
+          expect(reqOpts_.timeout).toBe(timeout);
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
+      asAny(service).request_(reqOpts, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     it('should add the User Agent', done => {
       const userAgent = 'user-agent/0.0.0';
 
-      const getUserAgentFn = util.getUserAgentFromPackageJson;
-      util.getUserAgentFromPackageJson = packageJson => {
-        util.getUserAgentFromPackageJson = getUserAgentFn;
-        assert.strictEqual(packageJson, service.packageJson);
-        return userAgent;
-      };
+      const spy = jest
+        .spyOn(util, 'getUserAgentFromPackageJson')
+        .mockImplementation((packageJson: any) => {
+          expect(packageJson).toBe(service.packageJson);
+          return userAgent;
+        });
 
-      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts.headers!['User-Agent'], userAgent);
-        done();
-      };
+      service.makeAuthenticatedRequest = ((reqOpts: DecorateRequestOptions) => {
+        try {
+          expect(reqOpts.headers!['User-Agent']).toBe(userAgent);
+          expect(spy).toHaveBeenCalled();
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
 
-      service.request_(reqOpts, assert.ifError);
+      asAny(service).request_(reqOpts, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     it('should add the provided User Agent', done => {
@@ -493,35 +537,46 @@ describe('Service', () => {
 
       service.providedUserAgent = providedUserAgent;
 
-      const getUserAgentFn = util.getUserAgentFromPackageJson;
-      util.getUserAgentFromPackageJson = packageJson => {
-        util.getUserAgentFromPackageJson = getUserAgentFn;
-        assert.strictEqual(packageJson, service.packageJson);
-        return userAgent;
-      };
+      const spy = jest
+        .spyOn(util, 'getUserAgentFromPackageJson')
+        .mockImplementation((packageJson: any) => {
+          expect(packageJson).toBe(service.packageJson);
+          return userAgent;
+        });
 
-      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(
-          reqOpts.headers!['User-Agent'],
-          `${providedUserAgent} ${userAgent}`,
-        );
-        done();
-      };
+      service.makeAuthenticatedRequest = ((reqOpts: DecorateRequestOptions) => {
+        try {
+          expect(reqOpts.headers!['User-Agent']).toBe(
+            `${providedUserAgent} ${userAgent}`,
+          );
+          expect(spy).toHaveBeenCalled();
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
 
-      service.request_(reqOpts, assert.ifError);
+      asAny(service).request_(reqOpts, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     it('should add the api-client header', done => {
-      service.makeAuthenticatedRequest = (reqOpts: DecorateRequestOptions) => {
-        const pkg = service.packageJson;
-        assert.strictEqual(
-          reqOpts.headers!['x-goog-api-client'],
-          `gl-node/${process.versions.node} gccl/${pkg.version}`,
-        );
-        done();
-      };
+      service.makeAuthenticatedRequest = ((reqOpts: DecorateRequestOptions) => {
+        try {
+          const pkg = service.packageJson;
+          expect(reqOpts.headers!['x-goog-api-client']).toBe(
+            `gl-node/${process.versions.node} gccl/${pkg.version}`,
+          );
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }) as any;
 
-      service.request_(reqOpts, assert.ifError);
+      asAny(service).request_(reqOpts, (err: any) => {
+        if (err) done(err);
+      });
     });
 
     describe('projectIdRequired', () => {
@@ -532,15 +587,20 @@ describe('Service', () => {
 
           const expectedUri = [service.baseUrl, reqOpts.uri].join('/');
 
-          service.makeAuthenticatedRequest = (
+          asAny(service).makeAuthenticatedRequest = ((
             reqOpts_: DecorateRequestOptions,
           ) => {
-            assert.strictEqual(reqOpts_.uri, expectedUri);
+            try {
+              expect(reqOpts_.uri).toBe(expectedUri);
+              done();
+            } catch (e) {
+              done(e);
+            }
+          }) as any;
 
-            done();
-          };
-
-          service.request_(reqOpts, assert.ifError);
+          asAny(service).request_(reqOpts, (err: any) => {
+            if (err) done(err);
+          });
         });
       });
 
@@ -556,15 +616,20 @@ describe('Service', () => {
             reqOpts.uri,
           ].join('/');
 
-          service.makeAuthenticatedRequest = (
+          asAny(service).makeAuthenticatedRequest = ((
             reqOpts_: DecorateRequestOptions,
           ) => {
-            assert.strictEqual(reqOpts_.uri, expectedUri);
+            try {
+              expect(reqOpts_.uri).toBe(expectedUri);
+              done();
+            } catch (e) {
+              done(e);
+            }
+          }) as any;
 
-            done();
-          };
-
-          service.request_(reqOpts, assert.ifError);
+          asAny(service).request_(reqOpts, (err: any) => {
+            if (err) done(err);
+          });
         });
 
         it('should use projectId override', done => {
@@ -581,15 +646,20 @@ describe('Service', () => {
             reqOpts.uri,
           ].join('/');
 
-          service.makeAuthenticatedRequest = (
+          asAny(service).makeAuthenticatedRequest = ((
             reqOpts_: DecorateRequestOptions,
           ) => {
-            assert.strictEqual(reqOpts_.uri, expectedUri);
+            try {
+              expect(reqOpts_.uri).toBe(expectedUri);
+              done();
+            } catch (e) {
+              done(e);
+            }
+          }) as any;
 
-            done();
-          };
-
-          service.request_(reqOpts, assert.ifError);
+          asAny(service).request_(reqOpts, (err: any) => {
+            if (err) done(err);
+          });
         });
       });
     });
@@ -613,13 +683,19 @@ describe('Service', () => {
           return requestInterceptors;
         };
 
-        service.makeAuthenticatedRequest = (reqOpts: FakeRequestOptions) => {
-          assert.strictEqual(reqOpts.a, 'a');
-          assert.strictEqual(reqOpts.b, 'b');
-          done();
-        };
+        service.makeAuthenticatedRequest = ((reqOpts: FakeRequestOptions) => {
+          try {
+            expect(reqOpts.a).toBe('a');
+            expect(reqOpts.b).toBe('b');
+            done();
+          } catch (e) {
+            done(e);
+          }
+        }) as any;
 
-        service.request_(reqOpts, assert.ifError);
+        asAny(service).request_(reqOpts, (err: any) => {
+          if (err) done(err);
+        });
       });
 
       it('should combine reqOpts interceptors', done => {
@@ -643,14 +719,20 @@ describe('Service', () => {
           },
         ];
 
-        service.makeAuthenticatedRequest = (reqOpts: FakeRequestOptions) => {
-          assert.strictEqual(reqOpts.a, 'a');
-          assert.strictEqual(reqOpts.b, 'b');
-          assert.strictEqual(typeof reqOpts.interceptors_, 'undefined');
-          done();
-        };
+        service.makeAuthenticatedRequest = ((reqOpts: FakeRequestOptions) => {
+          try {
+            expect(reqOpts.a).toBe('a');
+            expect(reqOpts.b).toBe('b');
+            expect(typeof reqOpts.interceptors_).toBe('undefined');
+            done();
+          } catch (e) {
+            done(e);
+          }
+        }) as any;
 
-        service.request_(reqOpts, assert.ifError);
+        asAny(service).request_(reqOpts, (err: any) => {
+          if (err) done(err);
+        });
       });
     });
 
@@ -658,79 +740,64 @@ describe('Service', () => {
       it('should re-throw any makeAuthenticatedRequest callback error', done => {
         const err = new Error('🥓');
         const res = {body: undefined};
-        service.makeAuthenticatedRequest = (_: void, callback: Function) => {
+        service.makeAuthenticatedRequest = ((_: void, callback: Function) => {
           callback(err, res.body, res);
-        };
-        service.request_({uri: ''}, (e: Error) => {
-          assert.strictEqual(e, err);
-          done();
+        }) as any;
+        asAny(service).request_({uri: ''}, (e: Error) => {
+          try {
+            expect(e).toBe(err);
+            done();
+          } catch (e) {
+            done(e);
+          }
         });
       });
     });
   });
 
   describe('request', () => {
-    let request_: Request;
-
-    before(() => {
-      request_ = Service.prototype.request_;
-    });
-
-    after(() => {
-      Service.prototype.request_ = request_;
-    });
-
     it('should call through to _request', async () => {
       const fakeOpts = {};
-      Service.prototype.request_ = async (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts, fakeOpts);
-        return Promise.resolve({});
-      };
+      const spy = jest.spyOn(Service.prototype as any, 'request_').mockResolvedValue({});
       await service.request(fakeOpts);
+      expect(spy.mock.calls[0][0]).toBe(fakeOpts);
     });
 
     it('should accept a callback', done => {
       const fakeOpts = {};
       const response = {body: {abc: '123'}, statusCode: 200};
-      Service.prototype.request_ = (
-        reqOpts: DecorateRequestOptions,
-        callback: Function,
-      ) => {
-        assert.strictEqual(reqOpts, fakeOpts);
-        callback(null, response.body, response);
-      };
+      const spy = jest
+        .spyOn(Service.prototype as any, 'request_')
+        .mockImplementation(((reqOpts: DecorateRequestOptions, callback: any) => {
+          callback(null, response.body, response);
+        }) as any);
 
       service.request(fakeOpts, (err: Error, body: {}, res: {}) => {
-        assert.ifError(err);
-        assert.deepStrictEqual(res, response);
-        assert.deepStrictEqual(body, response.body);
-        done();
+        try {
+          expect(err).toBeNull();
+          expect(res).toEqual(response);
+          expect(body).toEqual(response.body);
+          expect(spy).toHaveBeenCalledWith(fakeOpts, expect.any(Function));
+          done();
+        } catch (e) {
+          done(e);
+        }
       });
     });
   });
 
   describe('requestStream', () => {
-    let request_: Request;
-
-    before(() => {
-      request_ = Service.prototype.request_;
-    });
-
-    after(() => {
-      Service.prototype.request_ = request_;
-    });
-
     it('should return whatever _request returns', async () => {
       const fakeOpts = {};
       const fakeStream = {};
 
-      Service.prototype.request_ = async (reqOpts: DecorateRequestOptions) => {
-        assert.strictEqual(reqOpts, fakeOpts);
-        return fakeStream;
-      };
+      const spy = jest
+        .spyOn(Service.prototype as any, 'request_')
+        .mockResolvedValue(fakeStream);
 
       const stream = await service.requestStream(fakeOpts);
-      assert.strictEqual(stream, fakeStream);
+      expect(stream).toBe(fakeStream);
+      expect(spy).toHaveBeenCalledWith(fakeOpts);
     });
   });
 });

@@ -12,15 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as assert from 'assert';
-import {describe, it} from 'mocha';
 import {Operation, Service, ServiceObject, util} from '../src';
 
 describe('common', () => {
   it('should correctly export the common modules', () => {
-    assert(Operation);
-    assert(Service);
-    assert(ServiceObject);
-    assert(util);
+    expect(Operation).toBeTruthy();
+    expect(Service).toBeTruthy();
+    expect(ServiceObject).toBeTruthy();
+    expect(util).toBeTruthy();
   });
 });

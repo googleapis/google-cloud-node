@@ -429,6 +429,11 @@ export class Util {
       resp: httpRespMessage,
     } as ParsedHttpRespMessage;
 
+    if (!httpRespMessage) {
+      parsedHttpRespMessage.err = new ApiError('A failure occurred during this request.');
+      return parsedHttpRespMessage;
+    }
+
     if (httpRespMessage.statusCode < 200 || httpRespMessage.statusCode > 299) {
       // Unknown error. Format according to ApiError standard.
       parsedHttpRespMessage.err = new ApiError({
