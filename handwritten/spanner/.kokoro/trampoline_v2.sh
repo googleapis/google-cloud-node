@@ -269,7 +269,7 @@ if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     # Safe default: HEAD~1..HEAD
     DIFF_RANGE="HEAD~1..HEAD"
 
-    if git diff --quiet "${DIFF_RANGE}" -- "${RELATIVE_PKG_PATH}"; then
+    if git diff --quiet "${DIFF_RANGE}" -- ":(top)${RELATIVE_PKG_PATH}"; then
         echo "No changes detected in ${RELATIVE_PKG_PATH}. Skipping tests."
         exit 0
     else
@@ -511,3 +511,4 @@ if [[ "${update_cache}" == "true" ]] && \
 fi
 
 exit "${test_retval}"
+

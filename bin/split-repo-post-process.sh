@@ -167,7 +167,7 @@ if [[ "\${RUNNING_IN_CI:-}" == "true" ]]; then
     # Safe default: HEAD~1..HEAD
     DIFF_RANGE="HEAD~1..HEAD"
 
-    if git diff --quiet "\${DIFF_RANGE}" -- "\${RELATIVE_PKG_PATH}"; then
+    if git diff --quiet "\${DIFF_RANGE}" -- ":(top)\${RELATIVE_PKG_PATH}"; then
         echo "No changes detected in \${RELATIVE_PKG_PATH}. Skipping tests."
         exit 0
     else
@@ -190,8 +190,6 @@ else
 fi
 
 
-echo "Fixing .trampolinerc for populate-secrets.sh"
-gsed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' "${PACKAGE_PATH}"/.trampolinerc
  
 # add changes to local git directory
 git add .
