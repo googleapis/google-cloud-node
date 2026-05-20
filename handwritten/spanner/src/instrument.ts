@@ -104,6 +104,10 @@ const {
  * spans resulting from async/await invocations won't be correctly
  * associated in their respective hierarchies.
  */
+/**
+ * Safely ensures that the OpenTelemetry context manager is initialized
+ * only if no specialized manager is currently active globally.
+ */
 function ensureInitialContextManagerSet() {
   if (!context['_contextManager'] || context.active() === ROOT_CONTEXT) {
     // If no context manager is currently set, or if the active context is the ROOT_CONTEXT,
@@ -127,11 +131,44 @@ export {ensureInitialContextManagerSet};
  *
  * @returns {Span} The created span.
  */
+let tracingEnabled = false;
+
+export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
+  if (tracingEnabled) {
+    return true;
+  }
+  if (opts?.tracerProvider) {
+    tracingEnabled = true;
+    return true;
+  }
+  const globalProvider = trace.getTracerProvider();
+  if (
+    globalProvider &&
+    globalProvider.constructor.name !== 'NoopTracerProvider'
+  ) {
+    tracingEnabled = true;
+    return true;
+  }
+  return false;
+}
+
+/**
+ * startTrace begins an active span in the current active context
+ * and passes it back to the set callback function. Each span will
+ * be prefixed with "cloud.google.com/nodejs/spanner". It is the
+ * responsibility of the caller to invoke [span.end] when finished tracing.
+ *
+ * @returns {Span} The created span.
+ */
 export function startTrace<T>(
   spanNameSuffix: string,
   config: traceConfig | undefined,
   cb: (span: Span) => T,
 ): T {
+  if (!isTracingEnabled(config?.opts)) {
+    return cb(new noopSpan());
+  }
+
   if (!config) {
     config = {} as traceConfig;
   }
@@ -245,9 +282,11 @@ export function setSpanErrorAndException(
  * @returns {Span} the non-null span.
  */
 export function getActiveOrNoopSpan(): Span {
-  const span = trace.getActiveSpan();
-  if (span) {
-    return span;
+  if (isTracingEnabled()) {
+    const span = trace.getActiveSpan();
+    if (span) {
+      return span;
+    }
   }
   return new noopSpan();
 }
