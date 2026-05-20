@@ -46,7 +46,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/googleapis/google-cloud-node.git",
-    "directory": "packages/gapic-node-processing"
+    "directory": "core/packages/gapic-node-processing"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.15.2",
