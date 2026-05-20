@@ -990,22 +990,26 @@
                             if (options.defaults) {
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.workCompleted = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.workCompleted = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.workCompleted = options.longs === String ? "0" : 0;
+                                    object.workCompleted = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
-                                    object.workEstimated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    object.workEstimated = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                                 } else
-                                    object.workEstimated = options.longs === String ? "0" : 0;
+                                    object.workEstimated = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             }
                             if (message.workCompleted != null && message.hasOwnProperty("workCompleted"))
-                                if (typeof message.workCompleted === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.workCompleted = typeof message.workCompleted === "number" ? BigInt(message.workCompleted) : $util.Long.fromBits(message.workCompleted.low >>> 0, message.workCompleted.high >>> 0, false).toBigInt();
+                                else if (typeof message.workCompleted === "number")
                                     object.workCompleted = options.longs === String ? String(message.workCompleted) : message.workCompleted;
                                 else
                                     object.workCompleted = options.longs === String ? $util.Long.prototype.toString.call(message.workCompleted) : options.longs === Number ? new $util.LongBits(message.workCompleted.low >>> 0, message.workCompleted.high >>> 0).toNumber() : message.workCompleted;
                             if (message.workEstimated != null && message.hasOwnProperty("workEstimated"))
-                                if (typeof message.workEstimated === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.workEstimated = typeof message.workEstimated === "number" ? BigInt(message.workEstimated) : $util.Long.fromBits(message.workEstimated.low >>> 0, message.workEstimated.high >>> 0, false).toBigInt();
+                                else if (typeof message.workEstimated === "number")
                                     object.workEstimated = options.longs === String ? String(message.workEstimated) : message.workEstimated;
                                 else
                                     object.workEstimated = options.longs === String ? $util.Long.prototype.toString.call(message.workEstimated) : options.longs === Number ? new $util.LongBits(message.workEstimated.low >>> 0, message.workEstimated.high >>> 0).toNumber() : message.workEstimated;
@@ -8020,7 +8024,9 @@
                             if (message.kind != null && message.hasOwnProperty("kind"))
                                 object.kind = message.kind;
                             if (message.id != null && message.hasOwnProperty("id")) {
-                                if (typeof message.id === "number")
+                                if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                    object.id = typeof message.id === "number" ? BigInt(message.id) : $util.Long.fromBits(message.id.low >>> 0, message.id.high >>> 0, false).toBigInt();
+                                else if (typeof message.id === "number")
                                     object.id = options.longs === String ? String(message.id) : message.id;
                                 else
                                     object.id = options.longs === String ? $util.Long.prototype.toString.call(message.id) : options.longs === Number ? new $util.LongBits(message.id.low >>> 0, message.id.high >>> 0).toNumber() : message.id;
@@ -8847,7 +8853,9 @@
                                 object.valueType = "booleanValue";
                         }
                         if (message.integerValue != null && message.hasOwnProperty("integerValue")) {
-                            if (typeof message.integerValue === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.integerValue = typeof message.integerValue === "number" ? BigInt(message.integerValue) : $util.Long.fromBits(message.integerValue.low >>> 0, message.integerValue.high >>> 0, false).toBigInt();
+                            else if (typeof message.integerValue === "number")
                                 object.integerValue = options.longs === String ? String(message.integerValue) : message.integerValue;
                             else
                                 object.integerValue = options.longs === String ? $util.Long.prototype.toString.call(message.integerValue) : options.longs === Number ? new $util.LongBits(message.integerValue.low >>> 0, message.integerValue.high >>> 0).toNumber() : message.integerValue;
@@ -9527,9 +9535,9 @@
                             }
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.version = options.longs === String ? "0" : 0;
+                                object.version = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.updateTime = null;
                             object.createTime = null;
                         }
@@ -9538,7 +9546,9 @@
                         if (message.cursor != null && message.hasOwnProperty("cursor"))
                             object.cursor = options.bytes === String ? $util.base64.encode(message.cursor, 0, message.cursor.length) : options.bytes === Array ? Array.prototype.slice.call(message.cursor) : message.cursor;
                         if (message.version != null && message.hasOwnProperty("version"))
-                            if (typeof message.version === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.version = typeof message.version === "number" ? BigInt(message.version) : $util.Long.fromBits(message.version.low >>> 0, message.version.high >>> 0, false).toBigInt();
+                            else if (typeof message.version === "number")
                                 object.version = options.longs === String ? String(message.version) : message.version;
                             else
                                 object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
@@ -14784,9 +14794,9 @@
                             object.skippedResults = 0;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.snapshotVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.snapshotVersion = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.snapshotVersion = options.longs === String ? "0" : 0;
+                                object.snapshotVersion = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.readTime = null;
                         }
                         if (message.entityResultType != null && message.hasOwnProperty("entityResultType"))
@@ -14805,7 +14815,9 @@
                         if (message.skippedResults != null && message.hasOwnProperty("skippedResults"))
                             object.skippedResults = message.skippedResults;
                         if (message.snapshotVersion != null && message.hasOwnProperty("snapshotVersion"))
-                            if (typeof message.snapshotVersion === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.snapshotVersion = typeof message.snapshotVersion === "number" ? BigInt(message.snapshotVersion) : $util.Long.fromBits(message.snapshotVersion.low >>> 0, message.snapshotVersion.high >>> 0, false).toBigInt();
+                            else if (typeof message.snapshotVersion === "number")
                                 object.snapshotVersion = options.longs === String ? String(message.snapshotVersion) : message.snapshotVersion;
                             else
                                 object.snapshotVersion = options.longs === String ? $util.Long.prototype.toString.call(message.snapshotVersion) : options.longs === Number ? new $util.LongBits(message.snapshotVersion.low >>> 0, message.snapshotVersion.high >>> 0).toNumber() : message.snapshotVersion;
@@ -20533,7 +20545,9 @@
                                 object.operation = "delete";
                         }
                         if (message.baseVersion != null && message.hasOwnProperty("baseVersion")) {
-                            if (typeof message.baseVersion === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.baseVersion = typeof message.baseVersion === "number" ? BigInt(message.baseVersion) : $util.Long.fromBits(message.baseVersion.low >>> 0, message.baseVersion.high >>> 0, false).toBigInt();
+                            else if (typeof message.baseVersion === "number")
                                 object.baseVersion = options.longs === String ? String(message.baseVersion) : message.baseVersion;
                             else
                                 object.baseVersion = options.longs === String ? $util.Long.prototype.toString.call(message.baseVersion) : options.longs === Number ? new $util.LongBits(message.baseVersion.low >>> 0, message.baseVersion.high >>> 0).toNumber() : message.baseVersion;
@@ -21396,9 +21410,9 @@
                             object.key = null;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.version = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.version = options.longs === String ? "0" : 0;
+                                object.version = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.conflictDetected = false;
                             object.updateTime = null;
                             object.createTime = null;
@@ -21406,7 +21420,9 @@
                         if (message.key != null && message.hasOwnProperty("key"))
                             object.key = $root.google.datastore.v1.Key.toObject(message.key, options);
                         if (message.version != null && message.hasOwnProperty("version"))
-                            if (typeof message.version === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.version = typeof message.version === "number" ? BigInt(message.version) : $util.Long.fromBits(message.version.low >>> 0, message.version.high >>> 0, false).toBigInt();
+                            else if (typeof message.version === "number")
                                 object.version = options.longs === String ? String(message.version) : message.version;
                             else
                                 object.version = options.longs === String ? $util.Long.prototype.toString.call(message.version) : options.longs === Number ? new $util.LongBits(message.version.low >>> 0, message.version.high >>> 0).toNumber() : message.version;
@@ -23761,26 +23777,30 @@
                         if (options.defaults) {
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.resultsReturned = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.resultsReturned = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.resultsReturned = options.longs === String ? "0" : 0;
+                                object.resultsReturned = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.executionDuration = null;
                             if ($util.Long) {
                                 var long = new $util.Long(0, 0, false);
-                                object.readOperations = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                object.readOperations = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                             } else
-                                object.readOperations = options.longs === String ? "0" : 0;
+                                object.readOperations = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                             object.debugStats = null;
                         }
                         if (message.resultsReturned != null && message.hasOwnProperty("resultsReturned"))
-                            if (typeof message.resultsReturned === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.resultsReturned = typeof message.resultsReturned === "number" ? BigInt(message.resultsReturned) : $util.Long.fromBits(message.resultsReturned.low >>> 0, message.resultsReturned.high >>> 0, false).toBigInt();
+                            else if (typeof message.resultsReturned === "number")
                                 object.resultsReturned = options.longs === String ? String(message.resultsReturned) : message.resultsReturned;
                             else
                                 object.resultsReturned = options.longs === String ? $util.Long.prototype.toString.call(message.resultsReturned) : options.longs === Number ? new $util.LongBits(message.resultsReturned.low >>> 0, message.resultsReturned.high >>> 0).toNumber() : message.resultsReturned;
                         if (message.executionDuration != null && message.hasOwnProperty("executionDuration"))
                             object.executionDuration = $root.google.protobuf.Duration.toObject(message.executionDuration, options);
                         if (message.readOperations != null && message.hasOwnProperty("readOperations"))
-                            if (typeof message.readOperations === "number")
+                            if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                                object.readOperations = typeof message.readOperations === "number" ? BigInt(message.readOperations) : $util.Long.fromBits(message.readOperations.low >>> 0, message.readOperations.high >>> 0, false).toBigInt();
+                            else if (typeof message.readOperations === "number")
                                 object.readOperations = options.longs === String ? String(message.readOperations) : message.readOperations;
                             else
                                 object.readOperations = options.longs === String ? $util.Long.prototype.toString.call(message.readOperations) : options.longs === Number ? new $util.LongBits(message.readOperations.low >>> 0, message.readOperations.high >>> 0).toNumber() : message.readOperations;
@@ -40422,14 +40442,14 @@
                         object.identifierValue = "";
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.positiveIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.positiveIntValue = options.longs === String ? "0" : 0;
+                            object.positiveIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.negativeIntValue = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.negativeIntValue = options.longs === String ? "0" : 0;
+                            object.negativeIntValue = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.doubleValue = 0;
                         if (options.bytes === String)
                             object.stringValue = "";
@@ -40448,12 +40468,16 @@
                     if (message.identifierValue != null && message.hasOwnProperty("identifierValue"))
                         object.identifierValue = message.identifierValue;
                     if (message.positiveIntValue != null && message.hasOwnProperty("positiveIntValue"))
-                        if (typeof message.positiveIntValue === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.positiveIntValue = typeof message.positiveIntValue === "number" ? BigInt(message.positiveIntValue) : $util.Long.fromBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0, true).toBigInt();
+                        else if (typeof message.positiveIntValue === "number")
                             object.positiveIntValue = options.longs === String ? String(message.positiveIntValue) : message.positiveIntValue;
                         else
                             object.positiveIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.positiveIntValue) : options.longs === Number ? new $util.LongBits(message.positiveIntValue.low >>> 0, message.positiveIntValue.high >>> 0).toNumber(true) : message.positiveIntValue;
                     if (message.negativeIntValue != null && message.hasOwnProperty("negativeIntValue"))
-                        if (typeof message.negativeIntValue === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.negativeIntValue = typeof message.negativeIntValue === "number" ? BigInt(message.negativeIntValue) : $util.Long.fromBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0, false).toBigInt();
+                        else if (typeof message.negativeIntValue === "number")
                             object.negativeIntValue = options.longs === String ? String(message.negativeIntValue) : message.negativeIntValue;
                         else
                             object.negativeIntValue = options.longs === String ? $util.Long.prototype.toString.call(message.negativeIntValue) : options.longs === Number ? new $util.LongBits(message.negativeIntValue.low >>> 0, message.negativeIntValue.high >>> 0).toNumber() : message.negativeIntValue;
@@ -43866,13 +43890,15 @@
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
@@ -44560,13 +44586,15 @@
                     if (options.defaults) {
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.seconds = options.longs === String ? "0" : 0;
+                            object.seconds = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                         object.nanos = 0;
                     }
                     if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.seconds = typeof message.seconds === "number" ? BigInt(message.seconds) : $util.Long.fromBits(message.seconds.low >>> 0, message.seconds.high >>> 0, false).toBigInt();
+                        else if (typeof message.seconds === "number")
                             object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
                         else
                             object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
@@ -46151,11 +46179,13 @@
                     if (options.defaults)
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, false);
-                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.value = options.longs === String ? "0" : 0;
+                            object.value = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                     if (message.value != null && message.hasOwnProperty("value"))
-                        if (typeof message.value === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.value = typeof message.value === "number" ? BigInt(message.value) : $util.Long.fromBits(message.value.low >>> 0, message.value.high >>> 0, false).toBigInt();
+                        else if (typeof message.value === "number")
                             object.value = options.longs === String ? String(message.value) : message.value;
                         else
                             object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
@@ -46382,11 +46412,13 @@
                     if (options.defaults)
                         if ($util.Long) {
                             var long = new $util.Long(0, 0, true);
-                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                            object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : typeof BigInt !== "undefined" && options.longs === BigInt ? long.toBigInt() : long;
                         } else
-                            object.value = options.longs === String ? "0" : 0;
+                            object.value = options.longs === String ? "0" : typeof BigInt !== "undefined" && options.longs === BigInt ? BigInt("0") : 0;
                     if (message.value != null && message.hasOwnProperty("value"))
-                        if (typeof message.value === "number")
+                        if (typeof BigInt !== "undefined" && options.longs === BigInt)
+                            object.value = typeof message.value === "number" ? BigInt(message.value) : $util.Long.fromBits(message.value.low >>> 0, message.value.high >>> 0, true).toBigInt();
+                        else if (typeof message.value === "number")
                             object.value = options.longs === String ? String(message.value) : message.value;
                         else
                             object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber(true) : message.value;

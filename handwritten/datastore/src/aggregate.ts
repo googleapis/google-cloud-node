@@ -111,6 +111,9 @@ class AggregateQuery {
    * @param {function} cb The callback function.
    * @returns {void | Promise<RunQueryResponse>}
    */
+  run(options?: RunQueryOptions): Promise<RunQueryResponse>;
+  run(callback: RequestCallback): void;
+  run(options: RunQueryOptions, callback: RequestCallback): void;
   run(
     optionsOrCallback?: RunQueryOptions | RequestCallback,
     cb?: RequestCallback,

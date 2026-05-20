@@ -1683,7 +1683,7 @@ async.each(
               });
               assert.deepStrictEqual(entities, []);
               assert(info.explainMetrics);
-              assert(!info.executionStats);
+              assert(!info.explainMetrics.executionStats);
               assert.deepStrictEqual(
                 info.explainMetrics.planSummary,
                 expectedRunAggregationQueryPlan,
@@ -1697,7 +1697,7 @@ async.each(
               });
               assert.deepStrictEqual(entities, []);
               assert(info.explainMetrics);
-              assert(!info.executionStats);
+              assert(!info.explainMetrics.executionStats);
               assert.deepStrictEqual(
                 info.explainMetrics.planSummary,
                 expectedRunAggregationQueryPlan,
