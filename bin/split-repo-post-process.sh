@@ -190,8 +190,6 @@ else
 fi
 
 
-echo "Fixing .trampolinerc for populate-secrets.sh"
-gsed -i 's|source ${PROJECT_ROOT}/.kokoro/populate-secrets.sh|source ${PROJECT_ROOT}/'"${PACKAGE_PATH}"'/.kokoro/populate-secrets.sh|' "${PACKAGE_PATH}"/.trampolinerc
  
 # add changes to local git directory
 git add .
