@@ -18,7 +18,7 @@
     "@google-cloud/datacatalog": "^5.2.2"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
+    "chai": "^6.0.0",
     "execa": "^8.0.0",
     "mocha": "^8.0.0"
   }
