@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.8.0...products-v0.9.0) (2026-05-01)
+
+
+### Features
+
+* [merchantapi] a new field `base64_encoded_name` is added to the `Product` message ([#7997](https://github.com/googleapis/google-cloud-node/issues/7997)) ([f56dc14](https://github.com/googleapis/google-cloud-node/commit/f56dc1431ac275a9ab834b10685da0f99122dc90))
+* [merchantapi] a new optional field `video_links` is added to the `.google.shopping.merchant.products.v1.ProductAttributes` message ([#8080](https://github.com/googleapis/google-cloud-node/issues/8080)) ([9e986af](https://github.com/googleapis/google-cloud-node/commit/9e986afb669d71fdd29561fc06e0679315057b11))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.7.0...products-v0.8.0) (2025-10-13)
 
 

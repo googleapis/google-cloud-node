@@ -16,6 +16,7 @@ import * as fs from 'fs';
 import nunjucks from 'nunjucks';
 import * as path from 'path';
 import * as util from 'util';
+import * as prettier from 'prettier';
 
 import type * as protos from '../../protos/index.js';
 
@@ -183,7 +184,7 @@ async function countRegionTagLines(
   return {start, end};
 }
 
-function renderFile(
+async function renderFile(
   targetFilename: string,
   templateName: string,
   renderParameters: {},
@@ -200,6 +201,26 @@ function renderFile(
       if (err instanceof Error) {
         console.warn(
           `The generated JSON file ${targetFilename} does not look like a valid JSON: ${err.toString()}`,
+        );
+      } else {
+        throw err;
+      }
+    }
+  }
+
+  // Format generated TypeScript files using Prettier
+  if (targetFilename.match(/\.ts$/i)) {
+    try {
+      processed = await prettier.format(processed, {
+        parser: 'typescript',
+        singleQuote: true,
+        trailingComma: 'all',
+        semi: true,
+      });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.warn(
+          `Failed to format TypeScript file ${targetFilename}: ${err.toString()}`,
         );
       } else {
         throw err;
@@ -254,7 +275,7 @@ async function processOneTemplate(
           .replace(/\$service/, service.name!.toSnakeCase());
 
         result.push(
-          renderFile(pushFilename, relativeTemplateName, {
+          await renderFile(pushFilename, relativeTemplateName, {
             method,
             api,
             commonParameters,
@@ -274,7 +295,7 @@ async function processOneTemplate(
         continue;
       }
       result.push(
-        renderFile(
+        await renderFile(
           outputFilename.replace(/\$service/, service.name!.toSnakeCase()),
           relativeTemplateName,
           {api, commonParameters, service, id},
@@ -283,7 +304,7 @@ async function processOneTemplate(
     }
   } else {
     result.push(
-      renderFile(outputFilename, relativeTemplateName, {
+      await renderFile(outputFilename, relativeTemplateName, {
         api,
         commonParameters,
         id,

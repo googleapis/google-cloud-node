@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {LfpInventoryServiceClient} from './lfp_inventory_service_client';
-export {LfpMerchantStateServiceClient} from './lfp_merchant_state_service_client';
-export {LfpSaleServiceClient} from './lfp_sale_service_client';
-export {LfpStoreServiceClient} from './lfp_store_service_client';
+export { LfpInventoryServiceClient } from './lfp_inventory_service_client';
+export { LfpMerchantStateServiceClient } from './lfp_merchant_state_service_client';
+export { LfpSaleServiceClient } from './lfp_sale_service_client';
+export { LfpStoreServiceClient } from './lfp_store_service_client';

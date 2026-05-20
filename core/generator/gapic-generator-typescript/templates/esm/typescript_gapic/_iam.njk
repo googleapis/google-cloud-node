@@ -1,4 +1,4 @@
-{%- macro iamServiceMethods() -%}
+{%- macro iamServiceMethods(service) -%}
 {#-
   This part will be added into src/version/client.ts.
   If the --service-yaml contains "google.iam.v1.IAMPolicy", it means the client requires IAM methods [setIamPolicy, getIamPolicy, testIamPermission].
@@ -30,6 +30,7 @@
  *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
+{%- if service.iamPolicyMixinFlags.getIamPolicy %}
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -47,6 +48,7 @@
   ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
+{%- endif %}
 
 /**
  * Returns permissions that a caller has on the specified resource. If the
@@ -77,6 +79,7 @@
  *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  */
+{%- if service.iamPolicyMixinFlags.setIamPolicy %}
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -94,6 +97,7 @@
   ):Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
+{%- endif %}
 
 /**
  * Returns permissions that a caller has on the specified resource. If the
@@ -125,6 +129,7 @@
  *   The promise has a method named "cancel" which cancels the ongoing API call.
  *
  */
+{%- if service.iamPolicyMixinFlags.testIamPermissions %}
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -142,4 +147,5 @@
   ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
+{%- endif %}
 {%- endmacro -%}

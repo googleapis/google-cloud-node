@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {RoutesClient} from './routes_client';
+export { RoutesClient } from './routes_client';

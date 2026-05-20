@@ -3058,9 +3058,19 @@
                 "queryReasoningEngine"
               ]
             },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
+              ]
+            },
             "StreamQueryReasoningEngine": {
               "methods": [
                 "streamQueryReasoningEngine"
+              ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
               ]
             }
           }
@@ -3071,6 +3081,16 @@
             "QueryReasoningEngine": {
               "methods": [
                 "queryReasoningEngine"
+              ]
+            },
+            "CancelAsyncQueryReasoningEngine": {
+              "methods": [
+                "cancelAsyncQueryReasoningEngine"
+              ]
+            },
+            "AsyncQueryReasoningEngine": {
+              "methods": [
+                "asyncQueryReasoningEngine"
               ]
             }
           }

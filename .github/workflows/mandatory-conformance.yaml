@@ -39,7 +39,7 @@ jobs:
         repository: googleapis/cloud-bigtable-clients-test
         ref: v0.0.3
         path: handwritten/bigtable/cloud-bigtable-clients-test
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v6
       with:
         node-version: ${{ matrix.node }}
     - uses: actions/setup-go@v5

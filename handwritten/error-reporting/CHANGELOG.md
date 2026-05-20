@@ -1,8 +1,16 @@
 # Changelog
 
+
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
+
+## [3.0.6](https://github.com/googleapis/google-cloud-node/compare/error-reporting-v3.0.5...error-reporting-v3.0.6) (2026-05-06)
+
+
+### Bug Fixes
+
+* Bump all node submodules ([#8178](https://github.com/googleapis/google-cloud-node/issues/8178)) ([9fd76ef](https://github.com/googleapis/google-cloud-node/commit/9fd76eff87b1cf02db6205f141449b31e8ab7d8f))
 
 ## [3.0.5](https://github.com/googleapis/nodejs-error-reporting/compare/v3.0.4...v3.0.5) (2022-12-02)
 

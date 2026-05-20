@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-modelarmor",
-    "version": "0.1.0",
+    "version": "0.4.1",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -346,7 +346,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 63,
+          "end": 67,
           "type": "FULL"
         }
       ],
@@ -366,6 +366,10 @@
           {
             "name": "multi_language_detection_metadata",
             "type": ".google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata"
+          },
+          {
+            "name": "streaming_mode",
+            "type": ".google.cloud.modelarmor.v1beta.StreamingMode"
           }
         ],
         "resultType": ".google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse",
@@ -394,7 +398,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 71,
           "type": "FULL"
         }
       ],
@@ -418,6 +422,10 @@
           {
             "name": "multi_language_detection_metadata",
             "type": ".google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata"
+          },
+          {
+            "name": "streaming_mode",
+            "type": ".google.cloud.modelarmor.v1beta.StreamingMode"
           }
         ],
         "resultType": ".google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse",
@@ -428,6 +436,114 @@
         "method": {
           "shortName": "SanitizeModelResponse",
           "fullName": "google.cloud.modelarmor.v1beta.ModelArmor.SanitizeModelResponse",
+          "service": {
+            "shortName": "ModelArmor",
+            "fullName": "google.cloud.modelarmor.v1beta.ModelArmor"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "modelarmor_v1beta_generated_ModelArmor_StreamSanitizeUserPrompt_async",
+      "title": "ModelArmor streamSanitizeUserPrompt Sample",
+      "origin": "API_DEFINITION",
+      "description": " Streaming version of Sanitize User Prompt.",
+      "canonical": true,
+      "file": "model_armor.stream_sanitize_user_prompt.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamSanitizeUserPrompt",
+        "fullName": "google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeUserPrompt",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "user_prompt_data",
+            "type": ".google.cloud.modelarmor.v1beta.DataItem"
+          },
+          {
+            "name": "multi_language_detection_metadata",
+            "type": ".google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata"
+          },
+          {
+            "name": "streaming_mode",
+            "type": ".google.cloud.modelarmor.v1beta.StreamingMode"
+          }
+        ],
+        "resultType": ".google.cloud.modelarmor.v1beta.SanitizeUserPromptResponse",
+        "client": {
+          "shortName": "ModelArmorClient",
+          "fullName": "google.cloud.modelarmor.v1beta.ModelArmorClient"
+        },
+        "method": {
+          "shortName": "StreamSanitizeUserPrompt",
+          "fullName": "google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeUserPrompt",
+          "service": {
+            "shortName": "ModelArmor",
+            "fullName": "google.cloud.modelarmor.v1beta.ModelArmor"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "modelarmor_v1beta_generated_ModelArmor_StreamSanitizeModelResponse_async",
+      "title": "ModelArmor streamSanitizeModelResponse Sample",
+      "origin": "API_DEFINITION",
+      "description": " Streaming version of Sanitizes Model Response.",
+      "canonical": true,
+      "file": "model_armor.stream_sanitize_model_response.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StreamSanitizeModelResponse",
+        "fullName": "google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeModelResponse",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_response_data",
+            "type": ".google.cloud.modelarmor.v1beta.DataItem"
+          },
+          {
+            "name": "user_prompt",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "multi_language_detection_metadata",
+            "type": ".google.cloud.modelarmor.v1beta.MultiLanguageDetectionMetadata"
+          },
+          {
+            "name": "streaming_mode",
+            "type": ".google.cloud.modelarmor.v1beta.StreamingMode"
+          }
+        ],
+        "resultType": ".google.cloud.modelarmor.v1beta.SanitizeModelResponseResponse",
+        "client": {
+          "shortName": "ModelArmorClient",
+          "fullName": "google.cloud.modelarmor.v1beta.ModelArmorClient"
+        },
+        "method": {
+          "shortName": "StreamSanitizeModelResponse",
+          "fullName": "google.cloud.modelarmor.v1beta.ModelArmor.StreamSanitizeModelResponse",
           "service": {
             "shortName": "ModelArmor",
             "fullName": "google.cloud.modelarmor.v1beta.ModelArmor"

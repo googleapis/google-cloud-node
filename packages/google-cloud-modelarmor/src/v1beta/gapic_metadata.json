@@ -50,6 +50,16 @@
                 "sanitizeModelResponse"
               ]
             },
+            "StreamSanitizeUserPrompt": {
+              "methods": [
+                "streamSanitizeUserPrompt"
+              ]
+            },
+            "StreamSanitizeModelResponse": {
+              "methods": [
+                "streamSanitizeModelResponse"
+              ]
+            },
             "ListTemplates": {
               "methods": [
                 "listTemplates",

@@ -31,7 +31,25 @@ const RowAccessPolicyServiceClient = v2.RowAccessPolicyServiceClient;
 type RowAccessPolicyServiceClient = v2.RowAccessPolicyServiceClient;
 const TableServiceClient = v2.TableServiceClient;
 type TableServiceClient = v2.TableServiceClient;
-export {v2, DatasetServiceClient, JobServiceClient, ModelServiceClient, ProjectServiceClient, RoutineServiceClient, RowAccessPolicyServiceClient, TableServiceClient};
-export default {v2, DatasetServiceClient, JobServiceClient, ModelServiceClient, ProjectServiceClient, RoutineServiceClient, RowAccessPolicyServiceClient, TableServiceClient};
+export {
+  v2,
+  DatasetServiceClient,
+  JobServiceClient,
+  ModelServiceClient,
+  ProjectServiceClient,
+  RoutineServiceClient,
+  RowAccessPolicyServiceClient,
+  TableServiceClient,
+};
+export default {
+  v2,
+  DatasetServiceClient,
+  JobServiceClient,
+  ModelServiceClient,
+  ProjectServiceClient,
+  RoutineServiceClient,
+  RowAccessPolicyServiceClient,
+  TableServiceClient,
+};
 import * as protos from '../protos/protos';
-export {protos}
+export { protos };

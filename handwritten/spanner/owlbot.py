@@ -45,19 +45,19 @@ if staging.is_dir():
     for version in ['v1']:
         library = staging / 'admin' / 'database' / version
         _tracked_paths.add(library)
-        s.copy([library], excludes=excludes)
+        s.copy([library], destination="handwritten/spanner", excludes=excludes)
 
     # Copy the admin/instance library.
     for version in ['v1']:
         library = staging / 'admin' / 'instance' / version
         _tracked_paths.add(library)
-        s.copy([library], excludes=excludes)
+        s.copy([library], destination="handwritten/spanner", excludes=excludes)
 
     # Copy the spanner/executor library.
     for version in ['v1']:
         library = staging / 'executor' / version
         _tracked_paths.add(library)
-        s.copy([library], excludes=excludes)
+        s.copy([library], destination="handwritten/spanner", excludes=excludes)
 
     # The staging directory should never be merged into the main branch.
     shutil.rmtree(staging)

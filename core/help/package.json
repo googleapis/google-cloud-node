@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "scripts": {
+    "docs": "./docs-devsite.sh",
+    "test": "echo 'no unit tests'",
+    "system-test": "echo 'no system tests'",
+    "samples-test": "echo 'no samples test'"
+  }
+}

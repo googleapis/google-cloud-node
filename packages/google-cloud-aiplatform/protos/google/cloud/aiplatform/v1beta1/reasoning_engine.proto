@@ -262,6 +262,51 @@ message ReasoningEngine {
     singular: "reasoningEngine"
   };
 
+  // Traffic distribution configuration.
+  message TrafficConfig {
+    // Manual traffic distribution configuration, where the user specifies the
+    // Runtime Revision IDs and the percentage of traffic to send to each.
+    message TrafficSplitManual {
+      // A single target for the traffic split, specifying a Runtime Revision
+      // and the percentage of traffic to send to it.
+      message Target {
+        // Required. The Runtime Revision name to which to send this portion of
+        // traffic, if traffic allocation is by Runtime Revision.
+        string runtime_revision_name = 1 [
+          (google.api.field_behavior) = REQUIRED,
+          (google.api.resource_reference) = {
+            type: "aiplatform.googleapis.com/ReasoningEngineRuntimeRevision"
+          }
+        ];
+
+        // Required. Specifies percent of the traffic to this Runtime Revision.
+        int32 percent = 2 [(google.api.field_behavior) = REQUIRED];
+      }
+
+      // A list of traffic targets for the Runtimes Revisions. The sum of
+      // percentages must equal to 100.
+      repeated Target targets = 1;
+    }
+
+    // Traffic distribution configuration, where all traffic is sent to the
+    // latest Runtime Revision.
+    message TrafficSplitAlwaysLatest {}
+
+    // Traffic distribution configuration.
+    oneof traffic_split {
+      // Optional. Manual traffic distribution configuration, where the user
+      // specifies the Runtime Revision IDs and the percentage of traffic to
+      // send to each.
+      TrafficSplitManual traffic_split_manual = 18
+          [(google.api.field_behavior) = OPTIONAL];
+
+      // Optional. Traffic distribution configuration, where all traffic is sent
+      // to the latest Runtime Revision.
+      TrafficSplitAlwaysLatest traffic_split_always_latest = 19
+          [(google.api.field_behavior) = OPTIONAL];
+    }
+  }
+
   // Identifier. The resource name of the ReasoningEngine.
   // Format:
   // `projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}`
@@ -300,6 +345,9 @@ message ReasoningEngine {
 
   // Labels for the ReasoningEngine.
   map<string, string> labels = 17;
+
+  // Optional. Traffic distribution configuration for the Reasoning Engine.
+  TrafficConfig traffic_config = 20 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Configuration for how Agent Engine sub-resources should manage context.

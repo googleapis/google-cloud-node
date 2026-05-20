@@ -23,6 +23,13 @@ describe('Baseline tests', () => {
     useCommonProto: true,
   });
   runBaselineTest({
+    baselineName: 'duplicate_methods_test',
+    outputDir: '.test-out-duplicate_methods_test',
+    protoPath: 'google/duplicatemethodstest/v1/duplicate_methods_test_v1.proto',
+    serviceYaml: 'google/duplicatemethodstest/v1/duplicate_methods_test_v1.yaml',
+    useCommonProto: true,
+  });
+  runBaselineTest({
     baselineName: 'dlp',
     outputDir: '.test-out-dlp',
     protoPath: 'google/privacy/dlp/v2/*.proto',

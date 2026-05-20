@@ -18,11 +18,22 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +55,7 @@ export class EvaluationServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('ces');
@@ -57,11 +68,11 @@ export class EvaluationServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  evaluationServiceStub?: Promise<{[name: string]: Function}>;
+  evaluationServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of EvaluationServiceClient.
@@ -102,21 +113,42 @@ export class EvaluationServiceClient {
    *     const client = new EvaluationServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EvaluationServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'ces.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +173,7 @@ export class EvaluationServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +187,11 @@ export class EvaluationServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,64 +213,64 @@ export class EvaluationServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}'
+        'projects/{project}/locations/{location}/apps/{app}/agents/{agent}',
       ),
       appPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}'
+        'projects/{project}/locations/{location}/apps/{app}',
       ),
       appVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/versions/{version}'
+        'projects/{project}/locations/{location}/apps/{app}/versions/{version}',
       ),
       changelogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}'
+        'projects/{project}/locations/{location}/apps/{app}/changelogs/{changelog}',
       ),
       conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}'
+        'projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}',
       ),
       deploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}'
+        'projects/{project}/locations/{location}/apps/{app}/deployments/{deployment}',
       ),
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}',
       ),
       evaluationDatasetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluationDatasets/{evaluation_dataset}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluationDatasets/{evaluation_dataset}',
       ),
       evaluationExpectationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluationExpectations/{evaluation_expectation}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluationExpectations/{evaluation_expectation}',
       ),
       evaluationResultPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result}',
       ),
       evaluationRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/evaluationRuns/{evaluation_run}'
+        'projects/{project}/locations/{location}/apps/{app}/evaluationRuns/{evaluation_run}',
       ),
       examplePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/examples/{example}'
+        'projects/{project}/locations/{location}/apps/{app}/examples/{example}',
       ),
       guardrailPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}'
+        'projects/{project}/locations/{location}/apps/{app}/guardrails/{guardrail}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       omnichannelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/omnichannels/{omnichannel}'
+        'projects/{project}/locations/{location}/omnichannels/{omnichannel}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       scheduledEvaluationRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}'
+        'projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}',
       ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/securitySettings'
+        'projects/{project}/locations/{location}/securitySettings',
       ),
       toolPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}'
+        'projects/{project}/locations/{location}/apps/{app}/tools/{tool}',
       ),
       toolsetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}'
+        'projects/{project}/locations/{location}/apps/{app}/toolsets/{toolset}',
       ),
     };
 
@@ -250,18 +278,36 @@ export class EvaluationServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEvaluations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluations'),
-      listEvaluationResults:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluationResults'),
-      listEvaluationDatasets:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluationDatasets'),
-      listEvaluationRuns:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluationRuns'),
-      listEvaluationExpectations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'evaluationExpectations'),
-      listScheduledEvaluationRuns:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'scheduledEvaluationRuns')
+      listEvaluations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluations',
+      ),
+      listEvaluationResults: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluationResults',
+      ),
+      listEvaluationDatasets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluationDatasets',
+      ),
+      listEvaluationRuns: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluationRuns',
+      ),
+      listEvaluationExpectations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'evaluationExpectations',
+      ),
+      listScheduledEvaluationRuns: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'scheduledEvaluationRuns',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -270,61 +316,107 @@ export class EvaluationServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1beta/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1beta/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1beta/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const runEvaluationResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.RunEvaluationResponse') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.RunEvaluationResponse',
+    ) as gax.protobuf.Type;
     const runEvaluationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.RunEvaluationOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.RunEvaluationOperationMetadata',
+    ) as gax.protobuf.Type;
     const generateEvaluationResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.Evaluation') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.Evaluation',
+    ) as gax.protobuf.Type;
     const generateEvaluationMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.GenerateEvaluationOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.GenerateEvaluationOperationMetadata',
+    ) as gax.protobuf.Type;
     const importEvaluationsResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.ImportEvaluationsResponse') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.ImportEvaluationsResponse',
+    ) as gax.protobuf.Type;
     const importEvaluationsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.ImportEvaluationsOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.ImportEvaluationsOperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteEvaluationRunResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteEvaluationRunMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.DeleteEvaluationRunOperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.DeleteEvaluationRunOperationMetadata',
+    ) as gax.protobuf.Type;
     const exportEvaluationsResponse = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.ExportEvaluationsResponse') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.ExportEvaluationsResponse',
+    ) as gax.protobuf.Type;
     const exportEvaluationsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.ces.v1beta.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.ces.v1beta.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       runEvaluation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         runEvaluationResponse.decode.bind(runEvaluationResponse),
-        runEvaluationMetadata.decode.bind(runEvaluationMetadata)),
+        runEvaluationMetadata.decode.bind(runEvaluationMetadata),
+      ),
       generateEvaluation: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         generateEvaluationResponse.decode.bind(generateEvaluationResponse),
-        generateEvaluationMetadata.decode.bind(generateEvaluationMetadata)),
+        generateEvaluationMetadata.decode.bind(generateEvaluationMetadata),
+      ),
       importEvaluations: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importEvaluationsResponse.decode.bind(importEvaluationsResponse),
-        importEvaluationsMetadata.decode.bind(importEvaluationsMetadata)),
+        importEvaluationsMetadata.decode.bind(importEvaluationsMetadata),
+      ),
       deleteEvaluationRun: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEvaluationRunResponse.decode.bind(deleteEvaluationRunResponse),
-        deleteEvaluationRunMetadata.decode.bind(deleteEvaluationRunMetadata)),
+        deleteEvaluationRunMetadata.decode.bind(deleteEvaluationRunMetadata),
+      ),
       exportEvaluations: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportEvaluationsResponse.decode.bind(exportEvaluationsResponse),
-        exportEvaluationsMetadata.decode.bind(exportEvaluationsMetadata))
+        exportEvaluationsMetadata.decode.bind(exportEvaluationsMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.ces.v1beta.EvaluationService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.ces.v1beta.EvaluationService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -355,28 +447,66 @@ export class EvaluationServiceClient {
     // Put together the "service stub" for
     // google.cloud.ces.v1beta.EvaluationService.
     this.evaluationServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.ces.v1beta.EvaluationService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.ces.v1beta.EvaluationService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.ces.v1beta.EvaluationService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const evaluationServiceStubMethods =
-        ['runEvaluation', 'uploadEvaluationAudio', 'createEvaluation', 'generateEvaluation', 'importEvaluations', 'createEvaluationDataset', 'updateEvaluation', 'updateEvaluationDataset', 'deleteEvaluation', 'deleteEvaluationResult', 'deleteEvaluationDataset', 'deleteEvaluationRun', 'getEvaluation', 'getEvaluationResult', 'getEvaluationDataset', 'getEvaluationRun', 'listEvaluations', 'listEvaluationResults', 'listEvaluationDatasets', 'listEvaluationRuns', 'listEvaluationExpectations', 'getEvaluationExpectation', 'createEvaluationExpectation', 'updateEvaluationExpectation', 'deleteEvaluationExpectation', 'createScheduledEvaluationRun', 'getScheduledEvaluationRun', 'listScheduledEvaluationRuns', 'updateScheduledEvaluationRun', 'deleteScheduledEvaluationRun', 'testPersonaVoice', 'exportEvaluations'];
+    const evaluationServiceStubMethods = [
+      'runEvaluation',
+      'uploadEvaluationAudio',
+      'createEvaluation',
+      'generateEvaluation',
+      'importEvaluations',
+      'createEvaluationDataset',
+      'updateEvaluation',
+      'updateEvaluationDataset',
+      'deleteEvaluation',
+      'deleteEvaluationResult',
+      'deleteEvaluationDataset',
+      'deleteEvaluationRun',
+      'getEvaluation',
+      'getEvaluationResult',
+      'getEvaluationDataset',
+      'getEvaluationRun',
+      'listEvaluations',
+      'listEvaluationResults',
+      'listEvaluationDatasets',
+      'listEvaluationRuns',
+      'listEvaluationExpectations',
+      'getEvaluationExpectation',
+      'createEvaluationExpectation',
+      'updateEvaluationExpectation',
+      'deleteEvaluationExpectation',
+      'createScheduledEvaluationRun',
+      'getScheduledEvaluationRun',
+      'listScheduledEvaluationRuns',
+      'updateScheduledEvaluationRun',
+      'deleteScheduledEvaluationRun',
+      'testPersonaVoice',
+      'exportEvaluations',
+    ];
     for (const methodName of evaluationServiceStubMethods) {
       const callPromise = this.evaluationServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -386,7 +516,7 @@ export class EvaluationServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -401,8 +531,14 @@ export class EvaluationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -413,8 +549,14 @@ export class EvaluationServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'ces.googleapis.com';
   }
@@ -447,7 +589,7 @@ export class EvaluationServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/ces',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -457,8 +599,9 @@ export class EvaluationServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -469,2778 +612,4060 @@ export class EvaluationServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Uploads audio for use in Golden Evaluations. Stores the audio in the Cloud
- * Storage bucket defined in
- * 'App.logging_settings.evaluation_audio_recording_config.gcs_bucket' and
- * returns a transcript.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the Evaluation for which to upload the
- *   evaluation audio. Format:
- *   `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
- * @param {Buffer} request.audioContent
- *   Required. The raw audio bytes.
- *   The format of the audio must be single-channel LINEAR16 with a sample
- *   rate of 16kHz (default InputAudioConfig).
- * @param {string} [request.previousAudioGcsUri]
- *   Optional. The Google Cloud Storage URI of the previously uploaded audio
- *   file to be deleted. Format: `gs://<bucket-name>/<object-name>`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.UploadEvaluationAudioResponse|UploadEvaluationAudioResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.upload_evaluation_audio.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_UploadEvaluationAudio_async
- */
+  /**
+   * Uploads audio for use in Golden Evaluations. Stores the audio in the Cloud
+   * Storage bucket defined in
+   * 'App.logging_settings.evaluation_audio_recording_config.gcs_bucket' and
+   * returns a transcript.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Evaluation for which to upload the
+   *   evaluation audio. Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
+   * @param {Buffer} request.audioContent
+   *   Required. The raw audio bytes.
+   *   The format of the audio must be single-channel LINEAR16 with a sample
+   *   rate of 16kHz (default InputAudioConfig).
+   * @param {string} [request.previousAudioGcsUri]
+   *   Optional. The Google Cloud Storage URI of the previously uploaded audio
+   *   file to be deleted. Format: `gs://<bucket-name>/<object-name>`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.UploadEvaluationAudioResponse|UploadEvaluationAudioResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.upload_evaluation_audio.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_UploadEvaluationAudio_async
+   */
   uploadEvaluationAudio(
-      request?: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
+      protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   uploadEvaluationAudio(
-      request: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
+      | protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   uploadEvaluationAudio(
-      request: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
+      | protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   uploadEvaluationAudio(
-      request?: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
+      | protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
+      protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('uploadEvaluationAudio request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
+          | protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('uploadEvaluationAudio response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.uploadEvaluationAudio(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
-        protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('uploadEvaluationAudio response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .uploadEvaluationAudio(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IUploadEvaluationAudioResponse,
+          (
+            | protos.google.cloud.ces.v1beta.IUploadEvaluationAudioRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('uploadEvaluationAudio response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates an evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The app to create the evaluation for.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string} [request.evaluationId]
- *   Optional. The ID to use for the evaluation, which will become the final
- *   component of the evaluation's resource name. If not provided, a unique ID
- *   will be automatically assigned for the evaluation.
- * @param {google.cloud.ces.v1beta.Evaluation} request.evaluation
- *   Required. The evaluation to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.create_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_CreateEvaluation_async
- */
+  /**
+   * Creates an evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The app to create the evaluation for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string} [request.evaluationId]
+   *   Optional. The ID to use for the evaluation, which will become the final
+   *   component of the evaluation's resource name. If not provided, a unique ID
+   *   will be automatically assigned for the evaluation.
+   * @param {google.cloud.ces.v1beta.Evaluation} request.evaluation
+   *   Required. The evaluation to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.create_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_CreateEvaluation_async
+   */
   createEvaluation(
-      request?: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.ICreateEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createEvaluation(
-      request: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluation(
-      request: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluation(
-      request?: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.ICreateEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.ICreateEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.ICreateEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createEvaluation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluation,
+          | protos.google.cloud.ces.v1beta.ICreateEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEvaluation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createEvaluation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createEvaluation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluation,
+          protos.google.cloud.ces.v1beta.ICreateEvaluationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEvaluation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates an evaluation dataset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The app to create the evaluation for.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string} [request.evaluationDatasetId]
- *   Optional. The ID to use for the evaluation dataset, which will become the
- *   final component of the evaluation dataset's resource name. If not provided,
- *   a unique ID will be automatically assigned for the evaluation.
- * @param {google.cloud.ces.v1beta.EvaluationDataset} request.evaluationDataset
- *   Required. The evaluation dataset to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.create_evaluation_dataset.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_CreateEvaluationDataset_async
- */
+  /**
+   * Creates an evaluation dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The app to create the evaluation for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string} [request.evaluationDatasetId]
+   *   Optional. The ID to use for the evaluation dataset, which will become the
+   *   final component of the evaluation dataset's resource name. If not provided,
+   *   a unique ID will be automatically assigned for the evaluation.
+   * @param {google.cloud.ces.v1beta.EvaluationDataset} request.evaluationDataset
+   *   Required. The evaluation dataset to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.create_evaluation_dataset.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_CreateEvaluationDataset_async
+   */
   createEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      (
+        | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      (
+        | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createEvaluationDataset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationDataset,
+          | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEvaluationDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createEvaluationDataset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createEvaluationDataset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createEvaluationDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationDataset,
+          (
+            | protos.google.cloud.ces.v1beta.ICreateEvaluationDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEvaluationDataset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates an evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1beta.Evaluation} request.evaluation
- *   Required. The evaluation to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.update_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_UpdateEvaluation_async
- */
+  /**
+   * Updates an evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1beta.Evaluation} request.evaluation
+   *   Required. The evaluation to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.update_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_UpdateEvaluation_async
+   */
   updateEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateEvaluation(
-      request: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluation(
-      request: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'evaluation.name': request.evaluation!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'evaluation.name': request.evaluation!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateEvaluation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluation,
+          | protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEvaluation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateEvaluation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateEvaluation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluation,
+          protos.google.cloud.ces.v1beta.IUpdateEvaluationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEvaluation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates an evaluation dataset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1beta.EvaluationDataset} request.evaluationDataset
- *   Required. The evaluation dataset to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.update_evaluation_dataset.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_UpdateEvaluationDataset_async
- */
+  /**
+   * Updates an evaluation dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1beta.EvaluationDataset} request.evaluationDataset
+   *   Required. The evaluation dataset to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.update_evaluation_dataset.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_UpdateEvaluationDataset_async
+   */
   updateEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      (
+        | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      (
+        | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'evaluation_dataset.name': request.evaluationDataset!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'evaluation_dataset.name': request.evaluationDataset!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateEvaluationDataset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationDataset,
+          | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEvaluationDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateEvaluationDataset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateEvaluationDataset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateEvaluationDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationDataset,
+          (
+            | protos.google.cloud.ces.v1beta.IUpdateEvaluationDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEvaluationDataset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes an evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation to delete.
- * @param {boolean} [request.force]
- *   Optional. Indicates whether to forcefully delete the evaluation, even if it
- *   is still referenced by evaluation datasets.
- *
- *   *  If `force = false`, the deletion will fail if any datasets still
- *   reference the evaluation.
- *   *  If `force = true`, all existing references from datasets will be removed
- *   and the evaluation will be deleted.
- * @param {string} [request.etag]
- *   Optional. The current etag of the evaluation. If an etag is not provided,
- *   the deletion will overwrite any concurrent changes. If an etag is provided
- *   and does not match the current etag of the evaluation, deletion will be
- *   blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluation_async
- */
+  /**
+   * Deletes an evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation to delete.
+   * @param {boolean} [request.force]
+   *   Optional. Indicates whether to forcefully delete the evaluation, even if it
+   *   is still referenced by evaluation datasets.
+   *
+   *   *  If `force = false`, the deletion will fail if any datasets still
+   *   reference the evaluation.
+   *   *  If `force = true`, all existing references from datasets will be removed
+   *   and the evaluation will be deleted.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the evaluation. If an etag is not provided,
+   *   the deletion will overwrite any concurrent changes. If an etag is provided
+   *   and does not match the current etag of the evaluation, deletion will be
+   *   blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluation_async
+   */
   deleteEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteEvaluation(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluation(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteEvaluation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEvaluation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteEvaluation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteEvaluation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.ces.v1beta.IDeleteEvaluationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEvaluation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes an evaluation result.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation result to delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_result.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationResult_async
- */
+  /**
+   * Deletes an evaluation result.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation result to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_result.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationResult_async
+   */
   deleteEvaluationResult(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteEvaluationResult(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationResult(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationResult(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteEvaluationResult request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEvaluationResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteEvaluationResult(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteEvaluationResult response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteEvaluationResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.ces.v1beta.IDeleteEvaluationResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEvaluationResult response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes an evaluation dataset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation dataset to delete.
- * @param {string} [request.etag]
- *   Optional. The current etag of the evaluation dataset. If an etag is not
- *   provided, the deletion will overwrite any concurrent changes. If an etag is
- *   provided and does not match the current etag of the evaluation dataset,
- *   deletion will be blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_dataset.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationDataset_async
- */
+  /**
+   * Deletes an evaluation dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation dataset to delete.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the evaluation dataset. If an etag is not
+   *   provided, the deletion will overwrite any concurrent changes. If an etag is
+   *   provided and does not match the current etag of the evaluation dataset,
+   *   deletion will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_dataset.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationDataset_async
+   */
   deleteEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteEvaluationDataset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEvaluationDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteEvaluationDataset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteEvaluationDataset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteEvaluationDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.ces.v1beta.IDeleteEvaluationDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEvaluationDataset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluation_async
- */
+  /**
+   * Gets details of the specified evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluation_async
+   */
   getEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.IGetEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getEvaluation(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.IGetEvaluationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluation(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.IGetEvaluationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IGetEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.IGetEvaluationRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation,
+      protos.google.cloud.ces.v1beta.IGetEvaluationRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluation,
+          | protos.google.cloud.ces.v1beta.IGetEvaluationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEvaluation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEvaluation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluation,
+          protos.google.cloud.ces.v1beta.IGetEvaluationRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified evaluation result.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation result to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_result.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationResult_async
- */
+  /**
+   * Gets details of the specified evaluation result.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation result to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_result.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationResult_async
+   */
   getEvaluationResult(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationResult,
-        protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationResult,
+      protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getEvaluationResult(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationResult,
-          protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationResult,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationResult(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationResult,
-          protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationResult,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationResult(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationResult,
-          protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationResult,
-          protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationResult,
-        protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationResult,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationResult,
+      protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluationResult request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationResult,
-        protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationResult,
+          | protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluationResult response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEvaluationResult(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationResult,
-        protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEvaluationResult response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEvaluationResult(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationResult,
+          (
+            | protos.google.cloud.ces.v1beta.IGetEvaluationResultRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluationResult response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified evaluation dataset.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation dataset to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_dataset.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationDataset_async
- */
+  /**
+   * Gets details of the specified evaluation dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation dataset to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_dataset.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationDataset_async
+   */
   getEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationDataset(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationDataset(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationDataset,
-          protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset,
+      protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluationDataset request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationDataset,
+          | protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluationDataset response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEvaluationDataset(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationDataset,
-        protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEvaluationDataset response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEvaluationDataset(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationDataset,
+          (
+            | protos.google.cloud.ces.v1beta.IGetEvaluationDatasetRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluationDataset response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified evaluation run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation run to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_run.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationRun_async
- */
+  /**
+   * Gets details of the specified evaluation run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation run to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_run.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationRun_async
+   */
   getEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationRun,
+      protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationRun,
+      protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluationRun request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationRun,
+          | protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluationRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEvaluationRun(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEvaluationRun response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEvaluationRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationRun,
+          protos.google.cloud.ces.v1beta.IGetEvaluationRunRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluationRun response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified evaluation expectation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation expectation to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_expectation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationExpectation_async
- */
+  /**
+   * Gets details of the specified evaluation expectation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation expectation to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.get_evaluation_expectation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GetEvaluationExpectation_async
+   */
   getEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      (
+        | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      (
+        | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEvaluationExpectation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+          | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEvaluationExpectation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEvaluationExpectation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEvaluationExpectation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEvaluationExpectation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+          (
+            | protos.google.cloud.ces.v1beta.IGetEvaluationExpectationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEvaluationExpectation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates an evaluation expectation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The app to create the evaluation expectation for.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string} [request.evaluationExpectationId]
- *   Optional. The ID to use for the evaluation expectation, which will become
- *   the final component of the evaluation expectation's resource name. If not
- *   provided, a unique ID will be automatically assigned for the evaluation
- *   expectation.
- * @param {google.cloud.ces.v1beta.EvaluationExpectation} request.evaluationExpectation
- *   Required. The evaluation expectation to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.create_evaluation_expectation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_CreateEvaluationExpectation_async
- */
+  /**
+   * Creates an evaluation expectation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The app to create the evaluation expectation for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string} [request.evaluationExpectationId]
+   *   Optional. The ID to use for the evaluation expectation, which will become
+   *   the final component of the evaluation expectation's resource name. If not
+   *   provided, a unique ID will be automatically assigned for the evaluation
+   *   expectation.
+   * @param {google.cloud.ces.v1beta.EvaluationExpectation} request.evaluationExpectation
+   *   Required. The evaluation expectation to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.create_evaluation_expectation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_CreateEvaluationExpectation_async
+   */
   createEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      (
+        | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      (
+        | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createEvaluationExpectation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+          | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createEvaluationExpectation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createEvaluationExpectation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createEvaluationExpectation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createEvaluationExpectation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+          (
+            | protos.google.cloud.ces.v1beta.ICreateEvaluationExpectationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createEvaluationExpectation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates an evaluation expectation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1beta.EvaluationExpectation} request.evaluationExpectation
- *   Required. The evaluation expectation to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.update_evaluation_expectation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_UpdateEvaluationExpectation_async
- */
+  /**
+   * Updates an evaluation expectation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1beta.EvaluationExpectation} request.evaluationExpectation
+   *   Required. The evaluation expectation to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.update_evaluation_expectation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_UpdateEvaluationExpectation_async
+   */
   updateEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      (
+        | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-          protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+      (
+        | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'evaluation_expectation.name': request.evaluationExpectation!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'evaluation_expectation.name':
+          request.evaluationExpectation!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateEvaluationExpectation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+          | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateEvaluationExpectation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateEvaluationExpectation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation,
-        protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateEvaluationExpectation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateEvaluationExpectation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation,
+          (
+            | protos.google.cloud.ces.v1beta.IUpdateEvaluationExpectationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEvaluationExpectation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes an evaluation expectation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation expectation to delete.
- * @param {string} [request.etag]
- *   Optional. The current etag of the evaluation expectation. If an etag is not
- *   provided, the deletion will overwrite any concurrent changes. If an etag is
- *   provided and does not match the current etag of the evaluation expectation,
- *   deletion will be blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_expectation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationExpectation_async
- */
+  /**
+   * Deletes an evaluation expectation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation expectation to delete.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the evaluation expectation. If an etag is not
+   *   provided, the deletion will overwrite any concurrent changes. If an etag is
+   *   provided and does not match the current etag of the evaluation expectation,
+   *   deletion will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_expectation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationExpectation_async
+   */
   deleteEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationExpectation(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationExpectation(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteEvaluationExpectation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteEvaluationExpectation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteEvaluationExpectation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteEvaluationExpectation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteEvaluationExpectation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.ces.v1beta.IDeleteEvaluationExpectationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEvaluationExpectation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a scheduled evaluation run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The app to create the scheduled evaluation run for.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string} [request.scheduledEvaluationRunId]
- *   Optional. The ID to use for the scheduled evaluation run, which will become
- *   the final component of the scheduled evaluation run's resource name. If not
- *   provided, a unique ID will be automatically assigned.
- * @param {google.cloud.ces.v1beta.ScheduledEvaluationRun} request.scheduledEvaluationRun
- *   Required. The scheduled evaluation run to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.create_scheduled_evaluation_run.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_CreateScheduledEvaluationRun_async
- */
+  /**
+   * Creates a scheduled evaluation run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The app to create the scheduled evaluation run for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string} [request.scheduledEvaluationRunId]
+   *   Optional. The ID to use for the scheduled evaluation run, which will become
+   *   the final component of the scheduled evaluation run's resource name. If not
+   *   provided, a unique ID will be automatically assigned.
+   * @param {google.cloud.ces.v1beta.ScheduledEvaluationRun} request.scheduledEvaluationRun
+   *   Required. The scheduled evaluation run to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.create_scheduled_evaluation_run.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_CreateScheduledEvaluationRun_async
+   */
   createScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      (
+        | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      (
+        | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createScheduledEvaluationRun request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+          | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createScheduledEvaluationRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createScheduledEvaluationRun(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createScheduledEvaluationRun response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createScheduledEvaluationRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+          (
+            | protos.google.cloud.ces.v1beta.ICreateScheduledEvaluationRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createScheduledEvaluationRun response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of the specified scheduled evaluation run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the scheduled evaluation run to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.get_scheduled_evaluation_run.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GetScheduledEvaluationRun_async
- */
+  /**
+   * Gets details of the specified scheduled evaluation run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the scheduled evaluation run to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.get_scheduled_evaluation_run.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GetScheduledEvaluationRun_async
+   */
   getScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      (
+        | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      (
+        | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getScheduledEvaluationRun request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+          | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getScheduledEvaluationRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getScheduledEvaluationRun(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getScheduledEvaluationRun response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getScheduledEvaluationRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+          (
+            | protos.google.cloud.ces.v1beta.IGetScheduledEvaluationRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getScheduledEvaluationRun response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a scheduled evaluation run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1beta.ScheduledEvaluationRun} request.scheduledEvaluationRun
- *   Required. The scheduled evaluation run to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to control which fields get updated. If the
- *   mask is not present, all fields will be updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.update_scheduled_evaluation_run.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_UpdateScheduledEvaluationRun_async
- */
+  /**
+   * Updates a scheduled evaluation run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1beta.ScheduledEvaluationRun} request.scheduledEvaluationRun
+   *   Required. The scheduled evaluation run to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to control which fields get updated. If the
+   *   mask is not present, all fields will be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.update_scheduled_evaluation_run.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_UpdateScheduledEvaluationRun_async
+   */
   updateScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      (
+        | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-          protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+      (
+        | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'scheduled_evaluation_run.name': request.scheduledEvaluationRun!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'scheduled_evaluation_run.name':
+          request.scheduledEvaluationRun!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateScheduledEvaluationRun request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+          | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateScheduledEvaluationRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateScheduledEvaluationRun(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
-        protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateScheduledEvaluationRun response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateScheduledEvaluationRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun,
+          (
+            | protos.google.cloud.ces.v1beta.IUpdateScheduledEvaluationRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateScheduledEvaluationRun response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a scheduled evaluation run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the scheduled evaluation run to delete.
- * @param {string} [request.etag]
- *   Optional. The etag of the ScheduledEvaluationRun.
- *   If provided, it must match the server's etag.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_scheduled_evaluation_run.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_DeleteScheduledEvaluationRun_async
- */
+  /**
+   * Deletes a scheduled evaluation run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the scheduled evaluation run to delete.
+   * @param {string} [request.etag]
+   *   Optional. The etag of the ScheduledEvaluationRun.
+   *   If provided, it must match the server's etag.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_scheduled_evaluation_run.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_DeleteScheduledEvaluationRun_async
+   */
   deleteScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScheduledEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteScheduledEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteScheduledEvaluationRun request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteScheduledEvaluationRun response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteScheduledEvaluationRun(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteScheduledEvaluationRun response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteScheduledEvaluationRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.ces.v1beta.IDeleteScheduledEvaluationRunRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteScheduledEvaluationRun response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Tests the voice of a persona. Also accepts a default persona.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.app
- *   Required. the resource name of the app to test the persona voice for.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string} request.personaId
- *   Required. The persona ID to test the voice for. Also accepts "default".
- * @param {string} request.text
- *   Required. The text to test the voice for.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.TestPersonaVoiceResponse|TestPersonaVoiceResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.test_persona_voice.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_TestPersonaVoice_async
- */
+  /**
+   * Tests the voice of a persona. Also accepts a default persona.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.app
+   *   Required. the resource name of the app to test the persona voice for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string} request.personaId
+   *   Required. The persona ID to test the voice for. Also accepts "default".
+   * @param {string} request.text
+   *   Required. The text to test the voice for.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.ces.v1beta.TestPersonaVoiceResponse|TestPersonaVoiceResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.test_persona_voice.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_TestPersonaVoice_async
+   */
   testPersonaVoice(
-      request?: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
+      protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   testPersonaVoice(
-      request: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-          protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
+      | protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testPersonaVoice(
-      request: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
-      callback: Callback<
-          protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-          protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
+    callback: Callback<
+      protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
+      | protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testPersonaVoice(
-      request?: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-          protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-          protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
+      | protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
+      protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'app': request.app ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        app: request.app ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('testPersonaVoice request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
+          | protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testPersonaVoice response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.testPersonaVoice(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
-        protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('testPersonaVoice response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .testPersonaVoice(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.ces.v1beta.ITestPersonaVoiceResponse,
+          protos.google.cloud.ces.v1beta.ITestPersonaVoiceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testPersonaVoice response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Runs an evaluation of the app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.app
- *   Required. The app to evaluate.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {string[]} [request.evaluations]
- *   Optional. List of evaluations to run.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
- * @param {string} [request.evaluationDataset]
- *   Optional. An evaluation dataset to run.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/evaluationDatasets/{evaluationDataset}`
- * @param {string} [request.displayName]
- *   Optional. The display name of the evaluation run.
- * @param {string} [request.appVersion]
- *   Optional. The app version to evaluate.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
- * @param {google.cloud.ces.v1beta.EvaluationConfig} [request.config]
- *   Optional. The configuration to use for the run.
- * @param {number} [request.runCount]
- *   Optional. The number of times to run the evaluation. If not set, the
- *   default value is 1 per golden, and 5 per scenario.
- * @param {number[]} [request.personaRunConfigs]
- *   Optional. The configuration to use for the run per persona.
- * @param {google.cloud.ces.v1beta.OptimizationConfig} [request.optimizationConfig]
- *   Optional. Configuration for running the optimization step after the
- *   evaluation run. If not set, the optimization step will not be run.
- * @param {string} [request.scheduledEvaluationRun]
- *   Optional. The resource name of the `ScheduledEvaluationRun` that is
- *   triggering this evaluation run.
- *
- *   If this field is set, the `scheduled_evaluation_run` field on the created
- *   `EvaluationRun` resource will be populated from this value.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}`
- * @param {google.cloud.ces.v1beta.GoldenRunMethod} [request.goldenRunMethod]
- *   Optional. The method to run the evaluation if it is a golden evaluation. If
- *   not set, default to STABLE.
- * @param {boolean} [request.generateLatencyReport]
- *   Optional. Whether to generate a latency report for the evaluation run.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.run_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_RunEvaluation_async
- */
+  /**
+   * Runs an evaluation of the app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.app
+   *   Required. The app to evaluate.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string[]} [request.evaluations]
+   *   Optional. List of evaluations to run.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
+   * @param {string} [request.evaluationDataset]
+   *   Optional. An evaluation dataset to run.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluationDatasets/{evaluationDataset}`
+   * @param {string} [request.displayName]
+   *   Optional. The display name of the evaluation run.
+   * @param {string} [request.appVersion]
+   *   Optional. The app version to evaluate.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
+   * @param {google.cloud.ces.v1beta.EvaluationConfig} [request.config]
+   *   Optional. The configuration to use for the run.
+   * @param {number} [request.runCount]
+   *   Optional. The number of times to run the evaluation. If not set, the
+   *   default value is 1 per golden, and 5 per scenario.
+   * @param {number[]} [request.personaRunConfigs]
+   *   Optional. The configuration to use for the run per persona.
+   * @param {google.cloud.ces.v1beta.OptimizationConfig} [request.optimizationConfig]
+   *   Optional. Configuration for running the optimization step after the
+   *   evaluation run. If not set, the optimization step will not be run.
+   * @param {string} [request.scheduledEvaluationRun]
+   *   Optional. The resource name of the `ScheduledEvaluationRun` that is
+   *   triggering this evaluation run.
+   *
+   *   If this field is set, the `scheduled_evaluation_run` field on the created
+   *   `EvaluationRun` resource will be populated from this value.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/scheduledEvaluationRuns/{scheduled_evaluation_run}`
+   * @param {google.cloud.ces.v1beta.GoldenRunMethod} [request.goldenRunMethod]
+   *   Optional. The method to run the evaluation if it is a golden evaluation. If
+   *   not set, default to STABLE.
+   * @param {boolean} [request.generateLatencyReport]
+   *   Optional. Whether to generate a latency report for the evaluation run.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.run_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_RunEvaluation_async
+   */
   runEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   runEvaluation(
-      request: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runEvaluation(
-      request: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   runEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1beta.IRunEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+            protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'app': request.app ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        app: request.app ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+            protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('runEvaluation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('runEvaluation request %j', request);
-    return this.innerApiCalls.runEvaluation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1beta.IRunEvaluationResponse, protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('runEvaluation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .runEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1beta.IRunEvaluationResponse,
+            protos.google.cloud.ces.v1beta.IRunEvaluationOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runEvaluation response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `runEvaluation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.run_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_RunEvaluation_async
- */
-  async checkRunEvaluationProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1beta.RunEvaluationResponse, protos.google.cloud.ces.v1beta.RunEvaluationOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `runEvaluation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.run_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_RunEvaluation_async
+   */
+  async checkRunEvaluationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1beta.RunEvaluationResponse,
+      protos.google.cloud.ces.v1beta.RunEvaluationOperationMetadata
+    >
+  > {
     this._log.info('runEvaluation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.runEvaluation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1beta.RunEvaluationResponse, protos.google.cloud.ces.v1beta.RunEvaluationOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.runEvaluation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1beta.RunEvaluationResponse,
+      protos.google.cloud.ces.v1beta.RunEvaluationOperationMetadata
+    >;
   }
-/**
- * Creates a golden evaluation from a conversation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.conversation
- *   Required. The conversation to create the golden evaluation for.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}`
- * @param {google.cloud.ces.v1beta.Conversation.Source} [request.source]
- *   Optional. Indicate the source of the conversation. If not set, all sources
- *   will be searched.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.generate_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GenerateEvaluation_async
- */
+  /**
+   * Creates a golden evaluation from a conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.conversation
+   *   Required. The conversation to create the golden evaluation for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/conversations/{conversation}`
+   * @param {google.cloud.ces.v1beta.Conversation.Source} [request.source]
+   *   Optional. Indicate the source of the conversation. If not set, all sources
+   *   will be searched.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.generate_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GenerateEvaluation_async
+   */
   generateEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IEvaluation,
+        protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   generateEvaluation(
-      request: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IEvaluation,
+        protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateEvaluation(
-      request: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IEvaluation,
+        protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   generateEvaluation(
-      request?: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1beta.IGenerateEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IEvaluation,
+            protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IEvaluation,
+        protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IEvaluation,
+        protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'conversation': request.conversation ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        conversation: request.conversation ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IEvaluation,
+            protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('generateEvaluation response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('generateEvaluation request %j', request);
-    return this.innerApiCalls.generateEvaluation(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1beta.IEvaluation, protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('generateEvaluation response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .generateEvaluation(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1beta.IEvaluation,
+            protos.google.cloud.ces.v1beta.IGenerateEvaluationOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('generateEvaluation response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `generateEvaluation()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.generate_evaluation.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_GenerateEvaluation_async
- */
-  async checkGenerateEvaluationProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1beta.Evaluation, protos.google.cloud.ces.v1beta.GenerateEvaluationOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `generateEvaluation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.generate_evaluation.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_GenerateEvaluation_async
+   */
+  async checkGenerateEvaluationProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1beta.Evaluation,
+      protos.google.cloud.ces.v1beta.GenerateEvaluationOperationMetadata
+    >
+  > {
     this._log.info('generateEvaluation long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.generateEvaluation, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1beta.Evaluation, protos.google.cloud.ces.v1beta.GenerateEvaluationOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.generateEvaluation,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1beta.Evaluation,
+      protos.google.cloud.ces.v1beta.GenerateEvaluationOperationMetadata
+    >;
   }
-/**
- * Imports evaluations into the app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.ces.v1beta.ImportEvaluationsRequest.ConversationList} request.conversationList
- *   The conversations to import the evaluations from.
- * @param {string} request.gcsUri
- *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
- *   from which to import evaluations. The format of this URI must be
- *   `gs://<bucket-name>/<object-name>`.
- * @param {Buffer} request.csvContent
- *   Raw bytes representing the csv file with the evaluations structure.
- * @param {string} request.parent
- *   Required. The app to import the evaluations into.
- *   Format:
- *   `projects/{project}/locations/{location}/apps/{app}`
- * @param {google.cloud.ces.v1beta.ImportEvaluationsRequest.ImportOptions} [request.importOptions]
- *   Optional. Options governing the import process for the evaluations.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.import_evaluations.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ImportEvaluations_async
- */
+  /**
+   * Imports evaluations into the app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.ces.v1beta.ImportEvaluationsRequest.ConversationList} request.conversationList
+   *   The conversations to import the evaluations from.
+   * @param {string} request.gcsUri
+   *   The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
+   *   from which to import evaluations. The format of this URI must be
+   *   `gs://<bucket-name>/<object-name>`.
+   * @param {Buffer} request.csvContent
+   *   Raw bytes representing the csv file with the evaluations structure.
+   * @param {string} request.parent
+   *   Required. The app to import the evaluations into.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}`
+   * @param {google.cloud.ces.v1beta.ImportEvaluationsRequest.ImportOptions} [request.importOptions]
+   *   Optional. Options governing the import process for the evaluations.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.import_evaluations.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ImportEvaluations_async
+   */
   importEvaluations(
-      request?: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   importEvaluations(
-      request: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importEvaluations(
-      request: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   importEvaluations(
-      request?: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1beta.IImportEvaluationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+            protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+            protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('importEvaluations response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('importEvaluations request %j', request);
-    return this.innerApiCalls.importEvaluations(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1beta.IImportEvaluationsResponse, protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('importEvaluations response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .importEvaluations(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1beta.IImportEvaluationsResponse,
+            protos.google.cloud.ces.v1beta.IImportEvaluationsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('importEvaluations response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `importEvaluations()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.import_evaluations.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ImportEvaluations_async
- */
-  async checkImportEvaluationsProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1beta.ImportEvaluationsResponse, protos.google.cloud.ces.v1beta.ImportEvaluationsOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `importEvaluations()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.import_evaluations.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ImportEvaluations_async
+   */
+  async checkImportEvaluationsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1beta.ImportEvaluationsResponse,
+      protos.google.cloud.ces.v1beta.ImportEvaluationsOperationMetadata
+    >
+  > {
     this._log.info('importEvaluations long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importEvaluations, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1beta.ImportEvaluationsResponse, protos.google.cloud.ces.v1beta.ImportEvaluationsOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importEvaluations,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1beta.ImportEvaluationsResponse,
+      protos.google.cloud.ces.v1beta.ImportEvaluationsOperationMetadata
+    >;
   }
-/**
- * Deletes an evaluation run.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the evaluation run to delete.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_run.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationRun_async
- */
+  /**
+   * Deletes an evaluation run.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the evaluation run to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_run.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationRun_async
+   */
   deleteEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationRun(
-      request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEvaluationRun(
-      request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1beta.IDeleteEvaluationRunRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEvaluationRun response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEvaluationRun request %j', request);
-    return this.innerApiCalls.deleteEvaluationRun(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteEvaluationRun response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteEvaluationRun(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.ces.v1beta.IDeleteEvaluationRunOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEvaluationRun response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteEvaluationRun()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_run.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationRun_async
- */
-  async checkDeleteEvaluationRunProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.ces.v1beta.DeleteEvaluationRunOperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteEvaluationRun()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.delete_evaluation_run.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_DeleteEvaluationRun_async
+   */
+  async checkDeleteEvaluationRunProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.ces.v1beta.DeleteEvaluationRunOperationMetadata
+    >
+  > {
     this._log.info('deleteEvaluationRun long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEvaluationRun, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.ces.v1beta.DeleteEvaluationRunOperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteEvaluationRun,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.ces.v1beta.DeleteEvaluationRunOperationMetadata
+    >;
   }
-/**
- * Exports evaluations.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to export evaluations from.
- *   Format: `projects/{project}/locations/{location}/apps/{app}`
- * @param {string[]} request.names
- *   Required. The resource names of the evaluations to export.
- * @param {google.cloud.ces.v1beta.ExportOptions} [request.exportOptions]
- *   Optional. The export options for the evaluations.
- * @param {boolean} [request.includeEvaluationResults]
- *   Optional. Includes evaluation results in the export. At least one of
- *   include_evaluation_results or include_evaluations must be set.
- * @param {boolean} [request.includeEvaluations]
- *   Optional. Includes evaluations in the export. At least one of
- *   include_evaluation_results or include_evaluations must be set.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluations.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluations_async
- */
+  /**
+   * Exports evaluations.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to export evaluations from.
+   *   Format: `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the evaluations to export.
+   * @param {google.cloud.ces.v1beta.ExportOptions} [request.exportOptions]
+   *   Optional. The export options for the evaluations.
+   * @param {boolean} [request.includeEvaluationResults]
+   *   Optional. Includes evaluation results in the export. At least one of
+   *   include_evaluation_results or include_evaluations must be set.
+   * @param {boolean} [request.includeEvaluations]
+   *   Optional. Includes evaluations in the export. At least one of
+   *   include_evaluation_results or include_evaluations must be set.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluations.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluations_async
+   */
   exportEvaluations(
-      request?: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   exportEvaluations(
-      request: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportEvaluations(
-      request: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   exportEvaluations(
-      request?: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.ces.v1beta.IExportEvaluationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+            protos.google.cloud.ces.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+        protos.google.cloud.ces.v1beta.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+            protos.google.cloud.ces.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('exportEvaluations response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('exportEvaluations request %j', request);
-    return this.innerApiCalls.exportEvaluations(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.ces.v1beta.IExportEvaluationsResponse, protos.google.cloud.ces.v1beta.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('exportEvaluations response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .exportEvaluations(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationsResponse,
+            protos.google.cloud.ces.v1beta.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportEvaluations response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `exportEvaluations()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluations.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluations_async
- */
-  async checkExportEvaluationsProgress(name: string): Promise<LROperation<protos.google.cloud.ces.v1beta.ExportEvaluationsResponse, protos.google.cloud.ces.v1beta.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `exportEvaluations()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluations.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluations_async
+   */
+  async checkExportEvaluationsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1beta.ExportEvaluationsResponse,
+      protos.google.cloud.ces.v1beta.OperationMetadata
+    >
+  > {
     this._log.info('exportEvaluations long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportEvaluations, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.ces.v1beta.ExportEvaluationsResponse, protos.google.cloud.ces.v1beta.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportEvaluations,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1beta.ExportEvaluationsResponse,
+      protos.google.cloud.ces.v1beta.OperationMetadata
+    >;
   }
- /**
- * Lists all evaluations in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluations from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Deprecated: Use evaluation_filter and evaluation_run_filter
- *   instead.
- * @param {string} [request.evaluationFilter]
- *   Optional. Filter to be applied on the evaluation when listing the
- *   evaluations. See https://google.aip.dev/160 for more details. Supported
- *   fields: evaluation_datasets
- * @param {string} [request.evaluationRunFilter]
- *   Optional. Filter string for fields on the associated EvaluationRun
- *   resources. See https://google.aip.dev/160 for more details. Supported
- *   fields: create_time, initiated_by, app_version_display_name
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {boolean} [request.lastTenResults]
- *   Optional. Whether to include the last 10 evaluation results for each
- *   evaluation in the response.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEvaluationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all evaluations in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluations from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Deprecated: Use evaluation_filter and evaluation_run_filter
+   *   instead.
+   * @param {string} [request.evaluationFilter]
+   *   Optional. Filter to be applied on the evaluation when listing the
+   *   evaluations. See https://google.aip.dev/160 for more details. Supported
+   *   fields: evaluation_datasets
+   * @param {string} [request.evaluationRunFilter]
+   *   Optional. Filter string for fields on the associated EvaluationRun
+   *   resources. See https://google.aip.dev/160 for more details. Supported
+   *   fields: create_time, initiated_by, app_version_display_name
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {boolean} [request.lastTenResults]
+   *   Optional. Whether to include the last 10 evaluation results for each
+   *   evaluation in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluations(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation[],
-        protos.google.cloud.ces.v1beta.IListEvaluationsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation[],
+      protos.google.cloud.ces.v1beta.IListEvaluationsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationsResponse,
+    ]
+  >;
   listEvaluations(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluation>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluation
+    >,
+  ): void;
   listEvaluations(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluation>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluation
+    >,
+  ): void;
   listEvaluations(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluation>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluation[],
-        protos.google.cloud.ces.v1beta.IListEvaluationsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IListEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluation[],
+      protos.google.cloud.ces.v1beta.IListEvaluationsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-      protos.google.cloud.ces.v1beta.IListEvaluationsResponse|null|undefined,
-      protos.google.cloud.ces.v1beta.IEvaluation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+          | protos.google.cloud.ces.v1beta.IListEvaluationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvaluations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3249,256 +4674,285 @@ export class EvaluationServiceClient {
     this._log.info('listEvaluations request %j', request);
     return this.innerApiCalls
       .listEvaluations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1beta.IEvaluation[],
-        protos.google.cloud.ces.v1beta.IListEvaluationsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationsResponse
-      ]) => {
-        this._log.info('listEvaluations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1beta.IEvaluation[],
+          protos.google.cloud.ces.v1beta.IListEvaluationsRequest | null,
+          protos.google.cloud.ces.v1beta.IListEvaluationsResponse,
+        ]) => {
+          this._log.info('listEvaluations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEvaluations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluations from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Deprecated: Use evaluation_filter and evaluation_run_filter
- *   instead.
- * @param {string} [request.evaluationFilter]
- *   Optional. Filter to be applied on the evaluation when listing the
- *   evaluations. See https://google.aip.dev/160 for more details. Supported
- *   fields: evaluation_datasets
- * @param {string} [request.evaluationRunFilter]
- *   Optional. Filter string for fields on the associated EvaluationRun
- *   resources. See https://google.aip.dev/160 for more details. Supported
- *   fields: create_time, initiated_by, app_version_display_name
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {boolean} [request.lastTenResults]
- *   Optional. Whether to include the last 10 evaluation results for each
- *   evaluation in the response.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEvaluationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEvaluations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluations from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Deprecated: Use evaluation_filter and evaluation_run_filter
+   *   instead.
+   * @param {string} [request.evaluationFilter]
+   *   Optional. Filter to be applied on the evaluation when listing the
+   *   evaluations. See https://google.aip.dev/160 for more details. Supported
+   *   fields: evaluation_datasets
+   * @param {string} [request.evaluationRunFilter]
+   *   Optional. Filter string for fields on the associated EvaluationRun
+   *   resources. See https://google.aip.dev/160 for more details. Supported
+   *   fields: create_time, initiated_by, app_version_display_name
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {boolean} [request.lastTenResults]
+   *   Optional. Whether to include the last 10 evaluation results for each
+   *   evaluation in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEvaluationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationsStream(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluations stream %j', request);
     return this.descriptors.page.listEvaluations.createStream(
       this.innerApiCalls.listEvaluations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEvaluations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluations from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Deprecated: Use evaluation_filter and evaluation_run_filter
- *   instead.
- * @param {string} [request.evaluationFilter]
- *   Optional. Filter to be applied on the evaluation when listing the
- *   evaluations. See https://google.aip.dev/160 for more details. Supported
- *   fields: evaluation_datasets
- * @param {string} [request.evaluationRunFilter]
- *   Optional. Filter string for fields on the associated EvaluationRun
- *   resources. See https://google.aip.dev/160 for more details. Supported
- *   fields: create_time, initiated_by, app_version_display_name
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {boolean} [request.lastTenResults]
- *   Optional. Whether to include the last 10 evaluation results for each
- *   evaluation in the response.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluations.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluations_async
- */
+  /**
+   * Equivalent to `listEvaluations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluations from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Deprecated: Use evaluation_filter and evaluation_run_filter
+   *   instead.
+   * @param {string} [request.evaluationFilter]
+   *   Optional. Filter to be applied on the evaluation when listing the
+   *   evaluations. See https://google.aip.dev/160 for more details. Supported
+   *   fields: evaluation_datasets
+   * @param {string} [request.evaluationRunFilter]
+   *   Optional. Filter string for fields on the associated EvaluationRun
+   *   resources. See https://google.aip.dev/160 for more details. Supported
+   *   fields: create_time, initiated_by, app_version_display_name
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {boolean} [request.lastTenResults]
+   *   Optional. Whether to include the last 10 evaluation results for each
+   *   evaluation in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1beta.Evaluation|Evaluation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluations.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluations_async
+   */
   listEvaluationsAsync(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluation>{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluations iterate %j', request);
     return this.descriptors.page.listEvaluations.asyncIterate(
       this.innerApiCalls['listEvaluations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluation>;
   }
- /**
- * Lists all evaluation results for a given evaluation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the evaluation to list evaluation results
- *   from. To filter by evaluation run, use `-` as the evaluation ID and specify
- *   the evaluation run ID in the filter. For example:
- *   `projects/{project}/locations/{location}/apps/{app}/evaluations/-`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationResultsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation results.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEvaluationResultsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all evaluation results for a given evaluation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the evaluation to list evaluation results
+   *   from. To filter by evaluation run, use `-` as the evaluation ID and specify
+   *   the evaluation run ID in the filter. For example:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluations/-`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationResultsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation results.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEvaluationResultsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationResults(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationResult[],
-        protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationResult[],
+      protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse,
+    ]
+  >;
   listEvaluationResults(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationResult>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationResult
+    >,
+  ): void;
   listEvaluationResults(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationResult>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationResult
+    >,
+  ): void;
   listEvaluationResults(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationResult>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationResult>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationResult[],
-        protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationResult
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationResult[],
+      protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-      protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse|null|undefined,
-      protos.google.cloud.ces.v1beta.IEvaluationResult>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+          | protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationResult
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvaluationResults values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3507,237 +4961,266 @@ export class EvaluationServiceClient {
     this._log.info('listEvaluationResults request %j', request);
     return this.innerApiCalls
       .listEvaluationResults(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1beta.IEvaluationResult[],
-        protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse
-      ]) => {
-        this._log.info('listEvaluationResults values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1beta.IEvaluationResult[],
+          protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest | null,
+          protos.google.cloud.ces.v1beta.IListEvaluationResultsResponse,
+        ]) => {
+          this._log.info('listEvaluationResults values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEvaluationResults`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the evaluation to list evaluation results
- *   from. To filter by evaluation run, use `-` as the evaluation ID and specify
- *   the evaluation run ID in the filter. For example:
- *   `projects/{project}/locations/{location}/apps/{app}/evaluations/-`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationResultsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation results.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEvaluationResultsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEvaluationResults`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the evaluation to list evaluation results
+   *   from. To filter by evaluation run, use `-` as the evaluation ID and specify
+   *   the evaluation run ID in the filter. For example:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluations/-`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationResultsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation results.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEvaluationResultsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationResultsStream(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationResults stream %j', request);
     return this.descriptors.page.listEvaluationResults.createStream(
       this.innerApiCalls.listEvaluationResults as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEvaluationResults`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the evaluation to list evaluation results
- *   from. To filter by evaluation run, use `-` as the evaluation ID and specify
- *   the evaluation run ID in the filter. For example:
- *   `projects/{project}/locations/{location}/apps/{app}/evaluations/-`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationResultsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation results.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_results.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationResults_async
- */
+  /**
+   * Equivalent to `listEvaluationResults`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the evaluation to list evaluation results
+   *   from. To filter by evaluation run, use `-` as the evaluation ID and specify
+   *   the evaluation run ID in the filter. For example:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluations/-`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationResultsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation results.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationResult|EvaluationResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_results.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationResults_async
+   */
   listEvaluationResultsAsync(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationResult>{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationResultsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationResult> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationResults iterate %j', request);
     return this.descriptors.page.listEvaluationResults.asyncIterate(
       this.innerApiCalls['listEvaluationResults'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationResult>;
   }
- /**
- * Lists all evaluation datasets in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation datasets from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationDatasetsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationDatasets|EvaluationService.ListEvaluationDatasets}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation datasets.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEvaluationDatasetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all evaluation datasets in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation datasets from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationDatasetsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationDatasets|EvaluationService.ListEvaluationDatasets}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation datasets.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEvaluationDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationDatasets(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset[],
-        protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset[],
+      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse,
+    ]
+  >;
   listEvaluationDatasets(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationDataset>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationDataset
+    >,
+  ): void;
   listEvaluationDatasets(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationDataset>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationDataset
+    >,
+  ): void;
   listEvaluationDatasets(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationDataset>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationDataset>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationDataset[],
-        protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationDataset
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationDataset
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationDataset[],
+      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-      protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse|null|undefined,
-      protos.google.cloud.ces.v1beta.IEvaluationDataset>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+          | protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationDataset
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvaluationDatasets values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3746,231 +5229,260 @@ export class EvaluationServiceClient {
     this._log.info('listEvaluationDatasets request %j', request);
     return this.innerApiCalls
       .listEvaluationDatasets(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1beta.IEvaluationDataset[],
-        protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse
-      ]) => {
-        this._log.info('listEvaluationDatasets values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1beta.IEvaluationDataset[],
+          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest | null,
+          protos.google.cloud.ces.v1beta.IListEvaluationDatasetsResponse,
+        ]) => {
+          this._log.info('listEvaluationDatasets values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEvaluationDatasets`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation datasets from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationDatasetsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationDatasets|EvaluationService.ListEvaluationDatasets}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation datasets.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEvaluationDatasetsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEvaluationDatasets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation datasets from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationDatasetsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationDatasets|EvaluationService.ListEvaluationDatasets}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation datasets.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEvaluationDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationDatasetsStream(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationDatasets stream %j', request);
     return this.descriptors.page.listEvaluationDatasets.createStream(
       this.innerApiCalls.listEvaluationDatasets as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEvaluationDatasets`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation datasets from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationDatasetsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationDatasets|EvaluationService.ListEvaluationDatasets}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation datasets.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_datasets.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationDatasets_async
- */
+  /**
+   * Equivalent to `listEvaluationDatasets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation datasets from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationDatasetsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationDatasets|EvaluationService.ListEvaluationDatasets}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation datasets.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationDataset|EvaluationDataset}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_datasets.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationDatasets_async
+   */
   listEvaluationDatasetsAsync(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationDataset>{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationDatasetsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationDataset> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationDatasets iterate %j', request);
     return this.descriptors.page.listEvaluationDatasets.asyncIterate(
       this.innerApiCalls['listEvaluationDatasets'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationDataset>;
   }
- /**
- * Lists all evaluation runs in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation runs from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationRunsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationRuns|EvaluationService.ListEvaluationRuns}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation runs.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEvaluationRunsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all evaluation runs in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation runs from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationRunsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationRuns|EvaluationService.ListEvaluationRuns}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation runs.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEvaluationRunsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationRuns(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationRun[],
-        protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationRun[],
+      protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse,
+    ]
+  >;
   listEvaluationRuns(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationRun>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationRun
+    >,
+  ): void;
   listEvaluationRuns(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationRun>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationRun
+    >,
+  ): void;
   listEvaluationRuns(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationRun>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationRun>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationRun[],
-        protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationRun
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationRun
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationRun[],
+      protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-      protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse|null|undefined,
-      protos.google.cloud.ces.v1beta.IEvaluationRun>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+          | protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationRun
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvaluationRuns values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -3979,232 +5491,261 @@ export class EvaluationServiceClient {
     this._log.info('listEvaluationRuns request %j', request);
     return this.innerApiCalls
       .listEvaluationRuns(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1beta.IEvaluationRun[],
-        protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse
-      ]) => {
-        this._log.info('listEvaluationRuns values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1beta.IEvaluationRun[],
+          protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest | null,
+          protos.google.cloud.ces.v1beta.IListEvaluationRunsResponse,
+        ]) => {
+          this._log.info('listEvaluationRuns values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEvaluationRuns`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation runs from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationRunsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationRuns|EvaluationService.ListEvaluationRuns}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation runs.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEvaluationRunsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEvaluationRuns`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation runs from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationRunsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationRuns|EvaluationService.ListEvaluationRuns}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation runs.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEvaluationRunsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationRunsStream(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationRuns stream %j', request);
     return this.descriptors.page.listEvaluationRuns.createStream(
       this.innerApiCalls.listEvaluationRuns as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEvaluationRuns`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation runs from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationRunsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationRuns|EvaluationService.ListEvaluationRuns}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation runs.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_runs.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationRuns_async
- */
+  /**
+   * Equivalent to `listEvaluationRuns`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation runs from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationRunsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationRuns|EvaluationService.ListEvaluationRuns}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation runs.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationRun|EvaluationRun}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_runs.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationRuns_async
+   */
   listEvaluationRunsAsync(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationRun>{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationRunsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationRun> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationRuns iterate %j', request);
     return this.descriptors.page.listEvaluationRuns.asyncIterate(
       this.innerApiCalls['listEvaluationRuns'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationRun>;
   }
- /**
- * Lists all evaluation expectations in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation expectations
- *   from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationExpectationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationExpectations|EvaluationService.ListEvaluationExpectations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation expectations.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEvaluationExpectationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all evaluation expectations in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation expectations
+   *   from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationExpectationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationExpectations|EvaluationService.ListEvaluationExpectations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation expectations.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEvaluationExpectationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationExpectations(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation[],
-        protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation[],
+      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse,
+    ]
+  >;
   listEvaluationExpectations(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation
+    >,
+  ): void;
   listEvaluationExpectations(
-      request: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation>): void;
+    request: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation
+    >,
+  ): void;
   listEvaluationExpectations(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IEvaluationExpectation>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation[],
-        protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+      | protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IEvaluationExpectation[],
+      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest | null,
+      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-      protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse|null|undefined,
-      protos.google.cloud.ces.v1beta.IEvaluationExpectation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+          | protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEvaluationExpectations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4213,238 +5754,267 @@ export class EvaluationServiceClient {
     this._log.info('listEvaluationExpectations request %j', request);
     return this.innerApiCalls
       .listEvaluationExpectations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1beta.IEvaluationExpectation[],
-        protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest|null,
-        protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse
-      ]) => {
-        this._log.info('listEvaluationExpectations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1beta.IEvaluationExpectation[],
+          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest | null,
+          protos.google.cloud.ces.v1beta.IListEvaluationExpectationsResponse,
+        ]) => {
+          this._log.info('listEvaluationExpectations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEvaluationExpectations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation expectations
- *   from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationExpectationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationExpectations|EvaluationService.ListEvaluationExpectations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation expectations.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEvaluationExpectationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEvaluationExpectations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation expectations
+   *   from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationExpectationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationExpectations|EvaluationService.ListEvaluationExpectations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation expectations.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEvaluationExpectationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEvaluationExpectationsStream(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationExpectations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationExpectations stream %j', request);
     return this.descriptors.page.listEvaluationExpectations.createStream(
       this.innerApiCalls.listEvaluationExpectations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEvaluationExpectations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list evaluation expectations
- *   from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListEvaluationExpectationsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationExpectations|EvaluationService.ListEvaluationExpectations}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the evaluation expectations.
- *   See https://google.aip.dev/160 for more details.
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Only "name" and "create_time", and
- *   "update_time" are supported. Time fields are ordered in descending order,
- *   and the name field is ordered in ascending order. If not included,
- *   "update_time" will be the default. See https://google.aip.dev/132#ordering
- *   for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_expectations.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationExpectations_async
- */
+  /**
+   * Equivalent to `listEvaluationExpectations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list evaluation expectations
+   *   from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListEvaluationExpectationsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListEvaluationExpectations|EvaluationService.ListEvaluationExpectations}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the evaluation expectations.
+   *   See https://google.aip.dev/160 for more details.
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Only "name" and "create_time", and
+   *   "update_time" are supported. Time fields are ordered in descending order,
+   *   and the name field is ordered in ascending order. If not included,
+   *   "update_time" will be the default. See https://google.aip.dev/132#ordering
+   *   for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationExpectation|EvaluationExpectation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.list_evaluation_expectations.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ListEvaluationExpectations_async
+   */
   listEvaluationExpectationsAsync(
-      request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationExpectation>{
+    request?: protos.google.cloud.ces.v1beta.IListEvaluationExpectationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationExpectation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEvaluationExpectations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listEvaluationExpectations iterate %j', request);
     return this.descriptors.page.listEvaluationExpectations.asyncIterate(
       this.innerApiCalls['listEvaluationExpectations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1beta.IEvaluationExpectation>;
   }
- /**
- * Lists all scheduled evaluation runs in the given app.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list scheduled evaluation runs
- *   from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListScheduledEvaluationRunsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListScheduledEvaluationRuns|EvaluationService.ListScheduledEvaluationRuns}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the scheduled evaluation runs.
- *   See https://google.aip.dev/160 for more details.
- *   Currently supports filtering by:
- *   * request.evaluations:evaluation_id
- *   * request.evaluation_dataset:evaluation_dataset_id
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Supported fields are:
- *   "name" (ascending), "create_time" (descending), "update_time" (descending),
- *   "next_scheduled_execution" (ascending), and
- *   "last_completed_run.create_time" (descending).
- *   If not included, "update_time" will be the default.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listScheduledEvaluationRunsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all scheduled evaluation runs in the given app.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list scheduled evaluation runs
+   *   from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListScheduledEvaluationRunsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListScheduledEvaluationRuns|EvaluationService.ListScheduledEvaluationRuns}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the scheduled evaluation runs.
+   *   See https://google.aip.dev/160 for more details.
+   *   Currently supports filtering by:
+   *   * request.evaluations:evaluation_id
+   *   * request.evaluation_dataset:evaluation_dataset_id
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Supported fields are:
+   *   "name" (ascending), "create_time" (descending), "update_time" (descending),
+   *   "next_scheduled_execution" (ascending), and
+   *   "last_completed_run.create_time" (descending).
+   *   If not included, "update_time" will be the default.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listScheduledEvaluationRunsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScheduledEvaluationRuns(
-      request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[],
-        protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest|null,
-        protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
-      ]>;
+    request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[],
+      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest | null,
+      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse,
+    ]
+  >;
   listScheduledEvaluationRuns(
-      request: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun>): void;
+    request: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+      | protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun
+    >,
+  ): void;
   listScheduledEvaluationRuns(
-      request: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun>): void;
+    request: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+      | protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun
+    >,
+  ): void;
   listScheduledEvaluationRuns(
-      request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun>,
-      callback?: PaginationCallback<
-          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse|null|undefined,
-          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun>):
-      Promise<[
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[],
-        protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest|null,
-        protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
-      ]>|void {
+          | protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+      | protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
+      | null
+      | undefined,
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[],
+      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest | null,
+      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-      protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse|null|undefined,
-      protos.google.cloud.ces.v1beta.IScheduledEvaluationRun>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+          | protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
+          | null
+          | undefined,
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listScheduledEvaluationRuns values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -4453,147 +6023,152 @@ export class EvaluationServiceClient {
     this._log.info('listScheduledEvaluationRuns request %j', request);
     return this.innerApiCalls
       .listScheduledEvaluationRuns(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[],
-        protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest|null,
-        protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse
-      ]) => {
-        this._log.info('listScheduledEvaluationRuns values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.ces.v1beta.IScheduledEvaluationRun[],
+          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest | null,
+          protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsResponse,
+        ]) => {
+          this._log.info('listScheduledEvaluationRuns values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listScheduledEvaluationRuns`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list scheduled evaluation runs
- *   from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListScheduledEvaluationRunsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListScheduledEvaluationRuns|EvaluationService.ListScheduledEvaluationRuns}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the scheduled evaluation runs.
- *   See https://google.aip.dev/160 for more details.
- *   Currently supports filtering by:
- *   * request.evaluations:evaluation_id
- *   * request.evaluation_dataset:evaluation_dataset_id
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Supported fields are:
- *   "name" (ascending), "create_time" (descending), "update_time" (descending),
- *   "next_scheduled_execution" (ascending), and
- *   "last_completed_run.create_time" (descending).
- *   If not included, "update_time" will be the default.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listScheduledEvaluationRunsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listScheduledEvaluationRuns`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list scheduled evaluation runs
+   *   from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListScheduledEvaluationRunsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListScheduledEvaluationRuns|EvaluationService.ListScheduledEvaluationRuns}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the scheduled evaluation runs.
+   *   See https://google.aip.dev/160 for more details.
+   *   Currently supports filtering by:
+   *   * request.evaluations:evaluation_id
+   *   * request.evaluation_dataset:evaluation_dataset_id
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Supported fields are:
+   *   "name" (ascending), "create_time" (descending), "update_time" (descending),
+   *   "next_scheduled_execution" (ascending), and
+   *   "last_completed_run.create_time" (descending).
+   *   If not included, "update_time" will be the default.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listScheduledEvaluationRunsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listScheduledEvaluationRunsStream(
-      request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScheduledEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScheduledEvaluationRuns stream %j', request);
     return this.descriptors.page.listScheduledEvaluationRuns.createStream(
       this.innerApiCalls.listScheduledEvaluationRuns as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listScheduledEvaluationRuns`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The resource name of the app to list scheduled evaluation runs
- *   from.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. The
- *   {@link protos.google.cloud.ces.v1beta.ListScheduledEvaluationRunsResponse.next_page_token|next_page_token}
- *   value returned from a previous list
- *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListScheduledEvaluationRuns|EvaluationService.ListScheduledEvaluationRuns}
- *   call.
- * @param {string} [request.filter]
- *   Optional. Filter to be applied when listing the scheduled evaluation runs.
- *   See https://google.aip.dev/160 for more details.
- *   Currently supports filtering by:
- *   * request.evaluations:evaluation_id
- *   * request.evaluation_dataset:evaluation_dataset_id
- * @param {string} [request.orderBy]
- *   Optional. Field to sort by. Supported fields are:
- *   "name" (ascending), "create_time" (descending), "update_time" (descending),
- *   "next_scheduled_execution" (ascending), and
- *   "last_completed_run.create_time" (descending).
- *   If not included, "update_time" will be the default.
- *   See https://google.aip.dev/132#ordering for more details.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/evaluation_service.list_scheduled_evaluation_runs.js</caption>
- * region_tag:ces_v1beta_generated_EvaluationService_ListScheduledEvaluationRuns_async
- */
+  /**
+   * Equivalent to `listScheduledEvaluationRuns`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to list scheduled evaluation runs
+   *   from.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. The
+   *   {@link protos.google.cloud.ces.v1beta.ListScheduledEvaluationRunsResponse.next_page_token|next_page_token}
+   *   value returned from a previous list
+   *   {@link protos.google.cloud.ces.v1beta.EvaluationService.ListScheduledEvaluationRuns|EvaluationService.ListScheduledEvaluationRuns}
+   *   call.
+   * @param {string} [request.filter]
+   *   Optional. Filter to be applied when listing the scheduled evaluation runs.
+   *   See https://google.aip.dev/160 for more details.
+   *   Currently supports filtering by:
+   *   * request.evaluations:evaluation_id
+   *   * request.evaluation_dataset:evaluation_dataset_id
+   * @param {string} [request.orderBy]
+   *   Optional. Field to sort by. Supported fields are:
+   *   "name" (ascending), "create_time" (descending), "update_time" (descending),
+   *   "next_scheduled_execution" (ascending), and
+   *   "last_completed_run.create_time" (descending).
+   *   If not included, "update_time" will be the default.
+   *   See https://google.aip.dev/132#ordering for more details.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.ces.v1beta.ScheduledEvaluationRun|ScheduledEvaluationRun}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.list_scheduled_evaluation_runs.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ListScheduledEvaluationRuns_async
+   */
   listScheduledEvaluationRunsAsync(
-      request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.ces.v1beta.IScheduledEvaluationRun>{
+    request?: protos.google.cloud.ces.v1beta.IListScheduledEvaluationRunsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.ces.v1beta.IScheduledEvaluationRun> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listScheduledEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listScheduledEvaluationRuns iterate %j', request);
     return this.descriptors.page.listScheduledEvaluationRuns.asyncIterate(
       this.innerApiCalls['listScheduledEvaluationRuns'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.ces.v1beta.IScheduledEvaluationRun>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -4628,12 +6203,11 @@ export class EvaluationServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -4666,12 +6240,12 @@ export class EvaluationServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -4714,22 +6288,22 @@ export class EvaluationServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -4764,15 +6338,15 @@ export class EvaluationServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -4806,7 +6380,7 @@ export class EvaluationServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -4819,25 +6393,24 @@ export class EvaluationServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -4876,22 +6449,22 @@ export class EvaluationServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -4908,7 +6481,7 @@ export class EvaluationServiceClient {
    * @param {string} agent
    * @returns {string} Resource name string.
    */
-  agentPath(project:string,location:string,app:string,agent:string) {
+  agentPath(project: string, location: string, app: string, agent: string) {
     return this.pathTemplates.agentPathTemplate.render({
       project: project,
       location: location,
@@ -4969,7 +6542,7 @@ export class EvaluationServiceClient {
    * @param {string} app
    * @returns {string} Resource name string.
    */
-  appPath(project:string,location:string,app:string) {
+  appPath(project: string, location: string, app: string) {
     return this.pathTemplates.appPathTemplate.render({
       project: project,
       location: location,
@@ -5019,7 +6592,12 @@ export class EvaluationServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  appVersionPath(project:string,location:string,app:string,version:string) {
+  appVersionPath(
+    project: string,
+    location: string,
+    app: string,
+    version: string,
+  ) {
     return this.pathTemplates.appVersionPathTemplate.render({
       project: project,
       location: location,
@@ -5036,7 +6614,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).project;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .project;
   }
 
   /**
@@ -5047,7 +6626,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).location;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .location;
   }
 
   /**
@@ -5069,7 +6649,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromAppVersionName(appVersionName: string) {
-    return this.pathTemplates.appVersionPathTemplate.match(appVersionName).version;
+    return this.pathTemplates.appVersionPathTemplate.match(appVersionName)
+      .version;
   }
 
   /**
@@ -5081,7 +6662,12 @@ export class EvaluationServiceClient {
    * @param {string} changelog
    * @returns {string} Resource name string.
    */
-  changelogPath(project:string,location:string,app:string,changelog:string) {
+  changelogPath(
+    project: string,
+    location: string,
+    app: string,
+    changelog: string,
+  ) {
     return this.pathTemplates.changelogPathTemplate.render({
       project: project,
       location: location,
@@ -5098,7 +6684,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).project;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .project;
   }
 
   /**
@@ -5109,7 +6696,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).location;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .location;
   }
 
   /**
@@ -5131,7 +6719,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the changelog.
    */
   matchChangelogFromChangelogName(changelogName: string) {
-    return this.pathTemplates.changelogPathTemplate.match(changelogName).changelog;
+    return this.pathTemplates.changelogPathTemplate.match(changelogName)
+      .changelog;
   }
 
   /**
@@ -5143,7 +6732,12 @@ export class EvaluationServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(project:string,location:string,app:string,conversation:string) {
+  conversationPath(
+    project: string,
+    location: string,
+    app: string,
+    conversation: string,
+  ) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -5160,7 +6754,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
   }
 
   /**
@@ -5171,7 +6766,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
   }
 
   /**
@@ -5182,7 +6778,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).app;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .app;
   }
 
   /**
@@ -5193,7 +6790,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**
@@ -5205,7 +6803,12 @@ export class EvaluationServiceClient {
    * @param {string} deployment
    * @returns {string} Resource name string.
    */
-  deploymentPath(project:string,location:string,app:string,deployment:string) {
+  deploymentPath(
+    project: string,
+    location: string,
+    app: string,
+    deployment: string,
+  ) {
     return this.pathTemplates.deploymentPathTemplate.render({
       project: project,
       location: location,
@@ -5222,7 +6825,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).project;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .project;
   }
 
   /**
@@ -5233,7 +6837,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).location;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .location;
   }
 
   /**
@@ -5255,7 +6860,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the deployment.
    */
   matchDeploymentFromDeploymentName(deploymentName: string) {
-    return this.pathTemplates.deploymentPathTemplate.match(deploymentName).deployment;
+    return this.pathTemplates.deploymentPathTemplate.match(deploymentName)
+      .deployment;
   }
 
   /**
@@ -5267,7 +6873,12 @@ export class EvaluationServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  evaluationPath(project:string,location:string,app:string,evaluation:string) {
+  evaluationPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluation: string,
+  ) {
     return this.pathTemplates.evaluationPathTemplate.render({
       project: project,
       location: location,
@@ -5284,7 +6895,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).project;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
   }
 
   /**
@@ -5295,7 +6907,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).location;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .location;
   }
 
   /**
@@ -5317,7 +6930,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromEvaluationName(evaluationName: string) {
-    return this.pathTemplates.evaluationPathTemplate.match(evaluationName).evaluation;
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
   }
 
   /**
@@ -5329,7 +6943,12 @@ export class EvaluationServiceClient {
    * @param {string} evaluation_dataset
    * @returns {string} Resource name string.
    */
-  evaluationDatasetPath(project:string,location:string,app:string,evaluationDataset:string) {
+  evaluationDatasetPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluationDataset: string,
+  ) {
     return this.pathTemplates.evaluationDatasetPathTemplate.render({
       project: project,
       location: location,
@@ -5346,7 +6965,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).project;
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).project;
   }
 
   /**
@@ -5357,7 +6978,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).location;
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).location;
   }
 
   /**
@@ -5368,7 +6991,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).app;
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).app;
   }
 
   /**
@@ -5378,8 +7003,12 @@ export class EvaluationServiceClient {
    *   A fully-qualified path representing EvaluationDataset resource.
    * @returns {string} A string representing the evaluation_dataset.
    */
-  matchEvaluationDatasetFromEvaluationDatasetName(evaluationDatasetName: string) {
-    return this.pathTemplates.evaluationDatasetPathTemplate.match(evaluationDatasetName).evaluation_dataset;
+  matchEvaluationDatasetFromEvaluationDatasetName(
+    evaluationDatasetName: string,
+  ) {
+    return this.pathTemplates.evaluationDatasetPathTemplate.match(
+      evaluationDatasetName,
+    ).evaluation_dataset;
   }
 
   /**
@@ -5391,7 +7020,12 @@ export class EvaluationServiceClient {
    * @param {string} evaluation_expectation
    * @returns {string} Resource name string.
    */
-  evaluationExpectationPath(project:string,location:string,app:string,evaluationExpectation:string) {
+  evaluationExpectationPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluationExpectation: string,
+  ) {
     return this.pathTemplates.evaluationExpectationPathTemplate.render({
       project: project,
       location: location,
@@ -5408,7 +7042,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).project;
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).project;
   }
 
   /**
@@ -5418,8 +7054,12 @@ export class EvaluationServiceClient {
    *   A fully-qualified path representing EvaluationExpectation resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).location;
+  matchLocationFromEvaluationExpectationName(
+    evaluationExpectationName: string,
+  ) {
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).location;
   }
 
   /**
@@ -5430,7 +7070,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).app;
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).app;
   }
 
   /**
@@ -5440,8 +7082,12 @@ export class EvaluationServiceClient {
    *   A fully-qualified path representing EvaluationExpectation resource.
    * @returns {string} A string representing the evaluation_expectation.
    */
-  matchEvaluationExpectationFromEvaluationExpectationName(evaluationExpectationName: string) {
-    return this.pathTemplates.evaluationExpectationPathTemplate.match(evaluationExpectationName).evaluation_expectation;
+  matchEvaluationExpectationFromEvaluationExpectationName(
+    evaluationExpectationName: string,
+  ) {
+    return this.pathTemplates.evaluationExpectationPathTemplate.match(
+      evaluationExpectationName,
+    ).evaluation_expectation;
   }
 
   /**
@@ -5454,7 +7100,13 @@ export class EvaluationServiceClient {
    * @param {string} evaluation_result
    * @returns {string} Resource name string.
    */
-  evaluationResultPath(project:string,location:string,app:string,evaluation:string,evaluationResult:string) {
+  evaluationResultPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluation: string,
+    evaluationResult: string,
+  ) {
     return this.pathTemplates.evaluationResultPathTemplate.render({
       project: project,
       location: location,
@@ -5472,7 +7124,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).project;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).project;
   }
 
   /**
@@ -5483,7 +7137,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).location;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).location;
   }
 
   /**
@@ -5494,7 +7150,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).app;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).app;
   }
 
   /**
@@ -5505,7 +7163,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).evaluation;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).evaluation;
   }
 
   /**
@@ -5516,7 +7176,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the evaluation_result.
    */
   matchEvaluationResultFromEvaluationResultName(evaluationResultName: string) {
-    return this.pathTemplates.evaluationResultPathTemplate.match(evaluationResultName).evaluation_result;
+    return this.pathTemplates.evaluationResultPathTemplate.match(
+      evaluationResultName,
+    ).evaluation_result;
   }
 
   /**
@@ -5528,7 +7190,12 @@ export class EvaluationServiceClient {
    * @param {string} evaluation_run
    * @returns {string} Resource name string.
    */
-  evaluationRunPath(project:string,location:string,app:string,evaluationRun:string) {
+  evaluationRunPath(
+    project: string,
+    location: string,
+    app: string,
+    evaluationRun: string,
+  ) {
     return this.pathTemplates.evaluationRunPathTemplate.render({
       project: project,
       location: location,
@@ -5545,7 +7212,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).project;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .project;
   }
 
   /**
@@ -5556,7 +7224,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).location;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .location;
   }
 
   /**
@@ -5567,7 +7236,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).app;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .app;
   }
 
   /**
@@ -5578,7 +7248,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the evaluation_run.
    */
   matchEvaluationRunFromEvaluationRunName(evaluationRunName: string) {
-    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName).evaluation_run;
+    return this.pathTemplates.evaluationRunPathTemplate.match(evaluationRunName)
+      .evaluation_run;
   }
 
   /**
@@ -5590,7 +7261,7 @@ export class EvaluationServiceClient {
    * @param {string} example
    * @returns {string} Resource name string.
    */
-  examplePath(project:string,location:string,app:string,example:string) {
+  examplePath(project: string, location: string, app: string, example: string) {
     return this.pathTemplates.examplePathTemplate.render({
       project: project,
       location: location,
@@ -5652,7 +7323,12 @@ export class EvaluationServiceClient {
    * @param {string} guardrail
    * @returns {string} Resource name string.
    */
-  guardrailPath(project:string,location:string,app:string,guardrail:string) {
+  guardrailPath(
+    project: string,
+    location: string,
+    app: string,
+    guardrail: string,
+  ) {
     return this.pathTemplates.guardrailPathTemplate.render({
       project: project,
       location: location,
@@ -5669,7 +7345,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).project;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .project;
   }
 
   /**
@@ -5680,7 +7357,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).location;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .location;
   }
 
   /**
@@ -5702,7 +7380,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the guardrail.
    */
   matchGuardrailFromGuardrailName(guardrailName: string) {
-    return this.pathTemplates.guardrailPathTemplate.match(guardrailName).guardrail;
+    return this.pathTemplates.guardrailPathTemplate.match(guardrailName)
+      .guardrail;
   }
 
   /**
@@ -5712,7 +7391,7 @@ export class EvaluationServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -5749,7 +7428,7 @@ export class EvaluationServiceClient {
    * @param {string} omnichannel
    * @returns {string} Resource name string.
    */
-  omnichannelPath(project:string,location:string,omnichannel:string) {
+  omnichannelPath(project: string, location: string, omnichannel: string) {
     return this.pathTemplates.omnichannelPathTemplate.render({
       project: project,
       location: location,
@@ -5765,7 +7444,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).project;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .project;
   }
 
   /**
@@ -5776,7 +7456,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).location;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .location;
   }
 
   /**
@@ -5787,7 +7468,8 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the omnichannel.
    */
   matchOmnichannelFromOmnichannelName(omnichannelName: string) {
-    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName).omnichannel;
+    return this.pathTemplates.omnichannelPathTemplate.match(omnichannelName)
+      .omnichannel;
   }
 
   /**
@@ -5796,7 +7478,7 @@ export class EvaluationServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -5822,7 +7504,12 @@ export class EvaluationServiceClient {
    * @param {string} scheduled_evaluation_run
    * @returns {string} Resource name string.
    */
-  scheduledEvaluationRunPath(project:string,location:string,app:string,scheduledEvaluationRun:string) {
+  scheduledEvaluationRunPath(
+    project: string,
+    location: string,
+    app: string,
+    scheduledEvaluationRun: string,
+  ) {
     return this.pathTemplates.scheduledEvaluationRunPathTemplate.render({
       project: project,
       location: location,
@@ -5838,8 +7525,12 @@ export class EvaluationServiceClient {
    *   A fully-qualified path representing ScheduledEvaluationRun resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).project;
+  matchProjectFromScheduledEvaluationRunName(
+    scheduledEvaluationRunName: string,
+  ) {
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).project;
   }
 
   /**
@@ -5849,8 +7540,12 @@ export class EvaluationServiceClient {
    *   A fully-qualified path representing ScheduledEvaluationRun resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).location;
+  matchLocationFromScheduledEvaluationRunName(
+    scheduledEvaluationRunName: string,
+  ) {
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).location;
   }
 
   /**
@@ -5861,7 +7556,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the app.
    */
   matchAppFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).app;
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).app;
   }
 
   /**
@@ -5871,8 +7568,12 @@ export class EvaluationServiceClient {
    *   A fully-qualified path representing ScheduledEvaluationRun resource.
    * @returns {string} A string representing the scheduled_evaluation_run.
    */
-  matchScheduledEvaluationRunFromScheduledEvaluationRunName(scheduledEvaluationRunName: string) {
-    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(scheduledEvaluationRunName).scheduled_evaluation_run;
+  matchScheduledEvaluationRunFromScheduledEvaluationRunName(
+    scheduledEvaluationRunName: string,
+  ) {
+    return this.pathTemplates.scheduledEvaluationRunPathTemplate.match(
+      scheduledEvaluationRunName,
+    ).scheduled_evaluation_run;
   }
 
   /**
@@ -5882,7 +7583,7 @@ export class EvaluationServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  securitySettingsPath(project:string,location:string) {
+  securitySettingsPath(project: string, location: string) {
     return this.pathTemplates.securitySettingsPathTemplate.render({
       project: project,
       location: location,
@@ -5897,7 +7598,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).project;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).project;
   }
 
   /**
@@ -5908,7 +7611,9 @@ export class EvaluationServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSecuritySettingsName(securitySettingsName: string) {
-    return this.pathTemplates.securitySettingsPathTemplate.match(securitySettingsName).location;
+    return this.pathTemplates.securitySettingsPathTemplate.match(
+      securitySettingsName,
+    ).location;
   }
 
   /**
@@ -5920,7 +7625,7 @@ export class EvaluationServiceClient {
    * @param {string} tool
    * @returns {string} Resource name string.
    */
-  toolPath(project:string,location:string,app:string,tool:string) {
+  toolPath(project: string, location: string, app: string, tool: string) {
     return this.pathTemplates.toolPathTemplate.render({
       project: project,
       location: location,
@@ -5982,7 +7687,7 @@ export class EvaluationServiceClient {
    * @param {string} toolset
    * @returns {string} Resource name string.
    */
-  toolsetPath(project:string,location:string,app:string,toolset:string) {
+  toolsetPath(project: string, location: string, app: string, toolset: string) {
     return this.pathTemplates.toolsetPathTemplate.render({
       project: project,
       location: location,
@@ -6043,11 +7748,13 @@ export class EvaluationServiceClient {
    */
   close(): Promise<void> {
     if (this.evaluationServiceStub && !this._terminated) {
-      return this.evaluationServiceStub.then(stub => {
+      return this.evaluationServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

@@ -5,6 +5,88 @@
   "protoPackage": "google.iam.v3beta",
   "libraryPackage": "@google-cloud/iam",
   "services": {
+    "AccessPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AccessPoliciesClient",
+          "rpcs": {
+            "GetAccessPolicy": {
+              "methods": [
+                "getAccessPolicy"
+              ]
+            },
+            "CreateAccessPolicy": {
+              "methods": [
+                "createAccessPolicy"
+              ]
+            },
+            "UpdateAccessPolicy": {
+              "methods": [
+                "updateAccessPolicy"
+              ]
+            },
+            "DeleteAccessPolicy": {
+              "methods": [
+                "deleteAccessPolicy"
+              ]
+            },
+            "ListAccessPolicies": {
+              "methods": [
+                "listAccessPolicies",
+                "listAccessPoliciesStream",
+                "listAccessPoliciesAsync"
+              ]
+            },
+            "SearchAccessPolicyBindings": {
+              "methods": [
+                "searchAccessPolicyBindings",
+                "searchAccessPolicyBindingsStream",
+                "searchAccessPolicyBindingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AccessPoliciesClient",
+          "rpcs": {
+            "GetAccessPolicy": {
+              "methods": [
+                "getAccessPolicy"
+              ]
+            },
+            "CreateAccessPolicy": {
+              "methods": [
+                "createAccessPolicy"
+              ]
+            },
+            "UpdateAccessPolicy": {
+              "methods": [
+                "updateAccessPolicy"
+              ]
+            },
+            "DeleteAccessPolicy": {
+              "methods": [
+                "deleteAccessPolicy"
+              ]
+            },
+            "ListAccessPolicies": {
+              "methods": [
+                "listAccessPolicies",
+                "listAccessPoliciesStream",
+                "listAccessPoliciesAsync"
+              ]
+            },
+            "SearchAccessPolicyBindings": {
+              "methods": [
+                "searchAccessPolicyBindings",
+                "searchAccessPolicyBindingsStream",
+                "searchAccessPolicyBindingsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PolicyBindings": {
       "clients": {
         "grpc": {

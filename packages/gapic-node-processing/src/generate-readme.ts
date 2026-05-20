@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -60,9 +60,10 @@ export async function getSamplesMetadata(
   // which we then use to remove from the absolute filePath (so
   // /google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js
   // becomes just google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js (the relative path to the new directory)
-  const stringToRemove = currentLibrary
+  const normalizedLibrary = currentLibrary.replace(/\\/g, '/');
+  const stringToRemove = normalizedLibrary
     .split('/')
-    .slice(0, currentLibrary.split('/').length - 1)
+    .slice(0, normalizedLibrary.split('/').length - 1)
     .join('/');
 
   const samples = await traverseDirectory(
@@ -70,7 +71,8 @@ export async function getSamplesMetadata(
     [],
   );
   samples.map(sample => {
-    sample.filePath = sample.filePath
+    const normalizedSamplePath = sample.filePath.replace(/\\/g, '/');
+    sample.filePath = normalizedSamplePath
       .replace(stringToRemove, '')
       .replace('-nodejs', '');
     Object.assign(sample, {title: getSampleName(sample)});
@@ -93,9 +95,10 @@ export async function getSamplesMetadata(
  */
 export function getSampleName(sample: {filePath: string}): string {
   // Get just the sample name from the path
-  let sampleName = sample.filePath;
+  const normalizedPath = sample.filePath.replace(/\\/g, '/');
+  let sampleName = normalizedPath;
   try {
-    sampleName = sampleName.split('/')[sample.filePath.split('/').length - 1];
+    sampleName = sampleName.split('/')[normalizedPath.split('/').length - 1];
     // Remove the API name
     sampleName = sampleName.split('.')[1];
     // Remove the .js

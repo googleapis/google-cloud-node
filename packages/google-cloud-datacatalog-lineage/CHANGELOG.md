@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/lineage-v2.1.2...lineage-v2.2.0) (2026-05-14)
+
+
+### Features
+
+* [lineage] A new method SearchLineageStreaming is added ([#8238](https://github.com/googleapis/google-cloud-node/issues/8238)) ([9641d36](https://github.com/googleapis/google-cloud-node/commit/9641d3641c304e1779a4a0ef83a6482c552c66b1))
+* Added support for column level lineage information to be passed and returned from the Lineage service ([9641d36](https://github.com/googleapis/google-cloud-node/commit/9641d3641c304e1779a4a0ef83a6482c552c66b1))
+* SearchLinks can now accept multiple source and target entity references as search criteria ([9641d36](https://github.com/googleapis/google-cloud-node/commit/9641d3641c304e1779a4a0ef83a6482c552c66b1))
+
+## [2.1.2](https://github.com/googleapis/google-cloud-node/compare/lineage-v2.1.1...lineage-v2.1.2) (2026-05-01)
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* Do not publish the protos to npm ([#8079](https://github.com/googleapis/google-cloud-node/issues/8079)) ([816216b](https://github.com/googleapis/google-cloud-node/commit/816216bbf51afb25935cd930a0d97ed6efd6b91e))
+* Revert "fix: Do not publish the protos to npm" ([#8096](https://github.com/googleapis/google-cloud-node/issues/8096)) ([ac0fbb6](https://github.com/googleapis/google-cloud-node/commit/ac0fbb682409bb117fd54d344df10970a240772f))
+
 ## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/lineage-v2.1.0...lineage-v2.1.1) (2025-10-13)
 
 

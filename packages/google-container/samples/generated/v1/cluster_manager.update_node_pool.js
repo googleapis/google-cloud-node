@@ -215,6 +215,10 @@ function main(nodeVersion, imageType) {
    *  default behavior, i.e. according to the chosen autoscaling profile.
    */
   // const consolidationDelay = {}
+  /**
+   *  The taint configuration for the node pool.
+   */
+  // const taintConfig = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

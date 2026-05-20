@@ -96,6 +96,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search principal access boundary policy bindings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.search_principal_access_boundary_policy_bindings.js) |
 | update principal access boundary policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/principal_access_boundary_policies.update_principal_access_boundary_policy.js) |
 | iam | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3/snippet_metadata_google.iam.v3.json) |
+| create access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.create_access_policy.js) |
+| delete access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.delete_access_policy.js) |
+| get access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.get_access_policy.js) |
+| list access policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.list_access_policies.js) |
+| search access policy bindings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.search_access_policy_bindings.js) |
+| update access policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/access_policies.update_access_policy.js) |
 | create policy binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/policy_bindings.create_policy_binding.js) |
 | delete policy binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/policy_bindings.delete_policy_binding.js) |
 | get policy binding | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v3beta/policy_bindings.get_policy_binding.js) |

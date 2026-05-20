@@ -158,6 +158,22 @@ describe('MetricsTracerFactory', () => {
     assert.ok(tracer);
   });
 
+  it('should clear a MetricsTracer using an extracted operation request id', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    factory!.createMetricsTracer(
+      'some-method',
+      'method-name',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+
+    assert.strictEqual((factory as any)._currentOperationTracers.size, 1);
+
+    factory!.clearCurrentTracer('1.1a2bc3d4.1.1.1');
+
+    assert.strictEqual((factory as any)._currentOperationTracers.size, 0);
+    assert.strictEqual((factory as any)._currentOperationLastUpdatedMs.size, 0);
+  });
+
   it('should correctly set default attributes', () => {
     const factory = MetricsTracerFactory.getInstance('project-id');
     const tracer = factory!.createMetricsTracer(

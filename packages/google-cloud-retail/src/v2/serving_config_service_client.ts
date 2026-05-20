@@ -18,11 +18,21 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +54,7 @@ export class ServingConfigServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('retail');
@@ -57,11 +67,11 @@ export class ServingConfigServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  servingConfigServiceStub?: Promise<{[name: string]: Function}>;
+  servingConfigServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ServingConfigServiceClient.
@@ -102,21 +112,42 @@ export class ServingConfigServiceClient {
    *     const client = new ServingConfigServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ServingConfigServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'retail.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +172,7 @@ export class ServingConfigServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +186,11 @@ export class ServingConfigServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -185,25 +212,25 @@ export class ServingConfigServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig',
       ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}',
       ),
       completionConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig',
       ),
       controlPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}',
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}',
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}',
       ),
       servingConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
+        'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}',
       ),
     };
 
@@ -211,8 +238,11 @@ export class ServingConfigServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listServingConfigs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'servingConfigs')
+      listServingConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'servingConfigs',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -221,23 +251,47 @@ export class ServingConfigServiceClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.longrunning.Operations.GetOperation',get: '/v2/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/v2/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',},{get: '/v2/{name=projects/*/locations/*/catalogs/*/operations/*}',},{get: '/v2/{name=projects/*/operations/*}',}],
-      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v2/{name=projects/*/locations/*}/operations',additional_bindings: [{get: '/v2/{name=projects/*/locations/*/catalogs/*}/operations',},{get: '/v2/{name=projects/*}/operations',}],
-      }];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v2/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v2/{name=projects/*/locations/*/catalogs/*/branches/*/operations/*}',
+            },
+            {
+              get: '/v2/{name=projects/*/locations/*/catalogs/*/operations/*}',
+            },
+            { get: '/v2/{name=projects/*/operations/*}' },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v2/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            { get: '/v2/{name=projects/*/locations/*/catalogs/*}/operations' },
+            { get: '/v2/{name=projects/*}/operations' },
+          ],
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
 
-    this.descriptors.longrunning = {
-    };
+    this.descriptors.longrunning = {};
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.retail.v2.ServingConfigService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.retail.v2.ServingConfigService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -268,37 +322,48 @@ export class ServingConfigServiceClient {
     // Put together the "service stub" for
     // google.cloud.retail.v2.ServingConfigService.
     this.servingConfigServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.retail.v2.ServingConfigService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.retail.v2.ServingConfigService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.retail.v2.ServingConfigService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const servingConfigServiceStubMethods =
-        ['createServingConfig', 'deleteServingConfig', 'updateServingConfig', 'getServingConfig', 'listServingConfigs', 'addControl', 'removeControl'];
+    const servingConfigServiceStubMethods = [
+      'createServingConfig',
+      'deleteServingConfig',
+      'updateServingConfig',
+      'getServingConfig',
+      'listServingConfigs',
+      'addControl',
+      'removeControl',
+    ];
     for (const methodName of servingConfigServiceStubMethods) {
       const callPromise = this.servingConfigServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -313,8 +378,14 @@ export class ServingConfigServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'retail.googleapis.com';
   }
@@ -325,8 +396,14 @@ export class ServingConfigServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'retail.googleapis.com';
   }
@@ -357,9 +434,7 @@ export class ServingConfigServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -368,8 +443,9 @@ export class ServingConfigServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -380,700 +456,943 @@ export class ServingConfigServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a ServingConfig.
- *
- * A maximum of 100 {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}s are
- * allowed in a {@link protos.google.cloud.retail.v2.Catalog|Catalog}, otherwise a
- * FAILED_PRECONDITION error is returned.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Full resource name of parent. Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
- * @param {google.cloud.retail.v2.ServingConfig} request.servingConfig
- *   Required. The ServingConfig to create.
- * @param {string} request.servingConfigId
- *   Required. The ID to use for the ServingConfig, which will become the final
- *   component of the ServingConfig's resource name.
- *
- *   This value should be 4-63 characters, and valid characters
- *   are /{@link protos.0-9|a-z}-_/.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/serving_config_service.create_serving_config.js</caption>
- * region_tag:retail_v2_generated_ServingConfigService_CreateServingConfig_async
- */
+  /**
+   * Creates a ServingConfig.
+   *
+   * A maximum of 100 {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}s are
+   * allowed in a {@link protos.google.cloud.retail.v2.Catalog|Catalog}, otherwise a
+   * FAILED_PRECONDITION error is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Full resource name of parent. Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   * @param {google.cloud.retail.v2.ServingConfig} request.servingConfig
+   *   Required. The ServingConfig to create.
+   * @param {string} request.servingConfigId
+   *   Required. The ID to use for the ServingConfig, which will become the final
+   *   component of the ServingConfig's resource name.
+   *
+   *   This value should be 4-63 characters, and valid characters
+   *   are /{@link protos.0-9|a-z}-_/.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/serving_config_service.create_serving_config.js</caption>
+   * region_tag:retail_v2_generated_ServingConfigService_CreateServingConfig_async
+   */
   createServingConfig(
-      request?: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.ICreateServingConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.ICreateServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createServingConfig(
-      request: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.ICreateServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      | protos.google.cloud.retail.v2.ICreateServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createServingConfig(
-      request: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.ICreateServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      | protos.google.cloud.retail.v2.ICreateServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createServingConfig(
-      request?: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.retail.v2.ICreateServingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.ICreateServingConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.ICreateServingConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.ICreateServingConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.retail.v2.ICreateServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      | protos.google.cloud.retail.v2.ICreateServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.ICreateServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createServingConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.ICreateServingConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2.IServingConfig,
+          | protos.google.cloud.retail.v2.ICreateServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createServingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createServingConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.ICreateServingConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createServingConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createServingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2.IServingConfig,
+          protos.google.cloud.retail.v2.ICreateServingConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createServingConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a ServingConfig.
- *
- * Returns a NotFound error if the ServingConfig does not exist.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the ServingConfig to delete. Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/serving_config_service.delete_serving_config.js</caption>
- * region_tag:retail_v2_generated_ServingConfigService_DeleteServingConfig_async
- */
+  /**
+   * Deletes a ServingConfig.
+   *
+   * Returns a NotFound error if the ServingConfig does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ServingConfig to delete. Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/serving_config_service.delete_serving_config.js</caption>
+   * region_tag:retail_v2_generated_ServingConfigService_DeleteServingConfig_async
+   */
   deleteServingConfig(
-      request?: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.retail.v2.IDeleteServingConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.retail.v2.IDeleteServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteServingConfig(
-      request: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2.IDeleteServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2.IDeleteServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteServingConfig(
-      request: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2.IDeleteServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2.IDeleteServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteServingConfig(
-      request?: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.retail.v2.IDeleteServingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2.IDeleteServingConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.retail.v2.IDeleteServingConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.retail.v2.IDeleteServingConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.retail.v2.IDeleteServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2.IDeleteServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.retail.v2.IDeleteServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteServingConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.retail.v2.IDeleteServingConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.retail.v2.IDeleteServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteServingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteServingConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.retail.v2.IDeleteServingConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteServingConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteServingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.retail.v2.IDeleteServingConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteServingConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a ServingConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.retail.v2.ServingConfig} request.servingConfig
- *   Required. The ServingConfig to update.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   Indicates which fields in the provided
- *   {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig} to update. The
- *   following are NOT supported:
- *
- *   * {@link protos.google.cloud.retail.v2.ServingConfig.name|ServingConfig.name}
- *
- *   If not set, all supported fields are updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/serving_config_service.update_serving_config.js</caption>
- * region_tag:retail_v2_generated_ServingConfigService_UpdateServingConfig_async
- */
+  /**
+   * Updates a ServingConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.retail.v2.ServingConfig} request.servingConfig
+   *   Required. The ServingConfig to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Indicates which fields in the provided
+   *   {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig} to update. The
+   *   following are NOT supported:
+   *
+   *   * {@link protos.google.cloud.retail.v2.ServingConfig.name|ServingConfig.name}
+   *
+   *   If not set, all supported fields are updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/serving_config_service.update_serving_config.js</caption>
+   * region_tag:retail_v2_generated_ServingConfigService_UpdateServingConfig_async
+   */
   updateServingConfig(
-      request?: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IUpdateServingConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IUpdateServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateServingConfig(
-      request: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IUpdateServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      | protos.google.cloud.retail.v2.IUpdateServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateServingConfig(
-      request: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IUpdateServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      | protos.google.cloud.retail.v2.IUpdateServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateServingConfig(
-      request?: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.retail.v2.IUpdateServingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IUpdateServingConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IUpdateServingConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IUpdateServingConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.retail.v2.IUpdateServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      | protos.google.cloud.retail.v2.IUpdateServingConfigRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IUpdateServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'serving_config.name': request.servingConfig!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'serving_config.name': request.servingConfig!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateServingConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IUpdateServingConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2.IServingConfig,
+          | protos.google.cloud.retail.v2.IUpdateServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateServingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateServingConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IUpdateServingConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateServingConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateServingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2.IServingConfig,
+          protos.google.cloud.retail.v2.IUpdateServingConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateServingConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a ServingConfig.
- *
- * Returns a NotFound error if the ServingConfig does not exist.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The resource name of the ServingConfig to get. Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/serving_config_service.get_serving_config.js</caption>
- * region_tag:retail_v2_generated_ServingConfigService_GetServingConfig_async
- */
+  /**
+   * Gets a ServingConfig.
+   *
+   * Returns a NotFound error if the ServingConfig does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ServingConfig to get. Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/serving_config_service.get_serving_config.js</caption>
+   * region_tag:retail_v2_generated_ServingConfigService_GetServingConfig_async
+   */
   getServingConfig(
-      request?: protos.google.cloud.retail.v2.IGetServingConfigRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IGetServingConfigRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.retail.v2.IGetServingConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IGetServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getServingConfig(
-      request: protos.google.cloud.retail.v2.IGetServingConfigRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IGetServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IGetServingConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IGetServingConfigRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getServingConfig(
-      request: protos.google.cloud.retail.v2.IGetServingConfigRequest,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IGetServingConfigRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IGetServingConfigRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IGetServingConfigRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getServingConfig(
-      request?: protos.google.cloud.retail.v2.IGetServingConfigRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.retail.v2.IGetServingConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IGetServingConfigRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IGetServingConfigRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IGetServingConfigRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.retail.v2.IGetServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IGetServingConfigRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IGetServingConfigRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getServingConfig request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IGetServingConfigRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2.IServingConfig,
+          | protos.google.cloud.retail.v2.IGetServingConfigRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getServingConfig response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getServingConfig(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IGetServingConfigRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getServingConfig response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getServingConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2.IServingConfig,
+          protos.google.cloud.retail.v2.IGetServingConfigRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getServingConfig response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Enables a Control on the specified ServingConfig.
- * The control is added in the last position of the list of controls
- * it belongs to (e.g. if it's a facet spec control it will be applied
- * in the last position of servingConfig.facetSpecIds)
- * Returns a ALREADY_EXISTS error if the control has already been applied.
- * Returns a FAILED_PRECONDITION error if the addition could exceed maximum
- * number of control allowed for that type of control.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.servingConfig
- *   Required. The source ServingConfig resource name . Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
- * @param {string} request.controlId
- *   Required. The id of the control to apply. Assumed to be in the same catalog
- *   as the serving config - if id is not found a NOT_FOUND error is returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/serving_config_service.add_control.js</caption>
- * region_tag:retail_v2_generated_ServingConfigService_AddControl_async
- */
+  /**
+   * Enables a Control on the specified ServingConfig.
+   * The control is added in the last position of the list of controls
+   * it belongs to (e.g. if it's a facet spec control it will be applied
+   * in the last position of servingConfig.facetSpecIds)
+   * Returns a ALREADY_EXISTS error if the control has already been applied.
+   * Returns a FAILED_PRECONDITION error if the addition could exceed maximum
+   * number of control allowed for that type of control.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The source ServingConfig resource name . Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
+   * @param {string} request.controlId
+   *   Required. The id of the control to apply. Assumed to be in the same catalog
+   *   as the serving config - if id is not found a NOT_FOUND error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/serving_config_service.add_control.js</caption>
+   * region_tag:retail_v2_generated_ServingConfigService_AddControl_async
+   */
   addControl(
-      request?: protos.google.cloud.retail.v2.IAddControlRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IAddControlRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.retail.v2.IAddControlRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IAddControlRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   addControl(
-      request: protos.google.cloud.retail.v2.IAddControlRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IAddControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IAddControlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IAddControlRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   addControl(
-      request: protos.google.cloud.retail.v2.IAddControlRequest,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IAddControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IAddControlRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IAddControlRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   addControl(
-      request?: protos.google.cloud.retail.v2.IAddControlRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.retail.v2.IAddControlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IAddControlRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IAddControlRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IAddControlRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.retail.v2.IAddControlRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IAddControlRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IAddControlRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'serving_config': request.servingConfig ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('addControl request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IAddControlRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2.IServingConfig,
+          protos.google.cloud.retail.v2.IAddControlRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('addControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.addControl(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IAddControlRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('addControl response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .addControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2.IServingConfig,
+          protos.google.cloud.retail.v2.IAddControlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('addControl response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Disables a Control on the specified ServingConfig.
- * The control is removed from the ServingConfig.
- * Returns a NOT_FOUND error if the Control is not enabled for the
- * ServingConfig.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.servingConfig
- *   Required. The source ServingConfig resource name . Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
- * @param {string} request.controlId
- *   Required. The id of the control to apply. Assumed to be in the same catalog
- *   as the serving config.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/serving_config_service.remove_control.js</caption>
- * region_tag:retail_v2_generated_ServingConfigService_RemoveControl_async
- */
+  /**
+   * Disables a Control on the specified ServingConfig.
+   * The control is removed from the ServingConfig.
+   * Returns a NOT_FOUND error if the Control is not enabled for the
+   * ServingConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.servingConfig
+   *   Required. The source ServingConfig resource name . Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
+   * @param {string} request.controlId
+   *   Required. The id of the control to apply. Assumed to be in the same catalog
+   *   as the serving config.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/serving_config_service.remove_control.js</caption>
+   * region_tag:retail_v2_generated_ServingConfigService_RemoveControl_async
+   */
   removeControl(
-      request?: protos.google.cloud.retail.v2.IRemoveControlRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IRemoveControlRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.retail.v2.IRemoveControlRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IRemoveControlRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   removeControl(
-      request: protos.google.cloud.retail.v2.IRemoveControlRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IRemoveControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IRemoveControlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IRemoveControlRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   removeControl(
-      request: protos.google.cloud.retail.v2.IRemoveControlRequest,
-      callback: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IRemoveControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.retail.v2.IRemoveControlRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IRemoveControlRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   removeControl(
-      request?: protos.google.cloud.retail.v2.IRemoveControlRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.retail.v2.IRemoveControlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IRemoveControlRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.retail.v2.IServingConfig,
-          protos.google.cloud.retail.v2.IRemoveControlRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IRemoveControlRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.retail.v2.IRemoveControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IRemoveControlRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig,
+      protos.google.cloud.retail.v2.IRemoveControlRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'serving_config': request.servingConfig ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        serving_config: request.servingConfig ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('removeControl request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IRemoveControlRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.retail.v2.IServingConfig,
+          | protos.google.cloud.retail.v2.IRemoveControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('removeControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.removeControl(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.retail.v2.IServingConfig,
-        protos.google.cloud.retail.v2.IRemoveControlRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('removeControl response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .removeControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.retail.v2.IServingConfig,
+          protos.google.cloud.retail.v2.IRemoveControlRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('removeControl response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists all ServingConfigs linked to this catalog.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The catalog resource name. Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of results to return. If unspecified, defaults
- *   to 100. If a value greater than 100 is provided, at most 100 results are
- *   returned.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListServingConfigs` call.
- *   Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listServingConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all ServingConfigs linked to this catalog.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The catalog resource name. Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of results to return. If unspecified, defaults
+   *   to 100. If a value greater than 100 is provided, at most 100 results are
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListServingConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listServingConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServingConfigs(
-      request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig[],
-        protos.google.cloud.retail.v2.IListServingConfigsRequest|null,
-        protos.google.cloud.retail.v2.IListServingConfigsResponse
-      ]>;
+    request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig[],
+      protos.google.cloud.retail.v2.IListServingConfigsRequest | null,
+      protos.google.cloud.retail.v2.IListServingConfigsResponse,
+    ]
+  >;
   listServingConfigs(
-      request: protos.google.cloud.retail.v2.IListServingConfigsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.retail.v2.IListServingConfigsRequest,
-          protos.google.cloud.retail.v2.IListServingConfigsResponse|null|undefined,
-          protos.google.cloud.retail.v2.IServingConfig>): void;
+    request: protos.google.cloud.retail.v2.IListServingConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2.IListServingConfigsRequest,
+      | protos.google.cloud.retail.v2.IListServingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2.IServingConfig
+    >,
+  ): void;
   listServingConfigs(
-      request: protos.google.cloud.retail.v2.IListServingConfigsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.retail.v2.IListServingConfigsRequest,
-          protos.google.cloud.retail.v2.IListServingConfigsResponse|null|undefined,
-          protos.google.cloud.retail.v2.IServingConfig>): void;
+    request: protos.google.cloud.retail.v2.IListServingConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2.IListServingConfigsRequest,
+      | protos.google.cloud.retail.v2.IListServingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2.IServingConfig
+    >,
+  ): void;
   listServingConfigs(
-      request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.retail.v2.IListServingConfigsRequest,
-          protos.google.cloud.retail.v2.IListServingConfigsResponse|null|undefined,
-          protos.google.cloud.retail.v2.IServingConfig>,
-      callback?: PaginationCallback<
-          protos.google.cloud.retail.v2.IListServingConfigsRequest,
-          protos.google.cloud.retail.v2.IListServingConfigsResponse|null|undefined,
-          protos.google.cloud.retail.v2.IServingConfig>):
-      Promise<[
-        protos.google.cloud.retail.v2.IServingConfig[],
-        protos.google.cloud.retail.v2.IListServingConfigsRequest|null,
-        protos.google.cloud.retail.v2.IListServingConfigsResponse
-      ]>|void {
+          | protos.google.cloud.retail.v2.IListServingConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.retail.v2.IServingConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.retail.v2.IListServingConfigsRequest,
+      | protos.google.cloud.retail.v2.IListServingConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2.IServingConfig
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2.IServingConfig[],
+      protos.google.cloud.retail.v2.IListServingConfigsRequest | null,
+      protos.google.cloud.retail.v2.IListServingConfigsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.retail.v2.IListServingConfigsRequest,
-      protos.google.cloud.retail.v2.IListServingConfigsResponse|null|undefined,
-      protos.google.cloud.retail.v2.IServingConfig>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.retail.v2.IListServingConfigsRequest,
+          | protos.google.cloud.retail.v2.IListServingConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.retail.v2.IServingConfig
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listServingConfigs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1082,117 +1401,122 @@ export class ServingConfigServiceClient {
     this._log.info('listServingConfigs request %j', request);
     return this.innerApiCalls
       .listServingConfigs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.retail.v2.IServingConfig[],
-        protos.google.cloud.retail.v2.IListServingConfigsRequest|null,
-        protos.google.cloud.retail.v2.IListServingConfigsResponse
-      ]) => {
-        this._log.info('listServingConfigs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.retail.v2.IServingConfig[],
+          protos.google.cloud.retail.v2.IListServingConfigsRequest | null,
+          protos.google.cloud.retail.v2.IListServingConfigsResponse,
+        ]) => {
+          this._log.info('listServingConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listServingConfigs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The catalog resource name. Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of results to return. If unspecified, defaults
- *   to 100. If a value greater than 100 is provided, at most 100 results are
- *   returned.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListServingConfigs` call.
- *   Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listServingConfigsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listServingConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The catalog resource name. Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of results to return. If unspecified, defaults
+   *   to 100. If a value greater than 100 is provided, at most 100 results are
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListServingConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listServingConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listServingConfigsStream(
-      request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServingConfigs stream %j', request);
     return this.descriptors.page.listServingConfigs.createStream(
       this.innerApiCalls.listServingConfigs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listServingConfigs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The catalog resource name. Format:
- *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
- * @param {number} [request.pageSize]
- *   Optional. Maximum number of results to return. If unspecified, defaults
- *   to 100. If a value greater than 100 is provided, at most 100 results are
- *   returned.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListServingConfigs` call.
- *   Provide this to retrieve the subsequent page.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/serving_config_service.list_serving_configs.js</caption>
- * region_tag:retail_v2_generated_ServingConfigService_ListServingConfigs_async
- */
+  /**
+   * Equivalent to `listServingConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The catalog resource name. Format:
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of results to return. If unspecified, defaults
+   *   to 100. If a value greater than 100 is provided, at most 100 results are
+   *   returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListServingConfigs` call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.retail.v2.ServingConfig|ServingConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/serving_config_service.list_serving_configs.js</caption>
+   * region_tag:retail_v2_generated_ServingConfigService_ListServingConfigs_async
+   */
   listServingConfigsAsync(
-      request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.retail.v2.IServingConfig>{
+    request?: protos.google.cloud.retail.v2.IListServingConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.retail.v2.IServingConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listServingConfigs iterate %j', request);
     return this.descriptors.page.listServingConfigs.asyncIterate(
       this.innerApiCalls['listServingConfigs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.retail.v2.IServingConfig>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1227,12 +1551,11 @@ export class ServingConfigServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1265,12 +1588,12 @@ export class ServingConfigServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -1313,22 +1636,22 @@ export class ServingConfigServiceClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -1363,15 +1686,15 @@ export class ServingConfigServiceClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -1405,7 +1728,7 @@ export class ServingConfigServiceClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -1418,25 +1741,24 @@ export class ServingConfigServiceClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -1475,22 +1797,22 @@ export class ServingConfigServiceClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -1506,7 +1828,7 @@ export class ServingConfigServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  attributesConfigPath(project:string,location:string,catalog:string) {
+  attributesConfigPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.attributesConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1522,7 +1844,9 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).project;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName,
+    ).project;
   }
 
   /**
@@ -1533,7 +1857,9 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).location;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName,
+    ).location;
   }
 
   /**
@@ -1544,7 +1870,9 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromAttributesConfigName(attributesConfigName: string) {
-    return this.pathTemplates.attributesConfigPathTemplate.match(attributesConfigName).catalog;
+    return this.pathTemplates.attributesConfigPathTemplate.match(
+      attributesConfigName,
+    ).catalog;
   }
 
   /**
@@ -1555,7 +1883,7 @@ export class ServingConfigServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  catalogPath(project:string,location:string,catalog:string) {
+  catalogPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.catalogPathTemplate.render({
       project: project,
       location: location,
@@ -1604,7 +1932,7 @@ export class ServingConfigServiceClient {
    * @param {string} catalog
    * @returns {string} Resource name string.
    */
-  completionConfigPath(project:string,location:string,catalog:string) {
+  completionConfigPath(project: string, location: string, catalog: string) {
     return this.pathTemplates.completionConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1620,7 +1948,9 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).project;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName,
+    ).project;
   }
 
   /**
@@ -1631,7 +1961,9 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).location;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName,
+    ).location;
   }
 
   /**
@@ -1642,7 +1974,9 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromCompletionConfigName(completionConfigName: string) {
-    return this.pathTemplates.completionConfigPathTemplate.match(completionConfigName).catalog;
+    return this.pathTemplates.completionConfigPathTemplate.match(
+      completionConfigName,
+    ).catalog;
   }
 
   /**
@@ -1654,7 +1988,12 @@ export class ServingConfigServiceClient {
    * @param {string} control
    * @returns {string} Resource name string.
    */
-  controlPath(project:string,location:string,catalog:string,control:string) {
+  controlPath(
+    project: string,
+    location: string,
+    catalog: string,
+    control: string,
+  ) {
     return this.pathTemplates.controlPathTemplate.render({
       project: project,
       location: location,
@@ -1716,7 +2055,7 @@ export class ServingConfigServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project:string,location:string,catalog:string,model:string) {
+  modelPath(project: string, location: string, catalog: string, model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -1779,7 +2118,13 @@ export class ServingConfigServiceClient {
    * @param {string} product
    * @returns {string} Resource name string.
    */
-  productPath(project:string,location:string,catalog:string,branch:string,product:string) {
+  productPath(
+    project: string,
+    location: string,
+    catalog: string,
+    branch: string,
+    product: string,
+  ) {
     return this.pathTemplates.productPathTemplate.render({
       project: project,
       location: location,
@@ -1853,7 +2198,12 @@ export class ServingConfigServiceClient {
    * @param {string} serving_config
    * @returns {string} Resource name string.
    */
-  servingConfigPath(project:string,location:string,catalog:string,servingConfig:string) {
+  servingConfigPath(
+    project: string,
+    location: string,
+    catalog: string,
+    servingConfig: string,
+  ) {
     return this.pathTemplates.servingConfigPathTemplate.render({
       project: project,
       location: location,
@@ -1870,7 +2220,8 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).project;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .project;
   }
 
   /**
@@ -1881,7 +2232,8 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).location;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .location;
   }
 
   /**
@@ -1892,7 +2244,8 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the catalog.
    */
   matchCatalogFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).catalog;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .catalog;
   }
 
   /**
@@ -1903,7 +2256,8 @@ export class ServingConfigServiceClient {
    * @returns {string} A string representing the serving_config.
    */
   matchServingConfigFromServingConfigName(servingConfigName: string) {
-    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName).serving_config;
+    return this.pathTemplates.servingConfigPathTemplate.match(servingConfigName)
+      .serving_config;
   }
 
   /**
@@ -1914,11 +2268,13 @@ export class ServingConfigServiceClient {
    */
   close(): Promise<void> {
     if (this.servingConfigServiceStub && !this._terminated) {
-      return this.servingConfigServiceStub.then(stub => {
+      return this.servingConfigServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

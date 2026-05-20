@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/bigquery",
   "description": "Google BigQuery Client Library for Node.js",
-  "version": "8.3.0",
+  "version": "8.3.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
@@ -64,6 +64,7 @@
     "stream-events": "^1.0.5"
   },
   "overrides": {
+    "@sinonjs/fake-timers": "15.1.1",
     "@google-cloud/common": {
       "google-auth-library": "10.3.0"
     }

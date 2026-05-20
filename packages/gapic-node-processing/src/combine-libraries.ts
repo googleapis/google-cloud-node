@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -162,8 +162,10 @@ export async function generateFinalDirectoryPath(
   const uniquefullPathAndContent = [];
 
   for (const fullPathAndContent of fullPathsAndContents) {
-    if (!uniquePaths.has(fullPathAndContent.filePath)) {
-      uniquePaths.add(fullPathAndContent.filePath);
+    const normalizedPath = fullPathAndContent.filePath.replace(/\\/g, '/');
+    fullPathAndContent.filePath = normalizedPath;
+    if (!uniquePaths.has(normalizedPath)) {
+      uniquePaths.add(normalizedPath);
       uniquefullPathAndContent.push(fullPathAndContent);
     }
   }
@@ -203,9 +205,10 @@ export function setOnlyDefaultSystemTests(
 
   for (let i = filePaths.length - 1; i >= 0; i--) {
     const filePathObj = filePaths[i];
+    const normalizedPath = filePathObj.filePath.replace(/\\/g, '/');
     if (
-      systemTestRegex.test(filePathObj.filePath) &&
-      !filePathObj.filePath.includes(defaultVersion)
+      systemTestRegex.test(normalizedPath) &&
+      !normalizedPath.includes(defaultVersion)
     ) {
       filePaths.splice(i, 1);
     }

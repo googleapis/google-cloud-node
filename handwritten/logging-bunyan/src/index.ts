@@ -211,7 +211,7 @@ export class LoggingBunyan extends Writable {
       this.cloudLog = new Logging(options).logSync(
         this.logName,
         undefined,
-        logSyncOptions
+        logSyncOptions,
       );
     }
 
@@ -225,7 +225,7 @@ export class LoggingBunyan extends Writable {
     if (this.serviceContext && !this.serviceContext.service) {
       throw new Error(
         "If 'serviceContext' is specified then " +
-          "'serviceContext.service' is required."
+          "'serviceContext.service' is required.",
       );
     }
 
@@ -238,7 +238,7 @@ export class LoggingBunyan extends Writable {
         },
         () => {
           /* swallow any errors. */
-        }
+        },
       );
     }
   }
@@ -257,7 +257,7 @@ export class LoggingBunyan extends Writable {
   private formatEntry_(record: string | types.BunyanLogRecord) {
     if (typeof record === 'string') {
       throw new Error(
-        '@google-cloud/logging-bunyan only works as a raw bunyan stream type.'
+        '@google-cloud/logging-bunyan only works as a raw bunyan stream type.',
       );
     }
     // Stackdriver Log Viewer picks up the summary line from the 'message' field
@@ -356,7 +356,7 @@ export class LoggingBunyan extends Writable {
   write(
     record: types.BunyanLogRecord,
     encoding?: string,
-    callback?: Function
+    callback?: Function,
   ): boolean;
   // Writable.write used 'any' in function signature.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -383,7 +383,7 @@ export class LoggingBunyan extends Writable {
         this,
         record,
         encoding as BufferEncoding,
-        callback as Callback
+        callback as Callback,
       );
     } else {
       return super.write.call(this, record, callback as BufferEncoding);
@@ -410,7 +410,7 @@ export class LoggingBunyan extends Writable {
       chunk: any;
       encoding: string;
     }>,
-    callback: Function
+    callback: Function,
   ) {
     const entries = chunks.map(
       (request: {
@@ -419,7 +419,7 @@ export class LoggingBunyan extends Writable {
         encoding: string;
       }) => {
         return this.formatEntry_(request.chunk);
-      }
+      },
     );
     this._writeCall(entries, callback);
   }
@@ -433,7 +433,7 @@ export class LoggingBunyan extends Writable {
     // Make sure that both callbacks are called in case if provided
     const newCallback: ApiResponseCallback = (
       err: Error | null,
-      apiResponse?: {}
+      apiResponse?: {},
     ) => {
       if (callback) {
         callback(err, apiResponse);
@@ -456,7 +456,7 @@ export class LoggingBunyan extends Writable {
     if (!alreadyWritten) {
       let instrumentationEntry = createDiagnosticEntry(
         'nodejs-bunyan',
-        this.getNodejsLibraryVersion()
+        this.getNodejsLibraryVersion(),
       );
       // Update instrumentation record resource and logName
       instrumentationEntry.metadata.resource = this.resource;
