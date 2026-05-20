@@ -89,6 +89,7 @@ import * as v1 from './v1';
 import {
   ObservabilityOptions,
   ensureInitialContextManagerSet,
+  isTracingEnabled,
 } from './instrument';
 import {
   attributeXGoogSpannerRequestIdToActiveSpan,
@@ -496,12 +497,14 @@ class Spanner extends GrpcService {
     this.directedReadOptions = directedReadOptions;
     this.defaultTransactionOptions = defaultTransactionOptions;
     this._observabilityOptions = options.observabilityOptions;
+    if (isTracingEnabled(this._observabilityOptions)) {
+      ensureInitialContextManagerSet();
+    }
     this.sessionLabels = options.sessionLabels || null;
     this.commonHeaders_ = getCommonHeaders(
       this.projectFormattedName_,
       this._observabilityOptions?.enableEndToEndTracing,
     );
-    ensureInitialContextManagerSet();
     this._nthClientId = nextSpannerClientId();
     this._universeDomain = universeEndpoint;
     this.projectId_ = options.projectId;
@@ -1677,7 +1680,7 @@ class Spanner extends GrpcService {
    * @param {function} callback Callback function
    */
   prepareGapicRequest_(config, callback) {
-    this.auth.getProjectId((err, projectId) => {
+    const proceed = (err?: Error | null, projectId?: string | null) => {
       if (err) {
         callback(err);
         return;
@@ -1691,13 +1694,10 @@ class Spanner extends GrpcService {
         callback(err, null);
       }
       const gaxClient = this.clients_.get(clientName)!;
-      let reqOpts = extend(true, {}, config.reqOpts);
-      reqOpts = replaceProjectIdToken(reqOpts, projectId!);
-      // It would have been preferable to replace the projectId already in the
-      // constructor of Spanner, but that is not possible as auth.getProjectId
-      // is an async method. This is therefore the first place where we have
-      // access to the value that should be used instead of the placeholder.
+      let reqOpts;
       if (!this.projectIdReplaced_) {
+        reqOpts = extend(true, {}, config.reqOpts);
+        reqOpts = replaceProjectIdToken(reqOpts, projectId!);
         this.projectId = replaceProjectIdToken(this.projectId, projectId!);
         this.projectFormattedName_ = replaceProjectIdToken(
           this.projectFormattedName_,
@@ -1715,20 +1715,24 @@ class Spanner extends GrpcService {
             );
           });
         });
+        config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+          config.headers[CLOUD_RESOURCE_HEADER],
+          projectId!,
+        );
         this.projectIdReplaced_ = true;
+      } else {
+        reqOpts = config.reqOpts;
       }
-      config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
-        config.headers[CLOUD_RESOURCE_HEADER],
-        projectId!,
-      );
-      // Do context propagation
-      propagation.inject(context.active(), config.headers, {
-        set: (carrier, key, value) => {
-          carrier[key] = value; // Set the span context (trace and span ID)
-        },
-      });
-      // Attach the x-goog-spanner-request-id to the currently active span.
-      attributeXGoogSpannerRequestIdToActiveSpan(config);
+      if (isTracingEnabled(this._observabilityOptions)) {
+        // Do context propagation
+        propagation.inject(context.active(), config.headers, {
+          set: (carrier, key, value) => {
+            carrier[key] = value; // Set the span context (trace and span ID)
+          },
+        });
+        // Attach the x-goog-spanner-request-id to the currently active span.
+        attributeXGoogSpannerRequestIdToActiveSpan(config);
+      }
       const interceptors: any[] = [];
       if (this._metricsEnabled) {
         interceptors.push(MetricInterceptor);
@@ -1796,7 +1800,19 @@ class Spanner extends GrpcService {
       };
 
       callback(null, wrappedRequestFn);
-    });
+    };
+
+    if (
+      this.projectIdReplaced_ &&
+      this.projectId &&
+      this.projectId !== '{{projectId}}'
+    ) {
+      process.nextTick(() => {
+        proceed(null, this.projectId);
+      });
+    } else {
+      this.auth.getProjectId(proceed);
+    }
   }
 
   /**

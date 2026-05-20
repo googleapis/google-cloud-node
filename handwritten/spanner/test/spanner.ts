@@ -91,7 +91,7 @@ const {
   InMemorySpanExporter,
 } = require('@opentelemetry/sdk-trace-node');
 const {SimpleSpanProcessor} = require('@opentelemetry/sdk-trace-base');
-const {startTrace, ObservabilityOptions} = require('../src/instrument');
+const {startTrace, ObservabilityOptions, _resetTracingEnabledForTest} = require('../src/instrument');
 
 function numberToEnglishWord(num: number): string {
   switch (num) {
@@ -7112,6 +7112,7 @@ describe('Spanner with mock server', () => {
       spanProcessors: [new SimpleSpanProcessor(exporter)],
     });
     provider.register();
+    _resetTracingEnabledForTest();
 
     after(async () => {
       await provider.shutdown();
@@ -7205,6 +7206,7 @@ describe('Spanner with mock server', () => {
     provider.register();
 
     beforeEach(async () => {
+      _resetTracingEnabledForTest();
       await exporter.forceFlush();
       await exporter.reset();
     });
