@@ -92,7 +92,7 @@ tests_with_credentials="core/packages/google-auth-library-nodejs/ packages/googl
 # on Windows due to incompatible npm scripts.
 # 
 # Until these packages can be updated to be OS agnostic, we will skip them on Windows.
-windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ packages/gapic-node-processing/ packages/typeless-sample-bot/"
+windows_exempt_tests="core/ core/packages/ core/dev-packages/ .github/scripts/fixtures/ .github/scripts/tests/ core/packages/gapic-node-processing/ core/packages/typeless-sample-bot/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do
