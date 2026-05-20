@@ -133,6 +133,16 @@ export class GdchClient extends OAuth2Client {
     this.serviceIdentityName = json.name;
     this.tokenServerUri = json.token_uri;
     this.caCertPath = json.ca_cert_path;
+
+    this.gdchOptions = {
+      ...this.gdchOptions,
+      projectId: json.project,
+      privateKeyId: json.private_key_id,
+      privateKey: json.private_key,
+      serviceIdentityName: json.name,
+      tokenServerUri: json.token_uri,
+      caCertPath: json.ca_cert_path,
+    };
   }
 
   protected async refreshTokenNoCache(): Promise<GetTokenResponse> {
@@ -180,7 +190,7 @@ export class GdchClient extends OAuth2Client {
 
     if (this.caCertPath) {
       try {
-        const ca = fs.readFileSync(this.caCertPath);
+        const ca = await fs.promises.readFile(this.caCertPath);
         requestOpts.agent = new https.Agent({ ca });
       } catch (err) {
         if (err instanceof Error) {
@@ -193,6 +203,9 @@ export class GdchClient extends OAuth2Client {
     try {
       const res = await this.transporter.request<CredentialRequest>(requestOpts);
       const tokenResponse = res.data;
+      if (!tokenResponse.access_token) {
+        throw new Error('Token response did not contain an access_token.');
+      }
       const tokens: Credentials = {
         access_token: tokenResponse.access_token,
         token_type: 'Bearer',

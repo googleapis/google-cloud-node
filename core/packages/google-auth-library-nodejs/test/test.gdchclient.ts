@@ -294,8 +294,8 @@ describe('GdchClient', () => {
       caCertPath,
     });
 
-    // Stub fs.readFileSync to return a mock certificate
-    const readFileSyncStub = sinon.stub(fs, 'readFileSync').callsFake((path) => {
+    // Stub fs.promises.readFile to return a mock certificate
+    const readFileStub = sinon.stub(fs.promises, 'readFile').callsFake(async (path) => {
       assert.strictEqual(path, caCertPath);
       return Buffer.from('mock-ca-cert-content');
     });
@@ -308,8 +308,61 @@ describe('GdchClient', () => {
 
     const res = await client.getAccessToken();
     nockScope.done();
-    assert.ok(readFileSyncStub.calledOnce);
+    assert.ok(readFileStub.calledOnce);
     assert.strictEqual(res.token, 'ca-verified-token');
+  });
+
+  it('should raise helpful error message if CA cert file is unreadable', async () => {
+    const caCertPath = '/path/to/custom-ca.pem';
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+      caCertPath,
+    });
+
+    // Stub fs.promises.readFile to throw an error
+    const readFileStub = sinon.stub(fs.promises, 'readFile').rejects(new Error('Permission denied'));
+
+    const nockScope = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        access_token: 'ca-verified-token',
+      });
+
+    await assert.rejects(client.getAccessToken(), (err: Error) => {
+      assert.ok(err.message.includes('Error reading certificate file from CA cert path'));
+      assert.ok(err.message.includes('Permission denied'));
+      return true;
+    });
+    nockScope.restore();
+    assert.ok(readFileStub.calledOnce);
+  });
+
+  it('should throw error if token response does not contain access_token', async () => {
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+    });
+
+    const scope = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        expires_in: 3600,
+      });
+
+    await assert.rejects(client.getAccessToken(), (err: Error) => {
+      assert.ok(err.message.includes('Token response did not contain an access_token.'));
+      return true;
+    });
+    scope.done();
   });
 
   it('should raise helpful error message if token exchange fails', async () => {
