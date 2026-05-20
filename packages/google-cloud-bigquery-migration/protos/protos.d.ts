@@ -29,6 +29,224 @@ export namespace google {
                 /** Namespace v2. */
                 namespace v2 {
 
+                    /** Properties of an AssessmentTaskDetails. */
+                    interface IAssessmentTaskDetails {
+
+                        /** AssessmentTaskDetails inputPath */
+                        inputPath?: (string|null);
+
+                        /** AssessmentTaskDetails outputDataset */
+                        outputDataset?: (string|null);
+
+                        /** AssessmentTaskDetails querylogsPath */
+                        querylogsPath?: (string|null);
+
+                        /** AssessmentTaskDetails dataSource */
+                        dataSource?: (string|null);
+
+                        /** AssessmentTaskDetails featureHandle */
+                        featureHandle?: (google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle|null);
+                    }
+
+                    /** Represents an AssessmentTaskDetails. */
+                    class AssessmentTaskDetails implements IAssessmentTaskDetails {
+
+                        /**
+                         * Constructs a new AssessmentTaskDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.IAssessmentTaskDetails);
+
+                        /** AssessmentTaskDetails inputPath. */
+                        public inputPath: string;
+
+                        /** AssessmentTaskDetails outputDataset. */
+                        public outputDataset: string;
+
+                        /** AssessmentTaskDetails querylogsPath. */
+                        public querylogsPath: string;
+
+                        /** AssessmentTaskDetails dataSource. */
+                        public dataSource: string;
+
+                        /** AssessmentTaskDetails featureHandle. */
+                        public featureHandle?: (google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle|null);
+
+                        /**
+                         * Creates a new AssessmentTaskDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AssessmentTaskDetails instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.IAssessmentTaskDetails): google.cloud.bigquery.migration.v2.AssessmentTaskDetails;
+
+                        /**
+                         * Encodes the specified AssessmentTaskDetails message. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentTaskDetails.verify|verify} messages.
+                         * @param message AssessmentTaskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.IAssessmentTaskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AssessmentTaskDetails message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentTaskDetails.verify|verify} messages.
+                         * @param message AssessmentTaskDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.IAssessmentTaskDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AssessmentTaskDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AssessmentTaskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.AssessmentTaskDetails;
+
+                        /**
+                         * Decodes an AssessmentTaskDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AssessmentTaskDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.AssessmentTaskDetails;
+
+                        /**
+                         * Verifies an AssessmentTaskDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AssessmentTaskDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AssessmentTaskDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.AssessmentTaskDetails;
+
+                        /**
+                         * Creates a plain object from an AssessmentTaskDetails message. Also converts values to other types if specified.
+                         * @param message AssessmentTaskDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.AssessmentTaskDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AssessmentTaskDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AssessmentTaskDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AssessmentFeatureHandle. */
+                    interface IAssessmentFeatureHandle {
+
+                        /** AssessmentFeatureHandle addShareableDataset */
+                        addShareableDataset?: (boolean|null);
+                    }
+
+                    /** Represents an AssessmentFeatureHandle. */
+                    class AssessmentFeatureHandle implements IAssessmentFeatureHandle {
+
+                        /**
+                         * Constructs a new AssessmentFeatureHandle.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle);
+
+                        /** AssessmentFeatureHandle addShareableDataset. */
+                        public addShareableDataset?: (boolean|null);
+
+                        /**
+                         * Creates a new AssessmentFeatureHandle instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AssessmentFeatureHandle instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle): google.cloud.bigquery.migration.v2.AssessmentFeatureHandle;
+
+                        /**
+                         * Encodes the specified AssessmentFeatureHandle message. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.verify|verify} messages.
+                         * @param message AssessmentFeatureHandle message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AssessmentFeatureHandle message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.AssessmentFeatureHandle.verify|verify} messages.
+                         * @param message AssessmentFeatureHandle message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.IAssessmentFeatureHandle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AssessmentFeatureHandle message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AssessmentFeatureHandle
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.AssessmentFeatureHandle;
+
+                        /**
+                         * Decodes an AssessmentFeatureHandle message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AssessmentFeatureHandle
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.AssessmentFeatureHandle;
+
+                        /**
+                         * Verifies an AssessmentFeatureHandle message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AssessmentFeatureHandle message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AssessmentFeatureHandle
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.AssessmentFeatureHandle;
+
+                        /**
+                         * Creates a plain object from an AssessmentFeatureHandle message. Also converts values to other types if specified.
+                         * @param message AssessmentFeatureHandle
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.AssessmentFeatureHandle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AssessmentFeatureHandle to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AssessmentFeatureHandle
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a MigrationWorkflow. */
                     interface IMigrationWorkflow {
 
@@ -171,6 +389,9 @@ export namespace google {
                     /** Properties of a MigrationTask. */
                     interface IMigrationTask {
 
+                        /** MigrationTask assessmentTaskDetails */
+                        assessmentTaskDetails?: (google.cloud.bigquery.migration.v2.IAssessmentTaskDetails|null);
+
                         /** MigrationTask translationConfigDetails */
                         translationConfigDetails?: (google.cloud.bigquery.migration.v2.ITranslationConfigDetails|null);
 
@@ -223,6 +444,9 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.bigquery.migration.v2.IMigrationTask);
 
+                        /** MigrationTask assessmentTaskDetails. */
+                        public assessmentTaskDetails?: (google.cloud.bigquery.migration.v2.IAssessmentTaskDetails|null);
+
                         /** MigrationTask translationConfigDetails. */
                         public translationConfigDetails?: (google.cloud.bigquery.migration.v2.ITranslationConfigDetails|null);
 
@@ -266,7 +490,7 @@ export namespace google {
                         public totalResourceErrorCount: number;
 
                         /** MigrationTask taskDetails. */
-                        public taskDetails?: ("translationConfigDetails"|"translationDetails");
+                        public taskDetails?: ("assessmentTaskDetails"|"translationConfigDetails"|"translationDetails");
 
                         /**
                          * Creates a new MigrationTask instance using the specified properties.
@@ -633,6 +857,9 @@ export namespace google {
 
                         /** TranslationTaskResult reportLogMessages */
                         reportLogMessages?: (google.cloud.bigquery.migration.v2.IGcsReportLogMessage[]|null);
+
+                        /** TranslationTaskResult consoleUri */
+                        consoleUri?: (string|null);
                     }
 
                     /** Represents a TranslationTaskResult. */
@@ -649,6 +876,9 @@ export namespace google {
 
                         /** TranslationTaskResult reportLogMessages. */
                         public reportLogMessages: google.cloud.bigquery.migration.v2.IGcsReportLogMessage[];
+
+                        /** TranslationTaskResult consoleUri. */
+                        public consoleUri: string;
 
                         /**
                          * Creates a new TranslationTaskResult instance using the specified properties.
@@ -3972,6 +4202,9 @@ export namespace google {
 
                         /** TranslationDetails targetTypes */
                         targetTypes?: (string[]|null);
+
+                        /** TranslationDetails suggestionConfig */
+                        suggestionConfig?: (google.cloud.bigquery.migration.v2.ISuggestionConfig|null);
                     }
 
                     /** Represents a TranslationDetails. */
@@ -3997,6 +4230,9 @@ export namespace google {
 
                         /** TranslationDetails targetTypes. */
                         public targetTypes: string[];
+
+                        /** TranslationDetails suggestionConfig. */
+                        public suggestionConfig?: (google.cloud.bigquery.migration.v2.ISuggestionConfig|null);
 
                         /**
                          * Creates a new TranslationDetails instance using the specified properties.
@@ -4074,6 +4310,223 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SuggestionConfig. */
+                    interface ISuggestionConfig {
+
+                        /** SuggestionConfig skipSuggestionSteps */
+                        skipSuggestionSteps?: (google.cloud.bigquery.migration.v2.ISuggestionStep[]|null);
+                    }
+
+                    /** Represents a SuggestionConfig. */
+                    class SuggestionConfig implements ISuggestionConfig {
+
+                        /**
+                         * Constructs a new SuggestionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ISuggestionConfig);
+
+                        /** SuggestionConfig skipSuggestionSteps. */
+                        public skipSuggestionSteps: google.cloud.bigquery.migration.v2.ISuggestionStep[];
+
+                        /**
+                         * Creates a new SuggestionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SuggestionConfig instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ISuggestionConfig): google.cloud.bigquery.migration.v2.SuggestionConfig;
+
+                        /**
+                         * Encodes the specified SuggestionConfig message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionConfig.verify|verify} messages.
+                         * @param message SuggestionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ISuggestionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SuggestionConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionConfig.verify|verify} messages.
+                         * @param message SuggestionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ISuggestionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SuggestionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SuggestionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.SuggestionConfig;
+
+                        /**
+                         * Decodes a SuggestionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SuggestionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.SuggestionConfig;
+
+                        /**
+                         * Verifies a SuggestionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SuggestionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SuggestionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.SuggestionConfig;
+
+                        /**
+                         * Creates a plain object from a SuggestionConfig message. Also converts values to other types if specified.
+                         * @param message SuggestionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.SuggestionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SuggestionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SuggestionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SuggestionStep. */
+                    interface ISuggestionStep {
+
+                        /** SuggestionStep suggestionType */
+                        suggestionType?: (google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType|keyof typeof google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType|null);
+
+                        /** SuggestionStep rewriteTarget */
+                        rewriteTarget?: (google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget|keyof typeof google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget|null);
+                    }
+
+                    /** Represents a SuggestionStep. */
+                    class SuggestionStep implements ISuggestionStep {
+
+                        /**
+                         * Constructs a new SuggestionStep.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ISuggestionStep);
+
+                        /** SuggestionStep suggestionType. */
+                        public suggestionType: (google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType|keyof typeof google.cloud.bigquery.migration.v2.SuggestionStep.SuggestionType);
+
+                        /** SuggestionStep rewriteTarget. */
+                        public rewriteTarget: (google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget|keyof typeof google.cloud.bigquery.migration.v2.SuggestionStep.RewriteTarget);
+
+                        /**
+                         * Creates a new SuggestionStep instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SuggestionStep instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ISuggestionStep): google.cloud.bigquery.migration.v2.SuggestionStep;
+
+                        /**
+                         * Encodes the specified SuggestionStep message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionStep.verify|verify} messages.
+                         * @param message SuggestionStep message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ISuggestionStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SuggestionStep message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SuggestionStep.verify|verify} messages.
+                         * @param message SuggestionStep message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ISuggestionStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SuggestionStep message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SuggestionStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.SuggestionStep;
+
+                        /**
+                         * Decodes a SuggestionStep message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SuggestionStep
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.SuggestionStep;
+
+                        /**
+                         * Verifies a SuggestionStep message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SuggestionStep message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SuggestionStep
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.SuggestionStep;
+
+                        /**
+                         * Creates a plain object from a SuggestionStep message. Also converts values to other types if specified.
+                         * @param message SuggestionStep
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.SuggestionStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SuggestionStep to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SuggestionStep
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SuggestionStep {
+
+                        /** SuggestionType enum. */
+                        enum SuggestionType {
+                            SUGGESTION_TYPE_UNSPECIFIED = 0,
+                            QUERY_CUSTOMIZATION = 1,
+                            TRANSLATION_EXPLANATION = 2
+                        }
+
+                        /** RewriteTarget enum. */
+                        enum RewriteTarget {
+                            REWRITE_TARGET_UNSPECIFIED = 0,
+                            SOURCE_SQL = 1,
+                            TARGET_SQL = 2
+                        }
                     }
 
                     /** Properties of a SourceTargetMapping. */
@@ -4188,6 +4641,9 @@ export namespace google {
                         /** SourceSpec literal */
                         literal?: (google.cloud.bigquery.migration.v2.ILiteral|null);
 
+                        /** SourceSpec gcsFilePath */
+                        gcsFilePath?: (string|null);
+
                         /** SourceSpec encoding */
                         encoding?: (string|null);
                     }
@@ -4207,11 +4663,14 @@ export namespace google {
                         /** SourceSpec literal. */
                         public literal?: (google.cloud.bigquery.migration.v2.ILiteral|null);
 
+                        /** SourceSpec gcsFilePath. */
+                        public gcsFilePath?: (string|null);
+
                         /** SourceSpec encoding. */
                         public encoding: string;
 
                         /** SourceSpec source. */
-                        public source?: ("baseUri"|"literal");
+                        public source?: ("baseUri"|"literal"|"gcsFilePath");
 
                         /**
                          * Creates a new SourceSpec instance using the specified properties.
