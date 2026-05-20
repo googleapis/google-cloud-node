@@ -124,34 +124,22 @@ function injectRequestIDIntoHeaders(
   nthRequest?: number,
   attempt?: number,
 ) {
-  return headers;
-}
+  if (!session) {
+    return headers;
+  }
+  const database = session.parent;
+  if (!nthRequest) {
+    if (!database || typeof database._nextNthRequest !== 'function') {
+      return headers;
+    }
+    nthRequest = database._nextNthRequest();
+  }
+  const clientId = database ? database._nthClientId || 1 : 1;
+  const channelId = database ? database._channelId || 1 : 1;
 
-function _metadataWithRequestId(
-  session: any,
-  nthRequest: number,
-  attempt: number,
-  priorMetadata?: {[k: string]: string},
-): {[k: string]: string} {
-  if (!priorMetadata) {
-    priorMetadata = {};
-  }
-  const withReqId = {
-    ...priorMetadata,
-  };
-  const database = session.parent as withMetadataWithRequestId;
-  let clientId = 1;
-  let channelId = 1;
-  if (database) {
-    clientId = database._nthClientId || 1;
-    channelId = database._channelId || 1;
-  }
-  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
-    clientId,
-    channelId,
-    nthRequest || 1,
-    attempt || 1,
-  );
+  const withReqId = {...headers};
+  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] =
+    `${PROCESS_PREFIX}${clientId}.${channelId}.${nthRequest}.${attempt || 1}`;
   return withReqId;
 }
 
@@ -175,7 +163,12 @@ const X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR = 'x_goog_spanner_request_id';
  * long after tracing has been performed.
  */
 function attributeXGoogSpannerRequestIdToActiveSpan(config: any) {
-  return;
+  const reqId = extractRequestID(config);
+  if (!(reqId && reqId.length > 0)) {
+    return;
+  }
+  const span = getActiveOrNoopSpan();
+  span.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, reqId);
 }
 
 const X_GOOG_REQ_ID_REGEX = /^1\.[0-9A-Fa-f]{8}(\.\d+){3}\.\d+/;
@@ -187,6 +180,7 @@ export {
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
   attributeXGoogSpannerRequestIdToActiveSpan,
   craftRequestId,
+  PROCESS_PREFIX,
   injectRequestIDIntoError,
   injectRequestIDIntoHeaders,
   nextNthRequest,

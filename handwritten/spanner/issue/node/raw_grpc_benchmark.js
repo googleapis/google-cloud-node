@@ -45,6 +45,7 @@ async function runBenchmark() {
   const customGcpConfig = JSON.parse(JSON.stringify(gcpApiConfig));
   customGcpConfig.channelPool.minSize = 4;
   customGcpConfig.channelPool.maxSize = 4;
+  customGcpConfig.channelPool.maxConcurrentStreamsLowWatermark = 1;
 
   // Initialize a single GAPIC client with grpc-gcp channel pooling enabled
   const client = new v1.SpannerClient({

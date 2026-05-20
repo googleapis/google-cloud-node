@@ -2,46 +2,40 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: spanner-ns
-  name: issue-insert-node
+  name: issue-read-node-current
 spec:
   backoffLimit: 0
   template:
     metadata:
       labels:
-        app: issue-insert-node
+        app: issue-read-node-current
     spec:
       restartPolicy: Never
       containers:
         - name: benchmark
-          image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-insert-node:release-8.7.1
+          image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-read-node:current
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args:
             - |
               echo "Starting V8 CPU Profiler benchmark with tsx..."
-              /app/node_modules/.bin/tsx --cpu-prof --cpu-prof-dir=/tmp --cpu-prof-name=k8s-insert.cpuprofile /app/benchmark-insert-repl.mts
+              /app/node_modules/.bin/tsx --cpu-prof --cpu-prof-dir=/tmp --cpu-prof-name=k8s-read-current.cpuprofile /app/benchmark-read-repl.mts
               echo "✓ Benchmark finished! Sleeping for 1 hour so you can kubectl cp the profile..."
               sleep 3600
           resources:
             requests:
-              cpu: "1"
+              cpu: "3"
               memory: "2Gi"
             limits:
-              cpu: "1"
+              cpu: "3"
               memory: "2Gi"
           env:
             - name: SAMPLE_SIZE
               value: "10000"
-            - name: INSERT_COUNT
-              value: "1000"
-            - name: INSERT_CONCURRENCY
-              value: "110"
-            - name: BATCH_COUNT
-              value: "1"
-            - name: DUPLICATE_INSERT
-              value: "false"
-            - name: VERBOSE_BATCH_LOGS
-              value: "true"
+            - name: READ_COUNT
+              value: "1000000"
+            - name: READ_CONCURRENCY
+              value: "300"
             - name: DB_PROJECT_ID
               value: "span-cloud-testing"
             - name: DB_INSTANCE
@@ -54,3 +48,7 @@ spec:
               value: "true"
             - name: GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS
               value: "false"
+            - name: GRPC_GCP_CONFIG_PATH
+              value: ""
+            - name: GRPC_GCP_CONFIG_JSON
+              value: '{"channelPool": {"minSize": 20, "maxSize": 40, "maxConcurrentStreamsLowWatermark": 5}}'

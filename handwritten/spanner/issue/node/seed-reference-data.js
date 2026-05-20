@@ -1,7 +1,7 @@
 'use strict';
 
 const crypto = require('crypto');
-const { Spanner } = require('@google-cloud/spanner');
+const {Spanner} = require('@google-cloud/spanner');
 
 const SAMPLE_SIZE = envInt('SAMPLE_SIZE', 10000);
 const DB_PROJECT_ID = process.env.DB_PROJECT_ID || 'span-cloud-testing';
@@ -11,13 +11,36 @@ const DB_SCHEMA = process.env.DB_SCHEMA || 'tracking';
 const BATCH_SIZE = envInt('SEED_BATCH_SIZE', 500);
 
 async function main() {
-  const spanner = new Spanner({ projectId: DB_PROJECT_ID, disableBuiltInMetrics: true });
+  const spanner = new Spanner({
+    projectId: DB_PROJECT_ID,
+    disableBuiltInMetrics: true,
+  });
   const database = spanner.instance(DB_INSTANCE).database(DB_DATABASE);
   try {
-    await seedTable(database, `${DB_SCHEMA}.Devices`, 'deviceRecordId', 'device');
-    await seedTable(database, `${DB_SCHEMA}.DeviceDetails`, 'deviceDetailsId', 'detail');
-    await seedTable(database, `${DB_SCHEMA}.HttpRequestDetails`, 'httpRequestDetailsId', 'request');
-    await seedTable(database, `${DB_SCHEMA}.HttpRequestLocations`, 'httpRequestLocationId', 'location');
+    await seedTable(
+      database,
+      `${DB_SCHEMA}.Devices`,
+      'deviceRecordId',
+      'device',
+    );
+    await seedTable(
+      database,
+      `${DB_SCHEMA}.DeviceDetails`,
+      'deviceDetailsId',
+      'detail',
+    );
+    await seedTable(
+      database,
+      `${DB_SCHEMA}.HttpRequestDetails`,
+      'httpRequestDetailsId',
+      'request',
+    );
+    await seedTable(
+      database,
+      `${DB_SCHEMA}.HttpRequestLocations`,
+      'httpRequestLocationId',
+      'location',
+    );
   } finally {
     await database.close();
     spanner.close();

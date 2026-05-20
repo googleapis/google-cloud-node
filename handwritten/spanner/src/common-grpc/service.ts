@@ -992,7 +992,7 @@ export class GrpcService extends Service {
     delete reqOpts.autoPaginateVal;
     delete reqOpts.objectMode;
 
-    return reqOpts;
+    return replaceProjectIdToken(reqOpts, this.projectId);
   }
 
   /**

@@ -1680,7 +1680,7 @@ class Spanner extends GrpcService {
    * @param {function} callback Callback function
    */
   prepareGapicRequest_(config, callback) {
-    this.auth.getProjectId((err, projectId) => {
+    const proceed = (err?: Error | null, projectId?: string | null) => {
       if (err) {
         callback(err);
         return;
@@ -1718,12 +1718,14 @@ class Spanner extends GrpcService {
             );
           });
         });
+        config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+          config.headers[CLOUD_RESOURCE_HEADER],
+          projectId!,
+        );
         this.projectIdReplaced_ = true;
+      } else {
+        reqOpts = config.reqOpts;
       }
-      config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
-        config.headers[CLOUD_RESOURCE_HEADER],
-        projectId!,
-      );
       if (isTracingEnabled(this._observabilityOptions)) {
         // Do context propagation
         propagation.inject(context.active(), config.headers, {
@@ -1801,7 +1803,17 @@ class Spanner extends GrpcService {
       };
 
       callback(null, wrappedRequestFn);
-    });
+    };
+
+    if (
+      this.projectIdReplaced_ &&
+      this.projectId &&
+      this.projectId !== '{{projectId}}'
+    ) {
+      proceed(null, this.projectId);
+    } else {
+      this.auth.getProjectId(proceed);
+    }
   }
 
   /**

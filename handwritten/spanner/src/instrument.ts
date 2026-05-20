@@ -192,12 +192,99 @@ export function _resetTracingEnabledForTest(): void {
  *
  * @returns {Span} The created span.
  */
+let tracingEnabled = false;
+
+export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
+  if (tracingEnabled) {
+    return true;
+  }
+  if (opts?.tracerProvider) {
+    tracingEnabled = true;
+    return true;
+  }
+  const globalProvider = trace.getTracerProvider();
+  if (
+    globalProvider &&
+    globalProvider.constructor.name !== 'NoopTracerProvider'
+  ) {
+    tracingEnabled = true;
+    return true;
+  }
+  return false;
+}
+
+/**
+ * startTrace begins an active span in the current active context
+ * and passes it back to the set callback function. Each span will
+ * be prefixed with "cloud.google.com/nodejs/spanner". It is the
+ * responsibility of the caller to invoke [span.end] when finished tracing.
+ *
+ * @returns {Span} The created span.
+ */
 export function startTrace<T>(
   spanNameSuffix: string,
   config: traceConfig | undefined,
   cb: (span: Span) => T,
 ): T {
-  return cb(new noopSpan());
+  if (!isTracingEnabled(config?.opts)) {
+    return cb(new noopSpan());
+  }
+
+  if (!config) {
+    config = {} as traceConfig;
+  }
+
+  return getTracer(config.opts?.tracerProvider).startActiveSpan(
+    SPAN_NAMESPACE_PREFIX + '.' + spanNameSuffix,
+    {kind: SpanKind.CLIENT},
+    span => {
+      span.setAttribute(ATTR_OTEL_SCOPE_NAME, TRACER_NAME);
+      span.setAttribute(ATTR_OTEL_SCOPE_VERSION, TRACER_VERSION);
+      span.setAttribute('gcp.client.service', 'spanner');
+      span.setAttribute('gcp.client.version', TRACER_VERSION);
+      span.setAttribute('gcp.client.repo', 'googleapis/nodejs-spanner');
+
+      if (config.tableName) {
+        span.setAttribute('db.sql.table', config.tableName);
+      }
+      if (config.dbName) {
+        span.setAttribute(
+          'gcp.resource.name',
+          `//spanner.googleapis.com/${config.dbName}`,
+        );
+        span.setAttribute('db.name', config.dbName);
+      }
+      if (config.requestTag) {
+        span.setAttribute('request.tag', config.requestTag);
+      }
+      if (config.transactionTag) {
+        span.setAttribute('transaction.tag', config.transactionTag);
+      }
+
+      const allowExtendedTracing =
+        optedInPII || config.opts?.enableExtendedTracing;
+      if (config.sql && allowExtendedTracing) {
+        const sql = config.sql;
+        if (typeof sql === 'string') {
+          span.setAttribute('db.statement', sql as string);
+        } else {
+          const stmt = sql as SQLStatement;
+          span.setAttribute('db.statement', stmt.sql);
+        }
+      }
+
+      // If at all the invoked function throws an exception,
+      // record the exception and then end this span.
+      try {
+        return cb(span);
+      } catch (e) {
+        setSpanErrorAndException(span, e as Error);
+        span.end();
+        // Finally re-throw the exception.
+        throw e;
+      }
+    },
+  );
 }
 
 /**
@@ -256,6 +343,12 @@ export function setSpanErrorAndException(
  * @returns {Span} the non-null span.
  */
 export function getActiveOrNoopSpan(): Span {
+  if (isTracingEnabled()) {
+    const span = trace.getActiveSpan();
+    if (span) {
+      return span;
+    }
+  }
   return new noopSpan();
 }
 

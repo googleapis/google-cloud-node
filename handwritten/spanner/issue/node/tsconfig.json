@@ -15,7 +15,8 @@
     "declaration": true
   },
   "include": [
-    "benchmark-insert-repl.ts"
+    "benchmark-insert-repl.ts",
+    "benchmark-read-repl.ts"
   ],
   "exclude": [
     "node_modules",
