@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {AutoSuggestionServiceClient} from './auto_suggestion_service_client';
-export {QuestionServiceClient} from './question_service_client';
+export { AutoSuggestionServiceClient } from './auto_suggestion_service_client';
+export { QuestionServiceClient } from './question_service_client';

@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ContactCenterInsightsClient} from './contact_center_insights_client';
+export { ContactCenterInsightsClient } from './contact_center_insights_client';

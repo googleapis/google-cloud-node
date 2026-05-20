@@ -1,7 +1,7 @@
 {
   "clientLibrary": {
     "name": "nodejs-admanager",
-    "version": "0.5.0",
+    "version": "0.1.0",
     "language": "TYPESCRIPT",
     "apis": [
       {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 58,
           "type": "FULL"
         }
       ],
@@ -250,7 +250,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 104,
+          "end": 112,
           "type": "FULL"
         }
       ],
@@ -259,6 +259,14 @@
         "fullName": "google.ads.admanager.v1.AdReviewCenterAdService.SearchAdReviewCenterAds",
         "async": true,
         "parameters": [
+          {
+            "name": "status",
+            "type": ".google.ads.admanager.v1.AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus"
+          },
+          {
+            "name": "manual_review_status",
+            "type": ".google.ads.admanager.v1.ManualAdReviewCenterAdStatusEnum.ManualAdReviewCenterAdStatus"
+          },
           {
             "name": "parent",
             "type": "TYPE_STRING"
@@ -270,10 +278,6 @@
           {
             "name": "page_token",
             "type": "TYPE_STRING"
-          },
-          {
-            "name": "status",
-            "type": ".google.ads.admanager.v1.AdReviewCenterAdStatusEnum.AdReviewCenterAdStatus"
           },
           {
             "name": "ad_review_center_ad_id",
@@ -446,7 +450,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 101,
           "type": "FULL"
         }
       ],
@@ -610,7 +614,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 59,
           "type": "FULL"
         }
       ],
@@ -914,7 +918,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 98,
           "type": "FULL"
         }
       ],
@@ -956,6 +960,270 @@
         "method": {
           "shortName": "ListApplications",
           "fullName": "google.ads.admanager.v1.ApplicationService.ListApplications",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.ads.admanager.v1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_ApplicationService_CreateApplication_async",
+      "title": "AdBreakService createApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to create a `Application` object.",
+      "canonical": true,
+      "file": "application_service.create_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApplication",
+        "fullName": "google.ads.admanager.v1.ApplicationService.CreateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application",
+            "type": ".google.ads.admanager.v1.Application"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.Application",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.ads.admanager.v1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "CreateApplication",
+          "fullName": "google.ads.admanager.v1.ApplicationService.CreateApplication",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.ads.admanager.v1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_ApplicationService_BatchCreateApplications_async",
+      "title": "AdBreakService batchCreateApplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to batch create `Application` objects.",
+      "canonical": true,
+      "file": "application_service.batch_create_applications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateApplications",
+        "fullName": "google.ads.admanager.v1.ApplicationService.BatchCreateApplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchCreateApplicationsResponse",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.ads.admanager.v1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "BatchCreateApplications",
+          "fullName": "google.ads.admanager.v1.ApplicationService.BatchCreateApplications",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.ads.admanager.v1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_ApplicationService_UpdateApplication_async",
+      "title": "AdBreakService updateApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to update a `Application` object.",
+      "canonical": true,
+      "file": "application_service.update_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApplication",
+        "fullName": "google.ads.admanager.v1.ApplicationService.UpdateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "application",
+            "type": ".google.ads.admanager.v1.Application"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.Application",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.ads.admanager.v1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateApplication",
+          "fullName": "google.ads.admanager.v1.ApplicationService.UpdateApplication",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.ads.admanager.v1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_ApplicationService_BatchUpdateApplications_async",
+      "title": "AdBreakService batchUpdateApplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to batch update `Application` objects.",
+      "canonical": true,
+      "file": "application_service.batch_update_applications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateApplications",
+        "fullName": "google.ads.admanager.v1.ApplicationService.BatchUpdateApplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchUpdateApplicationsResponse",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.ads.admanager.v1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateApplications",
+          "fullName": "google.ads.admanager.v1.ApplicationService.BatchUpdateApplications",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.ads.admanager.v1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_ApplicationService_BatchArchiveApplications_async",
+      "title": "AdBreakService batchArchiveApplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " / API to batch archive `Application` objects.",
+      "canonical": true,
+      "file": "application_service.batch_archive_applications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchArchiveApplications",
+        "fullName": "google.ads.admanager.v1.ApplicationService.BatchArchiveApplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchArchiveApplicationsResponse",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.ads.admanager.v1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "BatchArchiveApplications",
+          "fullName": "google.ads.admanager.v1.ApplicationService.BatchArchiveApplications",
+          "service": {
+            "shortName": "ApplicationService",
+            "fullName": "google.ads.admanager.v1.ApplicationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_ApplicationService_BatchUnarchiveApplications_async",
+      "title": "AdBreakService batchUnarchiveApplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " / API to batch unarchive `Application` objects.",
+      "canonical": true,
+      "file": "application_service.batch_unarchive_applications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUnarchiveApplications",
+        "fullName": "google.ads.admanager.v1.ApplicationService.BatchUnarchiveApplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchUnarchiveApplicationsResponse",
+        "client": {
+          "shortName": "ApplicationServiceClient",
+          "fullName": "google.ads.admanager.v1.ApplicationServiceClient"
+        },
+        "method": {
+          "shortName": "BatchUnarchiveApplications",
+          "fullName": "google.ads.admanager.v1.ApplicationService.BatchUnarchiveApplications",
           "service": {
             "shortName": "ApplicationService",
             "fullName": "google.ads.admanager.v1.ApplicationService"
@@ -1014,7 +1282,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 90,
           "type": "FULL"
         }
       ],
@@ -1114,7 +1382,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -1214,7 +1482,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -1314,7 +1582,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 93,
           "type": "FULL"
         }
       ],
@@ -1414,7 +1682,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -1456,6 +1724,94 @@
         "method": {
           "shortName": "ListCmsMetadataKeys",
           "fullName": "google.ads.admanager.v1.CmsMetadataKeyService.ListCmsMetadataKeys",
+          "service": {
+            "shortName": "CmsMetadataKeyService",
+            "fullName": "google.ads.admanager.v1.CmsMetadataKeyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_CmsMetadataKeyService_BatchActivateCmsMetadataKeys_async",
+      "title": "AdBreakService batchActivateCmsMetadataKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to activate a list of `CmsMetadataKey` objects.",
+      "canonical": true,
+      "file": "cms_metadata_key_service.batch_activate_cms_metadata_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchActivateCmsMetadataKeys",
+        "fullName": "google.ads.admanager.v1.CmsMetadataKeyService.BatchActivateCmsMetadataKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchActivateCmsMetadataKeysResponse",
+        "client": {
+          "shortName": "CmsMetadataKeyServiceClient",
+          "fullName": "google.ads.admanager.v1.CmsMetadataKeyServiceClient"
+        },
+        "method": {
+          "shortName": "BatchActivateCmsMetadataKeys",
+          "fullName": "google.ads.admanager.v1.CmsMetadataKeyService.BatchActivateCmsMetadataKeys",
+          "service": {
+            "shortName": "CmsMetadataKeyService",
+            "fullName": "google.ads.admanager.v1.CmsMetadataKeyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_CmsMetadataKeyService_BatchDeactivateCmsMetadataKeys_async",
+      "title": "AdBreakService batchDeactivateCmsMetadataKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to deactivate a list of `CmsMetadataKey` objects.",
+      "canonical": true,
+      "file": "cms_metadata_key_service.batch_deactivate_cms_metadata_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeactivateCmsMetadataKeys",
+        "fullName": "google.ads.admanager.v1.CmsMetadataKeyService.BatchDeactivateCmsMetadataKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchDeactivateCmsMetadataKeysResponse",
+        "client": {
+          "shortName": "CmsMetadataKeyServiceClient",
+          "fullName": "google.ads.admanager.v1.CmsMetadataKeyServiceClient"
+        },
+        "method": {
+          "shortName": "BatchDeactivateCmsMetadataKeys",
+          "fullName": "google.ads.admanager.v1.CmsMetadataKeyService.BatchDeactivateCmsMetadataKeys",
           "service": {
             "shortName": "CmsMetadataKeyService",
             "fullName": "google.ads.admanager.v1.CmsMetadataKeyService"
@@ -1514,7 +1870,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 93,
           "type": "FULL"
         }
       ],
@@ -1556,6 +1912,94 @@
         "method": {
           "shortName": "ListCmsMetadataValues",
           "fullName": "google.ads.admanager.v1.CmsMetadataValueService.ListCmsMetadataValues",
+          "service": {
+            "shortName": "CmsMetadataValueService",
+            "fullName": "google.ads.admanager.v1.CmsMetadataValueService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_CmsMetadataValueService_BatchActivateCmsMetadataValues_async",
+      "title": "AdBreakService batchActivateCmsMetadataValues Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to activate a list of `CmsMetadataValue` objects.",
+      "canonical": true,
+      "file": "cms_metadata_value_service.batch_activate_cms_metadata_values.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchActivateCmsMetadataValues",
+        "fullName": "google.ads.admanager.v1.CmsMetadataValueService.BatchActivateCmsMetadataValues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchActivateCmsMetadataValuesResponse",
+        "client": {
+          "shortName": "CmsMetadataValueServiceClient",
+          "fullName": "google.ads.admanager.v1.CmsMetadataValueServiceClient"
+        },
+        "method": {
+          "shortName": "BatchActivateCmsMetadataValues",
+          "fullName": "google.ads.admanager.v1.CmsMetadataValueService.BatchActivateCmsMetadataValues",
+          "service": {
+            "shortName": "CmsMetadataValueService",
+            "fullName": "google.ads.admanager.v1.CmsMetadataValueService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_CmsMetadataValueService_BatchDeactivateCmsMetadataValues_async",
+      "title": "AdBreakService batchDeactivateCmsMetadataValues Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to deactivate a list of `CmsMetadataValue` objects.",
+      "canonical": true,
+      "file": "cms_metadata_value_service.batch_deactivate_cms_metadata_values.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeactivateCmsMetadataValues",
+        "fullName": "google.ads.admanager.v1.CmsMetadataValueService.BatchDeactivateCmsMetadataValues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchDeactivateCmsMetadataValuesResponse",
+        "client": {
+          "shortName": "CmsMetadataValueServiceClient",
+          "fullName": "google.ads.admanager.v1.CmsMetadataValueServiceClient"
+        },
+        "method": {
+          "shortName": "BatchDeactivateCmsMetadataValues",
+          "fullName": "google.ads.admanager.v1.CmsMetadataValueService.BatchDeactivateCmsMetadataValues",
           "service": {
             "shortName": "CmsMetadataValueService",
             "fullName": "google.ads.admanager.v1.CmsMetadataValueService"
@@ -1614,7 +2058,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 102,
           "type": "FULL"
         }
       ],
@@ -1714,7 +2158,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 100,
           "type": "FULL"
         }
       ],
@@ -1862,7 +2306,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 58,
           "type": "FULL"
         }
       ],
@@ -1990,7 +2434,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -2090,7 +2534,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -2190,7 +2634,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -2290,7 +2734,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 98,
           "type": "FULL"
         }
       ],
@@ -2390,7 +2834,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 98,
           "type": "FULL"
         }
       ],
@@ -2538,7 +2982,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 58,
           "type": "FULL"
         }
       ],
@@ -2754,7 +3198,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 95,
           "type": "FULL"
         }
       ],
@@ -2902,7 +3346,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 59,
           "type": "FULL"
         }
       ],
@@ -3118,7 +3562,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 89,
+          "end": 98,
           "type": "FULL"
         }
       ],
@@ -3218,7 +3662,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -3318,7 +3762,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -3418,7 +3862,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -3622,7 +4066,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 62,
+          "end": 61,
           "type": "FULL"
         }
       ],
@@ -3794,7 +4238,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 94,
           "type": "FULL"
         }
       ],
@@ -3839,6 +4283,370 @@
           "service": {
             "shortName": "GeoTargetService",
             "fullName": "google.ads.admanager.v1.GeoTargetService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_GetLabel_async",
+      "title": "AdBreakService getLabel Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to retrieve a `Label` object.",
+      "canonical": true,
+      "file": "label_service.get_label.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetLabel",
+        "fullName": "google.ads.admanager.v1.LabelService.GetLabel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.Label",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "GetLabel",
+          "fullName": "google.ads.admanager.v1.LabelService.GetLabel",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_ListLabels_async",
+      "title": "AdBreakService listLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to retrieve a list of `Label` objects.",
+      "canonical": true,
+      "file": "label_service.list_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 94,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLabels",
+        "fullName": "google.ads.admanager.v1.LabelService.ListLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "skip",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.ListLabelsResponse",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "ListLabels",
+          "fullName": "google.ads.admanager.v1.LabelService.ListLabels",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_CreateLabel_async",
+      "title": "AdBreakService createLabel Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to create a `Label` object.",
+      "canonical": true,
+      "file": "label_service.create_label.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateLabel",
+        "fullName": "google.ads.admanager.v1.LabelService.CreateLabel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "label",
+            "type": ".google.ads.admanager.v1.Label"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.Label",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "CreateLabel",
+          "fullName": "google.ads.admanager.v1.LabelService.CreateLabel",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_BatchCreateLabels_async",
+      "title": "AdBreakService batchCreateLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to batch create `Label` objects.",
+      "canonical": true,
+      "file": "label_service.batch_create_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateLabels",
+        "fullName": "google.ads.admanager.v1.LabelService.BatchCreateLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchCreateLabelsResponse",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "BatchCreateLabels",
+          "fullName": "google.ads.admanager.v1.LabelService.BatchCreateLabels",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_UpdateLabel_async",
+      "title": "AdBreakService updateLabel Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to update a `Label` object.",
+      "canonical": true,
+      "file": "label_service.update_label.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateLabel",
+        "fullName": "google.ads.admanager.v1.LabelService.UpdateLabel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "label",
+            "type": ".google.ads.admanager.v1.Label"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.Label",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateLabel",
+          "fullName": "google.ads.admanager.v1.LabelService.UpdateLabel",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_BatchUpdateLabels_async",
+      "title": "AdBreakService batchUpdateLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to batch update `Label` objects.",
+      "canonical": true,
+      "file": "label_service.batch_update_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateLabels",
+        "fullName": "google.ads.admanager.v1.LabelService.BatchUpdateLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchUpdateLabelsResponse",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateLabels",
+          "fullName": "google.ads.admanager.v1.LabelService.BatchUpdateLabels",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_BatchActivateLabels_async",
+      "title": "AdBreakService batchActivateLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to activate `Label` objects.",
+      "canonical": true,
+      "file": "label_service.batch_activate_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchActivateLabels",
+        "fullName": "google.ads.admanager.v1.LabelService.BatchActivateLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchActivateLabelsResponse",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "BatchActivateLabels",
+          "fullName": "google.ads.admanager.v1.LabelService.BatchActivateLabels",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LabelService_BatchDeactivateLabels_async",
+      "title": "AdBreakService batchDeactivateLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to deactivate `Label` objects.",
+      "canonical": true,
+      "file": "label_service.batch_deactivate_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeactivateLabels",
+        "fullName": "google.ads.admanager.v1.LabelService.BatchDeactivateLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.BatchDeactivateLabelsResponse",
+        "client": {
+          "shortName": "LabelServiceClient",
+          "fullName": "google.ads.admanager.v1.LabelServiceClient"
+        },
+        "method": {
+          "shortName": "BatchDeactivateLabels",
+          "fullName": "google.ads.admanager.v1.LabelService.BatchDeactivateLabels",
+          "service": {
+            "shortName": "LabelService",
+            "fullName": "google.ads.admanager.v1.LabelService"
           }
         }
       }
@@ -3894,7 +4702,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 96,
           "type": "FULL"
         }
       ],
@@ -3939,6 +4747,170 @@
           "service": {
             "shortName": "LineItemService",
             "fullName": "google.ads.admanager.v1.LineItemService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LinkedDeviceService_GetLinkedDevice_async",
+      "title": "AdBreakService getLinkedDevice Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a `LinkedDevice`.",
+      "canonical": true,
+      "file": "linked_device_service.get_linked_device.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetLinkedDevice",
+        "fullName": "google.ads.admanager.v1.LinkedDeviceService.GetLinkedDevice",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.LinkedDevice",
+        "client": {
+          "shortName": "LinkedDeviceServiceClient",
+          "fullName": "google.ads.admanager.v1.LinkedDeviceServiceClient"
+        },
+        "method": {
+          "shortName": "GetLinkedDevice",
+          "fullName": "google.ads.admanager.v1.LinkedDeviceService.GetLinkedDevice",
+          "service": {
+            "shortName": "LinkedDeviceService",
+            "fullName": "google.ads.admanager.v1.LinkedDeviceService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_LinkedDeviceService_ListLinkedDevices_async",
+      "title": "AdBreakService listLinkedDevices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists `LinkedDevice` objects.",
+      "canonical": true,
+      "file": "linked_device_service.list_linked_devices.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 93,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLinkedDevices",
+        "fullName": "google.ads.admanager.v1.LinkedDeviceService.ListLinkedDevices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "skip",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.ListLinkedDevicesResponse",
+        "client": {
+          "shortName": "LinkedDeviceServiceClient",
+          "fullName": "google.ads.admanager.v1.LinkedDeviceServiceClient"
+        },
+        "method": {
+          "shortName": "ListLinkedDevices",
+          "fullName": "google.ads.admanager.v1.LinkedDeviceService.ListLinkedDevices",
+          "service": {
+            "shortName": "LinkedDeviceService",
+            "fullName": "google.ads.admanager.v1.LinkedDeviceService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_McmEarningsService_FetchMcmEarnings_async",
+      "title": "AdBreakService fetchMcmEarnings Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to retrieve a list of `McmEarnings` objects.",
+      "canonical": true,
+      "file": "mcm_earnings_service.fetch_mcm_earnings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 92,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchMcmEarnings",
+        "fullName": "google.ads.admanager.v1.McmEarningsService.FetchMcmEarnings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "skip",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "month",
+            "type": ".google.type.Date"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.FetchMcmEarningsResponse",
+        "client": {
+          "shortName": "McmEarningsServiceClient",
+          "fullName": "google.ads.admanager.v1.McmEarningsServiceClient"
+        },
+        "method": {
+          "shortName": "FetchMcmEarnings",
+          "fullName": "google.ads.admanager.v1.McmEarningsService.FetchMcmEarnings",
+          "service": {
+            "shortName": "McmEarningsService",
+            "fullName": "google.ads.admanager.v1.McmEarningsService"
           }
         }
       }
@@ -3994,7 +4966,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -4094,7 +5066,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 92,
           "type": "FULL"
         }
       ],
@@ -4194,7 +5166,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 88,
+          "end": 94,
           "type": "FULL"
         }
       ],
@@ -4382,7 +5354,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 91,
           "type": "FULL"
         }
       ],
@@ -4482,7 +5454,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 88,
+          "end": 95,
           "type": "FULL"
         }
       ],
@@ -4582,7 +5554,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 108,
           "type": "FULL"
         }
       ],
@@ -4682,7 +5654,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 96,
           "type": "FULL"
         }
       ],
@@ -4786,7 +5758,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 60,
           "type": "FULL"
         }
       ],
@@ -5090,7 +6062,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 88,
+          "end": 104,
           "type": "FULL"
         }
       ],
@@ -5194,7 +6166,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 59,
           "type": "FULL"
         }
       ],
@@ -5382,7 +6354,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 60,
+          "end": 59,
           "type": "FULL"
         }
       ],
@@ -5466,7 +6438,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 97,
           "type": "FULL"
         }
       ],
@@ -5670,7 +6642,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 58,
+          "end": 57,
           "type": "FULL"
         }
       ],
@@ -5792,6 +6764,106 @@
       }
     },
     {
+      "regionTag": "admanager_v1_generated_RichMediaAdsCompanyService_GetRichMediaAdsCompany_async",
+      "title": "AdBreakService getRichMediaAdsCompany Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to retrieve a `RichMediaAdsCompany` object.",
+      "canonical": true,
+      "file": "rich_media_ads_company_service.get_rich_media_ads_company.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRichMediaAdsCompany",
+        "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyService.GetRichMediaAdsCompany",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.RichMediaAdsCompany",
+        "client": {
+          "shortName": "RichMediaAdsCompanyServiceClient",
+          "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyServiceClient"
+        },
+        "method": {
+          "shortName": "GetRichMediaAdsCompany",
+          "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyService.GetRichMediaAdsCompany",
+          "service": {
+            "shortName": "RichMediaAdsCompanyService",
+            "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "admanager_v1_generated_RichMediaAdsCompanyService_ListRichMediaAdsCompanies_async",
+      "title": "AdBreakService listRichMediaAdsCompanies Sample",
+      "origin": "API_DEFINITION",
+      "description": " API to retrieve a list of `RichMediaAdsCompany` objects.",
+      "canonical": true,
+      "file": "rich_media_ads_company_service.list_rich_media_ads_companies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 96,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRichMediaAdsCompanies",
+        "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyService.ListRichMediaAdsCompanies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "skip",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.ads.admanager.v1.ListRichMediaAdsCompaniesResponse",
+        "client": {
+          "shortName": "RichMediaAdsCompanyServiceClient",
+          "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyServiceClient"
+        },
+        "method": {
+          "shortName": "ListRichMediaAdsCompanies",
+          "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyService.ListRichMediaAdsCompanies",
+          "service": {
+            "shortName": "RichMediaAdsCompanyService",
+            "fullName": "google.ads.admanager.v1.RichMediaAdsCompanyService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "admanager_v1_generated_RoleService_GetRole_async",
       "title": "AdBreakService getRole Sample",
       "origin": "API_DEFINITION",
@@ -5842,7 +6914,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 94,
           "type": "FULL"
         }
       ],
@@ -5942,7 +7014,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 94,
           "type": "FULL"
         }
       ],
@@ -6090,7 +7162,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 58,
           "type": "FULL"
         }
       ],
@@ -6406,7 +7478,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 86,
+          "end": 96,
           "type": "FULL"
         }
       ],
@@ -6554,7 +7626,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 59,
+          "end": 58,
           "type": "FULL"
         }
       ],

@@ -251,9 +251,6 @@ else
     PROJECT_ROOT="$(repo_root $(pwd))"/handwritten/bigquery
 fi
 
-log_yellow "Changing to the project root: ${PROJECT_ROOT}."
-cd "${PROJECT_ROOT}"
-
 # Auto-injected conditional check
 # Check if the package directory has changes. If not, skip tests.
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
@@ -273,6 +270,9 @@ if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
         echo "Changes detected in ${RELATIVE_PKG_PATH}. Proceeding with tests."
     fi
 fi
+
+log_yellow "Changing to the project root: ${PROJECT_ROOT}."
+cd "${PROJECT_ROOT}"
 
 # To support relative path for `TRAMPOLINE_SERVICE_ACCOUNT`, we need
 # to use this environment variable in `PROJECT_ROOT`.

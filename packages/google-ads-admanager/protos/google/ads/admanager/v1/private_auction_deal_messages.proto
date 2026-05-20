@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -53,9 +53,9 @@ message PrivateAuctionDeal {
   // `networks/{network_code}/privateAuctionDeals/{private_auction_deal_id}`
   string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
-  // Output only. `PrivateAuctionDeal` ID.
+  // Output only. Deprecated: `PrivateAuctionDeal` ID.
   optional int64 private_auction_deal_id = 2
-      [(google.api.field_behavior) = OUTPUT_ONLY];
+      [deprecated = true, (google.api.field_behavior) = OUTPUT_ONLY];
 
   // Immutable. The ID of the
   // [PrivateAuction](google.ads.admanager.v1.PrivateAuction).

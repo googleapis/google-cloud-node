@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ReportServiceClient} from './report_service_client';
+export { ReportServiceClient } from './report_service_client';

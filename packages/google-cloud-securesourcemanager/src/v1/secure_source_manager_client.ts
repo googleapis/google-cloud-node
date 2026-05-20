@@ -18,11 +18,24 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, IamClient, IamProtos, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +59,7 @@ export class SecureSourceManagerClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('securesourcemanager');
@@ -59,12 +72,12 @@ export class SecureSourceManagerClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
+  pathTemplates: { [name: string]: gax.PathTemplate };
   operationsClient: gax.OperationsClient;
-  secureSourceManagerStub?: Promise<{[name: string]: Function}>;
+  secureSourceManagerStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of SecureSourceManagerClient.
@@ -105,21 +118,42 @@ export class SecureSourceManagerClient {
    *     const client = new SecureSourceManagerClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SecureSourceManagerClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'securesourcemanager.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -144,7 +178,7 @@ export class SecureSourceManagerClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -157,18 +191,14 @@ export class SecureSourceManagerClient {
       this.auth.defaultScopes = staticMembers.scopes;
     }
     this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
-  
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -190,37 +220,37 @@ export class SecureSourceManagerClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       branchRulePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}'
+        'projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}',
       ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}',
       ),
       hookPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repository}/hooks/{hook}'
+        'projects/{project}/locations/{location}/repositories/{repository}/hooks/{hook}',
       ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/instances/{instance}'
+        'projects/{project}/locations/{location}/instances/{instance}',
       ),
       issuePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repository}/issues/{issue}'
+        'projects/{project}/locations/{location}/repositories/{repository}/issues/{issue}',
       ),
       issueCommentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repository}/issues/{issue}/issueComments/{comment}'
+        'projects/{project}/locations/{location}/repositories/{repository}/issues/{issue}/issueComments/{comment}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
       pullRequestPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}'
+        'projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}',
       ),
       pullRequestCommentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}/pullRequestComments/{comment}'
+        'projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}/pullRequestComments/{comment}',
       ),
       repositoryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/repositories/{repository}'
+        'projects/{project}/locations/{location}/repositories/{repository}',
       ),
     };
 
@@ -228,26 +258,56 @@ export class SecureSourceManagerClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listInstances:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'instances'),
-      listRepositories:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'repositories'),
-      listHooks:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'hooks'),
-      listBranchRules:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'branchRules'),
-      listPullRequests:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'pullRequests'),
-      listPullRequestFileDiffs:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'fileDiffs'),
-      fetchTree:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'treeEntries'),
-      listIssues:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'issues'),
-      listPullRequestComments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'pullRequestComments'),
-      listIssueComments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'issueComments')
+      listInstances: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'instances',
+      ),
+      listRepositories: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'repositories',
+      ),
+      listHooks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'hooks',
+      ),
+      listBranchRules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'branchRules',
+      ),
+      listPullRequests: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'pullRequests',
+      ),
+      listPullRequestFileDiffs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'fileDiffs',
+      ),
+      fetchTree: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'treeEntries',
+      ),
+      listIssues: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'issues',
+      ),
+      listPullRequestComments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'pullRequestComments',
+      ),
+      listIssueComments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'issueComments',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -256,261 +316,420 @@ export class SecureSourceManagerClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1/{resource=projects/*/locations/*/instances/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/instances/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/instances/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/instances/*}:getIamPolicy',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/instances/*}:setIamPolicy',
+          body: '*',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/instances/*}:testIamPermissions',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Instance') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Instance',
+    ) as gax.protobuf.Type;
     const createInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createRepositoryResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Repository') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Repository',
+    ) as gax.protobuf.Type;
     const createRepositoryMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateRepositoryResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Repository') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Repository',
+    ) as gax.protobuf.Type;
     const updateRepositoryMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteRepositoryResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteRepositoryMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createHookResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Hook') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Hook',
+    ) as gax.protobuf.Type;
     const createHookMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateHookResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Hook') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Hook',
+    ) as gax.protobuf.Type;
     const updateHookMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteHookResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteHookMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createBranchRuleResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.BranchRule') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.BranchRule',
+    ) as gax.protobuf.Type;
     const createBranchRuleMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateBranchRuleResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.BranchRule') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.BranchRule',
+    ) as gax.protobuf.Type;
     const updateBranchRuleMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteBranchRuleResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteBranchRuleMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createPullRequestResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.PullRequest') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.PullRequest',
+    ) as gax.protobuf.Type;
     const createPullRequestMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updatePullRequestResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.PullRequest') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.PullRequest',
+    ) as gax.protobuf.Type;
     const updatePullRequestMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const mergePullRequestResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.PullRequest') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.PullRequest',
+    ) as gax.protobuf.Type;
     const mergePullRequestMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const openPullRequestResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.PullRequest') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.PullRequest',
+    ) as gax.protobuf.Type;
     const openPullRequestMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const closePullRequestResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.PullRequest') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.PullRequest',
+    ) as gax.protobuf.Type;
     const closePullRequestMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createIssueResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Issue') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Issue',
+    ) as gax.protobuf.Type;
     const createIssueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateIssueResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Issue') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Issue',
+    ) as gax.protobuf.Type;
     const updateIssueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteIssueResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteIssueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const openIssueResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Issue') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Issue',
+    ) as gax.protobuf.Type;
     const openIssueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const closeIssueResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.Issue') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.Issue',
+    ) as gax.protobuf.Type;
     const closeIssueMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createPullRequestCommentResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.PullRequestComment') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.PullRequestComment',
+    ) as gax.protobuf.Type;
     const createPullRequestCommentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updatePullRequestCommentResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.PullRequestComment') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.PullRequestComment',
+    ) as gax.protobuf.Type;
     const updatePullRequestCommentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deletePullRequestCommentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deletePullRequestCommentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const batchCreatePullRequestCommentsResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse',
+    ) as gax.protobuf.Type;
     const batchCreatePullRequestCommentsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const resolvePullRequestCommentsResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse',
+    ) as gax.protobuf.Type;
     const resolvePullRequestCommentsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const unresolvePullRequestCommentsResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse',
+    ) as gax.protobuf.Type;
     const unresolvePullRequestCommentsMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const createIssueCommentResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.IssueComment') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.IssueComment',
+    ) as gax.protobuf.Type;
     const createIssueCommentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateIssueCommentResponse = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.IssueComment') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.IssueComment',
+    ) as gax.protobuf.Type;
     const updateIssueCommentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteIssueCommentResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteIssueCommentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.securesourcemanager.v1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.securesourcemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInstanceResponse.decode.bind(createInstanceResponse),
-        createInstanceMetadata.decode.bind(createInstanceMetadata)),
+        createInstanceMetadata.decode.bind(createInstanceMetadata),
+      ),
       deleteInstance: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
-        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata)),
+        deleteInstanceMetadata.decode.bind(deleteInstanceMetadata),
+      ),
       createRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createRepositoryResponse.decode.bind(createRepositoryResponse),
-        createRepositoryMetadata.decode.bind(createRepositoryMetadata)),
+        createRepositoryMetadata.decode.bind(createRepositoryMetadata),
+      ),
       updateRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateRepositoryResponse.decode.bind(updateRepositoryResponse),
-        updateRepositoryMetadata.decode.bind(updateRepositoryMetadata)),
+        updateRepositoryMetadata.decode.bind(updateRepositoryMetadata),
+      ),
       deleteRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteRepositoryResponse.decode.bind(deleteRepositoryResponse),
-        deleteRepositoryMetadata.decode.bind(deleteRepositoryMetadata)),
+        deleteRepositoryMetadata.decode.bind(deleteRepositoryMetadata),
+      ),
       createHook: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createHookResponse.decode.bind(createHookResponse),
-        createHookMetadata.decode.bind(createHookMetadata)),
+        createHookMetadata.decode.bind(createHookMetadata),
+      ),
       updateHook: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateHookResponse.decode.bind(updateHookResponse),
-        updateHookMetadata.decode.bind(updateHookMetadata)),
+        updateHookMetadata.decode.bind(updateHookMetadata),
+      ),
       deleteHook: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteHookResponse.decode.bind(deleteHookResponse),
-        deleteHookMetadata.decode.bind(deleteHookMetadata)),
+        deleteHookMetadata.decode.bind(deleteHookMetadata),
+      ),
       createBranchRule: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createBranchRuleResponse.decode.bind(createBranchRuleResponse),
-        createBranchRuleMetadata.decode.bind(createBranchRuleMetadata)),
+        createBranchRuleMetadata.decode.bind(createBranchRuleMetadata),
+      ),
       updateBranchRule: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateBranchRuleResponse.decode.bind(updateBranchRuleResponse),
-        updateBranchRuleMetadata.decode.bind(updateBranchRuleMetadata)),
+        updateBranchRuleMetadata.decode.bind(updateBranchRuleMetadata),
+      ),
       deleteBranchRule: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteBranchRuleResponse.decode.bind(deleteBranchRuleResponse),
-        deleteBranchRuleMetadata.decode.bind(deleteBranchRuleMetadata)),
+        deleteBranchRuleMetadata.decode.bind(deleteBranchRuleMetadata),
+      ),
       createPullRequest: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createPullRequestResponse.decode.bind(createPullRequestResponse),
-        createPullRequestMetadata.decode.bind(createPullRequestMetadata)),
+        createPullRequestMetadata.decode.bind(createPullRequestMetadata),
+      ),
       updatePullRequest: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updatePullRequestResponse.decode.bind(updatePullRequestResponse),
-        updatePullRequestMetadata.decode.bind(updatePullRequestMetadata)),
+        updatePullRequestMetadata.decode.bind(updatePullRequestMetadata),
+      ),
       mergePullRequest: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         mergePullRequestResponse.decode.bind(mergePullRequestResponse),
-        mergePullRequestMetadata.decode.bind(mergePullRequestMetadata)),
+        mergePullRequestMetadata.decode.bind(mergePullRequestMetadata),
+      ),
       openPullRequest: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         openPullRequestResponse.decode.bind(openPullRequestResponse),
-        openPullRequestMetadata.decode.bind(openPullRequestMetadata)),
+        openPullRequestMetadata.decode.bind(openPullRequestMetadata),
+      ),
       closePullRequest: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         closePullRequestResponse.decode.bind(closePullRequestResponse),
-        closePullRequestMetadata.decode.bind(closePullRequestMetadata)),
+        closePullRequestMetadata.decode.bind(closePullRequestMetadata),
+      ),
       createIssue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createIssueResponse.decode.bind(createIssueResponse),
-        createIssueMetadata.decode.bind(createIssueMetadata)),
+        createIssueMetadata.decode.bind(createIssueMetadata),
+      ),
       updateIssue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateIssueResponse.decode.bind(updateIssueResponse),
-        updateIssueMetadata.decode.bind(updateIssueMetadata)),
+        updateIssueMetadata.decode.bind(updateIssueMetadata),
+      ),
       deleteIssue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteIssueResponse.decode.bind(deleteIssueResponse),
-        deleteIssueMetadata.decode.bind(deleteIssueMetadata)),
+        deleteIssueMetadata.decode.bind(deleteIssueMetadata),
+      ),
       openIssue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         openIssueResponse.decode.bind(openIssueResponse),
-        openIssueMetadata.decode.bind(openIssueMetadata)),
+        openIssueMetadata.decode.bind(openIssueMetadata),
+      ),
       closeIssue: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         closeIssueResponse.decode.bind(closeIssueResponse),
-        closeIssueMetadata.decode.bind(closeIssueMetadata)),
+        closeIssueMetadata.decode.bind(closeIssueMetadata),
+      ),
       createPullRequestComment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createPullRequestCommentResponse.decode.bind(createPullRequestCommentResponse),
-        createPullRequestCommentMetadata.decode.bind(createPullRequestCommentMetadata)),
+        createPullRequestCommentResponse.decode.bind(
+          createPullRequestCommentResponse,
+        ),
+        createPullRequestCommentMetadata.decode.bind(
+          createPullRequestCommentMetadata,
+        ),
+      ),
       updatePullRequestComment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updatePullRequestCommentResponse.decode.bind(updatePullRequestCommentResponse),
-        updatePullRequestCommentMetadata.decode.bind(updatePullRequestCommentMetadata)),
+        updatePullRequestCommentResponse.decode.bind(
+          updatePullRequestCommentResponse,
+        ),
+        updatePullRequestCommentMetadata.decode.bind(
+          updatePullRequestCommentMetadata,
+        ),
+      ),
       deletePullRequestComment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        deletePullRequestCommentResponse.decode.bind(deletePullRequestCommentResponse),
-        deletePullRequestCommentMetadata.decode.bind(deletePullRequestCommentMetadata)),
+        deletePullRequestCommentResponse.decode.bind(
+          deletePullRequestCommentResponse,
+        ),
+        deletePullRequestCommentMetadata.decode.bind(
+          deletePullRequestCommentMetadata,
+        ),
+      ),
       batchCreatePullRequestComments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        batchCreatePullRequestCommentsResponse.decode.bind(batchCreatePullRequestCommentsResponse),
-        batchCreatePullRequestCommentsMetadata.decode.bind(batchCreatePullRequestCommentsMetadata)),
+        batchCreatePullRequestCommentsResponse.decode.bind(
+          batchCreatePullRequestCommentsResponse,
+        ),
+        batchCreatePullRequestCommentsMetadata.decode.bind(
+          batchCreatePullRequestCommentsMetadata,
+        ),
+      ),
       resolvePullRequestComments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        resolvePullRequestCommentsResponse.decode.bind(resolvePullRequestCommentsResponse),
-        resolvePullRequestCommentsMetadata.decode.bind(resolvePullRequestCommentsMetadata)),
+        resolvePullRequestCommentsResponse.decode.bind(
+          resolvePullRequestCommentsResponse,
+        ),
+        resolvePullRequestCommentsMetadata.decode.bind(
+          resolvePullRequestCommentsMetadata,
+        ),
+      ),
       unresolvePullRequestComments: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        unresolvePullRequestCommentsResponse.decode.bind(unresolvePullRequestCommentsResponse),
-        unresolvePullRequestCommentsMetadata.decode.bind(unresolvePullRequestCommentsMetadata)),
+        unresolvePullRequestCommentsResponse.decode.bind(
+          unresolvePullRequestCommentsResponse,
+        ),
+        unresolvePullRequestCommentsMetadata.decode.bind(
+          unresolvePullRequestCommentsMetadata,
+        ),
+      ),
       createIssueComment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createIssueCommentResponse.decode.bind(createIssueCommentResponse),
-        createIssueCommentMetadata.decode.bind(createIssueCommentMetadata)),
+        createIssueCommentMetadata.decode.bind(createIssueCommentMetadata),
+      ),
       updateIssueComment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateIssueCommentResponse.decode.bind(updateIssueCommentResponse),
-        updateIssueCommentMetadata.decode.bind(updateIssueCommentMetadata)),
+        updateIssueCommentMetadata.decode.bind(updateIssueCommentMetadata),
+      ),
       deleteIssueComment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteIssueCommentResponse.decode.bind(deleteIssueCommentResponse),
-        deleteIssueCommentMetadata.decode.bind(deleteIssueCommentMetadata))
+        deleteIssueCommentMetadata.decode.bind(deleteIssueCommentMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.securesourcemanager.v1.SecureSourceManager', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.securesourcemanager.v1.SecureSourceManager',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -541,28 +760,87 @@ export class SecureSourceManagerClient {
     // Put together the "service stub" for
     // google.cloud.securesourcemanager.v1.SecureSourceManager.
     this.secureSourceManagerStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.securesourcemanager.v1.SecureSourceManager') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.securesourcemanager.v1.SecureSourceManager,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.securesourcemanager.v1.SecureSourceManager',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.securesourcemanager.v1
+            .SecureSourceManager,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const secureSourceManagerStubMethods =
-        ['listInstances', 'getInstance', 'createInstance', 'deleteInstance', 'listRepositories', 'getRepository', 'createRepository', 'updateRepository', 'deleteRepository', 'listHooks', 'getHook', 'createHook', 'updateHook', 'deleteHook', 'getIamPolicyRepo', 'setIamPolicyRepo', 'testIamPermissionsRepo', 'createBranchRule', 'listBranchRules', 'getBranchRule', 'updateBranchRule', 'deleteBranchRule', 'createPullRequest', 'getPullRequest', 'listPullRequests', 'updatePullRequest', 'mergePullRequest', 'openPullRequest', 'closePullRequest', 'listPullRequestFileDiffs', 'fetchTree', 'fetchBlob', 'createIssue', 'getIssue', 'listIssues', 'updateIssue', 'deleteIssue', 'openIssue', 'closeIssue', 'getPullRequestComment', 'listPullRequestComments', 'createPullRequestComment', 'updatePullRequestComment', 'deletePullRequestComment', 'batchCreatePullRequestComments', 'resolvePullRequestComments', 'unresolvePullRequestComments', 'createIssueComment', 'getIssueComment', 'listIssueComments', 'updateIssueComment', 'deleteIssueComment'];
+    const secureSourceManagerStubMethods = [
+      'listInstances',
+      'getInstance',
+      'createInstance',
+      'deleteInstance',
+      'listRepositories',
+      'getRepository',
+      'createRepository',
+      'updateRepository',
+      'deleteRepository',
+      'listHooks',
+      'getHook',
+      'createHook',
+      'updateHook',
+      'deleteHook',
+      'getIamPolicyRepo',
+      'setIamPolicyRepo',
+      'testIamPermissionsRepo',
+      'createBranchRule',
+      'listBranchRules',
+      'getBranchRule',
+      'updateBranchRule',
+      'deleteBranchRule',
+      'createPullRequest',
+      'getPullRequest',
+      'listPullRequests',
+      'updatePullRequest',
+      'mergePullRequest',
+      'openPullRequest',
+      'closePullRequest',
+      'listPullRequestFileDiffs',
+      'fetchTree',
+      'fetchBlob',
+      'createIssue',
+      'getIssue',
+      'listIssues',
+      'updateIssue',
+      'deleteIssue',
+      'openIssue',
+      'closeIssue',
+      'getPullRequestComment',
+      'listPullRequestComments',
+      'createPullRequestComment',
+      'updatePullRequestComment',
+      'deletePullRequestComment',
+      'batchCreatePullRequestComments',
+      'resolvePullRequestComments',
+      'unresolvePullRequestComments',
+      'createIssueComment',
+      'getIssueComment',
+      'listIssueComments',
+      'updateIssueComment',
+      'deleteIssueComment',
+    ];
     for (const methodName of secureSourceManagerStubMethods) {
       const callPromise = this.secureSourceManagerStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -572,7 +850,7 @@ export class SecureSourceManagerClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -587,8 +865,14 @@ export class SecureSourceManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'securesourcemanager.googleapis.com';
   }
@@ -599,8 +883,14 @@ export class SecureSourceManagerClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'securesourcemanager.googleapis.com';
   }
@@ -631,9 +921,7 @@ export class SecureSourceManagerClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -642,8 +930,9 @@ export class SecureSourceManagerClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -654,4662 +943,7072 @@ export class SecureSourceManagerClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_instance.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetInstance_async
- */
+  /**
+   * Gets details of a single instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_instance.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetInstance_async
+   */
   getInstance(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IInstance,
-        protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IInstance,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getInstance(
-      request: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IInstance,
-          protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IInstance,
+      | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInstance(
-      request: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IInstance,
-          protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IInstance,
+      | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getInstance(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IInstance,
-          protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IInstance,
-          protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IInstance,
-        protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IInstance,
+      | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IInstance,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getInstance request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IInstance,
-        protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IInstance,
+          | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getInstance response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getInstance(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IInstance,
-        protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getInstance response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IInstance,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetInstanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets metadata of a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the repository to retrieve.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_repository.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetRepository_async
- */
+  /**
+   * Gets metadata of a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the repository to retrieve.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_repository.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetRepository_async
+   */
   getRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IRepository,
-        protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRepository,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getRepository(
-      request: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IRepository,
-          protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IRepository,
+      | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRepository(
-      request: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IRepository,
-          protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IRepository,
+      | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IRepository,
-          protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IRepository,
-          protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IRepository,
-        protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IRepository,
+      | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRepository,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getRepository request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IRepository,
-        protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IRepository,
+          | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getRepository response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getRepository(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IRepository,
-        protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getRepository response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IRepository,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetRepositoryRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getRepository response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets metadata of a hook.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the hook to retrieve.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_hook.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetHook_async
- */
+  /**
+   * Gets metadata of a hook.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the hook to retrieve.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_hook.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetHook_async
+   */
   getHook(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IHook,
-        protos.google.cloud.securesourcemanager.v1.IGetHookRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IHook,
+      protos.google.cloud.securesourcemanager.v1.IGetHookRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getHook(
-      request: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IHook,
-          protos.google.cloud.securesourcemanager.v1.IGetHookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IHook,
+      | protos.google.cloud.securesourcemanager.v1.IGetHookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getHook(
-      request: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IHook,
-          protos.google.cloud.securesourcemanager.v1.IGetHookRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IHook,
+      | protos.google.cloud.securesourcemanager.v1.IGetHookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getHook(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetHookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IHook,
-          protos.google.cloud.securesourcemanager.v1.IGetHookRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IHook,
-          protos.google.cloud.securesourcemanager.v1.IGetHookRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IHook,
-        protos.google.cloud.securesourcemanager.v1.IGetHookRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetHookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IHook,
+      | protos.google.cloud.securesourcemanager.v1.IGetHookRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IHook,
+      protos.google.cloud.securesourcemanager.v1.IGetHookRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getHook request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IHook,
-        protos.google.cloud.securesourcemanager.v1.IGetHookRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IHook,
+          | protos.google.cloud.securesourcemanager.v1.IGetHookRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getHook response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getHook(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IHook,
-        protos.google.cloud.securesourcemanager.v1.IGetHookRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getHook response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getHook(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IHook,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetHookRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHook response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Get IAM policy for a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {google.iam.v1.GetPolicyOptions} request.options
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_iam_policy_repo.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetIamPolicyRepo_async
- */
+  /**
+   * Get IAM policy for a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.GetPolicyOptions} request.options
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_iam_policy_repo.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetIamPolicyRepo_async
+   */
   getIamPolicyRepo(
-      request?: protos.google.iam.v1.IGetIamPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getIamPolicyRepo(
-      request: protos.google.iam.v1.IGetIamPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIamPolicyRepo(
-      request: protos.google.iam.v1.IGetIamPolicyRequest,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIamPolicyRepo(
-      request?: protos.google.iam.v1.IGetIamPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getIamPolicyRepo request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIamPolicyRepo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getIamPolicyRepo(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getIamPolicyRepo response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getIamPolicyRepo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getIamPolicyRepo response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Set IAM policy on a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being specified.
- *   See the operation documentation for the appropriate value for this field.
- * @param {google.iam.v1.Policy} request.policy
- *   REQUIRED: The complete policy to be applied to the `resource`. The size of
- *   the policy is limited to a few 10s of KB. An empty policy is a
- *   valid policy but certain Cloud Platform services (such as Projects)
- *   might reject them.
- * @param {google.protobuf.FieldMask} request.updateMask
- *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
- *   the fields in the mask will be modified. If no mask is provided, the
- *   following default mask is used:
- *
- *   `paths: "bindings, etag"`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.set_iam_policy_repo.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_SetIamPolicyRepo_async
- */
+  /**
+   * Set IAM policy on a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being specified.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {google.iam.v1.Policy} request.policy
+   *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *   the policy is limited to a few 10s of KB. An empty policy is a
+   *   valid policy but certain Cloud Platform services (such as Projects)
+   *   might reject them.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *   the fields in the mask will be modified. If no mask is provided, the
+   *   following default mask is used:
+   *
+   *   `paths: "bindings, etag"`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.set_iam_policy_repo.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_SetIamPolicyRepo_async
+   */
   setIamPolicyRepo(
-      request?: protos.google.iam.v1.ISetIamPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   setIamPolicyRepo(
-      request: protos.google.iam.v1.ISetIamPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setIamPolicyRepo(
-      request: protos.google.iam.v1.ISetIamPolicyRequest,
-      callback: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    callback: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   setIamPolicyRepo(
-      request?: protos.google.iam.v1.ISetIamPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.IPolicy,
-          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.IPolicy,
+      protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('setIamPolicyRepo request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('setIamPolicyRepo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.setIamPolicyRepo(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.IPolicy,
-        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('setIamPolicyRepo response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .setIamPolicyRepo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setIamPolicyRepo response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Test IAM permissions on a repository.
- * IAM permission checks are not required on this method.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see
- *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_TestIamPermissionsRepo_async
- */
+  /**
+   * Test IAM permissions on a repository.
+   * IAM permission checks are not required on this method.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see
+   *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.test_iam_permissions_repo.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_TestIamPermissionsRepo_async
+   */
   testIamPermissionsRepo(
-      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   testIamPermissionsRepo(
-      request: protos.google.iam.v1.ITestIamPermissionsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testIamPermissionsRepo(
-      request: protos.google.iam.v1.ITestIamPermissionsRequest,
-      callback: Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    callback: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   testIamPermissionsRepo(
-      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.iam.v1.ITestIamPermissionsResponse,
-          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.iam.v1.ITestIamPermissionsResponse,
+      protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'resource': request.resource ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('testIamPermissionsRepo request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('testIamPermissionsRepo response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.testIamPermissionsRepo(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.iam.v1.ITestIamPermissionsResponse,
-        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('testIamPermissionsRepo response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .testIamPermissionsRepo(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('testIamPermissionsRepo response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * GetBranchRule gets a branch rule.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the repository to retrieve.
- *   The format is
- *   `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_branch_rule.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetBranchRule_async
- */
+  /**
+   * GetBranchRule gets a branch rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the repository to retrieve.
+   *   The format is
+   *   `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetBranchRule_async
+   */
   getBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IBranchRule,
-        protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IBranchRule,
-          protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IBranchRule,
-          protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IBranchRule,
-          protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IBranchRule,
-          protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IBranchRule,
-        protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getBranchRule request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IBranchRule,
-        protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IBranchRule,
+          | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getBranchRule response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getBranchRule(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IBranchRule,
-        protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getBranchRule response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getBranchRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IBranchRule,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getBranchRule response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a pull request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the pull request to retrieve.
- *   The format is
- *   `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetPullRequest_async
- */
+  /**
+   * Gets a pull request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the pull request to retrieve.
+   *   The format is
+   *   `projects/{project}/locations/{location}/repositories/{repository}/pullRequests/{pull_request}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetPullRequest_async
+   */
   getPullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequest,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequest,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getPullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IPullRequest,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IPullRequest,
+      | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IPullRequest,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IPullRequest,
+      | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IPullRequest,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IPullRequest,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequest,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IPullRequest,
+      | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequest,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getPullRequest request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IPullRequest,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IPullRequest,
+          | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPullRequest response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getPullRequest(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IPullRequest,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getPullRequest response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getPullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IPullRequest,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetPullRequestRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPullRequest response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Fetches a blob from a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.repository
- *   Required. The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
- *   Specifies the repository containing the blob.
- * @param {string} request.sha
- *   Required. The SHA-1 hash of the blob to retrieve.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.FetchBlobResponse|FetchBlobResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.fetch_blob.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_FetchBlob_async
- */
+  /**
+   * Fetches a blob from a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository containing the blob.
+   * @param {string} request.sha
+   *   Required. The SHA-1 hash of the blob to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.FetchBlobResponse|FetchBlobResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.fetch_blob.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_FetchBlob_async
+   */
   fetchBlob(
-      request?: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
+      protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   fetchBlob(
-      request: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-          protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
+      | protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   fetchBlob(
-      request: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-          protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
+      | protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   fetchBlob(
-      request?: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-          protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-          protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
+      | protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
+      protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'repository': request.repository ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('fetchBlob request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
+          | protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('fetchBlob response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.fetchBlob(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
-        protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('fetchBlob response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .fetchBlob(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IFetchBlobResponse,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IFetchBlobRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchBlob response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets an issue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the issue to retrieve.
- *   The format is
- *   `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetIssue_async
- */
+  /**
+   * Gets an issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the issue to retrieve.
+   *   The format is
+   *   `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetIssue_async
+   */
   getIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssue,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssue,
+      protos.google.cloud.securesourcemanager.v1.IGetIssueRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IIssue,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IIssue,
+      | protos.google.cloud.securesourcemanager.v1.IGetIssueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IIssue,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IIssue,
+      | protos.google.cloud.securesourcemanager.v1.IGetIssueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetIssueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IIssue,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IIssue,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssue,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetIssueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IIssue,
+      | protos.google.cloud.securesourcemanager.v1.IGetIssueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssue,
+      protos.google.cloud.securesourcemanager.v1.IGetIssueRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getIssue request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IIssue,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IIssue,
+          | protos.google.cloud.securesourcemanager.v1.IGetIssueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIssue response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getIssue(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IIssue,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getIssue response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IIssue,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetIssueRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIssue response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets a pull request comment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the pull request comment to retrieve.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_pull_request_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetPullRequestComment_async
- */
+  /**
+   * Gets a pull request comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the pull request comment to retrieve.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_pull_request_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetPullRequestComment_async
+   */
   getPullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getPullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+      | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+      | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-          protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+      | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getPullRequestComment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+          | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPullRequestComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getPullRequestComment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
-        protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getPullRequestComment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getPullRequestComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetPullRequestCommentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPullRequestComment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets an issue comment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the issue comment to retrieve.
- *   The format is
- *   `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}/issueComments/{comment_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.get_issue_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetIssueComment_async
- */
+  /**
+   * Gets an issue comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the issue comment to retrieve.
+   *   The format is
+   *   `projects/{project}/locations/{location}/repositories/{repository}/issues/{issue_id}/issueComments/{comment_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_issue_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetIssueComment_async
+   */
   getIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssueComment,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssueComment,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IIssueComment,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IIssueComment,
+      | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
-      callback: Callback<
-          protos.google.cloud.securesourcemanager.v1.IIssueComment,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IIssueComment,
+      | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.securesourcemanager.v1.IIssueComment,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.securesourcemanager.v1.IIssueComment,
-          protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssueComment,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IIssueComment,
+      | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssueComment,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getIssueComment request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.securesourcemanager.v1.IIssueComment,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IIssueComment,
+          | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getIssueComment response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getIssueComment(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.securesourcemanager.v1.IIssueComment,
-        protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getIssueComment response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getIssueComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.securesourcemanager.v1.IIssueComment,
+          (
+            | protos.google.cloud.securesourcemanager.v1.IGetIssueCommentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getIssueComment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new instance in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Value for parent.
- * @param {string} request.instanceId
- *   Required. ID of the instance to be created.
- * @param {google.cloud.securesourcemanager.v1.Instance} request.instance
- *   Required. The resource being created.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_instance.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_async
- */
+  /**
+   * Creates a new instance in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Value for parent.
+   * @param {string} request.instanceId
+   *   Required. ID of the instance to be created.
+   * @param {google.cloud.securesourcemanager.v1.Instance} request.instance
+   *   Required. The resource being created.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_instance.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_async
+   */
   createInstance(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IInstance,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createInstance(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IInstance,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInstance(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IInstance,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createInstance(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IInstance,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IInstance,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IInstance,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IInstance,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createInstance request %j', request);
-    return this.innerApiCalls.createInstance(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IInstance, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createInstance response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IInstance,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createInstance()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_instance.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_async
- */
-  async checkCreateInstanceProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Instance, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_instance.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_async
+   */
+  async checkCreateInstanceProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Instance,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createInstance long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createInstance, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Instance, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createInstance,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Instance,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single instance.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes after the first request.
- *
- *   For example, consider a situation where you make an initial request and
- *   the request times out. If you make the request again with the same request
- *   ID, the server can check if original operation with the same request ID
- *   was received, and if so, will ignore the second request. This prevents
- *   clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is
- *   not supported (00000000-0000-0000-0000-000000000000).
- * @param {boolean} [request.force]
- *   Optional. If set to true, will force the deletion of the instance.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_instance.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_async
- */
+  /**
+   * Deletes a single instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, will force the deletion of the instance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_instance.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_async
+   */
   deleteInstance(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteInstance(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInstance(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteInstance(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteInstance response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteInstance request %j', request);
-    return this.innerApiCalls.deleteInstance(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteInstance response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteInstance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteInstance response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteInstance()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_instance.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_async
- */
-  async checkDeleteInstanceProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteInstance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_instance.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_async
+   */
+  async checkDeleteInstanceProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteInstance long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteInstance, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteInstance,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new repository in a given project and location.
- *
- * The Repository.Instance field is required in the request body for requests
- * using the securesourcemanager.googleapis.com endpoint.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project in which to create the repository. Values are of the
- *   form `projects/{project_number}/locations/{location_id}`
- * @param {google.cloud.securesourcemanager.v1.Repository} request.repository
- *   Required. The resource being created.
- * @param {string} request.repositoryId
- *   Required. The ID to use for the repository, which will become the final
- *   component of the repository's resource name. This value should be 4-63
- *   characters, and valid characters are /{@link protos.0-9|a-z}-/.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_repository.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_async
- */
+  /**
+   * Creates a new repository in a given project and location.
+   *
+   * The Repository.Instance field is required in the request body for requests
+   * using the securesourcemanager.googleapis.com endpoint.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project in which to create the repository. Values are of the
+   *   form `projects/{project_number}/locations/{location_id}`
+   * @param {google.cloud.securesourcemanager.v1.Repository} request.repository
+   *   Required. The resource being created.
+   * @param {string} request.repositoryId
+   *   Required. The ID to use for the repository, which will become the final
+   *   component of the repository's resource name. This value should be 4-63
+   *   characters, and valid characters are /{@link protos.0-9|a-z}-/.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_repository.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_async
+   */
   createRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createRepository(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRepository(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateRepositoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IRepository,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IRepository,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createRepository request %j', request);
-    return this.innerApiCalls.createRepository(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createRepository response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IRepository,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createRepository response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createRepository()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_repository.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_async
- */
-  async checkCreateRepositoryProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Repository, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createRepository()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_repository.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_async
+   */
+  async checkCreateRepositoryProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Repository,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createRepository long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createRepository, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Repository, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createRepository,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Repository,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the metadata of a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   repository resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.securesourcemanager.v1.Repository} request.repository
- *   Required. The repository being updated.
- * @param {boolean} [request.validateOnly]
- *   Optional. False by default. If set to true, the request is validated and
- *   the user is provided with an expected result, but no actual change is made.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_repository.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateRepository_async
- */
+  /**
+   * Updates the metadata of a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   repository resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.securesourcemanager.v1.Repository} request.repository
+   *   Required. The repository being updated.
+   * @param {boolean} [request.validateOnly]
+   *   Optional. False by default. If set to true, the request is validated and
+   *   the user is provided with an expected result, but no actual change is made.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_repository.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateRepository_async
+   */
   updateRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateRepository(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRepository(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateRepositoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IRepository,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IRepository,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'repository.name': request.repository!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'repository.name': request.repository!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IRepository,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateRepository request %j', request);
-    return this.innerApiCalls.updateRepository(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IRepository, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateRepository response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IRepository,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateRepository response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateRepository()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_repository.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateRepository_async
- */
-  async checkUpdateRepositoryProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Repository, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateRepository()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_repository.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateRepository_async
+   */
+  async checkUpdateRepositoryProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Repository,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateRepository long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateRepository, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Repository, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateRepository,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Repository,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a Repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the repository to delete.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
- * @param {boolean} [request.allowMissing]
- *   Optional. If set to true, and the repository is not found, the request will
- *   succeed but no action will be taken on the server.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_repository.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_async
- */
+  /**
+   * Deletes a Repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the repository to delete.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the repository is not found, the request will
+   *   succeed but no action will be taken on the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_repository.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_async
+   */
   deleteRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteRepository(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRepository(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteRepository(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteRepositoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteRepository response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteRepository request %j', request);
-    return this.innerApiCalls.deleteRepository(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteRepository response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteRepository(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteRepository response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteRepository()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_repository.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_async
- */
-  async checkDeleteRepositoryProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteRepository()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_repository.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_async
+   */
+  async checkDeleteRepositoryProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteRepository long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteRepository, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRepository,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a new hook in a given repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to create the hook. Values are of the
- *   form
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {google.cloud.securesourcemanager.v1.Hook} request.hook
- *   Required. The resource being created.
- * @param {string} request.hookId
- *   Required. The ID to use for the hook, which will become the final component
- *   of the hook's resource name. This value restricts to lower-case letters,
- *   numbers, and hyphen, with the first character a letter, the last a letter
- *   or a number, and a 63 character maximum.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_hook.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateHook_async
- */
+  /**
+   * Creates a new hook in a given repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to create the hook. Values are of the
+   *   form
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {google.cloud.securesourcemanager.v1.Hook} request.hook
+   *   Required. The resource being created.
+   * @param {string} request.hookId
+   *   Required. The ID to use for the hook, which will become the final component
+   *   of the hook's resource name. This value restricts to lower-case letters,
+   *   numbers, and hyphen, with the first character a letter, the last a letter
+   *   or a number, and a 63 character maximum.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_hook.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateHook_async
+   */
   createHook(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createHook(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createHook(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createHook(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateHookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IHook,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IHook,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createHook response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createHook request %j', request);
-    return this.innerApiCalls.createHook(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createHook response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createHook(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IHook,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createHook response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createHook()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_hook.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateHook_async
- */
-  async checkCreateHookProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Hook, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createHook()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_hook.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateHook_async
+   */
+  async checkCreateHookProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Hook,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createHook long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createHook, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Hook, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createHook,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Hook,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates the metadata of a hook.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   hook resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *   The special value "*" means full replacement.
- * @param {google.cloud.securesourcemanager.v1.Hook} request.hook
- *   Required. The hook being updated.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_hook.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_async
- */
+  /**
+   * Updates the metadata of a hook.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   hook resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *   The special value "*" means full replacement.
+   * @param {google.cloud.securesourcemanager.v1.Hook} request.hook
+   *   Required. The hook being updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_hook.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_async
+   */
   updateHook(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateHook(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateHook(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateHook(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateHookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IHook,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IHook,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'hook.name': request.hook!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'hook.name': request.hook!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IHook,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateHook response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateHook request %j', request);
-    return this.innerApiCalls.updateHook(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IHook, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateHook response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateHook(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IHook,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateHook response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateHook()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_hook.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_async
- */
-  async checkUpdateHookProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Hook, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateHook()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_hook.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_async
+   */
+  async checkUpdateHookProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Hook,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateHook long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateHook, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Hook, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateHook,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Hook,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a Hook.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the hook to delete.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_hook.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteHook_async
- */
+  /**
+   * Deletes a Hook.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the hook to delete.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/hooks/{hook_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_hook.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteHook_async
+   */
   deleteHook(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteHook(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteHook(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteHook(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteHookRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteHook response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteHook request %j', request);
-    return this.innerApiCalls.deleteHook(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteHook response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteHook(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteHook response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteHook()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_hook.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteHook_async
- */
-  async checkDeleteHookProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteHook()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_hook.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteHook_async
+   */
+  async checkDeleteHookProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteHook long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteHook, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteHook,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * CreateBranchRule creates a branch rule in a given repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- * @param {google.cloud.securesourcemanager.v1.BranchRule} request.branchRule
- * @param {string} request.branchRuleId
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_branch_rule.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async
- */
+  /**
+   * CreateBranchRule creates a branch rule in a given repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {google.cloud.securesourcemanager.v1.BranchRule} request.branchRule
+   * @param {string} request.branchRuleId
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async
+   */
   createBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createBranchRule response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createBranchRule request %j', request);
-    return this.innerApiCalls.createBranchRule(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createBranchRule response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createBranchRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createBranchRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createBranchRule()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_branch_rule.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async
- */
-  async checkCreateBranchRuleProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.BranchRule, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createBranchRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async
+   */
+  async checkCreateBranchRuleProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createBranchRule long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createBranchRule, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.BranchRule, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createBranchRule,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * UpdateBranchRule updates a branch rule.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.securesourcemanager.v1.BranchRule} request.branchRule
- * @param {boolean} [request.validateOnly]
- *   Optional. If set, validate the request and preview the review, but do not
- *   actually post it.  (https://google.aip.dev/163, for declarative friendly)
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   branchRule resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *   The special value "*" means full replacement.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_branch_rule.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async
- */
+  /**
+   * UpdateBranchRule updates a branch rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securesourcemanager.v1.BranchRule} request.branchRule
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually post it.  (https://google.aip.dev/163, for declarative friendly)
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   branchRule resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *   The special value "*" means full replacement.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async
+   */
   updateBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'branch_rule.name': request.branchRule!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'branch_rule.name': request.branchRule!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateBranchRule response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateBranchRule request %j', request);
-    return this.innerApiCalls.updateBranchRule(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IBranchRule, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateBranchRule response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateBranchRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBranchRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateBranchRule()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_branch_rule.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async
- */
-  async checkUpdateBranchRuleProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.BranchRule, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateBranchRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async
+   */
+  async checkUpdateBranchRuleProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateBranchRule long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateBranchRule, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.BranchRule, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateBranchRule,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * DeleteBranchRule deletes a branch rule.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- * @param {boolean} [request.allowMissing]
- *   Optional. If set to true, and the branch rule is not found, the request
- *   will succeed but no action will be taken on the server.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_branch_rule.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async
- */
+  /**
+   * DeleteBranchRule deletes a branch rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the branch rule is not found, the request
+   *   will succeed but no action will be taken on the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async
+   */
   deleteBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteBranchRule(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteBranchRule(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteBranchRule response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteBranchRule request %j', request);
-    return this.innerApiCalls.deleteBranchRule(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteBranchRule response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteBranchRule(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBranchRule response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteBranchRule()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_branch_rule.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async
- */
-  async checkDeleteBranchRuleProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteBranchRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async
+   */
+  async checkDeleteBranchRuleProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteBranchRule long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteBranchRule, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteBranchRule,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a pull request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository that the pull request is created from. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {google.cloud.securesourcemanager.v1.PullRequest} request.pullRequest
- *   Required. The pull request to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequest_async
- */
+  /**
+   * Creates a pull request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository that the pull request is created from. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {google.cloud.securesourcemanager.v1.PullRequest} request.pullRequest
+   *   Required. The pull request to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequest_async
+   */
   createPullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createPullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPullRequest request %j', request);
-    return this.innerApiCalls.createPullRequest(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createPullRequest response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createPullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPullRequest response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createPullRequest()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequest_async
- */
-  async checkCreatePullRequestProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createPullRequest()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequest_async
+   */
+  async checkCreatePullRequestProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createPullRequest long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPullRequest, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPullRequest,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a pull request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.securesourcemanager.v1.PullRequest} request.pullRequest
- *   Required. The pull request to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   pull request resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *   The special value "*" means full replacement.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequest_async
- */
+  /**
+   * Updates a pull request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securesourcemanager.v1.PullRequest} request.pullRequest
+   *   Required. The pull request to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   pull request resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *   The special value "*" means full replacement.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequest_async
+   */
   updatePullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updatePullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updatePullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updatePullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'pull_request.name': request.pullRequest!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'pull_request.name': request.pullRequest!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updatePullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updatePullRequest request %j', request);
-    return this.innerApiCalls.updatePullRequest(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updatePullRequest response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updatePullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePullRequest response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updatePullRequest()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequest_async
- */
-  async checkUpdatePullRequestProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updatePullRequest()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequest_async
+   */
+  async checkUpdatePullRequestProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updatePullRequest long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePullRequest, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updatePullRequest,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Merges a pull request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The pull request to merge.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.merge_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_MergePullRequest_async
- */
+  /**
+   * Merges a pull request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The pull request to merge.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.merge_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_MergePullRequest_async
+   */
   mergePullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   mergePullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   mergePullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   mergePullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IMergePullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('mergePullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('mergePullRequest request %j', request);
-    return this.innerApiCalls.mergePullRequest(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('mergePullRequest response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .mergePullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('mergePullRequest response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `mergePullRequest()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.merge_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_MergePullRequest_async
- */
-  async checkMergePullRequestProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `mergePullRequest()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.merge_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_MergePullRequest_async
+   */
+  async checkMergePullRequestProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('mergePullRequest long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.mergePullRequest, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.mergePullRequest,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Opens a pull request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The pull request to open.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.open_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenPullRequest_async
- */
+  /**
+   * Opens a pull request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The pull request to open.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.open_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenPullRequest_async
+   */
   openPullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   openPullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   openPullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   openPullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IOpenPullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('openPullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('openPullRequest request %j', request);
-    return this.innerApiCalls.openPullRequest(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('openPullRequest response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .openPullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('openPullRequest response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `openPullRequest()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.open_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenPullRequest_async
- */
-  async checkOpenPullRequestProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `openPullRequest()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.open_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenPullRequest_async
+   */
+  async checkOpenPullRequestProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('openPullRequest long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.openPullRequest, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.openPullRequest,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Closes a pull request without merging.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The pull request to close.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.close_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ClosePullRequest_async
- */
+  /**
+   * Closes a pull request without merging.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The pull request to close.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.close_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ClosePullRequest_async
+   */
   closePullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   closePullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   closePullRequest(
-      request: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   closePullRequest(
-      request?: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IClosePullRequestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequest,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('closePullRequest response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('closePullRequest request %j', request);
-    return this.innerApiCalls.closePullRequest(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequest, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('closePullRequest response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .closePullRequest(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequest,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('closePullRequest response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `closePullRequest()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.close_pull_request.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ClosePullRequest_async
- */
-  async checkClosePullRequestProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `closePullRequest()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.close_pull_request.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ClosePullRequest_async
+   */
+  async checkClosePullRequestProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('closePullRequest long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.closePullRequest, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.PullRequest, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.closePullRequest,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequest,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Creates an issue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to create the issue. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {google.cloud.securesourcemanager.v1.Issue} request.issue
- *   Required. The issue to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssue_async
- */
+  /**
+   * Creates an issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to create the issue. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {google.cloud.securesourcemanager.v1.Issue} request.issue
+   *   Required. The issue to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssue_async
+   */
   createIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createIssue(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createIssue(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createIssue request %j', request);
-    return this.innerApiCalls.createIssue(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createIssue response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createIssue response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createIssue()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssue_async
- */
-  async checkCreateIssueProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createIssue()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssue_async
+   */
+  async checkCreateIssueProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createIssue long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createIssue, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createIssue,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a issue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.securesourcemanager.v1.Issue} request.issue
- *   Required. The issue to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   issue resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *   The special value "*" means full replacement.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssue_async
- */
+  /**
+   * Updates a issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securesourcemanager.v1.Issue} request.issue
+   *   Required. The issue to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   issue resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *   The special value "*" means full replacement.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssue_async
+   */
   updateIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'issue.name': request.issue!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'issue.name': request.issue!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateIssue request %j', request);
-    return this.innerApiCalls.updateIssue(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateIssue response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIssue response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateIssue()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssue_async
- */
-  async checkUpdateIssueProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateIssue()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssue_async
+   */
+  async checkUpdateIssueProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateIssue long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateIssue, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateIssue,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes an issue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the issue to delete.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
- * @param {string} [request.etag]
- *   Optional. The current etag of the issue.
- *   If the etag is provided and does not match the current etag of the issue,
- *   deletion will be blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssue_async
- */
+  /**
+   * Deletes an issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the issue to delete.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the issue.
+   *   If the etag is provided and does not match the current etag of the issue,
+   *   deletion will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssue_async
+   */
   deleteIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteIssue request %j', request);
-    return this.innerApiCalls.deleteIssue(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteIssue response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIssue response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteIssue()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssue_async
- */
-  async checkDeleteIssueProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteIssue()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssue_async
+   */
+  async checkDeleteIssueProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteIssue long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteIssue, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteIssue,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Opens an issue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the issue to open.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
- * @param {string} [request.etag]
- *   Optional. The current etag of the issue.
- *   If the etag is provided and does not match the current etag of the issue,
- *   opening will be blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.open_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenIssue_async
- */
+  /**
+   * Opens an issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the issue to open.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the issue.
+   *   If the etag is provided and does not match the current etag of the issue,
+   *   opening will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.open_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenIssue_async
+   */
   openIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   openIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   openIssue(
-      request: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   openIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IOpenIssueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('openIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('openIssue request %j', request);
-    return this.innerApiCalls.openIssue(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('openIssue response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .openIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('openIssue response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `openIssue()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.open_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenIssue_async
- */
-  async checkOpenIssueProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `openIssue()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.open_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_OpenIssue_async
+   */
+  async checkOpenIssueProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('openIssue long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.openIssue, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.openIssue,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Closes an issue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the issue to close.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
- * @param {string} [request.etag]
- *   Optional. The current etag of the issue.
- *   If the etag is provided and does not match the current etag of the issue,
- *   closing will be blocked and an ABORTED error will be returned.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.close_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CloseIssue_async
- */
+  /**
+   * Closes an issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the issue to close.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the issue.
+   *   If the etag is provided and does not match the current etag of the issue,
+   *   closing will be blocked and an ABORTED error will be returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.close_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CloseIssue_async
+   */
   closeIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   closeIssue(
-      request: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   closeIssue(
-      request: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   closeIssue(
-      request?: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICloseIssueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssue,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('closeIssue response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('closeIssue request %j', request);
-    return this.innerApiCalls.closeIssue(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IIssue, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('closeIssue response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .closeIssue(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssue,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('closeIssue response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `closeIssue()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.close_issue.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CloseIssue_async
- */
-  async checkCloseIssueProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `closeIssue()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.close_issue.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CloseIssue_async
+   */
+  async checkCloseIssueProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('closeIssue long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.closeIssue, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.Issue, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.closeIssue,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.Issue,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Creates a pull request comment. This function is used to create a single
- * PullRequestComment of type Comment, or a single PullRequestComment of type
- * Code that's replying to another PullRequestComment of type Code. Use
- * BatchCreatePullRequestComments to create multiple PullRequestComments for
- * code reviews.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pull request in which to create the pull request comment.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {google.cloud.securesourcemanager.v1.PullRequestComment} request.pullRequestComment
- *   Required. The pull request comment to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequestComment_async
- */
+  /**
+   * Creates a pull request comment. This function is used to create a single
+   * PullRequestComment of type Comment, or a single PullRequestComment of type
+   * Code that's replying to another PullRequestComment of type Code. Use
+   * BatchCreatePullRequestComments to create multiple PullRequestComments for
+   * code reviews.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pull request in which to create the pull request comment.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {google.cloud.securesourcemanager.v1.PullRequestComment} request.pullRequestComment
+   *   Required. The pull request comment to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequestComment_async
+   */
   createPullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createPullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createPullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreatePullRequestCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createPullRequestComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createPullRequestComment request %j', request);
-    return this.innerApiCalls.createPullRequestComment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createPullRequestComment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createPullRequestComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createPullRequestComment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createPullRequestComment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequestComment_async
- */
-  async checkCreatePullRequestCommentProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.PullRequestComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createPullRequestComment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_pull_request_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequestComment_async
+   */
+  async checkCreatePullRequestCommentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequestComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createPullRequestComment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createPullRequestComment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.PullRequestComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createPullRequestComment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequestComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates a pull request comment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.securesourcemanager.v1.PullRequestComment} request.pullRequestComment
- *   Required. The pull request comment to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   pull request comment resource by the update. Updatable fields are
- *   `body`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequestComment_async
- */
+  /**
+   * Updates a pull request comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securesourcemanager.v1.PullRequestComment} request.pullRequestComment
+   *   Required. The pull request comment to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   pull request comment resource by the update. Updatable fields are
+   *   `body`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequestComment_async
+   */
   updatePullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updatePullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updatePullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updatePullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdatePullRequestCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'pull_request_comment.name': request.pullRequestComment!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'pull_request_comment.name': request.pullRequestComment!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updatePullRequestComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updatePullRequestComment request %j', request);
-    return this.innerApiCalls.updatePullRequestComment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IPullRequestComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updatePullRequestComment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updatePullRequestComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IPullRequestComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updatePullRequestComment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updatePullRequestComment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequestComment_async
- */
-  async checkUpdatePullRequestCommentProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.PullRequestComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updatePullRequestComment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_pull_request_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequestComment_async
+   */
+  async checkUpdatePullRequestCommentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequestComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updatePullRequestComment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updatePullRequestComment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.PullRequestComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updatePullRequestComment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.PullRequestComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes a pull request comment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the pull request comment to delete.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_pull_request_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeletePullRequestComment_async
- */
+  /**
+   * Deletes a pull request comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the pull request comment to delete.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_pull_request_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeletePullRequestComment_async
+   */
   deletePullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deletePullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePullRequestComment(
-      request: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deletePullRequestComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IDeletePullRequestCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deletePullRequestComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deletePullRequestComment request %j', request);
-    return this.innerApiCalls.deletePullRequestComment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deletePullRequestComment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deletePullRequestComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deletePullRequestComment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deletePullRequestComment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_pull_request_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeletePullRequestComment_async
- */
-  async checkDeletePullRequestCommentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deletePullRequestComment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_pull_request_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeletePullRequestComment_async
+   */
+  async checkDeletePullRequestCommentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deletePullRequestComment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deletePullRequestComment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deletePullRequestComment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Batch creates pull request comments. This function is used to create
- * multiple PullRequestComments for code review. There needs to be exactly one
- * PullRequestComment of type Review, and at most 100 PullRequestComments of
- * type Code per request. The Position of the code comments must be unique
- * within the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pull request in which to create the pull request comments.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {number[]} request.requests
- *   Required. The request message specifying the resources to create. There
- *   should be exactly one CreatePullRequestCommentRequest with CommentDetail
- *   being REVIEW in the list, and no more than 100
- *   CreatePullRequestCommentRequests with CommentDetail being CODE in the list
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.batch_create_pull_request_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_async
- */
+  /**
+   * Batch creates pull request comments. This function is used to create
+   * multiple PullRequestComments for code review. There needs to be exactly one
+   * PullRequestComment of type Review, and at most 100 PullRequestComments of
+   * type Code per request. The Position of the code comments must be unique
+   * within the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pull request in which to create the pull request comments.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the resources to create. There
+   *   should be exactly one CreatePullRequestCommentRequest with CommentDetail
+   *   being REVIEW in the list, and no more than 100
+   *   CreatePullRequestCommentRequests with CommentDetail being CODE in the list
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.batch_create_pull_request_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_async
+   */
   batchCreatePullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   batchCreatePullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreatePullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   batchCreatePullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('batchCreatePullRequestComments response %j', rawResponse);
+          this._log.info(
+            'batchCreatePullRequestComments response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('batchCreatePullRequestComments request %j', request);
-    return this.innerApiCalls.batchCreatePullRequestComments(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('batchCreatePullRequestComments response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .batchCreatePullRequestComments(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBatchCreatePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchCreatePullRequestComments response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `batchCreatePullRequestComments()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.batch_create_pull_request_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_async
- */
-  async checkBatchCreatePullRequestCommentsProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `batchCreatePullRequestComments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.batch_create_pull_request_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_async
+   */
+  async checkBatchCreatePullRequestCommentsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('batchCreatePullRequestComments long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.batchCreatePullRequestComments, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.batchCreatePullRequestComments,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.BatchCreatePullRequestCommentsResponse,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Resolves pull request comments. A list of PullRequestComment names must be
- * provided. The PullRequestComment names must be in the same conversation
- * thread. If auto_fill is set, all comments in the conversation thread will
- * be resolved.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pull request in which to resolve the pull request comments.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {string[]} request.names
- *   Required. The names of the pull request comments to resolve. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
- *   Only comments from the same threads are allowed in the same request.
- * @param {boolean} [request.autoFill]
- *   Optional. If set, at least one comment in a thread is required, rest of the
- *   comments in the same thread will be automatically updated to resolved. If
- *   unset, all comments in the same thread need be present.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.resolve_pull_request_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ResolvePullRequestComments_async
- */
+  /**
+   * Resolves pull request comments. A list of PullRequestComment names must be
+   * provided. The PullRequestComment names must be in the same conversation
+   * thread. If auto_fill is set, all comments in the conversation thread will
+   * be resolved.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pull request in which to resolve the pull request comments.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {string[]} request.names
+   *   Required. The names of the pull request comments to resolve. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
+   *   Only comments from the same threads are allowed in the same request.
+   * @param {boolean} [request.autoFill]
+   *   Optional. If set, at least one comment in a thread is required, rest of the
+   *   comments in the same thread will be automatically updated to resolved. If
+   *   unset, all comments in the same thread need be present.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.resolve_pull_request_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ResolvePullRequestComments_async
+   */
   resolvePullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   resolvePullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   resolvePullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   resolvePullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('resolvePullRequestComments response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('resolvePullRequestComments request %j', request);
-    return this.innerApiCalls.resolvePullRequestComments(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('resolvePullRequestComments response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .resolvePullRequestComments(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IResolvePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('resolvePullRequestComments response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `resolvePullRequestComments()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.resolve_pull_request_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ResolvePullRequestComments_async
- */
-  async checkResolvePullRequestCommentsProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `resolvePullRequestComments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.resolve_pull_request_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ResolvePullRequestComments_async
+   */
+  async checkResolvePullRequestCommentsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('resolvePullRequestComments long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.resolvePullRequestComments, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.resolvePullRequestComments,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.ResolvePullRequestCommentsResponse,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Unresolves pull request comments. A list of PullRequestComment names must
- * be provided. The PullRequestComment names must be in the same conversation
- * thread. If auto_fill is set, all comments in the conversation thread will
- * be unresolved.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pull request in which to resolve the pull request comments.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {string[]} request.names
- *   Required. The names of the pull request comments to unresolve. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
- *   Only comments from the same threads are allowed in the same request.
- * @param {boolean} [request.autoFill]
- *   Optional. If set, at least one comment in a thread is required, rest of the
- *   comments in the same thread will be automatically updated to unresolved. If
- *   unset, all comments in the same thread need be present.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.unresolve_pull_request_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UnresolvePullRequestComments_async
- */
+  /**
+   * Unresolves pull request comments. A list of PullRequestComment names must
+   * be provided. The PullRequestComment names must be in the same conversation
+   * thread. If auto_fill is set, all comments in the conversation thread will
+   * be unresolved.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pull request in which to resolve the pull request comments.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {string[]} request.names
+   *   Required. The names of the pull request comments to unresolve. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}/pullRequestComments/{comment_id}`
+   *   Only comments from the same threads are allowed in the same request.
+   * @param {boolean} [request.autoFill]
+   *   Optional. If set, at least one comment in a thread is required, rest of the
+   *   comments in the same thread will be automatically updated to unresolved. If
+   *   unset, all comments in the same thread need be present.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.unresolve_pull_request_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UnresolvePullRequestComments_async
+   */
   unresolvePullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   unresolvePullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   unresolvePullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   unresolvePullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('unresolvePullRequestComments response %j', rawResponse);
+          this._log.info(
+            'unresolvePullRequestComments response %j',
+            rawResponse,
+          );
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('unresolvePullRequestComments request %j', request);
-    return this.innerApiCalls.unresolvePullRequestComments(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('unresolvePullRequestComments response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .unresolvePullRequestComments(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IUnresolvePullRequestCommentsResponse,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'unresolvePullRequestComments response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `unresolvePullRequestComments()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.unresolve_pull_request_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UnresolvePullRequestComments_async
- */
-  async checkUnresolvePullRequestCommentsProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `unresolvePullRequestComments()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.unresolve_pull_request_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UnresolvePullRequestComments_async
+   */
+  async checkUnresolvePullRequestCommentsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('unresolvePullRequestComments long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.unresolvePullRequestComments, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.unresolvePullRequestComments,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.UnresolvePullRequestCommentsResponse,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Creates an issue comment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The issue in which to create the issue comment. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
- * @param {google.cloud.securesourcemanager.v1.IssueComment} request.issueComment
- *   Required. The issue comment to create.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssueComment_async
- */
+  /**
+   * Creates an issue comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The issue in which to create the issue comment. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+   * @param {google.cloud.securesourcemanager.v1.IssueComment} request.issueComment
+   *   Required. The issue comment to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssueComment_async
+   */
   createIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateIssueCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssueComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssueComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createIssueComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createIssueComment request %j', request);
-    return this.innerApiCalls.createIssueComment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createIssueComment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createIssueComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssueComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createIssueComment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createIssueComment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssueComment_async
- */
-  async checkCreateIssueCommentProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.IssueComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createIssueComment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_issue_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateIssueComment_async
+   */
+  async checkCreateIssueCommentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.IssueComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('createIssueComment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createIssueComment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.IssueComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createIssueComment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.IssueComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Updates an issue comment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.securesourcemanager.v1.IssueComment} request.issueComment
- *   Required. The issue comment to update.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   issue comment resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask.
- *   The special value "*" means full replacement.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssueComment_async
- */
+  /**
+   * Updates an issue comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securesourcemanager.v1.IssueComment} request.issueComment
+   *   Required. The issue comment to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   issue comment resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *   The special value "*" means full replacement.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssueComment_async
+   */
   updateIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateIssueCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssueComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IIssueComment,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'issue_comment.name': request.issueComment!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'issue_comment.name': request.issueComment!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssueComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateIssueComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateIssueComment request %j', request);
-    return this.innerApiCalls.updateIssueComment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.securesourcemanager.v1.IIssueComment, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateIssueComment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateIssueComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IIssueComment,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateIssueComment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateIssueComment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssueComment_async
- */
-  async checkUpdateIssueCommentProgress(name: string): Promise<LROperation<protos.google.cloud.securesourcemanager.v1.IssueComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateIssueComment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_issue_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateIssueComment_async
+   */
+  async checkUpdateIssueCommentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.IssueComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('updateIssueComment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateIssueComment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.securesourcemanager.v1.IssueComment, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateIssueComment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.IssueComment,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
-/**
- * Deletes an issue comment.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the issue comment to delete.
- *   The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}/issueComments/{comment_id}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssueComment_async
- */
+  /**
+   * Deletes an issue comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the issue comment to delete.
+   *   The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}/issueComments/{comment_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssueComment_async
+   */
   deleteIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteIssueComment(
-      request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteIssueComment(
-      request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteIssueCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteIssueComment response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteIssueComment request %j', request);
-    return this.innerApiCalls.deleteIssueComment(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.securesourcemanager.v1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteIssueComment response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteIssueComment(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteIssueComment response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteIssueComment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue_comment.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssueComment_async
- */
-  async checkDeleteIssueCommentProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteIssueComment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_issue_comment.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteIssueComment_async
+   */
+  async checkDeleteIssueCommentProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
     this._log.info('deleteIssueComment long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        { name },
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteIssueComment, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.securesourcemanager.v1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteIssueComment,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
   }
- /**
- * Lists Instances in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInstancesRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filter for filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listInstancesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Instances in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInstancesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filter for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInstances(
-      request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IInstance[],
-        protos.google.cloud.securesourcemanager.v1.IListInstancesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IInstance[],
+      protos.google.cloud.securesourcemanager.v1.IListInstancesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListInstancesResponse,
+    ]
+  >;
   listInstances(
-      request: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IInstance>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IInstance
+    >,
+  ): void;
   listInstances(
-      request: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IInstance>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IInstance
+    >,
+  ): void;
   listInstances(
-      request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IInstance>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListInstancesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IInstance>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IInstance[],
-        protos.google.cloud.securesourcemanager.v1.IListInstancesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IInstance
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IInstance
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IInstance[],
+      protos.google.cloud.securesourcemanager.v1.IListInstancesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListInstancesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-      protos.google.cloud.securesourcemanager.v1.IListInstancesResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IInstance>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IInstance
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listInstances values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5318,212 +8017,241 @@ export class SecureSourceManagerClient {
     this._log.info('listInstances request %j', request);
     return this.innerApiCalls
       .listInstances(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IInstance[],
-        protos.google.cloud.securesourcemanager.v1.IListInstancesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListInstancesResponse
-      ]) => {
-        this._log.info('listInstances values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IInstance[],
+          protos.google.cloud.securesourcemanager.v1.IListInstancesRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListInstancesResponse,
+        ]) => {
+          this._log.info('listInstances values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listInstances`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInstancesRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filter for filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listInstancesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listInstances`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInstancesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filter for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listInstancesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listInstancesStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInstances stream %j', request);
     return this.descriptors.page.listInstances.createStream(
       this.innerApiCalls.listInstances as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listInstances`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListInstancesRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filter for filtering results.
- * @param {string} [request.orderBy]
- *   Optional. Hint for how to order the results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_instances.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListInstances_async
- */
+  /**
+   * Equivalent to `listInstances`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListInstancesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filter for filtering results.
+   * @param {string} [request.orderBy]
+   *   Optional. Hint for how to order the results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_instances.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListInstances_async
+   */
   listInstancesAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IInstance>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListInstancesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IInstance> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listInstances iterate %j', request);
     return this.descriptors.page.listInstances.asyncIterate(
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IInstance>;
   }
- /**
- * Lists Repositories in a given project and location.
- *
- * The instance field is required in the query parameter for requests using
- * the securesourcemanager.googleapis.com endpoint.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListRepositoriesRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filter results.
- * @param {string} [request.instance]
- *   Optional. The name of the instance in which the repository is hosted,
- *   formatted as
- *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
- *   When listing repositories via securesourcemanager.googleapis.com, this
- *   field is required. When listing repositories via *.sourcemanager.dev, this
- *   field is ignored.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listRepositoriesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists Repositories in a given project and location.
+   *
+   * The instance field is required in the query parameter for requests using
+   * the securesourcemanager.googleapis.com endpoint.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListRepositoriesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via securesourcemanager.googleapis.com, this
+   *   field is required. When listing repositories via *.sourcemanager.dev, this
+   *   field is ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listRepositoriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRepositories(
-      request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IRepository[],
-        protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRepository[],
+      protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse,
+    ]
+  >;
   listRepositories(
-      request: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IRepository>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRepository
+    >,
+  ): void;
   listRepositories(
-      request: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IRepository>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRepository
+    >,
+  ): void;
   listRepositories(
-      request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IRepository>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IRepository>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IRepository[],
-        protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IRepository
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IRepository
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IRepository[],
+      protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-      protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IRepository>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IRepository
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listRepositories values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5532,210 +8260,239 @@ export class SecureSourceManagerClient {
     this._log.info('listRepositories request %j', request);
     return this.innerApiCalls
       .listRepositories(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IRepository[],
-        protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse
-      ]) => {
-        this._log.info('listRepositories values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IRepository[],
+          protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListRepositoriesResponse,
+        ]) => {
+          this._log.info('listRepositories values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListRepositoriesRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filter results.
- * @param {string} [request.instance]
- *   Optional. The name of the instance in which the repository is hosted,
- *   formatted as
- *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
- *   When listing repositories via securesourcemanager.googleapis.com, this
- *   field is required. When listing repositories via *.sourcemanager.dev, this
- *   field is ignored.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listRepositoriesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listRepositories`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListRepositoriesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via securesourcemanager.googleapis.com, this
+   *   field is required. When listing repositories via *.sourcemanager.dev, this
+   *   field is ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listRepositoriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listRepositoriesStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRepositories stream %j', request);
     return this.descriptors.page.listRepositories.createStream(
       this.innerApiCalls.listRepositories as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listRepositories`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListRepositoriesRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filter results.
- * @param {string} [request.instance]
- *   Optional. The name of the instance in which the repository is hosted,
- *   formatted as
- *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
- *   When listing repositories via securesourcemanager.googleapis.com, this
- *   field is required. When listing repositories via *.sourcemanager.dev, this
- *   field is ignored.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_repositories.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_async
- */
+  /**
+   * Equivalent to `listRepositories`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListRepositoriesRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via securesourcemanager.googleapis.com, this
+   *   field is required. When listing repositories via *.sourcemanager.dev, this
+   *   field is ignored.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.Repository|Repository}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_repositories.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_async
+   */
   listRepositoriesAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRepository>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListRepositoriesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRepository> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listRepositories iterate %j', request);
     return this.descriptors.page.listRepositories.asyncIterate(
       this.innerApiCalls['listRepositories'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRepository>;
   }
- /**
- * Lists hooks in a given repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListHooksRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listHooksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists hooks in a given repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListHooksRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listHooksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listHooks(
-      request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IHook[],
-        protos.google.cloud.securesourcemanager.v1.IListHooksRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListHooksResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IHook[],
+      protos.google.cloud.securesourcemanager.v1.IListHooksRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListHooksResponse,
+    ]
+  >;
   listHooks(
-      request: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-          protos.google.cloud.securesourcemanager.v1.IListHooksResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IHook>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListHooksResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IHook
+    >,
+  ): void;
   listHooks(
-      request: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-          protos.google.cloud.securesourcemanager.v1.IListHooksResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IHook>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListHooksResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IHook
+    >,
+  ): void;
   listHooks(
-      request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-          protos.google.cloud.securesourcemanager.v1.IListHooksResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IHook>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-          protos.google.cloud.securesourcemanager.v1.IListHooksResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IHook>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IHook[],
-        protos.google.cloud.securesourcemanager.v1.IListHooksRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListHooksResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListHooksResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IHook
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListHooksResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IHook
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IHook[],
+      protos.google.cloud.securesourcemanager.v1.IListHooksRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListHooksResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-      protos.google.cloud.securesourcemanager.v1.IListHooksResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IHook>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListHooksResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IHook
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listHooks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5744,191 +8501,220 @@ export class SecureSourceManagerClient {
     this._log.info('listHooks request %j', request);
     return this.innerApiCalls
       .listHooks(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IHook[],
-        protos.google.cloud.securesourcemanager.v1.IListHooksRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListHooksResponse
-      ]) => {
-        this._log.info('listHooks values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IHook[],
+          protos.google.cloud.securesourcemanager.v1.IListHooksRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListHooksResponse,
+        ]) => {
+          this._log.info('listHooks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listHooks`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListHooksRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listHooksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listHooks`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListHooksRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listHooksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listHooksStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listHooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listHooks stream %j', request);
     return this.descriptors.page.listHooks.createStream(
       this.innerApiCalls.listHooks as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listHooks`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListHooksRequest.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_hooks.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListHooks_async
- */
+  /**
+   * Equivalent to `listHooks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListHooksRequest.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.Hook|Hook}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_hooks.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListHooks_async
+   */
   listHooksAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IHook>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListHooksRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IHook> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listHooks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listHooks iterate %j', request);
     return this.descriptors.page.listHooks.asyncIterate(
       this.innerApiCalls['listHooks'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IHook>;
   }
- /**
- * ListBranchRules lists branch rules in a given repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listBranchRulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * ListBranchRules lists branch rules in a given repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBranchRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBranchRules(
-      request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IBranchRule[],
-        protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule[],
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse,
+    ]
+  >;
   listBranchRules(
-      request: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IBranchRule>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IBranchRule
+    >,
+  ): void;
   listBranchRules(
-      request: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IBranchRule>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IBranchRule
+    >,
+  ): void;
   listBranchRules(
-      request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IBranchRule>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IBranchRule>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IBranchRule[],
-        protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IBranchRule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IBranchRule
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule[],
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-      protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IBranchRule>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IBranchRule
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listBranchRules values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -5937,191 +8723,220 @@ export class SecureSourceManagerClient {
     this._log.info('listBranchRules request %j', request);
     return this.innerApiCalls
       .listBranchRules(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IBranchRule[],
-        protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
-      ]) => {
-        this._log.info('listBranchRules values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IBranchRule[],
+          protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse,
+        ]) => {
+          this._log.info('listBranchRules values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listBranchRules`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listBranchRulesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listBranchRules`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBranchRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listBranchRulesStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBranchRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBranchRules stream %j', request);
     return this.descriptors.page.listBranchRules.createStream(
       this.innerApiCalls.listBranchRules as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listBranchRules`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_branch_rules.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListBranchRules_async
- */
+  /**
+   * Equivalent to `listBranchRules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_branch_rules.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListBranchRules_async
+   */
   listBranchRulesAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IBranchRule>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IBranchRule> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listBranchRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listBranchRules iterate %j', request);
     return this.descriptors.page.listBranchRules.asyncIterate(
       this.innerApiCalls['listBranchRules'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IBranchRule>;
   }
- /**
- * Lists pull requests in a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to list pull requests. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPullRequestsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists pull requests in a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to list pull requests. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPullRequestsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPullRequests(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequest[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequest[],
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse,
+    ]
+  >;
   listPullRequests(
-      request: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequest>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IPullRequest
+    >,
+  ): void;
   listPullRequests(
-      request: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequest>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IPullRequest
+    >,
+  ): void;
   listPullRequests(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequest>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequest>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequest[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IPullRequest
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IPullRequest
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequest[],
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-      protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IPullRequest>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IPullRequest
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPullRequests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6130,196 +8945,225 @@ export class SecureSourceManagerClient {
     this._log.info('listPullRequests request %j', request);
     return this.innerApiCalls
       .listPullRequests(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IPullRequest[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse
-      ]) => {
-        this._log.info('listPullRequests values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IPullRequest[],
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestsResponse,
+        ]) => {
+          this._log.info('listPullRequests values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPullRequests`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to list pull requests. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPullRequestsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPullRequests`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to list pull requests. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPullRequestsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPullRequestsStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPullRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPullRequests stream %j', request);
     return this.descriptors.page.listPullRequests.createStream(
       this.innerApiCalls.listPullRequests as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPullRequests`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to list pull requests. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_pull_requests.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListPullRequests_async
- */
+  /**
+   * Equivalent to `listPullRequests`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to list pull requests. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.PullRequest|PullRequest}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_pull_requests.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListPullRequests_async
+   */
   listPullRequestsAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IPullRequest>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IPullRequest> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPullRequests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPullRequests iterate %j', request);
     return this.descriptors.page.listPullRequests.asyncIterate(
       this.innerApiCalls['listPullRequests'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IPullRequest>;
   }
- /**
- * Lists a pull request's file diffs.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The pull request to list file diffs for.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.FileDiff|FileDiff}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPullRequestFileDiffsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists a pull request's file diffs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The pull request to list file diffs for.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.FileDiff|FileDiff}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPullRequestFileDiffsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPullRequestFileDiffs(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IFileDiff[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IFileDiff[],
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse,
+    ]
+  >;
   listPullRequestFileDiffs(
-      request: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IFileDiff>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IFileDiff
+    >,
+  ): void;
   listPullRequestFileDiffs(
-      request: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IFileDiff>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IFileDiff
+    >,
+  ): void;
   listPullRequestFileDiffs(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IFileDiff>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IFileDiff>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IFileDiff[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IFileDiff
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IFileDiff
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IFileDiff[],
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-      protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IFileDiff>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IFileDiff
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPullRequestFileDiffs values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6328,204 +9172,233 @@ export class SecureSourceManagerClient {
     this._log.info('listPullRequestFileDiffs request %j', request);
     return this.innerApiCalls
       .listPullRequestFileDiffs(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IFileDiff[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse
-      ]) => {
-        this._log.info('listPullRequestFileDiffs values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IFileDiff[],
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsResponse,
+        ]) => {
+          this._log.info('listPullRequestFileDiffs values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPullRequestFileDiffs`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The pull request to list file diffs for.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.FileDiff|FileDiff} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPullRequestFileDiffsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPullRequestFileDiffs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The pull request to list file diffs for.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.FileDiff|FileDiff} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPullRequestFileDiffsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPullRequestFileDiffsStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     const defaultCallSettings = this._defaults['listPullRequestFileDiffs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPullRequestFileDiffs stream %j', request);
     return this.descriptors.page.listPullRequestFileDiffs.createStream(
       this.innerApiCalls.listPullRequestFileDiffs as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPullRequestFileDiffs`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The pull request to list file diffs for.
- *   Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.FileDiff|FileDiff}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_pull_request_file_diffs.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestFileDiffs_async
- */
+  /**
+   * Equivalent to `listPullRequestFileDiffs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The pull request to list file diffs for.
+   *   Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.FileDiff|FileDiff}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_pull_request_file_diffs.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestFileDiffs_async
+   */
   listPullRequestFileDiffsAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IFileDiff>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestFileDiffsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IFileDiff> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     const defaultCallSettings = this._defaults['listPullRequestFileDiffs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPullRequestFileDiffs iterate %j', request);
     return this.descriptors.page.listPullRequestFileDiffs.asyncIterate(
       this.innerApiCalls['listPullRequestFileDiffs'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IFileDiff>;
   }
- /**
- * Fetches a tree from a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.repository
- *   Required. The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
- *   Specifies the repository to fetch the tree from.
- * @param {string} [request.ref]
- *   Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
- *   which tree to fetch. If not specified, the default branch will be used.
- * @param {boolean} [request.recursive]
- *   Optional. If true, include all subfolders and their files in the response.
- *   If false, only the immediate children are returned.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size.  Server may return fewer items than
- *   requested. If unspecified, at most 10,000 items will be returned.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.TreeEntry|TreeEntry}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `fetchTreeAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Fetches a tree from a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the tree from.
+   * @param {string} [request.ref]
+   *   Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
+   *   which tree to fetch. If not specified, the default branch will be used.
+   * @param {boolean} [request.recursive]
+   *   Optional. If true, include all subfolders and their files in the response.
+   *   If false, only the immediate children are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size.  Server may return fewer items than
+   *   requested. If unspecified, at most 10,000 items will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.TreeEntry|TreeEntry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchTreeAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   fetchTree(
-      request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.ITreeEntry[],
-        protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.ITreeEntry[],
+      protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse,
+    ]
+  >;
   fetchTree(
-      request: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-          protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.ITreeEntry>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.ITreeEntry
+    >,
+  ): void;
   fetchTree(
-      request: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-          protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.ITreeEntry>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.ITreeEntry
+    >,
+  ): void;
   fetchTree(
-      request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-          protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.ITreeEntry>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-          protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.ITreeEntry>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.ITreeEntry[],
-        protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.ITreeEntry
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+      | protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.ITreeEntry
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.ITreeEntry[],
+      protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'repository': request.repository ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-      protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.ITreeEntry>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+          | protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.ITreeEntry
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('fetchTree values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6534,211 +9407,240 @@ export class SecureSourceManagerClient {
     this._log.info('fetchTree request %j', request);
     return this.innerApiCalls
       .fetchTree(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.ITreeEntry[],
-        protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse
-      ]) => {
-        this._log.info('fetchTree values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.ITreeEntry[],
+          protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IFetchTreeResponse,
+        ]) => {
+          this._log.info('fetchTree values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `fetchTree`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.repository
- *   Required. The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
- *   Specifies the repository to fetch the tree from.
- * @param {string} [request.ref]
- *   Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
- *   which tree to fetch. If not specified, the default branch will be used.
- * @param {boolean} [request.recursive]
- *   Optional. If true, include all subfolders and their files in the response.
- *   If false, only the immediate children are returned.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size.  Server may return fewer items than
- *   requested. If unspecified, at most 10,000 items will be returned.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.TreeEntry|TreeEntry} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `fetchTreeAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `fetchTree`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the tree from.
+   * @param {string} [request.ref]
+   *   Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
+   *   which tree to fetch. If not specified, the default branch will be used.
+   * @param {boolean} [request.recursive]
+   *   Optional. If true, include all subfolders and their files in the response.
+   *   If false, only the immediate children are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size.  Server may return fewer items than
+   *   requested. If unspecified, at most 10,000 items will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.TreeEntry|TreeEntry} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchTreeAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   fetchTreeStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'repository': request.repository ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
     const defaultCallSettings = this._defaults['fetchTree'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('fetchTree stream %j', request);
     return this.descriptors.page.fetchTree.createStream(
       this.innerApiCalls.fetchTree as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `fetchTree`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.repository
- *   Required. The format is
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
- *   Specifies the repository to fetch the tree from.
- * @param {string} [request.ref]
- *   Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
- *   which tree to fetch. If not specified, the default branch will be used.
- * @param {boolean} [request.recursive]
- *   Optional. If true, include all subfolders and their files in the response.
- *   If false, only the immediate children are returned.
- * @param {number} [request.pageSize]
- *   Optional. Requested page size.  Server may return fewer items than
- *   requested. If unspecified, at most 10,000 items will be returned.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.TreeEntry|TreeEntry}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.fetch_tree.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_FetchTree_async
- */
+  /**
+   * Equivalent to `fetchTree`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.repository
+   *   Required. The format is
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
+   *   Specifies the repository to fetch the tree from.
+   * @param {string} [request.ref]
+   *   Optional. `ref` can be a SHA-1 hash, a branch name, or a tag. Specifies
+   *   which tree to fetch. If not specified, the default branch will be used.
+   * @param {boolean} [request.recursive]
+   *   Optional. If true, include all subfolders and their files in the response.
+   *   If false, only the immediate children are returned.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size.  Server may return fewer items than
+   *   requested. If unspecified, at most 10,000 items will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.TreeEntry|TreeEntry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.fetch_tree.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_FetchTree_async
+   */
   fetchTreeAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.ITreeEntry>{
+    request?: protos.google.cloud.securesourcemanager.v1.IFetchTreeRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.ITreeEntry> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'repository': request.repository ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        repository: request.repository ?? '',
+      });
     const defaultCallSettings = this._defaults['fetchTree'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('fetchTree iterate %j', request);
     return this.descriptors.page.fetchTree.asyncIterate(
       this.innerApiCalls['fetchTree'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.ITreeEntry>;
   }
- /**
- * Lists issues in a repository.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to list issues. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Used to filter the resulting issues list.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listIssuesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists issues in a repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to list issues. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Used to filter the resulting issues list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIssuesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listIssues(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssue[],
-        protos.google.cloud.securesourcemanager.v1.IListIssuesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssue[],
+      protos.google.cloud.securesourcemanager.v1.IListIssuesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListIssuesResponse,
+    ]
+  >;
   listIssues(
-      request: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssuesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssue>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IIssue
+    >,
+  ): void;
   listIssues(
-      request: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssuesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssue>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IIssue
+    >,
+  ): void;
   listIssues(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssuesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssue>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssuesResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssue>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssue[],
-        protos.google.cloud.securesourcemanager.v1.IListIssuesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IIssue
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IIssue
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssue[],
+      protos.google.cloud.securesourcemanager.v1.IListIssuesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListIssuesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-      protos.google.cloud.securesourcemanager.v1.IListIssuesResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IIssue>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IIssue
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listIssues values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6747,199 +9649,228 @@ export class SecureSourceManagerClient {
     this._log.info('listIssues request %j', request);
     return this.innerApiCalls
       .listIssues(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IIssue[],
-        protos.google.cloud.securesourcemanager.v1.IListIssuesRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListIssuesResponse
-      ]) => {
-        this._log.info('listIssues values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IIssue[],
+          protos.google.cloud.securesourcemanager.v1.IListIssuesRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListIssuesResponse,
+        ]) => {
+          this._log.info('listIssues values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listIssues`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to list issues. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Used to filter the resulting issues list.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listIssuesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listIssues`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to list issues. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Used to filter the resulting issues list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIssuesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listIssuesStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listIssues stream %j', request);
     return this.descriptors.page.listIssues.createStream(
       this.innerApiCalls.listIssues as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listIssues`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The repository in which to list issues. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Used to filter the resulting issues list.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_issues.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListIssues_async
- */
+  /**
+   * Equivalent to `listIssues`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The repository in which to list issues. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Used to filter the resulting issues list.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.Issue|Issue}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_issues.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListIssues_async
+   */
   listIssuesAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IIssue>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssuesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IIssue> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listIssues'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listIssues iterate %j', request);
     return this.descriptors.page.listIssues.asyncIterate(
       this.innerApiCalls['listIssues'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IIssue>;
   }
- /**
- * Lists pull request comments.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pull request in which to list pull request comments. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPullRequestCommentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists pull request comments.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pull request in which to list pull request comments. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPullRequestCommentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequestComment[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment[],
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse,
+    ]
+  >;
   listPullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequestComment>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment
+    >,
+  ): void;
   listPullRequestComments(
-      request: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequestComment>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment
+    >,
+  ): void;
   listPullRequestComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequestComment>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IPullRequestComment>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IPullRequestComment[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IPullRequestComment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IPullRequestComment[],
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-      protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IPullRequestComment>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IPullRequestComment
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPullRequestComments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -6948,195 +9879,224 @@ export class SecureSourceManagerClient {
     this._log.info('listPullRequestComments request %j', request);
     return this.innerApiCalls
       .listPullRequestComments(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IPullRequestComment[],
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse
-      ]) => {
-        this._log.info('listPullRequestComments values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IPullRequestComment[],
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsResponse,
+        ]) => {
+          this._log.info('listPullRequestComments values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPullRequestComments`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pull request in which to list pull request comments. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPullRequestCommentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPullRequestComments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pull request in which to list pull request comments. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPullRequestCommentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPullRequestCommentsStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPullRequestComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPullRequestComments stream %j', request);
     return this.descriptors.page.listPullRequestComments.createStream(
       this.innerApiCalls.listPullRequestComments as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPullRequestComments`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The pull request in which to list pull request comments. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_pull_request_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestComments_async
- */
+  /**
+   * Equivalent to `listPullRequestComments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The pull request in which to list pull request comments. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/pullRequests/{pull_request_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.PullRequestComment|PullRequestComment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_pull_request_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestComments_async
+   */
   listPullRequestCommentsAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IPullRequestComment>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListPullRequestCommentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IPullRequestComment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPullRequestComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPullRequestComments iterate %j', request);
     return this.descriptors.page.listPullRequestComments.asyncIterate(
       this.innerApiCalls['listPullRequestComments'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IPullRequestComment>;
   }
- /**
- * Lists comments in an issue.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The issue in which to list the comments. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listIssueCommentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists comments in an issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The issue in which to list the comments. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIssueCommentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listIssueComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssueComment[],
-        protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
-      ]>;
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssueComment[],
+      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse,
+    ]
+  >;
   listIssueComments(
-      request: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssueComment>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IIssueComment
+    >,
+  ): void;
   listIssueComments(
-      request: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssueComment>): void;
+    request: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IIssueComment
+    >,
+  ): void;
   listIssueComments(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssueComment>,
-      callback?: PaginationCallback<
-          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse|null|undefined,
-          protos.google.cloud.securesourcemanager.v1.IIssueComment>):
-      Promise<[
-        protos.google.cloud.securesourcemanager.v1.IIssueComment[],
-        protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
-      ]>|void {
+          | protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IIssueComment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IIssueComment
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IIssueComment[],
+      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-      protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse|null|undefined,
-      protos.google.cloud.securesourcemanager.v1.IIssueComment>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IIssueComment
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listIssueComments values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -7145,137 +10105,141 @@ export class SecureSourceManagerClient {
     this._log.info('listIssueComments request %j', request);
     return this.innerApiCalls
       .listIssueComments(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.securesourcemanager.v1.IIssueComment[],
-        protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest|null,
-        protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse
-      ]) => {
-        this._log.info('listIssueComments values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.securesourcemanager.v1.IIssueComment[],
+          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest | null,
+          protos.google.cloud.securesourcemanager.v1.IListIssueCommentsResponse,
+        ]) => {
+          this._log.info('listIssueComments values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listIssueComments`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The issue in which to list the comments. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listIssueCommentsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listIssueComments`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The issue in which to list the comments. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIssueCommentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listIssueCommentsStream(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listIssueComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listIssueComments stream %j', request);
     return this.descriptors.page.listIssueComments.createStream(
       this.innerApiCalls.listIssueComments as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listIssueComments`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The issue in which to list the comments. Format:
- *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. If unspecified, a default size of 30 will be
- *   used. The maximum value is 100; values above 100 will be coerced to 100.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/secure_source_manager.list_issue_comments.js</caption>
- * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListIssueComments_async
- */
+  /**
+   * Equivalent to `listIssueComments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The issue in which to list the comments. Format:
+   *   `projects/{project_number}/locations/{location_id}/repositories/{repository_id}/issues/{issue_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. If unspecified, a default size of 30 will be
+   *   used. The maximum value is 100; values above 100 will be coerced to 100.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.IssueComment|IssueComment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_issue_comments.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListIssueComments_async
+   */
   listIssueCommentsAsync(
-      request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.securesourcemanager.v1.IIssueComment>{
+    request?: protos.google.cloud.securesourcemanager.v1.IListIssueCommentsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IIssueComment> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listIssueComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listIssueComments iterate %j', request);
     return this.descriptors.page.listIssueComments.asyncIterate(
       this.innerApiCalls['listIssueComments'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IIssueComment>;
   }
-/**
- * Gets the access control policy for a resource. Returns an empty policy
- * if the resource exists and does not have a policy set.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {Object} [request.options]
- *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
- *   `GetIamPolicy`. This field is only used by Cloud IAM.
- *
- *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   getIamPolicy(
     request: IamProtos.google.iam.v1.GetIamPolicyRequest,
     options?:
@@ -7289,40 +10253,40 @@ export class SecureSourceManagerClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.getIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
   setIamPolicy(
     request: IamProtos.google.iam.v1.SetIamPolicyRequest,
     options?:
@@ -7336,41 +10300,41 @@ export class SecureSourceManagerClient {
       IamProtos.google.iam.v1.Policy,
       IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.Policy]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
     return this.iamClient.setIamPolicy(request, options, callback);
   }
 
-/**
- * Returns permissions that a caller has on the specified resource. If the
- * resource does not exist, this will return an empty set of
- * permissions, not a NOT_FOUND error.
- *
- * Note: This operation is designed to be used for building
- * permission-aware UIs and command-line tools, not for authorization
- * checking. This operation may "fail open" without warning.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   REQUIRED: The resource for which the policy detail is being requested.
- *   See the operation documentation for the appropriate value for this field.
- * @param {string[]} request.permissions
- *   The set of permissions to check for the `resource`. Permissions with
- *   wildcards (such as '*' or 'storage.*') are not allowed. For more
- *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
- * @param {Object} [options]
- *   Optional parameters. You can override the default settings for this call, e.g, timeout,
- *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
- * @param {function(?Error, ?Object)} [callback]
- *   The function which will be called with the result of the API call.
- *
- *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
- *   The promise has a method named "cancel" which cancels the ongoing API call.
- *
- */
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
   testIamPermissions(
     request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
     options?:
@@ -7384,12 +10348,12 @@ export class SecureSourceManagerClient {
       IamProtos.google.iam.v1.TestIamPermissionsResponse,
       IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
       {} | null | undefined
-    >
-  ):Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
     return this.iamClient.testIamPermissions(request, options, callback);
   }
 
-/**
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -7424,12 +10388,11 @@ export class SecureSourceManagerClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -7462,12 +10425,12 @@ export class SecureSourceManagerClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
-/**
+  /**
    * Gets the latest state of a long-running operation.  Clients can use this
    * method to poll the operation result at intervals as recommended by the API
    * service.
@@ -7510,22 +10473,22 @@ export class SecureSourceManagerClient {
       protos.google.longrunning.Operation,
       protos.google.longrunning.GetOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<[protos.google.longrunning.Operation]> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.getOperation(request, options, callback);
   }
   /**
@@ -7560,15 +10523,15 @@ export class SecureSourceManagerClient {
    */
   listOperationsAsync(
     request: protos.google.longrunning.ListOperationsRequest,
-    options?: gax.CallOptions
+    options?: gax.CallOptions,
   ): AsyncIterable<protos.google.longrunning.IOperation> {
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.listOperationsAsync(request, options);
   }
   /**
@@ -7602,7 +10565,7 @@ export class SecureSourceManagerClient {
    * await client.cancelOperation({name: ''});
    * ```
    */
-   cancelOperation(
+  cancelOperation(
     request: protos.google.longrunning.CancelOperationRequest,
     optionsOrCallback?:
       | gax.CallOptions
@@ -7615,25 +10578,24 @@ export class SecureSourceManagerClient {
       protos.google.longrunning.CancelOperationRequest,
       protos.google.protobuf.Empty,
       {} | undefined | null
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.cancelOperation(request, options, callback);
   }
-
   /**
    * Deletes a long-running operation. This method indicates that the client is
    * no longer interested in the operation result. It does not cancel the
@@ -7672,22 +10634,22 @@ export class SecureSourceManagerClient {
       protos.google.protobuf.Empty,
       protos.google.longrunning.DeleteOperationRequest,
       {} | null | undefined
-    >
+    >,
   ): Promise<protos.google.protobuf.Empty> {
-     let options: gax.CallOptions;
-     if (typeof optionsOrCallback === 'function' && callback === undefined) {
-       callback = optionsOrCallback;
-       options = {};
-     } else {
-       options = optionsOrCallback as gax.CallOptions;
-     }
-     options = options || {};
-     options.otherArgs = options.otherArgs || {};
-     options.otherArgs.headers = options.otherArgs.headers || {};
-     options.otherArgs.headers['x-goog-request-params'] =
-       this._gaxModule.routingHeader.fromParams({
-         name: request.name ?? '',
-       });
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
     return this.operationsClient.deleteOperation(request, options, callback);
   }
 
@@ -7704,7 +10666,12 @@ export class SecureSourceManagerClient {
    * @param {string} branch_rule
    * @returns {string} Resource name string.
    */
-  branchRulePath(project:string,location:string,repository:string,branchRule:string) {
+  branchRulePath(
+    project: string,
+    location: string,
+    repository: string,
+    branchRule: string,
+  ) {
     return this.pathTemplates.branchRulePathTemplate.render({
       project: project,
       location: location,
@@ -7721,7 +10688,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBranchRuleName(branchRuleName: string) {
-    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName).project;
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .project;
   }
 
   /**
@@ -7732,7 +10700,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBranchRuleName(branchRuleName: string) {
-    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName).location;
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .location;
   }
 
   /**
@@ -7743,7 +10712,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromBranchRuleName(branchRuleName: string) {
-    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName).repository;
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .repository;
   }
 
   /**
@@ -7754,7 +10724,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the branch_rule.
    */
   matchBranchRuleFromBranchRuleName(branchRuleName: string) {
-    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName).branch_rule;
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .branch_rule;
   }
 
   /**
@@ -7766,7 +10737,12 @@ export class SecureSourceManagerClient {
    * @param {string} crypto_key
    * @returns {string} Resource name string.
    */
-  cryptoKeyPath(project:string,location:string,keyRing:string,cryptoKey:string) {
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+  ) {
     return this.pathTemplates.cryptoKeyPathTemplate.render({
       project: project,
       location: location,
@@ -7783,7 +10759,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).project;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
   }
 
   /**
@@ -7794,7 +10771,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).location;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
   }
 
   /**
@@ -7805,7 +10783,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the key_ring.
    */
   matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key_ring;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
   }
 
   /**
@@ -7816,7 +10795,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the crypto_key.
    */
   matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
-    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).crypto_key;
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
   }
 
   /**
@@ -7828,7 +10808,12 @@ export class SecureSourceManagerClient {
    * @param {string} hook
    * @returns {string} Resource name string.
    */
-  hookPath(project:string,location:string,repository:string,hook:string) {
+  hookPath(
+    project: string,
+    location: string,
+    repository: string,
+    hook: string,
+  ) {
     return this.pathTemplates.hookPathTemplate.render({
       project: project,
       location: location,
@@ -7889,7 +10874,7 @@ export class SecureSourceManagerClient {
    * @param {string} instance
    * @returns {string} Resource name string.
    */
-  instancePath(project:string,location:string,instance:string) {
+  instancePath(project: string, location: string, instance: string) {
     return this.pathTemplates.instancePathTemplate.render({
       project: project,
       location: location,
@@ -7939,7 +10924,12 @@ export class SecureSourceManagerClient {
    * @param {string} issue
    * @returns {string} Resource name string.
    */
-  issuePath(project:string,location:string,repository:string,issue:string) {
+  issuePath(
+    project: string,
+    location: string,
+    repository: string,
+    issue: string,
+  ) {
     return this.pathTemplates.issuePathTemplate.render({
       project: project,
       location: location,
@@ -8002,7 +10992,13 @@ export class SecureSourceManagerClient {
    * @param {string} comment
    * @returns {string} Resource name string.
    */
-  issueCommentPath(project:string,location:string,repository:string,issue:string,comment:string) {
+  issueCommentPath(
+    project: string,
+    location: string,
+    repository: string,
+    issue: string,
+    comment: string,
+  ) {
     return this.pathTemplates.issueCommentPathTemplate.render({
       project: project,
       location: location,
@@ -8020,7 +11016,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromIssueCommentName(issueCommentName: string) {
-    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName).project;
+    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName)
+      .project;
   }
 
   /**
@@ -8031,7 +11028,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromIssueCommentName(issueCommentName: string) {
-    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName).location;
+    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName)
+      .location;
   }
 
   /**
@@ -8042,7 +11040,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromIssueCommentName(issueCommentName: string) {
-    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName).repository;
+    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName)
+      .repository;
   }
 
   /**
@@ -8053,7 +11052,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the issue.
    */
   matchIssueFromIssueCommentName(issueCommentName: string) {
-    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName).issue;
+    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName)
+      .issue;
   }
 
   /**
@@ -8064,7 +11064,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the comment.
    */
   matchCommentFromIssueCommentName(issueCommentName: string) {
-    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName).comment;
+    return this.pathTemplates.issueCommentPathTemplate.match(issueCommentName)
+      .comment;
   }
 
   /**
@@ -8074,7 +11075,7 @@ export class SecureSourceManagerClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -8109,7 +11110,7 @@ export class SecureSourceManagerClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -8135,7 +11136,12 @@ export class SecureSourceManagerClient {
    * @param {string} pull_request
    * @returns {string} Resource name string.
    */
-  pullRequestPath(project:string,location:string,repository:string,pullRequest:string) {
+  pullRequestPath(
+    project: string,
+    location: string,
+    repository: string,
+    pullRequest: string,
+  ) {
     return this.pathTemplates.pullRequestPathTemplate.render({
       project: project,
       location: location,
@@ -8152,7 +11158,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPullRequestName(pullRequestName: string) {
-    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName).project;
+    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName)
+      .project;
   }
 
   /**
@@ -8163,7 +11170,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPullRequestName(pullRequestName: string) {
-    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName).location;
+    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName)
+      .location;
   }
 
   /**
@@ -8174,7 +11182,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromPullRequestName(pullRequestName: string) {
-    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName).repository;
+    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName)
+      .repository;
   }
 
   /**
@@ -8185,7 +11194,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the pull_request.
    */
   matchPullRequestFromPullRequestName(pullRequestName: string) {
-    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName).pull_request;
+    return this.pathTemplates.pullRequestPathTemplate.match(pullRequestName)
+      .pull_request;
   }
 
   /**
@@ -8198,7 +11208,13 @@ export class SecureSourceManagerClient {
    * @param {string} comment
    * @returns {string} Resource name string.
    */
-  pullRequestCommentPath(project:string,location:string,repository:string,pullRequest:string,comment:string) {
+  pullRequestCommentPath(
+    project: string,
+    location: string,
+    repository: string,
+    pullRequest: string,
+    comment: string,
+  ) {
     return this.pathTemplates.pullRequestCommentPathTemplate.render({
       project: project,
       location: location,
@@ -8216,7 +11232,9 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromPullRequestCommentName(pullRequestCommentName: string) {
-    return this.pathTemplates.pullRequestCommentPathTemplate.match(pullRequestCommentName).project;
+    return this.pathTemplates.pullRequestCommentPathTemplate.match(
+      pullRequestCommentName,
+    ).project;
   }
 
   /**
@@ -8227,7 +11245,9 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromPullRequestCommentName(pullRequestCommentName: string) {
-    return this.pathTemplates.pullRequestCommentPathTemplate.match(pullRequestCommentName).location;
+    return this.pathTemplates.pullRequestCommentPathTemplate.match(
+      pullRequestCommentName,
+    ).location;
   }
 
   /**
@@ -8238,7 +11258,9 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromPullRequestCommentName(pullRequestCommentName: string) {
-    return this.pathTemplates.pullRequestCommentPathTemplate.match(pullRequestCommentName).repository;
+    return this.pathTemplates.pullRequestCommentPathTemplate.match(
+      pullRequestCommentName,
+    ).repository;
   }
 
   /**
@@ -8249,7 +11271,9 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the pull_request.
    */
   matchPullRequestFromPullRequestCommentName(pullRequestCommentName: string) {
-    return this.pathTemplates.pullRequestCommentPathTemplate.match(pullRequestCommentName).pull_request;
+    return this.pathTemplates.pullRequestCommentPathTemplate.match(
+      pullRequestCommentName,
+    ).pull_request;
   }
 
   /**
@@ -8260,7 +11284,9 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the comment.
    */
   matchCommentFromPullRequestCommentName(pullRequestCommentName: string) {
-    return this.pathTemplates.pullRequestCommentPathTemplate.match(pullRequestCommentName).comment;
+    return this.pathTemplates.pullRequestCommentPathTemplate.match(
+      pullRequestCommentName,
+    ).comment;
   }
 
   /**
@@ -8271,7 +11297,7 @@ export class SecureSourceManagerClient {
    * @param {string} repository
    * @returns {string} Resource name string.
    */
-  repositoryPath(project:string,location:string,repository:string) {
+  repositoryPath(project: string, location: string, repository: string) {
     return this.pathTemplates.repositoryPathTemplate.render({
       project: project,
       location: location,
@@ -8287,7 +11313,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).project;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .project;
   }
 
   /**
@@ -8298,7 +11325,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).location;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .location;
   }
 
   /**
@@ -8309,7 +11337,8 @@ export class SecureSourceManagerClient {
    * @returns {string} A string representing the repository.
    */
   matchRepositoryFromRepositoryName(repositoryName: string) {
-    return this.pathTemplates.repositoryPathTemplate.match(repositoryName).repository;
+    return this.pathTemplates.repositoryPathTemplate.match(repositoryName)
+      .repository;
   }
 
   /**
@@ -8320,12 +11349,16 @@ export class SecureSourceManagerClient {
    */
   close(): Promise<void> {
     if (this.secureSourceManagerStub && !this._terminated) {
-      return this.secureSourceManagerStub.then(stub => {
+      return this.secureSourceManagerStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch(err => {throw err});
-        this.locationsClient.close().catch(err => {throw err});
+        this.iamClient.close().catch((err) => {
+          throw err;
+        });
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }
