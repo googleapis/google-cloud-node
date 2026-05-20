@@ -19,7 +19,6 @@ import {Bucket, File, HmacKey, Notification, Storage} from '../src/';
 import * as uuid from 'uuid';
 import * as assert from 'assert';
 import {DecorateRequestOptions} from '../src/nodejs-common';
-import fetch from 'node-fetch';
 
 interface RetryCase {
   instructions: String[];
