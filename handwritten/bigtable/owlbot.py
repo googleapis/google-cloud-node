@@ -163,7 +163,7 @@ if staging.is_dir():
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_mono_repo_library(
-  relative_dir="handwritten/bigtable",
+  relative_dir="handwritten/bigtable", 
   source_location='build/src'
 )
 s.copy(templates,destination="handwritten/bigtable", excludes=[
