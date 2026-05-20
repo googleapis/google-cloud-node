@@ -62,7 +62,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 156,
+          "end": 164,
           "type": "FULL"
         }
       ],
@@ -411,7 +411,7 @@
       "regionTag": "health_v4_generated_DataPointsService_ExportExerciseTcx_async",
       "title": "DataPointsService exportExerciseTcx Sample",
       "origin": "API_DEFINITION",
-      "description": " Exports exercise data in TCX format. Note: While the Authorization section below states that any one of the listed scopes is accepted, this specific method requires the user to provide both one of the `activity_and_fitness` scopes (`normal` or `readonly`) AND one of the `location` scopes (`normal` or `readonly`) in their access token to succeed.",
+      "description": " Exports exercise data in TCX format. **IMPORTANT:** HTTP clients must append `?alt=media` to the request URL to download the raw TCX file. Example: `https://health.googleapis.com/v4/users/me/dataTypes/exercise/dataPoints/EXERCISE_ID:exportExerciseTcx?alt=media` Without `alt=media`, the server returns a JSON response (`ExportExerciseTcxResponse`) which is intended primarily for gRPC clients. **Note:** While the Authorization section below states that any one of the listed scopes is accepted, this specific method requires the user to provide both one of the `activity_and_fitness` scopes (`normal` or `readonly`) AND one of the `location` scopes (`normal` or `readonly`) in their access token to succeed.",
       "canonical": true,
       "file": "data_points_service.export_exercise_tcx.js",
       "language": "JAVASCRIPT",
@@ -447,6 +447,190 @@
           "service": {
             "shortName": "DataPointsService",
             "fullName": "google.devicesandservices.health.v4.DataPointsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "health_v4_generated_DataSubscriptionService_CreateSubscriber_async",
+      "title": "DataPointsService createSubscriber Sample",
+      "origin": "API_DEFINITION",
+      "description": " Registers a new subscriber endpoint to receive notifications. A subscriber represents an application or service that wishes to receive data change notifications for users who have granted consent. **Endpoint Verification:** For a subscriber to be successfully created, the provided `endpoint_uri` must be a valid HTTPS endpoint and must pass an automated verification check. The backend will send two HTTP POST requests to the `endpoint_uri`: 1.  **Verification with Authorization:**     *   **Headers:** Includes `Content-Type: application/json` and         `Authorization` (with the exact value from         `CreateSubscriberPayload.endpoint_authorization.secret`).     *   **Body:** `{\"type\": \"verification\"}`     *   **Expected Response:** HTTP `201 Created`. 2.  **Verification without Authorization:**     *   **Headers:** Includes `Content-Type: application/json`. The         `Authorization` header is OMITTED.     *   **Body:** `{\"type\": \"verification\"}`     *   **Expected Response:** HTTP `401 Unauthorized` or `403 Forbidden`. Both tests must pass for the subscriber creation to succeed. If verification fails, the operation will not be completed and an error will be returned. This process ensures the endpoint is reachable and correctly validates the `Authorization` header.",
+      "canonical": true,
+      "file": "data_subscription_service.create_subscriber.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSubscriber",
+        "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.CreateSubscriber",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "subscriber",
+            "type": ".google.devicesandservices.health.v4.CreateSubscriberPayload"
+          },
+          {
+            "name": "subscriber_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataSubscriptionServiceClient",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionServiceClient"
+        },
+        "method": {
+          "shortName": "CreateSubscriber",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.CreateSubscriber",
+          "service": {
+            "shortName": "DataSubscriptionService",
+            "fullName": "google.devicesandservices.health.v4.DataSubscriptionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "health_v4_generated_DataSubscriptionService_ListSubscribers_async",
+      "title": "DataPointsService listSubscribers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all subscribers registered within the owned Google Cloud Project.",
+      "canonical": true,
+      "file": "data_subscription_service.list_subscribers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSubscribers",
+        "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.ListSubscribers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devicesandservices.health.v4.ListSubscribersResponse",
+        "client": {
+          "shortName": "DataSubscriptionServiceClient",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionServiceClient"
+        },
+        "method": {
+          "shortName": "ListSubscribers",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.ListSubscribers",
+          "service": {
+            "shortName": "DataSubscriptionService",
+            "fullName": "google.devicesandservices.health.v4.DataSubscriptionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "health_v4_generated_DataSubscriptionService_UpdateSubscriber_async",
+      "title": "DataPointsService updateSubscriber Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the configuration of an existing subscriber, such as the endpoint URI or the data types it's interested in. **Endpoint Verification:** If the `endpoint_uri` or `endpoint_authorization` field is included in the `update_mask`, the backend will re-verify the endpoint. The verification process is the same as described in `CreateSubscriber`: 1.  **Verification with Authorization:** POST to the new or existing     `endpoint_uri` with the new or existing `Authorization` secret. Expects     HTTP `201 Created`. 2.  **Verification without Authorization:** POST to the `endpoint_uri`     without the `Authorization` header. Expects HTTP `401 Unauthorized` or     `403 Forbidden`. Both tests must pass using the potentially updated values for the subscriber update to succeed. If verification fails, the update will not be applied, and an error will be returned.",
+      "canonical": true,
+      "file": "data_subscription_service.update_subscriber.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSubscriber",
+        "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.UpdateSubscriber",
+        "async": true,
+        "parameters": [
+          {
+            "name": "subscriber",
+            "type": ".google.devicesandservices.health.v4.Subscriber"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataSubscriptionServiceClient",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSubscriber",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.UpdateSubscriber",
+          "service": {
+            "shortName": "DataSubscriptionService",
+            "fullName": "google.devicesandservices.health.v4.DataSubscriptionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "health_v4_generated_DataSubscriptionService_DeleteSubscriber_async",
+      "title": "DataPointsService deleteSubscriber Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a subscriber registration. This will stop all notifications to the subscriber's endpoint.",
+      "canonical": true,
+      "file": "data_subscription_service.delete_subscriber.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSubscriber",
+        "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.DeleteSubscriber",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataSubscriptionServiceClient",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSubscriber",
+          "fullName": "google.devicesandservices.health.v4.DataSubscriptionService.DeleteSubscriber",
+          "service": {
+            "shortName": "DataSubscriptionService",
+            "fullName": "google.devicesandservices.health.v4.DataSubscriptionService"
           }
         }
       }

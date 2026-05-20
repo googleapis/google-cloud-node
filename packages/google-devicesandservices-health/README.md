@@ -66,6 +66,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reconcile data points | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/data_points_service.reconcile_data_points.js) |
 | roll up data points | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/data_points_service.roll_up_data_points.js) |
 | update data point | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/data_points_service.update_data_point.js) |
+| create subscriber | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/data_subscription_service.create_subscriber.js) |
+| delete subscriber | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/data_subscription_service.delete_subscriber.js) |
+| list subscribers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/data_subscription_service.list_subscribers.js) |
+| update subscriber | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/data_subscription_service.update_subscriber.js) |
 | get identity | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/health_profile_service.get_identity.js) |
 | get profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/health_profile_service.get_profile.js) |
 | get settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/health_profile_service.get_settings.js) |
@@ -105,7 +109,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +119,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

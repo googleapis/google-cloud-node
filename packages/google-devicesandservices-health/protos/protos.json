@@ -193,6 +193,13 @@
                       }
                     },
                     "ActiveZoneMinutes": {
+                      "oneofs": {
+                        "_activeZoneMinutes": {
+                          "oneof": [
+                            "activeZoneMinutes"
+                          ]
+                        }
+                      },
                       "fields": {
                         "interval": {
                           "type": "ObservationTimeInterval",
@@ -212,7 +219,8 @@
                           "type": "int64",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -228,18 +236,44 @@
                       }
                     },
                     "ActiveZoneMinutesRollupValue": {
+                      "oneofs": {
+                        "_sumInCardioHeartZone": {
+                          "oneof": [
+                            "sumInCardioHeartZone"
+                          ]
+                        },
+                        "_sumInPeakHeartZone": {
+                          "oneof": [
+                            "sumInPeakHeartZone"
+                          ]
+                        },
+                        "_sumInFatBurnHeartZone": {
+                          "oneof": [
+                            "sumInFatBurnHeartZone"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sumInCardioHeartZone": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "sumInPeakHeartZone": {
                           "type": "int64",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "sumInFatBurnHeartZone": {
                           "type": "int64",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -263,6 +297,13 @@
                       },
                       "nested": {
                         "ActiveMinutesByActivityLevel": {
+                          "oneofs": {
+                            "_activeMinutes": {
+                              "oneof": [
+                                "activeMinutes"
+                              ]
+                            }
+                          },
                           "fields": {
                             "activityLevel": {
                               "type": "ActivityLevel",
@@ -275,7 +316,8 @@
                               "type": "int64",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -300,6 +342,13 @@
                       },
                       "nested": {
                         "ActiveMinutesRollupByActivityLevel": {
+                          "oneofs": {
+                            "_activeMinutesSum": {
+                              "oneof": [
+                                "activeMinutesSum"
+                              ]
+                            }
+                          },
                           "fields": {
                             "activityLevel": {
                               "type": "ActiveMinutes.ActivityLevel",
@@ -307,7 +356,10 @@
                             },
                             "activeMinutesSum": {
                               "type": "int64",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         }
@@ -366,6 +418,13 @@
                       }
                     },
                     "Altitude": {
+                      "oneofs": {
+                        "_gainMillimeters": {
+                          "oneof": [
+                            "gainMillimeters"
+                          ]
+                        }
+                      },
                       "fields": {
                         "interval": {
                           "type": "ObservationTimeInterval",
@@ -378,12 +437,20 @@
                           "type": "int64",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "BasalEnergyBurned": {
+                      "oneofs": {
+                        "_kcal": {
+                          "oneof": [
+                            "kcal"
+                          ]
+                        }
+                      },
                       "fields": {
                         "interval": {
                           "type": "ObservationTimeInterval",
@@ -396,12 +463,20 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "BodyFat": {
+                      "oneofs": {
+                        "_percentage": {
+                          "oneof": [
+                            "percentage"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -414,16 +489,27 @@
                           "type": "double",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "BodyFatRollupValue": {
+                      "oneofs": {
+                        "_bodyFatPercentageAvg": {
+                          "oneof": [
+                            "bodyFatPercentageAvg"
+                          ]
+                        }
+                      },
                       "fields": {
                         "bodyFatPercentageAvg": {
                           "type": "double",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -437,6 +523,13 @@
                       },
                       "nested": {
                         "CaloriesInHeartRateZoneValue": {
+                          "oneofs": {
+                            "_kcal": {
+                              "oneof": [
+                                "kcal"
+                              ]
+                            }
+                          },
                           "fields": {
                             "heartRateZone": {
                               "type": "HeartRateZoneType",
@@ -444,7 +537,10 @@
                             },
                             "kcal": {
                               "type": "double",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         }
@@ -470,6 +566,18 @@
                       },
                       "nested": {
                         "HeartRateZone": {
+                          "oneofs": {
+                            "_minBeatsPerMinute": {
+                              "oneof": [
+                                "minBeatsPerMinute"
+                              ]
+                            },
+                            "_maxBeatsPerMinute": {
+                              "oneof": [
+                                "maxBeatsPerMinute"
+                              ]
+                            }
+                          },
                           "fields": {
                             "heartRateZoneType": {
                               "type": "HeartRateZoneType",
@@ -482,14 +590,16 @@
                               "type": "int64",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
                               }
                             },
                             "maxBeatsPerMinute": {
                               "type": "int64",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -562,6 +672,13 @@
                       }
                     },
                     "DailyRespiratoryRate": {
+                      "oneofs": {
+                        "_breathsPerMinute": {
+                          "oneof": [
+                            "breathsPerMinute"
+                          ]
+                        }
+                      },
                       "fields": {
                         "date": {
                           "type": "google.type.Date",
@@ -574,12 +691,35 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "DailyOxygenSaturation": {
+                      "oneofs": {
+                        "_averagePercentage": {
+                          "oneof": [
+                            "averagePercentage"
+                          ]
+                        },
+                        "_lowerBoundPercentage": {
+                          "oneof": [
+                            "lowerBoundPercentage"
+                          ]
+                        },
+                        "_upperBoundPercentage": {
+                          "oneof": [
+                            "upperBoundPercentage"
+                          ]
+                        },
+                        "_standardDeviationPercentage": {
+                          "oneof": [
+                            "standardDeviationPercentage"
+                          ]
+                        }
+                      },
                       "fields": {
                         "date": {
                           "type": "google.type.Date",
@@ -592,33 +732,44 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "lowerBoundPercentage": {
                           "type": "double",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "upperBoundPercentage": {
                           "type": "double",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "standardDeviationPercentage": {
                           "type": "double",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "DailyRestingHeartRate": {
+                      "oneofs": {
+                        "_beatsPerMinute": {
+                          "oneof": [
+                            "beatsPerMinute"
+                          ]
+                        }
+                      },
                       "fields": {
                         "date": {
                           "type": "google.type.Date",
@@ -631,7 +782,8 @@
                           "type": "int64",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "dailyRestingHeartRateMetadata": {
@@ -666,6 +818,23 @@
                       }
                     },
                     "DailySleepTemperatureDerivations": {
+                      "oneofs": {
+                        "_nightlyTemperatureCelsius": {
+                          "oneof": [
+                            "nightlyTemperatureCelsius"
+                          ]
+                        },
+                        "_baselineTemperatureCelsius": {
+                          "oneof": [
+                            "baselineTemperatureCelsius"
+                          ]
+                        },
+                        "_relativeNightlyStddev_30dCelsius": {
+                          "oneof": [
+                            "relativeNightlyStddev_30dCelsius"
+                          ]
+                        }
+                      },
                       "fields": {
                         "date": {
                           "type": "google.type.Date",
@@ -678,26 +847,41 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "baselineTemperatureCelsius": {
                           "type": "double",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "relativeNightlyStddev_30dCelsius": {
                           "type": "double",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "DailyVO2Max": {
+                      "oneofs": {
+                        "_vo2Max": {
+                          "oneof": [
+                            "vo2Max"
+                          ]
+                        },
+                        "_vo2MaxCovariance": {
+                          "oneof": [
+                            "vo2MaxCovariance"
+                          ]
+                        }
+                      },
                       "fields": {
                         "date": {
                           "type": "google.type.Date",
@@ -710,7 +894,8 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "estimated": {
@@ -731,7 +916,8 @@
                           "type": "double",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -750,6 +936,13 @@
                       }
                     },
                     "Distance": {
+                      "oneofs": {
+                        "_millimeters": {
+                          "oneof": [
+                            "millimeters"
+                          ]
+                        }
+                      },
                       "fields": {
                         "interval": {
                           "type": "ObservationTimeInterval",
@@ -762,16 +955,27 @@
                           "type": "int64",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "DistanceRollupValue": {
+                      "oneofs": {
+                        "_millimetersSum": {
+                          "oneof": [
+                            "millimetersSum"
+                          ]
+                        }
+                      },
                       "fields": {
                         "millimetersSum": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -969,12 +1173,20 @@
                           }
                         },
                         "ExerciseMetadata": {
+                          "oneofs": {
+                            "_poolLengthMillimeters": {
+                              "oneof": [
+                                "poolLengthMillimeters"
+                              ]
+                            }
+                          },
                           "fields": {
                             "poolLengthMillimeters": {
                               "type": "int64",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             },
                             "hasGps": {
@@ -1006,6 +1218,13 @@
                       }
                     },
                     "Floors": {
+                      "oneofs": {
+                        "_count": {
+                          "oneof": [
+                            "count"
+                          ]
+                        }
+                      },
                       "fields": {
                         "interval": {
                           "type": "ObservationTimeInterval",
@@ -1018,28 +1237,56 @@
                           "type": "int64",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "FloorsRollupValue": {
+                      "oneofs": {
+                        "_countSum": {
+                          "oneof": [
+                            "countSum"
+                          ]
+                        }
+                      },
                       "fields": {
                         "countSum": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
                     "AltitudeRollupValue": {
+                      "oneofs": {
+                        "_gainMillimetersSum": {
+                          "oneof": [
+                            "gainMillimetersSum"
+                          ]
+                        }
+                      },
                       "fields": {
                         "gainMillimetersSum": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
                     "HeartRate": {
+                      "oneofs": {
+                        "_beatsPerMinute": {
+                          "oneof": [
+                            "beatsPerMinute"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -1052,7 +1299,8 @@
                           "type": "int64",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "metadata": {
@@ -1147,22 +1395,55 @@
                       }
                     },
                     "RunVO2MaxRollupValue": {
+                      "oneofs": {
+                        "_rateMin": {
+                          "oneof": [
+                            "rateMin"
+                          ]
+                        },
+                        "_rateMax": {
+                          "oneof": [
+                            "rateMax"
+                          ]
+                        },
+                        "_rateAvg": {
+                          "oneof": [
+                            "rateAvg"
+                          ]
+                        }
+                      },
                       "fields": {
                         "rateMin": {
                           "type": "double",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "rateMax": {
                           "type": "double",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "rateAvg": {
                           "type": "double",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
                     "RunVO2Max": {
+                      "oneofs": {
+                        "_runVo2Max": {
+                          "oneof": [
+                            "runVo2Max"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -1175,7 +1456,8 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1211,6 +1493,13 @@
                       }
                     },
                     "Height": {
+                      "oneofs": {
+                        "_heightMillimeters": {
+                          "oneof": [
+                            "heightMillimeters"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -1223,12 +1512,25 @@
                           "type": "int64",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "HeartRateVariability": {
+                      "oneofs": {
+                        "_rootMeanSquareOfSuccessiveDifferencesMilliseconds": {
+                          "oneof": [
+                            "rootMeanSquareOfSuccessiveDifferencesMilliseconds"
+                          ]
+                        },
+                        "_standardDeviationMilliseconds": {
+                          "oneof": [
+                            "standardDeviationMilliseconds"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -1241,25 +1543,35 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "standardDeviationMilliseconds": {
                           "type": "double",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "VolumeQuantity": {
+                      "oneofs": {
+                        "_milliliters": {
+                          "oneof": [
+                            "milliliters"
+                          ]
+                        }
+                      },
                       "fields": {
                         "milliliters": {
                           "type": "double",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "userProvidedUnit": {
@@ -1298,12 +1610,20 @@
                       },
                       "nested": {
                         "VolumeQuantityRollup": {
+                          "oneofs": {
+                            "_millilitersSum": {
+                              "oneof": [
+                                "millilitersSum"
+                              ]
+                            }
+                          },
                           "fields": {
                             "millilitersSum": {
                               "type": "double",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
                               }
                             },
                             "userProvidedUnitLast": {
@@ -1567,6 +1887,13 @@
                       }
                     },
                     "OxygenSaturation": {
+                      "oneofs": {
+                        "_percentage": {
+                          "oneof": [
+                            "percentage"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -1579,7 +1906,8 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -1654,26 +1982,46 @@
                       },
                       "nested": {
                         "RespiratoryRateSleepSummaryStatistics": {
+                          "oneofs": {
+                            "_breathsPerMinute": {
+                              "oneof": [
+                                "breathsPerMinute"
+                              ]
+                            },
+                            "_standardDeviation": {
+                              "oneof": [
+                                "standardDeviation"
+                              ]
+                            },
+                            "_signalToNoise": {
+                              "oneof": [
+                                "signalToNoise"
+                              ]
+                            }
+                          },
                           "fields": {
                             "breathsPerMinute": {
                               "type": "double",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
                               }
                             },
                             "standardDeviation": {
                               "type": "double",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             },
                             "signalToNoise": {
                               "type": "double",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -1962,6 +2310,18 @@
                           },
                           "nested": {
                             "StageSummary": {
+                              "oneofs": {
+                                "_minutes": {
+                                  "oneof": [
+                                    "minutes"
+                                  ]
+                                },
+                                "_count": {
+                                  "oneof": [
+                                    "count"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "type": {
                                   "type": "SleepStageType",
@@ -1974,14 +2334,16 @@
                                   "type": "int64",
                                   "id": 2,
                                   "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
                                   }
                                 },
                                 "count": {
                                   "type": "int64",
                                   "id": 3,
                                   "options": {
-                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                    "proto3_optional": true
                                   }
                                 }
                               }
@@ -2009,6 +2371,13 @@
                       }
                     },
                     "Steps": {
+                      "oneofs": {
+                        "_count": {
+                          "oneof": [
+                            "count"
+                          ]
+                        }
+                      },
                       "fields": {
                         "interval": {
                           "type": "ObservationTimeInterval",
@@ -2021,20 +2390,38 @@
                           "type": "int64",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       }
                     },
                     "StepsRollupValue": {
+                      "oneofs": {
+                        "_countSum": {
+                          "oneof": [
+                            "countSum"
+                          ]
+                        }
+                      },
                       "fields": {
                         "countSum": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
                     "SwimLengthsData": {
+                      "oneofs": {
+                        "_strokeCount": {
+                          "oneof": [
+                            "strokeCount"
+                          ]
+                        }
+                      },
                       "fields": {
                         "interval": {
                           "type": "ObservationTimeInterval",
@@ -2054,7 +2441,8 @@
                           "type": "int64",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         }
                       },
@@ -2071,10 +2459,20 @@
                       }
                     },
                     "SwimLengthsDataRollupValue": {
+                      "oneofs": {
+                        "_strokeCountSum": {
+                          "oneof": [
+                            "strokeCountSum"
+                          ]
+                        }
+                      },
                       "fields": {
                         "strokeCountSum": {
                           "type": "int64",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -2120,14 +2518,31 @@
                       }
                     },
                     "TotalCaloriesRollupValue": {
+                      "oneofs": {
+                        "_kcalSum": {
+                          "oneof": [
+                            "kcalSum"
+                          ]
+                        }
+                      },
                       "fields": {
                         "kcalSum": {
                           "type": "double",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
                     "VO2Max": {
+                      "oneofs": {
+                        "_vo2Max": {
+                          "oneof": [
+                            "vo2Max"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -2140,7 +2555,8 @@
                           "type": "double",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "measurementMethod": {
@@ -2171,6 +2587,13 @@
                       }
                     },
                     "Weight": {
+                      "oneofs": {
+                        "_weightGrams": {
+                          "oneof": [
+                            "weightGrams"
+                          ]
+                        }
+                      },
                       "fields": {
                         "sampleTime": {
                           "type": "ObservationSampleTime",
@@ -2183,7 +2606,8 @@
                           "type": "double",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
                           }
                         },
                         "notes": {
@@ -2196,10 +2620,20 @@
                       }
                     },
                     "WeightRollupValue": {
+                      "oneofs": {
+                        "_weightGramsAvg": {
+                          "oneof": [
+                            "weightGramsAvg"
+                          ]
+                        }
+                      },
                       "fields": {
                         "weightGramsAvg": {
                           "type": "double",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -3531,6 +3965,372 @@
                         }
                       }
                     },
+                    "DataSubscriptionService": {
+                      "options": {
+                        "(google.api.default_host)": "health.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "CreateSubscriber": {
+                          "requestType": "CreateSubscriberRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v4/{parent=projects/*}/subscribers",
+                            "(google.api.http).body": "subscriber",
+                            "(google.api.method_signature)": "parent,subscriber,subscriber_id",
+                            "(google.longrunning.operation_info).response_type": "Subscriber",
+                            "(google.longrunning.operation_info).metadata_type": "CreateSubscriberMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v4/{parent=projects/*}/subscribers",
+                                "body": "subscriber"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,subscriber,subscriber_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Subscriber",
+                                "metadata_type": "CreateSubscriberMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListSubscribers": {
+                          "requestType": "ListSubscribersRequest",
+                          "responseType": "ListSubscribersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v4/{parent=projects/*}/subscribers",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v4/{parent=projects/*}/subscribers"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateSubscriber": {
+                          "requestType": "UpdateSubscriberRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v4/{subscriber.name=projects/*/subscribers/*}",
+                            "(google.api.http).body": "subscriber",
+                            "(google.api.method_signature)": "subscriber,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Subscriber",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateSubscriberMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v4/{subscriber.name=projects/*/subscribers/*}",
+                                "body": "subscriber"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "subscriber,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Subscriber",
+                                "metadata_type": "UpdateSubscriberMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteSubscriber": {
+                          "requestType": "DeleteSubscriberRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v4/{name=projects/*/subscribers/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteSubscriberMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v4/{name=projects/*/subscribers/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteSubscriberMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateSubscriberRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "health.googleapis.com/Subscriber"
+                          }
+                        },
+                        "subscriber": {
+                          "type": "CreateSubscriberPayload",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subscriberId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSubscribersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "health.googleapis.com/Subscriber"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListSubscribersResponse": {
+                      "fields": {
+                        "subscribers": {
+                          "rule": "repeated",
+                          "type": "Subscriber",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateSubscriberRequest": {
+                      "fields": {
+                        "subscriber": {
+                          "type": "Subscriber",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteSubscriberRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "health.googleapis.com/Subscriber"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Subscriber": {
+                      "options": {
+                        "(google.api.resource).type": "health.googleapis.com/Subscriber",
+                        "(google.api.resource).pattern": "projects/{project}/subscribers/{subscriber}",
+                        "(google.api.resource).plural": "subscribers",
+                        "(google.api.resource).singular": "subscriber"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "endpointUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "subscriberConfigs": {
+                          "rule": "repeated",
+                          "type": "SubscriberConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endpointAuthorization": {
+                          "type": "EndpointAuthorization",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "UNVERIFIED": 1,
+                            "ACTIVE": 2,
+                            "INACTIVE": 3
+                          }
+                        }
+                      }
+                    },
+                    "SubscriberConfig": {
+                      "fields": {
+                        "dataTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "health.googleapis.com/DataType"
+                          }
+                        },
+                        "subscriptionCreatePolicy": {
+                          "type": "SubscriptionCreatePolicy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SubscriptionCreatePolicy": {
+                          "values": {
+                            "SUBSCRIPTION_CREATE_POLICY_UNSPECIFIED": 0,
+                            "AUTOMATIC": 1,
+                            "MANUAL": 2
+                          }
+                        }
+                      }
+                    },
+                    "EndpointAuthorization": {
+                      "fields": {
+                        "secret": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "secretSet": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSubscriberPayload": {
+                      "fields": {
+                        "endpointUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "subscriberConfigs": {
+                          "rule": "repeated",
+                          "type": "SubscriberConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "endpointAuthorization": {
+                          "type": "EndpointAuthorization",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateSubscriberMetadata": {
+                      "fields": {}
+                    },
+                    "UpdateSubscriberMetadata": {
+                      "fields": {}
+                    },
+                    "DeleteSubscriberMetadata": {
+                      "fields": {}
+                    },
                     "HealthProfileService": {
                       "options": {
                         "(google.api.default_host)": "health.googleapis.com",
@@ -4013,8 +4813,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "LaunchStageProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
+            "objc_class_prefix": "GAPI"
           },
           "nested": {
             "fieldBehavior": {
@@ -4237,6 +5036,10 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
+                },
+                "selectiveGapicGeneration": {
+                  "type": "SelectiveGapicGeneration",
+                  "id": 3
                 }
               }
             },
@@ -4377,6 +5180,28 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "experimentalFeatures": {
+                  "type": "ExperimentalFeatures",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "ExperimentalFeatures": {
+                  "fields": {
+                    "restAsyncIoEnabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "protobufPythonicTypesEnabled": {
+                      "type": "bool",
+                      "id": 2
+                    },
+                    "unversionedPackageDisabled": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
                 }
               }
             },
@@ -4434,6 +5259,11 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -4495,6 +5325,19 @@
                 "PACKAGE_MANAGER": 20
               }
             },
+            "SelectiveGapicGeneration": {
+              "fields": {
+                "methods": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                },
+                "generateOmittedAsInternal": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
             "LaunchStage": {
               "values": {
                 "LAUNCH_STAGE_UNSPECIFIED": 0,
@@ -4528,12 +5371,19 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              }
+              },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ]
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
+                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -4571,6 +5421,11 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
+                },
+                "optionDependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -4660,6 +5515,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 11
                 }
               },
               "nested": {
@@ -4885,6 +5744,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
+                },
+                "visibility": {
+                  "type": "SymbolVisibility",
+                  "id": 6
                 }
               },
               "nested": {
@@ -4935,7 +5798,14 @@
                   "type": "ServiceOptions",
                   "id": 3
                 }
-              }
+              },
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                "stream"
+              ]
             },
             "MethodDescriptorProto": {
               "edition": "proto2",
@@ -5099,6 +5969,7 @@
                   42,
                   42
                 ],
+                "php_generic_services",
                 [
                   38,
                   38
@@ -5234,7 +6105,8 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "deprecated": true
                   }
                 },
                 "debugRedact": {
@@ -5261,6 +6133,10 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
+                },
+                "featureSupport": {
+                  "type": "FeatureSupport",
+                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -5329,6 +6205,26 @@
                     "value": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "FeatureSupport": {
+                  "fields": {
+                    "editionIntroduced": {
+                      "type": "Edition",
+                      "id": 1
+                    },
+                    "editionDeprecated": {
+                      "type": "Edition",
+                      "id": 2
+                    },
+                    "deprecationWarning": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "editionRemoved": {
+                      "type": "Edition",
+                      "id": 4
                     }
                   }
                 }
@@ -5418,6 +6314,10 @@
                   "options": {
                     "default": false
                   }
+                },
+                "featureSupport": {
+                  "type": "FieldOptions.FeatureSupport",
+                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -5561,6 +6461,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -5571,6 +6472,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -5581,6 +6483,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -5591,6 +6494,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -5601,7 +6505,8 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "feature_support.edition_introduced": "EDITION_2023",
+                    "edition_defaults.edition": "EDITION_LEGACY",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -5611,27 +6516,38 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
+                  }
+                },
+                "enforceNamingStyle": {
+                  "type": "EnforceNamingStyle",
+                  "id": 7,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_METHOD",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "STYLE2024"
+                  }
+                },
+                "defaultSymbolVisibility": {
+                  "type": "VisibilityFeature.DefaultSymbolVisibility",
+                  "id": 8,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_FILE",
+                    "feature_support.edition_introduced": "EDITION_2024",
+                    "edition_defaults.edition": "EDITION_2024",
+                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  1000
-                ],
-                [
-                  1001,
-                  1001
-                ],
-                [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
+                  9994
                 ],
                 [
                   9995,
@@ -5676,7 +6592,13 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ]
+                  ]
                 },
                 "MessageEncoding": {
                   "values": {
@@ -5690,6 +6612,33 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
+                  }
+                },
+                "EnforceNamingStyle": {
+                  "values": {
+                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
+                    "STYLE2024": 1,
+                    "STYLE_LEGACY": 2
+                  }
+                },
+                "VisibilityFeature": {
+                  "fields": {},
+                  "reserved": [
+                    [
+                      1,
+                      536870911
+                    ]
+                  ],
+                  "nested": {
+                    "DefaultSymbolVisibility": {
+                      "values": {
+                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
+                        "EXPORT_ALL": 1,
+                        "EXPORT_TOP_LEVEL": 2,
+                        "LOCAL_ALL": 3,
+                        "STRICT": 4
+                      }
+                    }
                   }
                 }
               }
@@ -5718,11 +6667,26 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "features": {
+                    "overridableFeatures": {
                       "type": "FeatureSet",
-                      "id": 2
+                      "id": 4
+                    },
+                    "fixedFeatures": {
+                      "type": "FeatureSet",
+                      "id": 5
                     }
-                  }
+                  },
+                  "reserved": [
+                    [
+                      1,
+                      1
+                    ],
+                    [
+                      2,
+                      2
+                    ],
+                    "features"
+                  ]
                 }
               }
             },
@@ -5735,6 +6699,12 @@
                   "id": 1
                 }
               },
+              "extensions": [
+                [
+                  536000000,
+                  536000000
+                ]
+              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -5818,6 +6788,14 @@
                     }
                   }
                 }
+              }
+            },
+            "SymbolVisibility": {
+              "edition": "proto2",
+              "values": {
+                "VISIBILITY_UNSET": 0,
+                "VISIBILITY_LOCAL": 1,
+                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {
@@ -5938,6 +6916,7 @@
             "java_multiple_files": true,
             "java_outer_classname": "OperationsProto",
             "java_package": "com.google.longrunning",
+            "objc_class_prefix": "GLRUN",
             "php_namespace": "Google\\LongRunning"
           },
           "nested": {

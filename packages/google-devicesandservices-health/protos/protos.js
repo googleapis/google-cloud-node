@@ -1605,11 +1605,20 @@
     
                         /**
                          * ActiveZoneMinutes activeZoneMinutes.
-                         * @member {number|Long} activeZoneMinutes
+                         * @member {number|Long|null|undefined} activeZoneMinutes
                          * @memberof google.devicesandservices.health.v4.ActiveZoneMinutes
                          * @instance
                          */
-                        ActiveZoneMinutes.prototype.activeZoneMinutes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        ActiveZoneMinutes.prototype.activeZoneMinutes = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ActiveZoneMinutes.prototype, "_activeZoneMinutes", {
+                            get: $util.oneOfGetter($oneOfFields = ["activeZoneMinutes"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new ActiveZoneMinutes instance using the specified properties.
@@ -1724,6 +1733,7 @@
                         ActiveZoneMinutes.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.interval != null && message.hasOwnProperty("interval")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
                                 if (error)
@@ -1739,9 +1749,11 @@
                                 case 3:
                                     break;
                                 }
-                            if (message.activeZoneMinutes != null && message.hasOwnProperty("activeZoneMinutes"))
+                            if (message.activeZoneMinutes != null && message.hasOwnProperty("activeZoneMinutes")) {
+                                properties._activeZoneMinutes = 1;
                                 if (!$util.isInteger(message.activeZoneMinutes) && !(message.activeZoneMinutes && $util.isInteger(message.activeZoneMinutes.low) && $util.isInteger(message.activeZoneMinutes.high)))
                                     return "activeZoneMinutes: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -1814,21 +1826,19 @@
                             if (options.defaults) {
                                 object.interval = null;
                                 object.heartRateZone = options.enums === String ? "HEART_RATE_ZONE_UNSPECIFIED" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.activeZoneMinutes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.activeZoneMinutes = options.longs === String ? "0" : 0;
                             }
                             if (message.interval != null && message.hasOwnProperty("interval"))
                                 object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
                             if (message.heartRateZone != null && message.hasOwnProperty("heartRateZone"))
                                 object.heartRateZone = options.enums === String ? $root.google.devicesandservices.health.v4.ActiveZoneMinutes.HeartRateZone[message.heartRateZone] === undefined ? message.heartRateZone : $root.google.devicesandservices.health.v4.ActiveZoneMinutes.HeartRateZone[message.heartRateZone] : message.heartRateZone;
-                            if (message.activeZoneMinutes != null && message.hasOwnProperty("activeZoneMinutes"))
+                            if (message.activeZoneMinutes != null && message.hasOwnProperty("activeZoneMinutes")) {
                                 if (typeof message.activeZoneMinutes === "number")
                                     object.activeZoneMinutes = options.longs === String ? String(message.activeZoneMinutes) : message.activeZoneMinutes;
                                 else
                                     object.activeZoneMinutes = options.longs === String ? $util.Long.prototype.toString.call(message.activeZoneMinutes) : options.longs === Number ? new $util.LongBits(message.activeZoneMinutes.low >>> 0, message.activeZoneMinutes.high >>> 0).toNumber() : message.activeZoneMinutes;
+                                if (options.oneofs)
+                                    object._activeZoneMinutes = "activeZoneMinutes";
+                            }
                             return object;
                         };
     
@@ -1907,27 +1917,48 @@
     
                         /**
                          * ActiveZoneMinutesRollupValue sumInCardioHeartZone.
-                         * @member {number|Long} sumInCardioHeartZone
+                         * @member {number|Long|null|undefined} sumInCardioHeartZone
                          * @memberof google.devicesandservices.health.v4.ActiveZoneMinutesRollupValue
                          * @instance
                          */
-                        ActiveZoneMinutesRollupValue.prototype.sumInCardioHeartZone = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        ActiveZoneMinutesRollupValue.prototype.sumInCardioHeartZone = null;
     
                         /**
                          * ActiveZoneMinutesRollupValue sumInPeakHeartZone.
-                         * @member {number|Long} sumInPeakHeartZone
+                         * @member {number|Long|null|undefined} sumInPeakHeartZone
                          * @memberof google.devicesandservices.health.v4.ActiveZoneMinutesRollupValue
                          * @instance
                          */
-                        ActiveZoneMinutesRollupValue.prototype.sumInPeakHeartZone = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        ActiveZoneMinutesRollupValue.prototype.sumInPeakHeartZone = null;
     
                         /**
                          * ActiveZoneMinutesRollupValue sumInFatBurnHeartZone.
-                         * @member {number|Long} sumInFatBurnHeartZone
+                         * @member {number|Long|null|undefined} sumInFatBurnHeartZone
                          * @memberof google.devicesandservices.health.v4.ActiveZoneMinutesRollupValue
                          * @instance
                          */
-                        ActiveZoneMinutesRollupValue.prototype.sumInFatBurnHeartZone = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        ActiveZoneMinutesRollupValue.prototype.sumInFatBurnHeartZone = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ActiveZoneMinutesRollupValue.prototype, "_sumInCardioHeartZone", {
+                            get: $util.oneOfGetter($oneOfFields = ["sumInCardioHeartZone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ActiveZoneMinutesRollupValue.prototype, "_sumInPeakHeartZone", {
+                            get: $util.oneOfGetter($oneOfFields = ["sumInPeakHeartZone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(ActiveZoneMinutesRollupValue.prototype, "_sumInFatBurnHeartZone", {
+                            get: $util.oneOfGetter($oneOfFields = ["sumInFatBurnHeartZone"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new ActiveZoneMinutesRollupValue instance using the specified properties.
@@ -2042,15 +2073,22 @@
                         ActiveZoneMinutesRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.sumInCardioHeartZone != null && message.hasOwnProperty("sumInCardioHeartZone"))
+                            var properties = {};
+                            if (message.sumInCardioHeartZone != null && message.hasOwnProperty("sumInCardioHeartZone")) {
+                                properties._sumInCardioHeartZone = 1;
                                 if (!$util.isInteger(message.sumInCardioHeartZone) && !(message.sumInCardioHeartZone && $util.isInteger(message.sumInCardioHeartZone.low) && $util.isInteger(message.sumInCardioHeartZone.high)))
                                     return "sumInCardioHeartZone: integer|Long expected";
-                            if (message.sumInPeakHeartZone != null && message.hasOwnProperty("sumInPeakHeartZone"))
+                            }
+                            if (message.sumInPeakHeartZone != null && message.hasOwnProperty("sumInPeakHeartZone")) {
+                                properties._sumInPeakHeartZone = 1;
                                 if (!$util.isInteger(message.sumInPeakHeartZone) && !(message.sumInPeakHeartZone && $util.isInteger(message.sumInPeakHeartZone.low) && $util.isInteger(message.sumInPeakHeartZone.high)))
                                     return "sumInPeakHeartZone: integer|Long expected";
-                            if (message.sumInFatBurnHeartZone != null && message.hasOwnProperty("sumInFatBurnHeartZone"))
+                            }
+                            if (message.sumInFatBurnHeartZone != null && message.hasOwnProperty("sumInFatBurnHeartZone")) {
+                                properties._sumInFatBurnHeartZone = 1;
                                 if (!$util.isInteger(message.sumInFatBurnHeartZone) && !(message.sumInFatBurnHeartZone && $util.isInteger(message.sumInFatBurnHeartZone.low) && $util.isInteger(message.sumInFatBurnHeartZone.high)))
                                     return "sumInFatBurnHeartZone: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -2109,38 +2147,30 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.sumInCardioHeartZone = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.sumInCardioHeartZone = options.longs === String ? "0" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.sumInPeakHeartZone = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.sumInPeakHeartZone = options.longs === String ? "0" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.sumInFatBurnHeartZone = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.sumInFatBurnHeartZone = options.longs === String ? "0" : 0;
-                            }
-                            if (message.sumInCardioHeartZone != null && message.hasOwnProperty("sumInCardioHeartZone"))
+                            if (message.sumInCardioHeartZone != null && message.hasOwnProperty("sumInCardioHeartZone")) {
                                 if (typeof message.sumInCardioHeartZone === "number")
                                     object.sumInCardioHeartZone = options.longs === String ? String(message.sumInCardioHeartZone) : message.sumInCardioHeartZone;
                                 else
                                     object.sumInCardioHeartZone = options.longs === String ? $util.Long.prototype.toString.call(message.sumInCardioHeartZone) : options.longs === Number ? new $util.LongBits(message.sumInCardioHeartZone.low >>> 0, message.sumInCardioHeartZone.high >>> 0).toNumber() : message.sumInCardioHeartZone;
-                            if (message.sumInPeakHeartZone != null && message.hasOwnProperty("sumInPeakHeartZone"))
+                                if (options.oneofs)
+                                    object._sumInCardioHeartZone = "sumInCardioHeartZone";
+                            }
+                            if (message.sumInPeakHeartZone != null && message.hasOwnProperty("sumInPeakHeartZone")) {
                                 if (typeof message.sumInPeakHeartZone === "number")
                                     object.sumInPeakHeartZone = options.longs === String ? String(message.sumInPeakHeartZone) : message.sumInPeakHeartZone;
                                 else
                                     object.sumInPeakHeartZone = options.longs === String ? $util.Long.prototype.toString.call(message.sumInPeakHeartZone) : options.longs === Number ? new $util.LongBits(message.sumInPeakHeartZone.low >>> 0, message.sumInPeakHeartZone.high >>> 0).toNumber() : message.sumInPeakHeartZone;
-                            if (message.sumInFatBurnHeartZone != null && message.hasOwnProperty("sumInFatBurnHeartZone"))
+                                if (options.oneofs)
+                                    object._sumInPeakHeartZone = "sumInPeakHeartZone";
+                            }
+                            if (message.sumInFatBurnHeartZone != null && message.hasOwnProperty("sumInFatBurnHeartZone")) {
                                 if (typeof message.sumInFatBurnHeartZone === "number")
                                     object.sumInFatBurnHeartZone = options.longs === String ? String(message.sumInFatBurnHeartZone) : message.sumInFatBurnHeartZone;
                                 else
                                     object.sumInFatBurnHeartZone = options.longs === String ? $util.Long.prototype.toString.call(message.sumInFatBurnHeartZone) : options.longs === Number ? new $util.LongBits(message.sumInFatBurnHeartZone.low >>> 0, message.sumInFatBurnHeartZone.high >>> 0).toNumber() : message.sumInFatBurnHeartZone;
+                                if (options.oneofs)
+                                    object._sumInFatBurnHeartZone = "sumInFatBurnHeartZone";
+                            }
                             return object;
                         };
     
@@ -2460,11 +2490,20 @@
     
                             /**
                              * ActiveMinutesByActivityLevel activeMinutes.
-                             * @member {number|Long} activeMinutes
+                             * @member {number|Long|null|undefined} activeMinutes
                              * @memberof google.devicesandservices.health.v4.ActiveMinutes.ActiveMinutesByActivityLevel
                              * @instance
                              */
-                            ActiveMinutesByActivityLevel.prototype.activeMinutes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                            ActiveMinutesByActivityLevel.prototype.activeMinutes = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ActiveMinutesByActivityLevel.prototype, "_activeMinutes", {
+                                get: $util.oneOfGetter($oneOfFields = ["activeMinutes"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new ActiveMinutesByActivityLevel instance using the specified properties.
@@ -2573,6 +2612,7 @@
                             ActiveMinutesByActivityLevel.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.activityLevel != null && message.hasOwnProperty("activityLevel"))
                                     switch (message.activityLevel) {
                                     default:
@@ -2583,9 +2623,11 @@
                                     case 3:
                                         break;
                                     }
-                                if (message.activeMinutes != null && message.hasOwnProperty("activeMinutes"))
+                                if (message.activeMinutes != null && message.hasOwnProperty("activeMinutes")) {
+                                    properties._activeMinutes = 1;
                                     if (!$util.isInteger(message.activeMinutes) && !(message.activeMinutes && $util.isInteger(message.activeMinutes.low) && $util.isInteger(message.activeMinutes.high)))
                                         return "activeMinutes: integer|Long expected";
+                                }
                                 return null;
                             };
     
@@ -2650,21 +2692,18 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.activityLevel = options.enums === String ? "ACTIVITY_LEVEL_UNSPECIFIED" : 0;
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.activeMinutes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.activeMinutes = options.longs === String ? "0" : 0;
-                                }
                                 if (message.activityLevel != null && message.hasOwnProperty("activityLevel"))
                                     object.activityLevel = options.enums === String ? $root.google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel[message.activityLevel] === undefined ? message.activityLevel : $root.google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel[message.activityLevel] : message.activityLevel;
-                                if (message.activeMinutes != null && message.hasOwnProperty("activeMinutes"))
+                                if (message.activeMinutes != null && message.hasOwnProperty("activeMinutes")) {
                                     if (typeof message.activeMinutes === "number")
                                         object.activeMinutes = options.longs === String ? String(message.activeMinutes) : message.activeMinutes;
                                     else
                                         object.activeMinutes = options.longs === String ? $util.Long.prototype.toString.call(message.activeMinutes) : options.longs === Number ? new $util.LongBits(message.activeMinutes.low >>> 0, message.activeMinutes.high >>> 0).toNumber() : message.activeMinutes;
+                                    if (options.oneofs)
+                                        object._activeMinutes = "activeMinutes";
+                                }
                                 return object;
                             };
     
@@ -2976,11 +3015,20 @@
     
                             /**
                              * ActiveMinutesRollupByActivityLevel activeMinutesSum.
-                             * @member {number|Long} activeMinutesSum
+                             * @member {number|Long|null|undefined} activeMinutesSum
                              * @memberof google.devicesandservices.health.v4.ActiveMinutesRollupValue.ActiveMinutesRollupByActivityLevel
                              * @instance
                              */
-                            ActiveMinutesRollupByActivityLevel.prototype.activeMinutesSum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                            ActiveMinutesRollupByActivityLevel.prototype.activeMinutesSum = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ActiveMinutesRollupByActivityLevel.prototype, "_activeMinutesSum", {
+                                get: $util.oneOfGetter($oneOfFields = ["activeMinutesSum"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new ActiveMinutesRollupByActivityLevel instance using the specified properties.
@@ -3089,6 +3137,7 @@
                             ActiveMinutesRollupByActivityLevel.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.activityLevel != null && message.hasOwnProperty("activityLevel"))
                                     switch (message.activityLevel) {
                                     default:
@@ -3099,9 +3148,11 @@
                                     case 3:
                                         break;
                                     }
-                                if (message.activeMinutesSum != null && message.hasOwnProperty("activeMinutesSum"))
+                                if (message.activeMinutesSum != null && message.hasOwnProperty("activeMinutesSum")) {
+                                    properties._activeMinutesSum = 1;
                                     if (!$util.isInteger(message.activeMinutesSum) && !(message.activeMinutesSum && $util.isInteger(message.activeMinutesSum.low) && $util.isInteger(message.activeMinutesSum.high)))
                                         return "activeMinutesSum: integer|Long expected";
+                                }
                                 return null;
                             };
     
@@ -3166,21 +3217,18 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.activityLevel = options.enums === String ? "ACTIVITY_LEVEL_UNSPECIFIED" : 0;
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.activeMinutesSum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.activeMinutesSum = options.longs === String ? "0" : 0;
-                                }
                                 if (message.activityLevel != null && message.hasOwnProperty("activityLevel"))
                                     object.activityLevel = options.enums === String ? $root.google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel[message.activityLevel] === undefined ? message.activityLevel : $root.google.devicesandservices.health.v4.ActiveMinutes.ActivityLevel[message.activityLevel] : message.activityLevel;
-                                if (message.activeMinutesSum != null && message.hasOwnProperty("activeMinutesSum"))
+                                if (message.activeMinutesSum != null && message.hasOwnProperty("activeMinutesSum")) {
                                     if (typeof message.activeMinutesSum === "number")
                                         object.activeMinutesSum = options.longs === String ? String(message.activeMinutesSum) : message.activeMinutesSum;
                                     else
                                         object.activeMinutesSum = options.longs === String ? $util.Long.prototype.toString.call(message.activeMinutesSum) : options.longs === Number ? new $util.LongBits(message.activeMinutesSum.low >>> 0, message.activeMinutesSum.high >>> 0).toNumber() : message.activeMinutesSum;
+                                    if (options.oneofs)
+                                        object._activeMinutesSum = "activeMinutesSum";
+                                }
                                 return object;
                             };
     
@@ -4033,11 +4081,20 @@
     
                         /**
                          * Altitude gainMillimeters.
-                         * @member {number|Long} gainMillimeters
+                         * @member {number|Long|null|undefined} gainMillimeters
                          * @memberof google.devicesandservices.health.v4.Altitude
                          * @instance
                          */
-                        Altitude.prototype.gainMillimeters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Altitude.prototype.gainMillimeters = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Altitude.prototype, "_gainMillimeters", {
+                            get: $util.oneOfGetter($oneOfFields = ["gainMillimeters"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Altitude instance using the specified properties.
@@ -4146,14 +4203,17 @@
                         Altitude.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.interval != null && message.hasOwnProperty("interval")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
                                 if (error)
                                     return "interval." + error;
                             }
-                            if (message.gainMillimeters != null && message.hasOwnProperty("gainMillimeters"))
+                            if (message.gainMillimeters != null && message.hasOwnProperty("gainMillimeters")) {
+                                properties._gainMillimeters = 1;
                                 if (!$util.isInteger(message.gainMillimeters) && !(message.gainMillimeters && $util.isInteger(message.gainMillimeters.low) && $util.isInteger(message.gainMillimeters.high)))
                                     return "gainMillimeters: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -4199,21 +4259,18 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.interval = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.gainMillimeters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.gainMillimeters = options.longs === String ? "0" : 0;
-                            }
                             if (message.interval != null && message.hasOwnProperty("interval"))
                                 object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
-                            if (message.gainMillimeters != null && message.hasOwnProperty("gainMillimeters"))
+                            if (message.gainMillimeters != null && message.hasOwnProperty("gainMillimeters")) {
                                 if (typeof message.gainMillimeters === "number")
                                     object.gainMillimeters = options.longs === String ? String(message.gainMillimeters) : message.gainMillimeters;
                                 else
                                     object.gainMillimeters = options.longs === String ? $util.Long.prototype.toString.call(message.gainMillimeters) : options.longs === Number ? new $util.LongBits(message.gainMillimeters.low >>> 0, message.gainMillimeters.high >>> 0).toNumber() : message.gainMillimeters;
+                                if (options.oneofs)
+                                    object._gainMillimeters = "gainMillimeters";
+                            }
                             return object;
                         };
     
@@ -4281,11 +4338,20 @@
     
                         /**
                          * BasalEnergyBurned kcal.
-                         * @member {number} kcal
+                         * @member {number|null|undefined} kcal
                          * @memberof google.devicesandservices.health.v4.BasalEnergyBurned
                          * @instance
                          */
-                        BasalEnergyBurned.prototype.kcal = 0;
+                        BasalEnergyBurned.prototype.kcal = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BasalEnergyBurned.prototype, "_kcal", {
+                            get: $util.oneOfGetter($oneOfFields = ["kcal"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new BasalEnergyBurned instance using the specified properties.
@@ -4394,14 +4460,17 @@
                         BasalEnergyBurned.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.interval != null && message.hasOwnProperty("interval")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
                                 if (error)
                                     return "interval." + error;
                             }
-                            if (message.kcal != null && message.hasOwnProperty("kcal"))
+                            if (message.kcal != null && message.hasOwnProperty("kcal")) {
+                                properties._kcal = 1;
                                 if (typeof message.kcal !== "number")
                                     return "kcal: number expected";
+                            }
                             return null;
                         };
     
@@ -4440,14 +4509,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.interval = null;
-                                object.kcal = 0;
-                            }
                             if (message.interval != null && message.hasOwnProperty("interval"))
                                 object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
-                            if (message.kcal != null && message.hasOwnProperty("kcal"))
+                            if (message.kcal != null && message.hasOwnProperty("kcal")) {
                                 object.kcal = options.json && !isFinite(message.kcal) ? String(message.kcal) : message.kcal;
+                                if (options.oneofs)
+                                    object._kcal = "kcal";
+                            }
                             return object;
                         };
     
@@ -4515,11 +4585,20 @@
     
                         /**
                          * BodyFat percentage.
-                         * @member {number} percentage
+                         * @member {number|null|undefined} percentage
                          * @memberof google.devicesandservices.health.v4.BodyFat
                          * @instance
                          */
-                        BodyFat.prototype.percentage = 0;
+                        BodyFat.prototype.percentage = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BodyFat.prototype, "_percentage", {
+                            get: $util.oneOfGetter($oneOfFields = ["percentage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new BodyFat instance using the specified properties.
@@ -4628,14 +4707,17 @@
                         BodyFat.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.percentage != null && message.hasOwnProperty("percentage"))
+                            if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                properties._percentage = 1;
                                 if (typeof message.percentage !== "number")
                                     return "percentage: number expected";
+                            }
                             return null;
                         };
     
@@ -4674,14 +4756,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.sampleTime = null;
-                                object.percentage = 0;
-                            }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.percentage != null && message.hasOwnProperty("percentage"))
+                            if (message.percentage != null && message.hasOwnProperty("percentage")) {
                                 object.percentage = options.json && !isFinite(message.percentage) ? String(message.percentage) : message.percentage;
+                                if (options.oneofs)
+                                    object._percentage = "percentage";
+                            }
                             return object;
                         };
     
@@ -4740,11 +4823,20 @@
     
                         /**
                          * BodyFatRollupValue bodyFatPercentageAvg.
-                         * @member {number} bodyFatPercentageAvg
+                         * @member {number|null|undefined} bodyFatPercentageAvg
                          * @memberof google.devicesandservices.health.v4.BodyFatRollupValue
                          * @instance
                          */
-                        BodyFatRollupValue.prototype.bodyFatPercentageAvg = 0;
+                        BodyFatRollupValue.prototype.bodyFatPercentageAvg = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(BodyFatRollupValue.prototype, "_bodyFatPercentageAvg", {
+                            get: $util.oneOfGetter($oneOfFields = ["bodyFatPercentageAvg"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new BodyFatRollupValue instance using the specified properties.
@@ -4847,9 +4939,12 @@
                         BodyFatRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.bodyFatPercentageAvg != null && message.hasOwnProperty("bodyFatPercentageAvg"))
+                            var properties = {};
+                            if (message.bodyFatPercentageAvg != null && message.hasOwnProperty("bodyFatPercentageAvg")) {
+                                properties._bodyFatPercentageAvg = 1;
                                 if (typeof message.bodyFatPercentageAvg !== "number")
                                     return "bodyFatPercentageAvg: number expected";
+                            }
                             return null;
                         };
     
@@ -4883,10 +4978,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                object.bodyFatPercentageAvg = 0;
-                            if (message.bodyFatPercentageAvg != null && message.hasOwnProperty("bodyFatPercentageAvg"))
+                            if (message.bodyFatPercentageAvg != null && message.hasOwnProperty("bodyFatPercentageAvg")) {
                                 object.bodyFatPercentageAvg = options.json && !isFinite(message.bodyFatPercentageAvg) ? String(message.bodyFatPercentageAvg) : message.bodyFatPercentageAvg;
+                                if (options.oneofs)
+                                    object._bodyFatPercentageAvg = "bodyFatPercentageAvg";
+                            }
                             return object;
                         };
     
@@ -5177,11 +5273,20 @@
     
                             /**
                              * CaloriesInHeartRateZoneValue kcal.
-                             * @member {number} kcal
+                             * @member {number|null|undefined} kcal
                              * @memberof google.devicesandservices.health.v4.CaloriesInHeartRateZoneRollupValue.CaloriesInHeartRateZoneValue
                              * @instance
                              */
-                            CaloriesInHeartRateZoneValue.prototype.kcal = 0;
+                            CaloriesInHeartRateZoneValue.prototype.kcal = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(CaloriesInHeartRateZoneValue.prototype, "_kcal", {
+                                get: $util.oneOfGetter($oneOfFields = ["kcal"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new CaloriesInHeartRateZoneValue instance using the specified properties.
@@ -5290,6 +5395,7 @@
                             CaloriesInHeartRateZoneValue.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.heartRateZone != null && message.hasOwnProperty("heartRateZone"))
                                     switch (message.heartRateZone) {
                                     default:
@@ -5301,9 +5407,11 @@
                                     case 4:
                                         break;
                                     }
-                                if (message.kcal != null && message.hasOwnProperty("kcal"))
+                                if (message.kcal != null && message.hasOwnProperty("kcal")) {
+                                    properties._kcal = 1;
                                     if (typeof message.kcal !== "number")
                                         return "kcal: number expected";
+                                }
                                 return null;
                             };
     
@@ -5365,14 +5473,15 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.heartRateZone = options.enums === String ? "HEART_RATE_ZONE_TYPE_UNSPECIFIED" : 0;
-                                    object.kcal = 0;
-                                }
                                 if (message.heartRateZone != null && message.hasOwnProperty("heartRateZone"))
                                     object.heartRateZone = options.enums === String ? $root.google.devicesandservices.health.v4.HeartRateZoneType[message.heartRateZone] === undefined ? message.heartRateZone : $root.google.devicesandservices.health.v4.HeartRateZoneType[message.heartRateZone] : message.heartRateZone;
-                                if (message.kcal != null && message.hasOwnProperty("kcal"))
+                                if (message.kcal != null && message.hasOwnProperty("kcal")) {
                                     object.kcal = options.json && !isFinite(message.kcal) ? String(message.kcal) : message.kcal;
+                                    if (options.oneofs)
+                                        object._kcal = "kcal";
+                                }
                                 return object;
                             };
     
@@ -5696,19 +5805,34 @@
     
                             /**
                              * HeartRateZone minBeatsPerMinute.
-                             * @member {number|Long} minBeatsPerMinute
+                             * @member {number|Long|null|undefined} minBeatsPerMinute
                              * @memberof google.devicesandservices.health.v4.DailyHeartRateZones.HeartRateZone
                              * @instance
                              */
-                            HeartRateZone.prototype.minBeatsPerMinute = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                            HeartRateZone.prototype.minBeatsPerMinute = null;
     
                             /**
                              * HeartRateZone maxBeatsPerMinute.
-                             * @member {number|Long} maxBeatsPerMinute
+                             * @member {number|Long|null|undefined} maxBeatsPerMinute
                              * @memberof google.devicesandservices.health.v4.DailyHeartRateZones.HeartRateZone
                              * @instance
                              */
-                            HeartRateZone.prototype.maxBeatsPerMinute = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                            HeartRateZone.prototype.maxBeatsPerMinute = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(HeartRateZone.prototype, "_minBeatsPerMinute", {
+                                get: $util.oneOfGetter($oneOfFields = ["minBeatsPerMinute"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(HeartRateZone.prototype, "_maxBeatsPerMinute", {
+                                get: $util.oneOfGetter($oneOfFields = ["maxBeatsPerMinute"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new HeartRateZone instance using the specified properties.
@@ -5823,6 +5947,7 @@
                             HeartRateZone.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.heartRateZoneType != null && message.hasOwnProperty("heartRateZoneType"))
                                     switch (message.heartRateZoneType) {
                                     default:
@@ -5834,12 +5959,16 @@
                                     case 4:
                                         break;
                                     }
-                                if (message.minBeatsPerMinute != null && message.hasOwnProperty("minBeatsPerMinute"))
+                                if (message.minBeatsPerMinute != null && message.hasOwnProperty("minBeatsPerMinute")) {
+                                    properties._minBeatsPerMinute = 1;
                                     if (!$util.isInteger(message.minBeatsPerMinute) && !(message.minBeatsPerMinute && $util.isInteger(message.minBeatsPerMinute.low) && $util.isInteger(message.minBeatsPerMinute.high)))
                                         return "minBeatsPerMinute: integer|Long expected";
-                                if (message.maxBeatsPerMinute != null && message.hasOwnProperty("maxBeatsPerMinute"))
+                                }
+                                if (message.maxBeatsPerMinute != null && message.hasOwnProperty("maxBeatsPerMinute")) {
+                                    properties._maxBeatsPerMinute = 1;
                                     if (!$util.isInteger(message.maxBeatsPerMinute) && !(message.maxBeatsPerMinute && $util.isInteger(message.maxBeatsPerMinute.low) && $util.isInteger(message.maxBeatsPerMinute.high)))
                                         return "maxBeatsPerMinute: integer|Long expected";
+                                }
                                 return null;
                             };
     
@@ -5917,31 +6046,26 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.heartRateZoneType = options.enums === String ? "HEART_RATE_ZONE_TYPE_UNSPECIFIED" : 0;
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.minBeatsPerMinute = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.minBeatsPerMinute = options.longs === String ? "0" : 0;
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.maxBeatsPerMinute = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.maxBeatsPerMinute = options.longs === String ? "0" : 0;
-                                }
                                 if (message.heartRateZoneType != null && message.hasOwnProperty("heartRateZoneType"))
                                     object.heartRateZoneType = options.enums === String ? $root.google.devicesandservices.health.v4.HeartRateZoneType[message.heartRateZoneType] === undefined ? message.heartRateZoneType : $root.google.devicesandservices.health.v4.HeartRateZoneType[message.heartRateZoneType] : message.heartRateZoneType;
-                                if (message.minBeatsPerMinute != null && message.hasOwnProperty("minBeatsPerMinute"))
+                                if (message.minBeatsPerMinute != null && message.hasOwnProperty("minBeatsPerMinute")) {
                                     if (typeof message.minBeatsPerMinute === "number")
                                         object.minBeatsPerMinute = options.longs === String ? String(message.minBeatsPerMinute) : message.minBeatsPerMinute;
                                     else
                                         object.minBeatsPerMinute = options.longs === String ? $util.Long.prototype.toString.call(message.minBeatsPerMinute) : options.longs === Number ? new $util.LongBits(message.minBeatsPerMinute.low >>> 0, message.minBeatsPerMinute.high >>> 0).toNumber() : message.minBeatsPerMinute;
-                                if (message.maxBeatsPerMinute != null && message.hasOwnProperty("maxBeatsPerMinute"))
+                                    if (options.oneofs)
+                                        object._minBeatsPerMinute = "minBeatsPerMinute";
+                                }
+                                if (message.maxBeatsPerMinute != null && message.hasOwnProperty("maxBeatsPerMinute")) {
                                     if (typeof message.maxBeatsPerMinute === "number")
                                         object.maxBeatsPerMinute = options.longs === String ? String(message.maxBeatsPerMinute) : message.maxBeatsPerMinute;
                                     else
                                         object.maxBeatsPerMinute = options.longs === String ? $util.Long.prototype.toString.call(message.maxBeatsPerMinute) : options.longs === Number ? new $util.LongBits(message.maxBeatsPerMinute.low >>> 0, message.maxBeatsPerMinute.high >>> 0).toNumber() : message.maxBeatsPerMinute;
+                                    if (options.oneofs)
+                                        object._maxBeatsPerMinute = "maxBeatsPerMinute";
+                                }
                                 return object;
                             };
     
@@ -6368,11 +6492,20 @@
     
                         /**
                          * DailyRespiratoryRate breathsPerMinute.
-                         * @member {number} breathsPerMinute
+                         * @member {number|null|undefined} breathsPerMinute
                          * @memberof google.devicesandservices.health.v4.DailyRespiratoryRate
                          * @instance
                          */
-                        DailyRespiratoryRate.prototype.breathsPerMinute = 0;
+                        DailyRespiratoryRate.prototype.breathsPerMinute = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyRespiratoryRate.prototype, "_breathsPerMinute", {
+                            get: $util.oneOfGetter($oneOfFields = ["breathsPerMinute"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DailyRespiratoryRate instance using the specified properties.
@@ -6481,14 +6614,17 @@
                         DailyRespiratoryRate.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.date != null && message.hasOwnProperty("date")) {
                                 var error = $root.google.type.Date.verify(message.date);
                                 if (error)
                                     return "date." + error;
                             }
-                            if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute"))
+                            if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute")) {
+                                properties._breathsPerMinute = 1;
                                 if (typeof message.breathsPerMinute !== "number")
                                     return "breathsPerMinute: number expected";
+                            }
                             return null;
                         };
     
@@ -6527,14 +6663,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.date = null;
-                                object.breathsPerMinute = 0;
-                            }
                             if (message.date != null && message.hasOwnProperty("date"))
                                 object.date = $root.google.type.Date.toObject(message.date, options);
-                            if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute"))
+                            if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute")) {
                                 object.breathsPerMinute = options.json && !isFinite(message.breathsPerMinute) ? String(message.breathsPerMinute) : message.breathsPerMinute;
+                                if (options.oneofs)
+                                    object._breathsPerMinute = "breathsPerMinute";
+                            }
                             return object;
                         };
     
@@ -6605,35 +6742,62 @@
     
                         /**
                          * DailyOxygenSaturation averagePercentage.
-                         * @member {number} averagePercentage
+                         * @member {number|null|undefined} averagePercentage
                          * @memberof google.devicesandservices.health.v4.DailyOxygenSaturation
                          * @instance
                          */
-                        DailyOxygenSaturation.prototype.averagePercentage = 0;
+                        DailyOxygenSaturation.prototype.averagePercentage = null;
     
                         /**
                          * DailyOxygenSaturation lowerBoundPercentage.
-                         * @member {number} lowerBoundPercentage
+                         * @member {number|null|undefined} lowerBoundPercentage
                          * @memberof google.devicesandservices.health.v4.DailyOxygenSaturation
                          * @instance
                          */
-                        DailyOxygenSaturation.prototype.lowerBoundPercentage = 0;
+                        DailyOxygenSaturation.prototype.lowerBoundPercentage = null;
     
                         /**
                          * DailyOxygenSaturation upperBoundPercentage.
-                         * @member {number} upperBoundPercentage
+                         * @member {number|null|undefined} upperBoundPercentage
                          * @memberof google.devicesandservices.health.v4.DailyOxygenSaturation
                          * @instance
                          */
-                        DailyOxygenSaturation.prototype.upperBoundPercentage = 0;
+                        DailyOxygenSaturation.prototype.upperBoundPercentage = null;
     
                         /**
                          * DailyOxygenSaturation standardDeviationPercentage.
-                         * @member {number} standardDeviationPercentage
+                         * @member {number|null|undefined} standardDeviationPercentage
                          * @memberof google.devicesandservices.health.v4.DailyOxygenSaturation
                          * @instance
                          */
-                        DailyOxygenSaturation.prototype.standardDeviationPercentage = 0;
+                        DailyOxygenSaturation.prototype.standardDeviationPercentage = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyOxygenSaturation.prototype, "_averagePercentage", {
+                            get: $util.oneOfGetter($oneOfFields = ["averagePercentage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyOxygenSaturation.prototype, "_lowerBoundPercentage", {
+                            get: $util.oneOfGetter($oneOfFields = ["lowerBoundPercentage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyOxygenSaturation.prototype, "_upperBoundPercentage", {
+                            get: $util.oneOfGetter($oneOfFields = ["upperBoundPercentage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyOxygenSaturation.prototype, "_standardDeviationPercentage", {
+                            get: $util.oneOfGetter($oneOfFields = ["standardDeviationPercentage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DailyOxygenSaturation instance using the specified properties.
@@ -6760,23 +6924,32 @@
                         DailyOxygenSaturation.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.date != null && message.hasOwnProperty("date")) {
                                 var error = $root.google.type.Date.verify(message.date);
                                 if (error)
                                     return "date." + error;
                             }
-                            if (message.averagePercentage != null && message.hasOwnProperty("averagePercentage"))
+                            if (message.averagePercentage != null && message.hasOwnProperty("averagePercentage")) {
+                                properties._averagePercentage = 1;
                                 if (typeof message.averagePercentage !== "number")
                                     return "averagePercentage: number expected";
-                            if (message.lowerBoundPercentage != null && message.hasOwnProperty("lowerBoundPercentage"))
+                            }
+                            if (message.lowerBoundPercentage != null && message.hasOwnProperty("lowerBoundPercentage")) {
+                                properties._lowerBoundPercentage = 1;
                                 if (typeof message.lowerBoundPercentage !== "number")
                                     return "lowerBoundPercentage: number expected";
-                            if (message.upperBoundPercentage != null && message.hasOwnProperty("upperBoundPercentage"))
+                            }
+                            if (message.upperBoundPercentage != null && message.hasOwnProperty("upperBoundPercentage")) {
+                                properties._upperBoundPercentage = 1;
                                 if (typeof message.upperBoundPercentage !== "number")
                                     return "upperBoundPercentage: number expected";
-                            if (message.standardDeviationPercentage != null && message.hasOwnProperty("standardDeviationPercentage"))
+                            }
+                            if (message.standardDeviationPercentage != null && message.hasOwnProperty("standardDeviationPercentage")) {
+                                properties._standardDeviationPercentage = 1;
                                 if (typeof message.standardDeviationPercentage !== "number")
                                     return "standardDeviationPercentage: number expected";
+                            }
                             return null;
                         };
     
@@ -6821,23 +6994,30 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.date = null;
-                                object.averagePercentage = 0;
-                                object.lowerBoundPercentage = 0;
-                                object.upperBoundPercentage = 0;
-                                object.standardDeviationPercentage = 0;
-                            }
                             if (message.date != null && message.hasOwnProperty("date"))
                                 object.date = $root.google.type.Date.toObject(message.date, options);
-                            if (message.averagePercentage != null && message.hasOwnProperty("averagePercentage"))
+                            if (message.averagePercentage != null && message.hasOwnProperty("averagePercentage")) {
                                 object.averagePercentage = options.json && !isFinite(message.averagePercentage) ? String(message.averagePercentage) : message.averagePercentage;
-                            if (message.lowerBoundPercentage != null && message.hasOwnProperty("lowerBoundPercentage"))
+                                if (options.oneofs)
+                                    object._averagePercentage = "averagePercentage";
+                            }
+                            if (message.lowerBoundPercentage != null && message.hasOwnProperty("lowerBoundPercentage")) {
                                 object.lowerBoundPercentage = options.json && !isFinite(message.lowerBoundPercentage) ? String(message.lowerBoundPercentage) : message.lowerBoundPercentage;
-                            if (message.upperBoundPercentage != null && message.hasOwnProperty("upperBoundPercentage"))
+                                if (options.oneofs)
+                                    object._lowerBoundPercentage = "lowerBoundPercentage";
+                            }
+                            if (message.upperBoundPercentage != null && message.hasOwnProperty("upperBoundPercentage")) {
                                 object.upperBoundPercentage = options.json && !isFinite(message.upperBoundPercentage) ? String(message.upperBoundPercentage) : message.upperBoundPercentage;
-                            if (message.standardDeviationPercentage != null && message.hasOwnProperty("standardDeviationPercentage"))
+                                if (options.oneofs)
+                                    object._upperBoundPercentage = "upperBoundPercentage";
+                            }
+                            if (message.standardDeviationPercentage != null && message.hasOwnProperty("standardDeviationPercentage")) {
                                 object.standardDeviationPercentage = options.json && !isFinite(message.standardDeviationPercentage) ? String(message.standardDeviationPercentage) : message.standardDeviationPercentage;
+                                if (options.oneofs)
+                                    object._standardDeviationPercentage = "standardDeviationPercentage";
+                            }
                             return object;
                         };
     
@@ -6906,11 +7086,11 @@
     
                         /**
                          * DailyRestingHeartRate beatsPerMinute.
-                         * @member {number|Long} beatsPerMinute
+                         * @member {number|Long|null|undefined} beatsPerMinute
                          * @memberof google.devicesandservices.health.v4.DailyRestingHeartRate
                          * @instance
                          */
-                        DailyRestingHeartRate.prototype.beatsPerMinute = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        DailyRestingHeartRate.prototype.beatsPerMinute = null;
     
                         /**
                          * DailyRestingHeartRate dailyRestingHeartRateMetadata.
@@ -6919,6 +7099,15 @@
                          * @instance
                          */
                         DailyRestingHeartRate.prototype.dailyRestingHeartRateMetadata = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyRestingHeartRate.prototype, "_beatsPerMinute", {
+                            get: $util.oneOfGetter($oneOfFields = ["beatsPerMinute"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DailyRestingHeartRate instance using the specified properties.
@@ -7033,14 +7222,17 @@
                         DailyRestingHeartRate.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.date != null && message.hasOwnProperty("date")) {
                                 var error = $root.google.type.Date.verify(message.date);
                                 if (error)
                                     return "date." + error;
                             }
-                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute"))
+                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute")) {
+                                properties._beatsPerMinute = 1;
                                 if (!$util.isInteger(message.beatsPerMinute) && !(message.beatsPerMinute && $util.isInteger(message.beatsPerMinute.low) && $util.isInteger(message.beatsPerMinute.high)))
                                     return "beatsPerMinute: integer|Long expected";
+                            }
                             if (message.dailyRestingHeartRateMetadata != null && message.hasOwnProperty("dailyRestingHeartRateMetadata")) {
                                 var error = $root.google.devicesandservices.health.v4.DailyRestingHeartRate.DailyRestingHeartRateMetadata.verify(message.dailyRestingHeartRateMetadata);
                                 if (error)
@@ -7098,20 +7290,18 @@
                             var object = {};
                             if (options.defaults) {
                                 object.date = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.beatsPerMinute = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.beatsPerMinute = options.longs === String ? "0" : 0;
                                 object.dailyRestingHeartRateMetadata = null;
                             }
                             if (message.date != null && message.hasOwnProperty("date"))
                                 object.date = $root.google.type.Date.toObject(message.date, options);
-                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute"))
+                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute")) {
                                 if (typeof message.beatsPerMinute === "number")
                                     object.beatsPerMinute = options.longs === String ? String(message.beatsPerMinute) : message.beatsPerMinute;
                                 else
                                     object.beatsPerMinute = options.longs === String ? $util.Long.prototype.toString.call(message.beatsPerMinute) : options.longs === Number ? new $util.LongBits(message.beatsPerMinute.low >>> 0, message.beatsPerMinute.high >>> 0).toNumber() : message.beatsPerMinute;
+                                if (options.oneofs)
+                                    object._beatsPerMinute = "beatsPerMinute";
+                            }
                             if (message.dailyRestingHeartRateMetadata != null && message.hasOwnProperty("dailyRestingHeartRateMetadata"))
                                 object.dailyRestingHeartRateMetadata = $root.google.devicesandservices.health.v4.DailyRestingHeartRate.DailyRestingHeartRateMetadata.toObject(message.dailyRestingHeartRateMetadata, options);
                             return object;
@@ -7428,27 +7618,48 @@
     
                         /**
                          * DailySleepTemperatureDerivations nightlyTemperatureCelsius.
-                         * @member {number} nightlyTemperatureCelsius
+                         * @member {number|null|undefined} nightlyTemperatureCelsius
                          * @memberof google.devicesandservices.health.v4.DailySleepTemperatureDerivations
                          * @instance
                          */
-                        DailySleepTemperatureDerivations.prototype.nightlyTemperatureCelsius = 0;
+                        DailySleepTemperatureDerivations.prototype.nightlyTemperatureCelsius = null;
     
                         /**
                          * DailySleepTemperatureDerivations baselineTemperatureCelsius.
-                         * @member {number} baselineTemperatureCelsius
+                         * @member {number|null|undefined} baselineTemperatureCelsius
                          * @memberof google.devicesandservices.health.v4.DailySleepTemperatureDerivations
                          * @instance
                          */
-                        DailySleepTemperatureDerivations.prototype.baselineTemperatureCelsius = 0;
+                        DailySleepTemperatureDerivations.prototype.baselineTemperatureCelsius = null;
     
                         /**
                          * DailySleepTemperatureDerivations relativeNightlyStddev_30dCelsius.
-                         * @member {number} relativeNightlyStddev_30dCelsius
+                         * @member {number|null|undefined} relativeNightlyStddev_30dCelsius
                          * @memberof google.devicesandservices.health.v4.DailySleepTemperatureDerivations
                          * @instance
                          */
-                        DailySleepTemperatureDerivations.prototype.relativeNightlyStddev_30dCelsius = 0;
+                        DailySleepTemperatureDerivations.prototype.relativeNightlyStddev_30dCelsius = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailySleepTemperatureDerivations.prototype, "_nightlyTemperatureCelsius", {
+                            get: $util.oneOfGetter($oneOfFields = ["nightlyTemperatureCelsius"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailySleepTemperatureDerivations.prototype, "_baselineTemperatureCelsius", {
+                            get: $util.oneOfGetter($oneOfFields = ["baselineTemperatureCelsius"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailySleepTemperatureDerivations.prototype, "_relativeNightlyStddev_30dCelsius", {
+                            get: $util.oneOfGetter($oneOfFields = ["relativeNightlyStddev_30dCelsius"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DailySleepTemperatureDerivations instance using the specified properties.
@@ -7569,20 +7780,27 @@
                         DailySleepTemperatureDerivations.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.date != null && message.hasOwnProperty("date")) {
                                 var error = $root.google.type.Date.verify(message.date);
                                 if (error)
                                     return "date." + error;
                             }
-                            if (message.nightlyTemperatureCelsius != null && message.hasOwnProperty("nightlyTemperatureCelsius"))
+                            if (message.nightlyTemperatureCelsius != null && message.hasOwnProperty("nightlyTemperatureCelsius")) {
+                                properties._nightlyTemperatureCelsius = 1;
                                 if (typeof message.nightlyTemperatureCelsius !== "number")
                                     return "nightlyTemperatureCelsius: number expected";
-                            if (message.baselineTemperatureCelsius != null && message.hasOwnProperty("baselineTemperatureCelsius"))
+                            }
+                            if (message.baselineTemperatureCelsius != null && message.hasOwnProperty("baselineTemperatureCelsius")) {
+                                properties._baselineTemperatureCelsius = 1;
                                 if (typeof message.baselineTemperatureCelsius !== "number")
                                     return "baselineTemperatureCelsius: number expected";
-                            if (message.relativeNightlyStddev_30dCelsius != null && message.hasOwnProperty("relativeNightlyStddev_30dCelsius"))
+                            }
+                            if (message.relativeNightlyStddev_30dCelsius != null && message.hasOwnProperty("relativeNightlyStddev_30dCelsius")) {
+                                properties._relativeNightlyStddev_30dCelsius = 1;
                                 if (typeof message.relativeNightlyStddev_30dCelsius !== "number")
                                     return "relativeNightlyStddev_30dCelsius: number expected";
+                            }
                             return null;
                         };
     
@@ -7625,20 +7843,25 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.date = null;
-                                object.nightlyTemperatureCelsius = 0;
-                                object.baselineTemperatureCelsius = 0;
-                                object.relativeNightlyStddev_30dCelsius = 0;
-                            }
                             if (message.date != null && message.hasOwnProperty("date"))
                                 object.date = $root.google.type.Date.toObject(message.date, options);
-                            if (message.nightlyTemperatureCelsius != null && message.hasOwnProperty("nightlyTemperatureCelsius"))
+                            if (message.nightlyTemperatureCelsius != null && message.hasOwnProperty("nightlyTemperatureCelsius")) {
                                 object.nightlyTemperatureCelsius = options.json && !isFinite(message.nightlyTemperatureCelsius) ? String(message.nightlyTemperatureCelsius) : message.nightlyTemperatureCelsius;
-                            if (message.baselineTemperatureCelsius != null && message.hasOwnProperty("baselineTemperatureCelsius"))
+                                if (options.oneofs)
+                                    object._nightlyTemperatureCelsius = "nightlyTemperatureCelsius";
+                            }
+                            if (message.baselineTemperatureCelsius != null && message.hasOwnProperty("baselineTemperatureCelsius")) {
                                 object.baselineTemperatureCelsius = options.json && !isFinite(message.baselineTemperatureCelsius) ? String(message.baselineTemperatureCelsius) : message.baselineTemperatureCelsius;
-                            if (message.relativeNightlyStddev_30dCelsius != null && message.hasOwnProperty("relativeNightlyStddev_30dCelsius"))
+                                if (options.oneofs)
+                                    object._baselineTemperatureCelsius = "baselineTemperatureCelsius";
+                            }
+                            if (message.relativeNightlyStddev_30dCelsius != null && message.hasOwnProperty("relativeNightlyStddev_30dCelsius")) {
                                 object.relativeNightlyStddev_30dCelsius = options.json && !isFinite(message.relativeNightlyStddev_30dCelsius) ? String(message.relativeNightlyStddev_30dCelsius) : message.relativeNightlyStddev_30dCelsius;
+                                if (options.oneofs)
+                                    object._relativeNightlyStddev_30dCelsius = "relativeNightlyStddev_30dCelsius";
+                            }
                             return object;
                         };
     
@@ -7709,11 +7932,11 @@
     
                         /**
                          * DailyVO2Max vo2Max.
-                         * @member {number} vo2Max
+                         * @member {number|null|undefined} vo2Max
                          * @memberof google.devicesandservices.health.v4.DailyVO2Max
                          * @instance
                          */
-                        DailyVO2Max.prototype.vo2Max = 0;
+                        DailyVO2Max.prototype.vo2Max = null;
     
                         /**
                          * DailyVO2Max estimated.
@@ -7733,11 +7956,26 @@
     
                         /**
                          * DailyVO2Max vo2MaxCovariance.
-                         * @member {number} vo2MaxCovariance
+                         * @member {number|null|undefined} vo2MaxCovariance
                          * @memberof google.devicesandservices.health.v4.DailyVO2Max
                          * @instance
                          */
-                        DailyVO2Max.prototype.vo2MaxCovariance = 0;
+                        DailyVO2Max.prototype.vo2MaxCovariance = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyVO2Max.prototype, "_vo2Max", {
+                            get: $util.oneOfGetter($oneOfFields = ["vo2Max"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DailyVO2Max.prototype, "_vo2MaxCovariance", {
+                            get: $util.oneOfGetter($oneOfFields = ["vo2MaxCovariance"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DailyVO2Max instance using the specified properties.
@@ -7864,14 +8102,17 @@
                         DailyVO2Max.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.date != null && message.hasOwnProperty("date")) {
                                 var error = $root.google.type.Date.verify(message.date);
                                 if (error)
                                     return "date." + error;
                             }
-                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max"))
+                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max")) {
+                                properties._vo2Max = 1;
                                 if (typeof message.vo2Max !== "number")
                                     return "vo2Max: number expected";
+                            }
                             if (message.estimated != null && message.hasOwnProperty("estimated"))
                                 if (typeof message.estimated !== "boolean")
                                     return "estimated: boolean expected";
@@ -7888,9 +8129,11 @@
                                 case 6:
                                     break;
                                 }
-                            if (message.vo2MaxCovariance != null && message.hasOwnProperty("vo2MaxCovariance"))
+                            if (message.vo2MaxCovariance != null && message.hasOwnProperty("vo2MaxCovariance")) {
+                                properties._vo2MaxCovariance = 1;
                                 if (typeof message.vo2MaxCovariance !== "number")
                                     return "vo2MaxCovariance: number expected";
+                            }
                             return null;
                         };
     
@@ -7971,21 +8214,25 @@
                             var object = {};
                             if (options.defaults) {
                                 object.date = null;
-                                object.vo2Max = 0;
                                 object.estimated = false;
                                 object.cardioFitnessLevel = options.enums === String ? "CARDIO_FITNESS_LEVEL_UNSPECIFIED" : 0;
-                                object.vo2MaxCovariance = 0;
                             }
                             if (message.date != null && message.hasOwnProperty("date"))
                                 object.date = $root.google.type.Date.toObject(message.date, options);
-                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max"))
+                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max")) {
                                 object.vo2Max = options.json && !isFinite(message.vo2Max) ? String(message.vo2Max) : message.vo2Max;
+                                if (options.oneofs)
+                                    object._vo2Max = "vo2Max";
+                            }
                             if (message.estimated != null && message.hasOwnProperty("estimated"))
                                 object.estimated = message.estimated;
                             if (message.cardioFitnessLevel != null && message.hasOwnProperty("cardioFitnessLevel"))
                                 object.cardioFitnessLevel = options.enums === String ? $root.google.devicesandservices.health.v4.DailyVO2Max.CardioFitnessLevel[message.cardioFitnessLevel] === undefined ? message.cardioFitnessLevel : $root.google.devicesandservices.health.v4.DailyVO2Max.CardioFitnessLevel[message.cardioFitnessLevel] : message.cardioFitnessLevel;
-                            if (message.vo2MaxCovariance != null && message.hasOwnProperty("vo2MaxCovariance"))
+                            if (message.vo2MaxCovariance != null && message.hasOwnProperty("vo2MaxCovariance")) {
                                 object.vo2MaxCovariance = options.json && !isFinite(message.vo2MaxCovariance) ? String(message.vo2MaxCovariance) : message.vo2MaxCovariance;
+                                if (options.oneofs)
+                                    object._vo2MaxCovariance = "vo2MaxCovariance";
+                            }
                             return object;
                         };
     
@@ -8077,11 +8324,20 @@
     
                         /**
                          * Distance millimeters.
-                         * @member {number|Long} millimeters
+                         * @member {number|Long|null|undefined} millimeters
                          * @memberof google.devicesandservices.health.v4.Distance
                          * @instance
                          */
-                        Distance.prototype.millimeters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Distance.prototype.millimeters = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Distance.prototype, "_millimeters", {
+                            get: $util.oneOfGetter($oneOfFields = ["millimeters"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Distance instance using the specified properties.
@@ -8190,14 +8446,17 @@
                         Distance.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.interval != null && message.hasOwnProperty("interval")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
                                 if (error)
                                     return "interval." + error;
                             }
-                            if (message.millimeters != null && message.hasOwnProperty("millimeters"))
+                            if (message.millimeters != null && message.hasOwnProperty("millimeters")) {
+                                properties._millimeters = 1;
                                 if (!$util.isInteger(message.millimeters) && !(message.millimeters && $util.isInteger(message.millimeters.low) && $util.isInteger(message.millimeters.high)))
                                     return "millimeters: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -8243,21 +8502,18 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.interval = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.millimeters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.millimeters = options.longs === String ? "0" : 0;
-                            }
                             if (message.interval != null && message.hasOwnProperty("interval"))
                                 object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
-                            if (message.millimeters != null && message.hasOwnProperty("millimeters"))
+                            if (message.millimeters != null && message.hasOwnProperty("millimeters")) {
                                 if (typeof message.millimeters === "number")
                                     object.millimeters = options.longs === String ? String(message.millimeters) : message.millimeters;
                                 else
                                     object.millimeters = options.longs === String ? $util.Long.prototype.toString.call(message.millimeters) : options.longs === Number ? new $util.LongBits(message.millimeters.low >>> 0, message.millimeters.high >>> 0).toNumber() : message.millimeters;
+                                if (options.oneofs)
+                                    object._millimeters = "millimeters";
+                            }
                             return object;
                         };
     
@@ -8316,11 +8572,20 @@
     
                         /**
                          * DistanceRollupValue millimetersSum.
-                         * @member {number|Long} millimetersSum
+                         * @member {number|Long|null|undefined} millimetersSum
                          * @memberof google.devicesandservices.health.v4.DistanceRollupValue
                          * @instance
                          */
-                        DistanceRollupValue.prototype.millimetersSum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        DistanceRollupValue.prototype.millimetersSum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DistanceRollupValue.prototype, "_millimetersSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["millimetersSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new DistanceRollupValue instance using the specified properties.
@@ -8423,9 +8688,12 @@
                         DistanceRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.millimetersSum != null && message.hasOwnProperty("millimetersSum"))
+                            var properties = {};
+                            if (message.millimetersSum != null && message.hasOwnProperty("millimetersSum")) {
+                                properties._millimetersSum = 1;
                                 if (!$util.isInteger(message.millimetersSum) && !(message.millimetersSum && $util.isInteger(message.millimetersSum.low) && $util.isInteger(message.millimetersSum.high)))
                                     return "millimetersSum: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -8466,17 +8734,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.millimetersSum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.millimetersSum = options.longs === String ? "0" : 0;
-                            if (message.millimetersSum != null && message.hasOwnProperty("millimetersSum"))
+                            if (message.millimetersSum != null && message.hasOwnProperty("millimetersSum")) {
                                 if (typeof message.millimetersSum === "number")
                                     object.millimetersSum = options.longs === String ? String(message.millimetersSum) : message.millimetersSum;
                                 else
                                     object.millimetersSum = options.longs === String ? $util.Long.prototype.toString.call(message.millimetersSum) : options.longs === Number ? new $util.LongBits(message.millimetersSum.low >>> 0, message.millimetersSum.high >>> 0).toNumber() : message.millimetersSum;
+                                if (options.oneofs)
+                                    object._millimetersSum = "millimetersSum";
+                            }
                             return object;
                         };
     
@@ -9919,11 +10184,11 @@
     
                             /**
                              * ExerciseMetadata poolLengthMillimeters.
-                             * @member {number|Long} poolLengthMillimeters
+                             * @member {number|Long|null|undefined} poolLengthMillimeters
                              * @memberof google.devicesandservices.health.v4.Exercise.ExerciseMetadata
                              * @instance
                              */
-                            ExerciseMetadata.prototype.poolLengthMillimeters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                            ExerciseMetadata.prototype.poolLengthMillimeters = null;
     
                             /**
                              * ExerciseMetadata hasGps.
@@ -9932,6 +10197,15 @@
                              * @instance
                              */
                             ExerciseMetadata.prototype.hasGps = false;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(ExerciseMetadata.prototype, "_poolLengthMillimeters", {
+                                get: $util.oneOfGetter($oneOfFields = ["poolLengthMillimeters"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new ExerciseMetadata instance using the specified properties.
@@ -10040,9 +10314,12 @@
                             ExerciseMetadata.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
-                                if (message.poolLengthMillimeters != null && message.hasOwnProperty("poolLengthMillimeters"))
+                                var properties = {};
+                                if (message.poolLengthMillimeters != null && message.hasOwnProperty("poolLengthMillimeters")) {
+                                    properties._poolLengthMillimeters = 1;
                                     if (!$util.isInteger(message.poolLengthMillimeters) && !(message.poolLengthMillimeters && $util.isInteger(message.poolLengthMillimeters.low) && $util.isInteger(message.poolLengthMillimeters.high)))
                                         return "poolLengthMillimeters: integer|Long expected";
+                                }
                                 if (message.hasGps != null && message.hasOwnProperty("hasGps"))
                                     if (typeof message.hasGps !== "boolean")
                                         return "hasGps: boolean expected";
@@ -10088,19 +10365,16 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
-                                    if ($util.Long) {
-                                        var long = new $util.Long(0, 0, false);
-                                        object.poolLengthMillimeters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                    } else
-                                        object.poolLengthMillimeters = options.longs === String ? "0" : 0;
+                                if (options.defaults)
                                     object.hasGps = false;
-                                }
-                                if (message.poolLengthMillimeters != null && message.hasOwnProperty("poolLengthMillimeters"))
+                                if (message.poolLengthMillimeters != null && message.hasOwnProperty("poolLengthMillimeters")) {
                                     if (typeof message.poolLengthMillimeters === "number")
                                         object.poolLengthMillimeters = options.longs === String ? String(message.poolLengthMillimeters) : message.poolLengthMillimeters;
                                     else
                                         object.poolLengthMillimeters = options.longs === String ? $util.Long.prototype.toString.call(message.poolLengthMillimeters) : options.longs === Number ? new $util.LongBits(message.poolLengthMillimeters.low >>> 0, message.poolLengthMillimeters.high >>> 0).toNumber() : message.poolLengthMillimeters;
+                                    if (options.oneofs)
+                                        object._poolLengthMillimeters = "poolLengthMillimeters";
+                                }
                                 if (message.hasGps != null && message.hasOwnProperty("hasGps"))
                                     object.hasGps = message.hasGps;
                                 return object;
@@ -10209,11 +10483,20 @@
     
                         /**
                          * Floors count.
-                         * @member {number|Long} count
+                         * @member {number|Long|null|undefined} count
                          * @memberof google.devicesandservices.health.v4.Floors
                          * @instance
                          */
-                        Floors.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Floors.prototype.count = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Floors.prototype, "_count", {
+                            get: $util.oneOfGetter($oneOfFields = ["count"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Floors instance using the specified properties.
@@ -10322,14 +10605,17 @@
                         Floors.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.interval != null && message.hasOwnProperty("interval")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
                                 if (error)
                                     return "interval." + error;
                             }
-                            if (message.count != null && message.hasOwnProperty("count"))
+                            if (message.count != null && message.hasOwnProperty("count")) {
+                                properties._count = 1;
                                 if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
                                     return "count: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -10375,21 +10661,18 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.interval = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.count = options.longs === String ? "0" : 0;
-                            }
                             if (message.interval != null && message.hasOwnProperty("interval"))
                                 object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
-                            if (message.count != null && message.hasOwnProperty("count"))
+                            if (message.count != null && message.hasOwnProperty("count")) {
                                 if (typeof message.count === "number")
                                     object.count = options.longs === String ? String(message.count) : message.count;
                                 else
                                     object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                if (options.oneofs)
+                                    object._count = "count";
+                            }
                             return object;
                         };
     
@@ -10448,11 +10731,20 @@
     
                         /**
                          * FloorsRollupValue countSum.
-                         * @member {number|Long} countSum
+                         * @member {number|Long|null|undefined} countSum
                          * @memberof google.devicesandservices.health.v4.FloorsRollupValue
                          * @instance
                          */
-                        FloorsRollupValue.prototype.countSum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        FloorsRollupValue.prototype.countSum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(FloorsRollupValue.prototype, "_countSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["countSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new FloorsRollupValue instance using the specified properties.
@@ -10555,9 +10847,12 @@
                         FloorsRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.countSum != null && message.hasOwnProperty("countSum"))
+                            var properties = {};
+                            if (message.countSum != null && message.hasOwnProperty("countSum")) {
+                                properties._countSum = 1;
                                 if (!$util.isInteger(message.countSum) && !(message.countSum && $util.isInteger(message.countSum.low) && $util.isInteger(message.countSum.high)))
                                     return "countSum: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -10598,17 +10893,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.countSum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.countSum = options.longs === String ? "0" : 0;
-                            if (message.countSum != null && message.hasOwnProperty("countSum"))
+                            if (message.countSum != null && message.hasOwnProperty("countSum")) {
                                 if (typeof message.countSum === "number")
                                     object.countSum = options.longs === String ? String(message.countSum) : message.countSum;
                                 else
                                     object.countSum = options.longs === String ? $util.Long.prototype.toString.call(message.countSum) : options.longs === Number ? new $util.LongBits(message.countSum.low >>> 0, message.countSum.high >>> 0).toNumber() : message.countSum;
+                                if (options.oneofs)
+                                    object._countSum = "countSum";
+                            }
                             return object;
                         };
     
@@ -10667,11 +10959,20 @@
     
                         /**
                          * AltitudeRollupValue gainMillimetersSum.
-                         * @member {number|Long} gainMillimetersSum
+                         * @member {number|Long|null|undefined} gainMillimetersSum
                          * @memberof google.devicesandservices.health.v4.AltitudeRollupValue
                          * @instance
                          */
-                        AltitudeRollupValue.prototype.gainMillimetersSum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        AltitudeRollupValue.prototype.gainMillimetersSum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AltitudeRollupValue.prototype, "_gainMillimetersSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["gainMillimetersSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new AltitudeRollupValue instance using the specified properties.
@@ -10774,9 +11075,12 @@
                         AltitudeRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.gainMillimetersSum != null && message.hasOwnProperty("gainMillimetersSum"))
+                            var properties = {};
+                            if (message.gainMillimetersSum != null && message.hasOwnProperty("gainMillimetersSum")) {
+                                properties._gainMillimetersSum = 1;
                                 if (!$util.isInteger(message.gainMillimetersSum) && !(message.gainMillimetersSum && $util.isInteger(message.gainMillimetersSum.low) && $util.isInteger(message.gainMillimetersSum.high)))
                                     return "gainMillimetersSum: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -10817,17 +11121,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.gainMillimetersSum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.gainMillimetersSum = options.longs === String ? "0" : 0;
-                            if (message.gainMillimetersSum != null && message.hasOwnProperty("gainMillimetersSum"))
+                            if (message.gainMillimetersSum != null && message.hasOwnProperty("gainMillimetersSum")) {
                                 if (typeof message.gainMillimetersSum === "number")
                                     object.gainMillimetersSum = options.longs === String ? String(message.gainMillimetersSum) : message.gainMillimetersSum;
                                 else
                                     object.gainMillimetersSum = options.longs === String ? $util.Long.prototype.toString.call(message.gainMillimetersSum) : options.longs === Number ? new $util.LongBits(message.gainMillimetersSum.low >>> 0, message.gainMillimetersSum.high >>> 0).toNumber() : message.gainMillimetersSum;
+                                if (options.oneofs)
+                                    object._gainMillimetersSum = "gainMillimetersSum";
+                            }
                             return object;
                         };
     
@@ -10896,11 +11197,11 @@
     
                         /**
                          * HeartRate beatsPerMinute.
-                         * @member {number|Long} beatsPerMinute
+                         * @member {number|Long|null|undefined} beatsPerMinute
                          * @memberof google.devicesandservices.health.v4.HeartRate
                          * @instance
                          */
-                        HeartRate.prototype.beatsPerMinute = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        HeartRate.prototype.beatsPerMinute = null;
     
                         /**
                          * HeartRate metadata.
@@ -10909,6 +11210,15 @@
                          * @instance
                          */
                         HeartRate.prototype.metadata = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(HeartRate.prototype, "_beatsPerMinute", {
+                            get: $util.oneOfGetter($oneOfFields = ["beatsPerMinute"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new HeartRate instance using the specified properties.
@@ -11023,14 +11333,17 @@
                         HeartRate.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute"))
+                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute")) {
+                                properties._beatsPerMinute = 1;
                                 if (!$util.isInteger(message.beatsPerMinute) && !(message.beatsPerMinute && $util.isInteger(message.beatsPerMinute.low) && $util.isInteger(message.beatsPerMinute.high)))
                                     return "beatsPerMinute: integer|Long expected";
+                            }
                             if (message.metadata != null && message.hasOwnProperty("metadata")) {
                                 var error = $root.google.devicesandservices.health.v4.HeartRate.HeartRateMetadata.verify(message.metadata);
                                 if (error)
@@ -11088,20 +11401,18 @@
                             var object = {};
                             if (options.defaults) {
                                 object.sampleTime = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.beatsPerMinute = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.beatsPerMinute = options.longs === String ? "0" : 0;
                                 object.metadata = null;
                             }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute"))
+                            if (message.beatsPerMinute != null && message.hasOwnProperty("beatsPerMinute")) {
                                 if (typeof message.beatsPerMinute === "number")
                                     object.beatsPerMinute = options.longs === String ? String(message.beatsPerMinute) : message.beatsPerMinute;
                                 else
                                     object.beatsPerMinute = options.longs === String ? $util.Long.prototype.toString.call(message.beatsPerMinute) : options.longs === Number ? new $util.LongBits(message.beatsPerMinute.low >>> 0, message.beatsPerMinute.high >>> 0).toNumber() : message.beatsPerMinute;
+                                if (options.oneofs)
+                                    object._beatsPerMinute = "beatsPerMinute";
+                            }
                             if (message.metadata != null && message.hasOwnProperty("metadata"))
                                 object.metadata = $root.google.devicesandservices.health.v4.HeartRate.HeartRateMetadata.toObject(message.metadata, options);
                             return object;
@@ -11785,27 +12096,48 @@
     
                         /**
                          * RunVO2MaxRollupValue rateMin.
-                         * @member {number} rateMin
+                         * @member {number|null|undefined} rateMin
                          * @memberof google.devicesandservices.health.v4.RunVO2MaxRollupValue
                          * @instance
                          */
-                        RunVO2MaxRollupValue.prototype.rateMin = 0;
+                        RunVO2MaxRollupValue.prototype.rateMin = null;
     
                         /**
                          * RunVO2MaxRollupValue rateMax.
-                         * @member {number} rateMax
+                         * @member {number|null|undefined} rateMax
                          * @memberof google.devicesandservices.health.v4.RunVO2MaxRollupValue
                          * @instance
                          */
-                        RunVO2MaxRollupValue.prototype.rateMax = 0;
+                        RunVO2MaxRollupValue.prototype.rateMax = null;
     
                         /**
                          * RunVO2MaxRollupValue rateAvg.
-                         * @member {number} rateAvg
+                         * @member {number|null|undefined} rateAvg
                          * @memberof google.devicesandservices.health.v4.RunVO2MaxRollupValue
                          * @instance
                          */
-                        RunVO2MaxRollupValue.prototype.rateAvg = 0;
+                        RunVO2MaxRollupValue.prototype.rateAvg = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(RunVO2MaxRollupValue.prototype, "_rateMin", {
+                            get: $util.oneOfGetter($oneOfFields = ["rateMin"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(RunVO2MaxRollupValue.prototype, "_rateMax", {
+                            get: $util.oneOfGetter($oneOfFields = ["rateMax"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(RunVO2MaxRollupValue.prototype, "_rateAvg", {
+                            get: $util.oneOfGetter($oneOfFields = ["rateAvg"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new RunVO2MaxRollupValue instance using the specified properties.
@@ -11920,15 +12252,22 @@
                         RunVO2MaxRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.rateMin != null && message.hasOwnProperty("rateMin"))
+                            var properties = {};
+                            if (message.rateMin != null && message.hasOwnProperty("rateMin")) {
+                                properties._rateMin = 1;
                                 if (typeof message.rateMin !== "number")
                                     return "rateMin: number expected";
-                            if (message.rateMax != null && message.hasOwnProperty("rateMax"))
+                            }
+                            if (message.rateMax != null && message.hasOwnProperty("rateMax")) {
+                                properties._rateMax = 1;
                                 if (typeof message.rateMax !== "number")
                                     return "rateMax: number expected";
-                            if (message.rateAvg != null && message.hasOwnProperty("rateAvg"))
+                            }
+                            if (message.rateAvg != null && message.hasOwnProperty("rateAvg")) {
+                                properties._rateAvg = 1;
                                 if (typeof message.rateAvg !== "number")
                                     return "rateAvg: number expected";
+                            }
                             return null;
                         };
     
@@ -11966,17 +12305,21 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                object.rateMin = 0;
-                                object.rateMax = 0;
-                                object.rateAvg = 0;
-                            }
-                            if (message.rateMin != null && message.hasOwnProperty("rateMin"))
+                            if (message.rateMin != null && message.hasOwnProperty("rateMin")) {
                                 object.rateMin = options.json && !isFinite(message.rateMin) ? String(message.rateMin) : message.rateMin;
-                            if (message.rateMax != null && message.hasOwnProperty("rateMax"))
+                                if (options.oneofs)
+                                    object._rateMin = "rateMin";
+                            }
+                            if (message.rateMax != null && message.hasOwnProperty("rateMax")) {
                                 object.rateMax = options.json && !isFinite(message.rateMax) ? String(message.rateMax) : message.rateMax;
-                            if (message.rateAvg != null && message.hasOwnProperty("rateAvg"))
+                                if (options.oneofs)
+                                    object._rateMax = "rateMax";
+                            }
+                            if (message.rateAvg != null && message.hasOwnProperty("rateAvg")) {
                                 object.rateAvg = options.json && !isFinite(message.rateAvg) ? String(message.rateAvg) : message.rateAvg;
+                                if (options.oneofs)
+                                    object._rateAvg = "rateAvg";
+                            }
                             return object;
                         };
     
@@ -12044,11 +12387,20 @@
     
                         /**
                          * RunVO2Max runVo2Max.
-                         * @member {number} runVo2Max
+                         * @member {number|null|undefined} runVo2Max
                          * @memberof google.devicesandservices.health.v4.RunVO2Max
                          * @instance
                          */
-                        RunVO2Max.prototype.runVo2Max = 0;
+                        RunVO2Max.prototype.runVo2Max = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(RunVO2Max.prototype, "_runVo2Max", {
+                            get: $util.oneOfGetter($oneOfFields = ["runVo2Max"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new RunVO2Max instance using the specified properties.
@@ -12157,14 +12509,17 @@
                         RunVO2Max.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.runVo2Max != null && message.hasOwnProperty("runVo2Max"))
+                            if (message.runVo2Max != null && message.hasOwnProperty("runVo2Max")) {
+                                properties._runVo2Max = 1;
                                 if (typeof message.runVo2Max !== "number")
                                     return "runVo2Max: number expected";
+                            }
                             return null;
                         };
     
@@ -12203,14 +12558,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.sampleTime = null;
-                                object.runVo2Max = 0;
-                            }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.runVo2Max != null && message.hasOwnProperty("runVo2Max"))
+                            if (message.runVo2Max != null && message.hasOwnProperty("runVo2Max")) {
                                 object.runVo2Max = options.json && !isFinite(message.runVo2Max) ? String(message.runVo2Max) : message.runVo2Max;
+                                if (options.oneofs)
+                                    object._runVo2Max = "runVo2Max";
+                            }
                             return object;
                         };
     
@@ -12529,11 +12885,20 @@
     
                         /**
                          * Height heightMillimeters.
-                         * @member {number|Long} heightMillimeters
+                         * @member {number|Long|null|undefined} heightMillimeters
                          * @memberof google.devicesandservices.health.v4.Height
                          * @instance
                          */
-                        Height.prototype.heightMillimeters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Height.prototype.heightMillimeters = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Height.prototype, "_heightMillimeters", {
+                            get: $util.oneOfGetter($oneOfFields = ["heightMillimeters"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Height instance using the specified properties.
@@ -12642,14 +13007,17 @@
                         Height.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.heightMillimeters != null && message.hasOwnProperty("heightMillimeters"))
+                            if (message.heightMillimeters != null && message.hasOwnProperty("heightMillimeters")) {
+                                properties._heightMillimeters = 1;
                                 if (!$util.isInteger(message.heightMillimeters) && !(message.heightMillimeters && $util.isInteger(message.heightMillimeters.low) && $util.isInteger(message.heightMillimeters.high)))
                                     return "heightMillimeters: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -12695,21 +13063,18 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.sampleTime = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.heightMillimeters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.heightMillimeters = options.longs === String ? "0" : 0;
-                            }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.heightMillimeters != null && message.hasOwnProperty("heightMillimeters"))
+                            if (message.heightMillimeters != null && message.hasOwnProperty("heightMillimeters")) {
                                 if (typeof message.heightMillimeters === "number")
                                     object.heightMillimeters = options.longs === String ? String(message.heightMillimeters) : message.heightMillimeters;
                                 else
                                     object.heightMillimeters = options.longs === String ? $util.Long.prototype.toString.call(message.heightMillimeters) : options.longs === Number ? new $util.LongBits(message.heightMillimeters.low >>> 0, message.heightMillimeters.high >>> 0).toNumber() : message.heightMillimeters;
+                                if (options.oneofs)
+                                    object._heightMillimeters = "heightMillimeters";
+                            }
                             return object;
                         };
     
@@ -12778,19 +13143,34 @@
     
                         /**
                          * HeartRateVariability rootMeanSquareOfSuccessiveDifferencesMilliseconds.
-                         * @member {number} rootMeanSquareOfSuccessiveDifferencesMilliseconds
+                         * @member {number|null|undefined} rootMeanSquareOfSuccessiveDifferencesMilliseconds
                          * @memberof google.devicesandservices.health.v4.HeartRateVariability
                          * @instance
                          */
-                        HeartRateVariability.prototype.rootMeanSquareOfSuccessiveDifferencesMilliseconds = 0;
+                        HeartRateVariability.prototype.rootMeanSquareOfSuccessiveDifferencesMilliseconds = null;
     
                         /**
                          * HeartRateVariability standardDeviationMilliseconds.
-                         * @member {number} standardDeviationMilliseconds
+                         * @member {number|null|undefined} standardDeviationMilliseconds
                          * @memberof google.devicesandservices.health.v4.HeartRateVariability
                          * @instance
                          */
-                        HeartRateVariability.prototype.standardDeviationMilliseconds = 0;
+                        HeartRateVariability.prototype.standardDeviationMilliseconds = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(HeartRateVariability.prototype, "_rootMeanSquareOfSuccessiveDifferencesMilliseconds", {
+                            get: $util.oneOfGetter($oneOfFields = ["rootMeanSquareOfSuccessiveDifferencesMilliseconds"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(HeartRateVariability.prototype, "_standardDeviationMilliseconds", {
+                            get: $util.oneOfGetter($oneOfFields = ["standardDeviationMilliseconds"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new HeartRateVariability instance using the specified properties.
@@ -12905,17 +13285,22 @@
                         HeartRateVariability.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.rootMeanSquareOfSuccessiveDifferencesMilliseconds != null && message.hasOwnProperty("rootMeanSquareOfSuccessiveDifferencesMilliseconds"))
+                            if (message.rootMeanSquareOfSuccessiveDifferencesMilliseconds != null && message.hasOwnProperty("rootMeanSquareOfSuccessiveDifferencesMilliseconds")) {
+                                properties._rootMeanSquareOfSuccessiveDifferencesMilliseconds = 1;
                                 if (typeof message.rootMeanSquareOfSuccessiveDifferencesMilliseconds !== "number")
                                     return "rootMeanSquareOfSuccessiveDifferencesMilliseconds: number expected";
-                            if (message.standardDeviationMilliseconds != null && message.hasOwnProperty("standardDeviationMilliseconds"))
+                            }
+                            if (message.standardDeviationMilliseconds != null && message.hasOwnProperty("standardDeviationMilliseconds")) {
+                                properties._standardDeviationMilliseconds = 1;
                                 if (typeof message.standardDeviationMilliseconds !== "number")
                                     return "standardDeviationMilliseconds: number expected";
+                            }
                             return null;
                         };
     
@@ -12956,17 +13341,20 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.sampleTime = null;
-                                object.rootMeanSquareOfSuccessiveDifferencesMilliseconds = 0;
-                                object.standardDeviationMilliseconds = 0;
-                            }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.rootMeanSquareOfSuccessiveDifferencesMilliseconds != null && message.hasOwnProperty("rootMeanSquareOfSuccessiveDifferencesMilliseconds"))
+                            if (message.rootMeanSquareOfSuccessiveDifferencesMilliseconds != null && message.hasOwnProperty("rootMeanSquareOfSuccessiveDifferencesMilliseconds")) {
                                 object.rootMeanSquareOfSuccessiveDifferencesMilliseconds = options.json && !isFinite(message.rootMeanSquareOfSuccessiveDifferencesMilliseconds) ? String(message.rootMeanSquareOfSuccessiveDifferencesMilliseconds) : message.rootMeanSquareOfSuccessiveDifferencesMilliseconds;
-                            if (message.standardDeviationMilliseconds != null && message.hasOwnProperty("standardDeviationMilliseconds"))
+                                if (options.oneofs)
+                                    object._rootMeanSquareOfSuccessiveDifferencesMilliseconds = "rootMeanSquareOfSuccessiveDifferencesMilliseconds";
+                            }
+                            if (message.standardDeviationMilliseconds != null && message.hasOwnProperty("standardDeviationMilliseconds")) {
                                 object.standardDeviationMilliseconds = options.json && !isFinite(message.standardDeviationMilliseconds) ? String(message.standardDeviationMilliseconds) : message.standardDeviationMilliseconds;
+                                if (options.oneofs)
+                                    object._standardDeviationMilliseconds = "standardDeviationMilliseconds";
+                            }
                             return object;
                         };
     
@@ -13026,11 +13414,11 @@
     
                         /**
                          * VolumeQuantity milliliters.
-                         * @member {number} milliliters
+                         * @member {number|null|undefined} milliliters
                          * @memberof google.devicesandservices.health.v4.VolumeQuantity
                          * @instance
                          */
-                        VolumeQuantity.prototype.milliliters = 0;
+                        VolumeQuantity.prototype.milliliters = null;
     
                         /**
                          * VolumeQuantity userProvidedUnit.
@@ -13039,6 +13427,15 @@
                          * @instance
                          */
                         VolumeQuantity.prototype.userProvidedUnit = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VolumeQuantity.prototype, "_milliliters", {
+                            get: $util.oneOfGetter($oneOfFields = ["milliliters"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new VolumeQuantity instance using the specified properties.
@@ -13147,9 +13544,12 @@
                         VolumeQuantity.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.milliliters != null && message.hasOwnProperty("milliliters"))
+                            var properties = {};
+                            if (message.milliliters != null && message.hasOwnProperty("milliliters")) {
+                                properties._milliliters = 1;
                                 if (typeof message.milliliters !== "number")
                                     return "milliliters: number expected";
+                            }
                             if (message.userProvidedUnit != null && message.hasOwnProperty("userProvidedUnit"))
                                 switch (message.userProvidedUnit) {
                                 default:
@@ -13242,12 +13642,13 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                object.milliliters = 0;
+                            if (options.defaults)
                                 object.userProvidedUnit = options.enums === String ? "VOLUME_UNIT_UNSPECIFIED" : 0;
-                            }
-                            if (message.milliliters != null && message.hasOwnProperty("milliliters"))
+                            if (message.milliliters != null && message.hasOwnProperty("milliliters")) {
                                 object.milliliters = options.json && !isFinite(message.milliliters) ? String(message.milliliters) : message.milliliters;
+                                if (options.oneofs)
+                                    object._milliliters = "milliliters";
+                            }
                             if (message.userProvidedUnit != null && message.hasOwnProperty("userProvidedUnit"))
                                 object.userProvidedUnit = options.enums === String ? $root.google.devicesandservices.health.v4.VolumeUnit[message.userProvidedUnit] === undefined ? message.userProvidedUnit : $root.google.devicesandservices.health.v4.VolumeUnit[message.userProvidedUnit] : message.userProvidedUnit;
                             return object;
@@ -13755,11 +14156,11 @@
     
                             /**
                              * VolumeQuantityRollup millilitersSum.
-                             * @member {number} millilitersSum
+                             * @member {number|null|undefined} millilitersSum
                              * @memberof google.devicesandservices.health.v4.HydrationLogRollupValue.VolumeQuantityRollup
                              * @instance
                              */
-                            VolumeQuantityRollup.prototype.millilitersSum = 0;
+                            VolumeQuantityRollup.prototype.millilitersSum = null;
     
                             /**
                              * VolumeQuantityRollup userProvidedUnitLast.
@@ -13768,6 +14169,15 @@
                              * @instance
                              */
                             VolumeQuantityRollup.prototype.userProvidedUnitLast = 0;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(VolumeQuantityRollup.prototype, "_millilitersSum", {
+                                get: $util.oneOfGetter($oneOfFields = ["millilitersSum"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new VolumeQuantityRollup instance using the specified properties.
@@ -13876,9 +14286,12 @@
                             VolumeQuantityRollup.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
-                                if (message.millilitersSum != null && message.hasOwnProperty("millilitersSum"))
+                                var properties = {};
+                                if (message.millilitersSum != null && message.hasOwnProperty("millilitersSum")) {
+                                    properties._millilitersSum = 1;
                                     if (typeof message.millilitersSum !== "number")
                                         return "millilitersSum: number expected";
+                                }
                                 if (message.userProvidedUnitLast != null && message.hasOwnProperty("userProvidedUnitLast"))
                                     switch (message.userProvidedUnitLast) {
                                     default:
@@ -13971,12 +14384,13 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
-                                    object.millilitersSum = 0;
+                                if (options.defaults)
                                     object.userProvidedUnitLast = options.enums === String ? "VOLUME_UNIT_UNSPECIFIED" : 0;
-                                }
-                                if (message.millilitersSum != null && message.hasOwnProperty("millilitersSum"))
+                                if (message.millilitersSum != null && message.hasOwnProperty("millilitersSum")) {
                                     object.millilitersSum = options.json && !isFinite(message.millilitersSum) ? String(message.millilitersSum) : message.millilitersSum;
+                                    if (options.oneofs)
+                                        object._millilitersSum = "millilitersSum";
+                                }
                                 if (message.userProvidedUnitLast != null && message.hasOwnProperty("userProvidedUnitLast"))
                                     object.userProvidedUnitLast = options.enums === String ? $root.google.devicesandservices.health.v4.VolumeUnit[message.userProvidedUnitLast] === undefined ? message.userProvidedUnitLast : $root.google.devicesandservices.health.v4.VolumeUnit[message.userProvidedUnitLast] : message.userProvidedUnitLast;
                                 return object;
@@ -15313,11 +15727,20 @@
     
                         /**
                          * OxygenSaturation percentage.
-                         * @member {number} percentage
+                         * @member {number|null|undefined} percentage
                          * @memberof google.devicesandservices.health.v4.OxygenSaturation
                          * @instance
                          */
-                        OxygenSaturation.prototype.percentage = 0;
+                        OxygenSaturation.prototype.percentage = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(OxygenSaturation.prototype, "_percentage", {
+                            get: $util.oneOfGetter($oneOfFields = ["percentage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new OxygenSaturation instance using the specified properties.
@@ -15426,14 +15849,17 @@
                         OxygenSaturation.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.percentage != null && message.hasOwnProperty("percentage"))
+                            if (message.percentage != null && message.hasOwnProperty("percentage")) {
+                                properties._percentage = 1;
                                 if (typeof message.percentage !== "number")
                                     return "percentage: number expected";
+                            }
                             return null;
                         };
     
@@ -15472,14 +15898,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.sampleTime = null;
-                                object.percentage = 0;
-                            }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.percentage != null && message.hasOwnProperty("percentage"))
+                            if (message.percentage != null && message.hasOwnProperty("percentage")) {
                                 object.percentage = options.json && !isFinite(message.percentage) ? String(message.percentage) : message.percentage;
+                                if (options.oneofs)
+                                    object._percentage = "percentage";
+                            }
                             return object;
                         };
     
@@ -16111,27 +16538,48 @@
     
                             /**
                              * RespiratoryRateSleepSummaryStatistics breathsPerMinute.
-                             * @member {number} breathsPerMinute
+                             * @member {number|null|undefined} breathsPerMinute
                              * @memberof google.devicesandservices.health.v4.RespiratoryRateSleepSummary.RespiratoryRateSleepSummaryStatistics
                              * @instance
                              */
-                            RespiratoryRateSleepSummaryStatistics.prototype.breathsPerMinute = 0;
+                            RespiratoryRateSleepSummaryStatistics.prototype.breathsPerMinute = null;
     
                             /**
                              * RespiratoryRateSleepSummaryStatistics standardDeviation.
-                             * @member {number} standardDeviation
+                             * @member {number|null|undefined} standardDeviation
                              * @memberof google.devicesandservices.health.v4.RespiratoryRateSleepSummary.RespiratoryRateSleepSummaryStatistics
                              * @instance
                              */
-                            RespiratoryRateSleepSummaryStatistics.prototype.standardDeviation = 0;
+                            RespiratoryRateSleepSummaryStatistics.prototype.standardDeviation = null;
     
                             /**
                              * RespiratoryRateSleepSummaryStatistics signalToNoise.
-                             * @member {number} signalToNoise
+                             * @member {number|null|undefined} signalToNoise
                              * @memberof google.devicesandservices.health.v4.RespiratoryRateSleepSummary.RespiratoryRateSleepSummaryStatistics
                              * @instance
                              */
-                            RespiratoryRateSleepSummaryStatistics.prototype.signalToNoise = 0;
+                            RespiratoryRateSleepSummaryStatistics.prototype.signalToNoise = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RespiratoryRateSleepSummaryStatistics.prototype, "_breathsPerMinute", {
+                                get: $util.oneOfGetter($oneOfFields = ["breathsPerMinute"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RespiratoryRateSleepSummaryStatistics.prototype, "_standardDeviation", {
+                                get: $util.oneOfGetter($oneOfFields = ["standardDeviation"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(RespiratoryRateSleepSummaryStatistics.prototype, "_signalToNoise", {
+                                get: $util.oneOfGetter($oneOfFields = ["signalToNoise"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new RespiratoryRateSleepSummaryStatistics instance using the specified properties.
@@ -16246,15 +16694,22 @@
                             RespiratoryRateSleepSummaryStatistics.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
-                                if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute"))
+                                var properties = {};
+                                if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute")) {
+                                    properties._breathsPerMinute = 1;
                                     if (typeof message.breathsPerMinute !== "number")
                                         return "breathsPerMinute: number expected";
-                                if (message.standardDeviation != null && message.hasOwnProperty("standardDeviation"))
+                                }
+                                if (message.standardDeviation != null && message.hasOwnProperty("standardDeviation")) {
+                                    properties._standardDeviation = 1;
                                     if (typeof message.standardDeviation !== "number")
                                         return "standardDeviation: number expected";
-                                if (message.signalToNoise != null && message.hasOwnProperty("signalToNoise"))
+                                }
+                                if (message.signalToNoise != null && message.hasOwnProperty("signalToNoise")) {
+                                    properties._signalToNoise = 1;
                                     if (typeof message.signalToNoise !== "number")
                                         return "signalToNoise: number expected";
+                                }
                                 return null;
                             };
     
@@ -16292,17 +16747,21 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
-                                    object.breathsPerMinute = 0;
-                                    object.standardDeviation = 0;
-                                    object.signalToNoise = 0;
-                                }
-                                if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute"))
+                                if (message.breathsPerMinute != null && message.hasOwnProperty("breathsPerMinute")) {
                                     object.breathsPerMinute = options.json && !isFinite(message.breathsPerMinute) ? String(message.breathsPerMinute) : message.breathsPerMinute;
-                                if (message.standardDeviation != null && message.hasOwnProperty("standardDeviation"))
+                                    if (options.oneofs)
+                                        object._breathsPerMinute = "breathsPerMinute";
+                                }
+                                if (message.standardDeviation != null && message.hasOwnProperty("standardDeviation")) {
                                     object.standardDeviation = options.json && !isFinite(message.standardDeviation) ? String(message.standardDeviation) : message.standardDeviation;
-                                if (message.signalToNoise != null && message.hasOwnProperty("signalToNoise"))
+                                    if (options.oneofs)
+                                        object._standardDeviation = "standardDeviation";
+                                }
+                                if (message.signalToNoise != null && message.hasOwnProperty("signalToNoise")) {
                                     object.signalToNoise = options.json && !isFinite(message.signalToNoise) ? String(message.signalToNoise) : message.signalToNoise;
+                                    if (options.oneofs)
+                                        object._signalToNoise = "signalToNoise";
+                                }
                                 return object;
                             };
     
@@ -18373,19 +18832,34 @@
     
                                 /**
                                  * StageSummary minutes.
-                                 * @member {number|Long} minutes
+                                 * @member {number|Long|null|undefined} minutes
                                  * @memberof google.devicesandservices.health.v4.Sleep.SleepSummary.StageSummary
                                  * @instance
                                  */
-                                StageSummary.prototype.minutes = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                                StageSummary.prototype.minutes = null;
     
                                 /**
                                  * StageSummary count.
-                                 * @member {number|Long} count
+                                 * @member {number|Long|null|undefined} count
                                  * @memberof google.devicesandservices.health.v4.Sleep.SleepSummary.StageSummary
                                  * @instance
                                  */
-                                StageSummary.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                                StageSummary.prototype.count = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(StageSummary.prototype, "_minutes", {
+                                    get: $util.oneOfGetter($oneOfFields = ["minutes"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(StageSummary.prototype, "_count", {
+                                    get: $util.oneOfGetter($oneOfFields = ["count"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
     
                                 /**
                                  * Creates a new StageSummary instance using the specified properties.
@@ -18500,6 +18974,7 @@
                                 StageSummary.verify = function verify(message) {
                                     if (typeof message !== "object" || message === null)
                                         return "object expected";
+                                    var properties = {};
                                     if (message.type != null && message.hasOwnProperty("type"))
                                         switch (message.type) {
                                         default:
@@ -18513,12 +18988,16 @@
                                         case 6:
                                             break;
                                         }
-                                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                                    if (message.minutes != null && message.hasOwnProperty("minutes")) {
+                                        properties._minutes = 1;
                                         if (!$util.isInteger(message.minutes) && !(message.minutes && $util.isInteger(message.minutes.low) && $util.isInteger(message.minutes.high)))
                                             return "minutes: integer|Long expected";
-                                    if (message.count != null && message.hasOwnProperty("count"))
+                                    }
+                                    if (message.count != null && message.hasOwnProperty("count")) {
+                                        properties._count = 1;
                                         if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
                                             return "count: integer|Long expected";
+                                    }
                                     return null;
                                 };
     
@@ -18604,31 +19083,26 @@
                                     if (!options)
                                         options = {};
                                     var object = {};
-                                    if (options.defaults) {
+                                    if (options.defaults)
                                         object.type = options.enums === String ? "SLEEP_STAGE_TYPE_UNSPECIFIED" : 0;
-                                        if ($util.Long) {
-                                            var long = new $util.Long(0, 0, false);
-                                            object.minutes = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                        } else
-                                            object.minutes = options.longs === String ? "0" : 0;
-                                        if ($util.Long) {
-                                            var long = new $util.Long(0, 0, false);
-                                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                        } else
-                                            object.count = options.longs === String ? "0" : 0;
-                                    }
                                     if (message.type != null && message.hasOwnProperty("type"))
                                         object.type = options.enums === String ? $root.google.devicesandservices.health.v4.Sleep.SleepStageType[message.type] === undefined ? message.type : $root.google.devicesandservices.health.v4.Sleep.SleepStageType[message.type] : message.type;
-                                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                                    if (message.minutes != null && message.hasOwnProperty("minutes")) {
                                         if (typeof message.minutes === "number")
                                             object.minutes = options.longs === String ? String(message.minutes) : message.minutes;
                                         else
                                             object.minutes = options.longs === String ? $util.Long.prototype.toString.call(message.minutes) : options.longs === Number ? new $util.LongBits(message.minutes.low >>> 0, message.minutes.high >>> 0).toNumber() : message.minutes;
-                                    if (message.count != null && message.hasOwnProperty("count"))
+                                        if (options.oneofs)
+                                            object._minutes = "minutes";
+                                    }
+                                    if (message.count != null && message.hasOwnProperty("count")) {
                                         if (typeof message.count === "number")
                                             object.count = options.longs === String ? String(message.count) : message.count;
                                         else
                                             object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                        if (options.oneofs)
+                                            object._count = "count";
+                                    }
                                     return object;
                                 };
     
@@ -18742,11 +19216,20 @@
     
                         /**
                          * Steps count.
-                         * @member {number|Long} count
+                         * @member {number|Long|null|undefined} count
                          * @memberof google.devicesandservices.health.v4.Steps
                          * @instance
                          */
-                        Steps.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Steps.prototype.count = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Steps.prototype, "_count", {
+                            get: $util.oneOfGetter($oneOfFields = ["count"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Steps instance using the specified properties.
@@ -18855,14 +19338,17 @@
                         Steps.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.interval != null && message.hasOwnProperty("interval")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
                                 if (error)
                                     return "interval." + error;
                             }
-                            if (message.count != null && message.hasOwnProperty("count"))
+                            if (message.count != null && message.hasOwnProperty("count")) {
+                                properties._count = 1;
                                 if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
                                     return "count: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -18908,21 +19394,18 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
+                            if (options.defaults)
                                 object.interval = null;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.count = options.longs === String ? "0" : 0;
-                            }
                             if (message.interval != null && message.hasOwnProperty("interval"))
                                 object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
-                            if (message.count != null && message.hasOwnProperty("count"))
+                            if (message.count != null && message.hasOwnProperty("count")) {
                                 if (typeof message.count === "number")
                                     object.count = options.longs === String ? String(message.count) : message.count;
                                 else
                                     object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                                if (options.oneofs)
+                                    object._count = "count";
+                            }
                             return object;
                         };
     
@@ -18981,11 +19464,20 @@
     
                         /**
                          * StepsRollupValue countSum.
-                         * @member {number|Long} countSum
+                         * @member {number|Long|null|undefined} countSum
                          * @memberof google.devicesandservices.health.v4.StepsRollupValue
                          * @instance
                          */
-                        StepsRollupValue.prototype.countSum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        StepsRollupValue.prototype.countSum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StepsRollupValue.prototype, "_countSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["countSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new StepsRollupValue instance using the specified properties.
@@ -19088,9 +19580,12 @@
                         StepsRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.countSum != null && message.hasOwnProperty("countSum"))
+                            var properties = {};
+                            if (message.countSum != null && message.hasOwnProperty("countSum")) {
+                                properties._countSum = 1;
                                 if (!$util.isInteger(message.countSum) && !(message.countSum && $util.isInteger(message.countSum.low) && $util.isInteger(message.countSum.high)))
                                     return "countSum: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -19131,17 +19626,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.countSum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.countSum = options.longs === String ? "0" : 0;
-                            if (message.countSum != null && message.hasOwnProperty("countSum"))
+                            if (message.countSum != null && message.hasOwnProperty("countSum")) {
                                 if (typeof message.countSum === "number")
                                     object.countSum = options.longs === String ? String(message.countSum) : message.countSum;
                                 else
                                     object.countSum = options.longs === String ? $util.Long.prototype.toString.call(message.countSum) : options.longs === Number ? new $util.LongBits(message.countSum.low >>> 0, message.countSum.high >>> 0).toNumber() : message.countSum;
+                                if (options.oneofs)
+                                    object._countSum = "countSum";
+                            }
                             return object;
                         };
     
@@ -19218,11 +19710,20 @@
     
                         /**
                          * SwimLengthsData strokeCount.
-                         * @member {number|Long} strokeCount
+                         * @member {number|Long|null|undefined} strokeCount
                          * @memberof google.devicesandservices.health.v4.SwimLengthsData
                          * @instance
                          */
-                        SwimLengthsData.prototype.strokeCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        SwimLengthsData.prototype.strokeCount = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SwimLengthsData.prototype, "_strokeCount", {
+                            get: $util.oneOfGetter($oneOfFields = ["strokeCount"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new SwimLengthsData instance using the specified properties.
@@ -19337,6 +19838,7 @@
                         SwimLengthsData.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.interval != null && message.hasOwnProperty("interval")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationTimeInterval.verify(message.interval);
                                 if (error)
@@ -19353,9 +19855,11 @@
                                 case 4:
                                     break;
                                 }
-                            if (message.strokeCount != null && message.hasOwnProperty("strokeCount"))
+                            if (message.strokeCount != null && message.hasOwnProperty("strokeCount")) {
+                                properties._strokeCount = 1;
                                 if (!$util.isInteger(message.strokeCount) && !(message.strokeCount && $util.isInteger(message.strokeCount.low) && $util.isInteger(message.strokeCount.high)))
                                     return "strokeCount: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -19432,21 +19936,19 @@
                             if (options.defaults) {
                                 object.interval = null;
                                 object.swimStrokeType = options.enums === String ? "SWIM_STROKE_TYPE_UNSPECIFIED" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.strokeCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.strokeCount = options.longs === String ? "0" : 0;
                             }
                             if (message.interval != null && message.hasOwnProperty("interval"))
                                 object.interval = $root.google.devicesandservices.health.v4.ObservationTimeInterval.toObject(message.interval, options);
                             if (message.swimStrokeType != null && message.hasOwnProperty("swimStrokeType"))
                                 object.swimStrokeType = options.enums === String ? $root.google.devicesandservices.health.v4.SwimLengthsData.SwimStrokeType[message.swimStrokeType] === undefined ? message.swimStrokeType : $root.google.devicesandservices.health.v4.SwimLengthsData.SwimStrokeType[message.swimStrokeType] : message.swimStrokeType;
-                            if (message.strokeCount != null && message.hasOwnProperty("strokeCount"))
+                            if (message.strokeCount != null && message.hasOwnProperty("strokeCount")) {
                                 if (typeof message.strokeCount === "number")
                                     object.strokeCount = options.longs === String ? String(message.strokeCount) : message.strokeCount;
                                 else
                                     object.strokeCount = options.longs === String ? $util.Long.prototype.toString.call(message.strokeCount) : options.longs === Number ? new $util.LongBits(message.strokeCount.low >>> 0, message.strokeCount.high >>> 0).toNumber() : message.strokeCount;
+                                if (options.oneofs)
+                                    object._strokeCount = "strokeCount";
+                            }
                             return object;
                         };
     
@@ -19525,11 +20027,20 @@
     
                         /**
                          * SwimLengthsDataRollupValue strokeCountSum.
-                         * @member {number|Long} strokeCountSum
+                         * @member {number|Long|null|undefined} strokeCountSum
                          * @memberof google.devicesandservices.health.v4.SwimLengthsDataRollupValue
                          * @instance
                          */
-                        SwimLengthsDataRollupValue.prototype.strokeCountSum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        SwimLengthsDataRollupValue.prototype.strokeCountSum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(SwimLengthsDataRollupValue.prototype, "_strokeCountSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["strokeCountSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new SwimLengthsDataRollupValue instance using the specified properties.
@@ -19632,9 +20143,12 @@
                         SwimLengthsDataRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.strokeCountSum != null && message.hasOwnProperty("strokeCountSum"))
+                            var properties = {};
+                            if (message.strokeCountSum != null && message.hasOwnProperty("strokeCountSum")) {
+                                properties._strokeCountSum = 1;
                                 if (!$util.isInteger(message.strokeCountSum) && !(message.strokeCountSum && $util.isInteger(message.strokeCountSum.low) && $util.isInteger(message.strokeCountSum.high)))
                                     return "strokeCountSum: integer|Long expected";
+                            }
                             return null;
                         };
     
@@ -19675,17 +20189,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.strokeCountSum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.strokeCountSum = options.longs === String ? "0" : 0;
-                            if (message.strokeCountSum != null && message.hasOwnProperty("strokeCountSum"))
+                            if (message.strokeCountSum != null && message.hasOwnProperty("strokeCountSum")) {
                                 if (typeof message.strokeCountSum === "number")
                                     object.strokeCountSum = options.longs === String ? String(message.strokeCountSum) : message.strokeCountSum;
                                 else
                                     object.strokeCountSum = options.longs === String ? $util.Long.prototype.toString.call(message.strokeCountSum) : options.longs === Number ? new $util.LongBits(message.strokeCountSum.low >>> 0, message.strokeCountSum.high >>> 0).toNumber() : message.strokeCountSum;
+                                if (options.oneofs)
+                                    object._strokeCountSum = "strokeCountSum";
+                            }
                             return object;
                         };
     
@@ -20506,11 +21017,20 @@
     
                         /**
                          * TotalCaloriesRollupValue kcalSum.
-                         * @member {number} kcalSum
+                         * @member {number|null|undefined} kcalSum
                          * @memberof google.devicesandservices.health.v4.TotalCaloriesRollupValue
                          * @instance
                          */
-                        TotalCaloriesRollupValue.prototype.kcalSum = 0;
+                        TotalCaloriesRollupValue.prototype.kcalSum = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(TotalCaloriesRollupValue.prototype, "_kcalSum", {
+                            get: $util.oneOfGetter($oneOfFields = ["kcalSum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new TotalCaloriesRollupValue instance using the specified properties.
@@ -20613,9 +21133,12 @@
                         TotalCaloriesRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.kcalSum != null && message.hasOwnProperty("kcalSum"))
+                            var properties = {};
+                            if (message.kcalSum != null && message.hasOwnProperty("kcalSum")) {
+                                properties._kcalSum = 1;
                                 if (typeof message.kcalSum !== "number")
                                     return "kcalSum: number expected";
+                            }
                             return null;
                         };
     
@@ -20649,10 +21172,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                object.kcalSum = 0;
-                            if (message.kcalSum != null && message.hasOwnProperty("kcalSum"))
+                            if (message.kcalSum != null && message.hasOwnProperty("kcalSum")) {
                                 object.kcalSum = options.json && !isFinite(message.kcalSum) ? String(message.kcalSum) : message.kcalSum;
+                                if (options.oneofs)
+                                    object._kcalSum = "kcalSum";
+                            }
                             return object;
                         };
     
@@ -20721,11 +21245,11 @@
     
                         /**
                          * VO2Max vo2Max.
-                         * @member {number} vo2Max
+                         * @member {number|null|undefined} vo2Max
                          * @memberof google.devicesandservices.health.v4.VO2Max
                          * @instance
                          */
-                        VO2Max.prototype.vo2Max = 0;
+                        VO2Max.prototype.vo2Max = null;
     
                         /**
                          * VO2Max measurementMethod.
@@ -20734,6 +21258,15 @@
                          * @instance
                          */
                         VO2Max.prototype.measurementMethod = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(VO2Max.prototype, "_vo2Max", {
+                            get: $util.oneOfGetter($oneOfFields = ["vo2Max"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new VO2Max instance using the specified properties.
@@ -20848,14 +21381,17 @@
                         VO2Max.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max"))
+                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max")) {
+                                properties._vo2Max = 1;
                                 if (typeof message.vo2Max !== "number")
                                     return "vo2Max: number expected";
+                            }
                             if (message.measurementMethod != null && message.hasOwnProperty("measurementMethod"))
                                 switch (message.measurementMethod) {
                                 default:
@@ -20970,13 +21506,15 @@
                             var object = {};
                             if (options.defaults) {
                                 object.sampleTime = null;
-                                object.vo2Max = 0;
                                 object.measurementMethod = options.enums === String ? "MEASUREMENT_METHOD_UNSPECIFIED" : 0;
                             }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max"))
+                            if (message.vo2Max != null && message.hasOwnProperty("vo2Max")) {
                                 object.vo2Max = options.json && !isFinite(message.vo2Max) ? String(message.vo2Max) : message.vo2Max;
+                                if (options.oneofs)
+                                    object._vo2Max = "vo2Max";
+                            }
                             if (message.measurementMethod != null && message.hasOwnProperty("measurementMethod"))
                                 object.measurementMethod = options.enums === String ? $root.google.devicesandservices.health.v4.VO2Max.MeasurementMethod[message.measurementMethod] === undefined ? message.measurementMethod : $root.google.devicesandservices.health.v4.VO2Max.MeasurementMethod[message.measurementMethod] : message.measurementMethod;
                             return object;
@@ -21081,11 +21619,11 @@
     
                         /**
                          * Weight weightGrams.
-                         * @member {number} weightGrams
+                         * @member {number|null|undefined} weightGrams
                          * @memberof google.devicesandservices.health.v4.Weight
                          * @instance
                          */
-                        Weight.prototype.weightGrams = 0;
+                        Weight.prototype.weightGrams = null;
     
                         /**
                          * Weight notes.
@@ -21094,6 +21632,15 @@
                          * @instance
                          */
                         Weight.prototype.notes = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Weight.prototype, "_weightGrams", {
+                            get: $util.oneOfGetter($oneOfFields = ["weightGrams"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new Weight instance using the specified properties.
@@ -21208,14 +21755,17 @@
                         Weight.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime")) {
                                 var error = $root.google.devicesandservices.health.v4.ObservationSampleTime.verify(message.sampleTime);
                                 if (error)
                                     return "sampleTime." + error;
                             }
-                            if (message.weightGrams != null && message.hasOwnProperty("weightGrams"))
+                            if (message.weightGrams != null && message.hasOwnProperty("weightGrams")) {
+                                properties._weightGrams = 1;
                                 if (typeof message.weightGrams !== "number")
                                     return "weightGrams: number expected";
+                            }
                             if (message.notes != null && message.hasOwnProperty("notes"))
                                 if (!$util.isString(message.notes))
                                     return "notes: string expected";
@@ -21261,13 +21811,15 @@
                             var object = {};
                             if (options.defaults) {
                                 object.sampleTime = null;
-                                object.weightGrams = 0;
                                 object.notes = "";
                             }
                             if (message.sampleTime != null && message.hasOwnProperty("sampleTime"))
                                 object.sampleTime = $root.google.devicesandservices.health.v4.ObservationSampleTime.toObject(message.sampleTime, options);
-                            if (message.weightGrams != null && message.hasOwnProperty("weightGrams"))
+                            if (message.weightGrams != null && message.hasOwnProperty("weightGrams")) {
                                 object.weightGrams = options.json && !isFinite(message.weightGrams) ? String(message.weightGrams) : message.weightGrams;
+                                if (options.oneofs)
+                                    object._weightGrams = "weightGrams";
+                            }
                             if (message.notes != null && message.hasOwnProperty("notes"))
                                 object.notes = message.notes;
                             return object;
@@ -21328,11 +21880,20 @@
     
                         /**
                          * WeightRollupValue weightGramsAvg.
-                         * @member {number} weightGramsAvg
+                         * @member {number|null|undefined} weightGramsAvg
                          * @memberof google.devicesandservices.health.v4.WeightRollupValue
                          * @instance
                          */
-                        WeightRollupValue.prototype.weightGramsAvg = 0;
+                        WeightRollupValue.prototype.weightGramsAvg = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(WeightRollupValue.prototype, "_weightGramsAvg", {
+                            get: $util.oneOfGetter($oneOfFields = ["weightGramsAvg"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new WeightRollupValue instance using the specified properties.
@@ -21435,9 +21996,12 @@
                         WeightRollupValue.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.weightGramsAvg != null && message.hasOwnProperty("weightGramsAvg"))
+                            var properties = {};
+                            if (message.weightGramsAvg != null && message.hasOwnProperty("weightGramsAvg")) {
+                                properties._weightGramsAvg = 1;
                                 if (typeof message.weightGramsAvg !== "number")
                                     return "weightGramsAvg: number expected";
+                            }
                             return null;
                         };
     
@@ -21471,10 +22035,11 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                object.weightGramsAvg = 0;
-                            if (message.weightGramsAvg != null && message.hasOwnProperty("weightGramsAvg"))
+                            if (message.weightGramsAvg != null && message.hasOwnProperty("weightGramsAvg")) {
                                 object.weightGramsAvg = options.json && !isFinite(message.weightGramsAvg) ? String(message.weightGramsAvg) : message.weightGramsAvg;
+                                if (options.oneofs)
+                                    object._weightGramsAvg = "weightGramsAvg";
+                            }
                             return object;
                         };
     
@@ -32179,6 +32744,3176 @@
                         return DataSource;
                     })();
     
+                    v4.DataSubscriptionService = (function() {
+    
+                        /**
+                         * Constructs a new DataSubscriptionService service.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a DataSubscriptionService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function DataSubscriptionService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (DataSubscriptionService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = DataSubscriptionService;
+    
+                        /**
+                         * Creates new DataSubscriptionService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {DataSubscriptionService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        DataSubscriptionService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|createSubscriber}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef CreateSubscriberCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateSubscriber.
+                         * @function createSubscriber
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberRequest} request CreateSubscriberRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.CreateSubscriberCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.createSubscriber = function createSubscriber(request, callback) {
+                            return this.rpcCall(createSubscriber, $root.google.devicesandservices.health.v4.CreateSubscriberRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateSubscriber" });
+    
+                        /**
+                         * Calls CreateSubscriber.
+                         * @function createSubscriber
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberRequest} request CreateSubscriberRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|listSubscribers}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef ListSubscribersCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.devicesandservices.health.v4.ListSubscribersResponse} [response] ListSubscribersResponse
+                         */
+    
+                        /**
+                         * Calls ListSubscribers.
+                         * @function listSubscribers
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IListSubscribersRequest} request ListSubscribersRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.ListSubscribersCallback} callback Node-style callback called with the error, if any, and ListSubscribersResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.listSubscribers = function listSubscribers(request, callback) {
+                            return this.rpcCall(listSubscribers, $root.google.devicesandservices.health.v4.ListSubscribersRequest, $root.google.devicesandservices.health.v4.ListSubscribersResponse, request, callback);
+                        }, "name", { value: "ListSubscribers" });
+    
+                        /**
+                         * Calls ListSubscribers.
+                         * @function listSubscribers
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IListSubscribersRequest} request ListSubscribersRequest message or plain object
+                         * @returns {Promise<google.devicesandservices.health.v4.ListSubscribersResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|updateSubscriber}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef UpdateSubscriberCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateSubscriber.
+                         * @function updateSubscriber
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberRequest} request UpdateSubscriberRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.UpdateSubscriberCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.updateSubscriber = function updateSubscriber(request, callback) {
+                            return this.rpcCall(updateSubscriber, $root.google.devicesandservices.health.v4.UpdateSubscriberRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateSubscriber" });
+    
+                        /**
+                         * Calls UpdateSubscriber.
+                         * @function updateSubscriber
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberRequest} request UpdateSubscriberRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.devicesandservices.health.v4.DataSubscriptionService|deleteSubscriber}.
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @typedef DeleteSubscriberCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteSubscriber.
+                         * @function deleteSubscriber
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberRequest} request DeleteSubscriberRequest message or plain object
+                         * @param {google.devicesandservices.health.v4.DataSubscriptionService.DeleteSubscriberCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(DataSubscriptionService.prototype.deleteSubscriber = function deleteSubscriber(request, callback) {
+                            return this.rpcCall(deleteSubscriber, $root.google.devicesandservices.health.v4.DeleteSubscriberRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteSubscriber" });
+    
+                        /**
+                         * Calls DeleteSubscriber.
+                         * @function deleteSubscriber
+                         * @memberof google.devicesandservices.health.v4.DataSubscriptionService
+                         * @instance
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberRequest} request DeleteSubscriberRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return DataSubscriptionService;
+                    })();
+    
+                    v4.CreateSubscriberRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateSubscriberRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ICreateSubscriberRequest
+                         * @property {string|null} [parent] CreateSubscriberRequest parent
+                         * @property {google.devicesandservices.health.v4.ICreateSubscriberPayload|null} [subscriber] CreateSubscriberRequest subscriber
+                         * @property {string|null} [subscriberId] CreateSubscriberRequest subscriberId
+                         */
+    
+                        /**
+                         * Constructs a new CreateSubscriberRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a CreateSubscriberRequest.
+                         * @implements ICreateSubscriberRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberRequest=} [properties] Properties to set
+                         */
+                        function CreateSubscriberRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSubscriberRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @instance
+                         */
+                        CreateSubscriberRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateSubscriberRequest subscriber.
+                         * @member {google.devicesandservices.health.v4.ICreateSubscriberPayload|null|undefined} subscriber
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @instance
+                         */
+                        CreateSubscriberRequest.prototype.subscriber = null;
+    
+                        /**
+                         * CreateSubscriberRequest subscriberId.
+                         * @member {string} subscriberId
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @instance
+                         */
+                        CreateSubscriberRequest.prototype.subscriberId = "";
+    
+                        /**
+                         * Creates a new CreateSubscriberRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberRequest} CreateSubscriberRequest instance
+                         */
+                        CreateSubscriberRequest.create = function create(properties) {
+                            return new CreateSubscriberRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriberRequest message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberRequest} message CreateSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriberRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.subscriber != null && Object.hasOwnProperty.call(message, "subscriber"))
+                                $root.google.devicesandservices.health.v4.CreateSubscriberPayload.encode(message.subscriber, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.subscriberId != null && Object.hasOwnProperty.call(message, "subscriberId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.subscriberId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriberRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberRequest} message CreateSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriberRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriberRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberRequest} CreateSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriberRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.CreateSubscriberRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.subscriber = $root.google.devicesandservices.health.v4.CreateSubscriberPayload.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.subscriberId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriberRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberRequest} CreateSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriberRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSubscriberRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSubscriberRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.subscriber != null && message.hasOwnProperty("subscriber")) {
+                                var error = $root.google.devicesandservices.health.v4.CreateSubscriberPayload.verify(message.subscriber);
+                                if (error)
+                                    return "subscriber." + error;
+                            }
+                            if (message.subscriberId != null && message.hasOwnProperty("subscriberId"))
+                                if (!$util.isString(message.subscriberId))
+                                    return "subscriberId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberRequest} CreateSubscriberRequest
+                         */
+                        CreateSubscriberRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.CreateSubscriberRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.CreateSubscriberRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.subscriber != null) {
+                                if (typeof object.subscriber !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.CreateSubscriberRequest.subscriber: object expected");
+                                message.subscriber = $root.google.devicesandservices.health.v4.CreateSubscriberPayload.fromObject(object.subscriber);
+                            }
+                            if (object.subscriberId != null)
+                                message.subscriberId = String(object.subscriberId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSubscriberRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.CreateSubscriberRequest} message CreateSubscriberRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSubscriberRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.subscriber = null;
+                                object.subscriberId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.subscriber != null && message.hasOwnProperty("subscriber"))
+                                object.subscriber = $root.google.devicesandservices.health.v4.CreateSubscriberPayload.toObject(message.subscriber, options);
+                            if (message.subscriberId != null && message.hasOwnProperty("subscriberId"))
+                                object.subscriberId = message.subscriberId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSubscriberRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSubscriberRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSubscriberRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSubscriberRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.CreateSubscriberRequest";
+                        };
+    
+                        return CreateSubscriberRequest;
+                    })();
+    
+                    v4.ListSubscribersRequest = (function() {
+    
+                        /**
+                         * Properties of a ListSubscribersRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IListSubscribersRequest
+                         * @property {string|null} [parent] ListSubscribersRequest parent
+                         * @property {number|null} [pageSize] ListSubscribersRequest pageSize
+                         * @property {string|null} [pageToken] ListSubscribersRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListSubscribersRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a ListSubscribersRequest.
+                         * @implements IListSubscribersRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IListSubscribersRequest=} [properties] Properties to set
+                         */
+                        function ListSubscribersRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubscribersRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @instance
+                         */
+                        ListSubscribersRequest.prototype.parent = "";
+    
+                        /**
+                         * ListSubscribersRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @instance
+                         */
+                        ListSubscribersRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListSubscribersRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @instance
+                         */
+                        ListSubscribersRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListSubscribersRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscribersRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersRequest} ListSubscribersRequest instance
+                         */
+                        ListSubscribersRequest.create = function create(properties) {
+                            return new ListSubscribersRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersRequest message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscribersRequest} message ListSubscribersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscribersRequest} message ListSubscribersRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersRequest} ListSubscribersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ListSubscribersRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersRequest} ListSubscribersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubscribersRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubscribersRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubscribersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersRequest} ListSubscribersRequest
+                         */
+                        ListSubscribersRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ListSubscribersRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ListSubscribersRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubscribersRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ListSubscribersRequest} message ListSubscribersRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubscribersRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubscribersRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubscribersRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSubscribersRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSubscribersRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ListSubscribersRequest";
+                        };
+    
+                        return ListSubscribersRequest;
+                    })();
+    
+                    v4.ListSubscribersResponse = (function() {
+    
+                        /**
+                         * Properties of a ListSubscribersResponse.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IListSubscribersResponse
+                         * @property {Array.<google.devicesandservices.health.v4.ISubscriber>|null} [subscribers] ListSubscribersResponse subscribers
+                         * @property {string|null} [nextPageToken] ListSubscribersResponse nextPageToken
+                         * @property {number|null} [totalSize] ListSubscribersResponse totalSize
+                         */
+    
+                        /**
+                         * Constructs a new ListSubscribersResponse.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a ListSubscribersResponse.
+                         * @implements IListSubscribersResponse
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IListSubscribersResponse=} [properties] Properties to set
+                         */
+                        function ListSubscribersResponse(properties) {
+                            this.subscribers = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListSubscribersResponse subscribers.
+                         * @member {Array.<google.devicesandservices.health.v4.ISubscriber>} subscribers
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @instance
+                         */
+                        ListSubscribersResponse.prototype.subscribers = $util.emptyArray;
+    
+                        /**
+                         * ListSubscribersResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @instance
+                         */
+                        ListSubscribersResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListSubscribersResponse totalSize.
+                         * @member {number} totalSize
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @instance
+                         */
+                        ListSubscribersResponse.prototype.totalSize = 0;
+    
+                        /**
+                         * Creates a new ListSubscribersResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscribersResponse=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersResponse} ListSubscribersResponse instance
+                         */
+                        ListSubscribersResponse.create = function create(properties) {
+                            return new ListSubscribersResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersResponse message. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscribersResponse} message ListSubscribersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subscribers != null && message.subscribers.length)
+                                for (var i = 0; i < message.subscribers.length; ++i)
+                                    $root.google.devicesandservices.health.v4.Subscriber.encode(message.subscribers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListSubscribersResponse message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.ListSubscribersResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IListSubscribersResponse} message ListSubscribersResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListSubscribersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersResponse} ListSubscribersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.ListSubscribersResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.subscribers && message.subscribers.length))
+                                            message.subscribers = [];
+                                        message.subscribers.push($root.google.devicesandservices.health.v4.Subscriber.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.totalSize = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListSubscribersResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersResponse} ListSubscribersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListSubscribersResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListSubscribersResponse message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListSubscribersResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subscribers != null && message.hasOwnProperty("subscribers")) {
+                                if (!Array.isArray(message.subscribers))
+                                    return "subscribers: array expected";
+                                for (var i = 0; i < message.subscribers.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.Subscriber.verify(message.subscribers[i]);
+                                    if (error)
+                                        return "subscribers." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                if (!$util.isInteger(message.totalSize))
+                                    return "totalSize: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListSubscribersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.ListSubscribersResponse} ListSubscribersResponse
+                         */
+                        ListSubscribersResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.ListSubscribersResponse)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.ListSubscribersResponse();
+                            if (object.subscribers) {
+                                if (!Array.isArray(object.subscribers))
+                                    throw TypeError(".google.devicesandservices.health.v4.ListSubscribersResponse.subscribers: array expected");
+                                message.subscribers = [];
+                                for (var i = 0; i < object.subscribers.length; ++i) {
+                                    if (typeof object.subscribers[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.ListSubscribersResponse.subscribers: object expected");
+                                    message.subscribers[i] = $root.google.devicesandservices.health.v4.Subscriber.fromObject(object.subscribers[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.totalSize != null)
+                                message.totalSize = object.totalSize | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListSubscribersResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ListSubscribersResponse} message ListSubscribersResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListSubscribersResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.subscribers = [];
+                            if (options.defaults) {
+                                object.nextPageToken = "";
+                                object.totalSize = 0;
+                            }
+                            if (message.subscribers && message.subscribers.length) {
+                                object.subscribers = [];
+                                for (var j = 0; j < message.subscribers.length; ++j)
+                                    object.subscribers[j] = $root.google.devicesandservices.health.v4.Subscriber.toObject(message.subscribers[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                                object.totalSize = message.totalSize;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListSubscribersResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListSubscribersResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListSubscribersResponse
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.ListSubscribersResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListSubscribersResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.ListSubscribersResponse";
+                        };
+    
+                        return ListSubscribersResponse;
+                    })();
+    
+                    v4.UpdateSubscriberRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateSubscriberRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IUpdateSubscriberRequest
+                         * @property {google.devicesandservices.health.v4.ISubscriber|null} [subscriber] UpdateSubscriberRequest subscriber
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSubscriberRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSubscriberRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an UpdateSubscriberRequest.
+                         * @implements IUpdateSubscriberRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberRequest=} [properties] Properties to set
+                         */
+                        function UpdateSubscriberRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateSubscriberRequest subscriber.
+                         * @member {google.devicesandservices.health.v4.ISubscriber|null|undefined} subscriber
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @instance
+                         */
+                        UpdateSubscriberRequest.prototype.subscriber = null;
+    
+                        /**
+                         * UpdateSubscriberRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @instance
+                         */
+                        UpdateSubscriberRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateSubscriberRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberRequest} UpdateSubscriberRequest instance
+                         */
+                        UpdateSubscriberRequest.create = function create(properties) {
+                            return new UpdateSubscriberRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubscriberRequest message. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberRequest} message UpdateSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubscriberRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subscriber != null && Object.hasOwnProperty.call(message, "subscriber"))
+                                $root.google.devicesandservices.health.v4.Subscriber.encode(message.subscriber, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubscriberRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberRequest} message UpdateSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubscriberRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubscriberRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberRequest} UpdateSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubscriberRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.UpdateSubscriberRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.subscriber = $root.google.devicesandservices.health.v4.Subscriber.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubscriberRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberRequest} UpdateSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubscriberRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSubscriberRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSubscriberRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subscriber != null && message.hasOwnProperty("subscriber")) {
+                                var error = $root.google.devicesandservices.health.v4.Subscriber.verify(message.subscriber);
+                                if (error)
+                                    return "subscriber." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberRequest} UpdateSubscriberRequest
+                         */
+                        UpdateSubscriberRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.UpdateSubscriberRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.UpdateSubscriberRequest();
+                            if (object.subscriber != null) {
+                                if (typeof object.subscriber !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.UpdateSubscriberRequest.subscriber: object expected");
+                                message.subscriber = $root.google.devicesandservices.health.v4.Subscriber.fromObject(object.subscriber);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.UpdateSubscriberRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSubscriberRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.UpdateSubscriberRequest} message UpdateSubscriberRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSubscriberRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.subscriber = null;
+                                object.updateMask = null;
+                            }
+                            if (message.subscriber != null && message.hasOwnProperty("subscriber"))
+                                object.subscriber = $root.google.devicesandservices.health.v4.Subscriber.toObject(message.subscriber, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateSubscriberRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSubscriberRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSubscriberRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSubscriberRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.UpdateSubscriberRequest";
+                        };
+    
+                        return UpdateSubscriberRequest;
+                    })();
+    
+                    v4.DeleteSubscriberRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteSubscriberRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IDeleteSubscriberRequest
+                         * @property {string|null} [name] DeleteSubscriberRequest name
+                         * @property {boolean|null} [force] DeleteSubscriberRequest force
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSubscriberRequest.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a DeleteSubscriberRequest.
+                         * @implements IDeleteSubscriberRequest
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberRequest=} [properties] Properties to set
+                         */
+                        function DeleteSubscriberRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteSubscriberRequest name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @instance
+                         */
+                        DeleteSubscriberRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteSubscriberRequest force.
+                         * @member {boolean} force
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @instance
+                         */
+                        DeleteSubscriberRequest.prototype.force = false;
+    
+                        /**
+                         * Creates a new DeleteSubscriberRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberRequest=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberRequest} DeleteSubscriberRequest instance
+                         */
+                        DeleteSubscriberRequest.create = function create(properties) {
+                            return new DeleteSubscriberRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSubscriberRequest message. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberRequest} message DeleteSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSubscriberRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSubscriberRequest message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberRequest} message DeleteSubscriberRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSubscriberRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSubscriberRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberRequest} DeleteSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSubscriberRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.DeleteSubscriberRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSubscriberRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberRequest} DeleteSubscriberRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSubscriberRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSubscriberRequest message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSubscriberRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSubscriberRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberRequest} DeleteSubscriberRequest
+                         */
+                        DeleteSubscriberRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.DeleteSubscriberRequest)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.DeleteSubscriberRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSubscriberRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {google.devicesandservices.health.v4.DeleteSubscriberRequest} message DeleteSubscriberRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSubscriberRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.force = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteSubscriberRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSubscriberRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSubscriberRequest
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSubscriberRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.DeleteSubscriberRequest";
+                        };
+    
+                        return DeleteSubscriberRequest;
+                    })();
+    
+                    v4.Subscriber = (function() {
+    
+                        /**
+                         * Properties of a Subscriber.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ISubscriber
+                         * @property {string|null} [name] Subscriber name
+                         * @property {string|null} [endpointUri] Subscriber endpointUri
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Subscriber createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Subscriber updateTime
+                         * @property {Array.<google.devicesandservices.health.v4.ISubscriberConfig>|null} [subscriberConfigs] Subscriber subscriberConfigs
+                         * @property {google.devicesandservices.health.v4.IEndpointAuthorization|null} [endpointAuthorization] Subscriber endpointAuthorization
+                         * @property {google.devicesandservices.health.v4.Subscriber.State|null} [state] Subscriber state
+                         */
+    
+                        /**
+                         * Constructs a new Subscriber.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a Subscriber.
+                         * @implements ISubscriber
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ISubscriber=} [properties] Properties to set
+                         */
+                        function Subscriber(properties) {
+                            this.subscriberConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Subscriber name.
+                         * @member {string} name
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         */
+                        Subscriber.prototype.name = "";
+    
+                        /**
+                         * Subscriber endpointUri.
+                         * @member {string} endpointUri
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         */
+                        Subscriber.prototype.endpointUri = "";
+    
+                        /**
+                         * Subscriber createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         */
+                        Subscriber.prototype.createTime = null;
+    
+                        /**
+                         * Subscriber updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         */
+                        Subscriber.prototype.updateTime = null;
+    
+                        /**
+                         * Subscriber subscriberConfigs.
+                         * @member {Array.<google.devicesandservices.health.v4.ISubscriberConfig>} subscriberConfigs
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         */
+                        Subscriber.prototype.subscriberConfigs = $util.emptyArray;
+    
+                        /**
+                         * Subscriber endpointAuthorization.
+                         * @member {google.devicesandservices.health.v4.IEndpointAuthorization|null|undefined} endpointAuthorization
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         */
+                        Subscriber.prototype.endpointAuthorization = null;
+    
+                        /**
+                         * Subscriber state.
+                         * @member {google.devicesandservices.health.v4.Subscriber.State} state
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         */
+                        Subscriber.prototype.state = 0;
+    
+                        /**
+                         * Creates a new Subscriber instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscriber=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.Subscriber} Subscriber instance
+                         */
+                        Subscriber.create = function create(properties) {
+                            return new Subscriber(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Subscriber message. Does not implicitly {@link google.devicesandservices.health.v4.Subscriber.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscriber} message Subscriber message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Subscriber.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.endpointUri != null && Object.hasOwnProperty.call(message, "endpointUri"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.endpointUri);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.subscriberConfigs != null && message.subscriberConfigs.length)
+                                for (var i = 0; i < message.subscriberConfigs.length; ++i)
+                                    $root.google.devicesandservices.health.v4.SubscriberConfig.encode(message.subscriberConfigs[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
+                            if (message.endpointAuthorization != null && Object.hasOwnProperty.call(message, "endpointAuthorization"))
+                                $root.google.devicesandservices.health.v4.EndpointAuthorization.encode(message.endpointAuthorization, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Subscriber message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.Subscriber.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscriber} message Subscriber message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Subscriber.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Subscriber message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.Subscriber} Subscriber
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Subscriber.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.Subscriber();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endpointUri = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        if (!(message.subscriberConfigs && message.subscriberConfigs.length))
+                                            message.subscriberConfigs = [];
+                                        message.subscriberConfigs.push($root.google.devicesandservices.health.v4.SubscriberConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 7: {
+                                        message.endpointAuthorization = $root.google.devicesandservices.health.v4.EndpointAuthorization.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Subscriber message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.Subscriber} Subscriber
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Subscriber.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Subscriber message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Subscriber.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.endpointUri != null && message.hasOwnProperty("endpointUri"))
+                                if (!$util.isString(message.endpointUri))
+                                    return "endpointUri: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.subscriberConfigs != null && message.hasOwnProperty("subscriberConfigs")) {
+                                if (!Array.isArray(message.subscriberConfigs))
+                                    return "subscriberConfigs: array expected";
+                                for (var i = 0; i < message.subscriberConfigs.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.SubscriberConfig.verify(message.subscriberConfigs[i]);
+                                    if (error)
+                                        return "subscriberConfigs." + error;
+                                }
+                            }
+                            if (message.endpointAuthorization != null && message.hasOwnProperty("endpointAuthorization")) {
+                                var error = $root.google.devicesandservices.health.v4.EndpointAuthorization.verify(message.endpointAuthorization);
+                                if (error)
+                                    return "endpointAuthorization." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Subscriber message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.Subscriber} Subscriber
+                         */
+                        Subscriber.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.Subscriber)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.Subscriber();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.endpointUri != null)
+                                message.endpointUri = String(object.endpointUri);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Subscriber.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Subscriber.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.subscriberConfigs) {
+                                if (!Array.isArray(object.subscriberConfigs))
+                                    throw TypeError(".google.devicesandservices.health.v4.Subscriber.subscriberConfigs: array expected");
+                                message.subscriberConfigs = [];
+                                for (var i = 0; i < object.subscriberConfigs.length; ++i) {
+                                    if (typeof object.subscriberConfigs[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.Subscriber.subscriberConfigs: object expected");
+                                    message.subscriberConfigs[i] = $root.google.devicesandservices.health.v4.SubscriberConfig.fromObject(object.subscriberConfigs[i]);
+                                }
+                            }
+                            if (object.endpointAuthorization != null) {
+                                if (typeof object.endpointAuthorization !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.Subscriber.endpointAuthorization: object expected");
+                                message.endpointAuthorization = $root.google.devicesandservices.health.v4.EndpointAuthorization.fromObject(object.endpointAuthorization);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "UNVERIFIED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "INACTIVE":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Subscriber message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {google.devicesandservices.health.v4.Subscriber} message Subscriber
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Subscriber.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.subscriberConfigs = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.endpointUri = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.endpointAuthorization = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.endpointUri != null && message.hasOwnProperty("endpointUri"))
+                                object.endpointUri = message.endpointUri;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.subscriberConfigs && message.subscriberConfigs.length) {
+                                object.subscriberConfigs = [];
+                                for (var j = 0; j < message.subscriberConfigs.length; ++j)
+                                    object.subscriberConfigs[j] = $root.google.devicesandservices.health.v4.SubscriberConfig.toObject(message.subscriberConfigs[j], options);
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.devicesandservices.health.v4.Subscriber.State[message.state] === undefined ? message.state : $root.google.devicesandservices.health.v4.Subscriber.State[message.state] : message.state;
+                            if (message.endpointAuthorization != null && message.hasOwnProperty("endpointAuthorization"))
+                                object.endpointAuthorization = $root.google.devicesandservices.health.v4.EndpointAuthorization.toObject(message.endpointAuthorization, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Subscriber to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Subscriber.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Subscriber
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.Subscriber
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Subscriber.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.Subscriber";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.devicesandservices.health.v4.Subscriber.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} UNVERIFIED=1 UNVERIFIED value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} INACTIVE=3 INACTIVE value
+                         */
+                        Subscriber.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "UNVERIFIED"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "INACTIVE"] = 3;
+                            return values;
+                        })();
+    
+                        return Subscriber;
+                    })();
+    
+                    v4.SubscriberConfig = (function() {
+    
+                        /**
+                         * Properties of a SubscriberConfig.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ISubscriberConfig
+                         * @property {Array.<string>|null} [dataTypes] SubscriberConfig dataTypes
+                         * @property {google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy|null} [subscriptionCreatePolicy] SubscriberConfig subscriptionCreatePolicy
+                         */
+    
+                        /**
+                         * Constructs a new SubscriberConfig.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a SubscriberConfig.
+                         * @implements ISubscriberConfig
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ISubscriberConfig=} [properties] Properties to set
+                         */
+                        function SubscriberConfig(properties) {
+                            this.dataTypes = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SubscriberConfig dataTypes.
+                         * @member {Array.<string>} dataTypes
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @instance
+                         */
+                        SubscriberConfig.prototype.dataTypes = $util.emptyArray;
+    
+                        /**
+                         * SubscriberConfig subscriptionCreatePolicy.
+                         * @member {google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy} subscriptionCreatePolicy
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @instance
+                         */
+                        SubscriberConfig.prototype.subscriptionCreatePolicy = 0;
+    
+                        /**
+                         * Creates a new SubscriberConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscriberConfig=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.SubscriberConfig} SubscriberConfig instance
+                         */
+                        SubscriberConfig.create = function create(properties) {
+                            return new SubscriberConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriberConfig message. Does not implicitly {@link google.devicesandservices.health.v4.SubscriberConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscriberConfig} message SubscriberConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriberConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataTypes != null && message.dataTypes.length)
+                                for (var i = 0; i < message.dataTypes.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataTypes[i]);
+                            if (message.subscriptionCreatePolicy != null && Object.hasOwnProperty.call(message, "subscriptionCreatePolicy"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.subscriptionCreatePolicy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriberConfig message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.SubscriberConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ISubscriberConfig} message SubscriberConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriberConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SubscriberConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.SubscriberConfig} SubscriberConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriberConfig.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.SubscriberConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.dataTypes && message.dataTypes.length))
+                                            message.dataTypes = [];
+                                        message.dataTypes.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.subscriptionCreatePolicy = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SubscriberConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.SubscriberConfig} SubscriberConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriberConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SubscriberConfig message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SubscriberConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataTypes != null && message.hasOwnProperty("dataTypes")) {
+                                if (!Array.isArray(message.dataTypes))
+                                    return "dataTypes: array expected";
+                                for (var i = 0; i < message.dataTypes.length; ++i)
+                                    if (!$util.isString(message.dataTypes[i]))
+                                        return "dataTypes: string[] expected";
+                            }
+                            if (message.subscriptionCreatePolicy != null && message.hasOwnProperty("subscriptionCreatePolicy"))
+                                switch (message.subscriptionCreatePolicy) {
+                                default:
+                                    return "subscriptionCreatePolicy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SubscriberConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.SubscriberConfig} SubscriberConfig
+                         */
+                        SubscriberConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.SubscriberConfig)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.SubscriberConfig();
+                            if (object.dataTypes) {
+                                if (!Array.isArray(object.dataTypes))
+                                    throw TypeError(".google.devicesandservices.health.v4.SubscriberConfig.dataTypes: array expected");
+                                message.dataTypes = [];
+                                for (var i = 0; i < object.dataTypes.length; ++i)
+                                    message.dataTypes[i] = String(object.dataTypes[i]);
+                            }
+                            switch (object.subscriptionCreatePolicy) {
+                            default:
+                                if (typeof object.subscriptionCreatePolicy === "number") {
+                                    message.subscriptionCreatePolicy = object.subscriptionCreatePolicy;
+                                    break;
+                                }
+                                break;
+                            case "SUBSCRIPTION_CREATE_POLICY_UNSPECIFIED":
+                            case 0:
+                                message.subscriptionCreatePolicy = 0;
+                                break;
+                            case "AUTOMATIC":
+                            case 1:
+                                message.subscriptionCreatePolicy = 1;
+                                break;
+                            case "MANUAL":
+                            case 2:
+                                message.subscriptionCreatePolicy = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SubscriberConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {google.devicesandservices.health.v4.SubscriberConfig} message SubscriberConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SubscriberConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dataTypes = [];
+                            if (options.defaults)
+                                object.subscriptionCreatePolicy = options.enums === String ? "SUBSCRIPTION_CREATE_POLICY_UNSPECIFIED" : 0;
+                            if (message.dataTypes && message.dataTypes.length) {
+                                object.dataTypes = [];
+                                for (var j = 0; j < message.dataTypes.length; ++j)
+                                    object.dataTypes[j] = message.dataTypes[j];
+                            }
+                            if (message.subscriptionCreatePolicy != null && message.hasOwnProperty("subscriptionCreatePolicy"))
+                                object.subscriptionCreatePolicy = options.enums === String ? $root.google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy[message.subscriptionCreatePolicy] === undefined ? message.subscriptionCreatePolicy : $root.google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy[message.subscriptionCreatePolicy] : message.subscriptionCreatePolicy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SubscriberConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SubscriberConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SubscriberConfig
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.SubscriberConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubscriberConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.SubscriberConfig";
+                        };
+    
+                        /**
+                         * SubscriptionCreatePolicy enum.
+                         * @name google.devicesandservices.health.v4.SubscriberConfig.SubscriptionCreatePolicy
+                         * @enum {number}
+                         * @property {number} SUBSCRIPTION_CREATE_POLICY_UNSPECIFIED=0 SUBSCRIPTION_CREATE_POLICY_UNSPECIFIED value
+                         * @property {number} AUTOMATIC=1 AUTOMATIC value
+                         * @property {number} MANUAL=2 MANUAL value
+                         */
+                        SubscriberConfig.SubscriptionCreatePolicy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SUBSCRIPTION_CREATE_POLICY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AUTOMATIC"] = 1;
+                            values[valuesById[2] = "MANUAL"] = 2;
+                            return values;
+                        })();
+    
+                        return SubscriberConfig;
+                    })();
+    
+                    v4.EndpointAuthorization = (function() {
+    
+                        /**
+                         * Properties of an EndpointAuthorization.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IEndpointAuthorization
+                         * @property {string|null} [secret] EndpointAuthorization secret
+                         * @property {boolean|null} [secretSet] EndpointAuthorization secretSet
+                         */
+    
+                        /**
+                         * Constructs a new EndpointAuthorization.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an EndpointAuthorization.
+                         * @implements IEndpointAuthorization
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IEndpointAuthorization=} [properties] Properties to set
+                         */
+                        function EndpointAuthorization(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EndpointAuthorization secret.
+                         * @member {string} secret
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @instance
+                         */
+                        EndpointAuthorization.prototype.secret = "";
+    
+                        /**
+                         * EndpointAuthorization secretSet.
+                         * @member {boolean} secretSet
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @instance
+                         */
+                        EndpointAuthorization.prototype.secretSet = false;
+    
+                        /**
+                         * Creates a new EndpointAuthorization instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IEndpointAuthorization=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.EndpointAuthorization} EndpointAuthorization instance
+                         */
+                        EndpointAuthorization.create = function create(properties) {
+                            return new EndpointAuthorization(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EndpointAuthorization message. Does not implicitly {@link google.devicesandservices.health.v4.EndpointAuthorization.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IEndpointAuthorization} message EndpointAuthorization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EndpointAuthorization.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.secret);
+                            if (message.secretSet != null && Object.hasOwnProperty.call(message, "secretSet"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.secretSet);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EndpointAuthorization message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.EndpointAuthorization.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IEndpointAuthorization} message EndpointAuthorization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EndpointAuthorization.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EndpointAuthorization message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.EndpointAuthorization} EndpointAuthorization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EndpointAuthorization.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.EndpointAuthorization();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.secret = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.secretSet = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EndpointAuthorization message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.EndpointAuthorization} EndpointAuthorization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EndpointAuthorization.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EndpointAuthorization message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EndpointAuthorization.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                if (!$util.isString(message.secret))
+                                    return "secret: string expected";
+                            if (message.secretSet != null && message.hasOwnProperty("secretSet"))
+                                if (typeof message.secretSet !== "boolean")
+                                    return "secretSet: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EndpointAuthorization message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.EndpointAuthorization} EndpointAuthorization
+                         */
+                        EndpointAuthorization.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.EndpointAuthorization)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.EndpointAuthorization();
+                            if (object.secret != null)
+                                message.secret = String(object.secret);
+                            if (object.secretSet != null)
+                                message.secretSet = Boolean(object.secretSet);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EndpointAuthorization message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {google.devicesandservices.health.v4.EndpointAuthorization} message EndpointAuthorization
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EndpointAuthorization.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.secret = "";
+                                object.secretSet = false;
+                            }
+                            if (message.secret != null && message.hasOwnProperty("secret"))
+                                object.secret = message.secret;
+                            if (message.secretSet != null && message.hasOwnProperty("secretSet"))
+                                object.secretSet = message.secretSet;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EndpointAuthorization to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EndpointAuthorization.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EndpointAuthorization
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.EndpointAuthorization
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EndpointAuthorization.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.EndpointAuthorization";
+                        };
+    
+                        return EndpointAuthorization;
+                    })();
+    
+                    v4.CreateSubscriberPayload = (function() {
+    
+                        /**
+                         * Properties of a CreateSubscriberPayload.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ICreateSubscriberPayload
+                         * @property {string|null} [endpointUri] CreateSubscriberPayload endpointUri
+                         * @property {Array.<google.devicesandservices.health.v4.ISubscriberConfig>|null} [subscriberConfigs] CreateSubscriberPayload subscriberConfigs
+                         * @property {google.devicesandservices.health.v4.IEndpointAuthorization|null} [endpointAuthorization] CreateSubscriberPayload endpointAuthorization
+                         */
+    
+                        /**
+                         * Constructs a new CreateSubscriberPayload.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a CreateSubscriberPayload.
+                         * @implements ICreateSubscriberPayload
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberPayload=} [properties] Properties to set
+                         */
+                        function CreateSubscriberPayload(properties) {
+                            this.subscriberConfigs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateSubscriberPayload endpointUri.
+                         * @member {string} endpointUri
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @instance
+                         */
+                        CreateSubscriberPayload.prototype.endpointUri = "";
+    
+                        /**
+                         * CreateSubscriberPayload subscriberConfigs.
+                         * @member {Array.<google.devicesandservices.health.v4.ISubscriberConfig>} subscriberConfigs
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @instance
+                         */
+                        CreateSubscriberPayload.prototype.subscriberConfigs = $util.emptyArray;
+    
+                        /**
+                         * CreateSubscriberPayload endpointAuthorization.
+                         * @member {google.devicesandservices.health.v4.IEndpointAuthorization|null|undefined} endpointAuthorization
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @instance
+                         */
+                        CreateSubscriberPayload.prototype.endpointAuthorization = null;
+    
+                        /**
+                         * Creates a new CreateSubscriberPayload instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberPayload=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberPayload} CreateSubscriberPayload instance
+                         */
+                        CreateSubscriberPayload.create = function create(properties) {
+                            return new CreateSubscriberPayload(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriberPayload message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberPayload.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberPayload} message CreateSubscriberPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriberPayload.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.endpointUri != null && Object.hasOwnProperty.call(message, "endpointUri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.endpointUri);
+                            if (message.subscriberConfigs != null && message.subscriberConfigs.length)
+                                for (var i = 0; i < message.subscriberConfigs.length; ++i)
+                                    $root.google.devicesandservices.health.v4.SubscriberConfig.encode(message.subscriberConfigs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.endpointAuthorization != null && Object.hasOwnProperty.call(message, "endpointAuthorization"))
+                                $root.google.devicesandservices.health.v4.EndpointAuthorization.encode(message.endpointAuthorization, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriberPayload message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberPayload.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberPayload} message CreateSubscriberPayload message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriberPayload.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriberPayload message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberPayload} CreateSubscriberPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriberPayload.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.CreateSubscriberPayload();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.endpointUri = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.subscriberConfigs && message.subscriberConfigs.length))
+                                            message.subscriberConfigs = [];
+                                        message.subscriberConfigs.push($root.google.devicesandservices.health.v4.SubscriberConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 3: {
+                                        message.endpointAuthorization = $root.google.devicesandservices.health.v4.EndpointAuthorization.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriberPayload message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberPayload} CreateSubscriberPayload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriberPayload.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSubscriberPayload message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSubscriberPayload.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.endpointUri != null && message.hasOwnProperty("endpointUri"))
+                                if (!$util.isString(message.endpointUri))
+                                    return "endpointUri: string expected";
+                            if (message.subscriberConfigs != null && message.hasOwnProperty("subscriberConfigs")) {
+                                if (!Array.isArray(message.subscriberConfigs))
+                                    return "subscriberConfigs: array expected";
+                                for (var i = 0; i < message.subscriberConfigs.length; ++i) {
+                                    var error = $root.google.devicesandservices.health.v4.SubscriberConfig.verify(message.subscriberConfigs[i]);
+                                    if (error)
+                                        return "subscriberConfigs." + error;
+                                }
+                            }
+                            if (message.endpointAuthorization != null && message.hasOwnProperty("endpointAuthorization")) {
+                                var error = $root.google.devicesandservices.health.v4.EndpointAuthorization.verify(message.endpointAuthorization);
+                                if (error)
+                                    return "endpointAuthorization." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSubscriberPayload message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberPayload} CreateSubscriberPayload
+                         */
+                        CreateSubscriberPayload.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.CreateSubscriberPayload)
+                                return object;
+                            var message = new $root.google.devicesandservices.health.v4.CreateSubscriberPayload();
+                            if (object.endpointUri != null)
+                                message.endpointUri = String(object.endpointUri);
+                            if (object.subscriberConfigs) {
+                                if (!Array.isArray(object.subscriberConfigs))
+                                    throw TypeError(".google.devicesandservices.health.v4.CreateSubscriberPayload.subscriberConfigs: array expected");
+                                message.subscriberConfigs = [];
+                                for (var i = 0; i < object.subscriberConfigs.length; ++i) {
+                                    if (typeof object.subscriberConfigs[i] !== "object")
+                                        throw TypeError(".google.devicesandservices.health.v4.CreateSubscriberPayload.subscriberConfigs: object expected");
+                                    message.subscriberConfigs[i] = $root.google.devicesandservices.health.v4.SubscriberConfig.fromObject(object.subscriberConfigs[i]);
+                                }
+                            }
+                            if (object.endpointAuthorization != null) {
+                                if (typeof object.endpointAuthorization !== "object")
+                                    throw TypeError(".google.devicesandservices.health.v4.CreateSubscriberPayload.endpointAuthorization: object expected");
+                                message.endpointAuthorization = $root.google.devicesandservices.health.v4.EndpointAuthorization.fromObject(object.endpointAuthorization);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSubscriberPayload message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {google.devicesandservices.health.v4.CreateSubscriberPayload} message CreateSubscriberPayload
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSubscriberPayload.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.subscriberConfigs = [];
+                            if (options.defaults) {
+                                object.endpointUri = "";
+                                object.endpointAuthorization = null;
+                            }
+                            if (message.endpointUri != null && message.hasOwnProperty("endpointUri"))
+                                object.endpointUri = message.endpointUri;
+                            if (message.subscriberConfigs && message.subscriberConfigs.length) {
+                                object.subscriberConfigs = [];
+                                for (var j = 0; j < message.subscriberConfigs.length; ++j)
+                                    object.subscriberConfigs[j] = $root.google.devicesandservices.health.v4.SubscriberConfig.toObject(message.subscriberConfigs[j], options);
+                            }
+                            if (message.endpointAuthorization != null && message.hasOwnProperty("endpointAuthorization"))
+                                object.endpointAuthorization = $root.google.devicesandservices.health.v4.EndpointAuthorization.toObject(message.endpointAuthorization, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateSubscriberPayload to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSubscriberPayload.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSubscriberPayload
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberPayload
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSubscriberPayload.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.CreateSubscriberPayload";
+                        };
+    
+                        return CreateSubscriberPayload;
+                    })();
+    
+                    v4.CreateSubscriberMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateSubscriberMetadata.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface ICreateSubscriberMetadata
+                         */
+    
+                        /**
+                         * Constructs a new CreateSubscriberMetadata.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a CreateSubscriberMetadata.
+                         * @implements ICreateSubscriberMetadata
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberMetadata=} [properties] Properties to set
+                         */
+                        function CreateSubscriberMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new CreateSubscriberMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberMetadata=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberMetadata} CreateSubscriberMetadata instance
+                         */
+                        CreateSubscriberMetadata.create = function create(properties) {
+                            return new CreateSubscriberMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriberMetadata message. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberMetadata} message CreateSubscriberMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriberMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateSubscriberMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.CreateSubscriberMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.ICreateSubscriberMetadata} message CreateSubscriberMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateSubscriberMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriberMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberMetadata} CreateSubscriberMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriberMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.CreateSubscriberMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateSubscriberMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberMetadata} CreateSubscriberMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateSubscriberMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateSubscriberMetadata message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateSubscriberMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateSubscriberMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.CreateSubscriberMetadata} CreateSubscriberMetadata
+                         */
+                        CreateSubscriberMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.CreateSubscriberMetadata)
+                                return object;
+                            return new $root.google.devicesandservices.health.v4.CreateSubscriberMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateSubscriberMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.CreateSubscriberMetadata} message CreateSubscriberMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateSubscriberMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this CreateSubscriberMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateSubscriberMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateSubscriberMetadata
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.CreateSubscriberMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateSubscriberMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.CreateSubscriberMetadata";
+                        };
+    
+                        return CreateSubscriberMetadata;
+                    })();
+    
+                    v4.UpdateSubscriberMetadata = (function() {
+    
+                        /**
+                         * Properties of an UpdateSubscriberMetadata.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IUpdateSubscriberMetadata
+                         */
+    
+                        /**
+                         * Constructs a new UpdateSubscriberMetadata.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents an UpdateSubscriberMetadata.
+                         * @implements IUpdateSubscriberMetadata
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberMetadata=} [properties] Properties to set
+                         */
+                        function UpdateSubscriberMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new UpdateSubscriberMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberMetadata=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberMetadata} UpdateSubscriberMetadata instance
+                         */
+                        UpdateSubscriberMetadata.create = function create(properties) {
+                            return new UpdateSubscriberMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubscriberMetadata message. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberMetadata} message UpdateSubscriberMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubscriberMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateSubscriberMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.UpdateSubscriberMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IUpdateSubscriberMetadata} message UpdateSubscriberMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateSubscriberMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubscriberMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberMetadata} UpdateSubscriberMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubscriberMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.UpdateSubscriberMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateSubscriberMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberMetadata} UpdateSubscriberMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateSubscriberMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateSubscriberMetadata message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateSubscriberMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateSubscriberMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.UpdateSubscriberMetadata} UpdateSubscriberMetadata
+                         */
+                        UpdateSubscriberMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.UpdateSubscriberMetadata)
+                                return object;
+                            return new $root.google.devicesandservices.health.v4.UpdateSubscriberMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateSubscriberMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.UpdateSubscriberMetadata} message UpdateSubscriberMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateSubscriberMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this UpdateSubscriberMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateSubscriberMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateSubscriberMetadata
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.UpdateSubscriberMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateSubscriberMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.UpdateSubscriberMetadata";
+                        };
+    
+                        return UpdateSubscriberMetadata;
+                    })();
+    
+                    v4.DeleteSubscriberMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteSubscriberMetadata.
+                         * @memberof google.devicesandservices.health.v4
+                         * @interface IDeleteSubscriberMetadata
+                         */
+    
+                        /**
+                         * Constructs a new DeleteSubscriberMetadata.
+                         * @memberof google.devicesandservices.health.v4
+                         * @classdesc Represents a DeleteSubscriberMetadata.
+                         * @implements IDeleteSubscriberMetadata
+                         * @constructor
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberMetadata=} [properties] Properties to set
+                         */
+                        function DeleteSubscriberMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DeleteSubscriberMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberMetadata=} [properties] Properties to set
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberMetadata} DeleteSubscriberMetadata instance
+                         */
+                        DeleteSubscriberMetadata.create = function create(properties) {
+                            return new DeleteSubscriberMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSubscriberMetadata message. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberMetadata} message DeleteSubscriberMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSubscriberMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteSubscriberMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4.DeleteSubscriberMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.IDeleteSubscriberMetadata} message DeleteSubscriberMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteSubscriberMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteSubscriberMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberMetadata} DeleteSubscriberMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSubscriberMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devicesandservices.health.v4.DeleteSubscriberMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteSubscriberMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberMetadata} DeleteSubscriberMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteSubscriberMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteSubscriberMetadata message.
+                         * @function verify
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteSubscriberMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteSubscriberMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devicesandservices.health.v4.DeleteSubscriberMetadata} DeleteSubscriberMetadata
+                         */
+                        DeleteSubscriberMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devicesandservices.health.v4.DeleteSubscriberMetadata)
+                                return object;
+                            return new $root.google.devicesandservices.health.v4.DeleteSubscriberMetadata();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteSubscriberMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {google.devicesandservices.health.v4.DeleteSubscriberMetadata} message DeleteSubscriberMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteSubscriberMetadata.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DeleteSubscriberMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteSubscriberMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteSubscriberMetadata
+                         * @function getTypeUrl
+                         * @memberof google.devicesandservices.health.v4.DeleteSubscriberMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteSubscriberMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.devicesandservices.health.v4.DeleteSubscriberMetadata";
+                        };
+    
+                        return DeleteSubscriberMetadata;
+                    })();
+    
                     v4.HealthProfileService = (function() {
     
                         /**
@@ -36918,6 +40653,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -36953,6 +40689,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -36984,6 +40728,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -37033,6 +40779,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -37086,6 +40836,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -37128,6 +40883,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -37146,8 +40906,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -37155,6 +40917,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -38977,6 +42741,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -39001,6 +42766,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -39028,6 +42801,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -39066,6 +42841,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -39108,6 +42887,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -39128,6 +42912,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -39144,10 +42933,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -39176,6 +42969,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -40053,6 +44098,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -40064,6 +44110,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -40077,6 +44124,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -40104,6 +44159,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -40134,7 +44192,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -40142,6 +44200,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -40184,6 +44265,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -40204,6 +44293,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -40220,10 +44316,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -40862,6 +44966,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -41131,6 +45480,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -41145,6 +45495,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -41169,6 +45520,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -41191,6 +45543,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -41240,6 +45593,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -41362,6 +45723,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -41432,6 +45796,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -41536,6 +45906,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -41590,6 +45967,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -41641,6 +46019,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -41704,6 +46089,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -41770,6 +46159,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -41826,6 +46216,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -41874,6 +46269,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -41980,6 +46376,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -42031,6 +46435,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -42121,6 +46527,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -42236,6 +46646,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -42335,6 +46754,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -42364,6 +46803,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -42409,6 +46849,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -44453,6 +48895,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -44514,6 +48957,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -44550,6 +49001,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -44610,6 +49063,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -44680,6 +49137,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -44729,6 +49195,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -44753,6 +49239,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -44773,6 +49260,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -47091,6 +51580,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -47212,6 +51702,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -47285,6 +51783,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -47384,6 +51884,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -47520,6 +52024,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -47709,6 +52218,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -47806,6 +52320,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -47838,6 +52353,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -48110,6 +52627,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -48150,6 +52668,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -48248,6 +52770,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -48842,6 +53846,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -48886,6 +53891,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -48923,6 +53936,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -48972,6 +53987,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -49026,6 +54045,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -49059,6 +54083,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -49091,6 +54120,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -49098,6 +54128,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -50565,6 +55597,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -50631,6 +55665,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -50666,6 +55716,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -50724,6 +55778,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -50814,6 +55876,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -50955,6 +56037,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -50978,6 +56108,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -50991,6 +56123,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -51116,6 +56252,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -51302,6 +56651,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -51319,6 +56669,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -51366,6 +56717,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -51418,6 +56773,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -51527,7 +56886,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -51554,12 +56914,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -51585,10 +56953,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -51629,8 +56999,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -51673,6 +57047,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -51685,10 +57060,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -51715,6 +57095,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -51757,10 +57141,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -51779,13 +57168,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -52998,6 +58390,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

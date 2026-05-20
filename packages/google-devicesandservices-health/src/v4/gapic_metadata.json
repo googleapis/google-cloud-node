@@ -121,6 +121,64 @@
         }
       }
     },
+    "DataSubscriptionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSubscriber": {
+              "methods": [
+                "createSubscriber"
+              ]
+            },
+            "UpdateSubscriber": {
+              "methods": [
+                "updateSubscriber"
+              ]
+            },
+            "DeleteSubscriber": {
+              "methods": [
+                "deleteSubscriber"
+              ]
+            },
+            "ListSubscribers": {
+              "methods": [
+                "listSubscribers",
+                "listSubscribersStream",
+                "listSubscribersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataSubscriptionServiceClient",
+          "rpcs": {
+            "CreateSubscriber": {
+              "methods": [
+                "createSubscriber"
+              ]
+            },
+            "UpdateSubscriber": {
+              "methods": [
+                "updateSubscriber"
+              ]
+            },
+            "DeleteSubscriber": {
+              "methods": [
+                "deleteSubscriber"
+              ]
+            },
+            "ListSubscribers": {
+              "methods": [
+                "listSubscribers",
+                "listSubscribersStream",
+                "listSubscribersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "HealthProfileService": {
       "clients": {
         "grpc": {
