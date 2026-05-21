@@ -43,10 +43,10 @@
           "initial_retry_delay_millis": 100,
           "retry_delay_multiplier": 4,
           "max_retry_delay_millis": 60000,
-          "initial_rpc_timeout_millis": 60000,
+          "initial_rpc_timeout_millis": 180000,
           "rpc_timeout_multiplier": 1,
-          "max_rpc_timeout_millis": 60000,
-          "total_timeout_millis": 600000
+          "max_rpc_timeout_millis": 1800000,
+          "total_timeout_millis": 1800000
         }
       },
       "methods": {
