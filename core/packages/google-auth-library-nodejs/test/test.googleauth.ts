@@ -550,9 +550,9 @@ describe('googleauth', () => {
       assert.strictEqual(300000, (result as JWT).eagerRefreshThresholdMillis);
     });
 
-    it('fromJSON should create GdchClient for GDCH type credentials', () => {
+    it('fromJSON should create GdchClient for GDCH service account credentials', () => {
       const json = {
-        type: 'gdch_credentials',
+        type: 'gdch_service_account',
         format_version: '1',
         project: 'test-project',
         private_key_id: 'key-id-123',

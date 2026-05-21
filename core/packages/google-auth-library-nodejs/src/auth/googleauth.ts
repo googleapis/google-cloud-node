@@ -44,7 +44,7 @@ import {
 } from './externalAccountAuthorizedUserClient';
 import {
   GdchClient,
-  GDCH_CREDENTIALS_TYPE,
+  GDCH_SERVICE_ACCOUNT_TYPE,
   GdchCredentialsInput,
 } from './gdchclient';
 import {originalOrCamelOptions} from '../util';
@@ -795,7 +795,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
         ...json,
         ...options,
       } as ExternalAccountAuthorizedUserClientOptions);
-    } else if (json.type === GDCH_CREDENTIALS_TYPE) {
+    } else if (json.type === GDCH_SERVICE_ACCOUNT_TYPE) {
       client = new GdchClient(options);
       client.fromJSON(json as GdchCredentialsInput);
     } else {

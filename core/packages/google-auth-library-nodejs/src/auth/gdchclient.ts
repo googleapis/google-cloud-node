@@ -15,7 +15,7 @@
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as https from 'https';
-import {GaxiosOptions} from 'gaxios';
+import {GaxiosOptions, GaxiosResponse} from 'gaxios';
 import {
   GetTokenResponse,
   OAuth2Client,
@@ -24,7 +24,7 @@ import {
 import {CredentialRequest, Credentials} from './credentials';
 
 const DEFAULT_LIFETIME_IN_SECONDS = 3600;
-export const GDCH_CREDENTIALS_TYPE = 'gdch_credentials';
+export const GDCH_SERVICE_ACCOUNT_TYPE = 'gdch_service_account';
 
 export interface GdchClientOptions extends OAuth2ClientOptions {
   projectId?: string | null;
@@ -38,7 +38,7 @@ export interface GdchClientOptions extends OAuth2ClientOptions {
 }
 
 export interface GdchCredentialsInput {
-  type: 'gdch_credentials';
+  type: 'gdch_service_account';
   format_version: string;
   project: string;
   private_key_id: string;
@@ -101,9 +101,9 @@ export class GdchClient extends OAuth2Client {
         'Must pass in a JSON object containing the GDCH credentials settings.'
       );
     }
-    if (json.type !== GDCH_CREDENTIALS_TYPE) {
+    if (json.type !== GDCH_SERVICE_ACCOUNT_TYPE) {
       throw new Error(
-        `The incoming JSON object does not have the "${GDCH_CREDENTIALS_TYPE}" type`
+        `The incoming JSON object does not have the "${GDCH_SERVICE_ACCOUNT_TYPE}" type`
       );
     }
     if (json.format_version !== '1') {
@@ -172,7 +172,7 @@ export class GdchClient extends OAuth2Client {
 
     const data = {
       audience: this.apiAudience,
-      grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+      grant_type: 'urn:ietf:params:oauth:token-type:token-exchange',
       requested_token_type: 'urn:ietf:params:oauth:token-type:access_token',
       subject_token: assertion,
       subject_token_type: 'urn:k8s:params:oauth:token-type:serviceaccount',
@@ -208,7 +208,7 @@ export class GdchClient extends OAuth2Client {
       }
       const tokens: Credentials = {
         access_token: tokenResponse.access_token,
-        token_type: 'Bearer',
+        token_type: 'STS-Bearer',
       };
 
       if (tokenResponse.expires_in) {
@@ -257,6 +257,24 @@ export class GdchClient extends OAuth2Client {
 
     const encodedSignature = this.base64UrlEncode(signature);
     return `${signingInput}.${encodedSignature}`;
+  }
+
+  override async requestAsync<T>(
+    opts: GaxiosOptions,
+    retry = false
+  ): Promise<GaxiosResponse<T>> {
+    if (this.caCertPath && !opts.agent) {
+      try {
+        const ca = await fs.promises.readFile(this.caCertPath);
+        opts.agent = new https.Agent({ca});
+      } catch (err) {
+        if (err instanceof Error) {
+          err.message = `Error reading certificate file from CA cert path, value '${this.caCertPath}': ${err.message}`;
+        }
+        throw err;
+      }
+    }
+    return super.requestAsync(opts, retry);
   }
 
   private base64UrlEncode(str: string | Buffer): string {

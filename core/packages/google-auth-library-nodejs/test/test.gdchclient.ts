@@ -18,7 +18,7 @@ import * as nock from 'nock';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as sinon from 'sinon';
-import {GdchClient, GDCH_CREDENTIALS_TYPE, GdchCredentialsInput} from '../src/auth/gdchclient';
+import {GdchClient, GDCH_SERVICE_ACCOUNT_TYPE, GdchCredentialsInput} from '../src/auth/gdchclient';
 
 nock.disableNetConnect();
 
@@ -86,7 +86,7 @@ describe('GdchClient', () => {
   it('should parse JSON options via fromJSON() correctly', () => {
     const client = new GdchClient();
     const json: GdchCredentialsInput = {
-      type: GDCH_CREDENTIALS_TYPE,
+      type: GDCH_SERVICE_ACCOUNT_TYPE,
       format_version: '1',
       project: 'test-project',
       private_key_id: 'key-id-123',
@@ -115,13 +115,13 @@ describe('GdchClient', () => {
 
     assert.throws(() => {
       client.fromJSON(json);
-    }, /does not have the "gdch_credentials" type/);
+    }, /does not have the "gdch_service_account" type/);
   });
 
   it('fromJSON() should throw error if format_version is unsupported', () => {
     const client = new GdchClient();
     const json: GdchCredentialsInput = {
-      type: GDCH_CREDENTIALS_TYPE,
+      type: GDCH_SERVICE_ACCOUNT_TYPE,
       format_version: '2',
       project: 'p',
       private_key_id: 'k',
@@ -146,7 +146,7 @@ describe('GdchClient', () => {
 
     mandatoryFields.forEach(field => {
       const json: Partial<GdchCredentialsInput> = {
-        type: GDCH_CREDENTIALS_TYPE,
+        type: GDCH_SERVICE_ACCOUNT_TYPE,
         format_version: '1',
         project: 'test-project',
         private_key_id: 'key-id-123',
@@ -206,7 +206,7 @@ describe('GdchClient', () => {
     const scope = nock('https://token-server.local')
       .post('/token', (body) => {
         assert.strictEqual(body.audience, 'target-audience');
-        assert.strictEqual(body.grant_type, 'urn:ietf:params:oauth:grant-type:token-exchange');
+        assert.strictEqual(body.grant_type, 'urn:ietf:params:oauth:token-type:token-exchange');
         assert.strictEqual(body.requested_token_type, 'urn:ietf:params:oauth:token-type:access_token');
         assert.strictEqual(body.subject_token_type, 'urn:k8s:params:oauth:token-type:serviceaccount');
         assert.ok(body.subject_token);
@@ -338,7 +338,7 @@ describe('GdchClient', () => {
       assert.ok(err.message.includes('Permission denied'));
       return true;
     });
-    nockScope.restore();
+    nock.cleanAll();
     assert.ok(readFileStub.calledOnce);
   });
 
