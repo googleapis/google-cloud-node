@@ -1,5 +1,6 @@
 const { promisify } = require('util');
-const { Spanner } = require('@google-cloud/spanner');
+// Require the parent Spanner package relatively since we are running inside the repository
+const { Spanner } = require('../../');
 const { GoogleAuth } = require('google-auth-library');
 
 // Require the generated entry point of the napi-rs compiled extension
