@@ -67,22 +67,12 @@
     "sinon": "21.0.3",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
-    "uuid": "^11.1.1",
+    "uuid": "^9.0.1",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1"
   },
   "engines": {
     "node": ">=18"
-  },
-  "overrides": {
-    "protobufjs": "^7.5.8",
-    "protobufjs-cli": "^1.2.1",
-    "tar": "^7.5.11",
-    "serialize-javascript": "^7.0.5",
-    "minimatch": "^9.0.5",
-    "fast-xml-builder": "^1.1.7",
-    "trim-newlines": "^3.0.1",
-    "uuid": "^11.1.1"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/bigquery-storage"
 }
