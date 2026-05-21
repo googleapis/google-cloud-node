@@ -31,7 +31,7 @@ import {randomUUID} from 'crypto';
 // @ts-ignore
 import {getPackageJSON} from './package-json-helper.cjs';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
-import {RETRYABLE_ERR_FN_DEFAULT, RetryOptions} from './storage.js';
+import {RetryOptions} from './storage.js';
 
 export interface StandardStorageQueryParams {
   alt?: 'json' | 'media';
@@ -58,7 +58,6 @@ export interface StorageRequestOptions extends GaxiosOptions {
   projectId?: string;
   queryParameters?: StorageQueryParameters;
   shouldReturnStream?: boolean;
-  hasPrecondition?: boolean;
 }
 
 interface TransportParameters extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -114,11 +113,7 @@ export class StorageTransport {
     }
     this.providedUserAgent = options.userAgent;
     this.packageJson = getPackageJSON();
-    this.retryOptions = {
-      ...options.retryOptions,
-      retryableErrorFn:
-        options.retryOptions?.retryableErrorFn || RETRYABLE_ERR_FN_DEFAULT,
-    };
+    this.retryOptions = options.retryOptions;
     this.baseUrl = options.baseUrl;
     this.timeout = options.timeout;
     this.projectId = options.projectId;
@@ -146,14 +141,10 @@ export class StorageTransport {
     // Header Construction
     const headers = this.#prepareHeaders(reqOpts);
 
-    // Interceptor Management
-    const requestGaxiosInstance = reqOpts.interceptors
-      ? new Gaxios()
-      : this.gaxiosInstance;
-
     if (reqOpts.interceptors) {
+      this.gaxiosInstance.interceptors.request.clear();
       for (const inter of reqOpts.interceptors) {
-        requestGaxiosInstance.interceptors.request.add(inter);
+        this.gaxiosInstance.interceptors.request.add(inter);
       }
     }
 
@@ -165,52 +156,23 @@ export class StorageTransport {
       ? urlString
       : new URL(urlString, this.baseUrl).toString();
 
-    const bodyStr = typeof reqOpts.body === 'string'
-      ? reqOpts.body
-      : (typeof reqOpts.data === 'string' ? reqOpts.data : '');
-
-    const hasPrecondition = !!(
-      reqOpts.hasPrecondition ||
-      reqOpts.queryParameters?.ifGenerationMatch !== undefined ||
-      reqOpts.queryParameters?.ifMetagenerationMatch !== undefined ||
-      reqOpts.queryParameters?.ifSourceGenerationMatch !== undefined ||
-      bodyStr.includes('"etag"')
-    );
-
     try {
       const requestPromise = this.authClient.request<T>({
-        adapter: async (opts: GaxiosOptions) => {
-          const innerOpts = {
-            ...opts,
-            adapter: undefined,
-          };
-          return requestGaxiosInstance.request(innerOpts);
-        },
         retryConfig: {
           retry: this.retryOptions.maxRetries,
           noResponseRetries: this.retryOptions.maxRetries,
           maxRetryDelay: this.retryOptions.maxRetryDelay,
           retryDelayMultiplier: this.retryOptions.retryDelayMultiplier,
+          shouldRetry: this.retryOptions.retryableErrorFn,
           totalTimeout: this.retryOptions.totalTimeout,
-          shouldRetry: (err: GaxiosError) => !!this.retryOptions.retryableErrorFn?.(err),
         },
         ...reqOpts,
-        hasPrecondition, // Pass flag to Gaxios / AuthClient options
         params: queryParameters,
         paramsSerializer: this.#paramsSerializer,
         headers,
         url: requestUrl,
         timeout: this.timeout,
-        validateStatus: (status: number): boolean => {
-          const isResumable = !!(
-            reqOpts.queryParameters?.uploadType === 'resumable' ||
-            reqOpts.url?.toString().includes('uploadType=resumable')
-          );
-          return (
-            (status >= 200 && status < 300) || (isResumable && status === 308)
-          );
-        },
-      } as any);
+      });
 
       // Response Handling
       const isPlainObject = (obj: any): boolean =>
