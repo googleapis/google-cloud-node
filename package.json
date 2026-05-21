@@ -47,7 +47,6 @@
     "protobufjs-cli": "^1.2.1",
     "tar": "^6.2.1",
     "serialize-javascript": "^6.0.2",
-    "minimatch": "^3.1.2",
     "fast-xml-builder": "^1.1.7",
     "trim-newlines": "^3.0.1",
     "uuid": "^9.0.1"
@@ -57,7 +56,6 @@
     "protobufjs-cli": "^1.2.1",
     "tar": "^6.2.1",
     "serialize-javascript": "^6.0.2",
-    "minimatch": "^3.1.2",
     "fast-xml-builder": "^1.1.7",
     "trim-newlines": "^3.0.1",
     "uuid": "^9.0.1"
