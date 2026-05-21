@@ -74,12 +74,6 @@ if [ "$NODE_BIN_EXISTS" = false ]; then
 fi
 echo "Compiled .node native binary verified successfully."
 
-# 9. Check for placeholder values in benchmark.js
-echo "Verifying benchmark parameters..."
-if grep -q "your-project" __test__/benchmark.js; then
-  echo "ERROR: Placeholder values detected in __test__/benchmark.js. Please configure your real GCP details."
-  exit 1
-fi
 
 # 10. Execute comparative performance benchmark
 echo "Launching Spanner Performance Benchmark..."
