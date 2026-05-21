@@ -180,6 +180,92 @@ async function runBenchmark(executeFn, concurrency, durationMs) {
   };
 }
 
+/**
+ * Runs a fixed-request count benchmark (to replicate customer-specific Go/Node comparisons).
+ */
+async function runFixedCountBenchmark(executeFn, concurrency, totalRequests) {
+  const latencies = [];
+  let errors = 0;
+  let launched = 0;
+  let completed = 0;
+  const startBench = performance.now();
+
+  const cpuMonitor = new CPUMonitor();
+  cpuMonitor.start();
+
+  const lags = [];
+  let lagStopped = false;
+  const measureLag = () => {
+    if (lagStopped) return;
+    const before = performance.now();
+    setImmediate(() => {
+      lags.push(performance.now() - before);
+      setTimeout(measureLag, 10);
+    });
+  };
+  measureLag();
+
+  return new Promise((resolve) => {
+    function launchOne() {
+      if (completed >= totalRequests) {
+        lagStopped = true;
+        const elapsed = performance.now() - startBench;
+        const cpuUtil = cpuMonitor.stop();
+
+        const maxLag = Math.max(...lags, 0);
+        const avgLag = lags.reduce((a, b) => a + b, 0) / (lags.length || 1);
+
+        latencies.sort((a, b) => a - b);
+        const getPercentile = (p) => {
+          const idx = Math.ceil((p / 100) * latencies.length) - 1;
+          return latencies[Math.max(0, idx)];
+        };
+
+        resolve({
+          totalTimeMs: elapsed,
+          qps: latencies.length / (elapsed / 1000),
+          p50: getPercentile(50),
+          p90: getPercentile(90),
+          p95: getPercentile(95),
+          p99: getPercentile(99),
+          avgDuration: latencies.reduce((a, b) => a + b, 0) / (latencies.length || 1),
+          minDuration: latencies.length > 0 ? latencies[0] : 0.0,
+          maxDuration: latencies.length > 0 ? latencies[latencies.length - 1] : 0.0,
+          errorRate: errors / totalRequests,
+          total: totalRequests,
+          maxLagMs: maxLag,
+          avgLagMs: avgLag,
+          cpuUtil: cpuUtil
+        });
+        return;
+      }
+
+      if (launched >= totalRequests) return;
+      launched++;
+
+      const start = performance.now();
+      executeFn()
+        .then(() => {
+          latencies.push(performance.now() - start);
+        })
+        .catch((err) => {
+          errors++;
+          if (errors <= 5) {
+            console.error('\n[Fixed Count Err]:', err);
+          }
+        })
+        .finally(() => {
+          completed++;
+          launchOne();
+        });
+    }
+
+    for (let i = 0; i < Math.min(concurrency, totalRequests); i++) {
+      launchOne();
+    }
+  });
+}
+
 async function main() {
   // Validate placeholder values
   if (
@@ -211,9 +297,61 @@ async function main() {
   await runBenchmark(() => db.executeSqlNative(SQL, 4), 4, WARMUP_MS);
   await runBenchmark(() => db.executeSqlNative(SQL, 8), 4, WARMUP_MS);
   await runBenchmark(() => db.executeSqlNative(SQL, 16), 4, WARMUP_MS);
-  console.log('Warmup complete. Starting matrix benchmark tests...\n');
+  console.log('Warmup complete. Executing customer replication benchmark cases (110 Concurrency, 1000 Total Requests)...');
+  console.log('='.repeat(100));
+
+  // 1. JS Baseline Customer Case
+  console.log('Running JavaScript baseline...');
+  const custJs = await runFixedCountBenchmark(() => db.executeSqlJs(SQL), 110, 1000);
+
+  // 2. Rust Multi-Channel (4 Channels) Customer Case
+  console.log('Running Rust (4 Channels) extension...');
+  const custRust4 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 4), 110, 1000);
+
+  // 3. Rust Multi-Channel (16 Channels) Customer Case
+  console.log('Running Rust (16 Channels) extension...');
+  const custRust16 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 16), 110, 1000);
+
+  console.log('\n' + '='.repeat(100));
+  console.log('CUSTOMER BENCHMARK REPLICATION SUMMARY');
+  console.log('='.repeat(100));
+  
+  const printCustRes = (label, r, base = null) => {
+    console.log(`\n  [${label}]`);
+    console.log(`  Total Time          : ${r.totalTimeMs.toFixed(2)}ms`);
+    console.log(`  Inserts/Second (QPS): ${r.qps.toFixed(2)}`);
+    console.log(`  Avg Batch Duration  : ${r.avgDuration.toFixed(2)}ms`);
+    console.log(`  Min Batch Duration  : ${r.minDuration.toFixed(2)}ms`);
+    console.log(`  Max Batch Duration  : ${r.maxDuration.toFixed(2)}ms`);
+    console.log(`  P50                 : ${r.p50.toFixed(2)}ms`);
+    console.log(`  P90                 : ${r.p90.toFixed(2)}ms`);
+    console.log(`  P95                 : ${r.p95.toFixed(2)}ms`);
+    console.log(`  P99                 : ${r.p99.toFixed(2)}ms`);
+    console.log(`  Event Loop Lag (Avg): ${r.avgLagMs.toFixed(2)}ms (Max: ${r.maxLagMs.toFixed(2)}ms)`);
+    console.log(`  CPU Utilization     : ${r.cpuUtil.toFixed(1)}%`);
+    if (base) {
+      const speedup = r.qps / base.qps;
+      const latImp = ((base.p95 - r.p95) / base.p95) * 100;
+      console.log(`  Throughput Speedup  : \x1b[32m${speedup.toFixed(2)}x\x1b[0m`);
+      console.log(`  p95 Latency Imp. %  : \x1b[32m${latImp.toFixed(1)}%\x1b[0m`);
+    }
+  };
+
+  printCustRes('JavaScript Baseline', custJs);
+  printCustRes('Rust 4 Channels', custRust4, custJs);
+  printCustRes('Rust 16 Channels', custRust16, custJs);
+  console.log('='.repeat(100) + '\n');
 
   const results = [];
+  results.push({
+    concurrency: 110,
+    total: 1000,
+    javascript: custJs,
+    rust_4ch: custRust4,
+    rust_16ch: custRust16
+  });
+
+  console.log('Continuing to standard comparative matrix tests...\n');
 
   // Beautiful comparative markdown table header
   const columns = [
