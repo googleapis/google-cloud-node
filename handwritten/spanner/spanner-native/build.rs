@@ -5,7 +5,7 @@ fn main() {
     // 2. Compile Cloud Spanner client protos directly from cloned googleapis
     tonic_build::configure()
         .build_server(false)
-        .compile(
+        .compile_protos(
             &[
                 "/tmp/googleapis/google/spanner/v1/spanner.proto",
                 "/tmp/googleapis/google/spanner/v1/transaction.proto",
