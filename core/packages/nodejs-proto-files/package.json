@@ -44,7 +44,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "protobufjs": "^7.5.4",
+    "protobufjs": "^7.5.8",
     "walkdir": "^0.4.1"
   },
   "devDependencies": {

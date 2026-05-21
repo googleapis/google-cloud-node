@@ -39,7 +39,7 @@
     "prelint": "cd samples && npm link ../ && npm install"
   },
   "dependencies": {
-    "protobufjs": "^7.5.4"
+    "protobufjs": "^7.5.8"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

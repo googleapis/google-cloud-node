@@ -51,8 +51,8 @@
     "long": "^5.3.2",
     "object-hash": "^3.0.0",
     "proto3-json-serializer": "^3.0.3",
-    "protobufjs": "^7.5.6",
-    "protobufjs-cli": "^1.2.0",
+    "protobufjs": "^7.5.8",
+    "protobufjs-cli": "^1.2.1",
     "prettier": "^3.2.5",
     "yargs": "^17.7.2"
   },
@@ -75,5 +75,15 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "overrides": {
+    "protobufjs": "^7.5.8",
+    "protobufjs-cli": "^1.2.1",
+    "tar": "^7.5.11",
+    "serialize-javascript": "^7.0.5",
+    "minimatch": "^9.0.5",
+    "fast-xml-builder": "^1.1.7",
+    "trim-newlines": "^3.0.1",
+    "uuid": "^11.1.1"
   }
 }

@@ -88,14 +88,14 @@
     "lodash.snakecase": "^4.1.1",
     "merge-stream": "^2.0.0",
     "p-queue": "^6.0.2",
-    "protobufjs": "^7.4.0",
+    "protobufjs": "^7.5.8",
     "retry-request": "^8.0.0",
     "split-array-stream": "^2.0.0",
     "stack-trace": "0.0.10",
     "stream-events": "^1.0.5",
     "teeny-request": "^10.0.0",
     "through2": "^4.0.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.1"
   },
   "devDependencies": {
     "@grpc/reflection": "^1.0.4",
@@ -147,7 +147,15 @@
   },
   "overrides": {
     "gcp-metadata": "^7.0.1",
-    "@sinonjs/fake-timers": "15.2.1"
+    "@sinonjs/fake-timers": "15.2.1",
+    "protobufjs": "^7.5.8",
+    "protobufjs-cli": "^1.2.1",
+    "tar": "^7.5.11",
+    "serialize-javascript": "^7.0.5",
+    "minimatch": "^9.0.5",
+    "fast-xml-builder": "^1.1.7",
+    "trim-newlines": "^3.0.1",
+    "uuid": "^11.1.1"
   },
   "pnpm": {
     "overrides": {
