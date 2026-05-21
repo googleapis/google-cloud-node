@@ -16,6 +16,7 @@ class NativeSpannerDatabase {
     this.instance = this.spanner.instance(instanceId);
     this.database = this.instance.database(databaseId);
     this._cachedSessionName = null;
+    this._authClient = null;
 
     // Build standard auth client with spanner scope
     this.auth = new GoogleAuth({
@@ -28,8 +29,10 @@ class NativeSpannerDatabase {
    * Internally cached and automatically refreshed by the library.
    */
   async _getFreshToken() {
-    const client = await this.auth.getClient();
-    const tokenResponse = await client.getAccessToken();
+    if (!this._authClient) {
+      this._authClient = await this.auth.getClient();
+    }
+    const tokenResponse = await this._authClient.getAccessToken();
     return tokenResponse.token;
   }
 
