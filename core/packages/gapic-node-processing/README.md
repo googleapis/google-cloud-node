@@ -7,7 +7,7 @@ Docker container runs in the context of the git clone of google-cloud-node in a 
 To use the CLI, first link the command, like so:
 
 ```
-cd  $MONO_REPO_NAME/packages/gapic-node-processing
+cd  $MONO_REPO_NAME/core/packages/gapic-node-processing
 npm ci
 npm run compile
 npm link .

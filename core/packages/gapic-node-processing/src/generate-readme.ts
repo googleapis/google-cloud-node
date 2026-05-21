@@ -55,10 +55,10 @@ export async function getSamplesMetadata(
   // Let's separate out the absolute path so that we
   // can later remove it from the filePath (so that it
   // is relative to the working directory).
-  // For example for CURRENT LIBRARY: google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech
-  // we would produce stringToRemove: /Users/sofialeon/gcp/google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library
+  // For example for CURRENT LIBRARY: google-cloud-node/core/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech
+  // we would produce stringToRemove: /Users/sofialeon/gcp/google-cloud-node/core/packages/gapic-node-processing/test/fixtures/combined-library
   // which we then use to remove from the absolute filePath (so
-  // /google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js
+  // /google-cloud-node/core/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js
   // becomes just google-cloud-speech/samples/generated/v1/adaptation.create_custom_class.js (the relative path to the new directory)
   const normalizedLibrary = currentLibrary.replace(/\\/g, '/');
   const stringToRemove = normalizedLibrary
