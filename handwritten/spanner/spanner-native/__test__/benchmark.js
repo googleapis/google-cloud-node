@@ -164,7 +164,7 @@ async function main() {
   const db = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
 
   console.log('Warming up connection pools, auth tokens, and JIT compiler...');
-  await runBenchmark(db.executeSqlJs.bind(db), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlJs(SQL), 4, WARMUP_MS);
   await runBenchmark(() => db.executeSqlNative(SQL, 1), 4, WARMUP_MS);
   await runBenchmark(() => db.executeSqlNative(SQL, 4), 4, WARMUP_MS);
   await runBenchmark(() => db.executeSqlNative(SQL, 8), 4, WARMUP_MS);
@@ -194,7 +194,7 @@ async function main() {
 
   for (const concurrency of CONCURRENCY_LEVELS) {
     // 1. JS Baseline Execution
-    const jsRes = await runBenchmark(db.executeSqlJs.bind(db), concurrency, DURATION_MS);
+    const jsRes = await runBenchmark(() => db.executeSqlJs(SQL), concurrency, DURATION_MS);
     const jsQpsP95 = `${jsRes.qps.toFixed(1)} / ${jsRes.p95.toFixed(1)}`;
     
     console.log([
