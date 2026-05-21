@@ -47,7 +47,7 @@ function regionFromQualifiedZone(qualified: string): string | undefined {
  */
 export async function getCloudFunctionDescriptor() {
   // If the region is already available via an environment variable, don't delay the function by pinging metaserver.
-  let region = undefined;
+  let region: string | undefined = undefined;
   if (!(process.env.GOOGLE_CLOUD_REGION || process.env.FUNCTION_REGION)) {
     const qualifiedZone = await gcpMetadata.instance('zone');
     region = regionFromQualifiedZone(qualifiedZone);

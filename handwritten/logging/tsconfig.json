@@ -4,6 +4,7 @@
     "rootDir": ".",
     "outDir": "build",
     "resolveJsonModule": true,
+    "noImplicitAny": false,
     "lib": [
       "es2023",
       "dom"
