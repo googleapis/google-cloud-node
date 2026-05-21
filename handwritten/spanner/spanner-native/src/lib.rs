@@ -91,7 +91,7 @@ static CHANNELS: Lazy<Vec<Channel>> = Lazy::new(|| {
 
     let mut channels = Vec::new();
     RUNTIME.block_on(async {
-        for _ in 0..16 {
+        for _ in 0..50 {
             let ep = tonic::transport::Endpoint::from_static(endpoint)
                 .tls_config(tls_config.clone())
                 .expect("Failed to build TLS configuration endpoint");

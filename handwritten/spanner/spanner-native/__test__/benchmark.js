@@ -14,8 +14,11 @@ const INSTANCE = 'suvham-testing';
 const DATABASE = 'benchmark_db_async';
 const TABLE    = 'AsyncBenchmarkTable';
 
-const SQL = `SELECT * FROM ${TABLE} LIMIT 1`;
-
+function generateInsertQuery() {
+  const id = 'usr_' + Math.random().toString(36).substring(2) + Date.now().toString(36);
+  const val = 'val_' + Math.random().toString(36).substring(2);
+  return `INSERT INTO AsyncBenchmarkTable (id, field0, field1, field2, field3, field4, field5, field6, field7, field8, field9) VALUES ('${id}', '${val}', '${val}', '${val}', '${val}', '${val}', '${val}', '${val}', '${val}', '${val}', '${val}')`;
+}
 const WARMUP_MS = 10_000;
 const DURATION_MS = 30_000;
 const CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 32];
@@ -283,7 +286,7 @@ async function main() {
   console.log(`Node.js Version: ${process.version}`);
   console.log(`CPU Cores      : ${os.cpus().length}`);
   console.log(`System Platform: ${os.platform()} (${os.arch()})`);
-  console.log(`Target Query   : ${SQL}`);
+  console.log(`Target Query   : DML INSERT INTO AsyncBenchmarkTable`);
   console.log(`Warmup Duration: ${WARMUP_MS}ms`);
   console.log(`Run Duration   : ${DURATION_MS}ms`);
   console.log('-'.repeat(160));
@@ -292,25 +295,35 @@ async function main() {
   const db = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
 
   console.log('Warming up connection pools, auth tokens, and JIT compiler...');
-  await runBenchmark(() => db.executeSqlJs(SQL), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 1), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 4), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 8), 4, WARMUP_MS);
-  await runBenchmark(() => db.executeSqlNative(SQL, 16), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlJs(generateInsertQuery()), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlNative(generateInsertQuery(), 1), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlNative(generateInsertQuery(), 4), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlNative(generateInsertQuery(), 8), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlNative(generateInsertQuery(), 16), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlNative(generateInsertQuery(), 32), 4, WARMUP_MS);
+  await runBenchmark(() => db.executeSqlNative(generateInsertQuery(), 50), 4, WARMUP_MS);
   console.log('Warmup complete. Executing customer replication benchmark cases (110 Concurrency, 1000 Total Requests)...');
   console.log('='.repeat(100));
 
   // 1. JS Baseline Customer Case
   console.log('Running JavaScript baseline...');
-  const custJs = await runFixedCountBenchmark(() => db.executeSqlJs(SQL), 110, 1000);
+  const custJs = await runFixedCountBenchmark(() => db.executeSqlJs(generateInsertQuery()), 110, 1000);
 
   // 2. Rust Multi-Channel (4 Channels) Customer Case
   console.log('Running Rust (4 Channels) extension...');
-  const custRust4 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 4), 110, 1000);
+  const custRust4 = await runFixedCountBenchmark(() => db.executeSqlNative(generateInsertQuery(), 4), 110, 1000);
 
   // 3. Rust Multi-Channel (16 Channels) Customer Case
   console.log('Running Rust (16 Channels) extension...');
-  const custRust16 = await runFixedCountBenchmark(() => db.executeSqlNative(SQL, 16), 110, 1000);
+  const custRust16 = await runFixedCountBenchmark(() => db.executeSqlNative(generateInsertQuery(), 16), 110, 1000);
+
+  // 4. Rust Multi-Channel (32 Channels) Customer Case
+  console.log('Running Rust (32 Channels) extension...');
+  const custRust32 = await runFixedCountBenchmark(() => db.executeSqlNative(generateInsertQuery(), 32), 110, 1000);
+
+  // 5. Rust Multi-Channel (50 Channels) Customer Case
+  console.log('Running Rust (50 Channels) extension...');
+  const custRust50 = await runFixedCountBenchmark(() => db.executeSqlNative(generateInsertQuery(), 50), 110, 1000);
 
   console.log('\n' + '='.repeat(100));
   console.log('CUSTOMER BENCHMARK REPLICATION SUMMARY');
@@ -340,6 +353,8 @@ async function main() {
   printCustRes('JavaScript Baseline', custJs);
   printCustRes('Rust 4 Channels', custRust4, custJs);
   printCustRes('Rust 16 Channels', custRust16, custJs);
+  printCustRes('Rust 32 Channels', custRust32, custJs);
+  printCustRes('Rust 50 Channels', custRust50, custJs);
   console.log('='.repeat(100) + '\n');
 
   const results = [];
@@ -348,7 +363,9 @@ async function main() {
     total: 1000,
     javascript: custJs,
     rust_4ch: custRust4,
-    rust_16ch: custRust16
+    rust_16ch: custRust16,
+    rust_32ch: custRust32,
+    rust_50ch: custRust50
   });
 
   console.log('Continuing to standard comparative matrix tests...\n');
@@ -375,7 +392,7 @@ async function main() {
 
   for (const concurrency of CONCURRENCY_LEVELS) {
     // 1. JS Baseline Execution
-    const jsRes = await runBenchmark(() => db.executeSqlJs(SQL), concurrency, DURATION_MS);
+    const jsRes = await runBenchmark(() => db.executeSqlJs(generateInsertQuery()), concurrency, DURATION_MS);
     const jsQpsP95 = `${jsRes.qps.toFixed(1)} / ${jsRes.p95.toFixed(1)}`;
     
     console.log([
@@ -395,7 +412,7 @@ async function main() {
 
     // 2. Rust Native Dynamic Connection Channels Execution
     for (const channels of CHANNELS_TEST) {
-      const rustRes = await runBenchmark(() => db.executeSqlNative(SQL, channels), concurrency, DURATION_MS);
+      const rustRes = await runBenchmark(() => db.executeSqlNative(generateInsertQuery(), channels), concurrency, DURATION_MS);
       const speedup = jsRes.qps > 0 ? rustRes.qps / jsRes.qps : 0.0;
       const latImp = jsRes.p95 > 0 ? ((jsRes.p95 - rustRes.p95) / jsRes.p95) * 100 : 0.0;
       
@@ -442,7 +459,7 @@ async function main() {
           arch: os.arch(),
         },
         config: {
-          sql: SQL,
+          sql: "DML INSERT INTO AsyncBenchmarkTable",
           durationMs: DURATION_MS,
         },
         runs: results,
