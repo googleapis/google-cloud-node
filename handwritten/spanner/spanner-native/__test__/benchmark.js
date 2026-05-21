@@ -47,6 +47,9 @@ async function keepNInFlight(executeFn, concurrency, durationMs) {
           // Console logs limited to avoid flood
           if (errors <= 5) {
             console.error('\n[Request Error]:', err);
+            if (err.statusDetails) {
+              console.error('Status Details:', JSON.stringify(err.statusDetails, null, 2));
+            }
           }
         })
         .finally(() => {
