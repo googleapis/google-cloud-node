@@ -3,8 +3,8 @@ const os = require('os');
 const { performance } = require('perf_hooks');
 const { NativeSpannerDatabase } = require('./poc_bridge.js');
 
-// Disable multiplexed sessions for the benchmark to ensure traditional session pool query performance is measured
-process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
+// Enable multiplexed sessions for the benchmark to maximize performance scaling
+process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'true';
 
 // ════════════════════════════════════════════════════════════════
 // BENCHMARK CONFIGURATION — USER TO UPDATE
@@ -20,6 +20,38 @@ const WARMUP_MS = 10_000;
 const DURATION_MS = 30_000;
 const CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 32];
 const CHANNELS_TEST = [1, 2, 4, 8, 10, 12, 16];
+
+class CPUMonitor {
+  constructor() {
+    this.startUsage = null;
+  }
+  start() {
+    this.startUsage = this.getCPUUsage();
+  }
+  getCPUUsage() {
+    const cpus = os.cpus();
+    let totalUser = 0;
+    let totalSystem = 0;
+    let totalIdle = 0;
+    for (const cpu of cpus) {
+      totalUser += cpu.times.user;
+      totalSystem += cpu.times.sys;
+      totalIdle += cpu.times.idle;
+    }
+    const total = totalUser + totalSystem + totalIdle;
+    return { user: totalUser, system: totalSystem, idle: totalIdle, total };
+  }
+  stop() {
+    const endUsage = this.getCPUUsage();
+    const userDiff = endUsage.user - this.startUsage.user;
+    const sysDiff = endUsage.system - this.startUsage.system;
+    const idleDiff = endUsage.idle - this.startUsage.idle;
+    const totalDiff = endUsage.total - this.startUsage.total;
+
+    const activeDiff = userDiff + sysDiff;
+    return totalDiff > 0 ? (activeDiff / totalDiff) * 100 : 0.0;
+  }
+}
 
 /**
  * Maintains exactly N requests in flight simultaneously to model sustained load.
@@ -102,11 +134,16 @@ async function measureEventLoopLag(durationMs) {
  * Runs benchmark and logs metrics.
  */
 async function runBenchmark(executeFn, concurrency, durationMs) {
+  const cpuMonitor = new CPUMonitor();
+  cpuMonitor.start();
+
   // Run event loop lag monitor and keep-in-flight request loops concurrently
   const [{ latencies, errors }, lagStats] = await Promise.all([
     keepNInFlight(executeFn, concurrency, durationMs),
     measureEventLoopLag(durationMs),
   ]);
+
+  const cpuUtil = cpuMonitor.stop();
 
   if (latencies.length === 0) {
     return {
@@ -118,6 +155,7 @@ async function runBenchmark(executeFn, concurrency, durationMs) {
       total: errors,
       maxLagMs: lagStats.maxLag,
       avgLagMs: lagStats.avgLag,
+      cpuUtil: cpuUtil,
     };
   }
 
@@ -138,6 +176,7 @@ async function runBenchmark(executeFn, concurrency, durationMs) {
     total,
     maxLagMs: lagStats.maxLag,
     avgLagMs: lagStats.avgLag,
+    cpuUtil: cpuUtil,
   };
 }
 
@@ -161,7 +200,7 @@ async function main() {
   console.log(`Target Query   : ${SQL}`);
   console.log(`Warmup Duration: ${WARMUP_MS}ms`);
   console.log(`Run Duration   : ${DURATION_MS}ms`);
-  console.log('-'.repeat(140));
+  console.log('-'.repeat(160));
 
   console.log('Initializing Spanner connections...');
   const db = new NativeSpannerDatabase(PROJECT, INSTANCE, DATABASE);
@@ -185,6 +224,7 @@ async function main() {
     { text: 'p99 (ms)', width: 10 },
     { text: 'Avg EL Lag', width: 12 },
     { text: 'Max EL Lag', width: 12 },
+    { text: 'CPU Util', width: 10 },
     { text: 'Speedup', width: 10 },
     { text: 'Lat Imp', width: 10 }
   ];
@@ -208,6 +248,7 @@ async function main() {
       jsRes.p99.toFixed(1).padEnd(10),
       `${jsRes.avgLagMs.toFixed(1)}ms`.padEnd(12),
       `${jsRes.maxLagMs.toFixed(1)}ms`.padEnd(12),
+      `${jsRes.cpuUtil.toFixed(1)}%`.padEnd(10),
       '-'.padEnd(10),
       '-'.padEnd(10)
     ].join(' | '));
@@ -232,6 +273,7 @@ async function main() {
         rustRes.p99.toFixed(1).padEnd(10),
         `${rustRes.avgLagMs.toFixed(1)}ms`.padEnd(12),
         `${rustRes.maxLagMs.toFixed(1)}ms`.padEnd(12),
+        `${rustRes.cpuUtil.toFixed(1)}%`.padEnd(10),
         speedupStr.padEnd(10),
         latImpStr.padEnd(10)
       ].join(' | '));
@@ -241,7 +283,7 @@ async function main() {
       rustRuns[`latImp_${channels}ch`] = latImp;
     }
 
-    console.log('-'.repeat(140));
+    console.log('-'.repeat(160));
 
     results.push({
       concurrency,

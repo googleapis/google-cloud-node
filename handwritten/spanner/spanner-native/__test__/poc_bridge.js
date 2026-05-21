@@ -15,6 +15,7 @@ class NativeSpannerDatabase {
     this.spanner = new Spanner({ projectId });
     this.instance = this.spanner.instance(instanceId);
     this.database = this.instance.database(databaseId);
+    this._cachedSessionName = null;
 
     // Build standard auth client with spanner scope
     this.auth = new GoogleAuth({
@@ -33,24 +34,31 @@ class NativeSpannerDatabase {
   }
 
   /**
-   * Acquires a session from the internal pool, extracts the formatted session name,
-   * and releases it back to the pool immediately using a try/finally block to prevent leaks.
+   * Acquires a session name dynamically. Supports both multiplexed sessions and standard pools.
+   * Caches the session name if it is a multiplexed session to completely bypass V8 pool checkouts.
    */
   async _getSessionName() {
-    const pool = this.database.pool_;
-    // Explicitly open the regular pool if it was not opened automatically (e.g., when multiplexed sessions are enabled by default)
-    if (!pool.isOpen) {
-      pool.open();
+    // Return cached session name instantly if available (Multiplexed case)
+    if (this._cachedSessionName) {
+      return this._cachedSessionName;
     }
-    // Promisify the callback-based pool getSession method
-    const getSession = promisify(pool.getSession.bind(pool));
+
+    const factory = this.database.sessionFactory_;
+    // Promisify the unified factory getSession method
+    const getSession = promisify(factory.getSession.bind(factory));
     let session;
     try {
       session = await getSession();
-      return session.formattedName_;
+      const name = session.formattedName_;
+      
+      // Cache the session name string if multiplexed (safe to reuse indefinitely)
+      if (session.metadata?.multiplexed) {
+        this._cachedSessionName = name;
+      }
+      return name;
     } finally {
       if (session) {
-        pool.release(session);
+        factory.release(session);
       }
     }
   }
