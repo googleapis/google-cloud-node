@@ -3,6 +3,9 @@ const os = require('os');
 const { performance } = require('perf_hooks');
 const { NativeSpannerDatabase } = require('./poc_bridge.js');
 
+// Disable multiplexed sessions for the benchmark to ensure traditional session pool query performance is measured
+process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS = 'false';
+
 // ════════════════════════════════════════════════════════════════
 // BENCHMARK CONFIGURATION — USER TO UPDATE
 // ════════════════════════════════════════════════════════════════

@@ -38,6 +38,10 @@ class NativeSpannerDatabase {
    */
   async _getSessionName() {
     const pool = this.database.pool_;
+    // Explicitly open the regular pool if it was not opened automatically (e.g., when multiplexed sessions are enabled by default)
+    if (!pool.isOpen) {
+      pool.open();
+    }
     // Promisify the callback-based pool getSession method
     const getSession = promisify(pool.getSession.bind(pool));
     let session;
