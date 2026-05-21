@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/google-cloud-dns",
+    "directory": "handwritten/google-cloud-dns",
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "main": "./build/src/index.js",
@@ -79,5 +79,5 @@
     "typescript": "^5.8.2",
     "uuid": "^11.1.0"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/handwritten/google-cloud-dns"
 }
