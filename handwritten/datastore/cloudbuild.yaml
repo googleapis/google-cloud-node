@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    npm install
+    npm ci
   dir: 'handwritten/datastore'
   id: 'install-dependencies'
 
