@@ -1,0 +1,43 @@
+steps:
+# 1. Set up Node.js environment
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    npm install
+  dir: 'handwritten/firestore'
+  id: 'install-dependencies'
+
+# 2. Configure environment variables for the tests and run system tests
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    npm run system-test
+  dir: 'handwritten/firestore'
+  env:
+  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}'
+  id: 'run-system-tests'
+  waitFor: ['install-dependencies']
+
+# 3. Code Coverage Reporting
+- name: 'node:24'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    if [ -f ./node_modules/nyc/bin/nyc.js ]; then
+      ./node_modules/nyc/bin/nyc.js report || true
+    else
+      echo "nyc not found, skipping coverage report."
+    fi
+  dir: 'handwritten/firestore'
+  id: 'coverage-report'
+  waitFor: ['run-system-tests']
+
+substitutions:
+  _GCP_PROJECT_ID: 'long-door-651'
+
+timeout: '10800s'
