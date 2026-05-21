@@ -2,10 +2,10 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud DNS: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns)
+# [Cloud DNS: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/google-cloud-dns)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/dns.svg)](https://www.npmjs.org/package/@google-cloud/dns)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/dns.svg)](https://www.npmjs.com/package/@google-cloud/dns)
 
 
 
@@ -14,11 +14,11 @@ Cloud DNS Client Library for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/google-cloud-dns/CHANGELOG.md).
 
 * [Cloud DNS Node.js Client API Reference][client-docs]
 * [Cloud DNS Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-dns](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns)
+* [github.com/googleapis/google-cloud-node/handwritten/google-cloud-dns](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/google-cloud-dns)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -77,11 +77,11 @@ quickstart();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dns/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/handwritten/google-cloud-dns/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dns/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dns/samples/quickstart.js,packages/google-cloud-dns/samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/handwritten/google-cloud-dns/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=handwritten/google-cloud-dns/samples/quickstart.js,handwritten/google-cloud-dns/samples/README.md) |
 
 
 
@@ -152,6 +152,3 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=dns.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
