@@ -1694,9 +1694,8 @@ class Spanner extends GrpcService {
         callback(err, null);
       }
       const gaxClient = this.clients_.get(clientName)!;
-      let reqOpts;
+      let reqOpts = extend(true, {}, config.reqOpts);
       if (!this.projectIdReplaced_) {
-        reqOpts = extend(true, {}, config.reqOpts);
         reqOpts = replaceProjectIdToken(reqOpts, projectId!);
         this.projectId = replaceProjectIdToken(this.projectId, projectId!);
         this.projectFormattedName_ = replaceProjectIdToken(
@@ -1720,8 +1719,6 @@ class Spanner extends GrpcService {
           projectId!,
         );
         this.projectIdReplaced_ = true;
-      } else {
-        reqOpts = config.reqOpts;
       }
       if (isTracingEnabled(this._observabilityOptions)) {
         // Do context propagation

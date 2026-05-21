@@ -138,8 +138,12 @@ function injectRequestIDIntoHeaders(
   const channelId = database ? database._channelId || 1 : 1;
 
   const withReqId = {...headers};
-  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] =
-    craftRequestId(clientId, channelId, nthRequest || 1, attempt || 1);
+  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
+    clientId,
+    channelId,
+    nthRequest || 1,
+    attempt || 1,
+  );
   return withReqId;
 }
 

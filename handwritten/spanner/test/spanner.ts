@@ -91,7 +91,11 @@ const {
   InMemorySpanExporter,
 } = require('@opentelemetry/sdk-trace-node');
 const {SimpleSpanProcessor} = require('@opentelemetry/sdk-trace-base');
-const {startTrace, ObservabilityOptions, _resetTracingEnabledForTest} = require('../src/instrument');
+const {
+  startTrace,
+  ObservabilityOptions,
+  _resetTracingEnabledForTest,
+} = require('../src/instrument');
 
 function numberToEnglishWord(num: number): string {
   switch (num) {

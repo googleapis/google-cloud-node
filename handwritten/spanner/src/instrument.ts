@@ -119,7 +119,7 @@ function ensureInitialContextManagerSet() {
 
 export {ensureInitialContextManagerSet};
 
-let tracingEnabled: boolean | undefined = undefined;
+let globalTracingEnabled: boolean | undefined = undefined;
 
 /**
  * isGlobalTracingEnabled returns true if tracing is enabled globally,
@@ -128,22 +128,24 @@ let tracingEnabled: boolean | undefined = undefined;
  * @returns {boolean} True if global tracing is enabled.
  */
 function isGlobalTracingEnabled(): boolean {
-  if (tracingEnabled !== undefined) {
-    return tracingEnabled;
+  if (globalTracingEnabled !== undefined) {
+    return globalTracingEnabled;
   }
 
   const globalProvider = trace.getTracerProvider();
   if (globalProvider) {
-    const probeSpan = globalProvider.getTracer(TRACER_NAME, TRACER_VERSION).startSpan('probe');
+    const probeSpan = globalProvider
+      .getTracer(TRACER_NAME, TRACER_VERSION)
+      .startSpan('probe');
     const isRecording = probeSpan.isRecording();
     probeSpan.end();
 
     if (isRecording) {
-      tracingEnabled = true;
+      globalTracingEnabled = true;
       return true;
     }
   }
-  tracingEnabled = false;
+  globalTracingEnabled = false;
   return false;
 }
 
@@ -164,7 +166,7 @@ export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
 
 /** Only exported for resetting state in unit tests. */
 export function _resetTracingEnabledForTest(): void {
-  tracingEnabled = undefined;
+  globalTracingEnabled = undefined;
 }
 
 /**
