@@ -49,7 +49,7 @@
     "serialize-javascript": "^6.0.2",
     "fast-xml-builder": "^1.1.7",
     "trim-newlines": "^3.0.1",
-    "uuid": "^9.0.1"
+    "uuid": "^11.1.1"
   },
   "resolutions": {
     "protobufjs": "^7.5.8",
@@ -58,7 +58,7 @@
     "serialize-javascript": "^6.0.2",
     "fast-xml-builder": "^1.1.7",
     "trim-newlines": "^3.0.1",
-    "uuid": "^9.0.1"
+    "uuid": "^11.1.1"
   },
   "engines": {
     "node": ">=18"
