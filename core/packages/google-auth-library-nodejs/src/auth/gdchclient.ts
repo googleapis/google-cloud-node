@@ -212,7 +212,7 @@ export class GdchClient extends OAuth2Client {
       };
 
       if (tokenResponse.expires_in) {
-        tokens.expiry_date = new Date().getTime() + tokenResponse.expires_in * 1000;
+        tokens.expiry_date = Date.now() + tokenResponse.expires_in * 1000;
       }
 
       this.emit('tokens', tokens);
