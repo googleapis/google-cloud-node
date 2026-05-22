@@ -117,7 +117,7 @@ export interface DownloadFileInChunksOptions {
   concurrencyLimit?: number;
   chunkSizeBytes?: number;
   destination?: string;
-  validation?: 'crc32c' | false;
+  validation?: 'crc32c' | boolean;
   noReturnData?: boolean;
 }
 
@@ -789,8 +789,11 @@ export class TransferManager {
         ? this.bucket.file(fileOrName)
         : fileOrName;
 
-    // Default validation to 'crc32c' unless explicitly set to false
-    const validation = options.validation === false ? false : 'crc32c';
+    // Default validation to 'crc32c' if undefined or true, otherwise respect user's value
+    const validation =
+      options.validation === undefined || options.validation === true
+        ? 'crc32c'
+        : options.validation;
 
     const fileInfo = await file.get();
     const size = parseInt(fileInfo[0].metadata.size!.toString());
