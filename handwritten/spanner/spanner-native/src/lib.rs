@@ -30,7 +30,8 @@ use napi::{Task, Env, Result, JsObject};
 use tokio::runtime::Runtime;
 use tonic::transport::{Channel, ClientTlsConfig};
 use std::sync::atomic::{AtomicUsize, Ordering};
-use gcp_auth::{AuthenticationManager, TokenProvider};
+use std::sync::Arc;
+use gcp_auth::{TokenProvider, Token};
 
 // Include the generated proto code from tonic-build
 pub mod google {
@@ -60,13 +61,14 @@ static RUNTIME: Lazy<Runtime> = Lazy::new(|| {
         .expect("Failed to initialize background Tokio runtime")
 });
 
-/// Google Cloud Authentication Manager initialized statically.
-/// Manages token caching and background token refreshes natively in Rust.
-static AUTH_MANAGER: Lazy<AuthenticationManager> = Lazy::new(|| {
+/// Google Cloud Authentication Provider initialized statically.
+/// Automatically resolves credentials via standard ADC and metadata server.
+/// Handles token caching and background token refreshes natively in Rust.
+static AUTH_PROVIDER: Lazy<Arc<dyn TokenProvider>> = Lazy::new(|| {
     RUNTIME.block_on(async {
-        AuthenticationManager::new()
+        gcp_auth::provider()
             .await
-            .expect("Failed to initialize Google Authentication Manager in Rust")
+            .expect("Failed to initialize Google Authentication Provider in Rust")
     })
 });
 
@@ -167,9 +169,9 @@ impl Task for SpannerTask {
         let sql_clone = self.sql.clone();
 
         let result: std::result::Result<ResultSet, tonic::Status> = RUNTIME.block_on(async move {
-            // 1. Fetch the fresh OAuth access token asynchronously in Rust/Tokio
-            let token_struct = AUTH_MANAGER
-                .get_token(&["https://www.googleapis.com/auth/spanner.data"])
+            // 1. Fetch the fresh OAuth access token asynchronously in Rust/Tokio using the Provider
+            let token_struct = AUTH_PROVIDER
+                .token(&["https://www.googleapis.com/auth/spanner.data"])
                 .await
                 .map_err(|e| tonic::Status::internal(format!("Failed to fetch GCP token in Rust: {}", e)))?;
             let token_str = token_struct.as_str().to_string();
