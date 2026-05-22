@@ -70,6 +70,7 @@
     "google-gax": "^5.1.1-rc.1",
     "gts": "^6.0.2",
     "mocha": "^11.7.4",
+    "serialize-javascript": "^6.0.2",
     "nunjucks": "^3.2.4",
     "typescript": "5.6.2"
   },

@@ -57,6 +57,7 @@
     "mocha": "^11.1.0",
     "ncp": "^2.0.0",
     "protobufjs": "^7.5.8",
+    "serialize-javascript": "^6.0.2",
     "typescript": "5.8.3"
   },
   "bugs": {
