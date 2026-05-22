@@ -16,7 +16,7 @@ tonic = { version = "0.12", features = ["tls", "tls-roots"] }
 prost = "0.13"
 prost-types = "0.13"
 once_cell = "1"
-gcp-auth = "0.12"
+gcp_auth = "0.12"
 num_cpus = "1"
 
 [build-dependencies]
