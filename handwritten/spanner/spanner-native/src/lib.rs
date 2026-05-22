@@ -31,7 +31,7 @@ use tokio::runtime::Runtime;
 use tonic::transport::{Channel, ClientTlsConfig};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
-use gcp_auth::{TokenProvider, Token};
+use gcp_auth::TokenProvider;
 
 // Include the generated proto code from tonic-build
 pub mod google {
@@ -100,7 +100,9 @@ static CHANNELS: Lazy<Vec<Channel>> = Lazy::new(|| {
         let provider = gcp_auth::provider()
             .await
             .expect("Failed to initialize Google Authentication Provider in Rust");
-        AUTH_PROVIDER.set(provider).expect("Failed to cache AUTH_PROVIDER in OnceCell");
+        if AUTH_PROVIDER.set(provider).is_err() {
+            panic!("Failed to cache AUTH_PROVIDER in OnceCell");
+        }
 
         // 2. Pre-warm all 50 connection channels
         for _ in 0..50 {
