@@ -736,7 +736,7 @@ export class TransferManager {
    * @property {number} [concurrencyLimit] The number of concurrently executing promises
    * to use when downloading the file.
    * @property {number} [chunkSizeBytes] The size in bytes of each chunk to be downloaded.
-   * @property {string | boolean} [validation] Whether or not to perform a CRC32C validation check when download is complete.
+   * @property {string | boolean} [validation] Whether or not to perform a CRC32C validation check when download is complete. Defaults to 'crc32c'.
    * @property {boolean} [noReturnData] Whether or not to return the downloaded data. A `true` value here would be useful for files with a size that will not fit into memory.
    *
    */
@@ -757,10 +757,19 @@ export class TransferManager {
    *
    * //-
    * // Download a large file in chunks utilizing parallel operations.
+   * // CRC32C validation is performed by default.
    * //-
    * const response = await transferManager.downloadFileInChunks(bucket.file('large-file.txt');
    * // Your local directory now contains:
    * // - "large-file.txt" (with the contents from my-bucket.large-file.txt)
+   *
+   * //-
+   * // To disable validation:
+   * //-
+   * const responseWithoutValidation = await transferManager.downloadFileInChunks(
+   *   bucket.file('large-file.txt'),
+   *   { validation: false }
+   * );
    * ```
    *
    */
@@ -779,6 +788,9 @@ export class TransferManager {
       typeof fileOrName === 'string'
         ? this.bucket.file(fileOrName)
         : fileOrName;
+
+    // Default validation to 'crc32c' unless explicitly set to false
+    const validation = options.validation === false ? false : 'crc32c';
 
     const fileInfo = await file.get();
     const size = parseInt(fileInfo[0].metadata.size!.toString());
@@ -801,6 +813,7 @@ export class TransferManager {
             start: chunkStart,
             end: chunkEnd,
             [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_SHARDED,
+            validation: false, // Disable validation on individual chunks
           });
           const result = await fileToWrite.write(
             resp[0],
@@ -823,7 +836,8 @@ export class TransferManager {
       await fileToWrite.close();
     }
 
-    if (options.validation === 'crc32c' && fileInfo[0].metadata.crc32c) {
+    // Check against the defaulted validation option
+    if (validation === 'crc32c' && fileInfo[0].metadata.crc32c) {
       const downloadedCrc32C = await CRC32C.fromFile(filePath);
       if (!downloadedCrc32C.validate(fileInfo[0].metadata.crc32c)) {
         const mismatchError = new RequestError(
@@ -833,6 +847,7 @@ export class TransferManager {
         throw mismatchError;
       }
     }
+
     if (noReturnData) return;
     return [Buffer.concat(chunks as Buffer[], size)];
   }
