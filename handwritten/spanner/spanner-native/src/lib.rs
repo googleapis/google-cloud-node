@@ -24,7 +24,7 @@
 #[macro_use]
 extern crate napi_derive;
 
-use once_cell::sync::Lazy;
+use once_cell::sync::{Lazy, OnceCell};
 use napi::bindgen_prelude::*;
 use napi::{Task, Env, Result, JsObject};
 use tokio::runtime::Runtime;
@@ -61,20 +61,12 @@ static RUNTIME: Lazy<Runtime> = Lazy::new(|| {
         .expect("Failed to initialize background Tokio runtime")
 });
 
-/// Google Cloud Authentication Provider initialized statically.
-/// Automatically resolves credentials via standard ADC and metadata server.
-/// Handles token caching and background token refreshes natively in Rust.
-static AUTH_PROVIDER: Lazy<Arc<dyn TokenProvider>> = Lazy::new(|| {
-    RUNTIME.block_on(async {
-        gcp_auth::provider()
-            .await
-            .expect("Failed to initialize Google Authentication Provider in Rust")
-    })
-});
+/// Google Cloud Authentication Provider initialized globally inside a OnceCell.
+/// Initialized at startup during connection pre-warming to avoid nested block_on panics.
+static AUTH_PROVIDER: OnceCell<Arc<dyn TokenProvider>> = OnceCell::new();
 
-/// Static pool of 16 pre-established TCP/TLS connection channels pointing to Spanner.
-/// Pre-establishing and reusing these channels prevents TLS/TCP handshakes on every call,
-/// while HTTP/2 multiplexing manages concurrent streams seamlessly.
+/// Static pool of 50 pre-established TCP/TLS connection channels pointing to Spanner.
+/// Pre-establishing and reusing these channels prevents TLS/TCP handshakes on every call.
 static CHANNELS: Lazy<Vec<Channel>> = Lazy::new(|| {
     let endpoint = "https://spanner.googleapis.com:443";
     let mut tls_config = ClientTlsConfig::new().domain_name("spanner.googleapis.com");
@@ -104,6 +96,13 @@ static CHANNELS: Lazy<Vec<Channel>> = Lazy::new(|| {
 
     let mut channels = Vec::new();
     RUNTIME.block_on(async {
+        // 1. Initialize the Google Auth Provider synchronously once inside the startup runtime
+        let provider = gcp_auth::provider()
+            .await
+            .expect("Failed to initialize Google Authentication Provider in Rust");
+        AUTH_PROVIDER.set(provider).expect("Failed to cache AUTH_PROVIDER in OnceCell");
+
+        // 2. Pre-warm all 50 connection channels
         for _ in 0..50 {
             let ep = tonic::transport::Endpoint::from_static(endpoint)
                 .tls_config(tls_config.clone())
@@ -169,8 +168,11 @@ impl Task for SpannerTask {
         let sql_clone = self.sql.clone();
 
         let result: std::result::Result<ResultSet, tonic::Status> = RUNTIME.block_on(async move {
-            // 1. Fetch the fresh OAuth access token asynchronously in Rust/Tokio using the Provider
-            let token_struct = AUTH_PROVIDER
+            // 1. Retrieve pre-initialized Provider from OnceCell and fetch access token
+            let provider = AUTH_PROVIDER
+                .get()
+                .ok_or_else(|| tonic::Status::internal("GCP Authentication Provider was not initialized at startup"))?;
+            let token_struct = provider
                 .token(&["https://www.googleapis.com/auth/spanner.data"])
                 .await
                 .map_err(|e| tonic::Status::internal(format!("Failed to fetch GCP token in Rust: {}", e)))?;
