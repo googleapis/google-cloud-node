@@ -1680,7 +1680,7 @@ class Spanner extends GrpcService {
    * @param {function} callback Callback function
    */
   prepareGapicRequest_(config, callback) {
-    const proceed = (err?: Error | null, projectId?: string | null) => {
+    this.auth.getProjectId((err, projectId) => {
       if (err) {
         callback(err);
         return;
@@ -1695,8 +1695,12 @@ class Spanner extends GrpcService {
       }
       const gaxClient = this.clients_.get(clientName)!;
       let reqOpts = extend(true, {}, config.reqOpts);
+      reqOpts = replaceProjectIdToken(reqOpts, projectId!);
+      // It would have been preferable to replace the projectId already in the
+      // constructor of Spanner, but that is not possible as auth.getProjectId
+      // is an async method. This is therefore the first place where we have
+      // access to the value that should be used instead of the placeholder.
       if (!this.projectIdReplaced_) {
-        reqOpts = replaceProjectIdToken(reqOpts, projectId!);
         this.projectId = replaceProjectIdToken(this.projectId, projectId!);
         this.projectFormattedName_ = replaceProjectIdToken(
           this.projectFormattedName_,
@@ -1714,12 +1718,12 @@ class Spanner extends GrpcService {
             );
           });
         });
-        config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
-          config.headers[CLOUD_RESOURCE_HEADER],
-          projectId!,
-        );
         this.projectIdReplaced_ = true;
       }
+      config.headers[CLOUD_RESOURCE_HEADER] = replaceProjectIdToken(
+        config.headers[CLOUD_RESOURCE_HEADER],
+        projectId!,
+      );
       if (isTracingEnabled(this._observabilityOptions)) {
         // Do context propagation
         propagation.inject(context.active(), config.headers, {
@@ -1797,19 +1801,7 @@ class Spanner extends GrpcService {
       };
 
       callback(null, wrappedRequestFn);
-    };
-
-    if (
-      this.projectIdReplaced_ &&
-      this.projectId &&
-      this.projectId !== '{{projectId}}'
-    ) {
-      process.nextTick(() => {
-        proceed(null, this.projectId);
-      });
-    } else {
-      this.auth.getProjectId(proceed);
-    }
+    });
   }
 
   /**

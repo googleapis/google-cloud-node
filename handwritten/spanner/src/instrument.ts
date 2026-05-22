@@ -120,6 +120,8 @@ function ensureInitialContextManagerSet() {
 export {ensureInitialContextManagerSet};
 
 let globalTracingEnabled: boolean | undefined = undefined;
+let lastCheckTime = 0;
+const CACHE_TTL_MS = 10000; // 10 seconds TTL
 
 /**
  * isGlobalTracingEnabled returns true if tracing is enabled globally,
@@ -128,21 +130,29 @@ let globalTracingEnabled: boolean | undefined = undefined;
  * @returns {boolean} True if global tracing is enabled.
  */
 function isGlobalTracingEnabled(): boolean {
-  if (globalTracingEnabled !== undefined) {
+  const now = Date.now();
+  if (
+    globalTracingEnabled !== undefined &&
+    (globalTracingEnabled || now - lastCheckTime < CACHE_TTL_MS)
+  ) {
     return globalTracingEnabled;
   }
 
+  lastCheckTime = now;
   const globalProvider = trace.getTracerProvider();
   if (globalProvider) {
-    const probeSpan = globalProvider
-      .getTracer(TRACER_NAME, TRACER_VERSION)
-      .startSpan('probe');
-    const isRecording = probeSpan.isRecording();
-    probeSpan.end();
-
-    if (isRecording) {
-      globalTracingEnabled = true;
-      return true;
+    let delegate = globalProvider;
+    if (typeof (globalProvider as any).getDelegate === 'function') {
+      delegate = (globalProvider as any).getDelegate();
+    }
+    if (delegate) {
+      const name = delegate.constructor.name;
+      // Exclude the dummy NoopTracerProvider and uninitialized ProxyTracerProvider
+      if (name !== 'NoopTracerProvider' && name !== 'ProxyTracerProvider') {
+        globalTracingEnabled = true;
+        ensureInitialContextManagerSet();
+        return true;
+      }
     }
   }
   globalTracingEnabled = false;
@@ -167,6 +177,7 @@ export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
 /** Only exported for resetting state in unit tests. */
 export function _resetTracingEnabledForTest(): void {
   globalTracingEnabled = undefined;
+  lastCheckTime = 0;
 }
 
 /**
@@ -299,11 +310,9 @@ export function setSpanErrorAndException(
  * @returns {Span} the non-null span.
  */
 export function getActiveOrNoopSpan(): Span {
-  if (isTracingEnabled()) {
-    const span = trace.getActiveSpan();
-    if (span) {
-      return span;
-    }
+  const span = trace.getActiveSpan();
+  if (span) {
+    return span;
   }
   return new noopSpan();
 }

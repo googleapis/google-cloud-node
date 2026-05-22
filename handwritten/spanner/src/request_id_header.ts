@@ -184,7 +184,6 @@ export {
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
   attributeXGoogSpannerRequestIdToActiveSpan,
   craftRequestId,
-  PROCESS_PREFIX,
   injectRequestIDIntoError,
   injectRequestIDIntoHeaders,
   nextNthRequest,
