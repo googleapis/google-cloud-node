@@ -30,6 +30,7 @@ use napi::{Task, Env, Result, JsObject};
 use tokio::runtime::Runtime;
 use tonic::transport::{Channel, ClientTlsConfig};
 use std::sync::atomic::{AtomicUsize, Ordering};
+use gcp_auth::{AuthenticationManager, TokenProvider};
 
 // Include the generated proto code from tonic-build
 pub mod google {
@@ -50,13 +51,23 @@ use google::spanner::v1::spanner_client::SpannerClient;
 use google::spanner::v1::{ExecuteSqlRequest, ResultSet};
 
 /// Shared multi-threaded Tokio runtime used to drive async tonic gRPC calls.
-/// Configured with 4 worker threads to manage background I/O cleanly.
+/// Dynamically scaled to match the physical CPU core count of the VM for zero work-stealing delays.
 static RUNTIME: Lazy<Runtime> = Lazy::new(|| {
     tokio::runtime::Builder::new_multi_thread()
-        .worker_threads(4)
+        .worker_threads(num_cpus::get())
         .enable_all()
         .build()
         .expect("Failed to initialize background Tokio runtime")
+});
+
+/// Google Cloud Authentication Manager initialized statically.
+/// Manages token caching and background token refreshes natively in Rust.
+static AUTH_MANAGER: Lazy<AuthenticationManager> = Lazy::new(|| {
+    RUNTIME.block_on(async {
+        AuthenticationManager::new()
+            .await
+            .expect("Failed to initialize Google Authentication Manager in Rust")
+    })
 });
 
 /// Static pool of 16 pre-established TCP/TLS connection channels pointing to Spanner.
@@ -138,7 +149,6 @@ impl tonic::service::Interceptor for AuthInterceptor {
 pub struct SpannerTask {
     session: String,
     sql: String,
-    token: String,
     channel_count: i32,
 }
 
@@ -155,11 +165,18 @@ impl Task for SpannerTask {
 
         let session_clone = self.session.clone();
         let sql_clone = self.sql.clone();
-        let token_clone = self.token.clone();
 
         let result: std::result::Result<ResultSet, tonic::Status> = RUNTIME.block_on(async move {
+            // 1. Fetch the fresh OAuth access token asynchronously in Rust/Tokio
+            let token_struct = AUTH_MANAGER
+                .get_token(&["https://www.googleapis.com/auth/spanner.data"])
+                .await
+                .map_err(|e| tonic::Status::internal(format!("Failed to fetch GCP token in Rust: {}", e)))?;
+            let token_str = token_struct.as_str().to_string();
+
+            // 2. Build AuthInterceptor using the retrieved token
             let interceptor = AuthInterceptor {
-                token: token_clone,
+                token: token_str,
                 session_name: session_clone.clone(),
             };
             let mut client = SpannerClient::with_interceptor(channel, interceptor);
@@ -241,13 +258,11 @@ fn proto_value_to_string(value: &prost_types::Value) -> String {
 pub fn execute_sql_native(
     session_name: String,
     sql: String,
-    token: String,
     channel_count: i32,
 ) -> AsyncTask<SpannerTask> {
     AsyncTask::new(SpannerTask {
         session: session_name,
         sql,
-        token,
         channel_count,
     })
 }

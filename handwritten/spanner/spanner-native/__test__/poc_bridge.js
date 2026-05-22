@@ -72,10 +72,9 @@ class NativeSpannerDatabase {
    */
   async executeSqlNative(sql, channelCount = 1) {
     const sessionName = await this._getSessionName();
-    const token = await this._getFreshToken();
 
-    // Invoke Rust async napi binding
-    return await spannerNative.executeSqlNative(sessionName, sql, token, channelCount);
+    // Invoke Rust async napi binding — Rust handles auth token dynamically under the hood!
+    return await spannerNative.executeSqlNative(sessionName, sql, channelCount);
   }
 
   /**
