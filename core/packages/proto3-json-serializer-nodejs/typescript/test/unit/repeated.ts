@@ -160,6 +160,27 @@ function testRepeatedEnum(root: protobuf.Root) {
   });
 }
 
+function testRepeatedBytes(root: protobuf.Root) {
+  const MessageWithRepeated = root.lookupType('test.MessageWithRepeated');
+  const message = MessageWithRepeated.fromObject({
+    repeatedBytes: ['dmFsdWUgMQo=', 'dmFsdWUgMgo='],
+  });
+  const json = {
+    repeatedBytes: ['dmFsdWUgMQo=', 'dmFsdWUgMgo='],
+  };
+
+  it('serializes to proto3 JSON', () => {
+    const serialized = toProto3JSON(message);
+    assert.deepStrictEqual(serialized, json);
+  });
+
+  it('deserializes from proto3 JSON', () => {
+    const deserialized = fromProto3JSON(MessageWithRepeated, json);
+    assert.deepStrictEqual(deserialized, message);
+  });
+}
+
 testTwoTypesOfLoad('repeated fields', testRepeated);
 testTwoTypesOfLoad('empty repeated fields', testEmptyRepeated);
 testTwoTypesOfLoad('repeated enums', testRepeatedEnum);
+testTwoTypesOfLoad('repeated bytes', testRepeatedBytes);
