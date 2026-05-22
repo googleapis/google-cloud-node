@@ -20,6 +20,58 @@
         }
       },
       "methods": {
+        "GetTeamFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateTeamFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateTeamFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteTeamFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryTeamFolderContents": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SearchTeamFolders": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryFolderContents": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "QueryUserRootContents": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "MoveFolder": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListRepositories": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -37,6 +89,10 @@
           "retry_params_name": "default"
         },
         "DeleteRepository": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "MoveRepository": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -233,6 +289,18 @@
           "retry_params_name": "default"
         },
         "UpdateConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetIamPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SetIamPolicy": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "TestIamPermissions": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
