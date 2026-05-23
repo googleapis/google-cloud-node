@@ -312,6 +312,104 @@ describe('GdchClient', () => {
     assert.strictEqual(res.token, 'ca-verified-token');
   });
 
+  it('should cache the CA cert agent and not reread the file or recreate the agent for subsequent requests', async () => {
+    const caCertPath = '/path/to/custom-ca.pem';
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+      caCertPath,
+    });
+
+    const readFileStub = sinon.stub(fs.promises, 'readFile').callsFake(async (path) => {
+      assert.strictEqual(path, caCertPath);
+      return Buffer.from('mock-ca-cert-content');
+    });
+
+    const tokenScope = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        access_token: 'ca-verified-token',
+      });
+
+    const apiScope = nock('https://api-server.local')
+      .get('/data')
+      .reply(200, {
+        data: 'foo',
+      });
+
+    // 1. First request - Token exchange (which reads caCertPath and sets agent)
+    const res = await client.getAccessToken();
+    assert.strictEqual(res.token, 'ca-verified-token');
+    tokenScope.done();
+
+    const opts: any = {
+      url: 'https://api-server.local/data',
+      method: 'GET',
+    };
+    const apiRes = await client.requestAsync(opts);
+    assert.strictEqual(apiRes.status, 200);
+    apiScope.done();
+
+    // fs.promises.readFile should only be called once
+    assert.ok(readFileStub.calledOnce);
+    assert.ok(opts.agent);
+  });
+
+  it('should reload the CA cert if caCertPath changes', async () => {
+    const client = new GdchClient({
+      projectId: 'test-project',
+      privateKeyId: 'key-id-123',
+      privateKey: privateKeyPemSec1,
+      serviceIdentityName: 'sa-name',
+      tokenServerUri: 'https://token-server.local/token',
+      apiAudience: 'target-audience',
+      caCertPath: '/path/to/first-ca.pem',
+    });
+
+    const tokenScope = nock('https://token-server.local')
+      .post('/token')
+      .reply(200, {
+        access_token: 'exchange-token-abc123',
+        expires_in: 3600,
+      });
+
+    const readFileStub = sinon.stub(fs.promises, 'readFile').callsFake(async (path) => {
+      return Buffer.from(`content-for-${path}`);
+    });
+
+    const apiScope1 = nock('https://api-server.local')
+      .get('/data1')
+      .reply(200, {});
+    const apiScope2 = nock('https://api-server.local')
+      .get('/data2')
+      .reply(200, {});
+
+    const opts1: any = {
+      url: 'https://api-server.local/data1',
+    };
+    await client.requestAsync(opts1);
+    apiScope1.done();
+    tokenScope.done();
+    const agent1 = opts1.agent;
+
+    // Change the path
+    client.caCertPath = '/path/to/second-ca.pem';
+
+    const opts2: any = {
+      url: 'https://api-server.local/data2',
+    };
+    await client.requestAsync(opts2);
+    apiScope2.done();
+    const agent2 = opts2.agent;
+
+    assert.ok(readFileStub.calledTwice);
+    assert.notStrictEqual(agent1, agent2);
+  });
+
   it('should raise helpful error message if CA cert file is unreadable', async () => {
     const caCertPath = '/path/to/custom-ca.pem';
     const client = new GdchClient({

@@ -58,6 +58,8 @@ export class GdchClient extends OAuth2Client {
   apiAudience?: string;
   lifetime: number;
   private gdchOptions: GdchClientOptions;
+  private caAgentPromise?: Promise<https.Agent>;
+  private cachedCaCertPath?: string;
 
   constructor(options: GdchClientOptions = {}) {
     super(options);
@@ -189,15 +191,7 @@ export class GdchClient extends OAuth2Client {
     };
 
     if (this.caCertPath) {
-      try {
-        const ca = await fs.promises.readFile(this.caCertPath);
-        requestOpts.agent = new https.Agent({ ca });
-      } catch (err) {
-        if (err instanceof Error) {
-          err.message = `Error reading certificate file from CA cert path, value '${this.caCertPath}': ${err.message}`;
-        }
-        throw err;
-      }
+      requestOpts.agent = await this.getCaAgent();
     }
 
     try {
@@ -264,17 +258,41 @@ export class GdchClient extends OAuth2Client {
     retry = false
   ): Promise<GaxiosResponse<T>> {
     if (this.caCertPath && !opts.agent) {
+      opts.agent = await this.getCaAgent();
+    }
+    return super.requestAsync(opts, retry);
+  }
+
+  private getCaAgent(): Promise<https.Agent> | undefined {
+    if (!this.caCertPath) {
+      this.caAgentPromise = undefined;
+      this.cachedCaCertPath = undefined;
+      return undefined;
+    }
+
+    if (this.caAgentPromise && this.caCertPath === this.cachedCaCertPath) {
+      return this.caAgentPromise;
+    }
+
+    this.cachedCaCertPath = this.caCertPath;
+    const currentPath = this.caCertPath;
+    this.caAgentPromise = (async () => {
       try {
-        const ca = await fs.promises.readFile(this.caCertPath);
-        opts.agent = new https.Agent({ca});
+        const ca = await fs.promises.readFile(currentPath);
+        return new https.Agent({ca});
       } catch (err) {
+        if (this.cachedCaCertPath === currentPath) {
+          this.caAgentPromise = undefined;
+          this.cachedCaCertPath = undefined;
+        }
         if (err instanceof Error) {
-          err.message = `Error reading certificate file from CA cert path, value '${this.caCertPath}': ${err.message}`;
+          err.message = `Error reading certificate file from CA cert path, value '${currentPath}': ${err.message}`;
         }
         throw err;
       }
-    }
-    return super.requestAsync(opts, retry);
+    })();
+
+    return this.caAgentPromise;
   }
 
   private base64UrlEncode(str: string | Buffer): string {
