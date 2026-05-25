@@ -24,6 +24,10 @@ import {
   GaxiosResponse,
 } from 'gaxios';
 
+function isBucket(parent: any): boolean {
+  return parent && typeof (parent as any).getFiles === 'function';
+}
+
 export type GetMetadataOptions = object;
 
 export type MetadataResponse<K> = [K, GaxiosResponse];
@@ -292,7 +296,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       (typeof this.methods.delete === 'object' && this.methods.delete) || {};
 
     let url = `${this.baseUrl}/${this.id}`;
-    if (this.parent && this.parent.constructor.name === 'Bucket') {
+    if (isBucket(this.parent)) {
       url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
@@ -439,7 +443,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       {};
 
     let url = `${this.baseUrl}/${this.id}`;
-    if (this.parent && this.parent.constructor.name === 'Bucket') {
+    if (isBucket(this.parent)) {
       url = `${this.parent.baseUrl}/${(this.parent as any).id}${url}`;
     }
 
@@ -512,7 +516,7 @@ class ServiceObject<T, K extends BaseMetadata> extends EventEmitter {
       {};
 
     let url = `${this.baseUrl}/${this.name}`;
-    if (this.parent && this.parent.constructor.name === 'Bucket') {
+    if (isBucket(this.parent)) {
       url = `${this.parent.baseUrl}/${(this.parent as any).name}${url}`;
     }
 

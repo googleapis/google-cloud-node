@@ -316,73 +316,30 @@ const IDEMPOTENCY_STRATEGY_DEFAULT = IdempotencyStrategy.RetryConditional;
  * @param {error} err - The API error to check if it is appropriate to retry.
  * @return {boolean} True if the API request should be retried, false otherwise.
  */
-export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
-  if (!err || !err.config) return false;
-
-  const config = err.config;
-  const method = (config.method || 'GET').toUpperCase();
-  const url = config.url ? config.url.toString() : '';
-  const params = config.params || {};
-  const data = config.data;
-
-  // Immediate exit for non-retryable status codes
+/**
+ * Checks if the error represents a transient network, status code, or stream closure error.
+ * @private
+ */
+export function isTransientError(err: GaxiosError): boolean {
   const status = err.response?.status;
-  if (status && [401, 405, 412].includes(status)) return false;
-
-  // Optimized Precondition Check
-  const hasPrecondition = !!(
-    params.ifGenerationMatch !== undefined ||
-    params.ifMetagenerationMatch !== undefined ||
-    params.ifSourceGenerationMatch !== undefined ||
-    (config as any).hasPrecondition
-  );
-
-  // Granular Idempotency Logic
-  let isIdempotent = false;
-  if (['GET', 'HEAD'].includes(method) || hasPrecondition) {
-    isIdempotent = true;
-  } else if (method === 'PUT') {
-    // Resumable uploads (upload_id) are idempotent.
-    // IAM/HMAC are only idempotent if they have an etag (handled in hasPrecondition).
-    const isResumable = url.includes('upload_id=');
-    const isSpecialMutation =
-      /\/iam($|\?)/.test(url) || /\/hmacKeys\//.test(url);
-    isIdempotent = isResumable || !isSpecialMutation;
-  } else if (method === 'DELETE') {
-    // Deleting a specific object is only idempotent with a precondition.
-    // Deleting a bucket/HMAC is generally safe to retry.
-    if (!url.includes('/o/')) {
-      isIdempotent = true;
-    }
-  } else if (method === 'POST') {
-    // Bucket creation is safe to retry.
-    // Object mutations (rewrite/copy) must have a precondition (handled above).
-    isIdempotent =
-      url.includes('/v1/b') &&
-      !url.includes('/o') &&
-      !url.includes('/notificationConfigs');
-  }
-  if (!isIdempotent) return false;
-
-  const gcsErrors = err.response?.data?.error?.errors || [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const hasRateLimitReason = gcsErrors.some((e: any) =>
-    ['rateLimitExceeded', 'userRateLimitExceeded'].includes(e.reason),
-  );
-
-  if (hasRateLimitReason) return true;
-
-  // Unified Error Detection
-  const retryableCodes = [408, 429, 500, 502, 503, 504];
   const errCode = err.code?.toString().toUpperCase() || '';
   const message = err.message?.toLowerCase() || '';
 
-  // Check HTTP Status
-  if (status && retryableCodes.includes(status)) return true;
+  // Immediate exit for non-retryable status codes
+  if (status && [401, 405, 412].includes(status)) return false;
 
-  // Check Gaxios/Node Error Codes
+  const gcsErrors = err.response?.data?.error?.errors || [];
+  const hasRateLimitReason = gcsErrors.some((e: any) =>
+    ['rateLimitExceeded', 'userRateLimitExceeded'].includes(e.reason),
+  );
+  if (hasRateLimitReason) return true;
+
+  // Unified HTTP Status Codes
+  const retryableCodes = [408, 429, 500, 502, 503, 504];
+  if (status && retryableCodes.includes(status)) return true;
   if (retryableCodes.includes(Number(errCode))) return true;
 
+  // Standard Node.js Connection / DNS Errors
   const connectionErrors = [
     'ECONNRESET',
     'EPIPE',
@@ -393,15 +350,11 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
     'ENETUNREACH',
     'EAI_AGAIN',
   ];
-
-  if (
-    connectionErrors.includes(errCode) ||
-    message.includes('socket hang up')
-  ) {
+  if (connectionErrors.includes(errCode) || message.includes('socket hang up')) {
     return true;
   }
 
-  // Handle malformed responses or stream interruptions
+  // Handle malformed responses, stream closures, or cancellations
   if (
     message.includes('unexpected end of json input') ||
     message.includes('unexpected token') ||
@@ -412,6 +365,54 @@ export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
   }
 
   return false;
+}
+
+/**
+ * Evaluates request configurations to determine if the request is idempotent and safe to retry.
+ * @private
+ */
+export function isRequestIdempotent(config: any): boolean {
+  const method = (config.method || 'GET').toUpperCase();
+  const url = config.url ? config.url.toString() : '';
+  const params = config.params || {};
+
+  // Optimized Precondition Check
+  const hasPrecondition = !!(
+    params.ifGenerationMatch !== undefined ||
+    params.ifMetagenerationMatch !== undefined ||
+    params.ifSourceGenerationMatch !== undefined ||
+    config.hasPrecondition
+  );
+
+  if (['GET', 'HEAD'].includes(method) || hasPrecondition) {
+    return true;
+  }
+
+  if (method === 'PUT') {
+    const isResumable = url.includes('upload_id=');
+    const isSpecialMutation =
+      /\/iam($|\?)/.test(url) || /\/hmacKeys\//.test(url);
+    return isResumable || !isSpecialMutation;
+  }
+
+  if (method === 'DELETE') {
+    return !url.includes('/o/');
+  }
+
+  if (method === 'POST') {
+    return (
+      url.includes('/v1/b') &&
+      !url.includes('/o') &&
+      !url.includes('/notificationConfigs')
+    );
+  }
+
+  return false;
+}
+
+export const RETRYABLE_ERR_FN_DEFAULT = function (err?: GaxiosError) {
+  if (!err || !err.config) return false;
+  return isRequestIdempotent(err.config) && isTransientError(err);
 };
 
 /*! Developer Documentation
