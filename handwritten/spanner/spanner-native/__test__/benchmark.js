@@ -14,7 +14,7 @@ const INSTANCE = 'suvham-testing';
 const DATABASE = 'benchmark_db_async';
 const TABLE    = 'AsyncBenchmarkTable';
 
-const SQL = `SELECT * FROM ${TABLE} LIMIT 1`;
+const SQL = `SELECT * FROM ${TABLE} LIMIT 1000`;
 const WARMUP_MS = 10_000;
 const DURATION_MS = 30_000;
 const CONCURRENCY_LEVELS = [1, 2, 4, 8, 16, 32];
