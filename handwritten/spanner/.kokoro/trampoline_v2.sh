@@ -254,9 +254,6 @@ else
     PROJECT_ROOT="$(repo_root $(pwd))/handwritten/spanner"
 fi
 
-log_yellow "Changing to the project root: ${PROJECT_ROOT}."
-cd "${PROJECT_ROOT}"
-
 # Auto-injected conditional check
 # Check if the package directory has changes. If not, skip tests.
 if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
@@ -269,6 +266,7 @@ if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
     # Safe default: HEAD~1..HEAD
     DIFF_RANGE="HEAD~1..HEAD"
 
+    git fetch --deepen=10 2>/dev/null || true
     if git diff --quiet "${DIFF_RANGE}" -- "${RELATIVE_PKG_PATH}"; then
         echo "No changes detected in ${RELATIVE_PKG_PATH}. Skipping tests."
         exit 0
@@ -276,6 +274,9 @@ if [[ "${RUNNING_IN_CI:-}" == "true" ]]; then
         echo "Changes detected in ${RELATIVE_PKG_PATH}. Proceeding with tests."
     fi
 fi
+
+log_yellow "Changing to the project root: ${PROJECT_ROOT}."
+cd "${PROJECT_ROOT}"
 
 # To support relative path for `TRAMPOLINE_SERVICE_ACCOUNT`, we need
 # to use this environment variable in `PROJECT_ROOT`.
@@ -316,6 +317,7 @@ done
 # We want to support legacy style TRAMPOLINE_BUILD_FILE used with V1
 # script: e.g. "github/repo-name/.kokoro/run_tests.sh"
 TRAMPOLINE_BUILD_FILE="${TRAMPOLINE_BUILD_FILE#github/*/}"
+TRAMPOLINE_BUILD_FILE="${TRAMPOLINE_BUILD_FILE#handwritten/spanner/}"
 log_yellow "Using TRAMPOLINE_BUILD_FILE: ${TRAMPOLINE_BUILD_FILE}"
 
 # ignore error on docker operations and test execution
