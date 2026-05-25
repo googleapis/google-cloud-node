@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: spanner-ns
+  name: issue-read-node
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: issue-read-node
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: benchmark
+          image: us-central1-docker.pkg.dev/span-cloud-testing/gargsurbhi-images/issue-read-node:release-8.7.1
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "Starting V8 CPU Profiler benchmark with tsx..."
+              /app/node_modules/.bin/tsx --cpu-prof --cpu-prof-dir=/tmp --cpu-prof-name=k8s-read.cpuprofile /app/benchmark-read-repl.mts
+              echo "✓ Benchmark finished! Sleeping for 1 hour so you can kubectl cp the profile..."
+              sleep 3600
+          resources:
+            requests:
+              cpu: "1"
+              memory: "3Gi"
+            limits:
+              cpu: "1"
+              memory: "3Gi"
+          env:
+            - name: SAMPLE_SIZE
+              value: "10000"
+            - name: READ_COUNT
+              value: "10000"
+            - name: READ_CONCURRENCY
+              value: "110"
+            - name: DB_PROJECT_ID
+              value: "span-cloud-testing"
+            - name: DB_INSTANCE
+              value: "gargsurbhi-testing1"
+            - name: DB_DATABASE
+              value: "jack_henry_db"
+            - name: DB_SCHEMA
+              value: "tracking"

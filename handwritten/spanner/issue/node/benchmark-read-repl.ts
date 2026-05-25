@@ -86,41 +86,6 @@ async function runBenchmark() {
   const { Spanner } = await import('@google-cloud/spanner')
   const { status: Status } = await import('@grpc/grpc-js')
 
-  // ====== INLINE UTILITIES ======
-
-  async function sha256Hash(str: string | undefined): Promise<string> {
-    const encoder = new TextEncoder()
-    return Array.from(
-      new Uint8Array(await subtle.digest('SHA-256', encoder.encode(str))),
-    )
-      .map((b) => `00${b.toString(16)}`.slice(-2))
-      .join('')
-  }
-
-  async function createDeviceRecentActivityLogId(opts: {
-    deviceId: string
-    deviceDetailsId: string
-    httpRequestDetailsId: string
-    createdAt: Date
-    sessionId?: string | null | undefined
-  }): Promise<string> {
-    return sha256Hash(
-      `${opts.deviceId}${opts.deviceDetailsId}${opts.httpRequestDetailsId}${opts.createdAt.getTime()}${opts.sessionId ?? ''}`,
-    )
-  }
-
-  function ipToBytes(ipAddress: string): Buffer {
-    const octets = ipAddress.split('.')
-    if (octets.length === 4) {
-      const bytes = Buffer.alloc(4)
-      for (let i = 0; i < 4; i++) {
-        bytes[i] = parseInt(octets[i], 10)
-      }
-      return bytes
-    }
-    throw new Error('Invalid IP address format')
-  }
-
   async function asyncMap<T, R>(
     items: T[],
     mapperFn: (item: T, index: number) => Promise<R>,
@@ -143,56 +108,6 @@ async function runBenchmark() {
     )
     await Promise.all(workers)
     return results
-  }
-
-  async function createBenchmarkRecord(opts: {
-    index: number
-    numDevices: number
-    numDetails: number
-    numRequests: number
-    numLocations: number
-  }) {
-    const deviceRecordId = await sha256Hash(
-      `device-${opts.index % opts.numDevices}`,
-    )
-    const deviceDetailsId = await sha256Hash(
-      `detail-${opts.index % opts.numDetails}`,
-    )
-    const httpRequestDetailsId = await sha256Hash(
-      `request-${opts.index % opts.numRequests}`,
-    )
-    const httpRequestLocationId =
-      opts.numLocations > 0
-        ? await sha256Hash(`location-${opts.index % opts.numLocations}`)
-        : null
-
-    const xRequestId = randomUUID()
-    const createdAt = new Date(Date.now() - (opts.index * 1000)) // historical dates for reads
-    const sessionId = randomUUID()
-
-    const deviceRecentActivityLogId = await createDeviceRecentActivityLogId({
-      deviceId: `benchmark-${opts.index}`,
-      deviceDetailsId,
-      httpRequestDetailsId,
-      createdAt,
-      sessionId,
-    })
-
-    return {
-      deviceRecentActivityLogId,
-      deviceRecordId,
-      deviceDetailsId,
-      httpRequestDetailsId,
-      ipAddress: ipToBytes('192.168.1.100'),
-      institutionId: 'benchmark-institution',
-      userId: Math.random() > 0.5 ? 'user-123' : null,
-      username: null,
-      xRequestId,
-      httpRequestLocationId,
-      latency: Math.random() > 0.5 ? Math.floor(Math.random() * 100) : null,
-      sessionId,
-      createdAt,
-    }
   }
 
   // ====== DATABASE CONNECTION ======
@@ -252,32 +167,36 @@ async function runBenchmark() {
     process.env.GOOGLE_CLOUD_SPANNER_MULTIPLEXED_SESSIONS === 'false'
       ? POOL_OPTIONS
       : {}
+
+  console.log('poolOpts: ', poolOpts);
   const database = instance.database(DB_DATABASE, poolOpts)
 
   let monitorInterval: NodeJS.Timeout | undefined
   try {
-    const table = database.table(`${DB_SCHEMA}.DeviceRecentActivityLog`)
+    console.log('Fetching actual seeded keys from the database to ensure 100% hit rate...')
+    const [existingRows] = await database.run({
+      sql: `SELECT deviceRecentActivityLogId FROM ${DB_SCHEMA}.DeviceRecentActivityLog LIMIT @limit`,
+      params: {
+        limit: SAMPLE_SIZE,
+      },
+      types: {
+        limit: 'int64',
+      },
+    })
 
-    console.log('Generating target read keys from sample space...')
-    const targetKeys: string[] = []
-    for (let i = 0; i < READ_COUNT; i++) {
-      // Re-create the identical IDs using index space
-      const record = await createBenchmarkRecord({
-        index: i % SAMPLE_SIZE,
-        numDevices: SAMPLE_SIZE,
-        numDetails: SAMPLE_SIZE,
-        numRequests: SAMPLE_SIZE,
-        numLocations: SAMPLE_SIZE,
-      })
-      targetKeys.push(record.deviceRecentActivityLogId)
+    if (existingRows.length === 0) {
+      throw new Error('No seeded rows found in the database! Please seed the table first using seed-reference-data.js.')
     }
+
+    console.log(`Successfully retrieved ${existingRows.length} active keys. Preparing read tasks...`)
+    const targetKeys = existingRows.map((r: any) => r.toJSON().deviceRecentActivityLogId)
 
     console.log(
       `Configuration: SAMPLE_SIZE=${SAMPLE_SIZE}, READ_COUNT=${READ_COUNT}, READ_CONCURRENCY=${READ_CONCURRENCY}`,
     )
 
     console.log(
-      `\nStarting ${READ_COUNT} Point Reads with concurrency: ${READ_CONCURRENCY}...\n`,
+      `\nStarting ${READ_COUNT} Point Reads (SQL ExecuteSql) with concurrency: ${READ_CONCURRENCY}...\n`,
     )
 
     const durations: number[] = []
@@ -292,21 +211,20 @@ async function runBenchmark() {
     }, 1000)
 
     await asyncMap(
-      targetKeys,
-      async (key, i) => {
-        const label = `read-${i} (concurrency: ${READ_CONCURRENCY})`
+      Array.from({ length: READ_COUNT }),
+      async (_, i) => {
+        const key = targetKeys[i % targetKeys.length]
         const startTime = performance.now()
 
         try {
-          const [rows] = await table.read({
-            keys: [key],
-            columns: [
-              'deviceRecentActivityLogId',
-              'deviceRecordId',
-              'deviceDetailsId',
-              'userId',
-              'createdAt',
-            ],
+          const [rows] = await database.run({
+            sql: `SELECT deviceRecentActivityLogId, deviceRecordId, deviceDetailsId, userId, createdAt FROM ${DB_SCHEMA}.DeviceRecentActivityLog WHERE deviceRecentActivityLogId = @id`,
+            params: {
+              id: key,
+            },
+            types: {
+              id: 'string',
+            },
           })
 
           if (rows.length > 0) {

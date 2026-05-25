@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import {randomBytes} from 'crypto';
+import { randomBytes } from 'crypto';
 // eslint-disable-next-line n/no-extraneous-import
 import * as grpc from '@grpc/grpc-js';
-import {getActiveOrNoopSpan} from './instrument';
+import { getActiveOrNoopSpan } from './instrument';
 const randIdForProcess = randomBytes(8)
   .readUint32LE(0)
   .toString(16)
@@ -90,7 +90,7 @@ function newAtomicCounter(n?: number): AtomicCounter {
 }
 
 interface withHeaders {
-  headers: {[k: string]: string};
+  headers: { [k: string]: string };
 }
 
 function extractRequestID(config: any): string {
@@ -114,12 +114,12 @@ function injectRequestIDIntoError(config: any, err: Error) {
   // error object regardless of the type.
   const requestID = extractRequestID(config);
   if (requestID) {
-    Object.assign(err, {requestID: requestID});
+    Object.assign(err, { requestID: requestID });
   }
 }
 
 function injectRequestIDIntoHeaders(
-  headers: {[k: string]: string},
+  headers: { [k: string]: string },
   session: any,
   nthRequest?: number,
   attempt?: number,
@@ -137,9 +137,13 @@ function injectRequestIDIntoHeaders(
   const clientId = database ? database._nthClientId || 1 : 1;
   const channelId = database ? database._channelId || 1 : 1;
 
-  const withReqId = {...headers};
-  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] =
-    `${PROCESS_PREFIX}${clientId}.${channelId}.${nthRequest}.${attempt || 1}`;
+  const withReqId = { ...headers };
+  withReqId[X_GOOG_SPANNER_REQUEST_ID_HEADER] = craftRequestId(
+    clientId,
+    channelId,
+    nthRequest || 1,
+    attempt || 1,
+  );
   return withReqId;
 }
 
@@ -180,7 +184,6 @@ export {
   X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR,
   attributeXGoogSpannerRequestIdToActiveSpan,
   craftRequestId,
-  PROCESS_PREFIX,
   injectRequestIDIntoError,
   injectRequestIDIntoHeaders,
   nextNthRequest,

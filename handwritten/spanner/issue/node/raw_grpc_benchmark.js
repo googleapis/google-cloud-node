@@ -57,7 +57,7 @@ async function runBenchmark() {
 
   console.log('\nCreating 4 multiplexed sessions (one per channel) via raw gRPC...');
   const sessions = await Promise.all(
-    Array.from({ length: 4 }, () =>
+    Array.from({ length: 1 }, () =>
       client.createSession({
         database: databasePath,
         session: {
@@ -69,27 +69,43 @@ async function runBenchmark() {
   console.log(`Created 4 Multiplexed Sessions.`);
 
   try {
+    console.log('Fetching actual seeded keys from the database via SDK bootstrap to ensure 100% hit rate...');
+    const { Spanner } = require('@google-cloud/spanner');
+    const bootstrapSpanner = new Spanner({ projectId: DB_PROJECT_ID });
+    const bootstrapDb = bootstrapSpanner.instance(DB_INSTANCE).database(DB_DATABASE);
+    const [existingRows] = await bootstrapDb.run({
+      sql: `SELECT deviceRecentActivityLogId FROM ${TABLE_NAME} LIMIT ${SAMPLE_SIZE}`
+    });
+    if (existingRows.length === 0) {
+      throw new Error('No seeded rows found in the database! Please seed the database first.');
+    }
+    const targetKeys = existingRows.map(r => r.toJSON().deviceRecentActivityLogId);
+    console.log(`Successfully retrieved ${targetKeys.length} active keys. Preparing read tasks...`);
+    await bootstrapDb.close();
+    bootstrapSpanner.close();
+
     // ==========================================
     // 1. READ BENCHMARK
     // ==========================================
     const readItems = Array.from({ length: READ_COUNT });
     const readDurations = new Array(READ_COUNT);
 
-    console.log(`\nStarting READ benchmark with concurrency ${CONCURRENCY}...`);
+    console.log(`\nStarting READ benchmark (SQL ExecuteSql) with concurrency ${CONCURRENCY}...`);
     const readOverallStartTime = performance.now();
 
     await asyncMap(
       readItems,
       async (_, i) => {
+        const startTime = performance.now();
         const session = sessions[i % sessions.length];
-        const randomId = Math.floor(Math.random() * 1000000) + 1;
+        const key = targetKeys[i % targetKeys.length];
         const request = {
           session: session.name,
-          sql: `SELECT * FROM ${TABLE_NAME} WHERE deviceRecentActivityLogId = @id`,
+          sql: `SELECT deviceRecentActivityLogId, deviceRecordId, deviceDetailsId, userId, createdAt FROM ${TABLE_NAME} WHERE deviceRecentActivityLogId = @id`,
           params: {
             fields: {
               id: {
-                stringValue: randomId.toString(),
+                stringValue: key,
               },
             },
           },
@@ -100,7 +116,6 @@ async function runBenchmark() {
           },
         };
 
-        const startTime = performance.now();
         await client.executeSql(request);
         const duration = performance.now() - startTime;
 
