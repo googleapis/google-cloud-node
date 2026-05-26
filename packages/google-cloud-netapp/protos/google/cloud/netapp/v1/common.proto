@@ -87,9 +87,20 @@ enum StoragePoolType {
 
   // Storage pool type is unified.
   UNIFIED = 2;
+}
 
-  // Storage pool type is unified large capacity.
-  UNIFIED_LARGE_CAPACITY = 3;
+// Defines the scale-type of a UNIFIED Storage Pool.
+enum ScaleType {
+  // Unspecified scale type.
+  SCALE_TYPE_UNSPECIFIED = 0;
+
+  // Represents standard capacity and performance scale-type.
+  // Suitable for general purpose workloads.
+  SCALE_TYPE_DEFAULT = 1;
+
+  // Represents higher capacity and performance scale-type.
+  // Suitable for more demanding workloads.
+  SCALE_TYPE_SCALEOUT = 2;
 }
 
 // Schedule for Hybrid Replication.

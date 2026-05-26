@@ -20,12 +20,12 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it, beforeEach, afterEach} from 'mocha';
+import {describe, it} from 'mocha';
 import * as memorystoreModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {GoogleAuth, protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
+import {protobuf, LROperation, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -116,17 +116,6 @@ function stubAsyncIterationCall<ResponseType>(responses?: ResponseType[], error?
 }
 
 describe('v1.MemorystoreClient', () => {
-  let googleAuth: GoogleAuth;
-  beforeEach(() => {
-    googleAuth = {
-      getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon.stub().resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      })
-    } as unknown as GoogleAuth;
-  });
-  afterEach(() => {
-    sinon.restore();
-  });
     describe('Common methods', () => {
         it('has apiEndpoint', () => {
             const client = new memorystoreModule.v1.MemorystoreClient();
@@ -222,7 +211,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('has initialize method and supports deferred initialization', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             assert.strictEqual(client.memorystoreStub, undefined);
@@ -232,7 +221,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('has close method for the initialized client', done => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             client.initialize().catch(err => {throw err});
@@ -244,7 +233,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('has close method for the non-initialized client', done => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             assert.strictEqual(client.memorystoreStub, undefined);
@@ -256,7 +245,7 @@ describe('v1.MemorystoreClient', () => {
         it('has getProjectId method', async () => {
             const fakeProjectId = 'fake-project-id';
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -268,7 +257,7 @@ describe('v1.MemorystoreClient', () => {
         it('has getProjectId method with callback', async () => {
             const fakeProjectId = 'fake-project-id';
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
@@ -289,7 +278,7 @@ describe('v1.MemorystoreClient', () => {
     describe('getInstance', () => {
         it('invokes getInstance without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -316,7 +305,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getInstance without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -354,7 +343,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getInstance with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -378,7 +367,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getInstance with closed client', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -397,7 +386,7 @@ describe('v1.MemorystoreClient', () => {
     describe('getCertificateAuthority', () => {
         it('invokes getCertificateAuthority without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -424,7 +413,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getCertificateAuthority without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -462,7 +451,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getCertificateAuthority with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -486,7 +475,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getCertificateAuthority with closed client', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -502,10 +491,118 @@ describe('v1.MemorystoreClient', () => {
         });
     });
 
+    describe('getSharedRegionalCertificateAuthority', () => {
+        it('invokes getSharedRegionalCertificateAuthority without error', async () => {
+            const client = new memorystoreModule.v1.MemorystoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority()
+            );
+            client.innerApiCalls.getSharedRegionalCertificateAuthority = stubSimpleCall(expectedResponse);
+            const [response] = await client.getSharedRegionalCertificateAuthority(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSharedRegionalCertificateAuthority without error using callback', async () => {
+            const client = new memorystoreModule.v1.MemorystoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.memorystore.v1.SharedRegionalCertificateAuthority()
+            );
+            client.innerApiCalls.getSharedRegionalCertificateAuthority = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getSharedRegionalCertificateAuthority(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.memorystore.v1.ISharedRegionalCertificateAuthority|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSharedRegionalCertificateAuthority with error', async () => {
+            const client = new memorystoreModule.v1.MemorystoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getSharedRegionalCertificateAuthority = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getSharedRegionalCertificateAuthority(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getSharedRegionalCertificateAuthority as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getSharedRegionalCertificateAuthority with closed client', async () => {
+            const client = new memorystoreModule.v1.MemorystoreClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.memorystore.v1.GetSharedRegionalCertificateAuthorityRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getSharedRegionalCertificateAuthority(request), expectedError);
+        });
+    });
+
     describe('getBackupCollection', () => {
         it('invokes getBackupCollection without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -532,7 +629,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getBackupCollection without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -570,7 +667,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getBackupCollection with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -594,7 +691,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getBackupCollection with closed client', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -613,7 +710,7 @@ describe('v1.MemorystoreClient', () => {
     describe('getBackup', () => {
         it('invokes getBackup without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -640,7 +737,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getBackup without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -678,7 +775,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getBackup with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -702,7 +799,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes getBackup with closed client', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -721,7 +818,7 @@ describe('v1.MemorystoreClient', () => {
     describe('createInstance', () => {
         it('invokes createInstance without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -749,7 +846,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes createInstance without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -790,7 +887,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes createInstance with call error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -814,7 +911,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes createInstance with LRO error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -839,7 +936,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkCreateInstanceProgress without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -859,7 +956,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkCreateInstanceProgress with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -875,7 +972,7 @@ describe('v1.MemorystoreClient', () => {
     describe('updateInstance', () => {
         it('invokes updateInstance without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -904,7 +1001,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes updateInstance without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -946,7 +1043,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes updateInstance with call error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -971,7 +1068,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes updateInstance with LRO error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -997,7 +1094,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkUpdateInstanceProgress without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1017,7 +1114,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkUpdateInstanceProgress with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1033,7 +1130,7 @@ describe('v1.MemorystoreClient', () => {
     describe('deleteInstance', () => {
         it('invokes deleteInstance without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1061,7 +1158,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes deleteInstance without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1102,7 +1199,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes deleteInstance with call error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1126,7 +1223,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes deleteInstance with LRO error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1151,7 +1248,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkDeleteInstanceProgress without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1171,7 +1268,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkDeleteInstanceProgress with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1187,7 +1284,7 @@ describe('v1.MemorystoreClient', () => {
     describe('rescheduleMaintenance', () => {
         it('invokes rescheduleMaintenance without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1215,7 +1312,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes rescheduleMaintenance without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1256,7 +1353,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes rescheduleMaintenance with call error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1280,7 +1377,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes rescheduleMaintenance with LRO error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1305,7 +1402,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkRescheduleMaintenanceProgress without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1325,7 +1422,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkRescheduleMaintenanceProgress with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1341,7 +1438,7 @@ describe('v1.MemorystoreClient', () => {
     describe('deleteBackup', () => {
         it('invokes deleteBackup without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1369,7 +1466,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes deleteBackup without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1410,7 +1507,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes deleteBackup with call error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1434,7 +1531,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes deleteBackup with LRO error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1459,7 +1556,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkDeleteBackupProgress without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1479,7 +1576,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkDeleteBackupProgress with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1495,7 +1592,7 @@ describe('v1.MemorystoreClient', () => {
     describe('exportBackup', () => {
         it('invokes exportBackup without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1523,7 +1620,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes exportBackup without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1564,7 +1661,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes exportBackup with call error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1588,7 +1685,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes exportBackup with LRO error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1613,7 +1710,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkExportBackupProgress without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1633,7 +1730,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkExportBackupProgress with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1649,7 +1746,7 @@ describe('v1.MemorystoreClient', () => {
     describe('backupInstance', () => {
         it('invokes backupInstance without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1677,7 +1774,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes backupInstance without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1718,7 +1815,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes backupInstance with call error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1742,7 +1839,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes backupInstance with LRO error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1767,7 +1864,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkBackupInstanceProgress without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1787,7 +1884,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('invokes checkBackupInstanceProgress with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -1977,7 +2074,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('uses async iteration with listInstances without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2222,7 +2319,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('uses async iteration with listBackupCollections without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2467,7 +2564,7 @@ describe('v1.MemorystoreClient', () => {
 
         it('uses async iteration with listBackups without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2537,7 +2634,7 @@ describe('v1.MemorystoreClient', () => {
     describe('getLocation', () => {
         it('invokes getLocation without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2564,7 +2661,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes getLocation without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2606,7 +2703,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes getLocation with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2632,7 +2729,7 @@ describe('v1.MemorystoreClient', () => {
     describe('listLocationsAsync', () => {
         it('uses async iteration with listLocations without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2703,7 +2800,7 @@ describe('v1.MemorystoreClient', () => {
     describe('getOperation', () => {
         it('invokes getOperation without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2722,7 +2819,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes getOperation without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             const request = generateSampleMessage(
@@ -2754,7 +2851,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes getOperation with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             const request = generateSampleMessage(
@@ -2770,7 +2867,7 @@ describe('v1.MemorystoreClient', () => {
     describe('cancelOperation', () => {
         it('invokes cancelOperation without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2789,7 +2886,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes cancelOperation without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             const request = generateSampleMessage(
@@ -2821,7 +2918,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes cancelOperation with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             const request = generateSampleMessage(
@@ -2837,7 +2934,7 @@ describe('v1.MemorystoreClient', () => {
     describe('deleteOperation', () => {
         it('invokes deleteOperation without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             await client.initialize();
@@ -2856,7 +2953,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes deleteOperation without error using callback', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             const request = generateSampleMessage(
@@ -2888,7 +2985,7 @@ describe('v1.MemorystoreClient', () => {
         });
         it('invokes deleteOperation with error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             const request = generateSampleMessage(
@@ -2904,7 +3001,7 @@ describe('v1.MemorystoreClient', () => {
     describe('listOperationsAsync', () => {
         it('uses async iteration with listOperations without error', async () => {
             const client = new memorystoreModule.v1.MemorystoreClient({
-              auth: googleAuth,
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
             });
             const request = generateSampleMessage(
@@ -3054,6 +3151,52 @@ describe('v1.MemorystoreClient', () => {
                 const result = client.matchBackupCollectionFromBackupCollectionName(fakePath);
                 assert.strictEqual(result, "backupCollectionValue");
                 assert((client.pathTemplates.backupCollectionPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('caPool', async () => {
+            const fakePath = "/rendered/path/caPool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                ca_pool: "caPoolValue",
+            };
+            const client = new memorystoreModule.v1.MemorystoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.caPoolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.caPoolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('caPoolPath', () => {
+                const result = client.caPoolPath("projectValue", "locationValue", "caPoolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.caPoolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromCaPoolName', () => {
+                const result = client.matchProjectFromCaPoolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromCaPoolName', () => {
+                const result = client.matchLocationFromCaPoolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCaPoolFromCaPoolName', () => {
+                const result = client.matchCaPoolFromCaPoolName(fakePath);
+                assert.strictEqual(result, "caPoolValue");
+                assert((client.pathTemplates.caPoolPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -3460,6 +3603,44 @@ describe('v1.MemorystoreClient', () => {
                 const result = client.matchServiceAttachmentFromServiceAttachmentName(fakePath);
                 assert.strictEqual(result, "serviceAttachmentValue");
                 assert((client.pathTemplates.serviceAttachmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('sharedRegionalCertificateAuthority', async () => {
+            const fakePath = "/rendered/path/sharedRegionalCertificateAuthority";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new memorystoreModule.v1.MemorystoreClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('sharedRegionalCertificateAuthorityPath', () => {
+                const result = client.sharedRegionalCertificateAuthorityPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromSharedRegionalCertificateAuthorityName', () => {
+                const result = client.matchProjectFromSharedRegionalCertificateAuthorityName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromSharedRegionalCertificateAuthorityName', () => {
+                const result = client.matchLocationFromSharedRegionalCertificateAuthorityName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.sharedRegionalCertificateAuthorityPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

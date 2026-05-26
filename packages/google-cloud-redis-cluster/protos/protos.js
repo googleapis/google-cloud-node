@@ -306,6 +306,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getSharedRegionalCertificateAuthority}.
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @typedef GetSharedRegionalCertificateAuthorityCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} [response] SharedRegionalCertificateAuthority
+                             */
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @param {google.cloud.redis.cluster.v1.CloudRedisCluster.GetSharedRegionalCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and SharedRegionalCertificateAuthority
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CloudRedisCluster.prototype.getSharedRegionalCertificateAuthority = function getSharedRegionalCertificateAuthority(request, callback) {
+                                return this.rpcCall(getSharedRegionalCertificateAuthority, $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest, $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority, request, callback);
+                            }, "name", { value: "GetSharedRegionalCertificateAuthority" });
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @returns {Promise<google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|rescheduleClusterMaintenance}.
                              * @memberof google.cloud.redis.cluster.v1.CloudRedisCluster
                              * @typedef RescheduleClusterMaintenanceCallback
@@ -613,6 +646,9 @@
                          * @property {number} REDIS_HIGHMEM_MEDIUM=2 REDIS_HIGHMEM_MEDIUM value
                          * @property {number} REDIS_HIGHMEM_XLARGE=3 REDIS_HIGHMEM_XLARGE value
                          * @property {number} REDIS_STANDARD_SMALL=4 REDIS_STANDARD_SMALL value
+                         * @property {number} REDIS_HIGHCPU_MEDIUM=7 REDIS_HIGHCPU_MEDIUM value
+                         * @property {number} REDIS_STANDARD_LARGE=8 REDIS_STANDARD_LARGE value
+                         * @property {number} REDIS_HIGHMEM_2XLARGE=9 REDIS_HIGHMEM_2XLARGE value
                          */
                         v1.NodeType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -621,6 +657,9 @@
                             values[valuesById[2] = "REDIS_HIGHMEM_MEDIUM"] = 2;
                             values[valuesById[3] = "REDIS_HIGHMEM_XLARGE"] = 3;
                             values[valuesById[4] = "REDIS_STANDARD_SMALL"] = 4;
+                            values[valuesById[7] = "REDIS_HIGHCPU_MEDIUM"] = 7;
+                            values[valuesById[8] = "REDIS_STANDARD_LARGE"] = 8;
+                            values[valuesById[9] = "REDIS_HIGHMEM_2XLARGE"] = 9;
                             return values;
                         })();
     
@@ -637,6 +676,24 @@
                             values[valuesById[0] = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "TRANSIT_ENCRYPTION_MODE_DISABLED"] = 1;
                             values[valuesById[2] = "TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ServerCaMode enum.
+                         * @name google.cloud.redis.cluster.v1.ServerCaMode
+                         * @enum {number}
+                         * @property {number} SERVER_CA_MODE_UNSPECIFIED=0 SERVER_CA_MODE_UNSPECIFIED value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA=1 SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA=2 SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA=3 SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA value
+                         */
+                        v1.ServerCaMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SERVER_CA_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values[valuesById[2] = "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values[valuesById[3] = "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA"] = 3;
                             return values;
                         })();
     
@@ -4658,6 +4715,9 @@
                              * @property {string|null} [kmsKey] Cluster kmsKey
                              * @property {google.cloud.redis.cluster.v1.IAutomatedBackupConfig|null} [automatedBackupConfig] Cluster automatedBackupConfig
                              * @property {google.cloud.redis.cluster.v1.IEncryptionInfo|null} [encryptionInfo] Cluster encryptionInfo
+                             * @property {google.cloud.redis.cluster.v1.ServerCaMode|null} [serverCaMode] Cluster serverCaMode
+                             * @property {string|null} [serverCaPool] Cluster serverCaPool
+                             * @property {boolean|null} [rotateServerCertificate] Cluster rotateServerCertificate
                              */
     
                             /**
@@ -4921,6 +4981,30 @@
                              */
                             Cluster.prototype.encryptionInfo = null;
     
+                            /**
+                             * Cluster serverCaMode.
+                             * @member {google.cloud.redis.cluster.v1.ServerCaMode|null|undefined} serverCaMode
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaMode = null;
+    
+                            /**
+                             * Cluster serverCaPool.
+                             * @member {string|null|undefined} serverCaPool
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaPool = null;
+    
+                            /**
+                             * Cluster rotateServerCertificate.
+                             * @member {boolean|null|undefined} rotateServerCertificate
+                             * @memberof google.cloud.redis.cluster.v1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.rotateServerCertificate = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -4986,6 +5070,24 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Cluster.prototype, "_kmsKey", {
                                 get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaMode", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaMode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaPool", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaPool"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_rotateServerCertificate", {
+                                get: $util.oneOfGetter($oneOfFields = ["rotateServerCertificate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -5079,6 +5181,12 @@
                                     $root.google.cloud.redis.cluster.v1.AutomatedBackupConfig.encode(message.automatedBackupConfig, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                                 if (message.encryptionInfo != null && Object.hasOwnProperty.call(message, "encryptionInfo"))
                                     $root.google.cloud.redis.cluster.v1.EncryptionInfo.encode(message.encryptionInfo, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+                                if (message.serverCaMode != null && Object.hasOwnProperty.call(message, "serverCaMode"))
+                                    writer.uint32(/* id 53, wireType 0 =*/424).int32(message.serverCaMode);
+                                if (message.serverCaPool != null && Object.hasOwnProperty.call(message, "serverCaPool"))
+                                    writer.uint32(/* id 54, wireType 2 =*/434).string(message.serverCaPool);
+                                if (message.rotateServerCertificate != null && Object.hasOwnProperty.call(message, "rotateServerCertificate"))
+                                    writer.uint32(/* id 55, wireType 0 =*/440).bool(message.rotateServerCertificate);
                                 return writer;
                             };
     
@@ -5264,6 +5372,18 @@
                                             message.encryptionInfo = $root.google.cloud.redis.cluster.v1.EncryptionInfo.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 53: {
+                                            message.serverCaMode = reader.int32();
+                                            break;
+                                        }
+                                    case 54: {
+                                            message.serverCaPool = reader.string();
+                                            break;
+                                        }
+                                    case 55: {
+                                            message.rotateServerCertificate = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5414,6 +5534,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
@@ -5502,6 +5625,28 @@
                                     var error = $root.google.cloud.redis.cluster.v1.EncryptionInfo.verify(message.encryptionInfo);
                                     if (error)
                                         return "encryptionInfo." + error;
+                                }
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    properties._serverCaMode = 1;
+                                    switch (message.serverCaMode) {
+                                    default:
+                                        return "serverCaMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    properties._serverCaPool = 1;
+                                    if (!$util.isString(message.serverCaPool))
+                                        return "serverCaPool: string expected";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    properties._rotateServerCertificate = 1;
+                                    if (typeof message.rotateServerCertificate !== "boolean")
+                                        return "rotateServerCertificate: boolean expected";
                                 }
                                 return null;
                             };
@@ -5673,6 +5818,18 @@
                                 case 4:
                                     message.nodeType = 4;
                                     break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
+                                    break;
                                 }
                                 if (object.persistenceConfig != null) {
                                     if (typeof object.persistenceConfig !== "object")
@@ -5744,6 +5901,34 @@
                                         throw TypeError(".google.cloud.redis.cluster.v1.Cluster.encryptionInfo: object expected");
                                     message.encryptionInfo = $root.google.cloud.redis.cluster.v1.EncryptionInfo.fromObject(object.encryptionInfo);
                                 }
+                                switch (object.serverCaMode) {
+                                default:
+                                    if (typeof object.serverCaMode === "number") {
+                                        message.serverCaMode = object.serverCaMode;
+                                        break;
+                                    }
+                                    break;
+                                case "SERVER_CA_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.serverCaMode = 0;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA":
+                                case 1:
+                                    message.serverCaMode = 1;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA":
+                                case 2:
+                                    message.serverCaMode = 2;
+                                    break;
+                                case "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA":
+                                case 3:
+                                    message.serverCaMode = 3;
+                                    break;
+                                }
+                                if (object.serverCaPool != null)
+                                    message.serverCaPool = String(object.serverCaPool);
+                                if (object.rotateServerCertificate != null)
+                                    message.rotateServerCertificate = Boolean(object.rotateServerCertificate);
                                 return message;
                             };
     
@@ -5896,6 +6081,21 @@
                                     object.automatedBackupConfig = $root.google.cloud.redis.cluster.v1.AutomatedBackupConfig.toObject(message.automatedBackupConfig, options);
                                 if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo"))
                                     object.encryptionInfo = $root.google.cloud.redis.cluster.v1.EncryptionInfo.toObject(message.encryptionInfo, options);
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    object.serverCaMode = options.enums === String ? $root.google.cloud.redis.cluster.v1.ServerCaMode[message.serverCaMode] === undefined ? message.serverCaMode : $root.google.cloud.redis.cluster.v1.ServerCaMode[message.serverCaMode] : message.serverCaMode;
+                                    if (options.oneofs)
+                                        object._serverCaMode = "serverCaMode";
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    object.serverCaPool = message.serverCaPool;
+                                    if (options.oneofs)
+                                        object._serverCaPool = "serverCaPool";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    object.rotateServerCertificate = message.rotateServerCertificate;
+                                    if (options.oneofs)
+                                        object._rotateServerCertificate = "rotateServerCertificate";
+                                }
                                 return object;
                             };
     
@@ -8098,6 +8298,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
@@ -8212,6 +8415,18 @@
                                 case "REDIS_STANDARD_SMALL":
                                 case 4:
                                     message.nodeType = 4;
+                                    break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
                                     break;
                                 }
                                 if (object.replicaCount != null)
@@ -12408,6 +12623,911 @@
                             return PscAutoConnection;
                         })();
     
+                        v1.SharedRegionalCertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface ISharedRegionalCertificateAuthority
+                             * @property {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null} [managedServerCa] SharedRegionalCertificateAuthority managedServerCa
+                             * @property {string|null} [name] SharedRegionalCertificateAuthority name
+                             */
+    
+                            /**
+                             * Constructs a new SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a SharedRegionalCertificateAuthority.
+                             * @implements ISharedRegionalCertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             */
+                            function SharedRegionalCertificateAuthority(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SharedRegionalCertificateAuthority managedServerCa.
+                             * @member {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null|undefined} managedServerCa
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.managedServerCa = null;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority serverCa.
+                             * @member {"managedServerCa"|undefined} serverCa
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            Object.defineProperty(SharedRegionalCertificateAuthority.prototype, "serverCa", {
+                                get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SharedRegionalCertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority instance
+                             */
+                            SharedRegionalCertificateAuthority.create = function create(properties) {
+                                return new SharedRegionalCertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                    $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.managedServerCa = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SharedRegionalCertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SharedRegionalCertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    properties.serverCa = 1;
+                                    {
+                                        var error = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify(message.managedServerCa);
+                                        if (error)
+                                            return "managedServerCa." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SharedRegionalCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             */
+                            SharedRegionalCertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority();
+                                if (object.managedServerCa != null) {
+                                    if (typeof object.managedServerCa !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.managedServerCa: object expected");
+                                    message.managedServerCa = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.fromObject(object.managedServerCa);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SharedRegionalCertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SharedRegionalCertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    object.managedServerCa = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                    if (options.oneofs)
+                                        object.serverCa = "managedServerCa";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SharedRegionalCertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SharedRegionalCertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SharedRegionalCertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SharedRegionalCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority";
+                            };
+    
+                            SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority = (function() {
+    
+                                /**
+                                 * Properties of a RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                                 * @interface IRegionalManagedCertificateAuthority
+                                 * @property {Array.<google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>|null} [caCerts] RegionalManagedCertificateAuthority caCerts
+                                 */
+    
+                                /**
+                                 * Constructs a new RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority
+                                 * @classdesc Represents a RegionalManagedCertificateAuthority.
+                                 * @implements IRegionalManagedCertificateAuthority
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 */
+                                function RegionalManagedCertificateAuthority(properties) {
+                                    this.caCerts = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RegionalManagedCertificateAuthority caCerts.
+                                 * @member {Array.<google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>} caCerts
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new RegionalManagedCertificateAuthority instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority instance
+                                 */
+                                RegionalManagedCertificateAuthority.create = function create(properties) {
+                                    return new RegionalManagedCertificateAuthority(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.caCerts != null && message.caCerts.length)
+                                        for (var i = 0; i < message.caCerts.length; ++i)
+                                            $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.caCerts && message.caCerts.length))
+                                                    message.caCerts = [];
+                                                message.caCerts.push($root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RegionalManagedCertificateAuthority message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RegionalManagedCertificateAuthority.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                        if (!Array.isArray(message.caCerts))
+                                            return "caCerts: array expected";
+                                        for (var i = 0; i < message.caCerts.length; ++i) {
+                                            var error = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify(message.caCerts[i]);
+                                            if (error)
+                                                return "caCerts." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RegionalManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 */
+                                RegionalManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    if (object.caCerts) {
+                                        if (!Array.isArray(object.caCerts))
+                                            throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: array expected");
+                                        message.caCerts = [];
+                                        for (var i = 0; i < object.caCerts.length; ++i) {
+                                            if (typeof object.caCerts[i] !== "object")
+                                                throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: object expected");
+                                            message.caCerts[i] = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.fromObject(object.caCerts[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RegionalManagedCertificateAuthority message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RegionalManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.caCerts = [];
+                                    if (message.caCerts && message.caCerts.length) {
+                                        object.caCerts = [];
+                                        for (var j = 0; j < message.caCerts.length; ++j)
+                                            object.caCerts[j] = $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.toObject(message.caCerts[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RegionalManagedCertificateAuthority to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RegionalManagedCertificateAuthority
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RegionalManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority";
+                                };
+    
+                                RegionalManagedCertificateAuthority.RegionalCertChain = (function() {
+    
+                                    /**
+                                     * Properties of a RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @interface IRegionalCertChain
+                                     * @property {Array.<string>|null} [certificates] RegionalCertChain certificates
+                                     */
+    
+                                    /**
+                                     * Constructs a new RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @classdesc Represents a RegionalCertChain.
+                                     * @implements IRegionalCertChain
+                                     * @constructor
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     */
+                                    function RegionalCertChain(properties) {
+                                        this.certificates = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * RegionalCertChain certificates.
+                                     * @member {Array.<string>} certificates
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     */
+                                    RegionalCertChain.prototype.certificates = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new RegionalCertChain instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain instance
+                                     */
+                                    RegionalCertChain.create = function create(properties) {
+                                        return new RegionalCertChain(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.certificates != null && message.certificates.length)
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.certificates && message.certificates.length))
+                                                        message.certificates = [];
+                                                    message.certificates.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a RegionalCertChain message.
+                                     * @function verify
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    RegionalCertChain.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                            if (!Array.isArray(message.certificates))
+                                                return "certificates: array expected";
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                if (!$util.isString(message.certificates[i]))
+                                                    return "certificates: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a RegionalCertChain message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     */
+                                    RegionalCertChain.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain)
+                                            return object;
+                                        var message = new $root.google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        if (object.certificates) {
+                                            if (!Array.isArray(object.certificates))
+                                                throw TypeError(".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.certificates: array expected");
+                                            message.certificates = [];
+                                            for (var i = 0; i < object.certificates.length; ++i)
+                                                message.certificates[i] = String(object.certificates[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a RegionalCertChain message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} message RegionalCertChain
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    RegionalCertChain.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.certificates = [];
+                                        if (message.certificates && message.certificates.length) {
+                                            object.certificates = [];
+                                            for (var j = 0; j < message.certificates.length; ++j)
+                                                object.certificates[j] = message.certificates[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this RegionalCertChain to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    RegionalCertChain.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for RegionalCertChain
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    RegionalCertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain";
+                                    };
+    
+                                    return RegionalCertChain;
+                                })();
+    
+                                return RegionalManagedCertificateAuthority;
+                            })();
+    
+                            return SharedRegionalCertificateAuthority;
+                        })();
+    
+                        v1.GetSharedRegionalCertificateAuthorityRequest = (function() {
+    
+                            /**
+                             * Properties of a GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @interface IGetSharedRegionalCertificateAuthorityRequest
+                             * @property {string|null} [name] GetSharedRegionalCertificateAuthorityRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1
+                             * @classdesc Represents a GetSharedRegionalCertificateAuthorityRequest.
+                             * @implements IGetSharedRegionalCertificateAuthorityRequest
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             */
+                            function GetSharedRegionalCertificateAuthorityRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetSharedRegionalCertificateAuthorityRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetSharedRegionalCertificateAuthorityRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.create = function create(properties) {
+                                return new GetSharedRegionalCertificateAuthorityRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetSharedRegionalCertificateAuthorityRequest message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetSharedRegionalCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetSharedRegionalCertificateAuthorityRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetSharedRegionalCertificateAuthorityRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetSharedRegionalCertificateAuthorityRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1.GetSharedRegionalCertificateAuthorityRequest";
+                            };
+    
+                            return GetSharedRegionalCertificateAuthorityRequest;
+                        })();
+    
                         v1.OperationMetadata = (function() {
     
                             /**
@@ -15539,6 +16659,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getSharedRegionalCertificateAuthority}.
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @typedef GetSharedRegionalCertificateAuthorityCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} [response] SharedRegionalCertificateAuthority
+                             */
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @param {google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetSharedRegionalCertificateAuthorityCallback} callback Node-style callback called with the error, if any, and SharedRegionalCertificateAuthority
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(CloudRedisCluster.prototype.getSharedRegionalCertificateAuthority = function getSharedRegionalCertificateAuthority(request, callback) {
+                                return this.rpcCall(getSharedRegionalCertificateAuthority, $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest, $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority, request, callback);
+                            }, "name", { value: "GetSharedRegionalCertificateAuthority" });
+    
+                            /**
+                             * Calls GetSharedRegionalCertificateAuthority.
+                             * @function getSharedRegionalCertificateAuthority
+                             * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
+                             * @instance
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} request GetSharedRegionalCertificateAuthorityRequest message or plain object
+                             * @returns {Promise<google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|rescheduleClusterMaintenance}.
                              * @memberof google.cloud.redis.cluster.v1beta1.CloudRedisCluster
                              * @typedef RescheduleClusterMaintenanceCallback
@@ -15846,6 +16999,9 @@
                          * @property {number} REDIS_HIGHMEM_MEDIUM=2 REDIS_HIGHMEM_MEDIUM value
                          * @property {number} REDIS_HIGHMEM_XLARGE=3 REDIS_HIGHMEM_XLARGE value
                          * @property {number} REDIS_STANDARD_SMALL=4 REDIS_STANDARD_SMALL value
+                         * @property {number} REDIS_HIGHCPU_MEDIUM=7 REDIS_HIGHCPU_MEDIUM value
+                         * @property {number} REDIS_STANDARD_LARGE=8 REDIS_STANDARD_LARGE value
+                         * @property {number} REDIS_HIGHMEM_2XLARGE=9 REDIS_HIGHMEM_2XLARGE value
                          */
                         v1beta1.NodeType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -15854,6 +17010,9 @@
                             values[valuesById[2] = "REDIS_HIGHMEM_MEDIUM"] = 2;
                             values[valuesById[3] = "REDIS_HIGHMEM_XLARGE"] = 3;
                             values[valuesById[4] = "REDIS_STANDARD_SMALL"] = 4;
+                            values[valuesById[7] = "REDIS_HIGHCPU_MEDIUM"] = 7;
+                            values[valuesById[8] = "REDIS_STANDARD_LARGE"] = 8;
+                            values[valuesById[9] = "REDIS_HIGHMEM_2XLARGE"] = 9;
                             return values;
                         })();
     
@@ -15870,6 +17029,24 @@
                             values[valuesById[0] = "TRANSIT_ENCRYPTION_MODE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "TRANSIT_ENCRYPTION_MODE_DISABLED"] = 1;
                             values[valuesById[2] = "TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * ServerCaMode enum.
+                         * @name google.cloud.redis.cluster.v1beta1.ServerCaMode
+                         * @enum {number}
+                         * @property {number} SERVER_CA_MODE_UNSPECIFIED=0 SERVER_CA_MODE_UNSPECIFIED value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA=1 SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA value
+                         * @property {number} SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA=2 SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA value
+                         * @property {number} SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA=3 SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA value
+                         */
+                        v1beta1.ServerCaMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SERVER_CA_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA"] = 1;
+                            values[valuesById[2] = "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA"] = 2;
+                            values[valuesById[3] = "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA"] = 3;
                             return values;
                         })();
     
@@ -19891,6 +21068,9 @@
                              * @property {string|null} [kmsKey] Cluster kmsKey
                              * @property {google.cloud.redis.cluster.v1beta1.IAutomatedBackupConfig|null} [automatedBackupConfig] Cluster automatedBackupConfig
                              * @property {google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null} [encryptionInfo] Cluster encryptionInfo
+                             * @property {google.cloud.redis.cluster.v1beta1.ServerCaMode|null} [serverCaMode] Cluster serverCaMode
+                             * @property {string|null} [serverCaPool] Cluster serverCaPool
+                             * @property {boolean|null} [rotateServerCertificate] Cluster rotateServerCertificate
                              */
     
                             /**
@@ -20154,6 +21334,30 @@
                              */
                             Cluster.prototype.encryptionInfo = null;
     
+                            /**
+                             * Cluster serverCaMode.
+                             * @member {google.cloud.redis.cluster.v1beta1.ServerCaMode|null|undefined} serverCaMode
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaMode = null;
+    
+                            /**
+                             * Cluster serverCaPool.
+                             * @member {string|null|undefined} serverCaPool
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.serverCaPool = null;
+    
+                            /**
+                             * Cluster rotateServerCertificate.
+                             * @member {boolean|null|undefined} rotateServerCertificate
+                             * @memberof google.cloud.redis.cluster.v1beta1.Cluster
+                             * @instance
+                             */
+                            Cluster.prototype.rotateServerCertificate = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -20219,6 +21423,24 @@
                             // Virtual OneOf for proto3 optional field
                             Object.defineProperty(Cluster.prototype, "_kmsKey", {
                                 get: $util.oneOfGetter($oneOfFields = ["kmsKey"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaMode", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaMode"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_serverCaPool", {
+                                get: $util.oneOfGetter($oneOfFields = ["serverCaPool"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(Cluster.prototype, "_rotateServerCertificate", {
+                                get: $util.oneOfGetter($oneOfFields = ["rotateServerCertificate"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -20312,6 +21534,12 @@
                                     $root.google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.encode(message.automatedBackupConfig, writer.uint32(/* id 42, wireType 2 =*/338).fork()).ldelim();
                                 if (message.encryptionInfo != null && Object.hasOwnProperty.call(message, "encryptionInfo"))
                                     $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.encode(message.encryptionInfo, writer.uint32(/* id 43, wireType 2 =*/346).fork()).ldelim();
+                                if (message.serverCaMode != null && Object.hasOwnProperty.call(message, "serverCaMode"))
+                                    writer.uint32(/* id 53, wireType 0 =*/424).int32(message.serverCaMode);
+                                if (message.serverCaPool != null && Object.hasOwnProperty.call(message, "serverCaPool"))
+                                    writer.uint32(/* id 54, wireType 2 =*/434).string(message.serverCaPool);
+                                if (message.rotateServerCertificate != null && Object.hasOwnProperty.call(message, "rotateServerCertificate"))
+                                    writer.uint32(/* id 55, wireType 0 =*/440).bool(message.rotateServerCertificate);
                                 return writer;
                             };
     
@@ -20497,6 +21725,18 @@
                                             message.encryptionInfo = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 53: {
+                                            message.serverCaMode = reader.int32();
+                                            break;
+                                        }
+                                    case 54: {
+                                            message.serverCaPool = reader.string();
+                                            break;
+                                        }
+                                    case 55: {
+                                            message.rotateServerCertificate = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -20647,6 +21887,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.persistenceConfig != null && message.hasOwnProperty("persistenceConfig")) {
@@ -20735,6 +21978,28 @@
                                     var error = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.verify(message.encryptionInfo);
                                     if (error)
                                         return "encryptionInfo." + error;
+                                }
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    properties._serverCaMode = 1;
+                                    switch (message.serverCaMode) {
+                                    default:
+                                        return "serverCaMode: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    properties._serverCaPool = 1;
+                                    if (!$util.isString(message.serverCaPool))
+                                        return "serverCaPool: string expected";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    properties._rotateServerCertificate = 1;
+                                    if (typeof message.rotateServerCertificate !== "boolean")
+                                        return "rotateServerCertificate: boolean expected";
                                 }
                                 return null;
                             };
@@ -20906,6 +22171,18 @@
                                 case 4:
                                     message.nodeType = 4;
                                     break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
+                                    break;
                                 }
                                 if (object.persistenceConfig != null) {
                                     if (typeof object.persistenceConfig !== "object")
@@ -20977,6 +22254,34 @@
                                         throw TypeError(".google.cloud.redis.cluster.v1beta1.Cluster.encryptionInfo: object expected");
                                     message.encryptionInfo = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.fromObject(object.encryptionInfo);
                                 }
+                                switch (object.serverCaMode) {
+                                default:
+                                    if (typeof object.serverCaMode === "number") {
+                                        message.serverCaMode = object.serverCaMode;
+                                        break;
+                                    }
+                                    break;
+                                case "SERVER_CA_MODE_UNSPECIFIED":
+                                case 0:
+                                    message.serverCaMode = 0;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_PER_INSTANCE_CA":
+                                case 1:
+                                    message.serverCaMode = 1;
+                                    break;
+                                case "SERVER_CA_MODE_GOOGLE_MANAGED_SHARED_CA":
+                                case 2:
+                                    message.serverCaMode = 2;
+                                    break;
+                                case "SERVER_CA_MODE_CUSTOMER_MANAGED_CAS_CA":
+                                case 3:
+                                    message.serverCaMode = 3;
+                                    break;
+                                }
+                                if (object.serverCaPool != null)
+                                    message.serverCaPool = String(object.serverCaPool);
+                                if (object.rotateServerCertificate != null)
+                                    message.rotateServerCertificate = Boolean(object.rotateServerCertificate);
                                 return message;
                             };
     
@@ -21129,6 +22434,21 @@
                                     object.automatedBackupConfig = $root.google.cloud.redis.cluster.v1beta1.AutomatedBackupConfig.toObject(message.automatedBackupConfig, options);
                                 if (message.encryptionInfo != null && message.hasOwnProperty("encryptionInfo"))
                                     object.encryptionInfo = $root.google.cloud.redis.cluster.v1beta1.EncryptionInfo.toObject(message.encryptionInfo, options);
+                                if (message.serverCaMode != null && message.hasOwnProperty("serverCaMode")) {
+                                    object.serverCaMode = options.enums === String ? $root.google.cloud.redis.cluster.v1beta1.ServerCaMode[message.serverCaMode] === undefined ? message.serverCaMode : $root.google.cloud.redis.cluster.v1beta1.ServerCaMode[message.serverCaMode] : message.serverCaMode;
+                                    if (options.oneofs)
+                                        object._serverCaMode = "serverCaMode";
+                                }
+                                if (message.serverCaPool != null && message.hasOwnProperty("serverCaPool")) {
+                                    object.serverCaPool = message.serverCaPool;
+                                    if (options.oneofs)
+                                        object._serverCaPool = "serverCaPool";
+                                }
+                                if (message.rotateServerCertificate != null && message.hasOwnProperty("rotateServerCertificate")) {
+                                    object.rotateServerCertificate = message.rotateServerCertificate;
+                                    if (options.oneofs)
+                                        object._rotateServerCertificate = "rotateServerCertificate";
+                                }
                                 return object;
                             };
     
@@ -23331,6 +24651,9 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.replicaCount != null && message.hasOwnProperty("replicaCount"))
@@ -23445,6 +24768,18 @@
                                 case "REDIS_STANDARD_SMALL":
                                 case 4:
                                     message.nodeType = 4;
+                                    break;
+                                case "REDIS_HIGHCPU_MEDIUM":
+                                case 7:
+                                    message.nodeType = 7;
+                                    break;
+                                case "REDIS_STANDARD_LARGE":
+                                case 8:
+                                    message.nodeType = 8;
+                                    break;
+                                case "REDIS_HIGHMEM_2XLARGE":
+                                case 9:
+                                    message.nodeType = 9;
                                     break;
                                 }
                                 if (object.replicaCount != null)
@@ -27641,6 +28976,911 @@
                             return PscAutoConnection;
                         })();
     
+                        v1beta1.SharedRegionalCertificateAuthority = (function() {
+    
+                            /**
+                             * Properties of a SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface ISharedRegionalCertificateAuthority
+                             * @property {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null} [managedServerCa] SharedRegionalCertificateAuthority managedServerCa
+                             * @property {string|null} [name] SharedRegionalCertificateAuthority name
+                             */
+    
+                            /**
+                             * Constructs a new SharedRegionalCertificateAuthority.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a SharedRegionalCertificateAuthority.
+                             * @implements ISharedRegionalCertificateAuthority
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             */
+                            function SharedRegionalCertificateAuthority(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SharedRegionalCertificateAuthority managedServerCa.
+                             * @member {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority|null|undefined} managedServerCa
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.managedServerCa = null;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            SharedRegionalCertificateAuthority.prototype.name = "";
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * SharedRegionalCertificateAuthority serverCa.
+                             * @member {"managedServerCa"|undefined} serverCa
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             */
+                            Object.defineProperty(SharedRegionalCertificateAuthority.prototype, "serverCa", {
+                                get: $util.oneOfGetter($oneOfFields = ["managedServerCa"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SharedRegionalCertificateAuthority instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority instance
+                             */
+                            SharedRegionalCertificateAuthority.create = function create(properties) {
+                                return new SharedRegionalCertificateAuthority(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.managedServerCa != null && Object.hasOwnProperty.call(message, "managedServerCa"))
+                                    $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.encode(message.managedServerCa, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SharedRegionalCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.ISharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SharedRegionalCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SharedRegionalCertificateAuthority message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SharedRegionalCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SharedRegionalCertificateAuthority message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SharedRegionalCertificateAuthority.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    properties.serverCa = 1;
+                                    {
+                                        var error = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify(message.managedServerCa);
+                                        if (error)
+                                            return "managedServerCa." + error;
+                                    }
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SharedRegionalCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} SharedRegionalCertificateAuthority
+                             */
+                            SharedRegionalCertificateAuthority.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority();
+                                if (object.managedServerCa != null) {
+                                    if (typeof object.managedServerCa !== "object")
+                                        throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.managedServerCa: object expected");
+                                    message.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.fromObject(object.managedServerCa);
+                                }
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SharedRegionalCertificateAuthority message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority} message SharedRegionalCertificateAuthority
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SharedRegionalCertificateAuthority.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.managedServerCa != null && message.hasOwnProperty("managedServerCa")) {
+                                    object.managedServerCa = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.toObject(message.managedServerCa, options);
+                                    if (options.oneofs)
+                                        object.serverCa = "managedServerCa";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SharedRegionalCertificateAuthority to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SharedRegionalCertificateAuthority.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SharedRegionalCertificateAuthority
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SharedRegionalCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority";
+                            };
+    
+                            SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority = (function() {
+    
+                                /**
+                                 * Properties of a RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                                 * @interface IRegionalManagedCertificateAuthority
+                                 * @property {Array.<google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>|null} [caCerts] RegionalManagedCertificateAuthority caCerts
+                                 */
+    
+                                /**
+                                 * Constructs a new RegionalManagedCertificateAuthority.
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority
+                                 * @classdesc Represents a RegionalManagedCertificateAuthority.
+                                 * @implements IRegionalManagedCertificateAuthority
+                                 * @constructor
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 */
+                                function RegionalManagedCertificateAuthority(properties) {
+                                    this.caCerts = [];
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * RegionalManagedCertificateAuthority caCerts.
+                                 * @member {Array.<google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain>} caCerts
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.caCerts = $util.emptyArray;
+    
+                                /**
+                                 * Creates a new RegionalManagedCertificateAuthority instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority=} [properties] Properties to set
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority instance
+                                 */
+                                RegionalManagedCertificateAuthority.create = function create(properties) {
+                                    return new RegionalManagedCertificateAuthority(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.caCerts != null && message.caCerts.length)
+                                        for (var i = 0; i < message.caCerts.length; ++i)
+                                            $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.encode(message.caCerts[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified RegionalManagedCertificateAuthority message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.IRegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                RegionalManagedCertificateAuthority.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                if (!(message.caCerts && message.caCerts.length))
+                                                    message.caCerts = [];
+                                                message.caCerts.push($root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a RegionalManagedCertificateAuthority message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                RegionalManagedCertificateAuthority.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a RegionalManagedCertificateAuthority message.
+                                 * @function verify
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                RegionalManagedCertificateAuthority.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.caCerts != null && message.hasOwnProperty("caCerts")) {
+                                        if (!Array.isArray(message.caCerts))
+                                            return "caCerts: array expected";
+                                        for (var i = 0; i < message.caCerts.length; ++i) {
+                                            var error = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify(message.caCerts[i]);
+                                            if (error)
+                                                return "caCerts." + error;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a RegionalManagedCertificateAuthority message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} RegionalManagedCertificateAuthority
+                                 */
+                                RegionalManagedCertificateAuthority.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority)
+                                        return object;
+                                    var message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority();
+                                    if (object.caCerts) {
+                                        if (!Array.isArray(object.caCerts))
+                                            throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: array expected");
+                                        message.caCerts = [];
+                                        for (var i = 0; i < object.caCerts.length; ++i) {
+                                            if (typeof object.caCerts[i] !== "object")
+                                                throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.caCerts: object expected");
+                                            message.caCerts[i] = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.fromObject(object.caCerts[i]);
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a RegionalManagedCertificateAuthority message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority} message RegionalManagedCertificateAuthority
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                RegionalManagedCertificateAuthority.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.arrays || options.defaults)
+                                        object.caCerts = [];
+                                    if (message.caCerts && message.caCerts.length) {
+                                        object.caCerts = [];
+                                        for (var j = 0; j < message.caCerts.length; ++j)
+                                            object.caCerts[j] = $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.toObject(message.caCerts[j], options);
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this RegionalManagedCertificateAuthority to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                RegionalManagedCertificateAuthority.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for RegionalManagedCertificateAuthority
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                RegionalManagedCertificateAuthority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority";
+                                };
+    
+                                RegionalManagedCertificateAuthority.RegionalCertChain = (function() {
+    
+                                    /**
+                                     * Properties of a RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @interface IRegionalCertChain
+                                     * @property {Array.<string>|null} [certificates] RegionalCertChain certificates
+                                     */
+    
+                                    /**
+                                     * Constructs a new RegionalCertChain.
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority
+                                     * @classdesc Represents a RegionalCertChain.
+                                     * @implements IRegionalCertChain
+                                     * @constructor
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     */
+                                    function RegionalCertChain(properties) {
+                                        this.certificates = [];
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * RegionalCertChain certificates.
+                                     * @member {Array.<string>} certificates
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     */
+                                    RegionalCertChain.prototype.certificates = $util.emptyArray;
+    
+                                    /**
+                                     * Creates a new RegionalCertChain instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain=} [properties] Properties to set
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain instance
+                                     */
+                                    RegionalCertChain.create = function create(properties) {
+                                        return new RegionalCertChain(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.certificates != null && message.certificates.length)
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.certificates[i]);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RegionalCertChain message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.IRegionalCertChain} message RegionalCertChain message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RegionalCertChain.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    if (!(message.certificates && message.certificates.length))
+                                                        message.certificates = [];
+                                                    message.certificates.push(reader.string());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a RegionalCertChain message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RegionalCertChain.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a RegionalCertChain message.
+                                     * @function verify
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    RegionalCertChain.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.certificates != null && message.hasOwnProperty("certificates")) {
+                                            if (!Array.isArray(message.certificates))
+                                                return "certificates: array expected";
+                                            for (var i = 0; i < message.certificates.length; ++i)
+                                                if (!$util.isString(message.certificates[i]))
+                                                    return "certificates: string[] expected";
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a RegionalCertChain message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} RegionalCertChain
+                                     */
+                                    RegionalCertChain.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain)
+                                            return object;
+                                        var message = new $root.google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain();
+                                        if (object.certificates) {
+                                            if (!Array.isArray(object.certificates))
+                                                throw TypeError(".google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain.certificates: array expected");
+                                            message.certificates = [];
+                                            for (var i = 0; i < object.certificates.length; ++i)
+                                                message.certificates[i] = String(object.certificates[i]);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a RegionalCertChain message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain} message RegionalCertChain
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    RegionalCertChain.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.arrays || options.defaults)
+                                            object.certificates = [];
+                                        if (message.certificates && message.certificates.length) {
+                                            object.certificates = [];
+                                            for (var j = 0; j < message.certificates.length; ++j)
+                                                object.certificates[j] = message.certificates[j];
+                                        }
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this RegionalCertChain to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    RegionalCertChain.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for RegionalCertChain
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    RegionalCertChain.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.SharedRegionalCertificateAuthority.RegionalManagedCertificateAuthority.RegionalCertChain";
+                                    };
+    
+                                    return RegionalCertChain;
+                                })();
+    
+                                return RegionalManagedCertificateAuthority;
+                            })();
+    
+                            return SharedRegionalCertificateAuthority;
+                        })();
+    
+                        v1beta1.GetSharedRegionalCertificateAuthorityRequest = (function() {
+    
+                            /**
+                             * Properties of a GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @interface IGetSharedRegionalCertificateAuthorityRequest
+                             * @property {string|null} [name] GetSharedRegionalCertificateAuthorityRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetSharedRegionalCertificateAuthorityRequest.
+                             * @memberof google.cloud.redis.cluster.v1beta1
+                             * @classdesc Represents a GetSharedRegionalCertificateAuthorityRequest.
+                             * @implements IGetSharedRegionalCertificateAuthorityRequest
+                             * @constructor
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             */
+                            function GetSharedRegionalCertificateAuthorityRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetSharedRegionalCertificateAuthorityRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetSharedRegionalCertificateAuthorityRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest=} [properties] Properties to set
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest instance
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.create = function create(properties) {
+                                return new GetSharedRegionalCertificateAuthorityRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetSharedRegionalCertificateAuthorityRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.IGetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetSharedRegionalCertificateAuthorityRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetSharedRegionalCertificateAuthorityRequest message.
+                             * @function verify
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetSharedRegionalCertificateAuthorityRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} GetSharedRegionalCertificateAuthorityRequest
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest)
+                                    return object;
+                                var message = new $root.google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetSharedRegionalCertificateAuthorityRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest} message GetSharedRegionalCertificateAuthorityRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetSharedRegionalCertificateAuthorityRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetSharedRegionalCertificateAuthorityRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetSharedRegionalCertificateAuthorityRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.redis.cluster.v1beta1.GetSharedRegionalCertificateAuthorityRequest";
+                            };
+    
+                            return GetSharedRegionalCertificateAuthorityRequest;
+                        })();
+    
                         v1beta1.OperationMetadata = (function() {
     
                             /**
@@ -31527,6 +33767,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -31562,6 +33803,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -31593,6 +33842,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -31642,6 +33893,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -31695,6 +33950,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -31737,6 +33997,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -31755,8 +34020,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -31764,6 +34031,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -33586,6 +35855,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -33610,6 +35880,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -33637,6 +35915,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -33675,6 +35955,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -33717,6 +36001,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -33737,6 +36026,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -33753,10 +36047,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -33785,6 +36083,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -34662,6 +37212,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -34673,6 +37224,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -34686,6 +37238,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -34713,6 +37273,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -34743,7 +37306,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -34751,6 +37314,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -34793,6 +37379,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -34813,6 +37407,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -34829,10 +37430,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -35471,6 +38080,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -35532,6 +38386,7 @@
                  * @memberof google.api
                  * @interface IFieldInfo
                  * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
                  */
     
                 /**
@@ -35543,6 +38398,7 @@
                  * @param {google.api.IFieldInfo=} [properties] Properties to set
                  */
                 function FieldInfo(properties) {
+                    this.referencedTypes = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -35556,6 +38412,14 @@
                  * @instance
                  */
                 FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
     
                 /**
                  * Creates a new FieldInfo instance using the specified properties.
@@ -35583,6 +38447,9 @@
                         writer = $Writer.create();
                     if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -35621,6 +38488,12 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -35669,6 +38542,15 @@
                         case 4:
                             break;
                         }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -35712,6 +38594,16 @@
                         message.format = 4;
                         break;
                     }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -35728,10 +38620,17 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
                     if (options.defaults)
                         object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
                     if (message.format != null && message.hasOwnProperty("format"))
                         object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
                     return object;
                 };
     
@@ -35782,6 +38681,211 @@
                 })();
     
                 return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -36715,6 +39819,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -36729,6 +39834,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -36753,6 +39859,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -36775,6 +39882,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -36824,6 +39932,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -36946,6 +40062,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -37016,6 +40135,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -37120,6 +40245,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -37174,6 +40306,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -37225,6 +40358,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -37288,6 +40428,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -37354,6 +40498,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -37410,6 +40555,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -37458,6 +40608,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -37564,6 +40715,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -37615,6 +40774,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -37705,6 +40866,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -37820,6 +40985,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -37919,6 +41093,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -37948,6 +41142,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -37993,6 +41188,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -40037,6 +43234,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -40098,6 +43296,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -40134,6 +43340,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -40194,6 +43402,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -40264,6 +43476,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -40313,6 +43534,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -40337,6 +43578,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -40357,6 +43599,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -42675,6 +45919,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
@@ -42797,6 +46042,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -42878,6 +46131,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -42979,6 +46234,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -43119,6 +46378,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -43313,6 +46577,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -43415,6 +46684,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                         object[".google.api.fieldInfo"] = null;
                     }
@@ -43448,6 +46718,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -43722,6 +46994,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -43762,6 +47035,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -43860,6 +47137,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -44454,6 +48213,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -44498,6 +48258,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -44535,6 +48303,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -44584,6 +48354,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -44638,6 +48412,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -44671,6 +48450,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -44703,6 +48487,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -44710,6 +48495,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -46177,6 +49964,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -46243,6 +50032,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -46278,6 +50083,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -46336,6 +50145,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -46426,6 +50243,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -46567,6 +50404,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -46590,6 +50475,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -46603,6 +50490,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -46728,6 +50619,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -46914,6 +51018,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -46931,6 +51036,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -46978,6 +51084,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -47030,6 +51140,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -47139,7 +51253,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -47166,12 +51281,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -47197,10 +51320,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -47241,8 +51366,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -47285,6 +51414,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -47297,10 +51427,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -47327,6 +51462,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -47369,10 +51508,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -47391,13 +51535,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -48610,6 +52757,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

@@ -16,13 +16,21 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AuditClient, CmEnrollmentServiceClient, ConfigClient, DeploymentClient, MonitoringClient} from '@google-cloud/cloudsecuritycompliance';
+import {
+  AuditClient,
+  CmEnrollmentServiceClient,
+  ConfigClient,
+  DeploymentClient,
+  MonitoringClient,
+} from '@google-cloud/cloudsecuritycompliance';
 
 // check that the client class type name can be used
 function doStuffWithAuditClient(client: AuditClient) {
   client.close();
 }
-function doStuffWithCmEnrollmentServiceClient(client: CmEnrollmentServiceClient) {
+function doStuffWithCmEnrollmentServiceClient(
+  client: CmEnrollmentServiceClient,
+) {
   client.close();
 }
 function doStuffWithConfigClient(client: ConfigClient) {

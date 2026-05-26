@@ -37,9 +37,9 @@ function main(parent, lineageEvent) {
    */
   // const lineageEvent = {}
   /**
-   *  A unique identifier for this request. Restricted to 36 ASCII characters.
-   *  A random UUID is recommended. This request is idempotent only if a
-   *  `request_id` is provided.
+   *  Optional. A unique identifier for this request. Restricted to 36 ASCII
+   *  characters. A random UUID is recommended. This request is idempotent only
+   *  if a `request_id` is provided.
    */
   // const requestId = 'abc123'
 

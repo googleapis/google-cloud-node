@@ -18,11 +18,18 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +51,7 @@ export class PromotionsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('promotions');
@@ -57,9 +64,9 @@ export class PromotionsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  promotionsServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  promotionsServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of PromotionsServiceClient.
@@ -100,21 +107,42 @@ export class PromotionsServiceClient {
    *     const client = new PromotionsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PromotionsServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +167,7 @@ export class PromotionsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class PromotionsServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,7 +203,7 @@ export class PromotionsServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       promotionPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/promotions/{promotion}'
+        'accounts/{account}/promotions/{promotion}',
       ),
     };
 
@@ -186,14 +211,20 @@ export class PromotionsServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listPromotions:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'promotions')
+      listPromotions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'promotions',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.shopping.merchant.promotions.v1.PromotionsService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.shopping.merchant.promotions.v1.PromotionsService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -224,37 +255,45 @@ export class PromotionsServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.promotions.v1.PromotionsService.
     this.promotionsServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.promotions.v1.PromotionsService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.promotions.v1.PromotionsService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.shopping.merchant.promotions.v1.PromotionsService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.promotions.v1
+            .PromotionsService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const promotionsServiceStubMethods =
-        ['insertPromotion', 'getPromotion', 'listPromotions'];
+    const promotionsServiceStubMethods = [
+      'insertPromotion',
+      'getPromotion',
+      'listPromotions',
+    ];
     for (const methodName of promotionsServiceStubMethods) {
       const callPromise = this.promotionsServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -269,8 +308,14 @@ export class PromotionsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -281,8 +326,14 @@ export class PromotionsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -313,9 +364,7 @@ export class PromotionsServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/content'
-    ];
+    return ['https://www.googleapis.com/auth/content'];
   }
 
   getProjectId(): Promise<string>;
@@ -324,8 +373,9 @@ export class PromotionsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -336,302 +386,425 @@ export class PromotionsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Inserts a promotion for your Merchant Center account. If the promotion
- * already exists, then it updates the promotion instead.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The account where the promotion will be inserted.
- *   Format: accounts/{account}
- * @param {google.shopping.merchant.promotions.v1.Promotion} request.promotion
- *   Required. The promotion to insert.
- * @param {string} request.dataSource
- *   Required. The data source of the
- *   [promotion](https://support.google.com/merchants/answer/6396268?sjid=5155774230887277618-NC)
- *   Format:
- *   `accounts/{account}/dataSources/{datasource}`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/promotions_service.insert_promotion.js</caption>
- * region_tag:merchantapi_v1_generated_PromotionsService_InsertPromotion_async
- */
+  /**
+   * Inserts a promotion for your Merchant Center account. If the promotion
+   * already exists, then it updates the promotion instead.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account where the promotion will be inserted.
+   *   Format: accounts/{account}
+   * @param {google.shopping.merchant.promotions.v1.Promotion} request.promotion
+   *   Required. The promotion to insert.
+   * @param {string} request.dataSource
+   *   Required. The data source of the
+   *   [promotion](https://support.google.com/merchants/answer/6396268?sjid=5155774230887277618-NC)
+   *   Format:
+   *   `accounts/{account}/dataSources/{datasource}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/promotions_service.insert_promotion.js</caption>
+   * region_tag:merchantapi_v1_generated_PromotionsService_InsertPromotion_async
+   */
   insertPromotion(
-      request?: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      (
+        | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   insertPromotion(
-      request: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   insertPromotion(
-      request: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   insertPromotion(
-      request?: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      (
+        | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('insertPromotion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.promotions.v1.IPromotion,
+          | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insertPromotion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.insertPromotion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('insertPromotion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .insertPromotion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.promotions.v1.IPromotion,
+          (
+            | protos.google.shopping.merchant.promotions.v1.IInsertPromotionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('insertPromotion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Retrieves the promotion from your Merchant Center account.
- *
- * After inserting or updating a promotion input, it may take several
- * minutes before the updated promotion can be retrieved.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the promotion to retrieve.
- *   Format: `accounts/{account}/promotions/{promotions}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/promotions_service.get_promotion.js</caption>
- * region_tag:merchantapi_v1_generated_PromotionsService_GetPromotion_async
- */
+  /**
+   * Retrieves the promotion from your Merchant Center account.
+   *
+   * After inserting or updating a promotion input, it may take several
+   * minutes before the updated promotion can be retrieved.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the promotion to retrieve.
+   *   Format: `accounts/{account}/promotions/{promotions}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/promotions_service.get_promotion.js</caption>
+   * region_tag:merchantapi_v1_generated_PromotionsService_GetPromotion_async
+   */
   getPromotion(
-      request?: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      (
+        | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getPromotion(
-      request: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPromotion(
-      request: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getPromotion(
-      request?: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.promotions.v1.IPromotion,
-          protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.promotions.v1.IPromotion,
+      (
+        | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getPromotion request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.promotions.v1.IPromotion,
+          | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getPromotion response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getPromotion(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.promotions.v1.IPromotion,
-        protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getPromotion response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getPromotion(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.promotions.v1.IPromotion,
+          (
+            | protos.google.shopping.merchant.promotions.v1.IGetPromotionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getPromotion response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists the promotions in your Merchant Center account. The
- * response might contain fewer items than specified by `pageSize`. Rely on
- * `pageToken` to determine if there are more items to be requested.
- *
- * After inserting or updating a promotion, it may take several minutes before
- * the updated processed promotion can be retrieved.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The account to list processed promotions for.
- *   Format: `accounts/{account}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of promotions to return. The service may
- *   return fewer than this value. The maximum value is 250; values above 250
- *   will be coerced to 250. If unspecified, the maximum number of promotions
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListPromotions` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListPromotions` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listPromotionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the promotions in your Merchant Center account. The
+   * response might contain fewer items than specified by `pageSize`. Rely on
+   * `pageToken` to determine if there are more items to be requested.
+   *
+   * After inserting or updating a promotion, it may take several minutes before
+   * the updated processed promotion can be retrieved.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account to list processed promotions for.
+   *   Format: `accounts/{account}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of promotions to return. The service may
+   *   return fewer than this value. The maximum value is 250; values above 250
+   *   will be coerced to 250. If unspecified, the maximum number of promotions
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListPromotions` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListPromotions` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPromotionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPromotions(
-      request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.promotions.v1.IPromotion[],
-        protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest|null,
-        protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
-      ]>;
+    request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.promotions.v1.IPromotion[],
+      protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest | null,
+      protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse,
+    ]
+  >;
   listPromotions(
-      request: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-          protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse|null|undefined,
-          protos.google.shopping.merchant.promotions.v1.IPromotion>): void;
+    request: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+      | protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.promotions.v1.IPromotion
+    >,
+  ): void;
   listPromotions(
-      request: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-      callback: PaginationCallback<
-          protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-          protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse|null|undefined,
-          protos.google.shopping.merchant.promotions.v1.IPromotion>): void;
+    request: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+    callback: PaginationCallback<
+      protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+      | protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.promotions.v1.IPromotion
+    >,
+  ): void;
   listPromotions(
-      request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-          protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse|null|undefined,
-          protos.google.shopping.merchant.promotions.v1.IPromotion>,
-      callback?: PaginationCallback<
-          protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-          protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse|null|undefined,
-          protos.google.shopping.merchant.promotions.v1.IPromotion>):
-      Promise<[
-        protos.google.shopping.merchant.promotions.v1.IPromotion[],
-        protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest|null,
-        protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
-      ]>|void {
+          | protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.promotions.v1.IPromotion
+        >,
+    callback?: PaginationCallback<
+      protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+      | protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
+      | null
+      | undefined,
+      protos.google.shopping.merchant.promotions.v1.IPromotion
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.promotions.v1.IPromotion[],
+      protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest | null,
+      protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-      protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse|null|undefined,
-      protos.google.shopping.merchant.promotions.v1.IPromotion>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+          | protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
+          | null
+          | undefined,
+          protos.google.shopping.merchant.promotions.v1.IPromotion
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listPromotions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -640,122 +813,126 @@ export class PromotionsServiceClient {
     this._log.info('listPromotions request %j', request);
     return this.innerApiCalls
       .listPromotions(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.shopping.merchant.promotions.v1.IPromotion[],
-        protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest|null,
-        protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse
-      ]) => {
-        this._log.info('listPromotions values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.shopping.merchant.promotions.v1.IPromotion[],
+          protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest | null,
+          protos.google.shopping.merchant.promotions.v1.IListPromotionsResponse,
+        ]) => {
+          this._log.info('listPromotions values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listPromotions`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The account to list processed promotions for.
- *   Format: `accounts/{account}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of promotions to return. The service may
- *   return fewer than this value. The maximum value is 250; values above 250
- *   will be coerced to 250. If unspecified, the maximum number of promotions
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListPromotions` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListPromotions` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listPromotionsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listPromotions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account to list processed promotions for.
+   *   Format: `accounts/{account}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of promotions to return. The service may
+   *   return fewer than this value. The maximum value is 250; values above 250
+   *   will be coerced to 250. If unspecified, the maximum number of promotions
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListPromotions` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListPromotions` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPromotionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listPromotionsStream(
-      request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPromotions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPromotions stream %j', request);
     return this.descriptors.page.listPromotions.createStream(
       this.innerApiCalls.listPromotions as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listPromotions`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The account to list processed promotions for.
- *   Format: `accounts/{account}`
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of promotions to return. The service may
- *   return fewer than this value. The maximum value is 250; values above 250
- *   will be coerced to 250. If unspecified, the maximum number of promotions
- *   will be returned.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `ListPromotions` call.
- *   Provide this to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `ListPromotions` must
- *   match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/promotions_service.list_promotions.js</caption>
- * region_tag:merchantapi_v1_generated_PromotionsService_ListPromotions_async
- */
+  /**
+   * Equivalent to `listPromotions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The account to list processed promotions for.
+   *   Format: `accounts/{account}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of promotions to return. The service may
+   *   return fewer than this value. The maximum value is 250; values above 250
+   *   will be coerced to 250. If unspecified, the maximum number of promotions
+   *   will be returned.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListPromotions` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListPromotions` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.shopping.merchant.promotions.v1.Promotion|Promotion}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/promotions_service.list_promotions.js</caption>
+   * region_tag:merchantapi_v1_generated_PromotionsService_ListPromotions_async
+   */
   listPromotionsAsync(
-      request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.shopping.merchant.promotions.v1.IPromotion>{
+    request?: protos.google.shopping.merchant.promotions.v1.IListPromotionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.shopping.merchant.promotions.v1.IPromotion> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listPromotions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listPromotions iterate %j', request);
     return this.descriptors.page.listPromotions.asyncIterate(
       this.innerApiCalls['listPromotions'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.shopping.merchant.promotions.v1.IPromotion>;
   }
   // --------------------
@@ -769,7 +946,7 @@ export class PromotionsServiceClient {
    * @param {string} promotion
    * @returns {string} Resource name string.
    */
-  promotionPath(account:string,promotion:string) {
+  promotionPath(account: string, promotion: string) {
     return this.pathTemplates.promotionPathTemplate.render({
       account: account,
       promotion: promotion,
@@ -784,7 +961,8 @@ export class PromotionsServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromPromotionName(promotionName: string) {
-    return this.pathTemplates.promotionPathTemplate.match(promotionName).account;
+    return this.pathTemplates.promotionPathTemplate.match(promotionName)
+      .account;
   }
 
   /**
@@ -795,7 +973,8 @@ export class PromotionsServiceClient {
    * @returns {string} A string representing the promotion.
    */
   matchPromotionFromPromotionName(promotionName: string) {
-    return this.pathTemplates.promotionPathTemplate.match(promotionName).promotion;
+    return this.pathTemplates.promotionPathTemplate.match(promotionName)
+      .promotion;
   }
 
   /**
@@ -806,7 +985,7 @@ export class PromotionsServiceClient {
    */
   close(): Promise<void> {
     if (this.promotionsServiceStub && !this._terminated) {
-      return this.promotionsServiceStub.then(stub => {
+      return this.promotionsServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -33,8 +33,8 @@ import * as gapicConfig from './jobs_v1_beta3_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Provides a method to create and modify Google Cloud Dataflow jobs.
- *  A Job is a multi-stage computation graph run by the Cloud Dataflow service.
+ *  Provides a method to create and modify Dataflow jobs.
+ *  A Job is a multi-stage computation graph run by the Dataflow service.
  * @class
  * @memberof v1beta3
  */
@@ -331,7 +331,7 @@ export class JobsV1Beta3Client {
   // -- Service calls --
   // -------------------
 /**
- * Creates a Cloud Dataflow job.
+ * Creates a Dataflow job.
  *
  * To create a job, we recommend using `projects.locations.jobs.create` with a
  * [regional endpoint]

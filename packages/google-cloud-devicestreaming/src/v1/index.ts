@@ -16,4 +16,4 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {DirectAccessServiceClient} from './direct_access_service_client';
+export { DirectAccessServiceClient } from './direct_access_service_client';

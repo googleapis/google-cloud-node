@@ -41,7 +41,7 @@ function main(input, voice, audioConfig) {
    */
   // const audioConfig = {}
   /**
-   *  Advanced voice options.
+   *  Optional. Advanced voice options.
    */
   // const advancedVoiceOptions = {}
 

@@ -284,6 +284,46 @@
       }
     },
     {
+      "regionTag": "redis_v1_generated_CloudRedisCluster_GetSharedRegionalCertificateAuthority_async",
+      "title": "CloudRedisCluster getSharedRegionalCertificateAuthority Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of regional certificate authority information for Redis cluster.",
+      "canonical": true,
+      "file": "cloud_redis_cluster.get_shared_regional_certificate_authority.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSharedRegionalCertificateAuthority",
+        "fullName": "google.cloud.redis.cluster.v1.CloudRedisCluster.GetSharedRegionalCertificateAuthority",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.redis.cluster.v1.SharedRegionalCertificateAuthority",
+        "client": {
+          "shortName": "CloudRedisClusterClient",
+          "fullName": "google.cloud.redis.cluster.v1.CloudRedisClusterClient"
+        },
+        "method": {
+          "shortName": "GetSharedRegionalCertificateAuthority",
+          "fullName": "google.cloud.redis.cluster.v1.CloudRedisCluster.GetSharedRegionalCertificateAuthority",
+          "service": {
+            "shortName": "CloudRedisCluster",
+            "fullName": "google.cloud.redis.cluster.v1.CloudRedisCluster"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "redis_v1_generated_CloudRedisCluster_RescheduleClusterMaintenance_async",
       "title": "CloudRedisCluster rescheduleClusterMaintenance Sample",
       "origin": "API_DEFINITION",

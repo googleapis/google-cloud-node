@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -45,7 +54,7 @@ export class ConfigClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('cloudsecuritycompliance');
@@ -58,10 +67,10 @@ export class ConfigClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  configStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  configStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of ConfigClient.
@@ -102,21 +111,42 @@ export class ConfigClient {
    *     const client = new ConfigClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ConfigClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'cloudsecuritycompliance.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -141,7 +171,7 @@ export class ConfigClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -155,15 +185,11 @@ export class ConfigClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -184,77 +210,120 @@ export class ConfigClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      cloudControlPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cloudControls/{cloud_control}'
-      ),
-      cloudControlDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}'
-      ),
-      folderLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/findingSummaries/{finding_summary}'
-      ),
-      folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
-      ),
-      folderLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
-      ),
-      folderLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'folders/{folder}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
-      ),
-      frameworkPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworks/{framework}'
-      ),
-      frameworkDeploymentPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}'
-      ),
+      folderLocationFindingSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/findingSummaries/{finding_summary}',
+        ),
+      folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}',
+        ),
+      folderLocationFrameworkComplianceReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}',
+        ),
+      folderLocationFrameworkComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}',
+        ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}'
+        'organizations/{organization}',
       ),
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}'
+        'organizations/{organization}/locations/{location}',
       ),
-      organizationLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/cmEnrollment'
-      ),
-      organizationLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/findingSummaries/{finding_summary}'
-      ),
-      organizationLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
-      ),
-      organizationLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkAudits/{framework_audit}'
-      ),
-      organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
-      ),
-      organizationLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
-      ),
-      organizationLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
-      ),
+      organizationLocationCloudControlDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}',
+        ),
+      organizationLocationCloudControlsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/cloudControls/{cloud_control}',
+        ),
+      organizationLocationCmEnrollmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/cmEnrollment',
+        ),
+      organizationLocationControlsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/controls/{control}',
+        ),
+      organizationLocationFindingSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/findingSummaries/{finding_summary}',
+        ),
+      organizationLocationFrameworkAuditScopeReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}',
+        ),
+      organizationLocationFrameworkAuditsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkAudits/{framework_audit}',
+        ),
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}',
+        ),
+      organizationLocationFrameworkComplianceReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}',
+        ),
+      organizationLocationFrameworkComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}',
+        ),
+      organizationLocationFrameworkDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment}',
+        ),
+      organizationLocationFrameworksPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/frameworks/{framework}',
+        ),
+      projectLocationCloudControlDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/cloudControlDeployments/{cloud_control_deployment}',
+        ),
+      projectLocationCloudControlsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/cloudControls/{cloud_control}',
+        ),
       projectLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/cmEnrollment'
+        'projects/{project}/locations/{location}/cmEnrollment',
       ),
-      projectLocationFindingSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/findingSummaries/{finding_summary}'
+      projectLocationControlsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/controls/{control}',
       ),
-      projectLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
-      ),
-      projectLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkAudits/{framework_audit}'
-      ),
-      projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}'
-      ),
-      projectLocationFrameworkComplianceReportsPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}'
-      ),
-      projectLocationFrameworkComplianceSummariesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}'
+      projectLocationFindingSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/findingSummaries/{finding_summary}',
+        ),
+      projectLocationFrameworkAuditScopeReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}',
+        ),
+      projectLocationFrameworkAuditsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkAudits/{framework_audit}',
+        ),
+      projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}/controlComplianceSummaries/{control_compliance_summary}',
+        ),
+      projectLocationFrameworkComplianceReportsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkComplianceReports/{framework_compliance_report}',
+        ),
+      projectLocationFrameworkComplianceSummariesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkComplianceSummaries/{framework_compliance_summary}',
+        ),
+      projectLocationFrameworkDeploymentsPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/frameworkDeployments/{framework_deployment}',
+        ),
+      projectLocationFrameworksPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworks/{framework}',
       ),
     };
 
@@ -262,16 +331,25 @@ export class ConfigClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listFrameworks:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'frameworks'),
-      listCloudControls:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'cloudControls')
+      listFrameworks: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'frameworks',
+      ),
+      listCloudControls: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'cloudControls',
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.cloudsecuritycompliance.v1.Config', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.cloudsecuritycompliance.v1.Config',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -302,37 +380,51 @@ export class ConfigClient {
     // Put together the "service stub" for
     // google.cloud.cloudsecuritycompliance.v1.Config.
     this.configStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.cloudsecuritycompliance.v1.Config') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.cloudsecuritycompliance.v1.Config',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.cloudsecuritycompliance.v1.Config,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const configStubMethods =
-        ['listFrameworks', 'getFramework', 'createFramework', 'updateFramework', 'deleteFramework', 'listCloudControls', 'getCloudControl', 'createCloudControl', 'updateCloudControl', 'deleteCloudControl'];
+    const configStubMethods = [
+      'listFrameworks',
+      'getFramework',
+      'createFramework',
+      'updateFramework',
+      'deleteFramework',
+      'listCloudControls',
+      'getCloudControl',
+      'createCloudControl',
+      'updateCloudControl',
+      'deleteCloudControl',
+    ];
     for (const methodName of configStubMethods) {
       const callPromise = this.configStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        this.descriptors.page[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -347,8 +439,14 @@ export class ConfigClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudsecuritycompliance.googleapis.com';
   }
@@ -359,8 +457,14 @@ export class ConfigClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'cloudsecuritycompliance.googleapis.com';
   }
@@ -391,9 +495,7 @@ export class ConfigClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -402,8 +504,9 @@ export class ConfigClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -414,952 +517,1390 @@ export class ConfigClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details about a framework.
- * This method retrieves the latest major version of the framework.
- *
- * To retrieve a specific major version, include `major_revision_id` in
- * the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the framework to retrieve, in the format
- *   `organizations/{organization}/locations/{location}/frameworks/{framework_id}`
- *   The only supported location is `global`.
- * @param {number} [request.majorRevisionId]
- *   Optional. The framework major version to retrieve. If not specified, the
- *   most recently updated `revision_id` is retrieved.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.get_framework.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_GetFramework_async
- */
+  /**
+   * Gets details about a framework.
+   * This method retrieves the latest major version of the framework.
+   *
+   * To retrieve a specific major version, include `major_revision_id` in
+   * the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the framework to retrieve, in one of the following
+   *   formats:
+   *   `organizations/{organization}/locations/{location}/frameworks/{framework}`
+   *   or
+   *   `projects/{project}/locations/{location}/frameworks/{framework}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.majorRevisionId]
+   *   Optional. The framework major version to retrieve. If not specified, the
+   *   most recently updated `revision_id` is retrieved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.get_framework.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_GetFramework_async
+   */
   getFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getFramework request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getFramework(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getFramework response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getFramework(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.IGetFrameworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getFramework response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a custom framework in a given parent resource.
- * You can't create built-in frameworks because those are managed by
- * Google.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {string} request.frameworkId
- *   Required. The identifier (ID) of the framework. The ID is not the full name
- *   of the framework; it's the last part of the full name of the framework.
- * @param {google.cloud.cloudsecuritycompliance.v1.Framework} request.framework
- *   Required. The resource being created.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.create_framework.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_CreateFramework_async
- */
+  /**
+   * Creates a custom framework in a given parent resource.
+   * You can't create built-in frameworks because those are managed by
+   * Google.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {string} request.frameworkId
+   *   Required. The identifier (ID) of the framework. The ID is not the full name
+   *   of the framework; it's the last part of the full name of the framework.
+   * @param {google.cloud.cloudsecuritycompliance.v1.Framework} request.framework
+   *   Required. The resource being created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.create_framework.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_CreateFramework_async
+   */
   createFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createFramework request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+          | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createFramework(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createFramework response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createFramework(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createFramework response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a custom framework.
- * This method allows for partial updates of a framework. Use the
- * `update_mask` to specify which fields to update. Consider the following:
- *
- * - If you provide an `update_mask`, only the fields that are specified
- * in the mask are updated.
- * - If you don't provide an `update_mask`, all the fields that are present
- * in the request's `framework` body are used to overwrite the existing
- * resource.
- *
- * You can only update frameworks with the `CUSTOM` type.
- * A successful update creates a new version of the framework.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. A field mask is used to specify the fields to be overwritten in
- *   the framework resource by the update. The fields specified in the
- *   `update_mask` are relative to the resource, not the full request. A field
- *   is overwritten if it is in the mask. If you don't provide a mask then all
- *   fields present in the request will be overwritten.
- * @param {google.cloud.cloudsecuritycompliance.v1.Framework} request.framework
- *   Required. The resource that is being updated.
- * @param {number} [request.majorRevisionId]
- *   Optional. The major version ID of the framework to update.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.update_framework.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_UpdateFramework_async
- */
+  /**
+   * Updates a custom framework.
+   * This method allows for partial updates of a framework. Use the
+   * `update_mask` to specify which fields to update. Consider the following:
+   *
+   * - If you provide an `update_mask`, only the fields that are specified
+   * in the mask are updated.
+   * - If you don't provide an `update_mask`, all the fields that are present
+   * in the request's `framework` body are used to overwrite the existing
+   * resource.
+   *
+   * You can only update frameworks with the `CUSTOM` type.
+   * A successful update creates a new version of the framework.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. A field mask is used to specify the fields to be overwritten in
+   *   the framework resource by the update. The fields specified in the
+   *   `update_mask` are relative to the resource, not the full request. A field
+   *   is overwritten if it is in the mask. If you don't provide a mask then all
+   *   fields present in the request will be overwritten.
+   * @param {google.cloud.cloudsecuritycompliance.v1.Framework} request.framework
+   *   Required. The resource that is being updated.
+   * @param {number} [request.majorRevisionId]
+   *   Optional. The major version ID of the framework to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.update_framework.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_UpdateFramework_async
+   */
   updateFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'framework.name': request.framework!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'framework.name': request.framework!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateFramework request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateFramework(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateFramework response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateFramework(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateFrameworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateFramework response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a custom framework, including all its major and
- * minor revisions. Consider the following:
- *
- * - You can't delete built-in frameworks. You can only delete frameworks
- *   with type `CUSTOM`.
- * - You can't delete frameworks that are deployed to a resource.
- * - You can't restore a deleted framework. This action is permanent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the resource, in the format
- *   `organizations/{organization}/locations/{location}/frameworks/{framework}`.
- *   The only supported location is `global`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.delete_framework.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_DeleteFramework_async
- */
+  /**
+   * Deletes a custom framework, including all its major and
+   * minor revisions. Consider the following:
+   *
+   * - You can't delete built-in frameworks. You can only delete frameworks
+   *   with type `CUSTOM`.
+   * - You can't delete frameworks that are deployed to a resource.
+   * - You can't restore a deleted framework. This action is permanent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource, in one of the following formats:
+   *   `organizations/{organization}/locations/{location}/frameworks/{framework}`
+   *   or
+   *   `projects/{project}/locations/{location}/frameworks/{framework}`.
+   *
+   *   The only supported location is `global`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.delete_framework.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_DeleteFramework_async
+   */
   deleteFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteFramework(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteFramework(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteFramework request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteFramework response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteFramework(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteFramework response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteFramework(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteFrameworkRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFramework response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details about a cloud control.
- * This method retrieves the latest major version of a cloud control that
- * you identify by name.
- *
- * By default, the latest major version of the cloud control is returned.
- * To retrieve a specific major version, include `major_revision_id` in
- * the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the cloud control to retrieve, in the format
- *   `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`.
- *   The only supported location is `global`.
- * @param {number} [request.majorRevisionId]
- *   Optional. The major version of the cloud control to retrieve. If not
- *   specified, the most recently updated `revision_id` is retrieved.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.get_cloud_control.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_GetCloudControl_async
- */
+  /**
+   * Gets details about a cloud control.
+   * This method retrieves the latest major version of a cloud control that
+   * you identify by name.
+   *
+   * By default, the latest major version of the cloud control is returned.
+   * To retrieve a specific major version, include `major_revision_id` in
+   * the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the cloud control to retrieve, in one of the
+   *   following formats:
+   *   `organizations/{organization}/locations/{location}/cloudControls/{cloud_control}`
+   *   or
+   *   `projects/{project}/locations/{location}/cloudControls/{cloud_control}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.majorRevisionId]
+   *   Optional. The major version of the cloud control to retrieve. If not
+   *   specified, the most recently updated `revision_id` is retrieved.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.get_cloud_control.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_GetCloudControl_async
+   */
   getCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getCloudControl request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getCloudControl(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getCloudControl response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getCloudControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.IGetCloudControlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getCloudControl response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Creates a custom cloud control in a given parent
- * resource.
- * You can't create built-in cloud controls because those are managed by
- * Google.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {string} request.cloudControlId
- *   Required. The identifier for the cloud control, which is the last segment
- *   of the cloud control name. The format is
- *   `^{@link protos.a-zA-Z0-9-|a-zA-Z}{0,61}[a-zA-Z0-9]$`.
- * @param {google.cloud.cloudsecuritycompliance.v1.CloudControl} request.cloudControl
- *   Required. The cloud control that's being created.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.create_cloud_control.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_CreateCloudControl_async
- */
+  /**
+   * Creates a custom cloud control in a given parent
+   * resource.
+   * You can't create built-in cloud controls because those are managed by
+   * Google.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`.
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {string} request.cloudControlId
+   *   Required. The identifier for the cloud control, which is the last segment
+   *   of the cloud control name. The format is
+   *   `^{@link protos.a-zA-Z0-9-|a-zA-Z}{0,61}[a-zA-Z0-9]$`.
+   * @param {google.cloud.cloudsecuritycompliance.v1.CloudControl} request.cloudControl
+   *   Required. The cloud control that's being created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.create_cloud_control.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_CreateCloudControl_async
+   */
   createCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createCloudControl request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+          | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createCloudControl(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createCloudControl response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createCloudControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.ICreateCloudControlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createCloudControl response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a custom cloud control.
- * This method allows for partial updates of a cloud control. Use the
- * `update_mask` to specify which fields to update. Consider the following:
- *
- * - If you provide an `update_mask`, only the fields that are specified
- * in the mask are updated.
- * - If you don't provide an `update_mask`, all the fields that are present
- * in the request's `cloud_control` body are used to overwrite the existing
- * resource.
- *
- * You can only update cloud controls with the `CUSTOM` type.
- * A successful update creates a new version of the cloud control.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Use a field mask to specify the fields to be overwritten in the
- *   cloud control during the update.
- *   The fields that you specify in the `update_mask` are relative to the
- *   cloud control, not the full request. A field is overwritten if it is in
- *   the mask. If you don't provide a mask, all fields in the request
- *   are updated.
- *
- *   You can update the following fields:
- *
- *   - Display name
- *   - Description
- *   - Parameters
- *   - Rules
- *   - Parameter specification
- * @param {google.cloud.cloudsecuritycompliance.v1.CloudControl} request.cloudControl
- *   Required. The cloud control that you're updating.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.update_cloud_control.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_UpdateCloudControl_async
- */
+  /**
+   * Updates a custom cloud control.
+   * This method allows for partial updates of a cloud control. Use the
+   * `update_mask` to specify which fields to update. Consider the following:
+   *
+   * - If you provide an `update_mask`, only the fields that are specified
+   * in the mask are updated.
+   * - If you don't provide an `update_mask`, all the fields that are present
+   * in the request's `cloud_control` body are used to overwrite the existing
+   * resource.
+   *
+   * You can only update cloud controls with the `CUSTOM` type.
+   * A successful update creates a new version of the cloud control.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Use a field mask to specify the fields to be overwritten in the
+   *   cloud control during the update.
+   *   The fields that you specify in the `update_mask` are relative to the
+   *   cloud control, not the full request. A field is overwritten if it is in
+   *   the mask. If you don't provide a mask, all fields in the request
+   *   are updated.
+   *
+   *   You can update the following fields:
+   *
+   *   - Display name
+   *   - Description
+   *   - Parameters
+   *   - Rules
+   *   - Parameter specification
+   * @param {google.cloud.cloudsecuritycompliance.v1.CloudControl} request.cloudControl
+   *   Required. The cloud control that you're updating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.update_cloud_control.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_UpdateCloudControl_async
+   */
   updateCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
-      callback: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
+    callback: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-          protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'cloud_control.name': request.cloudControl!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'cloud_control.name': request.cloudControl!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateCloudControl request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateCloudControl(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
-        protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateCloudControl response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateCloudControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.IUpdateCloudControlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateCloudControl response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a custom cloud control, including all its
- * major and minor revisions. Consider the following:
- *
- * - You can't delete built-in cloud controls. You can only delete cloud
- *   controls with type `CUSTOM`.
- * - You can't delete cloud controls if any of the versions are referenced
- *   by a framework.
- * - You can't restore a deleted cloud control. This action is permanent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the cloud control to delete, in the format
- *   `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`.
- *   The only supported location is `global`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.delete_cloud_control.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_DeleteCloudControl_async
- */
+  /**
+   * Deletes a custom cloud control, including all its
+   * major and minor revisions. Consider the following:
+   *
+   * - You can't delete built-in cloud controls. You can only delete cloud
+   *   controls with type `CUSTOM`.
+   * - You can't delete cloud controls if any of the versions are referenced
+   *   by a framework.
+   * - You can't restore a deleted cloud control. This action is permanent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the cloud control to delete, in one of the following
+   *   formats:
+   *   `organizations/{organization}/locations/{location}/CloudControls/{CloudControl}`
+   *   or
+   *   `projects/{project}/locations/{location}/CloudControls/{CloudControl}`.
+   *
+   *   The only supported location is `global`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.delete_cloud_control.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_DeleteCloudControl_async
+   */
   deleteCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCloudControl(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteCloudControl(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteCloudControl request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteCloudControl response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteCloudControl(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteCloudControl response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteCloudControl(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.cloudsecuritycompliance.v1.IDeleteCloudControlRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteCloudControl response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
- /**
- * Lists the frameworks (both built-in and custom) that are available within
- * the parent resource. The latest major version of each framework is
- * returned.
- * This method supports pagination.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of frameworks to return. The default value is
- *   `500`.
- *
- *   If you exceed the maximum value of `1000`, then the service uses the
- *   maximum value.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request to list
- *   frameworks. Provide this token to retrieve the next page of results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listFrameworksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the frameworks (both built-in and custom) that are available within
+   * the parent resource. The latest major version of each framework is
+   * returned.
+   * This method supports pagination.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of frameworks to return. The default value is
+   *   `500`.
+   *
+   *   If you exceed the maximum value of `1000`, then the service uses the
+   *   maximum value.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request to list
+   *   frameworks. Provide this token to retrieve the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFrameworksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFrameworks(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework[],
-        protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest|null,
-        protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework[],
+      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest | null,
+      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse,
+    ]
+  >;
   listFrameworks(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
+      | null
+      | undefined,
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework
+    >,
+  ): void;
   listFrameworks(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
+      | null
+      | undefined,
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework
+    >,
+  ): void;
   listFrameworks(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework>,
-      callback?: PaginationCallback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.IFramework>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework[],
-        protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest|null,
-        protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
+          | null
+          | undefined,
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
+      | null
+      | undefined,
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.IFramework[],
+      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest | null,
+      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-      protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse|null|undefined,
-      protos.google.cloud.cloudsecuritycompliance.v1.IFramework>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
+          | null
+          | undefined,
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listFrameworks values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1368,218 +1909,253 @@ export class ConfigClient {
     this._log.info('listFrameworks request %j', request);
     return this.innerApiCalls
       .listFrameworks(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.IFramework[],
-        protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest|null,
-        protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse
-      ]) => {
-        this._log.info('listFrameworks values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.IFramework[],
+          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest | null,
+          protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksResponse,
+        ]) => {
+          this._log.info('listFrameworks values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listFrameworks`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of frameworks to return. The default value is
- *   `500`.
- *
- *   If you exceed the maximum value of `1000`, then the service uses the
- *   maximum value.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request to list
- *   frameworks. Provide this token to retrieve the next page of results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listFrameworksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listFrameworks`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of frameworks to return. The default value is
+   *   `500`.
+   *
+   *   If you exceed the maximum value of `1000`, then the service uses the
+   *   maximum value.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request to list
+   *   frameworks. Provide this token to retrieve the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFrameworksAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listFrameworksStream(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listFrameworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listFrameworks stream %j', request);
     return this.descriptors.page.listFrameworks.createStream(
       this.innerApiCalls.listFrameworks as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listFrameworks`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of frameworks to return. The default value is
- *   `500`.
- *
- *   If you exceed the maximum value of `1000`, then the service uses the
- *   maximum value.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token returned from a previous request to list
- *   frameworks. Provide this token to retrieve the next page of results.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.list_frameworks.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_ListFrameworks_async
- */
+  /**
+   * Equivalent to `listFrameworks`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of frameworks to return. The default value is
+   *   `500`.
+   *
+   *   If you exceed the maximum value of `1000`, then the service uses the
+   *   maximum value.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token returned from a previous request to list
+   *   frameworks. Provide this token to retrieve the next page of results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Framework|Framework}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.list_frameworks.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_ListFrameworks_async
+   */
   listFrameworksAsync(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.IFramework>{
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListFrameworksRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.IFramework> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listFrameworks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listFrameworks iterate %j', request);
     return this.descriptors.page.listFrameworks.asyncIterate(
       this.innerApiCalls['listFrameworks'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.IFramework>;
   }
- /**
- * Lists the cloud controls (both built-in and custom) that are available
- * in a given parent resource. The latest major version of each cloud control
- * is returned.
- * This method supports pagination.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud controls to return. The default value
- *   is `500`.
- *
- *   If you exceed the maximum value of `1000`, then the service uses the
- *   maximum value.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token that's returned from a previous request to
- *   list cloud controls. Provide this token to retrieve the next page of
- *   results.
- *
- *   When paginating, the parent that you provide to the
- *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls|ListCloudControls}
- *   request must match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listCloudControlsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists the cloud controls (both built-in and custom) that are available
+   * in a given parent resource. The latest major version of each cloud control
+   * is returned.
+   * This method supports pagination.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud controls to return. The default value
+   *   is `500`.
+   *
+   *   If you exceed the maximum value of `1000`, then the service uses the
+   *   maximum value.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token that's returned from a previous request to
+   *   list cloud controls. Provide this token to retrieve the next page of
+   *   results.
+   *
+   *   When paginating, the parent that you provide to the
+   *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls|ListCloudControls}
+   *   request must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCloudControlsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCloudControls(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl[],
-        protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest|null,
-        protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
-      ]>;
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl[],
+      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest | null,
+      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse,
+    ]
+  >;
   listCloudControls(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
+      | null
+      | undefined,
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl
+    >,
+  ): void;
   listCloudControls(
-      request: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl>): void;
+    request: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
+      | null
+      | undefined,
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl
+    >,
+  ): void;
   listCloudControls(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl>,
-      callback?: PaginationCallback<
-          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse|null|undefined,
-          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl>):
-      Promise<[
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl[],
-        protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest|null,
-        protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
-      ]>|void {
+          | protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
+          | null
+          | undefined,
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+      | protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
+      | null
+      | undefined,
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl[],
+      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest | null,
+      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-      protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse|null|undefined,
-      protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+          | protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
+          | null
+          | undefined,
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listCloudControls values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1588,133 +2164,142 @@ export class ConfigClient {
     this._log.info('listCloudControls request %j', request);
     return this.innerApiCalls
       .listCloudControls(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl[],
-        protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest|null,
-        protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse
-      ]) => {
-        this._log.info('listCloudControls values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl[],
+          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest | null,
+          protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsResponse,
+        ]) => {
+          this._log.info('listCloudControls values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listCloudControls`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud controls to return. The default value
- *   is `500`.
- *
- *   If you exceed the maximum value of `1000`, then the service uses the
- *   maximum value.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token that's returned from a previous request to
- *   list cloud controls. Provide this token to retrieve the next page of
- *   results.
- *
- *   When paginating, the parent that you provide to the
- *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls|ListCloudControls}
- *   request must match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listCloudControlsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listCloudControls`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud controls to return. The default value
+   *   is `500`.
+   *
+   *   If you exceed the maximum value of `1000`, then the service uses the
+   *   maximum value.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token that's returned from a previous request to
+   *   list cloud controls. Provide this token to retrieve the next page of
+   *   results.
+   *
+   *   When paginating, the parent that you provide to the
+   *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls|ListCloudControls}
+   *   request must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCloudControlsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listCloudControlsStream(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCloudControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCloudControls stream %j', request);
     return this.descriptors.page.listCloudControls.createStream(
       this.innerApiCalls.listCloudControls as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listCloudControls`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource name, in the format
- *   `organizations/{organization}/locations/{location}`.
- *   The only supported location is `global`.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of cloud controls to return. The default value
- *   is `500`.
- *
- *   If you exceed the maximum value of `1000`, then the service uses the
- *   maximum value.
- * @param {string} [request.pageToken]
- *   Optional. A pagination token that's returned from a previous request to
- *   list cloud controls. Provide this token to retrieve the next page of
- *   results.
- *
- *   When paginating, the parent that you provide to the
- *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls|ListCloudControls}
- *   request must match the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/config.list_cloud_controls.js</caption>
- * region_tag:cloudsecuritycompliance_v1_generated_Config_ListCloudControls_async
- */
+  /**
+   * Equivalent to `listCloudControls`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource name, in one of the following formats:
+   *   - `organizations/{organization}/locations/{location}`
+   *   - `projects/{project}/locations/{location}`.
+   *
+   *   The only supported location is `global`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of cloud controls to return. The default value
+   *   is `500`.
+   *
+   *   If you exceed the maximum value of `1000`, then the service uses the
+   *   maximum value.
+   * @param {string} [request.pageToken]
+   *   Optional. A pagination token that's returned from a previous request to
+   *   list cloud controls. Provide this token to retrieve the next page of
+   *   results.
+   *
+   *   When paginating, the parent that you provide to the
+   *   {@link protos.google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls|ListCloudControls}
+   *   request must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.cloudsecuritycompliance.v1.CloudControl|CloudControl}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/config.list_cloud_controls.js</caption>
+   * region_tag:cloudsecuritycompliance_v1_generated_Config_ListCloudControls_async
+   */
   listCloudControlsAsync(
-      request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl>{
+    request?: protos.google.cloud.cloudsecuritycompliance.v1.IListCloudControlsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listCloudControls'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listCloudControls iterate %j', request);
     return this.descriptors.page.listCloudControls.asyncIterate(
       this.innerApiCalls['listCloudControls'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.ICloudControl>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1749,12 +2334,11 @@ export class ConfigClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1787,7 +2371,7 @@ export class ConfigClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1797,104 +2381,6 @@ export class ConfigClient {
   // --------------------
 
   /**
-   * Return a fully-qualified cloudControl resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} cloud_control
-   * @returns {string} Resource name string.
-   */
-  cloudControlPath(organization:string,location:string,cloudControl:string) {
-    return this.pathTemplates.cloudControlPathTemplate.render({
-      organization: organization,
-      location: location,
-      cloud_control: cloudControl,
-    });
-  }
-
-  /**
-   * Parse the organization from CloudControl resource.
-   *
-   * @param {string} cloudControlName
-   *   A fully-qualified path representing CloudControl resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromCloudControlName(cloudControlName: string) {
-    return this.pathTemplates.cloudControlPathTemplate.match(cloudControlName).organization;
-  }
-
-  /**
-   * Parse the location from CloudControl resource.
-   *
-   * @param {string} cloudControlName
-   *   A fully-qualified path representing CloudControl resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromCloudControlName(cloudControlName: string) {
-    return this.pathTemplates.cloudControlPathTemplate.match(cloudControlName).location;
-  }
-
-  /**
-   * Parse the cloud_control from CloudControl resource.
-   *
-   * @param {string} cloudControlName
-   *   A fully-qualified path representing CloudControl resource.
-   * @returns {string} A string representing the cloud_control.
-   */
-  matchCloudControlFromCloudControlName(cloudControlName: string) {
-    return this.pathTemplates.cloudControlPathTemplate.match(cloudControlName).cloud_control;
-  }
-
-  /**
-   * Return a fully-qualified cloudControlDeployment resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} cloud_control_deployment
-   * @returns {string} Resource name string.
-   */
-  cloudControlDeploymentPath(organization:string,location:string,cloudControlDeployment:string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.render({
-      organization: organization,
-      location: location,
-      cloud_control_deployment: cloudControlDeployment,
-    });
-  }
-
-  /**
-   * Parse the organization from CloudControlDeployment resource.
-   *
-   * @param {string} cloudControlDeploymentName
-   *   A fully-qualified path representing CloudControlDeployment resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromCloudControlDeploymentName(cloudControlDeploymentName: string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.match(cloudControlDeploymentName).organization;
-  }
-
-  /**
-   * Parse the location from CloudControlDeployment resource.
-   *
-   * @param {string} cloudControlDeploymentName
-   *   A fully-qualified path representing CloudControlDeployment resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromCloudControlDeploymentName(cloudControlDeploymentName: string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.match(cloudControlDeploymentName).location;
-  }
-
-  /**
-   * Parse the cloud_control_deployment from CloudControlDeployment resource.
-   *
-   * @param {string} cloudControlDeploymentName
-   *   A fully-qualified path representing CloudControlDeployment resource.
-   * @returns {string} A string representing the cloud_control_deployment.
-   */
-  matchCloudControlDeploymentFromCloudControlDeploymentName(cloudControlDeploymentName: string) {
-    return this.pathTemplates.cloudControlDeploymentPathTemplate.match(cloudControlDeploymentName).cloud_control_deployment;
-  }
-
-  /**
    * Return a fully-qualified folderLocationFindingSummaries resource name string.
    *
    * @param {string} folder
@@ -1902,12 +2388,18 @@ export class ConfigClient {
    * @param {string} finding_summary
    * @returns {string} Resource name string.
    */
-  folderLocationFindingSummariesPath(folder:string,location:string,findingSummary:string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.render({
-      folder: folder,
-      location: location,
-      finding_summary: findingSummary,
-    });
+  folderLocationFindingSummariesPath(
+    folder: string,
+    location: string,
+    findingSummary: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        finding_summary: findingSummary,
+      },
+    );
   }
 
   /**
@@ -1917,8 +2409,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_findingSummaries resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).folder;
+  matchFolderFromFolderLocationFindingSummariesName(
+    folderLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(
+      folderLocationFindingSummariesName,
+    ).folder;
   }
 
   /**
@@ -1928,8 +2424,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_findingSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).location;
+  matchLocationFromFolderLocationFindingSummariesName(
+    folderLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(
+      folderLocationFindingSummariesName,
+    ).location;
   }
 
   /**
@@ -1939,8 +2439,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_findingSummaries resource.
    * @returns {string} A string representing the finding_summary.
    */
-  matchFindingSummaryFromFolderLocationFindingSummariesName(folderLocationFindingSummariesName: string) {
-    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(folderLocationFindingSummariesName).finding_summary;
+  matchFindingSummaryFromFolderLocationFindingSummariesName(
+    folderLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFindingSummariesPathTemplate.match(
+      folderLocationFindingSummariesName,
+    ).finding_summary;
   }
 
   /**
@@ -1952,13 +2456,20 @@ export class ConfigClient {
    * @param {string} control_compliance_summary
    * @returns {string} Resource name string.
    */
-  folderLocationFrameworkComplianceReportControlComplianceSummariesPath(folder:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
-      folder: folder,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-      control_compliance_summary: controlComplianceSummary,
-    });
+  folderLocationFrameworkComplianceReportControlComplianceSummariesPath(
+    folder: string,
+    location: string,
+    frameworkComplianceReport: string,
+    controlComplianceSummary: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+        control_compliance_summary: controlComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -1968,8 +2479,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).folder;
+  matchFolderFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).folder;
   }
 
   /**
@@ -1979,8 +2494,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  matchLocationFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -1990,8 +2509,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -2001,8 +2524,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the control_compliance_summary.
    */
-  matchControlComplianceSummaryFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(folderLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  matchControlComplianceSummaryFromFolderLocationFrameworkComplianceReportControlComplianceSummariesName(
+    folderLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).control_compliance_summary;
   }
 
   /**
@@ -2013,12 +2540,18 @@ export class ConfigClient {
    * @param {string} framework_compliance_report
    * @returns {string} Resource name string.
    */
-  folderLocationFrameworkComplianceReportsPath(folder:string,location:string,frameworkComplianceReport:string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.render({
-      folder: folder,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-    });
+  folderLocationFrameworkComplianceReportsPath(
+    folder: string,
+    location: string,
+    frameworkComplianceReport: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+      },
+    );
   }
 
   /**
@@ -2028,8 +2561,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).folder;
+  matchFolderFromFolderLocationFrameworkComplianceReportsName(
+    folderLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(
+      folderLocationFrameworkComplianceReportsName,
+    ).folder;
   }
 
   /**
@@ -2039,8 +2576,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).location;
+  matchLocationFromFolderLocationFrameworkComplianceReportsName(
+    folderLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(
+      folderLocationFrameworkComplianceReportsName,
+    ).location;
   }
 
   /**
@@ -2050,8 +2591,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportsName(folderLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(folderLocationFrameworkComplianceReportsName).framework_compliance_report;
+  matchFrameworkComplianceReportFromFolderLocationFrameworkComplianceReportsName(
+    folderLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceReportsPathTemplate.match(
+      folderLocationFrameworkComplianceReportsName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -2062,12 +2607,18 @@ export class ConfigClient {
    * @param {string} framework_compliance_summary
    * @returns {string} Resource name string.
    */
-  folderLocationFrameworkComplianceSummariesPath(folder:string,location:string,frameworkComplianceSummary:string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.render({
-      folder: folder,
-      location: location,
-      framework_compliance_summary: frameworkComplianceSummary,
-    });
+  folderLocationFrameworkComplianceSummariesPath(
+    folder: string,
+    location: string,
+    frameworkComplianceSummary: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.render(
+      {
+        folder: folder,
+        location: location,
+        framework_compliance_summary: frameworkComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -2077,8 +2628,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the folder.
    */
-  matchFolderFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).folder;
+  matchFolderFromFolderLocationFrameworkComplianceSummariesName(
+    folderLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceSummariesName,
+    ).folder;
   }
 
   /**
@@ -2088,8 +2643,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).location;
+  matchLocationFromFolderLocationFrameworkComplianceSummariesName(
+    folderLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -2099,106 +2658,12 @@ export class ConfigClient {
    *   A fully-qualified path representing folder_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_summary.
    */
-  matchFrameworkComplianceSummaryFromFolderLocationFrameworkComplianceSummariesName(folderLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(folderLocationFrameworkComplianceSummariesName).framework_compliance_summary;
-  }
-
-  /**
-   * Return a fully-qualified framework resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} framework
-   * @returns {string} Resource name string.
-   */
-  frameworkPath(organization:string,location:string,framework:string) {
-    return this.pathTemplates.frameworkPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework: framework,
-    });
-  }
-
-  /**
-   * Parse the organization from Framework resource.
-   *
-   * @param {string} frameworkName
-   *   A fully-qualified path representing Framework resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromFrameworkName(frameworkName: string) {
-    return this.pathTemplates.frameworkPathTemplate.match(frameworkName).organization;
-  }
-
-  /**
-   * Parse the location from Framework resource.
-   *
-   * @param {string} frameworkName
-   *   A fully-qualified path representing Framework resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFrameworkName(frameworkName: string) {
-    return this.pathTemplates.frameworkPathTemplate.match(frameworkName).location;
-  }
-
-  /**
-   * Parse the framework from Framework resource.
-   *
-   * @param {string} frameworkName
-   *   A fully-qualified path representing Framework resource.
-   * @returns {string} A string representing the framework.
-   */
-  matchFrameworkFromFrameworkName(frameworkName: string) {
-    return this.pathTemplates.frameworkPathTemplate.match(frameworkName).framework;
-  }
-
-  /**
-   * Return a fully-qualified frameworkDeployment resource name string.
-   *
-   * @param {string} organization
-   * @param {string} location
-   * @param {string} framework_deployment
-   * @returns {string} Resource name string.
-   */
-  frameworkDeploymentPath(organization:string,location:string,frameworkDeployment:string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_deployment: frameworkDeployment,
-    });
-  }
-
-  /**
-   * Parse the organization from FrameworkDeployment resource.
-   *
-   * @param {string} frameworkDeploymentName
-   *   A fully-qualified path representing FrameworkDeployment resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromFrameworkDeploymentName(frameworkDeploymentName: string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.match(frameworkDeploymentName).organization;
-  }
-
-  /**
-   * Parse the location from FrameworkDeployment resource.
-   *
-   * @param {string} frameworkDeploymentName
-   *   A fully-qualified path representing FrameworkDeployment resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFrameworkDeploymentName(frameworkDeploymentName: string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.match(frameworkDeploymentName).location;
-  }
-
-  /**
-   * Parse the framework_deployment from FrameworkDeployment resource.
-   *
-   * @param {string} frameworkDeploymentName
-   *   A fully-qualified path representing FrameworkDeployment resource.
-   * @returns {string} A string representing the framework_deployment.
-   */
-  matchFrameworkDeploymentFromFrameworkDeploymentName(frameworkDeploymentName: string) {
-    return this.pathTemplates.frameworkDeploymentPathTemplate.match(frameworkDeploymentName).framework_deployment;
+  matchFrameworkComplianceSummaryFromFolderLocationFrameworkComplianceSummariesName(
+    folderLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.folderLocationFrameworkComplianceSummariesPathTemplate.match(
+      folderLocationFrameworkComplianceSummariesName,
+    ).framework_compliance_summary;
   }
 
   /**
@@ -2207,7 +2672,7 @@ export class ConfigClient {
    * @param {string} organization
    * @returns {string} Resource name string.
    */
-  organizationPath(organization:string) {
+  organizationPath(organization: string) {
     return this.pathTemplates.organizationPathTemplate.render({
       organization: organization,
     });
@@ -2221,7 +2686,8 @@ export class ConfigClient {
    * @returns {string} A string representing the organization.
    */
   matchOrganizationFromOrganizationName(organizationName: string) {
-    return this.pathTemplates.organizationPathTemplate.match(organizationName).organization;
+    return this.pathTemplates.organizationPathTemplate.match(organizationName)
+      .organization;
   }
 
   /**
@@ -2231,7 +2697,7 @@ export class ConfigClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationPath(organization:string,location:string) {
+  organizationLocationPath(organization: string, location: string) {
     return this.pathTemplates.organizationLocationPathTemplate.render({
       organization: organization,
       location: location,
@@ -2245,8 +2711,12 @@ export class ConfigClient {
    *   A fully-qualified path representing OrganizationLocation resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).organization;
+  matchOrganizationFromOrganizationLocationName(
+    organizationLocationName: string,
+  ) {
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).organization;
   }
 
   /**
@@ -2257,7 +2727,143 @@ export class ConfigClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
-    return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
+    return this.pathTemplates.organizationLocationPathTemplate.match(
+      organizationLocationName,
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationCloudControlDeployments resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} cloud_control_deployment
+   * @returns {string} Resource name string.
+   */
+  organizationLocationCloudControlDeploymentsPath(
+    organization: string,
+    location: string,
+    cloudControlDeployment: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        cloud_control_deployment: cloudControlDeployment,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationCloudControlDeployments resource.
+   *
+   * @param {string} organizationLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationCloudControlDeploymentsName(
+    organizationLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(
+      organizationLocationCloudControlDeploymentsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationCloudControlDeployments resource.
+   *
+   * @param {string} organizationLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationCloudControlDeploymentsName(
+    organizationLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(
+      organizationLocationCloudControlDeploymentsName,
+    ).location;
+  }
+
+  /**
+   * Parse the cloud_control_deployment from OrganizationLocationCloudControlDeployments resource.
+   *
+   * @param {string} organizationLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing organization_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the cloud_control_deployment.
+   */
+  matchCloudControlDeploymentFromOrganizationLocationCloudControlDeploymentsName(
+    organizationLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlDeploymentsPathTemplate.match(
+      organizationLocationCloudControlDeploymentsName,
+    ).cloud_control_deployment;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationCloudControls resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} cloud_control
+   * @returns {string} Resource name string.
+   */
+  organizationLocationCloudControlsPath(
+    organization: string,
+    location: string,
+    cloudControl: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        cloud_control: cloudControl,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationCloudControls resource.
+   *
+   * @param {string} organizationLocationCloudControlsName
+   *   A fully-qualified path representing organization_location_cloudControls resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationCloudControlsName(
+    organizationLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(
+      organizationLocationCloudControlsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationCloudControls resource.
+   *
+   * @param {string} organizationLocationCloudControlsName
+   *   A fully-qualified path representing organization_location_cloudControls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationCloudControlsName(
+    organizationLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(
+      organizationLocationCloudControlsName,
+    ).location;
+  }
+
+  /**
+   * Parse the cloud_control from OrganizationLocationCloudControls resource.
+   *
+   * @param {string} organizationLocationCloudControlsName
+   *   A fully-qualified path representing organization_location_cloudControls resource.
+   * @returns {string} A string representing the cloud_control.
+   */
+  matchCloudControlFromOrganizationLocationCloudControlsName(
+    organizationLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCloudControlsPathTemplate.match(
+      organizationLocationCloudControlsName,
+    ).cloud_control;
   }
 
   /**
@@ -2267,11 +2873,13 @@ export class ConfigClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  organizationLocationCmEnrollmentPath(organization:string,location:string) {
-    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render({
-      organization: organization,
-      location: location,
-    });
+  organizationLocationCmEnrollmentPath(organization: string, location: string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+      },
+    );
   }
 
   /**
@@ -2281,8 +2889,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_cmEnrollment resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
-    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).organization;
+  matchOrganizationFromOrganizationLocationCmEnrollmentName(
+    organizationLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(
+      organizationLocationCmEnrollmentName,
+    ).organization;
   }
 
   /**
@@ -2292,8 +2904,77 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_cmEnrollment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
-    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).location;
+  matchLocationFromOrganizationLocationCmEnrollmentName(
+    organizationLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(
+      organizationLocationCmEnrollmentName,
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationControls resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  organizationLocationControlsPath(
+    organization: string,
+    location: string,
+    control: string,
+  ) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.render({
+      organization: organization,
+      location: location,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationControls resource.
+   *
+   * @param {string} organizationLocationControlsName
+   *   A fully-qualified path representing organization_location_controls resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationControlsName(
+    organizationLocationControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(
+      organizationLocationControlsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationControls resource.
+   *
+   * @param {string} organizationLocationControlsName
+   *   A fully-qualified path representing organization_location_controls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationControlsName(
+    organizationLocationControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(
+      organizationLocationControlsName,
+    ).location;
+  }
+
+  /**
+   * Parse the control from OrganizationLocationControls resource.
+   *
+   * @param {string} organizationLocationControlsName
+   *   A fully-qualified path representing organization_location_controls resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromOrganizationLocationControlsName(
+    organizationLocationControlsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationControlsPathTemplate.match(
+      organizationLocationControlsName,
+    ).control;
   }
 
   /**
@@ -2304,12 +2985,18 @@ export class ConfigClient {
    * @param {string} finding_summary
    * @returns {string} Resource name string.
    */
-  organizationLocationFindingSummariesPath(organization:string,location:string,findingSummary:string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.render({
-      organization: organization,
-      location: location,
-      finding_summary: findingSummary,
-    });
+  organizationLocationFindingSummariesPath(
+    organization: string,
+    location: string,
+    findingSummary: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        finding_summary: findingSummary,
+      },
+    );
   }
 
   /**
@@ -2319,8 +3006,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_findingSummaries resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).organization;
+  matchOrganizationFromOrganizationLocationFindingSummariesName(
+    organizationLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(
+      organizationLocationFindingSummariesName,
+    ).organization;
   }
 
   /**
@@ -2330,8 +3021,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_findingSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).location;
+  matchLocationFromOrganizationLocationFindingSummariesName(
+    organizationLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(
+      organizationLocationFindingSummariesName,
+    ).location;
   }
 
   /**
@@ -2341,8 +3036,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_findingSummaries resource.
    * @returns {string} A string representing the finding_summary.
    */
-  matchFindingSummaryFromOrganizationLocationFindingSummariesName(organizationLocationFindingSummariesName: string) {
-    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(organizationLocationFindingSummariesName).finding_summary;
+  matchFindingSummaryFromOrganizationLocationFindingSummariesName(
+    organizationLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFindingSummariesPathTemplate.match(
+      organizationLocationFindingSummariesName,
+    ).finding_summary;
   }
 
   /**
@@ -2353,12 +3052,19 @@ export class ConfigClient {
    * @param {string} generate_framework_audit_scope_report_response
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkAuditScopeReportsPath(organization:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render({
-      organization: organization,
-      location: location,
-      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
-    });
+  organizationLocationFrameworkAuditScopeReportsPath(
+    organization: string,
+    location: string,
+    generateFrameworkAuditScopeReportResponse: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        generate_framework_audit_scope_report_response:
+          generateFrameworkAuditScopeReportResponse,
+      },
+    );
   }
 
   /**
@@ -2368,8 +3074,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName(
+    organizationLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(
+      organizationLocationFrameworkAuditScopeReportsName,
+    ).organization;
   }
 
   /**
@@ -2379,8 +3089,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).location;
+  matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName(
+    organizationLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(
+      organizationLocationFrameworkAuditScopeReportsName,
+    ).location;
   }
 
   /**
@@ -2390,8 +3104,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the generate_framework_audit_scope_report_response.
    */
-  matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName(
+    organizationLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(
+      organizationLocationFrameworkAuditScopeReportsName,
+    ).generate_framework_audit_scope_report_response;
   }
 
   /**
@@ -2402,12 +3120,18 @@ export class ConfigClient {
    * @param {string} framework_audit
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkAuditsPath(organization:string,location:string,frameworkAudit:string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_audit: frameworkAudit,
-    });
+  organizationLocationFrameworkAuditsPath(
+    organization: string,
+    location: string,
+    frameworkAudit: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_audit: frameworkAudit,
+      },
+    );
   }
 
   /**
@@ -2417,8 +3141,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkAudits resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkAuditsName(
+    organizationLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(
+      organizationLocationFrameworkAuditsName,
+    ).organization;
   }
 
   /**
@@ -2428,8 +3156,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkAudits resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).location;
+  matchLocationFromOrganizationLocationFrameworkAuditsName(
+    organizationLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(
+      organizationLocationFrameworkAuditsName,
+    ).location;
   }
 
   /**
@@ -2439,8 +3171,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkAudits resource.
    * @returns {string} A string representing the framework_audit.
    */
-  matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).framework_audit;
+  matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName(
+    organizationLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(
+      organizationLocationFrameworkAuditsName,
+    ).framework_audit;
   }
 
   /**
@@ -2452,13 +3188,20 @@ export class ConfigClient {
    * @param {string} control_compliance_summary
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkComplianceReportControlComplianceSummariesPath(organization:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-      control_compliance_summary: controlComplianceSummary,
-    });
+  organizationLocationFrameworkComplianceReportControlComplianceSummariesPath(
+    organization: string,
+    location: string,
+    frameworkComplianceReport: string,
+    controlComplianceSummary: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+        control_compliance_summary: controlComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -2468,8 +3211,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).organization;
   }
 
   /**
@@ -2479,8 +3226,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  matchLocationFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -2490,8 +3241,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -2501,8 +3256,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the control_compliance_summary.
    */
-  matchControlComplianceSummaryFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  matchControlComplianceSummaryFromOrganizationLocationFrameworkComplianceReportControlComplianceSummariesName(
+    organizationLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).control_compliance_summary;
   }
 
   /**
@@ -2513,12 +3272,18 @@ export class ConfigClient {
    * @param {string} framework_compliance_report
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkComplianceReportsPath(organization:string,location:string,frameworkComplianceReport:string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-    });
+  organizationLocationFrameworkComplianceReportsPath(
+    organization: string,
+    location: string,
+    frameworkComplianceReport: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+      },
+    );
   }
 
   /**
@@ -2528,8 +3293,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkComplianceReportsName(
+    organizationLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(
+      organizationLocationFrameworkComplianceReportsName,
+    ).organization;
   }
 
   /**
@@ -2539,8 +3308,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).location;
+  matchLocationFromOrganizationLocationFrameworkComplianceReportsName(
+    organizationLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(
+      organizationLocationFrameworkComplianceReportsName,
+    ).location;
   }
 
   /**
@@ -2550,8 +3323,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportsName(organizationLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(organizationLocationFrameworkComplianceReportsName).framework_compliance_report;
+  matchFrameworkComplianceReportFromOrganizationLocationFrameworkComplianceReportsName(
+    organizationLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceReportsPathTemplate.match(
+      organizationLocationFrameworkComplianceReportsName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -2562,12 +3339,18 @@ export class ConfigClient {
    * @param {string} framework_compliance_summary
    * @returns {string} Resource name string.
    */
-  organizationLocationFrameworkComplianceSummariesPath(organization:string,location:string,frameworkComplianceSummary:string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.render({
-      organization: organization,
-      location: location,
-      framework_compliance_summary: frameworkComplianceSummary,
-    });
+  organizationLocationFrameworkComplianceSummariesPath(
+    organization: string,
+    location: string,
+    frameworkComplianceSummary: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_compliance_summary: frameworkComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -2577,8 +3360,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the organization.
    */
-  matchOrganizationFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).organization;
+  matchOrganizationFromOrganizationLocationFrameworkComplianceSummariesName(
+    organizationLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceSummariesName,
+    ).organization;
   }
 
   /**
@@ -2588,8 +3375,12 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).location;
+  matchLocationFromOrganizationLocationFrameworkComplianceSummariesName(
+    organizationLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -2599,8 +3390,278 @@ export class ConfigClient {
    *   A fully-qualified path representing organization_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_summary.
    */
-  matchFrameworkComplianceSummaryFromOrganizationLocationFrameworkComplianceSummariesName(organizationLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(organizationLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  matchFrameworkComplianceSummaryFromOrganizationLocationFrameworkComplianceSummariesName(
+    organizationLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkComplianceSummariesPathTemplate.match(
+      organizationLocationFrameworkComplianceSummariesName,
+    ).framework_compliance_summary;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkDeployments resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework_deployment
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkDeploymentsPath(
+    organization: string,
+    location: string,
+    frameworkDeployment: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework_deployment: frameworkDeployment,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkDeployments resource.
+   *
+   * @param {string} organizationLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing organization_location_frameworkDeployments resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkDeploymentsName(
+    organizationLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(
+      organizationLocationFrameworkDeploymentsName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkDeployments resource.
+   *
+   * @param {string} organizationLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing organization_location_frameworkDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkDeploymentsName(
+    organizationLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(
+      organizationLocationFrameworkDeploymentsName,
+    ).location;
+  }
+
+  /**
+   * Parse the framework_deployment from OrganizationLocationFrameworkDeployments resource.
+   *
+   * @param {string} organizationLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing organization_location_frameworkDeployments resource.
+   * @returns {string} A string representing the framework_deployment.
+   */
+  matchFrameworkDeploymentFromOrganizationLocationFrameworkDeploymentsName(
+    organizationLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworkDeploymentsPathTemplate.match(
+      organizationLocationFrameworkDeploymentsName,
+    ).framework_deployment;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworks resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworksPath(
+    organization: string,
+    location: string,
+    framework: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        framework: framework,
+      },
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworks resource.
+   *
+   * @param {string} organizationLocationFrameworksName
+   *   A fully-qualified path representing organization_location_frameworks resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworksName(
+    organizationLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(
+      organizationLocationFrameworksName,
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworks resource.
+   *
+   * @param {string} organizationLocationFrameworksName
+   *   A fully-qualified path representing organization_location_frameworks resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworksName(
+    organizationLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(
+      organizationLocationFrameworksName,
+    ).location;
+  }
+
+  /**
+   * Parse the framework from OrganizationLocationFrameworks resource.
+   *
+   * @param {string} organizationLocationFrameworksName
+   *   A fully-qualified path representing organization_location_frameworks resource.
+   * @returns {string} A string representing the framework.
+   */
+  matchFrameworkFromOrganizationLocationFrameworksName(
+    organizationLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.organizationLocationFrameworksPathTemplate.match(
+      organizationLocationFrameworksName,
+    ).framework;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCloudControlDeployments resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cloud_control_deployment
+   * @returns {string} Resource name string.
+   */
+  projectLocationCloudControlDeploymentsPath(
+    project: string,
+    location: string,
+    cloudControlDeployment: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        cloud_control_deployment: cloudControlDeployment,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCloudControlDeployments resource.
+   *
+   * @param {string} projectLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing project_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCloudControlDeploymentsName(
+    projectLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(
+      projectLocationCloudControlDeploymentsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCloudControlDeployments resource.
+   *
+   * @param {string} projectLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing project_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCloudControlDeploymentsName(
+    projectLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(
+      projectLocationCloudControlDeploymentsName,
+    ).location;
+  }
+
+  /**
+   * Parse the cloud_control_deployment from ProjectLocationCloudControlDeployments resource.
+   *
+   * @param {string} projectLocationCloudControlDeploymentsName
+   *   A fully-qualified path representing project_location_cloudControlDeployments resource.
+   * @returns {string} A string representing the cloud_control_deployment.
+   */
+  matchCloudControlDeploymentFromProjectLocationCloudControlDeploymentsName(
+    projectLocationCloudControlDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlDeploymentsPathTemplate.match(
+      projectLocationCloudControlDeploymentsName,
+    ).cloud_control_deployment;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCloudControls resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cloud_control
+   * @returns {string} Resource name string.
+   */
+  projectLocationCloudControlsPath(
+    project: string,
+    location: string,
+    cloudControl: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.render({
+      project: project,
+      location: location,
+      cloud_control: cloudControl,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCloudControls resource.
+   *
+   * @param {string} projectLocationCloudControlsName
+   *   A fully-qualified path representing project_location_cloudControls resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCloudControlsName(
+    projectLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(
+      projectLocationCloudControlsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCloudControls resource.
+   *
+   * @param {string} projectLocationCloudControlsName
+   *   A fully-qualified path representing project_location_cloudControls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCloudControlsName(
+    projectLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(
+      projectLocationCloudControlsName,
+    ).location;
+  }
+
+  /**
+   * Parse the cloud_control from ProjectLocationCloudControls resource.
+   *
+   * @param {string} projectLocationCloudControlsName
+   *   A fully-qualified path representing project_location_cloudControls resource.
+   * @returns {string} A string representing the cloud_control.
+   */
+  matchCloudControlFromProjectLocationCloudControlsName(
+    projectLocationCloudControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationCloudControlsPathTemplate.match(
+      projectLocationCloudControlsName,
+    ).cloud_control;
   }
 
   /**
@@ -2610,7 +3671,7 @@ export class ConfigClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  projectLocationCmEnrollmentPath(project:string,location:string) {
+  projectLocationCmEnrollmentPath(project: string, location: string) {
     return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.render({
       project: project,
       location: location,
@@ -2624,8 +3685,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_cmEnrollment resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
-    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).project;
+  matchProjectFromProjectLocationCmEnrollmentName(
+    projectLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(
+      projectLocationCmEnrollmentName,
+    ).project;
   }
 
   /**
@@ -2635,8 +3700,77 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_cmEnrollment resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
-    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).location;
+  matchLocationFromProjectLocationCmEnrollmentName(
+    projectLocationCmEnrollmentName: string,
+  ) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(
+      projectLocationCmEnrollmentName,
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationControls resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} control
+   * @returns {string} Resource name string.
+   */
+  projectLocationControlsPath(
+    project: string,
+    location: string,
+    control: string,
+  ) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.render({
+      project: project,
+      location: location,
+      control: control,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationControls resource.
+   *
+   * @param {string} projectLocationControlsName
+   *   A fully-qualified path representing project_location_controls resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationControlsName(
+    projectLocationControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(
+      projectLocationControlsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationControls resource.
+   *
+   * @param {string} projectLocationControlsName
+   *   A fully-qualified path representing project_location_controls resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationControlsName(
+    projectLocationControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(
+      projectLocationControlsName,
+    ).location;
+  }
+
+  /**
+   * Parse the control from ProjectLocationControls resource.
+   *
+   * @param {string} projectLocationControlsName
+   *   A fully-qualified path representing project_location_controls resource.
+   * @returns {string} A string representing the control.
+   */
+  matchControlFromProjectLocationControlsName(
+    projectLocationControlsName: string,
+  ) {
+    return this.pathTemplates.projectLocationControlsPathTemplate.match(
+      projectLocationControlsName,
+    ).control;
   }
 
   /**
@@ -2647,12 +3781,18 @@ export class ConfigClient {
    * @param {string} finding_summary
    * @returns {string} Resource name string.
    */
-  projectLocationFindingSummariesPath(project:string,location:string,findingSummary:string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.render({
-      project: project,
-      location: location,
-      finding_summary: findingSummary,
-    });
+  projectLocationFindingSummariesPath(
+    project: string,
+    location: string,
+    findingSummary: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        finding_summary: findingSummary,
+      },
+    );
   }
 
   /**
@@ -2662,8 +3802,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_findingSummaries resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).project;
+  matchProjectFromProjectLocationFindingSummariesName(
+    projectLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(
+      projectLocationFindingSummariesName,
+    ).project;
   }
 
   /**
@@ -2673,8 +3817,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_findingSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).location;
+  matchLocationFromProjectLocationFindingSummariesName(
+    projectLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(
+      projectLocationFindingSummariesName,
+    ).location;
   }
 
   /**
@@ -2684,8 +3832,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_findingSummaries resource.
    * @returns {string} A string representing the finding_summary.
    */
-  matchFindingSummaryFromProjectLocationFindingSummariesName(projectLocationFindingSummariesName: string) {
-    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(projectLocationFindingSummariesName).finding_summary;
+  matchFindingSummaryFromProjectLocationFindingSummariesName(
+    projectLocationFindingSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFindingSummariesPathTemplate.match(
+      projectLocationFindingSummariesName,
+    ).finding_summary;
   }
 
   /**
@@ -2696,12 +3848,19 @@ export class ConfigClient {
    * @param {string} generate_framework_audit_scope_report_response
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkAuditScopeReportsPath(project:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render({
-      project: project,
-      location: location,
-      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
-    });
+  projectLocationFrameworkAuditScopeReportsPath(
+    project: string,
+    location: string,
+    generateFrameworkAuditScopeReportResponse: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        generate_framework_audit_scope_report_response:
+          generateFrameworkAuditScopeReportResponse,
+      },
+    );
   }
 
   /**
@@ -2711,8 +3870,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).project;
+  matchProjectFromProjectLocationFrameworkAuditScopeReportsName(
+    projectLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(
+      projectLocationFrameworkAuditScopeReportsName,
+    ).project;
   }
 
   /**
@@ -2722,8 +3885,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).location;
+  matchLocationFromProjectLocationFrameworkAuditScopeReportsName(
+    projectLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(
+      projectLocationFrameworkAuditScopeReportsName,
+    ).location;
   }
 
   /**
@@ -2733,8 +3900,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
    * @returns {string} A string representing the generate_framework_audit_scope_report_response.
    */
-  matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName(
+    projectLocationFrameworkAuditScopeReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(
+      projectLocationFrameworkAuditScopeReportsName,
+    ).generate_framework_audit_scope_report_response;
   }
 
   /**
@@ -2745,12 +3916,18 @@ export class ConfigClient {
    * @param {string} framework_audit
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkAuditsPath(project:string,location:string,frameworkAudit:string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render({
-      project: project,
-      location: location,
-      framework_audit: frameworkAudit,
-    });
+  projectLocationFrameworkAuditsPath(
+    project: string,
+    location: string,
+    frameworkAudit: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_audit: frameworkAudit,
+      },
+    );
   }
 
   /**
@@ -2760,8 +3937,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkAudits resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).project;
+  matchProjectFromProjectLocationFrameworkAuditsName(
+    projectLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(
+      projectLocationFrameworkAuditsName,
+    ).project;
   }
 
   /**
@@ -2771,8 +3952,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkAudits resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).location;
+  matchLocationFromProjectLocationFrameworkAuditsName(
+    projectLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(
+      projectLocationFrameworkAuditsName,
+    ).location;
   }
 
   /**
@@ -2782,8 +3967,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkAudits resource.
    * @returns {string} A string representing the framework_audit.
    */
-  matchFrameworkAuditFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
-    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).framework_audit;
+  matchFrameworkAuditFromProjectLocationFrameworkAuditsName(
+    projectLocationFrameworkAuditsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(
+      projectLocationFrameworkAuditsName,
+    ).framework_audit;
   }
 
   /**
@@ -2795,13 +3984,20 @@ export class ConfigClient {
    * @param {string} control_compliance_summary
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkComplianceReportControlComplianceSummariesPath(project:string,location:string,frameworkComplianceReport:string,controlComplianceSummary:string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render({
-      project: project,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-      control_compliance_summary: controlComplianceSummary,
-    });
+  projectLocationFrameworkComplianceReportControlComplianceSummariesPath(
+    project: string,
+    location: string,
+    frameworkComplianceReport: string,
+    controlComplianceSummary: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+        control_compliance_summary: controlComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -2811,8 +4007,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).project;
+  matchProjectFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).project;
   }
 
   /**
@@ -2822,8 +4022,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).location;
+  matchLocationFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -2833,8 +4037,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).framework_compliance_report;
+  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -2844,8 +4052,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_framework_compliance_report_controlComplianceSummaries resource.
    * @returns {string} A string representing the control_compliance_summary.
    */
-  matchControlComplianceSummaryFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(projectLocationFrameworkComplianceReportControlComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceReportControlComplianceSummariesName).control_compliance_summary;
+  matchControlComplianceSummaryFromProjectLocationFrameworkComplianceReportControlComplianceSummariesName(
+    projectLocationFrameworkComplianceReportControlComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportControlComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceReportControlComplianceSummariesName,
+    ).control_compliance_summary;
   }
 
   /**
@@ -2856,12 +4068,18 @@ export class ConfigClient {
    * @param {string} framework_compliance_report
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkComplianceReportsPath(project:string,location:string,frameworkComplianceReport:string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.render({
-      project: project,
-      location: location,
-      framework_compliance_report: frameworkComplianceReport,
-    });
+  projectLocationFrameworkComplianceReportsPath(
+    project: string,
+    location: string,
+    frameworkComplianceReport: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_compliance_report: frameworkComplianceReport,
+      },
+    );
   }
 
   /**
@@ -2871,8 +4089,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).project;
+  matchProjectFromProjectLocationFrameworkComplianceReportsName(
+    projectLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(
+      projectLocationFrameworkComplianceReportsName,
+    ).project;
   }
 
   /**
@@ -2882,8 +4104,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).location;
+  matchLocationFromProjectLocationFrameworkComplianceReportsName(
+    projectLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(
+      projectLocationFrameworkComplianceReportsName,
+    ).location;
   }
 
   /**
@@ -2893,8 +4119,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkComplianceReports resource.
    * @returns {string} A string representing the framework_compliance_report.
    */
-  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportsName(projectLocationFrameworkComplianceReportsName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(projectLocationFrameworkComplianceReportsName).framework_compliance_report;
+  matchFrameworkComplianceReportFromProjectLocationFrameworkComplianceReportsName(
+    projectLocationFrameworkComplianceReportsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceReportsPathTemplate.match(
+      projectLocationFrameworkComplianceReportsName,
+    ).framework_compliance_report;
   }
 
   /**
@@ -2905,12 +4135,18 @@ export class ConfigClient {
    * @param {string} framework_compliance_summary
    * @returns {string} Resource name string.
    */
-  projectLocationFrameworkComplianceSummariesPath(project:string,location:string,frameworkComplianceSummary:string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.render({
-      project: project,
-      location: location,
-      framework_compliance_summary: frameworkComplianceSummary,
-    });
+  projectLocationFrameworkComplianceSummariesPath(
+    project: string,
+    location: string,
+    frameworkComplianceSummary: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_compliance_summary: frameworkComplianceSummary,
+      },
+    );
   }
 
   /**
@@ -2920,8 +4156,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).project;
+  matchProjectFromProjectLocationFrameworkComplianceSummariesName(
+    projectLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceSummariesName,
+    ).project;
   }
 
   /**
@@ -2931,8 +4171,12 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).location;
+  matchLocationFromProjectLocationFrameworkComplianceSummariesName(
+    projectLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceSummariesName,
+    ).location;
   }
 
   /**
@@ -2942,8 +4186,144 @@ export class ConfigClient {
    *   A fully-qualified path representing project_location_frameworkComplianceSummaries resource.
    * @returns {string} A string representing the framework_compliance_summary.
    */
-  matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName(projectLocationFrameworkComplianceSummariesName: string) {
-    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(projectLocationFrameworkComplianceSummariesName).framework_compliance_summary;
+  matchFrameworkComplianceSummaryFromProjectLocationFrameworkComplianceSummariesName(
+    projectLocationFrameworkComplianceSummariesName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkComplianceSummariesPathTemplate.match(
+      projectLocationFrameworkComplianceSummariesName,
+    ).framework_compliance_summary;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkDeployments resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework_deployment
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkDeploymentsPath(
+    project: string,
+    location: string,
+    frameworkDeployment: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        framework_deployment: frameworkDeployment,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkDeployments resource.
+   *
+   * @param {string} projectLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing project_location_frameworkDeployments resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkDeploymentsName(
+    projectLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(
+      projectLocationFrameworkDeploymentsName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkDeployments resource.
+   *
+   * @param {string} projectLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing project_location_frameworkDeployments resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkDeploymentsName(
+    projectLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(
+      projectLocationFrameworkDeploymentsName,
+    ).location;
+  }
+
+  /**
+   * Parse the framework_deployment from ProjectLocationFrameworkDeployments resource.
+   *
+   * @param {string} projectLocationFrameworkDeploymentsName
+   *   A fully-qualified path representing project_location_frameworkDeployments resource.
+   * @returns {string} A string representing the framework_deployment.
+   */
+  matchFrameworkDeploymentFromProjectLocationFrameworkDeploymentsName(
+    projectLocationFrameworkDeploymentsName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworkDeploymentsPathTemplate.match(
+      projectLocationFrameworkDeploymentsName,
+    ).framework_deployment;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworks resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworksPath(
+    project: string,
+    location: string,
+    framework: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.render({
+      project: project,
+      location: location,
+      framework: framework,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworks resource.
+   *
+   * @param {string} projectLocationFrameworksName
+   *   A fully-qualified path representing project_location_frameworks resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworksName(
+    projectLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(
+      projectLocationFrameworksName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworks resource.
+   *
+   * @param {string} projectLocationFrameworksName
+   *   A fully-qualified path representing project_location_frameworks resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworksName(
+    projectLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(
+      projectLocationFrameworksName,
+    ).location;
+  }
+
+  /**
+   * Parse the framework from ProjectLocationFrameworks resource.
+   *
+   * @param {string} projectLocationFrameworksName
+   *   A fully-qualified path representing project_location_frameworks resource.
+   * @returns {string} A string representing the framework.
+   */
+  matchFrameworkFromProjectLocationFrameworksName(
+    projectLocationFrameworksName: string,
+  ) {
+    return this.pathTemplates.projectLocationFrameworksPathTemplate.match(
+      projectLocationFrameworksName,
+    ).framework;
   }
 
   /**
@@ -2954,11 +4334,13 @@ export class ConfigClient {
    */
   close(): Promise<void> {
     if (this.configStub && !this._terminated) {
-      return this.configStub.then(stub => {
+      return this.configStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

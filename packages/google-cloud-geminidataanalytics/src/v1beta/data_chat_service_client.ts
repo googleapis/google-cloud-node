@@ -18,11 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
-import {Transform, PassThrough} from 'stream';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
+import { Transform, PassThrough } from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -46,7 +55,7 @@ export class DataChatServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geminidataanalytics');
@@ -59,10 +68,10 @@ export class DataChatServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
+  innerApiCalls: { [name: string]: Function };
   locationsClient: LocationsClient;
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  dataChatServiceStub?: Promise<{[name: string]: Function}>;
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  dataChatServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of DataChatServiceClient.
@@ -103,21 +112,42 @@ export class DataChatServiceClient {
    *     const client = new DataChatServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataChatServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'geminidataanalytics.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -142,7 +172,7 @@ export class DataChatServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -156,15 +186,11 @@ export class DataChatServiceClient {
     }
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
-      opts
+      opts,
     );
-  
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -186,16 +212,16 @@ export class DataChatServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       conversationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}'
+        'projects/{project}/locations/{location}/conversations/{conversation}',
       ),
       dataAgentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/dataAgents/{data_agent}'
+        'projects/{project}/locations/{location}/dataAgents/{data_agent}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}'
+        'projects/{project}/locations/{location}',
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}'
+        'projects/{project}',
       ),
     };
 
@@ -203,22 +229,35 @@ export class DataChatServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConversations:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'conversations'),
-      listMessages:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'messages')
+      listConversations: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'conversations',
+      ),
+      listMessages: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'messages',
+      ),
     };
 
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
-      chat: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.SERVER_STREAMING, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+      chat: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries,
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.geminidataanalytics.v1beta.DataChatService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.geminidataanalytics.v1beta.DataChatService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -249,35 +288,54 @@ export class DataChatServiceClient {
     // Put together the "service stub" for
     // google.cloud.geminidataanalytics.v1beta.DataChatService.
     this.dataChatServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.geminidataanalytics.v1beta.DataChatService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.geminidataanalytics.v1beta.DataChatService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.geminidataanalytics.v1beta.DataChatService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.geminidataanalytics.v1beta
+            .DataChatService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const dataChatServiceStubMethods =
-        ['chat', 'createConversation', 'deleteConversation', 'getConversation', 'listConversations', 'listMessages', 'queryData'];
+    const dataChatServiceStubMethods = [
+      'chat',
+      'createConversation',
+      'deleteConversation',
+      'getConversation',
+      'listConversations',
+      'listMessages',
+      'queryData',
+    ];
     for (const methodName of dataChatServiceStubMethods) {
       const callPromise = this.dataChatServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            if (methodName in this.descriptors.stream) {
-              const stream = new PassThrough({objectMode: true});
-              setImmediate(() => {
-                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
-              });
-              return stream;
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough({ objectMode: true });
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.',
+                    ),
+                  );
+                });
+                return stream;
+              }
+              return Promise.reject('The client has already been closed.');
             }
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -287,7 +345,7 @@ export class DataChatServiceClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -302,8 +360,14 @@ export class DataChatServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geminidataanalytics.googleapis.com';
   }
@@ -314,8 +378,14 @@ export class DataChatServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'geminidataanalytics.googleapis.com';
   }
@@ -346,9 +416,7 @@ export class DataChatServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -357,8 +425,9 @@ export class DataChatServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -369,557 +438,779 @@ export class DataChatServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a new conversation to persist the conversation history. Each
- * conversation will have multiple messages associated with it.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for CreateConversationRequest.
- *   Format: `projects/{project}/locations/{location}`
- * @param {string} [request.conversationId]
- *   Optional. The conversation id of the conversation to create.
- *   Must be unique within the parent.
- *   The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
- *   If not provided, the server will auto-generate a value for the id.
- * @param {google.cloud.geminidataanalytics.v1beta.Conversation} request.conversation
- *   Required. The conversation to create.
- * @param {string} [request.requestId]
- *   Optional. An optional request ID to identify requests. Specify a unique
- *   request ID so that if you must retry your request, the server will know to
- *   ignore the request if it has already been completed. The server will
- *   guarantee that for at least 60 minutes since the first request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_chat_service.create_conversation.js</caption>
- * region_tag:geminidataanalytics_v1beta_generated_DataChatService_CreateConversation_async
- */
+  /**
+   * Creates a new conversation to persist the conversation history. Each
+   * conversation will have multiple messages associated with it.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for CreateConversationRequest.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} [request.conversationId]
+   *   Optional. The conversation id of the conversation to create.
+   *   Must be unique within the parent.
+   *   The allowed format is: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
+   *   If not provided, the server will auto-generate a value for the id.
+   * @param {google.cloud.geminidataanalytics.v1beta.Conversation} request.conversation
+   *   Required. The conversation to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_chat_service.create_conversation.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataChatService_CreateConversation_async
+   */
   createConversation(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   createConversation(
-      request: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createConversation(
-      request: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createConversation(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('createConversation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+          | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createConversation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createConversation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createConversation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+          (
+            | protos.google.cloud.geminidataanalytics.v1beta.ICreateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createConversation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Deletes a conversation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- *   Format:
- *   `projects/{project}/locations/{location}/conversations/{conversation}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_chat_service.delete_conversation.js</caption>
- * region_tag:geminidataanalytics_v1beta_generated_DataChatService_DeleteConversation_async
- */
+  /**
+   * Deletes a conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/conversations/{conversation}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_chat_service.delete_conversation.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataChatService_DeleteConversation_async
+   */
   deleteConversation(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   deleteConversation(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteConversation(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteConversation(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('deleteConversation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('deleteConversation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.deleteConversation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('deleteConversation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .deleteConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteConversation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details of a single conversation by using conversation id and parent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the resource.
- *   Format:
- *   `projects/{project}/locations/{location}/conversations/{conversation}`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_chat_service.get_conversation.js</caption>
- * region_tag:geminidataanalytics_v1beta_generated_DataChatService_GetConversation_async
- */
+  /**
+   * Gets details of a single conversation by using conversation id and parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/conversations/{conversation}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_chat_service.get_conversation.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataChatService_GetConversation_async
+   */
   getConversation(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getConversation(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getConversation(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getConversation(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-          protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getConversation request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+          | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConversation response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getConversation(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation,
-        protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getConversation response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1beta.IConversation,
+          (
+            | protos.google.cloud.geminidataanalytics.v1beta.IGetConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getConversation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Queries data from a natural language user query.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource to generate the query for.
- *   Format: projects/{project}/locations/{location}
- * @param {string} request.prompt
- *   Required. The natural language query for which to generate query.
- *   Example: "What are the top 5 best selling products this month?"
- * @param {google.cloud.geminidataanalytics.v1beta.QueryDataContext} request.context
- *   Required. The context for the data query, including the data sources to
- *   use.
- * @param {google.cloud.geminidataanalytics.v1beta.GenerationOptions} [request.generationOptions]
- *   Optional. Options to control query generation and execution behavior.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.QueryDataResponse|QueryDataResponse}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_chat_service.query_data.js</caption>
- * region_tag:geminidataanalytics_v1beta_generated_DataChatService_QueryData_async
- */
+  /**
+   * Queries data from a natural language user query.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource to generate the query for.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.prompt
+   *   Required. The natural language query for which to generate query.
+   *   Example: "What are the top 5 best selling products this month?"
+   * @param {google.cloud.geminidataanalytics.v1beta.QueryDataContext} request.context
+   *   Required. The context for the data query, including the data sources to
+   *   use.
+   * @param {google.cloud.geminidataanalytics.v1beta.GenerationOptions} [request.generationOptions]
+   *   Optional. Options to control query generation and execution behavior.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.QueryDataResponse|QueryDataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_chat_service.query_data.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataChatService_QueryData_async
+   */
   queryData(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   queryData(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
+      | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryData(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
-      callback: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
+      | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   queryData(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
+      | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('queryData request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
+          | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('queryData response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.queryData(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
-        protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('queryData response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .queryData(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1beta.IQueryDataResponse,
+          (
+            | protos.google.cloud.geminidataanalytics.v1beta.IQueryDataRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('queryData response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Answers a data question by generating a stream of
- * {@link protos.google.cloud.geminidataanalytics.v1alpha.Message|Message} objects.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.geminidataanalytics.v1beta.Context} [request.inlineContext]
- *   Optional. Inline context for the chat request. Use this to chat
- *   statelessly (without managed conversation persistence and without an
- *   Agent) by passing all context inline.
- * @param {google.cloud.geminidataanalytics.v1beta.ConversationReference} [request.conversationReference]
- *   Optional. Reference to a persisted conversation and agent context.
- *   Use this to chat with an Agent using managed conversation persistence.
- * @param {google.cloud.geminidataanalytics.v1beta.DataAgentContext} [request.dataAgentContext]
- *   Optional. Context for the chat request. Use this to chat with an Agent
- *   statelessly, without managed conversation persistence.
- * @param {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} [request.clientManagedResourceContext]
- *   Optional. Context with client managed resources.
- *   Some clients may not use GDA managed resources including
- *   conversations and agents, instead they create and manage their own
- *   conversations and agents resources.
- * @param {string} [request.project]
- *   Optional. The Google Cloud project to be used for quota and billing.
- * @param {string} request.parent
- *   Required. The parent value for chat request.
- *   Pattern: `projects/{project}/locations/{location}`
- * @param {number[]} request.messages
- *   Required. Content of current conversation.
- * @param {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode} [request.thinkingMode]
- *   Optional. The thinking mode to use for the agent loop.
- *   Defaults to THINKING_MODE_UNSPECIFIED if not specified.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits {@link protos.google.cloud.geminidataanalytics.v1beta.Message|Message} on 'data' event.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_chat_service.chat.js</caption>
- * region_tag:geminidataanalytics_v1beta_generated_DataChatService_Chat_async
- */
+  /**
+   * Answers a data question by generating a stream of
+   * {@link protos.google.cloud.geminidataanalytics.v1alpha.Message|Message} objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.geminidataanalytics.v1beta.Context} [request.inlineContext]
+   *   Optional. Inline context for the chat request. Use this to chat
+   *   statelessly (without managed conversation persistence and without an
+   *   Agent) by passing all context inline.
+   * @param {google.cloud.geminidataanalytics.v1beta.ConversationReference} [request.conversationReference]
+   *   Optional. Reference to a persisted conversation and agent context.
+   *   Use this to chat with an Agent using managed conversation persistence.
+   * @param {google.cloud.geminidataanalytics.v1beta.DataAgentContext} [request.dataAgentContext]
+   *   Optional. Context for the chat request. Use this to chat with an Agent
+   *   statelessly, without managed conversation persistence.
+   * @param {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} [request.clientManagedResourceContext]
+   *   Optional. Context with client managed resources.
+   *   Some clients may not use GDA managed resources including
+   *   conversations and agents, instead they create and manage their own
+   *   conversations and agents resources.
+   * @param {string} [request.project]
+   *   Optional. The Google Cloud project to be used for quota and billing.
+   * @param {string} request.parent
+   *   Required. The parent value for chat request.
+   *   Pattern: `projects/{project}/locations/{location}`
+   * @param {number[]} request.messages
+   *   Required. Content of current conversation.
+   * @param {google.cloud.geminidataanalytics.v1beta.ChatRequest.ThinkingMode} [request.thinkingMode]
+   *   Optional. The thinking mode to use for the agent loop.
+   *   Defaults to THINKING_MODE_UNSPECIFIED if not specified.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.cloud.geminidataanalytics.v1beta.Message|Message} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_chat_service.chat.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataChatService_Chat_async
+   */
   chat(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IChatRequest,
-      options?: CallOptions):
-    gax.CancellableStream{
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IChatRequest,
+    options?: CallOptions,
+  ): gax.CancellableStream {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('chat stream %j', options);
     return this.innerApiCalls.chat(request, options);
   }
 
- /**
- * Lists all conversations for a given parent.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListConversationsRequest.
- *   Format: `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. The max page size is 100. All larger page sizes will be coerced
- *   to 100. If unspecified, server will pick 50 as an approperiate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Returned conversations will match criteria specified within the
- *   filter. ListConversations allows filtering by:
- *    * agents
- *    * labels
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listConversationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all conversations for a given parent.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListConversationsRequest.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. The max page size is 100. All larger page sizes will be coerced
+   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Returned conversations will match criteria specified within the
+   *   filter. ListConversations allows filtering by:
+   *    * agents
+   *    * labels
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConversationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listConversations(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation[],
-        protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation[],
+      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest | null,
+      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse,
+    ]
+  >;
   listConversations(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+      | protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation
+    >,
+  ): void;
   listConversations(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+      | protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation
+    >,
+  ): void;
   listConversations(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation>,
-      callback?: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IConversation>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation[],
-        protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1beta.IConversation
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+      | protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IConversation[],
+      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest | null,
+      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-      protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse|null|undefined,
-      protos.google.cloud.geminidataanalytics.v1beta.IConversation>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+          | protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1beta.IConversation
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listConversations values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -928,216 +1219,245 @@ export class DataChatServiceClient {
     this._log.info('listConversations request %j', request);
     return this.innerApiCalls
       .listConversations(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.geminidataanalytics.v1beta.IConversation[],
-        protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest|null,
-        protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse
-      ]) => {
-        this._log.info('listConversations values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.geminidataanalytics.v1beta.IConversation[],
+          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest | null,
+          protos.google.cloud.geminidataanalytics.v1beta.IListConversationsResponse,
+        ]) => {
+          this._log.info('listConversations values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listConversations`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListConversationsRequest.
- *   Format: `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. The max page size is 100. All larger page sizes will be coerced
- *   to 100. If unspecified, server will pick 50 as an approperiate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Returned conversations will match criteria specified within the
- *   filter. ListConversations allows filtering by:
- *    * agents
- *    * labels
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listConversationsAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listConversations`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListConversationsRequest.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. The max page size is 100. All larger page sizes will be coerced
+   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Returned conversations will match criteria specified within the
+   *   filter. ListConversations allows filtering by:
+   *    * agents
+   *    * labels
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listConversationsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listConversationsStream(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listConversations stream %j', request);
     return this.descriptors.page.listConversations.createStream(
       this.innerApiCalls.listConversations as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listConversations`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. Parent value for ListConversationsRequest.
- *   Format: `projects/{project}/locations/{location}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. The max page size is 100. All larger page sizes will be coerced
- *   to 100. If unspecified, server will pick 50 as an approperiate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Returned conversations will match criteria specified within the
- *   filter. ListConversations allows filtering by:
- *    * agents
- *    * labels
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_chat_service.list_conversations.js</caption>
- * region_tag:geminidataanalytics_v1beta_generated_DataChatService_ListConversations_async
- */
+  /**
+   * Equivalent to `listConversations`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for ListConversationsRequest.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. The max page size is 100. All larger page sizes will be coerced
+   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Returned conversations will match criteria specified within the
+   *   filter. ListConversations allows filtering by:
+   *    * agents
+   *    * labels
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.geminidataanalytics.v1beta.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_chat_service.list_conversations.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataChatService_ListConversations_async
+   */
   listConversationsAsync(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.geminidataanalytics.v1beta.IConversation>{
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListConversationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.geminidataanalytics.v1beta.IConversation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listConversations iterate %j', request);
     return this.descriptors.page.listConversations.asyncIterate(
       this.innerApiCalls['listConversations'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.geminidataanalytics.v1beta.IConversation>;
   }
- /**
- * Lists all messages for a given conversation.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The conversation to list messages under.
- *   Format:
- *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. The max page size is 100. All larger page sizes will be coerced
- *   to 100. If unspecified, server will pick 50 as an approperiate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- *
- *   ListMessages allows filtering by:
- *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
- *    * update_time
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1beta.StorageMessage|StorageMessage}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listMessagesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists all messages for a given conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The conversation to list messages under.
+   *   Format:
+   *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. The max page size is 100. All larger page sizes will be coerced
+   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   *
+   *   ListMessages allows filtering by:
+   *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
+   *    * update_time
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.geminidataanalytics.v1beta.StorageMessage|StorageMessage}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMessagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMessages(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage[],
-        protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest|null,
-        protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
-      ]>;
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage[],
+      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest | null,
+      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse,
+    ]
+  >;
   listMessages(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+      | protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage
+    >,
+  ): void;
   listMessages(
-      request: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage>): void;
+    request: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+      | protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage
+    >,
+  ): void;
   listMessages(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage>,
-      callback?: PaginationCallback<
-          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse|null|undefined,
-          protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage>):
-      Promise<[
-        protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage[],
-        protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest|null,
-        protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
-      ]>|void {
+          | protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+      | protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
+      | null
+      | undefined,
+      protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage[],
+      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest | null,
+      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-      protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse|null|undefined,
-      protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+          | protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
+          | null
+          | undefined,
+          protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listMessages values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -1146,131 +1466,136 @@ export class DataChatServiceClient {
     this._log.info('listMessages request %j', request);
     return this.innerApiCalls
       .listMessages(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage[],
-        protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest|null,
-        protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse
-      ]) => {
-        this._log.info('listMessages values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage[],
+          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest | null,
+          protos.google.cloud.geminidataanalytics.v1beta.IListMessagesResponse,
+        ]) => {
+          this._log.info('listMessages values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listMessages`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The conversation to list messages under.
- *   Format:
- *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. The max page size is 100. All larger page sizes will be coerced
- *   to 100. If unspecified, server will pick 50 as an approperiate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- *
- *   ListMessages allows filtering by:
- *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
- *    * update_time
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.StorageMessage|StorageMessage} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listMessagesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listMessages`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The conversation to list messages under.
+   *   Format:
+   *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. The max page size is 100. All larger page sizes will be coerced
+   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   *
+   *   ListMessages allows filtering by:
+   *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
+   *    * update_time
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.StorageMessage|StorageMessage} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMessagesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listMessagesStream(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMessages stream %j', request);
     return this.descriptors.page.listMessages.createStream(
       this.innerApiCalls.listMessages as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listMessages`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The conversation to list messages under.
- *   Format:
- *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
- * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. The max page size is 100. All larger page sizes will be coerced
- *   to 100. If unspecified, server will pick 50 as an approperiate default.
- * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
- * @param {string} [request.filter]
- *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
- *   syntax.
- *
- *   ListMessages allows filtering by:
- *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
- *    * update_time
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.geminidataanalytics.v1beta.StorageMessage|StorageMessage}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta/data_chat_service.list_messages.js</caption>
- * region_tag:geminidataanalytics_v1beta_generated_DataChatService_ListMessages_async
- */
+  /**
+   * Equivalent to `listMessages`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The conversation to list messages under.
+   *   Format:
+   *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. The max page size is 100. All larger page sizes will be coerced
+   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results. See [AIP-160](https://google.aip.dev/160) for
+   *   syntax.
+   *
+   *   ListMessages allows filtering by:
+   *    * create_time (e.g., `createTime > "2025-01-28T06:51:56-08:00"`)
+   *    * update_time
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.geminidataanalytics.v1beta.StorageMessage|StorageMessage}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_chat_service.list_messages.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataChatService_ListMessages_async
+   */
   listMessagesAsync(
-      request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage>{
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IListMessagesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch((err) => {
+      throw err;
+    });
     this._log.info('listMessages iterate %j', request);
     return this.descriptors.page.listMessages.asyncIterate(
       this.innerApiCalls['listMessages'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.geminidataanalytics.v1beta.IStorageMessage>;
   }
-/**
+
+  /**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -1305,12 +1630,11 @@ export class DataChatServiceClient {
       | null
       | undefined,
       {} | null | undefined
-    >
+    >,
   ): Promise<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.getLocation(request, options, callback);
   }
-
-/**
+  /**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -1343,7 +1667,7 @@ export class DataChatServiceClient {
    */
   listLocationsAsync(
     request: LocationProtos.google.cloud.location.IListLocationsRequest,
-    options?: CallOptions
+    options?: CallOptions,
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
   }
@@ -1360,7 +1684,7 @@ export class DataChatServiceClient {
    * @param {string} conversation
    * @returns {string} Resource name string.
    */
-  conversationPath(project:string,location:string,conversation:string) {
+  conversationPath(project: string, location: string, conversation: string) {
     return this.pathTemplates.conversationPathTemplate.render({
       project: project,
       location: location,
@@ -1376,7 +1700,8 @@ export class DataChatServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).project;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .project;
   }
 
   /**
@@ -1387,7 +1712,8 @@ export class DataChatServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).location;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .location;
   }
 
   /**
@@ -1398,7 +1724,8 @@ export class DataChatServiceClient {
    * @returns {string} A string representing the conversation.
    */
   matchConversationFromConversationName(conversationName: string) {
-    return this.pathTemplates.conversationPathTemplate.match(conversationName).conversation;
+    return this.pathTemplates.conversationPathTemplate.match(conversationName)
+      .conversation;
   }
 
   /**
@@ -1409,7 +1736,7 @@ export class DataChatServiceClient {
    * @param {string} data_agent
    * @returns {string} Resource name string.
    */
-  dataAgentPath(project:string,location:string,dataAgent:string) {
+  dataAgentPath(project: string, location: string, dataAgent: string) {
     return this.pathTemplates.dataAgentPathTemplate.render({
       project: project,
       location: location,
@@ -1425,7 +1752,8 @@ export class DataChatServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataAgentName(dataAgentName: string) {
-    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName).project;
+    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName)
+      .project;
   }
 
   /**
@@ -1436,7 +1764,8 @@ export class DataChatServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataAgentName(dataAgentName: string) {
-    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName).location;
+    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName)
+      .location;
   }
 
   /**
@@ -1447,7 +1776,8 @@ export class DataChatServiceClient {
    * @returns {string} A string representing the data_agent.
    */
   matchDataAgentFromDataAgentName(dataAgentName: string) {
-    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName).data_agent;
+    return this.pathTemplates.dataAgentPathTemplate.match(dataAgentName)
+      .data_agent;
   }
 
   /**
@@ -1457,7 +1787,7 @@ export class DataChatServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project:string,location:string) {
+  locationPath(project: string, location: string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -1492,7 +1822,7 @@ export class DataChatServiceClient {
    * @param {string} project
    * @returns {string} Resource name string.
    */
-  projectPath(project:string) {
+  projectPath(project: string) {
     return this.pathTemplates.projectPathTemplate.render({
       project: project,
     });
@@ -1517,11 +1847,13 @@ export class DataChatServiceClient {
    */
   close(): Promise<void> {
     if (this.dataChatServiceStub && !this._terminated) {
-      return this.dataChatServiceStub.then(stub => {
+      return this.dataChatServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {throw err});
+        this.locationsClient.close().catch((err) => {
+          throw err;
+        });
       });
     }
     return Promise.resolve();

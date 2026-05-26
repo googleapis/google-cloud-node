@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,9 @@ option java_package = "com.google.cloud.dataproc.v1";
 service SessionController {
   option (google.api.default_host) = "dataproc.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/cloud-platform";
+      "https://www.googleapis.com/auth/cloud-platform,"
+      "https://www.googleapis.com/auth/dataproc,"
+      "https://www.googleapis.com/auth/dataproc.read-only";
 
   // Create an interactive session asynchronously.
   rpc CreateSession(CreateSessionRequest)
@@ -275,8 +277,8 @@ message Session {
         [(google.api.field_behavior) = OUTPUT_ONLY];
   }
 
-  // Required. The resource name of the session.
-  string name = 1 [(google.api.field_behavior) = REQUIRED];
+  // Identifier. The resource name of the session.
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
 
   // Output only. A session UUID (Unique Universal Identifier). The service
   // generates this value when it creates the session.
@@ -291,7 +293,7 @@ message Session {
     // Optional. Jupyter session config.
     JupyterConfig jupyter_session = 4 [(google.api.field_behavior) = OPTIONAL];
 
-    // Optional. Spark Connect session config.
+    // Optional. Spark connect session config.
     SparkConnectConfig spark_connect_session = 17
         [(google.api.field_behavior) = OPTIONAL];
   }
@@ -375,5 +377,5 @@ message JupyterConfig {
   string display_name = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Spark Connect configuration for an interactive session.
+// Spark connect configuration for an interactive session.
 message SparkConnectConfig {}

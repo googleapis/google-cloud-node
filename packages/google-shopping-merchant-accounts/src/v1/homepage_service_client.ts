@@ -18,11 +18,16 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -44,7 +49,7 @@ export class HomepageServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: {[method: string]: gax.CallSettings};
+  private _defaults: { [method: string]: gax.CallSettings };
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('accounts');
@@ -57,9 +62,9 @@ export class HomepageServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: {[name: string]: Function};
-  pathTemplates: {[name: string]: gax.PathTemplate};
-  homepageServiceStub?: Promise<{[name: string]: Function}>;
+  innerApiCalls: { [name: string]: Function };
+  pathTemplates: { [name: string]: gax.PathTemplate };
+  homepageServiceStub?: Promise<{ [name: string]: Function }>;
 
   /**
    * Construct an instance of HomepageServiceClient.
@@ -100,21 +105,42 @@ export class HomepageServiceClient {
    *     const client = new HomepageServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof HomepageServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'merchantapi.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -139,7 +165,7 @@ export class HomepageServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +179,7 @@ export class HomepageServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,77 +201,81 @@ export class HomepageServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       accountPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}'
+        'accounts/{account}',
       ),
       accountIssuePathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/issues/{issue}'
+        'accounts/{account}/issues/{issue}',
       ),
       accountRelationshipPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/relationships/{relationship}'
+        'accounts/{account}/relationships/{relationship}',
       ),
       accountServicePathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/services/{service}'
+        'accounts/{account}/services/{service}',
       ),
       autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/autofeedSettings'
+        'accounts/{account}/autofeedSettings',
       ),
       automaticImprovementsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/automaticImprovements'
+        'accounts/{account}/automaticImprovements',
       ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/businessIdentity'
+        'accounts/{account}/businessIdentity',
       ),
       businessInfoPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/businessInfo'
+        'accounts/{account}/businessInfo',
       ),
       checkoutSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/programs/{program}/checkoutSettings'
+        'accounts/{account}/programs/{program}/checkoutSettings',
       ),
       developerRegistrationPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/developerRegistration'
+        'accounts/{account}/developerRegistration',
       ),
       emailPreferencesPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/users/{email}/emailPreferences'
+        'accounts/{account}/users/{email}/emailPreferences',
       ),
       gbpAccountPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/gbpAccounts/{gbp_account}'
+        'accounts/{account}/gbpAccounts/{gbp_account}',
       ),
       homepagePathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/homepage'
+        'accounts/{account}/homepage',
       ),
       lfpProviderPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/omnichannelSettings/{omnichannel_setting}/lfpProviders/{lfp_provider}'
+        'accounts/{account}/omnichannelSettings/{omnichannel_setting}/lfpProviders/{lfp_provider}',
       ),
       omnichannelSettingPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/omnichannelSettings/{omnichannel_setting}'
+        'accounts/{account}/omnichannelSettings/{omnichannel_setting}',
       ),
       onlineReturnPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/onlineReturnPolicies/{return_policy}'
+        'accounts/{account}/onlineReturnPolicies/{return_policy}',
       ),
       programPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/programs/{program}'
+        'accounts/{account}/programs/{program}',
       ),
       regionPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/regions/{region}'
+        'accounts/{account}/regions/{region}',
       ),
       shippingSettingsPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/shippingSettings'
+        'accounts/{account}/shippingSettings',
       ),
       termsOfServicePathTemplate: new this._gaxModule.PathTemplate(
-        'termsOfService/{version}'
+        'termsOfService/{version}',
       ),
-      termsOfServiceAgreementStatePathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/termsOfServiceAgreementStates/{identifier}'
-      ),
+      termsOfServiceAgreementStatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'accounts/{account}/termsOfServiceAgreementStates/{identifier}',
+        ),
       userPathTemplate: new this._gaxModule.PathTemplate(
-        'accounts/{account}/users/{email}'
+        'accounts/{account}/users/{email}',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.shopping.merchant.accounts.v1.HomepageService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.shopping.merchant.accounts.v1.HomepageService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      { 'x-goog-api-client': clientHeader.join(' ') },
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -279,36 +306,46 @@ export class HomepageServiceClient {
     // Put together the "service stub" for
     // google.shopping.merchant.accounts.v1.HomepageService.
     this.homepageServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.shopping.merchant.accounts.v1.HomepageService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.shopping.merchant.accounts.v1.HomepageService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.shopping.merchant.accounts.v1.HomepageService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.shopping.merchant.accounts.v1
+            .HomepageService,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{ [method: string]: Function }>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const homepageServiceStubMethods =
-        ['getHomepage', 'updateHomepage', 'claimHomepage', 'unclaimHomepage'];
+    const homepageServiceStubMethods = [
+      'getHomepage',
+      'updateHomepage',
+      'claimHomepage',
+      'unclaimHomepage',
+    ];
     for (const methodName of homepageServiceStubMethods) {
       const callPromise = this.homepageServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        (stub) =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -323,8 +360,14 @@ export class HomepageServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -335,8 +378,14 @@ export class HomepageServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'merchantapi.googleapis.com';
   }
@@ -367,9 +416,7 @@ export class HomepageServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/content'
-    ];
+    return ['https://www.googleapis.com/auth/content'];
   }
 
   getProjectId(): Promise<string>;
@@ -378,8 +425,9 @@ export class HomepageServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -390,412 +438,608 @@ export class HomepageServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Retrieves a store's homepage.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the homepage to retrieve.
- *   Format: `accounts/{account}/homepage`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/homepage_service.get_homepage.js</caption>
- * region_tag:merchantapi_v1_generated_HomepageService_GetHomepage_async
- */
+  /**
+   * Retrieves a store's homepage.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the homepage to retrieve.
+   *   Format: `accounts/{account}/homepage`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/homepage_service.get_homepage.js</caption>
+   * region_tag:merchantapi_v1_generated_HomepageService_GetHomepage_async
+   */
   getHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getHomepage request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getHomepage(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getHomepage response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1.IGetHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getHomepage response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates a store's homepage. Executing this method requires admin access.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.shopping.merchant.accounts.v1.Homepage} request.homepage
- *   Required. The new version of the homepage.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. List of fields being updated.
- *
- *   The following fields are supported (in both `snake_case` and
- *   `lowerCamelCase`):
- *
- *   - `uri`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/homepage_service.update_homepage.js</caption>
- * region_tag:merchantapi_v1_generated_HomepageService_UpdateHomepage_async
- */
+  /**
+   * Updates a store's homepage. Executing this method requires admin access.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.shopping.merchant.accounts.v1.Homepage} request.homepage
+   *   Required. The new version of the homepage.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. List of fields being updated.
+   *
+   *   The following fields are supported (in both `snake_case` and
+   *   `lowerCamelCase`):
+   *
+   *   - `uri`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/homepage_service.update_homepage.js</caption>
+   * region_tag:merchantapi_v1_generated_HomepageService_UpdateHomepage_async
+   */
   updateHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   updateHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'homepage.name': request.homepage!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'homepage.name': request.homepage!.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateHomepage request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateHomepage(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateHomepage response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1.IUpdateHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateHomepage response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Claims a store's homepage. Executing this method requires admin access.
- *
- * If the homepage is already claimed, this will recheck the
- * verification (unless the business is exempted from claiming, which also
- * exempts from verification) and return a successful response. If ownership
- * can no longer be verified, it will return an error, but it won't clear the
- * claim.
- *
- * In case of failure, a canonical error message is returned:
- *
- *    * PERMISSION_DENIED: User doesn't have the necessary permissions on this
- *    Merchant Center account.
- *
- *    * FAILED_PRECONDITION:
- *
- *      - The account is not a Merchant Center account.
- *
- *      - Merchant Center account doesn't have a homepage.
- *
- *      - Claiming failed (in this case the error message contains more
- *      details).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the homepage to claim.
- *   Format: `accounts/{account}/homepage`
- * @param {boolean} [request.overwrite]
- *   Optional. When set to `true`, this option removes any existing claim on the
- *   requested website from any other account to the account making the request,
- *   effectively replacing the previous claim.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/homepage_service.claim_homepage.js</caption>
- * region_tag:merchantapi_v1_generated_HomepageService_ClaimHomepage_async
- */
+  /**
+   * Claims a store's homepage. Executing this method requires admin access.
+   *
+   * If the homepage is already claimed, this will recheck the
+   * verification (unless the business is exempted from claiming, which also
+   * exempts from verification) and return a successful response. If ownership
+   * can no longer be verified, it will return an error, but it won't clear the
+   * claim.
+   *
+   * In case of failure, a canonical error message is returned:
+   *
+   *    * PERMISSION_DENIED: User doesn't have the necessary permissions on this
+   *    Merchant Center account.
+   *
+   *    * FAILED_PRECONDITION:
+   *
+   *      - The account is not a Merchant Center account.
+   *
+   *      - Merchant Center account doesn't have a homepage.
+   *
+   *      - Claiming failed (in this case the error message contains more
+   *      details).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the homepage to claim.
+   *   Format: `accounts/{account}/homepage`
+   * @param {boolean} [request.overwrite]
+   *   Optional. When set to `true`, this option removes any existing claim on the
+   *   requested website from any other account to the account making the request,
+   *   effectively replacing the previous claim.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/homepage_service.claim_homepage.js</caption>
+   * region_tag:merchantapi_v1_generated_HomepageService_ClaimHomepage_async
+   */
   claimHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   claimHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   claimHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   claimHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('claimHomepage request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('claimHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.claimHomepage(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('claimHomepage response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .claimHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1.IClaimHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('claimHomepage response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Unclaims a store's homepage. Executing this method requires admin access.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. The name of the homepage to unclaim.
- *   Format: `accounts/{account}/homepage`
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/homepage_service.unclaim_homepage.js</caption>
- * region_tag:merchantapi_v1_generated_HomepageService_UnclaimHomepage_async
- */
+  /**
+   * Unclaims a store's homepage. Executing this method requires admin access.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the homepage to unclaim.
+   *   Format: `accounts/{account}/homepage`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1.Homepage|Homepage}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/homepage_service.unclaim_homepage.js</caption>
+   * region_tag:merchantapi_v1_generated_HomepageService_UnclaimHomepage_async
+   */
   unclaimHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   unclaimHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   unclaimHomepage(
-      request: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
-      callback: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   unclaimHomepage(
-      request?: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.shopping.merchant.accounts.v1.IHomepage,
-          protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1.IHomepage,
+      (
+        | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch((err) => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('unclaimHomepage request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('unclaimHomepage response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.unclaimHomepage(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.shopping.merchant.accounts.v1.IHomepage,
-        protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('unclaimHomepage response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .unclaimHomepage(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.shopping.merchant.accounts.v1.IHomepage,
+          (
+            | protos.google.shopping.merchant.accounts.v1.IUnclaimHomepageRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('unclaimHomepage response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
@@ -811,7 +1055,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  accountPath(account:string) {
+  accountPath(account: string) {
     return this.pathTemplates.accountPathTemplate.render({
       account: account,
     });
@@ -835,7 +1079,7 @@ export class HomepageServiceClient {
    * @param {string} issue
    * @returns {string} Resource name string.
    */
-  accountIssuePath(account:string,issue:string) {
+  accountIssuePath(account: string, issue: string) {
     return this.pathTemplates.accountIssuePathTemplate.render({
       account: account,
       issue: issue,
@@ -850,7 +1094,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).account;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
+      .account;
   }
 
   /**
@@ -861,7 +1106,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the issue.
    */
   matchIssueFromAccountIssueName(accountIssueName: string) {
-    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName).issue;
+    return this.pathTemplates.accountIssuePathTemplate.match(accountIssueName)
+      .issue;
   }
 
   /**
@@ -871,7 +1117,7 @@ export class HomepageServiceClient {
    * @param {string} relationship
    * @returns {string} Resource name string.
    */
-  accountRelationshipPath(account:string,relationship:string) {
+  accountRelationshipPath(account: string, relationship: string) {
     return this.pathTemplates.accountRelationshipPathTemplate.render({
       account: account,
       relationship: relationship,
@@ -886,7 +1132,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountRelationshipName(accountRelationshipName: string) {
-    return this.pathTemplates.accountRelationshipPathTemplate.match(accountRelationshipName).account;
+    return this.pathTemplates.accountRelationshipPathTemplate.match(
+      accountRelationshipName,
+    ).account;
   }
 
   /**
@@ -896,8 +1144,12 @@ export class HomepageServiceClient {
    *   A fully-qualified path representing AccountRelationship resource.
    * @returns {string} A string representing the relationship.
    */
-  matchRelationshipFromAccountRelationshipName(accountRelationshipName: string) {
-    return this.pathTemplates.accountRelationshipPathTemplate.match(accountRelationshipName).relationship;
+  matchRelationshipFromAccountRelationshipName(
+    accountRelationshipName: string,
+  ) {
+    return this.pathTemplates.accountRelationshipPathTemplate.match(
+      accountRelationshipName,
+    ).relationship;
   }
 
   /**
@@ -907,7 +1159,7 @@ export class HomepageServiceClient {
    * @param {string} service
    * @returns {string} Resource name string.
    */
-  accountServicePath(account:string,service:string) {
+  accountServicePath(account: string, service: string) {
     return this.pathTemplates.accountServicePathTemplate.render({
       account: account,
       service: service,
@@ -922,7 +1174,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAccountServiceName(accountServiceName: string) {
-    return this.pathTemplates.accountServicePathTemplate.match(accountServiceName).account;
+    return this.pathTemplates.accountServicePathTemplate.match(
+      accountServiceName,
+    ).account;
   }
 
   /**
@@ -933,7 +1187,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the service.
    */
   matchServiceFromAccountServiceName(accountServiceName: string) {
-    return this.pathTemplates.accountServicePathTemplate.match(accountServiceName).service;
+    return this.pathTemplates.accountServicePathTemplate.match(
+      accountServiceName,
+    ).service;
   }
 
   /**
@@ -942,7 +1198,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  autofeedSettingsPath(account:string) {
+  autofeedSettingsPath(account: string) {
     return this.pathTemplates.autofeedSettingsPathTemplate.render({
       account: account,
     });
@@ -956,7 +1212,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
-    return this.pathTemplates.autofeedSettingsPathTemplate.match(autofeedSettingsName).account;
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(
+      autofeedSettingsName,
+    ).account;
   }
 
   /**
@@ -965,7 +1223,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  automaticImprovementsPath(account:string) {
+  automaticImprovementsPath(account: string) {
     return this.pathTemplates.automaticImprovementsPathTemplate.render({
       account: account,
     });
@@ -979,7 +1237,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromAutomaticImprovementsName(automaticImprovementsName: string) {
-    return this.pathTemplates.automaticImprovementsPathTemplate.match(automaticImprovementsName).account;
+    return this.pathTemplates.automaticImprovementsPathTemplate.match(
+      automaticImprovementsName,
+    ).account;
   }
 
   /**
@@ -988,7 +1248,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessIdentityPath(account:string) {
+  businessIdentityPath(account: string) {
     return this.pathTemplates.businessIdentityPathTemplate.render({
       account: account,
     });
@@ -1002,7 +1262,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessIdentityName(businessIdentityName: string) {
-    return this.pathTemplates.businessIdentityPathTemplate.match(businessIdentityName).account;
+    return this.pathTemplates.businessIdentityPathTemplate.match(
+      businessIdentityName,
+    ).account;
   }
 
   /**
@@ -1011,7 +1273,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  businessInfoPath(account:string) {
+  businessInfoPath(account: string) {
     return this.pathTemplates.businessInfoPathTemplate.render({
       account: account,
     });
@@ -1025,7 +1287,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromBusinessInfoName(businessInfoName: string) {
-    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName).account;
+    return this.pathTemplates.businessInfoPathTemplate.match(businessInfoName)
+      .account;
   }
 
   /**
@@ -1035,7 +1298,7 @@ export class HomepageServiceClient {
    * @param {string} program
    * @returns {string} Resource name string.
    */
-  checkoutSettingsPath(account:string,program:string) {
+  checkoutSettingsPath(account: string, program: string) {
     return this.pathTemplates.checkoutSettingsPathTemplate.render({
       account: account,
       program: program,
@@ -1050,7 +1313,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromCheckoutSettingsName(checkoutSettingsName: string) {
-    return this.pathTemplates.checkoutSettingsPathTemplate.match(checkoutSettingsName).account;
+    return this.pathTemplates.checkoutSettingsPathTemplate.match(
+      checkoutSettingsName,
+    ).account;
   }
 
   /**
@@ -1061,7 +1326,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the program.
    */
   matchProgramFromCheckoutSettingsName(checkoutSettingsName: string) {
-    return this.pathTemplates.checkoutSettingsPathTemplate.match(checkoutSettingsName).program;
+    return this.pathTemplates.checkoutSettingsPathTemplate.match(
+      checkoutSettingsName,
+    ).program;
   }
 
   /**
@@ -1070,7 +1337,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  developerRegistrationPath(account:string) {
+  developerRegistrationPath(account: string) {
     return this.pathTemplates.developerRegistrationPathTemplate.render({
       account: account,
     });
@@ -1084,7 +1351,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromDeveloperRegistrationName(developerRegistrationName: string) {
-    return this.pathTemplates.developerRegistrationPathTemplate.match(developerRegistrationName).account;
+    return this.pathTemplates.developerRegistrationPathTemplate.match(
+      developerRegistrationName,
+    ).account;
   }
 
   /**
@@ -1094,7 +1363,7 @@ export class HomepageServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  emailPreferencesPath(account:string,email:string) {
+  emailPreferencesPath(account: string, email: string) {
     return this.pathTemplates.emailPreferencesPathTemplate.render({
       account: account,
       email: email,
@@ -1109,7 +1378,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).account;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(
+      emailPreferencesName,
+    ).account;
   }
 
   /**
@@ -1120,7 +1391,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the email.
    */
   matchEmailFromEmailPreferencesName(emailPreferencesName: string) {
-    return this.pathTemplates.emailPreferencesPathTemplate.match(emailPreferencesName).email;
+    return this.pathTemplates.emailPreferencesPathTemplate.match(
+      emailPreferencesName,
+    ).email;
   }
 
   /**
@@ -1130,7 +1403,7 @@ export class HomepageServiceClient {
    * @param {string} gbp_account
    * @returns {string} Resource name string.
    */
-  gbpAccountPath(account:string,gbpAccount:string) {
+  gbpAccountPath(account: string, gbpAccount: string) {
     return this.pathTemplates.gbpAccountPathTemplate.render({
       account: account,
       gbp_account: gbpAccount,
@@ -1145,7 +1418,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
+      .account;
   }
 
   /**
@@ -1156,7 +1430,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the gbp_account.
    */
   matchGbpAccountFromGbpAccountName(gbpAccountName: string) {
-    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName).gbp_account;
+    return this.pathTemplates.gbpAccountPathTemplate.match(gbpAccountName)
+      .gbp_account;
   }
 
   /**
@@ -1165,7 +1440,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  homepagePath(account:string) {
+  homepagePath(account: string) {
     return this.pathTemplates.homepagePathTemplate.render({
       account: account,
     });
@@ -1190,7 +1465,11 @@ export class HomepageServiceClient {
    * @param {string} lfp_provider
    * @returns {string} Resource name string.
    */
-  lfpProviderPath(account:string,omnichannelSetting:string,lfpProvider:string) {
+  lfpProviderPath(
+    account: string,
+    omnichannelSetting: string,
+    lfpProvider: string,
+  ) {
     return this.pathTemplates.lfpProviderPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -1206,7 +1485,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).account;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .account;
   }
 
   /**
@@ -1217,7 +1497,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the omnichannel_setting.
    */
   matchOmnichannelSettingFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).omnichannel_setting;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .omnichannel_setting;
   }
 
   /**
@@ -1228,7 +1509,8 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the lfp_provider.
    */
   matchLfpProviderFromLfpProviderName(lfpProviderName: string) {
-    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName).lfp_provider;
+    return this.pathTemplates.lfpProviderPathTemplate.match(lfpProviderName)
+      .lfp_provider;
   }
 
   /**
@@ -1238,7 +1520,7 @@ export class HomepageServiceClient {
    * @param {string} omnichannel_setting
    * @returns {string} Resource name string.
    */
-  omnichannelSettingPath(account:string,omnichannelSetting:string) {
+  omnichannelSettingPath(account: string, omnichannelSetting: string) {
     return this.pathTemplates.omnichannelSettingPathTemplate.render({
       account: account,
       omnichannel_setting: omnichannelSetting,
@@ -1253,7 +1535,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOmnichannelSettingName(omnichannelSettingName: string) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).account;
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(
+      omnichannelSettingName,
+    ).account;
   }
 
   /**
@@ -1263,8 +1547,12 @@ export class HomepageServiceClient {
    *   A fully-qualified path representing OmnichannelSetting resource.
    * @returns {string} A string representing the omnichannel_setting.
    */
-  matchOmnichannelSettingFromOmnichannelSettingName(omnichannelSettingName: string) {
-    return this.pathTemplates.omnichannelSettingPathTemplate.match(omnichannelSettingName).omnichannel_setting;
+  matchOmnichannelSettingFromOmnichannelSettingName(
+    omnichannelSettingName: string,
+  ) {
+    return this.pathTemplates.omnichannelSettingPathTemplate.match(
+      omnichannelSettingName,
+    ).omnichannel_setting;
   }
 
   /**
@@ -1274,7 +1562,7 @@ export class HomepageServiceClient {
    * @param {string} return_policy
    * @returns {string} Resource name string.
    */
-  onlineReturnPolicyPath(account:string,returnPolicy:string) {
+  onlineReturnPolicyPath(account: string, returnPolicy: string) {
     return this.pathTemplates.onlineReturnPolicyPathTemplate.render({
       account: account,
       return_policy: returnPolicy,
@@ -1289,7 +1577,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).account;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
+      onlineReturnPolicyName,
+    ).account;
   }
 
   /**
@@ -1300,7 +1590,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the return_policy.
    */
   matchReturnPolicyFromOnlineReturnPolicyName(onlineReturnPolicyName: string) {
-    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(onlineReturnPolicyName).return_policy;
+    return this.pathTemplates.onlineReturnPolicyPathTemplate.match(
+      onlineReturnPolicyName,
+    ).return_policy;
   }
 
   /**
@@ -1310,7 +1602,7 @@ export class HomepageServiceClient {
    * @param {string} program
    * @returns {string} Resource name string.
    */
-  programPath(account:string,program:string) {
+  programPath(account: string, program: string) {
     return this.pathTemplates.programPathTemplate.render({
       account: account,
       program: program,
@@ -1346,7 +1638,7 @@ export class HomepageServiceClient {
    * @param {string} region
    * @returns {string} Resource name string.
    */
-  regionPath(account:string,region:string) {
+  regionPath(account: string, region: string) {
     return this.pathTemplates.regionPathTemplate.render({
       account: account,
       region: region,
@@ -1381,7 +1673,7 @@ export class HomepageServiceClient {
    * @param {string} account
    * @returns {string} Resource name string.
    */
-  shippingSettingsPath(account:string) {
+  shippingSettingsPath(account: string) {
     return this.pathTemplates.shippingSettingsPathTemplate.render({
       account: account,
     });
@@ -1395,7 +1687,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the account.
    */
   matchAccountFromShippingSettingsName(shippingSettingsName: string) {
-    return this.pathTemplates.shippingSettingsPathTemplate.match(shippingSettingsName).account;
+    return this.pathTemplates.shippingSettingsPathTemplate.match(
+      shippingSettingsName,
+    ).account;
   }
 
   /**
@@ -1404,7 +1698,7 @@ export class HomepageServiceClient {
    * @param {string} version
    * @returns {string} Resource name string.
    */
-  termsOfServicePath(version:string) {
+  termsOfServicePath(version: string) {
     return this.pathTemplates.termsOfServicePathTemplate.render({
       version: version,
     });
@@ -1418,7 +1712,9 @@ export class HomepageServiceClient {
    * @returns {string} A string representing the version.
    */
   matchVersionFromTermsOfServiceName(termsOfServiceName: string) {
-    return this.pathTemplates.termsOfServicePathTemplate.match(termsOfServiceName).version;
+    return this.pathTemplates.termsOfServicePathTemplate.match(
+      termsOfServiceName,
+    ).version;
   }
 
   /**
@@ -1428,7 +1724,7 @@ export class HomepageServiceClient {
    * @param {string} identifier
    * @returns {string} Resource name string.
    */
-  termsOfServiceAgreementStatePath(account:string,identifier:string) {
+  termsOfServiceAgreementStatePath(account: string, identifier: string) {
     return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.render({
       account: account,
       identifier: identifier,
@@ -1442,8 +1738,12 @@ export class HomepageServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the account.
    */
-  matchAccountFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).account;
+  matchAccountFromTermsOfServiceAgreementStateName(
+    termsOfServiceAgreementStateName: string,
+  ) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
+      termsOfServiceAgreementStateName,
+    ).account;
   }
 
   /**
@@ -1453,8 +1753,12 @@ export class HomepageServiceClient {
    *   A fully-qualified path representing TermsOfServiceAgreementState resource.
    * @returns {string} A string representing the identifier.
    */
-  matchIdentifierFromTermsOfServiceAgreementStateName(termsOfServiceAgreementStateName: string) {
-    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(termsOfServiceAgreementStateName).identifier;
+  matchIdentifierFromTermsOfServiceAgreementStateName(
+    termsOfServiceAgreementStateName: string,
+  ) {
+    return this.pathTemplates.termsOfServiceAgreementStatePathTemplate.match(
+      termsOfServiceAgreementStateName,
+    ).identifier;
   }
 
   /**
@@ -1464,7 +1768,7 @@ export class HomepageServiceClient {
    * @param {string} email
    * @returns {string} Resource name string.
    */
-  userPath(account:string,email:string) {
+  userPath(account: string, email: string) {
     return this.pathTemplates.userPathTemplate.render({
       account: account,
       email: email,
@@ -1501,7 +1805,7 @@ export class HomepageServiceClient {
    */
   close(): Promise<void> {
     if (this.homepageServiceStub && !this._terminated) {
-      return this.homepageServiceStub.then(stub => {
+      return this.homepageServiceStub.then((stub) => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

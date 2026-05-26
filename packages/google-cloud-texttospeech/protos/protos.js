@@ -1004,6 +1004,8 @@
                          * @interface IAdvancedVoiceOptions
                          * @property {boolean|null} [lowLatencyJourneySynthesis] AdvancedVoiceOptions lowLatencyJourneySynthesis
                          * @property {boolean|null} [relaxSafetyFilters] AdvancedVoiceOptions relaxSafetyFilters
+                         * @property {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings|null} [safetySettings] AdvancedVoiceOptions safetySettings
+                         * @property {boolean|null} [enableTextnorm] AdvancedVoiceOptions enableTextnorm
                          */
     
                         /**
@@ -1037,12 +1039,34 @@
                          */
                         AdvancedVoiceOptions.prototype.relaxSafetyFilters = false;
     
+                        /**
+                         * AdvancedVoiceOptions safetySettings.
+                         * @member {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings|null|undefined} safetySettings
+                         * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.safetySettings = null;
+    
+                        /**
+                         * AdvancedVoiceOptions enableTextnorm.
+                         * @member {boolean|null|undefined} enableTextnorm
+                         * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.enableTextnorm = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AdvancedVoiceOptions.prototype, "_lowLatencyJourneySynthesis", {
                             get: $util.oneOfGetter($oneOfFields = ["lowLatencyJourneySynthesis"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AdvancedVoiceOptions.prototype, "_enableTextnorm", {
+                            get: $util.oneOfGetter($oneOfFields = ["enableTextnorm"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1072,8 +1096,12 @@
                                 writer = $Writer.create();
                             if (message.lowLatencyJourneySynthesis != null && Object.hasOwnProperty.call(message, "lowLatencyJourneySynthesis"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowLatencyJourneySynthesis);
+                            if (message.enableTextnorm != null && Object.hasOwnProperty.call(message, "enableTextnorm"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableTextnorm);
                             if (message.relaxSafetyFilters != null && Object.hasOwnProperty.call(message, "relaxSafetyFilters"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.relaxSafetyFilters);
+                            if (message.safetySettings != null && Object.hasOwnProperty.call(message, "safetySettings"))
+                                $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.encode(message.safetySettings, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -1116,6 +1144,14 @@
                                     }
                                 case 8: {
                                         message.relaxSafetyFilters = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.safetySettings = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableTextnorm = reader.bool();
                                         break;
                                     }
                                 default:
@@ -1162,6 +1198,16 @@
                             if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
                                 if (typeof message.relaxSafetyFilters !== "boolean")
                                     return "relaxSafetyFilters: boolean expected";
+                            if (message.safetySettings != null && message.hasOwnProperty("safetySettings")) {
+                                var error = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.verify(message.safetySettings);
+                                if (error)
+                                    return "safetySettings." + error;
+                            }
+                            if (message.enableTextnorm != null && message.hasOwnProperty("enableTextnorm")) {
+                                properties._enableTextnorm = 1;
+                                if (typeof message.enableTextnorm !== "boolean")
+                                    return "enableTextnorm: boolean expected";
+                            }
                             return null;
                         };
     
@@ -1181,6 +1227,13 @@
                                 message.lowLatencyJourneySynthesis = Boolean(object.lowLatencyJourneySynthesis);
                             if (object.relaxSafetyFilters != null)
                                 message.relaxSafetyFilters = Boolean(object.relaxSafetyFilters);
+                            if (object.safetySettings != null) {
+                                if (typeof object.safetySettings !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.AdvancedVoiceOptions.safetySettings: object expected");
+                                message.safetySettings = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.fromObject(object.safetySettings);
+                            }
+                            if (object.enableTextnorm != null)
+                                message.enableTextnorm = Boolean(object.enableTextnorm);
                             return message;
                         };
     
@@ -1197,15 +1250,24 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.relaxSafetyFilters = false;
+                                object.safetySettings = null;
+                            }
                             if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
                                 object.lowLatencyJourneySynthesis = message.lowLatencyJourneySynthesis;
                                 if (options.oneofs)
                                     object._lowLatencyJourneySynthesis = "lowLatencyJourneySynthesis";
                             }
+                            if (message.enableTextnorm != null && message.hasOwnProperty("enableTextnorm")) {
+                                object.enableTextnorm = message.enableTextnorm;
+                                if (options.oneofs)
+                                    object._enableTextnorm = "enableTextnorm";
+                            }
                             if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
                                 object.relaxSafetyFilters = message.relaxSafetyFilters;
+                            if (message.safetySettings != null && message.hasOwnProperty("safetySettings"))
+                                object.safetySettings = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.toObject(message.safetySettings, options);
                             return object;
                         };
     
@@ -1234,6 +1296,576 @@
                             }
                             return typeUrlPrefix + "/google.cloud.texttospeech.v1.AdvancedVoiceOptions";
                         };
+    
+                        AdvancedVoiceOptions.SafetySetting = (function() {
+    
+                            /**
+                             * Properties of a SafetySetting.
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                             * @interface ISafetySetting
+                             * @property {google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory|null} [category] SafetySetting category
+                             * @property {google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold|null} [threshold] SafetySetting threshold
+                             */
+    
+                            /**
+                             * Constructs a new SafetySetting.
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                             * @classdesc Represents a SafetySetting.
+                             * @implements ISafetySetting
+                             * @constructor
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting=} [properties] Properties to set
+                             */
+                            function SafetySetting(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SafetySetting category.
+                             * @member {google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory} category
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @instance
+                             */
+                            SafetySetting.prototype.category = 0;
+    
+                            /**
+                             * SafetySetting threshold.
+                             * @member {google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold} threshold
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @instance
+                             */
+                            SafetySetting.prototype.threshold = 0;
+    
+                            /**
+                             * Creates a new SafetySetting instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting=} [properties] Properties to set
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting} SafetySetting instance
+                             */
+                            SafetySetting.create = function create(properties) {
+                                return new SafetySetting(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting} message SafetySetting message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySetting.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.category);
+                                if (message.threshold != null && Object.hasOwnProperty.call(message, "threshold"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.threshold);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting} message SafetySetting message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySetting.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SafetySetting message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting} SafetySetting
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySetting.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.category = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.threshold = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting} SafetySetting
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySetting.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SafetySetting message.
+                             * @function verify
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SafetySetting.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    switch (message.category) {
+                                    default:
+                                        return "category: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                    switch (message.threshold) {
+                                    default:
+                                        return "threshold: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting} SafetySetting
+                             */
+                            SafetySetting.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting)
+                                    return object;
+                                var message = new $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting();
+                                switch (object.category) {
+                                default:
+                                    if (typeof object.category === "number") {
+                                        message.category = object.category;
+                                        break;
+                                    }
+                                    break;
+                                case "HARM_CATEGORY_UNSPECIFIED":
+                                case 0:
+                                    message.category = 0;
+                                    break;
+                                case "HARM_CATEGORY_HATE_SPEECH":
+                                case 1:
+                                    message.category = 1;
+                                    break;
+                                case "HARM_CATEGORY_DANGEROUS_CONTENT":
+                                case 2:
+                                    message.category = 2;
+                                    break;
+                                case "HARM_CATEGORY_HARASSMENT":
+                                case 3:
+                                    message.category = 3;
+                                    break;
+                                case "HARM_CATEGORY_SEXUALLY_EXPLICIT":
+                                case 4:
+                                    message.category = 4;
+                                    break;
+                                }
+                                switch (object.threshold) {
+                                default:
+                                    if (typeof object.threshold === "number") {
+                                        message.threshold = object.threshold;
+                                        break;
+                                    }
+                                    break;
+                                case "HARM_BLOCK_THRESHOLD_UNSPECIFIED":
+                                case 0:
+                                    message.threshold = 0;
+                                    break;
+                                case "BLOCK_LOW_AND_ABOVE":
+                                case 1:
+                                    message.threshold = 1;
+                                    break;
+                                case "BLOCK_MEDIUM_AND_ABOVE":
+                                case 2:
+                                    message.threshold = 2;
+                                    break;
+                                case "BLOCK_ONLY_HIGH":
+                                case 3:
+                                    message.threshold = 3;
+                                    break;
+                                case "BLOCK_NONE":
+                                case 4:
+                                    message.threshold = 4;
+                                    break;
+                                case "OFF":
+                                case 5:
+                                    message.threshold = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting} message SafetySetting
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SafetySetting.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.category = options.enums === String ? "HARM_CATEGORY_UNSPECIFIED" : 0;
+                                    object.threshold = options.enums === String ? "HARM_BLOCK_THRESHOLD_UNSPECIFIED" : 0;
+                                }
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    object.category = options.enums === String ? $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory[message.category] === undefined ? message.category : $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory[message.category] : message.category;
+                                if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                    object.threshold = options.enums === String ? $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold[message.threshold] === undefined ? message.threshold : $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold[message.threshold] : message.threshold;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SafetySetting to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SafetySetting.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SafetySetting
+                             * @function getTypeUrl
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SafetySetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting";
+                            };
+    
+                            return SafetySetting;
+                        })();
+    
+                        AdvancedVoiceOptions.SafetySettings = (function() {
+    
+                            /**
+                             * Properties of a SafetySettings.
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                             * @interface ISafetySettings
+                             * @property {Array.<google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting>|null} [settings] SafetySettings settings
+                             */
+    
+                            /**
+                             * Constructs a new SafetySettings.
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions
+                             * @classdesc Represents a SafetySettings.
+                             * @implements ISafetySettings
+                             * @constructor
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings=} [properties] Properties to set
+                             */
+                            function SafetySettings(properties) {
+                                this.settings = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SafetySettings settings.
+                             * @member {Array.<google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySetting>} settings
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @instance
+                             */
+                            SafetySettings.prototype.settings = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SafetySettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings=} [properties] Properties to set
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings} SafetySettings instance
+                             */
+                            SafetySettings.create = function create(properties) {
+                                return new SafetySettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySettings message. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings} message SafetySettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.settings != null && message.settings.length)
+                                    for (var i = 0; i < message.settings.length; ++i)
+                                        $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.encode(message.settings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySettings message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.ISafetySettings} message SafetySettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SafetySettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings} SafetySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.settings && message.settings.length))
+                                                message.settings = [];
+                                            message.settings.push($root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SafetySettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings} SafetySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SafetySettings message.
+                             * @function verify
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SafetySettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.settings != null && message.hasOwnProperty("settings")) {
+                                    if (!Array.isArray(message.settings))
+                                        return "settings: array expected";
+                                    for (var i = 0; i < message.settings.length; ++i) {
+                                        var error = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.verify(message.settings[i]);
+                                        if (error)
+                                            return "settings." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SafetySettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings} SafetySettings
+                             */
+                            SafetySettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings)
+                                    return object;
+                                var message = new $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings();
+                                if (object.settings) {
+                                    if (!Array.isArray(object.settings))
+                                        throw TypeError(".google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.settings: array expected");
+                                    message.settings = [];
+                                    for (var i = 0; i < object.settings.length; ++i) {
+                                        if (typeof object.settings[i] !== "object")
+                                            throw TypeError(".google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings.settings: object expected");
+                                        message.settings[i] = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.fromObject(object.settings[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SafetySettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings} message SafetySettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SafetySettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.settings = [];
+                                if (message.settings && message.settings.length) {
+                                    object.settings = [];
+                                    for (var j = 0; j < message.settings.length; ++j)
+                                        object.settings[j] = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting.toObject(message.settings[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SafetySettings to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SafetySettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SafetySettings
+                             * @function getTypeUrl
+                             * @memberof google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SafetySettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings";
+                            };
+    
+                            return SafetySettings;
+                        })();
+    
+                        /**
+                         * HarmCategory enum.
+                         * @name google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmCategory
+                         * @enum {number}
+                         * @property {number} HARM_CATEGORY_UNSPECIFIED=0 HARM_CATEGORY_UNSPECIFIED value
+                         * @property {number} HARM_CATEGORY_HATE_SPEECH=1 HARM_CATEGORY_HATE_SPEECH value
+                         * @property {number} HARM_CATEGORY_DANGEROUS_CONTENT=2 HARM_CATEGORY_DANGEROUS_CONTENT value
+                         * @property {number} HARM_CATEGORY_HARASSMENT=3 HARM_CATEGORY_HARASSMENT value
+                         * @property {number} HARM_CATEGORY_SEXUALLY_EXPLICIT=4 HARM_CATEGORY_SEXUALLY_EXPLICIT value
+                         */
+                        AdvancedVoiceOptions.HarmCategory = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_CATEGORY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HARM_CATEGORY_HATE_SPEECH"] = 1;
+                            values[valuesById[2] = "HARM_CATEGORY_DANGEROUS_CONTENT"] = 2;
+                            values[valuesById[3] = "HARM_CATEGORY_HARASSMENT"] = 3;
+                            values[valuesById[4] = "HARM_CATEGORY_SEXUALLY_EXPLICIT"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * HarmBlockThreshold enum.
+                         * @name google.cloud.texttospeech.v1.AdvancedVoiceOptions.HarmBlockThreshold
+                         * @enum {number}
+                         * @property {number} HARM_BLOCK_THRESHOLD_UNSPECIFIED=0 HARM_BLOCK_THRESHOLD_UNSPECIFIED value
+                         * @property {number} BLOCK_LOW_AND_ABOVE=1 BLOCK_LOW_AND_ABOVE value
+                         * @property {number} BLOCK_MEDIUM_AND_ABOVE=2 BLOCK_MEDIUM_AND_ABOVE value
+                         * @property {number} BLOCK_ONLY_HIGH=3 BLOCK_ONLY_HIGH value
+                         * @property {number} BLOCK_NONE=4 BLOCK_NONE value
+                         * @property {number} OFF=5 OFF value
+                         */
+                        AdvancedVoiceOptions.HarmBlockThreshold = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_BLOCK_THRESHOLD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BLOCK_LOW_AND_ABOVE"] = 1;
+                            values[valuesById[2] = "BLOCK_MEDIUM_AND_ABOVE"] = 2;
+                            values[valuesById[3] = "BLOCK_ONLY_HIGH"] = 3;
+                            values[valuesById[4] = "BLOCK_NONE"] = 4;
+                            values[valuesById[5] = "OFF"] = 5;
+                            return values;
+                        })();
     
                         return AdvancedVoiceOptions;
                     })();
@@ -5173,6 +5805,7 @@
                          * @property {google.cloud.texttospeech.v1.IVoiceSelectionParams|null} [voice] StreamingSynthesizeConfig voice
                          * @property {google.cloud.texttospeech.v1.IStreamingAudioConfig|null} [streamingAudioConfig] StreamingSynthesizeConfig streamingAudioConfig
                          * @property {google.cloud.texttospeech.v1.ICustomPronunciations|null} [customPronunciations] StreamingSynthesizeConfig customPronunciations
+                         * @property {google.cloud.texttospeech.v1.IAdvancedVoiceOptions|null} [advancedVoiceOptions] StreamingSynthesizeConfig advancedVoiceOptions
                          */
     
                         /**
@@ -5215,6 +5848,23 @@
                         StreamingSynthesizeConfig.prototype.customPronunciations = null;
     
                         /**
+                         * StreamingSynthesizeConfig advancedVoiceOptions.
+                         * @member {google.cloud.texttospeech.v1.IAdvancedVoiceOptions|null|undefined} advancedVoiceOptions
+                         * @memberof google.cloud.texttospeech.v1.StreamingSynthesizeConfig
+                         * @instance
+                         */
+                        StreamingSynthesizeConfig.prototype.advancedVoiceOptions = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StreamingSynthesizeConfig.prototype, "_advancedVoiceOptions", {
+                            get: $util.oneOfGetter($oneOfFields = ["advancedVoiceOptions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new StreamingSynthesizeConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1.StreamingSynthesizeConfig
@@ -5244,6 +5894,8 @@
                                 $root.google.cloud.texttospeech.v1.StreamingAudioConfig.encode(message.streamingAudioConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.customPronunciations != null && Object.hasOwnProperty.call(message, "customPronunciations"))
                                 $root.google.cloud.texttospeech.v1.CustomPronunciations.encode(message.customPronunciations, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.advancedVoiceOptions != null && Object.hasOwnProperty.call(message, "advancedVoiceOptions"))
+                                $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.encode(message.advancedVoiceOptions, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -5292,6 +5944,10 @@
                                         message.customPronunciations = $root.google.cloud.texttospeech.v1.CustomPronunciations.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 7: {
+                                        message.advancedVoiceOptions = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5327,6 +5983,7 @@
                         StreamingSynthesizeConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.voice != null && message.hasOwnProperty("voice")) {
                                 var error = $root.google.cloud.texttospeech.v1.VoiceSelectionParams.verify(message.voice);
                                 if (error)
@@ -5341,6 +5998,14 @@
                                 var error = $root.google.cloud.texttospeech.v1.CustomPronunciations.verify(message.customPronunciations);
                                 if (error)
                                     return "customPronunciations." + error;
+                            }
+                            if (message.advancedVoiceOptions != null && message.hasOwnProperty("advancedVoiceOptions")) {
+                                properties._advancedVoiceOptions = 1;
+                                {
+                                    var error = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.verify(message.advancedVoiceOptions);
+                                    if (error)
+                                        return "advancedVoiceOptions." + error;
+                                }
                             }
                             return null;
                         };
@@ -5372,6 +6037,11 @@
                                     throw TypeError(".google.cloud.texttospeech.v1.StreamingSynthesizeConfig.customPronunciations: object expected");
                                 message.customPronunciations = $root.google.cloud.texttospeech.v1.CustomPronunciations.fromObject(object.customPronunciations);
                             }
+                            if (object.advancedVoiceOptions != null) {
+                                if (typeof object.advancedVoiceOptions !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1.StreamingSynthesizeConfig.advancedVoiceOptions: object expected");
+                                message.advancedVoiceOptions = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.fromObject(object.advancedVoiceOptions);
+                            }
                             return message;
                         };
     
@@ -5399,6 +6069,11 @@
                                 object.streamingAudioConfig = $root.google.cloud.texttospeech.v1.StreamingAudioConfig.toObject(message.streamingAudioConfig, options);
                             if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations"))
                                 object.customPronunciations = $root.google.cloud.texttospeech.v1.CustomPronunciations.toObject(message.customPronunciations, options);
+                            if (message.advancedVoiceOptions != null && message.hasOwnProperty("advancedVoiceOptions")) {
+                                object.advancedVoiceOptions = $root.google.cloud.texttospeech.v1.AdvancedVoiceOptions.toObject(message.advancedVoiceOptions, options);
+                                if (options.oneofs)
+                                    object._advancedVoiceOptions = "advancedVoiceOptions";
+                            }
                             return object;
                         };
     
@@ -8001,6 +8676,8 @@
                          * @interface IAdvancedVoiceOptions
                          * @property {boolean|null} [lowLatencyJourneySynthesis] AdvancedVoiceOptions lowLatencyJourneySynthesis
                          * @property {boolean|null} [relaxSafetyFilters] AdvancedVoiceOptions relaxSafetyFilters
+                         * @property {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings|null} [safetySettings] AdvancedVoiceOptions safetySettings
+                         * @property {boolean|null} [enableTextnorm] AdvancedVoiceOptions enableTextnorm
                          */
     
                         /**
@@ -8034,12 +8711,34 @@
                          */
                         AdvancedVoiceOptions.prototype.relaxSafetyFilters = false;
     
+                        /**
+                         * AdvancedVoiceOptions safetySettings.
+                         * @member {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings|null|undefined} safetySettings
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.safetySettings = null;
+    
+                        /**
+                         * AdvancedVoiceOptions enableTextnorm.
+                         * @member {boolean|null|undefined} enableTextnorm
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.enableTextnorm = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         // Virtual OneOf for proto3 optional field
                         Object.defineProperty(AdvancedVoiceOptions.prototype, "_lowLatencyJourneySynthesis", {
                             get: $util.oneOfGetter($oneOfFields = ["lowLatencyJourneySynthesis"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(AdvancedVoiceOptions.prototype, "_enableTextnorm", {
+                            get: $util.oneOfGetter($oneOfFields = ["enableTextnorm"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -8069,8 +8768,12 @@
                                 writer = $Writer.create();
                             if (message.lowLatencyJourneySynthesis != null && Object.hasOwnProperty.call(message, "lowLatencyJourneySynthesis"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowLatencyJourneySynthesis);
+                            if (message.enableTextnorm != null && Object.hasOwnProperty.call(message, "enableTextnorm"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enableTextnorm);
                             if (message.relaxSafetyFilters != null && Object.hasOwnProperty.call(message, "relaxSafetyFilters"))
                                 writer.uint32(/* id 8, wireType 0 =*/64).bool(message.relaxSafetyFilters);
+                            if (message.safetySettings != null && Object.hasOwnProperty.call(message, "safetySettings"))
+                                $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.encode(message.safetySettings, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -8113,6 +8816,14 @@
                                     }
                                 case 8: {
                                         message.relaxSafetyFilters = reader.bool();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.safetySettings = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.enableTextnorm = reader.bool();
                                         break;
                                     }
                                 default:
@@ -8159,6 +8870,16 @@
                             if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
                                 if (typeof message.relaxSafetyFilters !== "boolean")
                                     return "relaxSafetyFilters: boolean expected";
+                            if (message.safetySettings != null && message.hasOwnProperty("safetySettings")) {
+                                var error = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.verify(message.safetySettings);
+                                if (error)
+                                    return "safetySettings." + error;
+                            }
+                            if (message.enableTextnorm != null && message.hasOwnProperty("enableTextnorm")) {
+                                properties._enableTextnorm = 1;
+                                if (typeof message.enableTextnorm !== "boolean")
+                                    return "enableTextnorm: boolean expected";
+                            }
                             return null;
                         };
     
@@ -8178,6 +8899,13 @@
                                 message.lowLatencyJourneySynthesis = Boolean(object.lowLatencyJourneySynthesis);
                             if (object.relaxSafetyFilters != null)
                                 message.relaxSafetyFilters = Boolean(object.relaxSafetyFilters);
+                            if (object.safetySettings != null) {
+                                if (typeof object.safetySettings !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.safetySettings: object expected");
+                                message.safetySettings = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.fromObject(object.safetySettings);
+                            }
+                            if (object.enableTextnorm != null)
+                                message.enableTextnorm = Boolean(object.enableTextnorm);
                             return message;
                         };
     
@@ -8194,15 +8922,24 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.relaxSafetyFilters = false;
+                                object.safetySettings = null;
+                            }
                             if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
                                 object.lowLatencyJourneySynthesis = message.lowLatencyJourneySynthesis;
                                 if (options.oneofs)
                                     object._lowLatencyJourneySynthesis = "lowLatencyJourneySynthesis";
                             }
+                            if (message.enableTextnorm != null && message.hasOwnProperty("enableTextnorm")) {
+                                object.enableTextnorm = message.enableTextnorm;
+                                if (options.oneofs)
+                                    object._enableTextnorm = "enableTextnorm";
+                            }
                             if (message.relaxSafetyFilters != null && message.hasOwnProperty("relaxSafetyFilters"))
                                 object.relaxSafetyFilters = message.relaxSafetyFilters;
+                            if (message.safetySettings != null && message.hasOwnProperty("safetySettings"))
+                                object.safetySettings = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.toObject(message.safetySettings, options);
                             return object;
                         };
     
@@ -8231,6 +8968,576 @@
                             }
                             return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions";
                         };
+    
+                        AdvancedVoiceOptions.SafetySetting = (function() {
+    
+                            /**
+                             * Properties of a SafetySetting.
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                             * @interface ISafetySetting
+                             * @property {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory|null} [category] SafetySetting category
+                             * @property {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold|null} [threshold] SafetySetting threshold
+                             */
+    
+                            /**
+                             * Constructs a new SafetySetting.
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                             * @classdesc Represents a SafetySetting.
+                             * @implements ISafetySetting
+                             * @constructor
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting=} [properties] Properties to set
+                             */
+                            function SafetySetting(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SafetySetting category.
+                             * @member {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory} category
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @instance
+                             */
+                            SafetySetting.prototype.category = 0;
+    
+                            /**
+                             * SafetySetting threshold.
+                             * @member {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold} threshold
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @instance
+                             */
+                            SafetySetting.prototype.threshold = 0;
+    
+                            /**
+                             * Creates a new SafetySetting instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting=} [properties] Properties to set
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting} SafetySetting instance
+                             */
+                            SafetySetting.create = function create(properties) {
+                                return new SafetySetting(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySetting message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting} message SafetySetting message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySetting.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.category);
+                                if (message.threshold != null && Object.hasOwnProperty.call(message, "threshold"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.threshold);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySetting message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting} message SafetySetting message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySetting.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SafetySetting message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting} SafetySetting
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySetting.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.category = reader.int32();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.threshold = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SafetySetting message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting} SafetySetting
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySetting.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SafetySetting message.
+                             * @function verify
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SafetySetting.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    switch (message.category) {
+                                    default:
+                                        return "category: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                        break;
+                                    }
+                                if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                    switch (message.threshold) {
+                                    default:
+                                        return "threshold: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SafetySetting message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting} SafetySetting
+                             */
+                            SafetySetting.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting)
+                                    return object;
+                                var message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting();
+                                switch (object.category) {
+                                default:
+                                    if (typeof object.category === "number") {
+                                        message.category = object.category;
+                                        break;
+                                    }
+                                    break;
+                                case "HARM_CATEGORY_UNSPECIFIED":
+                                case 0:
+                                    message.category = 0;
+                                    break;
+                                case "HARM_CATEGORY_HATE_SPEECH":
+                                case 1:
+                                    message.category = 1;
+                                    break;
+                                case "HARM_CATEGORY_DANGEROUS_CONTENT":
+                                case 2:
+                                    message.category = 2;
+                                    break;
+                                case "HARM_CATEGORY_HARASSMENT":
+                                case 3:
+                                    message.category = 3;
+                                    break;
+                                case "HARM_CATEGORY_SEXUALLY_EXPLICIT":
+                                case 4:
+                                    message.category = 4;
+                                    break;
+                                }
+                                switch (object.threshold) {
+                                default:
+                                    if (typeof object.threshold === "number") {
+                                        message.threshold = object.threshold;
+                                        break;
+                                    }
+                                    break;
+                                case "HARM_BLOCK_THRESHOLD_UNSPECIFIED":
+                                case 0:
+                                    message.threshold = 0;
+                                    break;
+                                case "BLOCK_LOW_AND_ABOVE":
+                                case 1:
+                                    message.threshold = 1;
+                                    break;
+                                case "BLOCK_MEDIUM_AND_ABOVE":
+                                case 2:
+                                    message.threshold = 2;
+                                    break;
+                                case "BLOCK_ONLY_HIGH":
+                                case 3:
+                                    message.threshold = 3;
+                                    break;
+                                case "BLOCK_NONE":
+                                case 4:
+                                    message.threshold = 4;
+                                    break;
+                                case "OFF":
+                                case 5:
+                                    message.threshold = 5;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SafetySetting message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting} message SafetySetting
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SafetySetting.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.category = options.enums === String ? "HARM_CATEGORY_UNSPECIFIED" : 0;
+                                    object.threshold = options.enums === String ? "HARM_BLOCK_THRESHOLD_UNSPECIFIED" : 0;
+                                }
+                                if (message.category != null && message.hasOwnProperty("category"))
+                                    object.category = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory[message.category] === undefined ? message.category : $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory[message.category] : message.category;
+                                if (message.threshold != null && message.hasOwnProperty("threshold"))
+                                    object.threshold = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold[message.threshold] === undefined ? message.threshold : $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold[message.threshold] : message.threshold;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SafetySetting to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SafetySetting.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SafetySetting
+                             * @function getTypeUrl
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SafetySetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting";
+                            };
+    
+                            return SafetySetting;
+                        })();
+    
+                        AdvancedVoiceOptions.SafetySettings = (function() {
+    
+                            /**
+                             * Properties of a SafetySettings.
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                             * @interface ISafetySettings
+                             * @property {Array.<google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting>|null} [settings] SafetySettings settings
+                             */
+    
+                            /**
+                             * Constructs a new SafetySettings.
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                             * @classdesc Represents a SafetySettings.
+                             * @implements ISafetySettings
+                             * @constructor
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings=} [properties] Properties to set
+                             */
+                            function SafetySettings(properties) {
+                                this.settings = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SafetySettings settings.
+                             * @member {Array.<google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySetting>} settings
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @instance
+                             */
+                            SafetySettings.prototype.settings = $util.emptyArray;
+    
+                            /**
+                             * Creates a new SafetySettings instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings=} [properties] Properties to set
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings} SafetySettings instance
+                             */
+                            SafetySettings.create = function create(properties) {
+                                return new SafetySettings(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySettings message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings} message SafetySettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySettings.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.settings != null && message.settings.length)
+                                    for (var i = 0; i < message.settings.length; ++i)
+                                        $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.encode(message.settings[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SafetySettings message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.ISafetySettings} message SafetySettings message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SafetySettings.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SafetySettings message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings} SafetySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySettings.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.settings && message.settings.length))
+                                                message.settings = [];
+                                            message.settings.push($root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SafetySettings message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings} SafetySettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SafetySettings.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SafetySettings message.
+                             * @function verify
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SafetySettings.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.settings != null && message.hasOwnProperty("settings")) {
+                                    if (!Array.isArray(message.settings))
+                                        return "settings: array expected";
+                                    for (var i = 0; i < message.settings.length; ++i) {
+                                        var error = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.verify(message.settings[i]);
+                                        if (error)
+                                            return "settings." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SafetySettings message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings} SafetySettings
+                             */
+                            SafetySettings.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings)
+                                    return object;
+                                var message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings();
+                                if (object.settings) {
+                                    if (!Array.isArray(object.settings))
+                                        throw TypeError(".google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.settings: array expected");
+                                    message.settings = [];
+                                    for (var i = 0; i < object.settings.length; ++i) {
+                                        if (typeof object.settings[i] !== "object")
+                                            throw TypeError(".google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings.settings: object expected");
+                                        message.settings[i] = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.fromObject(object.settings[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SafetySettings message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings} message SafetySettings
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SafetySettings.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.settings = [];
+                                if (message.settings && message.settings.length) {
+                                    object.settings = [];
+                                    for (var j = 0; j < message.settings.length; ++j)
+                                        object.settings[j] = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySetting.toObject(message.settings[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SafetySettings to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SafetySettings.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SafetySettings
+                             * @function getTypeUrl
+                             * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SafetySettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.SafetySettings";
+                            };
+    
+                            return SafetySettings;
+                        })();
+    
+                        /**
+                         * HarmCategory enum.
+                         * @name google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmCategory
+                         * @enum {number}
+                         * @property {number} HARM_CATEGORY_UNSPECIFIED=0 HARM_CATEGORY_UNSPECIFIED value
+                         * @property {number} HARM_CATEGORY_HATE_SPEECH=1 HARM_CATEGORY_HATE_SPEECH value
+                         * @property {number} HARM_CATEGORY_DANGEROUS_CONTENT=2 HARM_CATEGORY_DANGEROUS_CONTENT value
+                         * @property {number} HARM_CATEGORY_HARASSMENT=3 HARM_CATEGORY_HARASSMENT value
+                         * @property {number} HARM_CATEGORY_SEXUALLY_EXPLICIT=4 HARM_CATEGORY_SEXUALLY_EXPLICIT value
+                         */
+                        AdvancedVoiceOptions.HarmCategory = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_CATEGORY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HARM_CATEGORY_HATE_SPEECH"] = 1;
+                            values[valuesById[2] = "HARM_CATEGORY_DANGEROUS_CONTENT"] = 2;
+                            values[valuesById[3] = "HARM_CATEGORY_HARASSMENT"] = 3;
+                            values[valuesById[4] = "HARM_CATEGORY_SEXUALLY_EXPLICIT"] = 4;
+                            return values;
+                        })();
+    
+                        /**
+                         * HarmBlockThreshold enum.
+                         * @name google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.HarmBlockThreshold
+                         * @enum {number}
+                         * @property {number} HARM_BLOCK_THRESHOLD_UNSPECIFIED=0 HARM_BLOCK_THRESHOLD_UNSPECIFIED value
+                         * @property {number} BLOCK_LOW_AND_ABOVE=1 BLOCK_LOW_AND_ABOVE value
+                         * @property {number} BLOCK_MEDIUM_AND_ABOVE=2 BLOCK_MEDIUM_AND_ABOVE value
+                         * @property {number} BLOCK_ONLY_HIGH=3 BLOCK_ONLY_HIGH value
+                         * @property {number} BLOCK_NONE=4 BLOCK_NONE value
+                         * @property {number} OFF=5 OFF value
+                         */
+                        AdvancedVoiceOptions.HarmBlockThreshold = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "HARM_BLOCK_THRESHOLD_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BLOCK_LOW_AND_ABOVE"] = 1;
+                            values[valuesById[2] = "BLOCK_MEDIUM_AND_ABOVE"] = 2;
+                            values[valuesById[3] = "BLOCK_ONLY_HIGH"] = 3;
+                            values[valuesById[4] = "BLOCK_NONE"] = 4;
+                            values[valuesById[5] = "OFF"] = 5;
+                            return values;
+                        })();
     
                         return AdvancedVoiceOptions;
                     })();
@@ -12564,6 +13871,7 @@
                          * @property {google.cloud.texttospeech.v1beta1.IVoiceSelectionParams|null} [voice] StreamingSynthesizeConfig voice
                          * @property {google.cloud.texttospeech.v1beta1.IStreamingAudioConfig|null} [streamingAudioConfig] StreamingSynthesizeConfig streamingAudioConfig
                          * @property {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null} [customPronunciations] StreamingSynthesizeConfig customPronunciations
+                         * @property {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions|null} [advancedVoiceOptions] StreamingSynthesizeConfig advancedVoiceOptions
                          */
     
                         /**
@@ -12606,6 +13914,23 @@
                         StreamingSynthesizeConfig.prototype.customPronunciations = null;
     
                         /**
+                         * StreamingSynthesizeConfig advancedVoiceOptions.
+                         * @member {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions|null|undefined} advancedVoiceOptions
+                         * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig
+                         * @instance
+                         */
+                        StreamingSynthesizeConfig.prototype.advancedVoiceOptions = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(StreamingSynthesizeConfig.prototype, "_advancedVoiceOptions", {
+                            get: $util.oneOfGetter($oneOfFields = ["advancedVoiceOptions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new StreamingSynthesizeConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig
@@ -12635,6 +13960,8 @@
                                 $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.encode(message.streamingAudioConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.customPronunciations != null && Object.hasOwnProperty.call(message, "customPronunciations"))
                                 $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.encode(message.customPronunciations, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.advancedVoiceOptions != null && Object.hasOwnProperty.call(message, "advancedVoiceOptions"))
+                                $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.encode(message.advancedVoiceOptions, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -12683,6 +14010,10 @@
                                         message.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.decode(reader, reader.uint32());
                                         break;
                                     }
+                                case 7: {
+                                        message.advancedVoiceOptions = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12718,6 +14049,7 @@
                         StreamingSynthesizeConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.voice != null && message.hasOwnProperty("voice")) {
                                 var error = $root.google.cloud.texttospeech.v1beta1.VoiceSelectionParams.verify(message.voice);
                                 if (error)
@@ -12732,6 +14064,14 @@
                                 var error = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.verify(message.customPronunciations);
                                 if (error)
                                     return "customPronunciations." + error;
+                            }
+                            if (message.advancedVoiceOptions != null && message.hasOwnProperty("advancedVoiceOptions")) {
+                                properties._advancedVoiceOptions = 1;
+                                {
+                                    var error = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.verify(message.advancedVoiceOptions);
+                                    if (error)
+                                        return "advancedVoiceOptions." + error;
+                                }
                             }
                             return null;
                         };
@@ -12763,6 +14103,11 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig.customPronunciations: object expected");
                                 message.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.fromObject(object.customPronunciations);
                             }
+                            if (object.advancedVoiceOptions != null) {
+                                if (typeof object.advancedVoiceOptions !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig.advancedVoiceOptions: object expected");
+                                message.advancedVoiceOptions = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.fromObject(object.advancedVoiceOptions);
+                            }
                             return message;
                         };
     
@@ -12790,6 +14135,11 @@
                                 object.streamingAudioConfig = $root.google.cloud.texttospeech.v1beta1.StreamingAudioConfig.toObject(message.streamingAudioConfig, options);
                             if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations"))
                                 object.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.toObject(message.customPronunciations, options);
+                            if (message.advancedVoiceOptions != null && message.hasOwnProperty("advancedVoiceOptions")) {
+                                object.advancedVoiceOptions = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.toObject(message.advancedVoiceOptions, options);
+                                if (options.oneofs)
+                                    object._advancedVoiceOptions = "advancedVoiceOptions";
+                            }
                             return object;
                         };
     

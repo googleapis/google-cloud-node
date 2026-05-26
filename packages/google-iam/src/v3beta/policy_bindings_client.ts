@@ -185,6 +185,9 @@ export class PolicyBindingsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      folderLocationAccessPoliciesPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/locations/{location}/accessPolicies/{access_policy}'
+      ),
       folderLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/locations/{location}/policyBindings/{policy_binding}'
       ),
@@ -194,11 +197,17 @@ export class PolicyBindingsClient {
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
       ),
+      organizationLocationAccessPoliciesPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/accessPolicies/{access_policy}'
+      ),
       organizationLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/policyBindings/{policy_binding}'
       ),
       principalAccessBoundaryPolicyPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}/principalAccessBoundaryPolicies/{principal_access_boundary_policy}'
+      ),
+      projectLocationAccessPoliciesPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/accessPolicies/{access_policy}'
       ),
       projectLocationPolicyBindingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/policyBindings/{policy_binding}'
@@ -509,7 +518,7 @@ export class PolicyBindingsClient {
 /**
  * Creates a policy binding and returns a long-running operation.
  * Callers will need the IAM permissions on both the policy and target.
- * Once the binding is created, the policy is applied to the target.
+ * After the binding is created, the policy is applied to the target.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -639,9 +648,7 @@ export class PolicyBindingsClient {
 /**
  * Updates a policy binding and returns a long-running operation.
  * Callers will need the IAM permissions on the policy and target in the
- * binding to update, and the IAM permission to remove the existing policy
- * from the binding. Target is immutable and cannot be updated. Once the
- * binding is updated, the new policy is applied to the target.
+ * binding to update. Target and policy are immutable and cannot be updated.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -758,7 +765,7 @@ export class PolicyBindingsClient {
 /**
  * Deletes a policy binding and returns a long-running operation.
  * Callers will need the IAM permissions on both the policy and target.
- * Once the binding is deleted, the policy no longer applies to the target.
+ * After the binding is deleted, the policy no longer applies to the target.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -896,8 +903,7 @@ export class PolicyBindingsClient {
  *   Optional. The maximum number of policy bindings to return. The service may
  *   return fewer than this value.
  *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ *   The default value is 50. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListPolicyBindings` call.
  *   Provide this to retrieve the subsequent page.
@@ -906,7 +912,8 @@ export class PolicyBindingsClient {
  *   match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. An expression for filtering the results of the request. Filter
- *   rules are case insensitive. Some eligible fields for filtering are:
+ *   rules are case insensitive. Some eligible fields for filtering are the
+ *   following:
  *
  *   + `target`
  *   + `policy`
@@ -1022,8 +1029,7 @@ export class PolicyBindingsClient {
  *   Optional. The maximum number of policy bindings to return. The service may
  *   return fewer than this value.
  *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ *   The default value is 50. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListPolicyBindings` call.
  *   Provide this to retrieve the subsequent page.
@@ -1032,7 +1038,8 @@ export class PolicyBindingsClient {
  *   match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. An expression for filtering the results of the request. Filter
- *   rules are case insensitive. Some eligible fields for filtering are:
+ *   rules are case insensitive. Some eligible fields for filtering are the
+ *   following:
  *
  *   + `target`
  *   + `policy`
@@ -1097,8 +1104,7 @@ export class PolicyBindingsClient {
  *   Optional. The maximum number of policy bindings to return. The service may
  *   return fewer than this value.
  *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ *   The default value is 50. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous `ListPolicyBindings` call.
  *   Provide this to retrieve the subsequent page.
@@ -1107,7 +1113,8 @@ export class PolicyBindingsClient {
  *   match the call that provided the page token.
  * @param {string} [request.filter]
  *   Optional. An expression for filtering the results of the request. Filter
- *   rules are case insensitive. Some eligible fields for filtering are:
+ *   rules are case insensitive. Some eligible fields for filtering are the
+ *   following:
  *
  *   + `target`
  *   + `policy`
@@ -1173,8 +1180,7 @@ export class PolicyBindingsClient {
  *   Optional. The maximum number of policy bindings to return. The service may
  *   return fewer than this value.
  *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ *   The default value is 50. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous
  *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
@@ -1194,6 +1200,17 @@ export class PolicyBindingsClient {
  *   * `projects/{project_number}/locations/{location}`
  *   * `folders/{folder_id}/locations/{location}`
  *   * `organizations/{organization_id}/locations/{location}`
+ * @param {string} [request.filter]
+ *   Optional. Filtering currently only supports the kind of policies to return,
+ *   and must be in the format "policy_kind={policy_kind}".
+ *
+ *   If String is empty, bindings bound to all kinds of policies would be
+ *   returned.
+ *
+ *   The only supported values are the following:
+ *
+ *   * "policy_kind=PRINCIPAL_ACCESS_BOUNDARY",
+ *   * "policy_kind=ACCESS"
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1301,8 +1318,7 @@ export class PolicyBindingsClient {
  *   Optional. The maximum number of policy bindings to return. The service may
  *   return fewer than this value.
  *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ *   The default value is 50. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous
  *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
@@ -1322,6 +1338,17 @@ export class PolicyBindingsClient {
  *   * `projects/{project_number}/locations/{location}`
  *   * `folders/{folder_id}/locations/{location}`
  *   * `organizations/{organization_id}/locations/{location}`
+ * @param {string} [request.filter]
+ *   Optional. Filtering currently only supports the kind of policies to return,
+ *   and must be in the format "policy_kind={policy_kind}".
+ *
+ *   If String is empty, bindings bound to all kinds of policies would be
+ *   returned.
+ *
+ *   The only supported values are the following:
+ *
+ *   * "policy_kind=PRINCIPAL_ACCESS_BOUNDARY",
+ *   * "policy_kind=ACCESS"
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1378,8 +1405,7 @@ export class PolicyBindingsClient {
  *   Optional. The maximum number of policy bindings to return. The service may
  *   return fewer than this value.
  *
- *   If unspecified, at most 50 policy bindings will be returned.
- *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+ *   The default value is 50. The maximum value is 1000.
  * @param {string} [request.pageToken]
  *   Optional. A page token, received from a previous
  *   `SearchTargetPolicyBindingsRequest` call. Provide this to retrieve the
@@ -1399,6 +1425,17 @@ export class PolicyBindingsClient {
  *   * `projects/{project_number}/locations/{location}`
  *   * `folders/{folder_id}/locations/{location}`
  *   * `organizations/{organization_id}/locations/{location}`
+ * @param {string} [request.filter]
+ *   Optional. Filtering currently only supports the kind of policies to return,
+ *   and must be in the format "policy_kind={policy_kind}".
+ *
+ *   If String is empty, bindings bound to all kinds of policies would be
+ *   returned.
+ *
+ *   The only supported values are the following:
+ *
+ *   * "policy_kind=PRINCIPAL_ACCESS_BOUNDARY",
+ *   * "policy_kind=ACCESS"
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1741,6 +1778,55 @@ export class PolicyBindingsClient {
   // --------------------
 
   /**
+   * Return a fully-qualified folderLocationAccessPolicies resource name string.
+   *
+   * @param {string} folder
+   * @param {string} location
+   * @param {string} access_policy
+   * @returns {string} Resource name string.
+   */
+  folderLocationAccessPoliciesPath(folder:string,location:string,accessPolicy:string) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.render({
+      folder: folder,
+      location: location,
+      access_policy: accessPolicy,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderLocationAccessPolicies resource.
+   *
+   * @param {string} folderLocationAccessPoliciesName
+   *   A fully-qualified path representing folder_location_accessPolicies resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderLocationAccessPoliciesName(folderLocationAccessPoliciesName: string) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.match(folderLocationAccessPoliciesName).folder;
+  }
+
+  /**
+   * Parse the location from FolderLocationAccessPolicies resource.
+   *
+   * @param {string} folderLocationAccessPoliciesName
+   *   A fully-qualified path representing folder_location_accessPolicies resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromFolderLocationAccessPoliciesName(folderLocationAccessPoliciesName: string) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.match(folderLocationAccessPoliciesName).location;
+  }
+
+  /**
+   * Parse the access_policy from FolderLocationAccessPolicies resource.
+   *
+   * @param {string} folderLocationAccessPoliciesName
+   *   A fully-qualified path representing folder_location_accessPolicies resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromFolderLocationAccessPoliciesName(folderLocationAccessPoliciesName: string) {
+    return this.pathTemplates.folderLocationAccessPoliciesPathTemplate.match(folderLocationAccessPoliciesName).access_policy;
+  }
+
+  /**
    * Return a fully-qualified folderLocationPolicyBindings resource name string.
    *
    * @param {string} folder
@@ -1849,6 +1935,55 @@ export class PolicyBindingsClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationAccessPolicies resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} access_policy
+   * @returns {string} Resource name string.
+   */
+  organizationLocationAccessPoliciesPath(organization:string,location:string,accessPolicy:string) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.render({
+      organization: organization,
+      location: location,
+      access_policy: accessPolicy,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationAccessPolicies resource.
+   *
+   * @param {string} organizationLocationAccessPoliciesName
+   *   A fully-qualified path representing organization_location_accessPolicies resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationAccessPoliciesName(organizationLocationAccessPoliciesName: string) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.match(organizationLocationAccessPoliciesName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationAccessPolicies resource.
+   *
+   * @param {string} organizationLocationAccessPoliciesName
+   *   A fully-qualified path representing organization_location_accessPolicies resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationAccessPoliciesName(organizationLocationAccessPoliciesName: string) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.match(organizationLocationAccessPoliciesName).location;
+  }
+
+  /**
+   * Parse the access_policy from OrganizationLocationAccessPolicies resource.
+   *
+   * @param {string} organizationLocationAccessPoliciesName
+   *   A fully-qualified path representing organization_location_accessPolicies resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromOrganizationLocationAccessPoliciesName(organizationLocationAccessPoliciesName: string) {
+    return this.pathTemplates.organizationLocationAccessPoliciesPathTemplate.match(organizationLocationAccessPoliciesName).access_policy;
+  }
+
+  /**
    * Return a fully-qualified organizationLocationPolicyBindings resource name string.
    *
    * @param {string} organization
@@ -1944,6 +2079,55 @@ export class PolicyBindingsClient {
    */
   matchPrincipalAccessBoundaryPolicyFromPrincipalAccessBoundaryPolicyName(principalAccessBoundaryPolicyName: string) {
     return this.pathTemplates.principalAccessBoundaryPolicyPathTemplate.match(principalAccessBoundaryPolicyName).principal_access_boundary_policy;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAccessPolicies resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} access_policy
+   * @returns {string} Resource name string.
+   */
+  projectLocationAccessPoliciesPath(project:string,location:string,accessPolicy:string) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.render({
+      project: project,
+      location: location,
+      access_policy: accessPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAccessPolicies resource.
+   *
+   * @param {string} projectLocationAccessPoliciesName
+   *   A fully-qualified path representing project_location_accessPolicies resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAccessPoliciesName(projectLocationAccessPoliciesName: string) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.match(projectLocationAccessPoliciesName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAccessPolicies resource.
+   *
+   * @param {string} projectLocationAccessPoliciesName
+   *   A fully-qualified path representing project_location_accessPolicies resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAccessPoliciesName(projectLocationAccessPoliciesName: string) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.match(projectLocationAccessPoliciesName).location;
+  }
+
+  /**
+   * Parse the access_policy from ProjectLocationAccessPolicies resource.
+   *
+   * @param {string} projectLocationAccessPoliciesName
+   *   A fully-qualified path representing project_location_accessPolicies resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromProjectLocationAccessPoliciesName(projectLocationAccessPoliciesName: string) {
+    return this.pathTemplates.projectLocationAccessPoliciesPathTemplate.match(projectLocationAccessPoliciesName).access_policy;
   }
 
   /**

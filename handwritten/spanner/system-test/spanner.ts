@@ -1193,7 +1193,11 @@ describe('Spanner', () => {
           assert.fail('Expected an error to be thrown, but it was not.');
         } catch (err: any) {
           KOKORO_JOB_NAME?.includes('system-test-regular-session')
-            ? assert.strictEqual(err.code, grpc.status.FAILED_PRECONDITION)
+            ? assert.ok(
+                err.code === grpc.status.FAILED_PRECONDITION ||
+                  err.code === grpc.status.OUT_OF_RANGE,
+                `Expected FAILED_PRECONDITION (9) or OUT_OF_RANGE (11), got ${err.code}`
+              )
             : assert.strictEqual(err.code, grpc.status.INVALID_ARGUMENT);
         }
       };

@@ -1,7 +1,14 @@
 [
+  "../../protos/google/cloud/chronicle/v1/big_query_export.proto",
+  "../../protos/google/cloud/chronicle/v1/dashboard_chart.proto",
+  "../../protos/google/cloud/chronicle/v1/dashboard_query.proto",
   "../../protos/google/cloud/chronicle/v1/data_access_control.proto",
+  "../../protos/google/cloud/chronicle/v1/data_table.proto",
   "../../protos/google/cloud/chronicle/v1/entity.proto",
+  "../../protos/google/cloud/chronicle/v1/featured_content_metadata.proto",
+  "../../protos/google/cloud/chronicle/v1/featured_content_native_dashboard.proto",
   "../../protos/google/cloud/chronicle/v1/instance.proto",
+  "../../protos/google/cloud/chronicle/v1/native_dashboard.proto",
   "../../protos/google/cloud/chronicle/v1/reference_list.proto",
   "../../protos/google/cloud/chronicle/v1/rule.proto"
 ]

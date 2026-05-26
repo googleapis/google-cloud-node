@@ -1055,6 +1055,303 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|getDeploymentGroup}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef GetDeploymentGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.DeploymentGroup} [response] DeploymentGroup
+                         */
+    
+                        /**
+                         * Calls GetDeploymentGroup.
+                         * @function getDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRequest} request GetDeploymentGroupRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.GetDeploymentGroupCallback} callback Node-style callback called with the error, if any, and DeploymentGroup
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.getDeploymentGroup = function getDeploymentGroup(request, callback) {
+                            return this.rpcCall(getDeploymentGroup, $root.google.cloud.config.v1.GetDeploymentGroupRequest, $root.google.cloud.config.v1.DeploymentGroup, request, callback);
+                        }, "name", { value: "GetDeploymentGroup" });
+    
+                        /**
+                         * Calls GetDeploymentGroup.
+                         * @function getDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRequest} request GetDeploymentGroupRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.DeploymentGroup>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|createDeploymentGroup}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef CreateDeploymentGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateDeploymentGroup.
+                         * @function createDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.ICreateDeploymentGroupRequest} request CreateDeploymentGroupRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.CreateDeploymentGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.createDeploymentGroup = function createDeploymentGroup(request, callback) {
+                            return this.rpcCall(createDeploymentGroup, $root.google.cloud.config.v1.CreateDeploymentGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateDeploymentGroup" });
+    
+                        /**
+                         * Calls CreateDeploymentGroup.
+                         * @function createDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.ICreateDeploymentGroupRequest} request CreateDeploymentGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|updateDeploymentGroup}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef UpdateDeploymentGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateDeploymentGroup.
+                         * @function updateDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IUpdateDeploymentGroupRequest} request UpdateDeploymentGroupRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.UpdateDeploymentGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.updateDeploymentGroup = function updateDeploymentGroup(request, callback) {
+                            return this.rpcCall(updateDeploymentGroup, $root.google.cloud.config.v1.UpdateDeploymentGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateDeploymentGroup" });
+    
+                        /**
+                         * Calls UpdateDeploymentGroup.
+                         * @function updateDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IUpdateDeploymentGroupRequest} request UpdateDeploymentGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|deleteDeploymentGroup}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef DeleteDeploymentGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteDeploymentGroup.
+                         * @function deleteDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IDeleteDeploymentGroupRequest} request DeleteDeploymentGroupRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.DeleteDeploymentGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.deleteDeploymentGroup = function deleteDeploymentGroup(request, callback) {
+                            return this.rpcCall(deleteDeploymentGroup, $root.google.cloud.config.v1.DeleteDeploymentGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteDeploymentGroup" });
+    
+                        /**
+                         * Calls DeleteDeploymentGroup.
+                         * @function deleteDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IDeleteDeploymentGroupRequest} request DeleteDeploymentGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|listDeploymentGroups}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef ListDeploymentGroupsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.ListDeploymentGroupsResponse} [response] ListDeploymentGroupsResponse
+                         */
+    
+                        /**
+                         * Calls ListDeploymentGroups.
+                         * @function listDeploymentGroups
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsRequest} request ListDeploymentGroupsRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.ListDeploymentGroupsCallback} callback Node-style callback called with the error, if any, and ListDeploymentGroupsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.listDeploymentGroups = function listDeploymentGroups(request, callback) {
+                            return this.rpcCall(listDeploymentGroups, $root.google.cloud.config.v1.ListDeploymentGroupsRequest, $root.google.cloud.config.v1.ListDeploymentGroupsResponse, request, callback);
+                        }, "name", { value: "ListDeploymentGroups" });
+    
+                        /**
+                         * Calls ListDeploymentGroups.
+                         * @function listDeploymentGroups
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsRequest} request ListDeploymentGroupsRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.ListDeploymentGroupsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|provisionDeploymentGroup}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef ProvisionDeploymentGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ProvisionDeploymentGroup.
+                         * @function provisionDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupRequest} request ProvisionDeploymentGroupRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.ProvisionDeploymentGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.provisionDeploymentGroup = function provisionDeploymentGroup(request, callback) {
+                            return this.rpcCall(provisionDeploymentGroup, $root.google.cloud.config.v1.ProvisionDeploymentGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ProvisionDeploymentGroup" });
+    
+                        /**
+                         * Calls ProvisionDeploymentGroup.
+                         * @function provisionDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupRequest} request ProvisionDeploymentGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|deprovisionDeploymentGroup}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef DeprovisionDeploymentGroupCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeprovisionDeploymentGroup.
+                         * @function deprovisionDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IDeprovisionDeploymentGroupRequest} request DeprovisionDeploymentGroupRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.DeprovisionDeploymentGroupCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.deprovisionDeploymentGroup = function deprovisionDeploymentGroup(request, callback) {
+                            return this.rpcCall(deprovisionDeploymentGroup, $root.google.cloud.config.v1.DeprovisionDeploymentGroupRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeprovisionDeploymentGroup" });
+    
+                        /**
+                         * Calls DeprovisionDeploymentGroup.
+                         * @function deprovisionDeploymentGroup
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IDeprovisionDeploymentGroupRequest} request DeprovisionDeploymentGroupRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|getDeploymentGroupRevision}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef GetDeploymentGroupRevisionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.DeploymentGroupRevision} [response] DeploymentGroupRevision
+                         */
+    
+                        /**
+                         * Calls GetDeploymentGroupRevision.
+                         * @function getDeploymentGroupRevision
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRevisionRequest} request GetDeploymentGroupRevisionRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.GetDeploymentGroupRevisionCallback} callback Node-style callback called with the error, if any, and DeploymentGroupRevision
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.getDeploymentGroupRevision = function getDeploymentGroupRevision(request, callback) {
+                            return this.rpcCall(getDeploymentGroupRevision, $root.google.cloud.config.v1.GetDeploymentGroupRevisionRequest, $root.google.cloud.config.v1.DeploymentGroupRevision, request, callback);
+                        }, "name", { value: "GetDeploymentGroupRevision" });
+    
+                        /**
+                         * Calls GetDeploymentGroupRevision.
+                         * @function getDeploymentGroupRevision
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRevisionRequest} request GetDeploymentGroupRevisionRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.DeploymentGroupRevision>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.config.v1.Config|listDeploymentGroupRevisions}.
+                         * @memberof google.cloud.config.v1.Config
+                         * @typedef ListDeploymentGroupRevisionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.config.v1.ListDeploymentGroupRevisionsResponse} [response] ListDeploymentGroupRevisionsResponse
+                         */
+    
+                        /**
+                         * Calls ListDeploymentGroupRevisions.
+                         * @function listDeploymentGroupRevisions
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsRequest} request ListDeploymentGroupRevisionsRequest message or plain object
+                         * @param {google.cloud.config.v1.Config.ListDeploymentGroupRevisionsCallback} callback Node-style callback called with the error, if any, and ListDeploymentGroupRevisionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(Config.prototype.listDeploymentGroupRevisions = function listDeploymentGroupRevisions(request, callback) {
+                            return this.rpcCall(listDeploymentGroupRevisions, $root.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest, $root.google.cloud.config.v1.ListDeploymentGroupRevisionsResponse, request, callback);
+                        }, "name", { value: "ListDeploymentGroupRevisions" });
+    
+                        /**
+                         * Calls ListDeploymentGroupRevisions.
+                         * @function listDeploymentGroupRevisions
+                         * @memberof google.cloud.config.v1.Config
+                         * @instance
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsRequest} request ListDeploymentGroupRevisionsRequest message or plain object
+                         * @returns {Promise<google.cloud.config.v1.ListDeploymentGroupRevisionsResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return Config;
                     })();
     
@@ -2248,6 +2545,7 @@
                          * @property {string|null} [gcsSource] TerraformBlueprint gcsSource
                          * @property {google.cloud.config.v1.IGitSource|null} [gitSource] TerraformBlueprint gitSource
                          * @property {Object.<string,google.cloud.config.v1.ITerraformVariable>|null} [inputValues] TerraformBlueprint inputValues
+                         * @property {Object.<string,google.cloud.config.v1.IExternalValueSource>|null} [externalValues] TerraformBlueprint externalValues
                          */
     
                         /**
@@ -2260,6 +2558,7 @@
                          */
                         function TerraformBlueprint(properties) {
                             this.inputValues = {};
+                            this.externalValues = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2289,6 +2588,14 @@
                          * @instance
                          */
                         TerraformBlueprint.prototype.inputValues = $util.emptyObject;
+    
+                        /**
+                         * TerraformBlueprint externalValues.
+                         * @member {Object.<string,google.cloud.config.v1.IExternalValueSource>} externalValues
+                         * @memberof google.cloud.config.v1.TerraformBlueprint
+                         * @instance
+                         */
+                        TerraformBlueprint.prototype.externalValues = $util.emptyObject;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -2336,6 +2643,11 @@
                                 for (var keys = Object.keys(message.inputValues), i = 0; i < keys.length; ++i) {
                                     writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.config.v1.TerraformVariable.encode(message.inputValues[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.externalValues != null && Object.hasOwnProperty.call(message, "externalValues"))
+                                for (var keys = Object.keys(message.externalValues), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.config.v1.ExternalValueSource.encode(message.externalValues[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
                             return writer;
                         };
@@ -2404,6 +2716,29 @@
                                         message.inputValues[key] = value;
                                         break;
                                     }
+                                case 5: {
+                                        if (message.externalValues === $util.emptyObject)
+                                            message.externalValues = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.config.v1.ExternalValueSource.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.externalValues[key] = value;
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2465,6 +2800,16 @@
                                         return "inputValues." + error;
                                 }
                             }
+                            if (message.externalValues != null && message.hasOwnProperty("externalValues")) {
+                                if (!$util.isObject(message.externalValues))
+                                    return "externalValues: object expected";
+                                var key = Object.keys(message.externalValues);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.ExternalValueSource.verify(message.externalValues[key[i]]);
+                                    if (error)
+                                        return "externalValues." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2497,6 +2842,16 @@
                                     message.inputValues[keys[i]] = $root.google.cloud.config.v1.TerraformVariable.fromObject(object.inputValues[keys[i]]);
                                 }
                             }
+                            if (object.externalValues) {
+                                if (typeof object.externalValues !== "object")
+                                    throw TypeError(".google.cloud.config.v1.TerraformBlueprint.externalValues: object expected");
+                                message.externalValues = {};
+                                for (var keys = Object.keys(object.externalValues), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.externalValues[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.TerraformBlueprint.externalValues: object expected");
+                                    message.externalValues[keys[i]] = $root.google.cloud.config.v1.ExternalValueSource.fromObject(object.externalValues[keys[i]]);
+                                }
+                            }
                             return message;
                         };
     
@@ -2513,8 +2868,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.inputValues = {};
+                                object.externalValues = {};
+                            }
                             if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
                                 object.gcsSource = message.gcsSource;
                                 if (options.oneofs)
@@ -2530,6 +2887,11 @@
                                 object.inputValues = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.inputValues[keys2[j]] = $root.google.cloud.config.v1.TerraformVariable.toObject(message.inputValues[keys2[j]], options);
+                            }
+                            if (message.externalValues && (keys2 = Object.keys(message.externalValues)).length) {
+                                object.externalValues = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.externalValues[keys2[j]] = $root.google.cloud.config.v1.ExternalValueSource.toObject(message.externalValues[keys2[j]], options);
                             }
                             return object;
                         };
@@ -2771,6 +3133,464 @@
                         };
     
                         return TerraformVariable;
+                    })();
+    
+                    v1.ExternalValueSource = (function() {
+    
+                        /**
+                         * Properties of an ExternalValueSource.
+                         * @memberof google.cloud.config.v1
+                         * @interface IExternalValueSource
+                         * @property {google.cloud.config.v1.IDeploymentSource|null} [deploymentSource] ExternalValueSource deploymentSource
+                         */
+    
+                        /**
+                         * Constructs a new ExternalValueSource.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents an ExternalValueSource.
+                         * @implements IExternalValueSource
+                         * @constructor
+                         * @param {google.cloud.config.v1.IExternalValueSource=} [properties] Properties to set
+                         */
+                        function ExternalValueSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExternalValueSource deploymentSource.
+                         * @member {google.cloud.config.v1.IDeploymentSource|null|undefined} deploymentSource
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @instance
+                         */
+                        ExternalValueSource.prototype.deploymentSource = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExternalValueSource source.
+                         * @member {"deploymentSource"|undefined} source
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @instance
+                         */
+                        Object.defineProperty(ExternalValueSource.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["deploymentSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExternalValueSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {google.cloud.config.v1.IExternalValueSource=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ExternalValueSource} ExternalValueSource instance
+                         */
+                        ExternalValueSource.create = function create(properties) {
+                            return new ExternalValueSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalValueSource message. Does not implicitly {@link google.cloud.config.v1.ExternalValueSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {google.cloud.config.v1.IExternalValueSource} message ExternalValueSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalValueSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deploymentSource != null && Object.hasOwnProperty.call(message, "deploymentSource"))
+                                $root.google.cloud.config.v1.DeploymentSource.encode(message.deploymentSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExternalValueSource message, length delimited. Does not implicitly {@link google.cloud.config.v1.ExternalValueSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {google.cloud.config.v1.IExternalValueSource} message ExternalValueSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExternalValueSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExternalValueSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ExternalValueSource} ExternalValueSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalValueSource.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ExternalValueSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.deploymentSource = $root.google.cloud.config.v1.DeploymentSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExternalValueSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ExternalValueSource} ExternalValueSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExternalValueSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExternalValueSource message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExternalValueSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.deploymentSource != null && message.hasOwnProperty("deploymentSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.config.v1.DeploymentSource.verify(message.deploymentSource);
+                                    if (error)
+                                        return "deploymentSource." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExternalValueSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ExternalValueSource} ExternalValueSource
+                         */
+                        ExternalValueSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ExternalValueSource)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ExternalValueSource();
+                            if (object.deploymentSource != null) {
+                                if (typeof object.deploymentSource !== "object")
+                                    throw TypeError(".google.cloud.config.v1.ExternalValueSource.deploymentSource: object expected");
+                                message.deploymentSource = $root.google.cloud.config.v1.DeploymentSource.fromObject(object.deploymentSource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExternalValueSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {google.cloud.config.v1.ExternalValueSource} message ExternalValueSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExternalValueSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.deploymentSource != null && message.hasOwnProperty("deploymentSource")) {
+                                object.deploymentSource = $root.google.cloud.config.v1.DeploymentSource.toObject(message.deploymentSource, options);
+                                if (options.oneofs)
+                                    object.source = "deploymentSource";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExternalValueSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExternalValueSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExternalValueSource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ExternalValueSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExternalValueSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ExternalValueSource";
+                        };
+    
+                        return ExternalValueSource;
+                    })();
+    
+                    v1.DeploymentSource = (function() {
+    
+                        /**
+                         * Properties of a DeploymentSource.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeploymentSource
+                         * @property {string|null} [deployment] DeploymentSource deployment
+                         * @property {string|null} [outputName] DeploymentSource outputName
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentSource.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeploymentSource.
+                         * @implements IDeploymentSource
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeploymentSource=} [properties] Properties to set
+                         */
+                        function DeploymentSource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentSource deployment.
+                         * @member {string} deployment
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @instance
+                         */
+                        DeploymentSource.prototype.deployment = "";
+    
+                        /**
+                         * DeploymentSource outputName.
+                         * @member {string} outputName
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @instance
+                         */
+                        DeploymentSource.prototype.outputName = "";
+    
+                        /**
+                         * Creates a new DeploymentSource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentSource=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeploymentSource} DeploymentSource instance
+                         */
+                        DeploymentSource.create = function create(properties) {
+                            return new DeploymentSource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentSource message. Does not implicitly {@link google.cloud.config.v1.DeploymentSource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentSource} message DeploymentSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentSource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deployment != null && Object.hasOwnProperty.call(message, "deployment"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.deployment);
+                            if (message.outputName != null && Object.hasOwnProperty.call(message, "outputName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.outputName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentSource message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentSource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentSource} message DeploymentSource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentSource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentSource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeploymentSource} DeploymentSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentSource.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentSource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.deployment = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.outputName = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentSource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeploymentSource} DeploymentSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentSource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentSource message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentSource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.deployment != null && message.hasOwnProperty("deployment"))
+                                if (!$util.isString(message.deployment))
+                                    return "deployment: string expected";
+                            if (message.outputName != null && message.hasOwnProperty("outputName"))
+                                if (!$util.isString(message.outputName))
+                                    return "outputName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentSource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeploymentSource} DeploymentSource
+                         */
+                        DeploymentSource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeploymentSource)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeploymentSource();
+                            if (object.deployment != null)
+                                message.deployment = String(object.deployment);
+                            if (object.outputName != null)
+                                message.outputName = String(object.outputName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentSource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {google.cloud.config.v1.DeploymentSource} message DeploymentSource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentSource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.deployment = "";
+                                object.outputName = "";
+                            }
+                            if (message.deployment != null && message.hasOwnProperty("deployment"))
+                                object.deployment = message.deployment;
+                            if (message.outputName != null && message.hasOwnProperty("outputName"))
+                                object.outputName = message.outputName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentSource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentSource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentSource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeploymentSource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeploymentSource";
+                        };
+    
+                        return DeploymentSource;
                     })();
     
                     v1.ApplyResults = (function() {
@@ -5168,6 +5988,870 @@
                         return CreateDeploymentRequest;
                     })();
     
+                    v1.CreateDeploymentGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface ICreateDeploymentGroupRequest
+                         * @property {string|null} [parent] CreateDeploymentGroupRequest parent
+                         * @property {string|null} [deploymentGroupId] CreateDeploymentGroupRequest deploymentGroupId
+                         * @property {google.cloud.config.v1.IDeploymentGroup|null} [deploymentGroup] CreateDeploymentGroupRequest deploymentGroup
+                         * @property {string|null} [requestId] CreateDeploymentGroupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new CreateDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a CreateDeploymentGroupRequest.
+                         * @implements ICreateDeploymentGroupRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.ICreateDeploymentGroupRequest=} [properties] Properties to set
+                         */
+                        function CreateDeploymentGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDeploymentGroupRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @instance
+                         */
+                        CreateDeploymentGroupRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDeploymentGroupRequest deploymentGroupId.
+                         * @member {string} deploymentGroupId
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @instance
+                         */
+                        CreateDeploymentGroupRequest.prototype.deploymentGroupId = "";
+    
+                        /**
+                         * CreateDeploymentGroupRequest deploymentGroup.
+                         * @member {google.cloud.config.v1.IDeploymentGroup|null|undefined} deploymentGroup
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @instance
+                         */
+                        CreateDeploymentGroupRequest.prototype.deploymentGroup = null;
+    
+                        /**
+                         * CreateDeploymentGroupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @instance
+                         */
+                        CreateDeploymentGroupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new CreateDeploymentGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ICreateDeploymentGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.CreateDeploymentGroupRequest} CreateDeploymentGroupRequest instance
+                         */
+                        CreateDeploymentGroupRequest.create = function create(properties) {
+                            return new CreateDeploymentGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.CreateDeploymentGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ICreateDeploymentGroupRequest} message CreateDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDeploymentGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.deploymentGroupId != null && Object.hasOwnProperty.call(message, "deploymentGroupId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deploymentGroupId);
+                            if (message.deploymentGroup != null && Object.hasOwnProperty.call(message, "deploymentGroup"))
+                                $root.google.cloud.config.v1.DeploymentGroup.encode(message.deploymentGroup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.CreateDeploymentGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ICreateDeploymentGroupRequest} message CreateDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDeploymentGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDeploymentGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.CreateDeploymentGroupRequest} CreateDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDeploymentGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.CreateDeploymentGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deploymentGroupId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.deploymentGroup = $root.google.cloud.config.v1.DeploymentGroup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.CreateDeploymentGroupRequest} CreateDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDeploymentGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDeploymentGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDeploymentGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.deploymentGroupId != null && message.hasOwnProperty("deploymentGroupId"))
+                                if (!$util.isString(message.deploymentGroupId))
+                                    return "deploymentGroupId: string expected";
+                            if (message.deploymentGroup != null && message.hasOwnProperty("deploymentGroup")) {
+                                var error = $root.google.cloud.config.v1.DeploymentGroup.verify(message.deploymentGroup);
+                                if (error)
+                                    return "deploymentGroup." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.CreateDeploymentGroupRequest} CreateDeploymentGroupRequest
+                         */
+                        CreateDeploymentGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.CreateDeploymentGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.CreateDeploymentGroupRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.deploymentGroupId != null)
+                                message.deploymentGroupId = String(object.deploymentGroupId);
+                            if (object.deploymentGroup != null) {
+                                if (typeof object.deploymentGroup !== "object")
+                                    throw TypeError(".google.cloud.config.v1.CreateDeploymentGroupRequest.deploymentGroup: object expected");
+                                message.deploymentGroup = $root.google.cloud.config.v1.DeploymentGroup.fromObject(object.deploymentGroup);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDeploymentGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.CreateDeploymentGroupRequest} message CreateDeploymentGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDeploymentGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.deploymentGroupId = "";
+                                object.deploymentGroup = null;
+                                object.requestId = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.deploymentGroupId != null && message.hasOwnProperty("deploymentGroupId"))
+                                object.deploymentGroupId = message.deploymentGroupId;
+                            if (message.deploymentGroup != null && message.hasOwnProperty("deploymentGroup"))
+                                object.deploymentGroup = $root.google.cloud.config.v1.DeploymentGroup.toObject(message.deploymentGroup, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDeploymentGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDeploymentGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDeploymentGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.CreateDeploymentGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDeploymentGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.CreateDeploymentGroupRequest";
+                        };
+    
+                        return CreateDeploymentGroupRequest;
+                    })();
+    
+                    v1.UpdateDeploymentGroupRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IUpdateDeploymentGroupRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateDeploymentGroupRequest updateMask
+                         * @property {google.cloud.config.v1.IDeploymentGroup|null} [deploymentGroup] UpdateDeploymentGroupRequest deploymentGroup
+                         * @property {string|null} [requestId] UpdateDeploymentGroupRequest requestId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents an UpdateDeploymentGroupRequest.
+                         * @implements IUpdateDeploymentGroupRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IUpdateDeploymentGroupRequest=} [properties] Properties to set
+                         */
+                        function UpdateDeploymentGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateDeploymentGroupRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @instance
+                         */
+                        UpdateDeploymentGroupRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateDeploymentGroupRequest deploymentGroup.
+                         * @member {google.cloud.config.v1.IDeploymentGroup|null|undefined} deploymentGroup
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @instance
+                         */
+                        UpdateDeploymentGroupRequest.prototype.deploymentGroup = null;
+    
+                        /**
+                         * UpdateDeploymentGroupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @instance
+                         */
+                        UpdateDeploymentGroupRequest.prototype.requestId = "";
+    
+                        /**
+                         * Creates a new UpdateDeploymentGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IUpdateDeploymentGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.UpdateDeploymentGroupRequest} UpdateDeploymentGroupRequest instance
+                         */
+                        UpdateDeploymentGroupRequest.create = function create(properties) {
+                            return new UpdateDeploymentGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.UpdateDeploymentGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IUpdateDeploymentGroupRequest} message UpdateDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDeploymentGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.deploymentGroup != null && Object.hasOwnProperty.call(message, "deploymentGroup"))
+                                $root.google.cloud.config.v1.DeploymentGroup.encode(message.deploymentGroup, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.requestId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.UpdateDeploymentGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IUpdateDeploymentGroupRequest} message UpdateDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateDeploymentGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateDeploymentGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.UpdateDeploymentGroupRequest} UpdateDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDeploymentGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.UpdateDeploymentGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deploymentGroup = $root.google.cloud.config.v1.DeploymentGroup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.UpdateDeploymentGroupRequest} UpdateDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateDeploymentGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateDeploymentGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateDeploymentGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.deploymentGroup != null && message.hasOwnProperty("deploymentGroup")) {
+                                var error = $root.google.cloud.config.v1.DeploymentGroup.verify(message.deploymentGroup);
+                                if (error)
+                                    return "deploymentGroup." + error;
+                            }
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.UpdateDeploymentGroupRequest} UpdateDeploymentGroupRequest
+                         */
+                        UpdateDeploymentGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.UpdateDeploymentGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.UpdateDeploymentGroupRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.config.v1.UpdateDeploymentGroupRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.deploymentGroup != null) {
+                                if (typeof object.deploymentGroup !== "object")
+                                    throw TypeError(".google.cloud.config.v1.UpdateDeploymentGroupRequest.deploymentGroup: object expected");
+                                message.deploymentGroup = $root.google.cloud.config.v1.DeploymentGroup.fromObject(object.deploymentGroup);
+                            }
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateDeploymentGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.UpdateDeploymentGroupRequest} message UpdateDeploymentGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateDeploymentGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.deploymentGroup = null;
+                                object.requestId = "";
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.deploymentGroup != null && message.hasOwnProperty("deploymentGroup"))
+                                object.deploymentGroup = $root.google.cloud.config.v1.DeploymentGroup.toObject(message.deploymentGroup, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateDeploymentGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateDeploymentGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateDeploymentGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.UpdateDeploymentGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateDeploymentGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.UpdateDeploymentGroupRequest";
+                        };
+    
+                        return UpdateDeploymentGroupRequest;
+                    })();
+    
+                    v1.DeleteDeploymentGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeleteDeploymentGroupRequest
+                         * @property {string|null} [name] DeleteDeploymentGroupRequest name
+                         * @property {string|null} [requestId] DeleteDeploymentGroupRequest requestId
+                         * @property {boolean|null} [force] DeleteDeploymentGroupRequest force
+                         * @property {google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy|null} [deploymentReferencePolicy] DeleteDeploymentGroupRequest deploymentReferencePolicy
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeleteDeploymentGroupRequest.
+                         * @implements IDeleteDeploymentGroupRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeleteDeploymentGroupRequest=} [properties] Properties to set
+                         */
+                        function DeleteDeploymentGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDeploymentGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @instance
+                         */
+                        DeleteDeploymentGroupRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteDeploymentGroupRequest requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @instance
+                         */
+                        DeleteDeploymentGroupRequest.prototype.requestId = "";
+    
+                        /**
+                         * DeleteDeploymentGroupRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @instance
+                         */
+                        DeleteDeploymentGroupRequest.prototype.force = false;
+    
+                        /**
+                         * DeleteDeploymentGroupRequest deploymentReferencePolicy.
+                         * @member {google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy} deploymentReferencePolicy
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @instance
+                         */
+                        DeleteDeploymentGroupRequest.prototype.deploymentReferencePolicy = 0;
+    
+                        /**
+                         * Creates a new DeleteDeploymentGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IDeleteDeploymentGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeleteDeploymentGroupRequest} DeleteDeploymentGroupRequest instance
+                         */
+                        DeleteDeploymentGroupRequest.create = function create(properties) {
+                            return new DeleteDeploymentGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.DeleteDeploymentGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IDeleteDeploymentGroupRequest} message DeleteDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDeploymentGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
+                            if (message.deploymentReferencePolicy != null && Object.hasOwnProperty.call(message, "deploymentReferencePolicy"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.deploymentReferencePolicy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeleteDeploymentGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IDeleteDeploymentGroupRequest} message DeleteDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDeploymentGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDeploymentGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeleteDeploymentGroupRequest} DeleteDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDeploymentGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeleteDeploymentGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.deploymentReferencePolicy = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeleteDeploymentGroupRequest} DeleteDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDeploymentGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDeploymentGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDeploymentGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            if (message.deploymentReferencePolicy != null && message.hasOwnProperty("deploymentReferencePolicy"))
+                                switch (message.deploymentReferencePolicy) {
+                                default:
+                                    return "deploymentReferencePolicy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeleteDeploymentGroupRequest} DeleteDeploymentGroupRequest
+                         */
+                        DeleteDeploymentGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeleteDeploymentGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeleteDeploymentGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            switch (object.deploymentReferencePolicy) {
+                            default:
+                                if (typeof object.deploymentReferencePolicy === "number") {
+                                    message.deploymentReferencePolicy = object.deploymentReferencePolicy;
+                                    break;
+                                }
+                                break;
+                            case "DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED":
+                            case 0:
+                                message.deploymentReferencePolicy = 0;
+                                break;
+                            case "FAIL_IF_ANY_REFERENCES_EXIST":
+                            case 1:
+                                message.deploymentReferencePolicy = 1;
+                                break;
+                            case "FAIL_IF_METADATA_REFERENCES_EXIST":
+                            case 2:
+                                message.deploymentReferencePolicy = 2;
+                                break;
+                            case "IGNORE_DEPLOYMENT_REFERENCES":
+                            case 3:
+                                message.deploymentReferencePolicy = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDeploymentGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.DeleteDeploymentGroupRequest} message DeleteDeploymentGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDeploymentGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.requestId = "";
+                                object.force = false;
+                                object.deploymentReferencePolicy = options.enums === String ? "DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            if (message.deploymentReferencePolicy != null && message.hasOwnProperty("deploymentReferencePolicy"))
+                                object.deploymentReferencePolicy = options.enums === String ? $root.google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy[message.deploymentReferencePolicy] === undefined ? message.deploymentReferencePolicy : $root.google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy[message.deploymentReferencePolicy] : message.deploymentReferencePolicy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDeploymentGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDeploymentGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDeploymentGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeleteDeploymentGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDeploymentGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeleteDeploymentGroupRequest";
+                        };
+    
+                        /**
+                         * DeploymentReferencePolicy enum.
+                         * @name google.cloud.config.v1.DeleteDeploymentGroupRequest.DeploymentReferencePolicy
+                         * @enum {number}
+                         * @property {number} DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED=0 DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED value
+                         * @property {number} FAIL_IF_ANY_REFERENCES_EXIST=1 FAIL_IF_ANY_REFERENCES_EXIST value
+                         * @property {number} FAIL_IF_METADATA_REFERENCES_EXIST=2 FAIL_IF_METADATA_REFERENCES_EXIST value
+                         * @property {number} IGNORE_DEPLOYMENT_REFERENCES=3 IGNORE_DEPLOYMENT_REFERENCES value
+                         */
+                        DeleteDeploymentGroupRequest.DeploymentReferencePolicy = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DEPLOYMENT_REFERENCE_POLICY_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FAIL_IF_ANY_REFERENCES_EXIST"] = 1;
+                            values[valuesById[2] = "FAIL_IF_METADATA_REFERENCES_EXIST"] = 2;
+                            values[valuesById[3] = "IGNORE_DEPLOYMENT_REFERENCES"] = 3;
+                            return values;
+                        })();
+    
+                        return DeleteDeploymentGroupRequest;
+                    })();
+    
                     v1.UpdateDeploymentRequest = (function() {
     
                         /**
@@ -5753,6 +7437,7 @@
                          * @interface IOperationMetadata
                          * @property {google.cloud.config.v1.IDeploymentOperationMetadata|null} [deploymentMetadata] OperationMetadata deploymentMetadata
                          * @property {google.cloud.config.v1.IPreviewOperationMetadata|null} [previewMetadata] OperationMetadata previewMetadata
+                         * @property {google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata|null} [provisionDeploymentGroupMetadata] OperationMetadata provisionDeploymentGroupMetadata
                          * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
                          * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
                          * @property {string|null} [target] OperationMetadata target
@@ -5792,6 +7477,14 @@
                          * @instance
                          */
                         OperationMetadata.prototype.previewMetadata = null;
+    
+                        /**
+                         * OperationMetadata provisionDeploymentGroupMetadata.
+                         * @member {google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata|null|undefined} provisionDeploymentGroupMetadata
+                         * @memberof google.cloud.config.v1.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.provisionDeploymentGroupMetadata = null;
     
                         /**
                          * OperationMetadata createTime.
@@ -5854,12 +7547,12 @@
     
                         /**
                          * OperationMetadata resourceMetadata.
-                         * @member {"deploymentMetadata"|"previewMetadata"|undefined} resourceMetadata
+                         * @member {"deploymentMetadata"|"previewMetadata"|"provisionDeploymentGroupMetadata"|undefined} resourceMetadata
                          * @memberof google.cloud.config.v1.OperationMetadata
                          * @instance
                          */
                         Object.defineProperty(OperationMetadata.prototype, "resourceMetadata", {
-                            get: $util.oneOfGetter($oneOfFields = ["deploymentMetadata", "previewMetadata"]),
+                            get: $util.oneOfGetter($oneOfFields = ["deploymentMetadata", "previewMetadata", "provisionDeploymentGroupMetadata"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5905,6 +7598,8 @@
                                 $root.google.cloud.config.v1.DeploymentOperationMetadata.encode(message.deploymentMetadata, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.previewMetadata != null && Object.hasOwnProperty.call(message, "previewMetadata"))
                                 $root.google.cloud.config.v1.PreviewOperationMetadata.encode(message.previewMetadata, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.provisionDeploymentGroupMetadata != null && Object.hasOwnProperty.call(message, "provisionDeploymentGroupMetadata"))
+                                $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.encode(message.provisionDeploymentGroupMetadata, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -5947,6 +7642,10 @@
                                     }
                                 case 9: {
                                         message.previewMetadata = $root.google.cloud.config.v1.PreviewOperationMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.provisionDeploymentGroupMetadata = $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 1: {
@@ -6031,6 +7730,16 @@
                                         return "previewMetadata." + error;
                                 }
                             }
+                            if (message.provisionDeploymentGroupMetadata != null && message.hasOwnProperty("provisionDeploymentGroupMetadata")) {
+                                if (properties.resourceMetadata === 1)
+                                    return "resourceMetadata: multiple values";
+                                properties.resourceMetadata = 1;
+                                {
+                                    var error = $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.verify(message.provisionDeploymentGroupMetadata);
+                                    if (error)
+                                        return "provisionDeploymentGroupMetadata." + error;
+                                }
+                            }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
@@ -6080,6 +7789,11 @@
                                 if (typeof object.previewMetadata !== "object")
                                     throw TypeError(".google.cloud.config.v1.OperationMetadata.previewMetadata: object expected");
                                 message.previewMetadata = $root.google.cloud.config.v1.PreviewOperationMetadata.fromObject(object.previewMetadata);
+                            }
+                            if (object.provisionDeploymentGroupMetadata != null) {
+                                if (typeof object.provisionDeploymentGroupMetadata !== "object")
+                                    throw TypeError(".google.cloud.config.v1.OperationMetadata.provisionDeploymentGroupMetadata: object expected");
+                                message.provisionDeploymentGroupMetadata = $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.fromObject(object.provisionDeploymentGroupMetadata);
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -6149,6 +7863,11 @@
                                 object.previewMetadata = $root.google.cloud.config.v1.PreviewOperationMetadata.toObject(message.previewMetadata, options);
                                 if (options.oneofs)
                                     object.resourceMetadata = "previewMetadata";
+                            }
+                            if (message.provisionDeploymentGroupMetadata != null && message.hasOwnProperty("provisionDeploymentGroupMetadata")) {
+                                object.provisionDeploymentGroupMetadata = $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.toObject(message.provisionDeploymentGroupMetadata, options);
+                                if (options.oneofs)
+                                    object.resourceMetadata = "provisionDeploymentGroupMetadata";
                             }
                             return object;
                         };
@@ -21108,6 +22827,4799 @@
                         return UpdateAutoMigrationConfigRequest;
                     })();
     
+                    v1.DeploymentGroup = (function() {
+    
+                        /**
+                         * Properties of a DeploymentGroup.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeploymentGroup
+                         * @property {string|null} [name] DeploymentGroup name
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeploymentGroup createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DeploymentGroup updateTime
+                         * @property {Object.<string,string>|null} [labels] DeploymentGroup labels
+                         * @property {Object.<string,string>|null} [annotations] DeploymentGroup annotations
+                         * @property {google.cloud.config.v1.DeploymentGroup.State|null} [state] DeploymentGroup state
+                         * @property {string|null} [stateDescription] DeploymentGroup stateDescription
+                         * @property {Array.<google.cloud.config.v1.IDeploymentUnit>|null} [deploymentUnits] DeploymentGroup deploymentUnits
+                         * @property {google.cloud.config.v1.DeploymentGroup.ProvisioningState|null} [provisioningState] DeploymentGroup provisioningState
+                         * @property {string|null} [provisioningStateDescription] DeploymentGroup provisioningStateDescription
+                         * @property {google.rpc.IStatus|null} [provisioningError] DeploymentGroup provisioningError
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentGroup.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeploymentGroup.
+                         * @implements IDeploymentGroup
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeploymentGroup=} [properties] Properties to set
+                         */
+                        function DeploymentGroup(properties) {
+                            this.labels = {};
+                            this.annotations = {};
+                            this.deploymentUnits = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentGroup name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.name = "";
+    
+                        /**
+                         * DeploymentGroup createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.createTime = null;
+    
+                        /**
+                         * DeploymentGroup updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.updateTime = null;
+    
+                        /**
+                         * DeploymentGroup labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * DeploymentGroup annotations.
+                         * @member {Object.<string,string>} annotations
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.annotations = $util.emptyObject;
+    
+                        /**
+                         * DeploymentGroup state.
+                         * @member {google.cloud.config.v1.DeploymentGroup.State} state
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.state = 0;
+    
+                        /**
+                         * DeploymentGroup stateDescription.
+                         * @member {string} stateDescription
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.stateDescription = "";
+    
+                        /**
+                         * DeploymentGroup deploymentUnits.
+                         * @member {Array.<google.cloud.config.v1.IDeploymentUnit>} deploymentUnits
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.deploymentUnits = $util.emptyArray;
+    
+                        /**
+                         * DeploymentGroup provisioningState.
+                         * @member {google.cloud.config.v1.DeploymentGroup.ProvisioningState} provisioningState
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.provisioningState = 0;
+    
+                        /**
+                         * DeploymentGroup provisioningStateDescription.
+                         * @member {string} provisioningStateDescription
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.provisioningStateDescription = "";
+    
+                        /**
+                         * DeploymentGroup provisioningError.
+                         * @member {google.rpc.IStatus|null|undefined} provisioningError
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         */
+                        DeploymentGroup.prototype.provisioningError = null;
+    
+                        /**
+                         * Creates a new DeploymentGroup instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentGroup=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeploymentGroup} DeploymentGroup instance
+                         */
+                        DeploymentGroup.create = function create(properties) {
+                            return new DeploymentGroup(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentGroup message. Does not implicitly {@link google.cloud.config.v1.DeploymentGroup.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentGroup} message DeploymentGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentGroup.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.annotations != null && Object.hasOwnProperty.call(message, "annotations"))
+                                for (var keys = Object.keys(message.annotations), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.annotations[keys[i]]).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
+                            if (message.stateDescription != null && Object.hasOwnProperty.call(message, "stateDescription"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.stateDescription);
+                            if (message.deploymentUnits != null && message.deploymentUnits.length)
+                                for (var i = 0; i < message.deploymentUnits.length; ++i)
+                                    $root.google.cloud.config.v1.DeploymentUnit.encode(message.deploymentUnits[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.provisioningState != null && Object.hasOwnProperty.call(message, "provisioningState"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.provisioningState);
+                            if (message.provisioningStateDescription != null && Object.hasOwnProperty.call(message, "provisioningStateDescription"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.provisioningStateDescription);
+                            if (message.provisioningError != null && Object.hasOwnProperty.call(message, "provisioningError"))
+                                $root.google.rpc.Status.encode(message.provisioningError, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentGroup message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentGroup.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentGroup} message DeploymentGroup message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentGroup message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeploymentGroup} DeploymentGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentGroup.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentGroup(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 5: {
+                                        if (message.annotations === $util.emptyObject)
+                                            message.annotations = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.annotations[key] = value;
+                                        break;
+                                    }
+                                case 6: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.stateDescription = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        if (!(message.deploymentUnits && message.deploymentUnits.length))
+                                            message.deploymentUnits = [];
+                                        message.deploymentUnits.push($root.google.cloud.config.v1.DeploymentUnit.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 9: {
+                                        message.provisioningState = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.provisioningStateDescription = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        message.provisioningError = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentGroup message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeploymentGroup} DeploymentGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentGroup.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentGroup message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentGroup.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.annotations != null && message.hasOwnProperty("annotations")) {
+                                if (!$util.isObject(message.annotations))
+                                    return "annotations: object expected";
+                                var key = Object.keys(message.annotations);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.annotations[key[i]]))
+                                        return "annotations: string{k:string} expected";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
+                                if (!$util.isString(message.stateDescription))
+                                    return "stateDescription: string expected";
+                            if (message.deploymentUnits != null && message.hasOwnProperty("deploymentUnits")) {
+                                if (!Array.isArray(message.deploymentUnits))
+                                    return "deploymentUnits: array expected";
+                                for (var i = 0; i < message.deploymentUnits.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.DeploymentUnit.verify(message.deploymentUnits[i]);
+                                    if (error)
+                                        return "deploymentUnits." + error;
+                                }
+                            }
+                            if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
+                                switch (message.provisioningState) {
+                                default:
+                                    return "provisioningState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.provisioningStateDescription != null && message.hasOwnProperty("provisioningStateDescription"))
+                                if (!$util.isString(message.provisioningStateDescription))
+                                    return "provisioningStateDescription: string expected";
+                            if (message.provisioningError != null && message.hasOwnProperty("provisioningError")) {
+                                var error = $root.google.rpc.Status.verify(message.provisioningError);
+                                if (error)
+                                    return "provisioningError." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentGroup message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeploymentGroup} DeploymentGroup
+                         */
+                        DeploymentGroup.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeploymentGroup)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeploymentGroup();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroup.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroup.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroup.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.annotations) {
+                                if (typeof object.annotations !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroup.annotations: object expected");
+                                message.annotations = {};
+                                for (var keys = Object.keys(object.annotations), i = 0; i < keys.length; ++i)
+                                    message.annotations[keys[i]] = String(object.annotations[keys[i]]);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "ACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UPDATING":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "DELETING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "FAILED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "SUSPENDED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "DELETED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            }
+                            if (object.stateDescription != null)
+                                message.stateDescription = String(object.stateDescription);
+                            if (object.deploymentUnits) {
+                                if (!Array.isArray(object.deploymentUnits))
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroup.deploymentUnits: array expected");
+                                message.deploymentUnits = [];
+                                for (var i = 0; i < object.deploymentUnits.length; ++i) {
+                                    if (typeof object.deploymentUnits[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.DeploymentGroup.deploymentUnits: object expected");
+                                    message.deploymentUnits[i] = $root.google.cloud.config.v1.DeploymentUnit.fromObject(object.deploymentUnits[i]);
+                                }
+                            }
+                            switch (object.provisioningState) {
+                            default:
+                                if (typeof object.provisioningState === "number") {
+                                    message.provisioningState = object.provisioningState;
+                                    break;
+                                }
+                                break;
+                            case "PROVISIONING_STATE_UNSPECIFIED":
+                            case 0:
+                                message.provisioningState = 0;
+                                break;
+                            case "PROVISIONING":
+                            case 1:
+                                message.provisioningState = 1;
+                                break;
+                            case "PROVISIONED":
+                            case 2:
+                                message.provisioningState = 2;
+                                break;
+                            case "FAILED_TO_PROVISION":
+                            case 3:
+                                message.provisioningState = 3;
+                                break;
+                            case "DEPROVISIONING":
+                            case 4:
+                                message.provisioningState = 4;
+                                break;
+                            case "DEPROVISIONED":
+                            case 5:
+                                message.provisioningState = 5;
+                                break;
+                            case "FAILED_TO_DEPROVISION":
+                            case 6:
+                                message.provisioningState = 6;
+                                break;
+                            }
+                            if (object.provisioningStateDescription != null)
+                                message.provisioningStateDescription = String(object.provisioningStateDescription);
+                            if (object.provisioningError != null) {
+                                if (typeof object.provisioningError !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroup.provisioningError: object expected");
+                                message.provisioningError = $root.google.rpc.Status.fromObject(object.provisioningError);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentGroup message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {google.cloud.config.v1.DeploymentGroup} message DeploymentGroup
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentGroup.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.deploymentUnits = [];
+                            if (options.objects || options.defaults) {
+                                object.labels = {};
+                                object.annotations = {};
+                            }
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateDescription = "";
+                                object.provisioningState = options.enums === String ? "PROVISIONING_STATE_UNSPECIFIED" : 0;
+                                object.provisioningStateDescription = "";
+                                object.provisioningError = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.annotations && (keys2 = Object.keys(message.annotations)).length) {
+                                object.annotations = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.annotations[keys2[j]] = message.annotations[keys2[j]];
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.config.v1.DeploymentGroup.State[message.state] === undefined ? message.state : $root.google.cloud.config.v1.DeploymentGroup.State[message.state] : message.state;
+                            if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
+                                object.stateDescription = message.stateDescription;
+                            if (message.deploymentUnits && message.deploymentUnits.length) {
+                                object.deploymentUnits = [];
+                                for (var j = 0; j < message.deploymentUnits.length; ++j)
+                                    object.deploymentUnits[j] = $root.google.cloud.config.v1.DeploymentUnit.toObject(message.deploymentUnits[j], options);
+                            }
+                            if (message.provisioningState != null && message.hasOwnProperty("provisioningState"))
+                                object.provisioningState = options.enums === String ? $root.google.cloud.config.v1.DeploymentGroup.ProvisioningState[message.provisioningState] === undefined ? message.provisioningState : $root.google.cloud.config.v1.DeploymentGroup.ProvisioningState[message.provisioningState] : message.provisioningState;
+                            if (message.provisioningStateDescription != null && message.hasOwnProperty("provisioningStateDescription"))
+                                object.provisioningStateDescription = message.provisioningStateDescription;
+                            if (message.provisioningError != null && message.hasOwnProperty("provisioningError"))
+                                object.provisioningError = $root.google.rpc.Status.toObject(message.provisioningError, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentGroup to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentGroup.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentGroup
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeploymentGroup
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeploymentGroup";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.config.v1.DeploymentGroup.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} ACTIVE=2 ACTIVE value
+                         * @property {number} UPDATING=3 UPDATING value
+                         * @property {number} DELETING=4 DELETING value
+                         * @property {number} FAILED=5 FAILED value
+                         * @property {number} SUSPENDED=6 SUSPENDED value
+                         * @property {number} DELETED=7 DELETED value
+                         */
+                        DeploymentGroup.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "ACTIVE"] = 2;
+                            values[valuesById[3] = "UPDATING"] = 3;
+                            values[valuesById[4] = "DELETING"] = 4;
+                            values[valuesById[5] = "FAILED"] = 5;
+                            values[valuesById[6] = "SUSPENDED"] = 6;
+                            values[valuesById[7] = "DELETED"] = 7;
+                            return values;
+                        })();
+    
+                        /**
+                         * ProvisioningState enum.
+                         * @name google.cloud.config.v1.DeploymentGroup.ProvisioningState
+                         * @enum {number}
+                         * @property {number} PROVISIONING_STATE_UNSPECIFIED=0 PROVISIONING_STATE_UNSPECIFIED value
+                         * @property {number} PROVISIONING=1 PROVISIONING value
+                         * @property {number} PROVISIONED=2 PROVISIONED value
+                         * @property {number} FAILED_TO_PROVISION=3 FAILED_TO_PROVISION value
+                         * @property {number} DEPROVISIONING=4 DEPROVISIONING value
+                         * @property {number} DEPROVISIONED=5 DEPROVISIONED value
+                         * @property {number} FAILED_TO_DEPROVISION=6 FAILED_TO_DEPROVISION value
+                         */
+                        DeploymentGroup.ProvisioningState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVISIONING_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PROVISIONING"] = 1;
+                            values[valuesById[2] = "PROVISIONED"] = 2;
+                            values[valuesById[3] = "FAILED_TO_PROVISION"] = 3;
+                            values[valuesById[4] = "DEPROVISIONING"] = 4;
+                            values[valuesById[5] = "DEPROVISIONED"] = 5;
+                            values[valuesById[6] = "FAILED_TO_DEPROVISION"] = 6;
+                            return values;
+                        })();
+    
+                        return DeploymentGroup;
+                    })();
+    
+                    v1.DeploymentUnit = (function() {
+    
+                        /**
+                         * Properties of a DeploymentUnit.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeploymentUnit
+                         * @property {string|null} [id] DeploymentUnit id
+                         * @property {string|null} [deployment] DeploymentUnit deployment
+                         * @property {Array.<string>|null} [dependencies] DeploymentUnit dependencies
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentUnit.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeploymentUnit.
+                         * @implements IDeploymentUnit
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeploymentUnit=} [properties] Properties to set
+                         */
+                        function DeploymentUnit(properties) {
+                            this.dependencies = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentUnit id.
+                         * @member {string} id
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @instance
+                         */
+                        DeploymentUnit.prototype.id = "";
+    
+                        /**
+                         * DeploymentUnit deployment.
+                         * @member {string|null|undefined} deployment
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @instance
+                         */
+                        DeploymentUnit.prototype.deployment = null;
+    
+                        /**
+                         * DeploymentUnit dependencies.
+                         * @member {Array.<string>} dependencies
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @instance
+                         */
+                        DeploymentUnit.prototype.dependencies = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(DeploymentUnit.prototype, "_deployment", {
+                            get: $util.oneOfGetter($oneOfFields = ["deployment"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DeploymentUnit instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentUnit=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeploymentUnit} DeploymentUnit instance
+                         */
+                        DeploymentUnit.create = function create(properties) {
+                            return new DeploymentUnit(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentUnit message. Does not implicitly {@link google.cloud.config.v1.DeploymentUnit.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentUnit} message DeploymentUnit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentUnit.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                            if (message.deployment != null && Object.hasOwnProperty.call(message, "deployment"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deployment);
+                            if (message.dependencies != null && message.dependencies.length)
+                                for (var i = 0; i < message.dependencies.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.dependencies[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentUnit message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentUnit.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentUnit} message DeploymentUnit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentUnit.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentUnit message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeploymentUnit} DeploymentUnit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentUnit.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentUnit();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.id = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deployment = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.dependencies && message.dependencies.length))
+                                            message.dependencies = [];
+                                        message.dependencies.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentUnit message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeploymentUnit} DeploymentUnit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentUnit.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentUnit message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentUnit.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                if (!$util.isString(message.id))
+                                    return "id: string expected";
+                            if (message.deployment != null && message.hasOwnProperty("deployment")) {
+                                properties._deployment = 1;
+                                if (!$util.isString(message.deployment))
+                                    return "deployment: string expected";
+                            }
+                            if (message.dependencies != null && message.hasOwnProperty("dependencies")) {
+                                if (!Array.isArray(message.dependencies))
+                                    return "dependencies: array expected";
+                                for (var i = 0; i < message.dependencies.length; ++i)
+                                    if (!$util.isString(message.dependencies[i]))
+                                        return "dependencies: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentUnit message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeploymentUnit} DeploymentUnit
+                         */
+                        DeploymentUnit.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeploymentUnit)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeploymentUnit();
+                            if (object.id != null)
+                                message.id = String(object.id);
+                            if (object.deployment != null)
+                                message.deployment = String(object.deployment);
+                            if (object.dependencies) {
+                                if (!Array.isArray(object.dependencies))
+                                    throw TypeError(".google.cloud.config.v1.DeploymentUnit.dependencies: array expected");
+                                message.dependencies = [];
+                                for (var i = 0; i < object.dependencies.length; ++i)
+                                    message.dependencies[i] = String(object.dependencies[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentUnit message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {google.cloud.config.v1.DeploymentUnit} message DeploymentUnit
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentUnit.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.dependencies = [];
+                            if (options.defaults)
+                                object.id = "";
+                            if (message.id != null && message.hasOwnProperty("id"))
+                                object.id = message.id;
+                            if (message.deployment != null && message.hasOwnProperty("deployment")) {
+                                object.deployment = message.deployment;
+                                if (options.oneofs)
+                                    object._deployment = "deployment";
+                            }
+                            if (message.dependencies && message.dependencies.length) {
+                                object.dependencies = [];
+                                for (var j = 0; j < message.dependencies.length; ++j)
+                                    object.dependencies[j] = message.dependencies[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentUnit to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentUnit.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentUnit
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeploymentUnit
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentUnit.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeploymentUnit";
+                        };
+    
+                        return DeploymentUnit;
+                    })();
+    
+                    v1.DeploymentSpec = (function() {
+    
+                        /**
+                         * Properties of a DeploymentSpec.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeploymentSpec
+                         * @property {string|null} [deploymentId] DeploymentSpec deploymentId
+                         * @property {google.cloud.config.v1.IDeployment|null} [deployment] DeploymentSpec deployment
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentSpec.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeploymentSpec.
+                         * @implements IDeploymentSpec
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeploymentSpec=} [properties] Properties to set
+                         */
+                        function DeploymentSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentSpec deploymentId.
+                         * @member {string} deploymentId
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @instance
+                         */
+                        DeploymentSpec.prototype.deploymentId = "";
+    
+                        /**
+                         * DeploymentSpec deployment.
+                         * @member {google.cloud.config.v1.IDeployment|null|undefined} deployment
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @instance
+                         */
+                        DeploymentSpec.prototype.deployment = null;
+    
+                        /**
+                         * Creates a new DeploymentSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentSpec=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeploymentSpec} DeploymentSpec instance
+                         */
+                        DeploymentSpec.create = function create(properties) {
+                            return new DeploymentSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentSpec message. Does not implicitly {@link google.cloud.config.v1.DeploymentSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentSpec} message DeploymentSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deploymentId != null && Object.hasOwnProperty.call(message, "deploymentId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.deploymentId);
+                            if (message.deployment != null && Object.hasOwnProperty.call(message, "deployment"))
+                                $root.google.cloud.config.v1.Deployment.encode(message.deployment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentSpec message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentSpec} message DeploymentSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeploymentSpec} DeploymentSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentSpec.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.deploymentId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deployment = $root.google.cloud.config.v1.Deployment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeploymentSpec} DeploymentSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentSpec message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.deploymentId != null && message.hasOwnProperty("deploymentId"))
+                                if (!$util.isString(message.deploymentId))
+                                    return "deploymentId: string expected";
+                            if (message.deployment != null && message.hasOwnProperty("deployment")) {
+                                var error = $root.google.cloud.config.v1.Deployment.verify(message.deployment);
+                                if (error)
+                                    return "deployment." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeploymentSpec} DeploymentSpec
+                         */
+                        DeploymentSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeploymentSpec)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeploymentSpec();
+                            if (object.deploymentId != null)
+                                message.deploymentId = String(object.deploymentId);
+                            if (object.deployment != null) {
+                                if (typeof object.deployment !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentSpec.deployment: object expected");
+                                message.deployment = $root.google.cloud.config.v1.Deployment.fromObject(object.deployment);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {google.cloud.config.v1.DeploymentSpec} message DeploymentSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.deploymentId = "";
+                                object.deployment = null;
+                            }
+                            if (message.deploymentId != null && message.hasOwnProperty("deploymentId"))
+                                object.deploymentId = message.deploymentId;
+                            if (message.deployment != null && message.hasOwnProperty("deployment"))
+                                object.deployment = $root.google.cloud.config.v1.Deployment.toObject(message.deployment, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentSpec
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeploymentSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeploymentSpec";
+                        };
+    
+                        return DeploymentSpec;
+                    })();
+    
+                    v1.GetDeploymentGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IGetDeploymentGroupRequest
+                         * @property {string|null} [name] GetDeploymentGroupRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a GetDeploymentGroupRequest.
+                         * @implements IGetDeploymentGroupRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRequest=} [properties] Properties to set
+                         */
+                        function GetDeploymentGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDeploymentGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @instance
+                         */
+                        GetDeploymentGroupRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDeploymentGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRequest} GetDeploymentGroupRequest instance
+                         */
+                        GetDeploymentGroupRequest.create = function create(properties) {
+                            return new GetDeploymentGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRequest} message GetDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDeploymentGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRequest} message GetDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDeploymentGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDeploymentGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRequest} GetDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDeploymentGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetDeploymentGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRequest} GetDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDeploymentGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDeploymentGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDeploymentGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRequest} GetDeploymentGroupRequest
+                         */
+                        GetDeploymentGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.GetDeploymentGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.GetDeploymentGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDeploymentGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.GetDeploymentGroupRequest} message GetDeploymentGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDeploymentGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDeploymentGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDeploymentGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDeploymentGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDeploymentGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.GetDeploymentGroupRequest";
+                        };
+    
+                        return GetDeploymentGroupRequest;
+                    })();
+    
+                    v1.ListDeploymentGroupsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDeploymentGroupsRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListDeploymentGroupsRequest
+                         * @property {string|null} [parent] ListDeploymentGroupsRequest parent
+                         * @property {number|null} [pageSize] ListDeploymentGroupsRequest pageSize
+                         * @property {string|null} [pageToken] ListDeploymentGroupsRequest pageToken
+                         * @property {string|null} [filter] ListDeploymentGroupsRequest filter
+                         * @property {string|null} [orderBy] ListDeploymentGroupsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListDeploymentGroupsRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListDeploymentGroupsRequest.
+                         * @implements IListDeploymentGroupsRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsRequest=} [properties] Properties to set
+                         */
+                        function ListDeploymentGroupsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDeploymentGroupsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDeploymentGroupsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDeploymentGroupsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListDeploymentGroupsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListDeploymentGroupsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListDeploymentGroupsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsRequest} ListDeploymentGroupsRequest instance
+                         */
+                        ListDeploymentGroupsRequest.create = function create(properties) {
+                            return new ListDeploymentGroupsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupsRequest message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsRequest} message ListDeploymentGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsRequest} message ListDeploymentGroupsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsRequest} ListDeploymentGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListDeploymentGroupsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsRequest} ListDeploymentGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDeploymentGroupsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDeploymentGroupsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDeploymentGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsRequest} ListDeploymentGroupsRequest
+                         */
+                        ListDeploymentGroupsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListDeploymentGroupsRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListDeploymentGroupsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDeploymentGroupsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ListDeploymentGroupsRequest} message ListDeploymentGroupsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDeploymentGroupsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDeploymentGroupsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDeploymentGroupsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDeploymentGroupsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDeploymentGroupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListDeploymentGroupsRequest";
+                        };
+    
+                        return ListDeploymentGroupsRequest;
+                    })();
+    
+                    v1.ListDeploymentGroupsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDeploymentGroupsResponse.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListDeploymentGroupsResponse
+                         * @property {Array.<google.cloud.config.v1.IDeploymentGroup>|null} [deploymentGroups] ListDeploymentGroupsResponse deploymentGroups
+                         * @property {string|null} [nextPageToken] ListDeploymentGroupsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListDeploymentGroupsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListDeploymentGroupsResponse.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListDeploymentGroupsResponse.
+                         * @implements IListDeploymentGroupsResponse
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsResponse=} [properties] Properties to set
+                         */
+                        function ListDeploymentGroupsResponse(properties) {
+                            this.deploymentGroups = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDeploymentGroupsResponse deploymentGroups.
+                         * @member {Array.<google.cloud.config.v1.IDeploymentGroup>} deploymentGroups
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @instance
+                         */
+                        ListDeploymentGroupsResponse.prototype.deploymentGroups = $util.emptyArray;
+    
+                        /**
+                         * ListDeploymentGroupsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @instance
+                         */
+                        ListDeploymentGroupsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListDeploymentGroupsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @instance
+                         */
+                        ListDeploymentGroupsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListDeploymentGroupsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsResponse} ListDeploymentGroupsResponse instance
+                         */
+                        ListDeploymentGroupsResponse.create = function create(properties) {
+                            return new ListDeploymentGroupsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupsResponse message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsResponse} message ListDeploymentGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deploymentGroups != null && message.deploymentGroups.length)
+                                for (var i = 0; i < message.deploymentGroups.length; ++i)
+                                    $root.google.cloud.config.v1.DeploymentGroup.encode(message.deploymentGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupsResponse} message ListDeploymentGroupsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsResponse} ListDeploymentGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListDeploymentGroupsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.deploymentGroups && message.deploymentGroups.length))
+                                            message.deploymentGroups = [];
+                                        message.deploymentGroups.push($root.google.cloud.config.v1.DeploymentGroup.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsResponse} ListDeploymentGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDeploymentGroupsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDeploymentGroupsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.deploymentGroups != null && message.hasOwnProperty("deploymentGroups")) {
+                                if (!Array.isArray(message.deploymentGroups))
+                                    return "deploymentGroups: array expected";
+                                for (var i = 0; i < message.deploymentGroups.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.DeploymentGroup.verify(message.deploymentGroups[i]);
+                                    if (error)
+                                        return "deploymentGroups." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDeploymentGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupsResponse} ListDeploymentGroupsResponse
+                         */
+                        ListDeploymentGroupsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListDeploymentGroupsResponse)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListDeploymentGroupsResponse();
+                            if (object.deploymentGroups) {
+                                if (!Array.isArray(object.deploymentGroups))
+                                    throw TypeError(".google.cloud.config.v1.ListDeploymentGroupsResponse.deploymentGroups: array expected");
+                                message.deploymentGroups = [];
+                                for (var i = 0; i < object.deploymentGroups.length; ++i) {
+                                    if (typeof object.deploymentGroups[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ListDeploymentGroupsResponse.deploymentGroups: object expected");
+                                    message.deploymentGroups[i] = $root.google.cloud.config.v1.DeploymentGroup.fromObject(object.deploymentGroups[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.config.v1.ListDeploymentGroupsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDeploymentGroupsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.ListDeploymentGroupsResponse} message ListDeploymentGroupsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDeploymentGroupsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.deploymentGroups = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.deploymentGroups && message.deploymentGroups.length) {
+                                object.deploymentGroups = [];
+                                for (var j = 0; j < message.deploymentGroups.length; ++j)
+                                    object.deploymentGroups[j] = $root.google.cloud.config.v1.DeploymentGroup.toObject(message.deploymentGroups[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDeploymentGroupsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDeploymentGroupsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDeploymentGroupsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDeploymentGroupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListDeploymentGroupsResponse";
+                        };
+    
+                        return ListDeploymentGroupsResponse;
+                    })();
+    
+                    v1.ProvisionDeploymentGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a ProvisionDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IProvisionDeploymentGroupRequest
+                         * @property {string|null} [name] ProvisionDeploymentGroupRequest name
+                         * @property {Object.<string,google.cloud.config.v1.IDeploymentSpec>|null} [deploymentSpecs] ProvisionDeploymentGroupRequest deploymentSpecs
+                         */
+    
+                        /**
+                         * Constructs a new ProvisionDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ProvisionDeploymentGroupRequest.
+                         * @implements IProvisionDeploymentGroupRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupRequest=} [properties] Properties to set
+                         */
+                        function ProvisionDeploymentGroupRequest(properties) {
+                            this.deploymentSpecs = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProvisionDeploymentGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @instance
+                         */
+                        ProvisionDeploymentGroupRequest.prototype.name = "";
+    
+                        /**
+                         * ProvisionDeploymentGroupRequest deploymentSpecs.
+                         * @member {Object.<string,google.cloud.config.v1.IDeploymentSpec>} deploymentSpecs
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @instance
+                         */
+                        ProvisionDeploymentGroupRequest.prototype.deploymentSpecs = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ProvisionDeploymentGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupRequest} ProvisionDeploymentGroupRequest instance
+                         */
+                        ProvisionDeploymentGroupRequest.create = function create(properties) {
+                            return new ProvisionDeploymentGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProvisionDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupRequest} message ProvisionDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProvisionDeploymentGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.deploymentSpecs != null && Object.hasOwnProperty.call(message, "deploymentSpecs"))
+                                for (var keys = Object.keys(message.deploymentSpecs), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 3, wireType 2 =*/26).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.config.v1.DeploymentSpec.encode(message.deploymentSpecs[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProvisionDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupRequest} message ProvisionDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProvisionDeploymentGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProvisionDeploymentGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupRequest} ProvisionDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProvisionDeploymentGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ProvisionDeploymentGroupRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (message.deploymentSpecs === $util.emptyObject)
+                                            message.deploymentSpecs = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.config.v1.DeploymentSpec.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.deploymentSpecs[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProvisionDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupRequest} ProvisionDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProvisionDeploymentGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProvisionDeploymentGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProvisionDeploymentGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.deploymentSpecs != null && message.hasOwnProperty("deploymentSpecs")) {
+                                if (!$util.isObject(message.deploymentSpecs))
+                                    return "deploymentSpecs: object expected";
+                                var key = Object.keys(message.deploymentSpecs);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.DeploymentSpec.verify(message.deploymentSpecs[key[i]]);
+                                    if (error)
+                                        return "deploymentSpecs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProvisionDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupRequest} ProvisionDeploymentGroupRequest
+                         */
+                        ProvisionDeploymentGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ProvisionDeploymentGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ProvisionDeploymentGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.deploymentSpecs) {
+                                if (typeof object.deploymentSpecs !== "object")
+                                    throw TypeError(".google.cloud.config.v1.ProvisionDeploymentGroupRequest.deploymentSpecs: object expected");
+                                message.deploymentSpecs = {};
+                                for (var keys = Object.keys(object.deploymentSpecs), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.deploymentSpecs[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ProvisionDeploymentGroupRequest.deploymentSpecs: object expected");
+                                    message.deploymentSpecs[keys[i]] = $root.google.cloud.config.v1.DeploymentSpec.fromObject(object.deploymentSpecs[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProvisionDeploymentGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ProvisionDeploymentGroupRequest} message ProvisionDeploymentGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProvisionDeploymentGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.deploymentSpecs = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            var keys2;
+                            if (message.deploymentSpecs && (keys2 = Object.keys(message.deploymentSpecs)).length) {
+                                object.deploymentSpecs = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.deploymentSpecs[keys2[j]] = $root.google.cloud.config.v1.DeploymentSpec.toObject(message.deploymentSpecs[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProvisionDeploymentGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProvisionDeploymentGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProvisionDeploymentGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProvisionDeploymentGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ProvisionDeploymentGroupRequest";
+                        };
+    
+                        return ProvisionDeploymentGroupRequest;
+                    })();
+    
+                    v1.DeprovisionDeploymentGroupRequest = (function() {
+    
+                        /**
+                         * Properties of a DeprovisionDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeprovisionDeploymentGroupRequest
+                         * @property {string|null} [name] DeprovisionDeploymentGroupRequest name
+                         * @property {boolean|null} [force] DeprovisionDeploymentGroupRequest force
+                         * @property {google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy|null} [deletePolicy] DeprovisionDeploymentGroupRequest deletePolicy
+                         */
+    
+                        /**
+                         * Constructs a new DeprovisionDeploymentGroupRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeprovisionDeploymentGroupRequest.
+                         * @implements IDeprovisionDeploymentGroupRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeprovisionDeploymentGroupRequest=} [properties] Properties to set
+                         */
+                        function DeprovisionDeploymentGroupRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeprovisionDeploymentGroupRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @instance
+                         */
+                        DeprovisionDeploymentGroupRequest.prototype.name = "";
+    
+                        /**
+                         * DeprovisionDeploymentGroupRequest force.
+                         * @member {boolean} force
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @instance
+                         */
+                        DeprovisionDeploymentGroupRequest.prototype.force = false;
+    
+                        /**
+                         * DeprovisionDeploymentGroupRequest deletePolicy.
+                         * @member {google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy} deletePolicy
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @instance
+                         */
+                        DeprovisionDeploymentGroupRequest.prototype.deletePolicy = 0;
+    
+                        /**
+                         * Creates a new DeprovisionDeploymentGroupRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IDeprovisionDeploymentGroupRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeprovisionDeploymentGroupRequest} DeprovisionDeploymentGroupRequest instance
+                         */
+                        DeprovisionDeploymentGroupRequest.create = function create(properties) {
+                            return new DeprovisionDeploymentGroupRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeprovisionDeploymentGroupRequest message. Does not implicitly {@link google.cloud.config.v1.DeprovisionDeploymentGroupRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IDeprovisionDeploymentGroupRequest} message DeprovisionDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeprovisionDeploymentGroupRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
+                            if (message.deletePolicy != null && Object.hasOwnProperty.call(message, "deletePolicy"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deletePolicy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeprovisionDeploymentGroupRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeprovisionDeploymentGroupRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IDeprovisionDeploymentGroupRequest} message DeprovisionDeploymentGroupRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeprovisionDeploymentGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeprovisionDeploymentGroupRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeprovisionDeploymentGroupRequest} DeprovisionDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeprovisionDeploymentGroupRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeprovisionDeploymentGroupRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.force = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.deletePolicy = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeprovisionDeploymentGroupRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeprovisionDeploymentGroupRequest} DeprovisionDeploymentGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeprovisionDeploymentGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeprovisionDeploymentGroupRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeprovisionDeploymentGroupRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                if (typeof message.force !== "boolean")
+                                    return "force: boolean expected";
+                            if (message.deletePolicy != null && message.hasOwnProperty("deletePolicy"))
+                                switch (message.deletePolicy) {
+                                default:
+                                    return "deletePolicy: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeprovisionDeploymentGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeprovisionDeploymentGroupRequest} DeprovisionDeploymentGroupRequest
+                         */
+                        DeprovisionDeploymentGroupRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeprovisionDeploymentGroupRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeprovisionDeploymentGroupRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.force != null)
+                                message.force = Boolean(object.force);
+                            switch (object.deletePolicy) {
+                            default:
+                                if (typeof object.deletePolicy === "number") {
+                                    message.deletePolicy = object.deletePolicy;
+                                    break;
+                                }
+                                break;
+                            case "DELETE_POLICY_UNSPECIFIED":
+                            case 0:
+                                message.deletePolicy = 0;
+                                break;
+                            case "DELETE":
+                            case 1:
+                                message.deletePolicy = 1;
+                                break;
+                            case "ABANDON":
+                            case 2:
+                                message.deletePolicy = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeprovisionDeploymentGroupRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {google.cloud.config.v1.DeprovisionDeploymentGroupRequest} message DeprovisionDeploymentGroupRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeprovisionDeploymentGroupRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.force = false;
+                                object.deletePolicy = options.enums === String ? "DELETE_POLICY_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.force != null && message.hasOwnProperty("force"))
+                                object.force = message.force;
+                            if (message.deletePolicy != null && message.hasOwnProperty("deletePolicy"))
+                                object.deletePolicy = options.enums === String ? $root.google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy[message.deletePolicy] === undefined ? message.deletePolicy : $root.google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy[message.deletePolicy] : message.deletePolicy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeprovisionDeploymentGroupRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeprovisionDeploymentGroupRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeprovisionDeploymentGroupRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeprovisionDeploymentGroupRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeprovisionDeploymentGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeprovisionDeploymentGroupRequest";
+                        };
+    
+                        return DeprovisionDeploymentGroupRequest;
+                    })();
+    
+                    v1.DeploymentOperationSummary = (function() {
+    
+                        /**
+                         * Properties of a DeploymentOperationSummary.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeploymentOperationSummary
+                         * @property {google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep|null} [deploymentStep] DeploymentOperationSummary deploymentStep
+                         * @property {string|null} [build] DeploymentOperationSummary build
+                         * @property {string|null} [logs] DeploymentOperationSummary logs
+                         * @property {string|null} [content] DeploymentOperationSummary content
+                         * @property {string|null} [artifacts] DeploymentOperationSummary artifacts
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentOperationSummary.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeploymentOperationSummary.
+                         * @implements IDeploymentOperationSummary
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeploymentOperationSummary=} [properties] Properties to set
+                         */
+                        function DeploymentOperationSummary(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentOperationSummary deploymentStep.
+                         * @member {google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep} deploymentStep
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @instance
+                         */
+                        DeploymentOperationSummary.prototype.deploymentStep = 0;
+    
+                        /**
+                         * DeploymentOperationSummary build.
+                         * @member {string} build
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @instance
+                         */
+                        DeploymentOperationSummary.prototype.build = "";
+    
+                        /**
+                         * DeploymentOperationSummary logs.
+                         * @member {string} logs
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @instance
+                         */
+                        DeploymentOperationSummary.prototype.logs = "";
+    
+                        /**
+                         * DeploymentOperationSummary content.
+                         * @member {string} content
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @instance
+                         */
+                        DeploymentOperationSummary.prototype.content = "";
+    
+                        /**
+                         * DeploymentOperationSummary artifacts.
+                         * @member {string} artifacts
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @instance
+                         */
+                        DeploymentOperationSummary.prototype.artifacts = "";
+    
+                        /**
+                         * Creates a new DeploymentOperationSummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentOperationSummary=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeploymentOperationSummary} DeploymentOperationSummary instance
+                         */
+                        DeploymentOperationSummary.create = function create(properties) {
+                            return new DeploymentOperationSummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentOperationSummary message. Does not implicitly {@link google.cloud.config.v1.DeploymentOperationSummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentOperationSummary} message DeploymentOperationSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentOperationSummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deploymentStep != null && Object.hasOwnProperty.call(message, "deploymentStep"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.deploymentStep);
+                            if (message.build != null && Object.hasOwnProperty.call(message, "build"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.build);
+                            if (message.logs != null && Object.hasOwnProperty.call(message, "logs"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.logs);
+                            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.content);
+                            if (message.artifacts != null && Object.hasOwnProperty.call(message, "artifacts"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.artifacts);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentOperationSummary message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentOperationSummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentOperationSummary} message DeploymentOperationSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentOperationSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentOperationSummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeploymentOperationSummary} DeploymentOperationSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentOperationSummary.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentOperationSummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.deploymentStep = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.build = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.logs = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.content = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.artifacts = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentOperationSummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeploymentOperationSummary} DeploymentOperationSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentOperationSummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentOperationSummary message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentOperationSummary.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.deploymentStep != null && message.hasOwnProperty("deploymentStep"))
+                                switch (message.deploymentStep) {
+                                default:
+                                    return "deploymentStep: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 11:
+                                case 12:
+                                    break;
+                                }
+                            if (message.build != null && message.hasOwnProperty("build"))
+                                if (!$util.isString(message.build))
+                                    return "build: string expected";
+                            if (message.logs != null && message.hasOwnProperty("logs"))
+                                if (!$util.isString(message.logs))
+                                    return "logs: string expected";
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                if (!$util.isString(message.content))
+                                    return "content: string expected";
+                            if (message.artifacts != null && message.hasOwnProperty("artifacts"))
+                                if (!$util.isString(message.artifacts))
+                                    return "artifacts: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentOperationSummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeploymentOperationSummary} DeploymentOperationSummary
+                         */
+                        DeploymentOperationSummary.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeploymentOperationSummary)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeploymentOperationSummary();
+                            switch (object.deploymentStep) {
+                            default:
+                                if (typeof object.deploymentStep === "number") {
+                                    message.deploymentStep = object.deploymentStep;
+                                    break;
+                                }
+                                break;
+                            case "DEPLOYMENT_STEP_UNSPECIFIED":
+                            case 0:
+                                message.deploymentStep = 0;
+                                break;
+                            case "PREPARING_STORAGE_BUCKET":
+                            case 1:
+                                message.deploymentStep = 1;
+                                break;
+                            case "DOWNLOADING_BLUEPRINT":
+                            case 2:
+                                message.deploymentStep = 2;
+                                break;
+                            case "RUNNING_TF_INIT":
+                            case 3:
+                                message.deploymentStep = 3;
+                                break;
+                            case "RUNNING_TF_PLAN":
+                            case 4:
+                                message.deploymentStep = 4;
+                                break;
+                            case "RUNNING_TF_APPLY":
+                            case 5:
+                                message.deploymentStep = 5;
+                                break;
+                            case "RUNNING_TF_DESTROY":
+                            case 6:
+                                message.deploymentStep = 6;
+                                break;
+                            case "RUNNING_TF_VALIDATE":
+                            case 7:
+                                message.deploymentStep = 7;
+                                break;
+                            case "UNLOCKING_DEPLOYMENT":
+                            case 8:
+                                message.deploymentStep = 8;
+                                break;
+                            case "SUCCEEDED":
+                            case 9:
+                                message.deploymentStep = 9;
+                                break;
+                            case "FAILED":
+                            case 10:
+                                message.deploymentStep = 10;
+                                break;
+                            case "VALIDATING_REPOSITORY":
+                            case 11:
+                                message.deploymentStep = 11;
+                                break;
+                            case "RUNNING_QUOTA_VALIDATION":
+                            case 12:
+                                message.deploymentStep = 12;
+                                break;
+                            }
+                            if (object.build != null)
+                                message.build = String(object.build);
+                            if (object.logs != null)
+                                message.logs = String(object.logs);
+                            if (object.content != null)
+                                message.content = String(object.content);
+                            if (object.artifacts != null)
+                                message.artifacts = String(object.artifacts);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentOperationSummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {google.cloud.config.v1.DeploymentOperationSummary} message DeploymentOperationSummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentOperationSummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.deploymentStep = options.enums === String ? "DEPLOYMENT_STEP_UNSPECIFIED" : 0;
+                                object.build = "";
+                                object.logs = "";
+                                object.content = "";
+                                object.artifacts = "";
+                            }
+                            if (message.deploymentStep != null && message.hasOwnProperty("deploymentStep"))
+                                object.deploymentStep = options.enums === String ? $root.google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep[message.deploymentStep] === undefined ? message.deploymentStep : $root.google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep[message.deploymentStep] : message.deploymentStep;
+                            if (message.build != null && message.hasOwnProperty("build"))
+                                object.build = message.build;
+                            if (message.logs != null && message.hasOwnProperty("logs"))
+                                object.logs = message.logs;
+                            if (message.content != null && message.hasOwnProperty("content"))
+                                object.content = message.content;
+                            if (message.artifacts != null && message.hasOwnProperty("artifacts"))
+                                object.artifacts = message.artifacts;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentOperationSummary to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentOperationSummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentOperationSummary
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeploymentOperationSummary
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentOperationSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeploymentOperationSummary";
+                        };
+    
+                        return DeploymentOperationSummary;
+                    })();
+    
+                    v1.DeploymentUnitProgress = (function() {
+    
+                        /**
+                         * Properties of a DeploymentUnitProgress.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeploymentUnitProgress
+                         * @property {string|null} [unitId] DeploymentUnitProgress unitId
+                         * @property {string|null} [deployment] DeploymentUnitProgress deployment
+                         * @property {google.cloud.config.v1.DeploymentUnitProgress.State|null} [state] DeploymentUnitProgress state
+                         * @property {string|null} [stateDescription] DeploymentUnitProgress stateDescription
+                         * @property {google.cloud.config.v1.IDeploymentOperationSummary|null} [deploymentOperationSummary] DeploymentUnitProgress deploymentOperationSummary
+                         * @property {google.rpc.IStatus|null} [error] DeploymentUnitProgress error
+                         * @property {google.cloud.config.v1.DeploymentUnitProgress.Intent|null} [intent] DeploymentUnitProgress intent
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentUnitProgress.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeploymentUnitProgress.
+                         * @implements IDeploymentUnitProgress
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeploymentUnitProgress=} [properties] Properties to set
+                         */
+                        function DeploymentUnitProgress(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentUnitProgress unitId.
+                         * @member {string} unitId
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         */
+                        DeploymentUnitProgress.prototype.unitId = "";
+    
+                        /**
+                         * DeploymentUnitProgress deployment.
+                         * @member {string} deployment
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         */
+                        DeploymentUnitProgress.prototype.deployment = "";
+    
+                        /**
+                         * DeploymentUnitProgress state.
+                         * @member {google.cloud.config.v1.DeploymentUnitProgress.State} state
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         */
+                        DeploymentUnitProgress.prototype.state = 0;
+    
+                        /**
+                         * DeploymentUnitProgress stateDescription.
+                         * @member {string} stateDescription
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         */
+                        DeploymentUnitProgress.prototype.stateDescription = "";
+    
+                        /**
+                         * DeploymentUnitProgress deploymentOperationSummary.
+                         * @member {google.cloud.config.v1.IDeploymentOperationSummary|null|undefined} deploymentOperationSummary
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         */
+                        DeploymentUnitProgress.prototype.deploymentOperationSummary = null;
+    
+                        /**
+                         * DeploymentUnitProgress error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         */
+                        DeploymentUnitProgress.prototype.error = null;
+    
+                        /**
+                         * DeploymentUnitProgress intent.
+                         * @member {google.cloud.config.v1.DeploymentUnitProgress.Intent} intent
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         */
+                        DeploymentUnitProgress.prototype.intent = 0;
+    
+                        /**
+                         * Creates a new DeploymentUnitProgress instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentUnitProgress=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeploymentUnitProgress} DeploymentUnitProgress instance
+                         */
+                        DeploymentUnitProgress.create = function create(properties) {
+                            return new DeploymentUnitProgress(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentUnitProgress message. Does not implicitly {@link google.cloud.config.v1.DeploymentUnitProgress.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentUnitProgress} message DeploymentUnitProgress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentUnitProgress.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.unitId != null && Object.hasOwnProperty.call(message, "unitId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.unitId);
+                            if (message.deployment != null && Object.hasOwnProperty.call(message, "deployment"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deployment);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.stateDescription != null && Object.hasOwnProperty.call(message, "stateDescription"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.stateDescription);
+                            if (message.deploymentOperationSummary != null && Object.hasOwnProperty.call(message, "deploymentOperationSummary"))
+                                $root.google.cloud.config.v1.DeploymentOperationSummary.encode(message.deploymentOperationSummary, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.intent != null && Object.hasOwnProperty.call(message, "intent"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.intent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentUnitProgress message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentUnitProgress.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentUnitProgress} message DeploymentUnitProgress message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentUnitProgress.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentUnitProgress message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeploymentUnitProgress} DeploymentUnitProgress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentUnitProgress.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentUnitProgress();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.unitId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.deployment = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.stateDescription = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.deploymentOperationSummary = $root.google.cloud.config.v1.DeploymentOperationSummary.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.intent = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentUnitProgress message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeploymentUnitProgress} DeploymentUnitProgress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentUnitProgress.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentUnitProgress message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentUnitProgress.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.unitId != null && message.hasOwnProperty("unitId"))
+                                if (!$util.isString(message.unitId))
+                                    return "unitId: string expected";
+                            if (message.deployment != null && message.hasOwnProperty("deployment"))
+                                if (!$util.isString(message.deployment))
+                                    return "deployment: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                    break;
+                                }
+                            if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
+                                if (!$util.isString(message.stateDescription))
+                                    return "stateDescription: string expected";
+                            if (message.deploymentOperationSummary != null && message.hasOwnProperty("deploymentOperationSummary")) {
+                                var error = $root.google.cloud.config.v1.DeploymentOperationSummary.verify(message.deploymentOperationSummary);
+                                if (error)
+                                    return "deploymentOperationSummary." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            if (message.intent != null && message.hasOwnProperty("intent"))
+                                switch (message.intent) {
+                                default:
+                                    return "intent: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentUnitProgress message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeploymentUnitProgress} DeploymentUnitProgress
+                         */
+                        DeploymentUnitProgress.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeploymentUnitProgress)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeploymentUnitProgress();
+                            if (object.unitId != null)
+                                message.unitId = String(object.unitId);
+                            if (object.deployment != null)
+                                message.deployment = String(object.deployment);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "QUEUED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "APPLYING_DEPLOYMENT":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "SUCCEEDED":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "FAILED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            case "ABORTED":
+                            case 6:
+                                message.state = 6;
+                                break;
+                            case "SKIPPED":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "DELETING_DEPLOYMENT":
+                            case 8:
+                                message.state = 8;
+                                break;
+                            case "PREVIEWING_DEPLOYMENT":
+                            case 9:
+                                message.state = 9;
+                                break;
+                            }
+                            if (object.stateDescription != null)
+                                message.stateDescription = String(object.stateDescription);
+                            if (object.deploymentOperationSummary != null) {
+                                if (typeof object.deploymentOperationSummary !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentUnitProgress.deploymentOperationSummary: object expected");
+                                message.deploymentOperationSummary = $root.google.cloud.config.v1.DeploymentOperationSummary.fromObject(object.deploymentOperationSummary);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentUnitProgress.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            switch (object.intent) {
+                            default:
+                                if (typeof object.intent === "number") {
+                                    message.intent = object.intent;
+                                    break;
+                                }
+                                break;
+                            case "INTENT_UNSPECIFIED":
+                            case 0:
+                                message.intent = 0;
+                                break;
+                            case "CREATE_DEPLOYMENT":
+                            case 1:
+                                message.intent = 1;
+                                break;
+                            case "UPDATE_DEPLOYMENT":
+                            case 2:
+                                message.intent = 2;
+                                break;
+                            case "DELETE_DEPLOYMENT":
+                            case 3:
+                                message.intent = 3;
+                                break;
+                            case "RECREATE_DEPLOYMENT":
+                            case 4:
+                                message.intent = 4;
+                                break;
+                            case "CLEAN_UP":
+                            case 5:
+                                message.intent = 5;
+                                break;
+                            case "UNCHANGED":
+                            case 6:
+                                message.intent = 6;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentUnitProgress message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {google.cloud.config.v1.DeploymentUnitProgress} message DeploymentUnitProgress
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentUnitProgress.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.unitId = "";
+                                object.deployment = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.stateDescription = "";
+                                object.deploymentOperationSummary = null;
+                                object.error = null;
+                                object.intent = options.enums === String ? "INTENT_UNSPECIFIED" : 0;
+                            }
+                            if (message.unitId != null && message.hasOwnProperty("unitId"))
+                                object.unitId = message.unitId;
+                            if (message.deployment != null && message.hasOwnProperty("deployment"))
+                                object.deployment = message.deployment;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.config.v1.DeploymentUnitProgress.State[message.state] === undefined ? message.state : $root.google.cloud.config.v1.DeploymentUnitProgress.State[message.state] : message.state;
+                            if (message.stateDescription != null && message.hasOwnProperty("stateDescription"))
+                                object.stateDescription = message.stateDescription;
+                            if (message.deploymentOperationSummary != null && message.hasOwnProperty("deploymentOperationSummary"))
+                                object.deploymentOperationSummary = $root.google.cloud.config.v1.DeploymentOperationSummary.toObject(message.deploymentOperationSummary, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            if (message.intent != null && message.hasOwnProperty("intent"))
+                                object.intent = options.enums === String ? $root.google.cloud.config.v1.DeploymentUnitProgress.Intent[message.intent] === undefined ? message.intent : $root.google.cloud.config.v1.DeploymentUnitProgress.Intent[message.intent] : message.intent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentUnitProgress to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentUnitProgress.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentUnitProgress
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeploymentUnitProgress
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentUnitProgress.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeploymentUnitProgress";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.config.v1.DeploymentUnitProgress.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} QUEUED=1 QUEUED value
+                         * @property {number} APPLYING_DEPLOYMENT=2 APPLYING_DEPLOYMENT value
+                         * @property {number} SUCCEEDED=4 SUCCEEDED value
+                         * @property {number} FAILED=5 FAILED value
+                         * @property {number} ABORTED=6 ABORTED value
+                         * @property {number} SKIPPED=7 SKIPPED value
+                         * @property {number} DELETING_DEPLOYMENT=8 DELETING_DEPLOYMENT value
+                         * @property {number} PREVIEWING_DEPLOYMENT=9 PREVIEWING_DEPLOYMENT value
+                         */
+                        DeploymentUnitProgress.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "QUEUED"] = 1;
+                            values[valuesById[2] = "APPLYING_DEPLOYMENT"] = 2;
+                            values[valuesById[4] = "SUCCEEDED"] = 4;
+                            values[valuesById[5] = "FAILED"] = 5;
+                            values[valuesById[6] = "ABORTED"] = 6;
+                            values[valuesById[7] = "SKIPPED"] = 7;
+                            values[valuesById[8] = "DELETING_DEPLOYMENT"] = 8;
+                            values[valuesById[9] = "PREVIEWING_DEPLOYMENT"] = 9;
+                            return values;
+                        })();
+    
+                        /**
+                         * Intent enum.
+                         * @name google.cloud.config.v1.DeploymentUnitProgress.Intent
+                         * @enum {number}
+                         * @property {number} INTENT_UNSPECIFIED=0 INTENT_UNSPECIFIED value
+                         * @property {number} CREATE_DEPLOYMENT=1 CREATE_DEPLOYMENT value
+                         * @property {number} UPDATE_DEPLOYMENT=2 UPDATE_DEPLOYMENT value
+                         * @property {number} DELETE_DEPLOYMENT=3 DELETE_DEPLOYMENT value
+                         * @property {number} RECREATE_DEPLOYMENT=4 RECREATE_DEPLOYMENT value
+                         * @property {number} CLEAN_UP=5 CLEAN_UP value
+                         * @property {number} UNCHANGED=6 UNCHANGED value
+                         */
+                        DeploymentUnitProgress.Intent = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INTENT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATE_DEPLOYMENT"] = 1;
+                            values[valuesById[2] = "UPDATE_DEPLOYMENT"] = 2;
+                            values[valuesById[3] = "DELETE_DEPLOYMENT"] = 3;
+                            values[valuesById[4] = "RECREATE_DEPLOYMENT"] = 4;
+                            values[valuesById[5] = "CLEAN_UP"] = 5;
+                            values[valuesById[6] = "UNCHANGED"] = 6;
+                            return values;
+                        })();
+    
+                        return DeploymentUnitProgress;
+                    })();
+    
+                    v1.ProvisionDeploymentGroupOperationMetadata = (function() {
+    
+                        /**
+                         * Properties of a ProvisionDeploymentGroupOperationMetadata.
+                         * @memberof google.cloud.config.v1
+                         * @interface IProvisionDeploymentGroupOperationMetadata
+                         * @property {google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep|null} [step] ProvisionDeploymentGroupOperationMetadata step
+                         * @property {Array.<google.cloud.config.v1.IDeploymentUnitProgress>|null} [deploymentUnitProgresses] ProvisionDeploymentGroupOperationMetadata deploymentUnitProgresses
+                         */
+    
+                        /**
+                         * Constructs a new ProvisionDeploymentGroupOperationMetadata.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ProvisionDeploymentGroupOperationMetadata.
+                         * @implements IProvisionDeploymentGroupOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata=} [properties] Properties to set
+                         */
+                        function ProvisionDeploymentGroupOperationMetadata(properties) {
+                            this.deploymentUnitProgresses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ProvisionDeploymentGroupOperationMetadata step.
+                         * @member {google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep} step
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @instance
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.prototype.step = 0;
+    
+                        /**
+                         * ProvisionDeploymentGroupOperationMetadata deploymentUnitProgresses.
+                         * @member {Array.<google.cloud.config.v1.IDeploymentUnitProgress>} deploymentUnitProgresses
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @instance
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.prototype.deploymentUnitProgresses = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ProvisionDeploymentGroupOperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata} ProvisionDeploymentGroupOperationMetadata instance
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.create = function create(properties) {
+                            return new ProvisionDeploymentGroupOperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ProvisionDeploymentGroupOperationMetadata message. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata} message ProvisionDeploymentGroupOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.step != null && Object.hasOwnProperty.call(message, "step"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.step);
+                            if (message.deploymentUnitProgresses != null && message.deploymentUnitProgresses.length)
+                                for (var i = 0; i < message.deploymentUnitProgresses.length; ++i)
+                                    $root.google.cloud.config.v1.DeploymentUnitProgress.encode(message.deploymentUnitProgresses[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ProvisionDeploymentGroupOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {google.cloud.config.v1.IProvisionDeploymentGroupOperationMetadata} message ProvisionDeploymentGroupOperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ProvisionDeploymentGroupOperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata} ProvisionDeploymentGroupOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.step = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.deploymentUnitProgresses && message.deploymentUnitProgresses.length))
+                                            message.deploymentUnitProgresses = [];
+                                        message.deploymentUnitProgresses.push($root.google.cloud.config.v1.DeploymentUnitProgress.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ProvisionDeploymentGroupOperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata} ProvisionDeploymentGroupOperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ProvisionDeploymentGroupOperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                switch (message.step) {
+                                default:
+                                    return "step: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.deploymentUnitProgresses != null && message.hasOwnProperty("deploymentUnitProgresses")) {
+                                if (!Array.isArray(message.deploymentUnitProgresses))
+                                    return "deploymentUnitProgresses: array expected";
+                                for (var i = 0; i < message.deploymentUnitProgresses.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.DeploymentUnitProgress.verify(message.deploymentUnitProgresses[i]);
+                                    if (error)
+                                        return "deploymentUnitProgresses." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ProvisionDeploymentGroupOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata} ProvisionDeploymentGroupOperationMetadata
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata();
+                            switch (object.step) {
+                            default:
+                                if (typeof object.step === "number") {
+                                    message.step = object.step;
+                                    break;
+                                }
+                                break;
+                            case "PROVISION_DEPLOYMENT_GROUP_STEP_UNSPECIFIED":
+                            case 0:
+                                message.step = 0;
+                                break;
+                            case "VALIDATING_DEPLOYMENT_GROUP":
+                            case 1:
+                                message.step = 1;
+                                break;
+                            case "ASSOCIATING_DEPLOYMENTS_TO_DEPLOYMENT_GROUP":
+                            case 2:
+                                message.step = 2;
+                                break;
+                            case "PROVISIONING_DEPLOYMENT_UNITS":
+                            case 3:
+                                message.step = 3;
+                                break;
+                            case "DISASSOCIATING_DEPLOYMENTS_FROM_DEPLOYMENT_GROUP":
+                            case 4:
+                                message.step = 4;
+                                break;
+                            case "SUCCEEDED":
+                            case 5:
+                                message.step = 5;
+                                break;
+                            case "FAILED":
+                            case 6:
+                                message.step = 6;
+                                break;
+                            case "DEPROVISIONING_DEPLOYMENT_UNITS":
+                            case 7:
+                                message.step = 7;
+                                break;
+                            }
+                            if (object.deploymentUnitProgresses) {
+                                if (!Array.isArray(object.deploymentUnitProgresses))
+                                    throw TypeError(".google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.deploymentUnitProgresses: array expected");
+                                message.deploymentUnitProgresses = [];
+                                for (var i = 0; i < object.deploymentUnitProgresses.length; ++i) {
+                                    if (typeof object.deploymentUnitProgresses[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.deploymentUnitProgresses: object expected");
+                                    message.deploymentUnitProgresses[i] = $root.google.cloud.config.v1.DeploymentUnitProgress.fromObject(object.deploymentUnitProgresses[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ProvisionDeploymentGroupOperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata} message ProvisionDeploymentGroupOperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.deploymentUnitProgresses = [];
+                            if (options.defaults)
+                                object.step = options.enums === String ? "PROVISION_DEPLOYMENT_GROUP_STEP_UNSPECIFIED" : 0;
+                            if (message.step != null && message.hasOwnProperty("step"))
+                                object.step = options.enums === String ? $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep[message.step] === undefined ? message.step : $root.google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep[message.step] : message.step;
+                            if (message.deploymentUnitProgresses && message.deploymentUnitProgresses.length) {
+                                object.deploymentUnitProgresses = [];
+                                for (var j = 0; j < message.deploymentUnitProgresses.length; ++j)
+                                    object.deploymentUnitProgresses[j] = $root.google.cloud.config.v1.DeploymentUnitProgress.toObject(message.deploymentUnitProgresses[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ProvisionDeploymentGroupOperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ProvisionDeploymentGroupOperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata";
+                        };
+    
+                        /**
+                         * ProvisionDeploymentGroupStep enum.
+                         * @name google.cloud.config.v1.ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep
+                         * @enum {number}
+                         * @property {number} PROVISION_DEPLOYMENT_GROUP_STEP_UNSPECIFIED=0 PROVISION_DEPLOYMENT_GROUP_STEP_UNSPECIFIED value
+                         * @property {number} VALIDATING_DEPLOYMENT_GROUP=1 VALIDATING_DEPLOYMENT_GROUP value
+                         * @property {number} ASSOCIATING_DEPLOYMENTS_TO_DEPLOYMENT_GROUP=2 ASSOCIATING_DEPLOYMENTS_TO_DEPLOYMENT_GROUP value
+                         * @property {number} PROVISIONING_DEPLOYMENT_UNITS=3 PROVISIONING_DEPLOYMENT_UNITS value
+                         * @property {number} DISASSOCIATING_DEPLOYMENTS_FROM_DEPLOYMENT_GROUP=4 DISASSOCIATING_DEPLOYMENTS_FROM_DEPLOYMENT_GROUP value
+                         * @property {number} SUCCEEDED=5 SUCCEEDED value
+                         * @property {number} FAILED=6 FAILED value
+                         * @property {number} DEPROVISIONING_DEPLOYMENT_UNITS=7 DEPROVISIONING_DEPLOYMENT_UNITS value
+                         */
+                        ProvisionDeploymentGroupOperationMetadata.ProvisionDeploymentGroupStep = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PROVISION_DEPLOYMENT_GROUP_STEP_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "VALIDATING_DEPLOYMENT_GROUP"] = 1;
+                            values[valuesById[2] = "ASSOCIATING_DEPLOYMENTS_TO_DEPLOYMENT_GROUP"] = 2;
+                            values[valuesById[3] = "PROVISIONING_DEPLOYMENT_UNITS"] = 3;
+                            values[valuesById[4] = "DISASSOCIATING_DEPLOYMENTS_FROM_DEPLOYMENT_GROUP"] = 4;
+                            values[valuesById[5] = "SUCCEEDED"] = 5;
+                            values[valuesById[6] = "FAILED"] = 6;
+                            values[valuesById[7] = "DEPROVISIONING_DEPLOYMENT_UNITS"] = 7;
+                            return values;
+                        })();
+    
+                        return ProvisionDeploymentGroupOperationMetadata;
+                    })();
+    
+                    v1.DeploymentGroupRevision = (function() {
+    
+                        /**
+                         * Properties of a DeploymentGroupRevision.
+                         * @memberof google.cloud.config.v1
+                         * @interface IDeploymentGroupRevision
+                         * @property {string|null} [name] DeploymentGroupRevision name
+                         * @property {google.cloud.config.v1.IDeploymentGroup|null} [snapshot] DeploymentGroupRevision snapshot
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeploymentGroupRevision createTime
+                         * @property {Array.<string>|null} [alternativeIds] DeploymentGroupRevision alternativeIds
+                         */
+    
+                        /**
+                         * Constructs a new DeploymentGroupRevision.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a DeploymentGroupRevision.
+                         * @implements IDeploymentGroupRevision
+                         * @constructor
+                         * @param {google.cloud.config.v1.IDeploymentGroupRevision=} [properties] Properties to set
+                         */
+                        function DeploymentGroupRevision(properties) {
+                            this.alternativeIds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeploymentGroupRevision name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @instance
+                         */
+                        DeploymentGroupRevision.prototype.name = "";
+    
+                        /**
+                         * DeploymentGroupRevision snapshot.
+                         * @member {google.cloud.config.v1.IDeploymentGroup|null|undefined} snapshot
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @instance
+                         */
+                        DeploymentGroupRevision.prototype.snapshot = null;
+    
+                        /**
+                         * DeploymentGroupRevision createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @instance
+                         */
+                        DeploymentGroupRevision.prototype.createTime = null;
+    
+                        /**
+                         * DeploymentGroupRevision alternativeIds.
+                         * @member {Array.<string>} alternativeIds
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @instance
+                         */
+                        DeploymentGroupRevision.prototype.alternativeIds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DeploymentGroupRevision instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentGroupRevision=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.DeploymentGroupRevision} DeploymentGroupRevision instance
+                         */
+                        DeploymentGroupRevision.create = function create(properties) {
+                            return new DeploymentGroupRevision(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentGroupRevision message. Does not implicitly {@link google.cloud.config.v1.DeploymentGroupRevision.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentGroupRevision} message DeploymentGroupRevision message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentGroupRevision.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.snapshot != null && Object.hasOwnProperty.call(message, "snapshot"))
+                                $root.google.cloud.config.v1.DeploymentGroup.encode(message.snapshot, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.alternativeIds != null && message.alternativeIds.length)
+                                for (var i = 0; i < message.alternativeIds.length; ++i)
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.alternativeIds[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeploymentGroupRevision message, length delimited. Does not implicitly {@link google.cloud.config.v1.DeploymentGroupRevision.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {google.cloud.config.v1.IDeploymentGroupRevision} message DeploymentGroupRevision message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeploymentGroupRevision.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeploymentGroupRevision message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.DeploymentGroupRevision} DeploymentGroupRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentGroupRevision.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.DeploymentGroupRevision();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.snapshot = $root.google.cloud.config.v1.DeploymentGroup.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.alternativeIds && message.alternativeIds.length))
+                                            message.alternativeIds = [];
+                                        message.alternativeIds.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeploymentGroupRevision message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.DeploymentGroupRevision} DeploymentGroupRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeploymentGroupRevision.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeploymentGroupRevision message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeploymentGroupRevision.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot")) {
+                                var error = $root.google.cloud.config.v1.DeploymentGroup.verify(message.snapshot);
+                                if (error)
+                                    return "snapshot." + error;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.alternativeIds != null && message.hasOwnProperty("alternativeIds")) {
+                                if (!Array.isArray(message.alternativeIds))
+                                    return "alternativeIds: array expected";
+                                for (var i = 0; i < message.alternativeIds.length; ++i)
+                                    if (!$util.isString(message.alternativeIds[i]))
+                                        return "alternativeIds: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeploymentGroupRevision message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.DeploymentGroupRevision} DeploymentGroupRevision
+                         */
+                        DeploymentGroupRevision.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.DeploymentGroupRevision)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.DeploymentGroupRevision();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.snapshot != null) {
+                                if (typeof object.snapshot !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroupRevision.snapshot: object expected");
+                                message.snapshot = $root.google.cloud.config.v1.DeploymentGroup.fromObject(object.snapshot);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroupRevision.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.alternativeIds) {
+                                if (!Array.isArray(object.alternativeIds))
+                                    throw TypeError(".google.cloud.config.v1.DeploymentGroupRevision.alternativeIds: array expected");
+                                message.alternativeIds = [];
+                                for (var i = 0; i < object.alternativeIds.length; ++i)
+                                    message.alternativeIds[i] = String(object.alternativeIds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeploymentGroupRevision message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {google.cloud.config.v1.DeploymentGroupRevision} message DeploymentGroupRevision
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeploymentGroupRevision.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.alternativeIds = [];
+                            if (options.defaults) {
+                                object.name = "";
+                                object.snapshot = null;
+                                object.createTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.snapshot != null && message.hasOwnProperty("snapshot"))
+                                object.snapshot = $root.google.cloud.config.v1.DeploymentGroup.toObject(message.snapshot, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.alternativeIds && message.alternativeIds.length) {
+                                object.alternativeIds = [];
+                                for (var j = 0; j < message.alternativeIds.length; ++j)
+                                    object.alternativeIds[j] = message.alternativeIds[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeploymentGroupRevision to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeploymentGroupRevision.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeploymentGroupRevision
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.DeploymentGroupRevision
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeploymentGroupRevision.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.DeploymentGroupRevision";
+                        };
+    
+                        return DeploymentGroupRevision;
+                    })();
+    
+                    v1.GetDeploymentGroupRevisionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDeploymentGroupRevisionRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IGetDeploymentGroupRevisionRequest
+                         * @property {string|null} [name] GetDeploymentGroupRevisionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDeploymentGroupRevisionRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a GetDeploymentGroupRevisionRequest.
+                         * @implements IGetDeploymentGroupRevisionRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRevisionRequest=} [properties] Properties to set
+                         */
+                        function GetDeploymentGroupRevisionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDeploymentGroupRevisionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @instance
+                         */
+                        GetDeploymentGroupRevisionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDeploymentGroupRevisionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRevisionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRevisionRequest} GetDeploymentGroupRevisionRequest instance
+                         */
+                        GetDeploymentGroupRevisionRequest.create = function create(properties) {
+                            return new GetDeploymentGroupRevisionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDeploymentGroupRevisionRequest message. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRevisionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRevisionRequest} message GetDeploymentGroupRevisionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDeploymentGroupRevisionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDeploymentGroupRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.GetDeploymentGroupRevisionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IGetDeploymentGroupRevisionRequest} message GetDeploymentGroupRevisionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDeploymentGroupRevisionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDeploymentGroupRevisionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRevisionRequest} GetDeploymentGroupRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDeploymentGroupRevisionRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.GetDeploymentGroupRevisionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDeploymentGroupRevisionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRevisionRequest} GetDeploymentGroupRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDeploymentGroupRevisionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDeploymentGroupRevisionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDeploymentGroupRevisionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDeploymentGroupRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.GetDeploymentGroupRevisionRequest} GetDeploymentGroupRevisionRequest
+                         */
+                        GetDeploymentGroupRevisionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.GetDeploymentGroupRevisionRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.GetDeploymentGroupRevisionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDeploymentGroupRevisionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {google.cloud.config.v1.GetDeploymentGroupRevisionRequest} message GetDeploymentGroupRevisionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDeploymentGroupRevisionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDeploymentGroupRevisionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDeploymentGroupRevisionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDeploymentGroupRevisionRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.GetDeploymentGroupRevisionRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDeploymentGroupRevisionRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.GetDeploymentGroupRevisionRequest";
+                        };
+    
+                        return GetDeploymentGroupRevisionRequest;
+                    })();
+    
+                    v1.ListDeploymentGroupRevisionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDeploymentGroupRevisionsRequest.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListDeploymentGroupRevisionsRequest
+                         * @property {string|null} [parent] ListDeploymentGroupRevisionsRequest parent
+                         * @property {number|null} [pageSize] ListDeploymentGroupRevisionsRequest pageSize
+                         * @property {string|null} [pageToken] ListDeploymentGroupRevisionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDeploymentGroupRevisionsRequest.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListDeploymentGroupRevisionsRequest.
+                         * @implements IListDeploymentGroupRevisionsRequest
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsRequest=} [properties] Properties to set
+                         */
+                        function ListDeploymentGroupRevisionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDeploymentGroupRevisionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupRevisionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDeploymentGroupRevisionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupRevisionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDeploymentGroupRevisionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @instance
+                         */
+                        ListDeploymentGroupRevisionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListDeploymentGroupRevisionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsRequest} ListDeploymentGroupRevisionsRequest instance
+                         */
+                        ListDeploymentGroupRevisionsRequest.create = function create(properties) {
+                            return new ListDeploymentGroupRevisionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupRevisionsRequest message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsRequest} message ListDeploymentGroupRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupRevisionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsRequest} message ListDeploymentGroupRevisionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupRevisionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupRevisionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsRequest} ListDeploymentGroupRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupRevisionsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupRevisionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsRequest} ListDeploymentGroupRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupRevisionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDeploymentGroupRevisionsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDeploymentGroupRevisionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDeploymentGroupRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsRequest} ListDeploymentGroupRevisionsRequest
+                         */
+                        ListDeploymentGroupRevisionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListDeploymentGroupRevisionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDeploymentGroupRevisionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {google.cloud.config.v1.ListDeploymentGroupRevisionsRequest} message ListDeploymentGroupRevisionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDeploymentGroupRevisionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDeploymentGroupRevisionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDeploymentGroupRevisionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDeploymentGroupRevisionsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDeploymentGroupRevisionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListDeploymentGroupRevisionsRequest";
+                        };
+    
+                        return ListDeploymentGroupRevisionsRequest;
+                    })();
+    
+                    v1.ListDeploymentGroupRevisionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDeploymentGroupRevisionsResponse.
+                         * @memberof google.cloud.config.v1
+                         * @interface IListDeploymentGroupRevisionsResponse
+                         * @property {Array.<google.cloud.config.v1.IDeploymentGroupRevision>|null} [deploymentGroupRevisions] ListDeploymentGroupRevisionsResponse deploymentGroupRevisions
+                         * @property {string|null} [nextPageToken] ListDeploymentGroupRevisionsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListDeploymentGroupRevisionsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListDeploymentGroupRevisionsResponse.
+                         * @memberof google.cloud.config.v1
+                         * @classdesc Represents a ListDeploymentGroupRevisionsResponse.
+                         * @implements IListDeploymentGroupRevisionsResponse
+                         * @constructor
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsResponse=} [properties] Properties to set
+                         */
+                        function ListDeploymentGroupRevisionsResponse(properties) {
+                            this.deploymentGroupRevisions = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDeploymentGroupRevisionsResponse deploymentGroupRevisions.
+                         * @member {Array.<google.cloud.config.v1.IDeploymentGroupRevision>} deploymentGroupRevisions
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @instance
+                         */
+                        ListDeploymentGroupRevisionsResponse.prototype.deploymentGroupRevisions = $util.emptyArray;
+    
+                        /**
+                         * ListDeploymentGroupRevisionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @instance
+                         */
+                        ListDeploymentGroupRevisionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListDeploymentGroupRevisionsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @instance
+                         */
+                        ListDeploymentGroupRevisionsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListDeploymentGroupRevisionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsResponse} ListDeploymentGroupRevisionsResponse instance
+                         */
+                        ListDeploymentGroupRevisionsResponse.create = function create(properties) {
+                            return new ListDeploymentGroupRevisionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupRevisionsResponse message. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsResponse} message ListDeploymentGroupRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupRevisionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.deploymentGroupRevisions != null && message.deploymentGroupRevisions.length)
+                                for (var i = 0; i < message.deploymentGroupRevisions.length; ++i)
+                                    $root.google.cloud.config.v1.DeploymentGroupRevision.encode(message.deploymentGroupRevisions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDeploymentGroupRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.config.v1.ListDeploymentGroupRevisionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.IListDeploymentGroupRevisionsResponse} message ListDeploymentGroupRevisionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDeploymentGroupRevisionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupRevisionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsResponse} ListDeploymentGroupRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupRevisionsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.config.v1.ListDeploymentGroupRevisionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.deploymentGroupRevisions && message.deploymentGroupRevisions.length))
+                                            message.deploymentGroupRevisions = [];
+                                        message.deploymentGroupRevisions.push($root.google.cloud.config.v1.DeploymentGroupRevision.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDeploymentGroupRevisionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsResponse} ListDeploymentGroupRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDeploymentGroupRevisionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDeploymentGroupRevisionsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDeploymentGroupRevisionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.deploymentGroupRevisions != null && message.hasOwnProperty("deploymentGroupRevisions")) {
+                                if (!Array.isArray(message.deploymentGroupRevisions))
+                                    return "deploymentGroupRevisions: array expected";
+                                for (var i = 0; i < message.deploymentGroupRevisions.length; ++i) {
+                                    var error = $root.google.cloud.config.v1.DeploymentGroupRevision.verify(message.deploymentGroupRevisions[i]);
+                                    if (error)
+                                        return "deploymentGroupRevisions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDeploymentGroupRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.config.v1.ListDeploymentGroupRevisionsResponse} ListDeploymentGroupRevisionsResponse
+                         */
+                        ListDeploymentGroupRevisionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.config.v1.ListDeploymentGroupRevisionsResponse)
+                                return object;
+                            var message = new $root.google.cloud.config.v1.ListDeploymentGroupRevisionsResponse();
+                            if (object.deploymentGroupRevisions) {
+                                if (!Array.isArray(object.deploymentGroupRevisions))
+                                    throw TypeError(".google.cloud.config.v1.ListDeploymentGroupRevisionsResponse.deploymentGroupRevisions: array expected");
+                                message.deploymentGroupRevisions = [];
+                                for (var i = 0; i < object.deploymentGroupRevisions.length; ++i) {
+                                    if (typeof object.deploymentGroupRevisions[i] !== "object")
+                                        throw TypeError(".google.cloud.config.v1.ListDeploymentGroupRevisionsResponse.deploymentGroupRevisions: object expected");
+                                    message.deploymentGroupRevisions[i] = $root.google.cloud.config.v1.DeploymentGroupRevision.fromObject(object.deploymentGroupRevisions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.config.v1.ListDeploymentGroupRevisionsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDeploymentGroupRevisionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {google.cloud.config.v1.ListDeploymentGroupRevisionsResponse} message ListDeploymentGroupRevisionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDeploymentGroupRevisionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.deploymentGroupRevisions = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.deploymentGroupRevisions && message.deploymentGroupRevisions.length) {
+                                object.deploymentGroupRevisions = [];
+                                for (var j = 0; j < message.deploymentGroupRevisions.length; ++j)
+                                    object.deploymentGroupRevisions[j] = $root.google.cloud.config.v1.DeploymentGroupRevision.toObject(message.deploymentGroupRevisions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDeploymentGroupRevisionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDeploymentGroupRevisionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDeploymentGroupRevisionsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.config.v1.ListDeploymentGroupRevisionsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDeploymentGroupRevisionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.config.v1.ListDeploymentGroupRevisionsResponse";
+                        };
+    
+                        return ListDeploymentGroupRevisionsResponse;
+                    })();
+    
                     return v1;
                 })();
     
@@ -22103,6 +28615,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -22138,6 +28651,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -22169,6 +28690,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -22218,6 +28741,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -22271,6 +28798,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -22313,6 +28845,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -22331,8 +28868,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -22340,6 +28879,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -24162,6 +30703,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -24186,6 +30728,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -24213,6 +30763,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -24251,6 +30803,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -24293,6 +30849,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -24313,6 +30874,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -24329,10 +30895,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -24361,6 +30931,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -25238,6 +32060,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -25249,6 +32072,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -25262,6 +32086,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -25289,6 +32121,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -25319,7 +32154,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -25327,6 +32162,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -25369,6 +32227,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -25389,6 +32255,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -25405,10 +32278,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -26047,6 +32928,251 @@
                 return values;
             })();
     
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
+            })();
+    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -26108,6 +33234,7 @@
                  * @memberof google.api
                  * @interface IFieldInfo
                  * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 * @property {Array.<google.api.ITypeReference>|null} [referencedTypes] FieldInfo referencedTypes
                  */
     
                 /**
@@ -26119,6 +33246,7 @@
                  * @param {google.api.IFieldInfo=} [properties] Properties to set
                  */
                 function FieldInfo(properties) {
+                    this.referencedTypes = [];
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -26132,6 +33260,14 @@
                  * @instance
                  */
                 FieldInfo.prototype.format = 0;
+    
+                /**
+                 * FieldInfo referencedTypes.
+                 * @member {Array.<google.api.ITypeReference>} referencedTypes
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.referencedTypes = $util.emptyArray;
     
                 /**
                  * Creates a new FieldInfo instance using the specified properties.
@@ -26159,6 +33295,9 @@
                         writer = $Writer.create();
                     if (message.format != null && Object.hasOwnProperty.call(message, "format"))
                         writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    if (message.referencedTypes != null && message.referencedTypes.length)
+                        for (var i = 0; i < message.referencedTypes.length; ++i)
+                            $root.google.api.TypeReference.encode(message.referencedTypes[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -26197,6 +33336,12 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.format = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                if (!(message.referencedTypes && message.referencedTypes.length))
+                                    message.referencedTypes = [];
+                                message.referencedTypes.push($root.google.api.TypeReference.decode(reader, reader.uint32()));
                                 break;
                             }
                         default:
@@ -26245,6 +33390,15 @@
                         case 4:
                             break;
                         }
+                    if (message.referencedTypes != null && message.hasOwnProperty("referencedTypes")) {
+                        if (!Array.isArray(message.referencedTypes))
+                            return "referencedTypes: array expected";
+                        for (var i = 0; i < message.referencedTypes.length; ++i) {
+                            var error = $root.google.api.TypeReference.verify(message.referencedTypes[i]);
+                            if (error)
+                                return "referencedTypes." + error;
+                        }
+                    }
                     return null;
                 };
     
@@ -26288,6 +33442,16 @@
                         message.format = 4;
                         break;
                     }
+                    if (object.referencedTypes) {
+                        if (!Array.isArray(object.referencedTypes))
+                            throw TypeError(".google.api.FieldInfo.referencedTypes: array expected");
+                        message.referencedTypes = [];
+                        for (var i = 0; i < object.referencedTypes.length; ++i) {
+                            if (typeof object.referencedTypes[i] !== "object")
+                                throw TypeError(".google.api.FieldInfo.referencedTypes: object expected");
+                            message.referencedTypes[i] = $root.google.api.TypeReference.fromObject(object.referencedTypes[i]);
+                        }
+                    }
                     return message;
                 };
     
@@ -26304,10 +33468,17 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.arrays || options.defaults)
+                        object.referencedTypes = [];
                     if (options.defaults)
                         object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
                     if (message.format != null && message.hasOwnProperty("format"))
                         object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    if (message.referencedTypes && message.referencedTypes.length) {
+                        object.referencedTypes = [];
+                        for (var j = 0; j < message.referencedTypes.length; ++j)
+                            object.referencedTypes[j] = $root.google.api.TypeReference.toObject(message.referencedTypes[j], options);
+                    }
                     return object;
                 };
     
@@ -26358,6 +33529,211 @@
                 })();
     
                 return FieldInfo;
+            })();
+    
+            api.TypeReference = (function() {
+    
+                /**
+                 * Properties of a TypeReference.
+                 * @memberof google.api
+                 * @interface ITypeReference
+                 * @property {string|null} [typeName] TypeReference typeName
+                 */
+    
+                /**
+                 * Constructs a new TypeReference.
+                 * @memberof google.api
+                 * @classdesc Represents a TypeReference.
+                 * @implements ITypeReference
+                 * @constructor
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 */
+                function TypeReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TypeReference typeName.
+                 * @member {string} typeName
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 */
+                TypeReference.prototype.typeName = "";
+    
+                /**
+                 * Creates a new TypeReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference=} [properties] Properties to set
+                 * @returns {google.api.TypeReference} TypeReference instance
+                 */
+                TypeReference.create = function create(properties) {
+                    return new TypeReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.typeName != null && Object.hasOwnProperty.call(message, "typeName"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.typeName);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.ITypeReference} message TypeReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TypeReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.TypeReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.typeName = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.TypeReference} TypeReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TypeReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TypeReference message.
+                 * @function verify
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TypeReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        if (!$util.isString(message.typeName))
+                            return "typeName: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.TypeReference} TypeReference
+                 */
+                TypeReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.TypeReference)
+                        return object;
+                    var message = new $root.google.api.TypeReference();
+                    if (object.typeName != null)
+                        message.typeName = String(object.typeName);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {google.api.TypeReference} message TypeReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TypeReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.typeName = "";
+                    if (message.typeName != null && message.hasOwnProperty("typeName"))
+                        object.typeName = message.typeName;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TypeReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.TypeReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TypeReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for TypeReference
+                 * @function getTypeUrl
+                 * @memberof google.api.TypeReference
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                TypeReference.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.TypeReference";
+                };
+    
+                return TypeReference;
             })();
     
             api.ResourceDescriptor = (function() {
@@ -27291,6 +34667,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -27305,6 +34682,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -27329,6 +34707,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -27351,6 +34730,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -27400,6 +34780,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -27522,6 +34910,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -27592,6 +34983,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -27696,6 +35093,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -27750,6 +35154,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -27801,6 +35206,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -27864,6 +35276,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -27930,6 +35346,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -27986,6 +35403,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -28034,6 +35456,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -28140,6 +35563,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -28191,6 +35622,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -28281,6 +35714,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -28396,6 +35833,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -28495,6 +35941,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -28524,6 +35990,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -28569,6 +36036,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -30613,6 +38082,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -30674,6 +38144,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -30710,6 +38188,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -30770,6 +38250,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -30840,6 +38324,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -30889,6 +38382,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -30913,6 +38426,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -30933,6 +38447,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -33251,6 +40767,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
@@ -33373,6 +40890,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -33454,6 +40979,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -33555,6 +41082,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -33695,6 +41226,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -33889,6 +41425,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -33991,6 +41532,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                         object[".google.api.fieldInfo"] = null;
                     }
@@ -34024,6 +41566,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -34298,6 +41842,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -34338,6 +41883,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -34436,6 +41985,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -35030,6 +43061,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -35074,6 +43106,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -35111,6 +43151,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -35160,6 +43202,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -35214,6 +43260,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -35247,6 +43298,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -35279,6 +43335,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -35286,6 +43343,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -36753,6 +44812,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -36819,6 +44880,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -36854,6 +44931,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -36912,6 +44993,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -37002,6 +45091,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -37143,6 +45252,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -37166,6 +45323,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -37179,6 +45338,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -37304,6 +45467,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -37490,6 +45866,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -37507,6 +45884,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -37554,6 +45932,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -37606,6 +45988,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -37715,7 +46101,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -37742,12 +46129,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -37773,10 +46168,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -37817,8 +46214,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -37861,6 +46262,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -37873,10 +46275,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -37903,6 +46310,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -37945,10 +46356,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -37967,13 +46383,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -39186,6 +47605,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {

@@ -18,9 +18,11 @@ import {Bucket, UploadOptions, UploadResponse} from './bucket.js';
 import {
   DownloadOptions,
   DownloadResponse,
+  DownloadResponseWithStatus,
   File,
   FileExceptionMessages,
   RequestError,
+  SkipReason,
 } from './file.js';
 import pLimit from 'p-limit';
 import * as path from 'path';
@@ -115,7 +117,7 @@ export interface DownloadFileInChunksOptions {
   concurrencyLimit?: number;
   chunkSizeBytes?: number;
   destination?: string;
-  validation?: 'crc32c' | false;
+  validation?: 'crc32c' | boolean;
   noReturnData?: boolean;
 }
 
@@ -127,7 +129,7 @@ export interface UploadFileInChunksOptions {
   uploadId?: string;
   autoAbortFailure?: boolean;
   partsMap?: Map<number, string>;
-  validation?: 'md5' | false;
+  validation?: 'md5' | 'crc32c' | false;
   headers?: {[key: string]: string};
 }
 
@@ -140,7 +142,7 @@ export interface MultiPartUploadHelper {
   uploadPart(
     partNumber: number,
     chunk: Buffer,
-    validation?: 'md5' | false,
+    validation?: 'md5' | 'crc32c' | false,
   ): Promise<void>;
   completeUpload(): Promise<GaxiosResponse | undefined>;
   abortUpload(): Promise<void>;
@@ -289,7 +291,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   async uploadPart(
     partNumber: number,
     chunk: Buffer,
-    validation?: 'md5' | false,
+    validation?: 'md5' | 'crc32c' | false,
   ): Promise<void> {
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
     let headers: Headers = this.#setGoogApiClientHeaders();
@@ -299,6 +301,10 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       headers = {
         'Content-MD5': hash,
       };
+    } else if (validation === 'crc32c') {
+      const crc = new CRC32C();
+      crc.update(chunk);
+      headers['x-goog-hash'] = `crc32c=${crc.toString()}`;
     }
 
     return AsyncRetry(async bail => {
@@ -540,6 +546,34 @@ export class TransferManager {
    * instead of being returned as a buffer.
    * @returns {Promise<DownloadResponse[]>}
    *
+   * @behavior
+   * **Return shape change (breaking/observable behavior):**
+   * - Previously, the returned array only contained entries for files that were successfully downloaded.
+   * - This meant the response length could be smaller than the number of requested input files.
+   * - Now, the returned array always has the same length and ordering as the input file list.
+   * - Each index in the response corresponds directly to the same index in the input.
+   * - Files that are skipped or fail will still have an entry in the result with:
+   *   - `skipped = true`
+   *   - `reason` populated with a {@link SkipReason}
+   *
+   * **New guarantees:**
+   * - Response length === number of requested files
+   * - Stable positional mapping between input and output
+   * - All outcomes (success, skipped, error) are explicitly represented
+   *
+   * @security
+   * **Path traversal protection (new):**
+   * - File paths are resolved relative to the configured destination directory.
+   * - Any file whose resolved path escapes the base destination directory is rejected.
+   * - This prevents directory traversal attacks (e.g. `../../etc/passwd`).
+   * - Such files are not downloaded and instead return:
+   *   - `skipped = true`
+   *   - `reason = SkipReason.PATH_TRAVERSAL`
+   *
+   * **Additional validation:**
+   * - File names containing illegal drive prefixes (e.g. `C:\`) are skipped
+   * to prevent unintended writes on host systems.
+   *
    * @example
    * ```
    * const {Storage} = require('@google-cloud/storage');
@@ -554,12 +588,15 @@ export class TransferManager {
    * // The following files have been downloaded:
    * // - "file1.txt" (with the contents from my-bucket.file1.txt)
    * // - "file2.txt" (with the contents from my-bucket.file2.txt)
+   * // response.length === 2 (always matches input length)
+   * // Each entry corresponds to the respective input file
    * const response = await transferManager.downloadManyFiles([bucket.File('file1.txt'), bucket.File('file2.txt')]);
    * // The following files have been downloaded:
    * // - "file1.txt" (with the contents from my-bucket.file1.txt)
    * // - "file2.txt" (with the contents from my-bucket.file2.txt)
    * const response = await transferManager.downloadManyFiles('test-folder');
-   * // All files with GCS prefix of 'test-folder' have been downloaded.
+   * // All files with GCS prefix of 'test-folder' have been processed.
+   * // Skipped or failed files are still included in the response.
    * ```
    *
    */
@@ -570,8 +607,12 @@ export class TransferManager {
     const limit = pLimit(
       options.concurrencyLimit || DEFAULT_PARALLEL_DOWNLOAD_LIMIT,
     );
-    const promises: Promise<DownloadResponse>[] = [];
+    const promises: Promise<void>[] = [];
     let files: File[] = [];
+
+    const baseDestination = path.resolve(
+      options.passthroughOptions?.destination || '.',
+    );
 
     if (!Array.isArray(filesOrFolder)) {
       const directoryFiles = await this.bucket.getFiles({
@@ -592,45 +633,102 @@ export class TransferManager {
       : EMPTY_REGEX;
     const regex = new RegExp(stripRegexString, 'g');
 
-    for (const file of files) {
-      const passThroughOptionsCopy = {
-        ...options.passthroughOptions,
-        [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
-      };
+    const finalResults: DownloadResponseWithStatus[] = new Array(files.length);
 
-      if (options.prefix || passThroughOptionsCopy.destination) {
-        passThroughOptionsCopy.destination = path.join(
-          options.prefix || '',
-          passThroughOptionsCopy.destination || '',
-          file.name,
-        );
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      const hasIllegalDrive = /^[a-zA-Z]:/.test(file.name);
+      if (hasIllegalDrive) {
+        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+        skippedResult.skipped = true;
+        skippedResult.reason = SkipReason.ILLEGAL_CHARACTER;
+        skippedResult.fileName = file.name;
+        finalResults[i] = skippedResult;
+        continue;
       }
-      if (options.stripPrefix) {
-        passThroughOptionsCopy.destination = file.name.replace(regex, '');
+
+      const fileName = options.stripPrefix
+        ? file.name.replace(regex, '')
+        : file.name;
+
+      const dest = fileName.replace(/^[\\/]+/, '');
+
+      const resolvedPath = path.resolve(baseDestination, dest);
+      const relativeFromBase = path.relative(baseDestination, resolvedPath);
+
+      const isOutside =
+        path.isAbsolute(relativeFromBase) ||
+        relativeFromBase.split(/[\\/]/).includes('..');
+
+      if (isOutside) {
+        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+        skippedResult.skipped = true;
+        skippedResult.reason = SkipReason.PATH_TRAVERSAL;
+        skippedResult.fileName = file.name;
+        skippedResult.localPath = resolvedPath;
+        finalResults[i] = skippedResult;
+        continue;
       }
-      if (
-        options.skipIfExists &&
-        existsSync(passThroughOptionsCopy.destination || '')
-      ) {
+
+      if (options.skipIfExists && existsSync(resolvedPath)) {
+        const skippedResult = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+        skippedResult.skipped = true;
+        skippedResult.reason = SkipReason.ALREADY_EXISTS;
+        skippedResult.fileName = file.name;
+        skippedResult.localPath = resolvedPath;
+        finalResults[i] = skippedResult;
         continue;
       }
 
       promises.push(
         limit(async () => {
-          const destination = passThroughOptionsCopy.destination;
-          if (destination && destination.endsWith(path.sep)) {
-            await fsp.mkdir(destination, {recursive: true});
-            return Promise.resolve([
-              Buffer.alloc(0),
-            ]) as Promise<DownloadResponse>;
-          }
+          const passThroughOptionsCopy = {
+            ...options.passthroughOptions,
+            destination: resolvedPath,
+            [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_MANY,
+          };
 
-          return file.download(passThroughOptionsCopy);
+          try {
+            const destination = passThroughOptionsCopy.destination!;
+
+            if (destination.endsWith(path.sep) || destination.endsWith('/')) {
+              await fsp.mkdir(destination, {recursive: true});
+              const dirResp = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+              dirResp.skipped = false;
+              dirResp.fileName = file.name;
+              dirResp.localPath = destination;
+              finalResults[i] = dirResp;
+              return;
+            }
+
+            await fsp.mkdir(path.dirname(destination), {recursive: true});
+
+            const resp = (await file.download(
+              passThroughOptionsCopy,
+            )) as DownloadResponseWithStatus;
+
+            finalResults[i] = {
+              ...resp,
+              skipped: false,
+              fileName: file.name,
+              localPath: destination,
+            } as DownloadResponse;
+          } catch (err) {
+            const errorResp = [Buffer.alloc(0)] as DownloadResponseWithStatus;
+            errorResp.skipped = true;
+            errorResp.reason = SkipReason.DOWNLOAD_ERROR;
+            errorResp.fileName = file.name;
+            errorResp.localPath = resolvedPath;
+            errorResp.error = err as Error;
+            finalResults[i] = errorResp;
+          }
         }),
       );
     }
 
-    return Promise.all(promises);
+    await Promise.all(promises);
+    return finalResults;
   }
 
   /**
@@ -638,7 +736,7 @@ export class TransferManager {
    * @property {number} [concurrencyLimit] The number of concurrently executing promises
    * to use when downloading the file.
    * @property {number} [chunkSizeBytes] The size in bytes of each chunk to be downloaded.
-   * @property {string | boolean} [validation] Whether or not to perform a CRC32C validation check when download is complete.
+   * @property {'crc32c' | boolean} [validation] Whether or not to perform a CRC32C validation check when download is complete. Defaults to 'crc32c'.
    * @property {boolean} [noReturnData] Whether or not to return the downloaded data. A `true` value here would be useful for files with a size that will not fit into memory.
    *
    */
@@ -659,10 +757,19 @@ export class TransferManager {
    *
    * //-
    * // Download a large file in chunks utilizing parallel operations.
+   * // CRC32C validation is performed by default.
    * //-
    * const response = await transferManager.downloadFileInChunks(bucket.file('large-file.txt');
    * // Your local directory now contains:
    * // - "large-file.txt" (with the contents from my-bucket.large-file.txt)
+   *
+   * //-
+   * // To disable validation:
+   * //-
+   * const responseWithoutValidation = await transferManager.downloadFileInChunks(
+   *   bucket.file('large-file.txt'),
+   *   { validation: false }
+   * );
    * ```
    *
    */
@@ -681,6 +788,12 @@ export class TransferManager {
       typeof fileOrName === 'string'
         ? this.bucket.file(fileOrName)
         : fileOrName;
+
+    // Default validation to 'crc32c' if undefined or true, otherwise respect user's value
+    const validation =
+      options.validation === undefined || options.validation === true
+        ? 'crc32c'
+        : options.validation;
 
     const fileInfo = await file.get();
     const size = parseInt(fileInfo[0].metadata.size!.toString());
@@ -703,6 +816,7 @@ export class TransferManager {
             start: chunkStart,
             end: chunkEnd,
             [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.DOWNLOAD_SHARDED,
+            validation: false, // Disable validation on individual chunks
           });
           const result = await fileToWrite.write(
             resp[0],
@@ -725,7 +839,8 @@ export class TransferManager {
       await fileToWrite.close();
     }
 
-    if (options.validation === 'crc32c' && fileInfo[0].metadata.crc32c) {
+    // Check against the defaulted validation option
+    if (validation === 'crc32c' && fileInfo[0].metadata.crc32c) {
       const downloadedCrc32C = await CRC32C.fromFile(filePath);
       if (!downloadedCrc32C.validate(fileInfo[0].metadata.crc32c)) {
         const mismatchError = new RequestError(
@@ -735,6 +850,7 @@ export class TransferManager {
         throw mismatchError;
       }
     }
+
     if (noReturnData) return;
     return [Buffer.concat(chunks as Buffer[], size)];
   }
@@ -806,6 +922,7 @@ export class TransferManager {
     );
     let partNumber = 1;
     let promises: Promise<void>[] = [];
+    const validation = options.validation ?? 'crc32c';
     try {
       if (options.uploadId === undefined) {
         await mpuHelper.initiateUpload(options.headers);
@@ -823,9 +940,7 @@ export class TransferManager {
           promises = [];
         }
         promises.push(
-          limit(() =>
-            mpuHelper.uploadPart(partNumber++, curChunk, options.validation),
-          ),
+          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation)),
         );
       }
       await Promise.all(promises);
