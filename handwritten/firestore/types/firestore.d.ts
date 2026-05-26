@@ -2707,6 +2707,146 @@ declare namespace FirebaseFirestore {
      */
     isEqual(other: VectorValue): boolean;
   }
+
+  /** Represent a "Min Key" type in Firestore documents. */
+  export class MinKey {
+    private constructor();
+
+    /** A type string to uniquely identify instances of this class. */
+    readonly type = 'MinKey';
+
+    /**
+     * @return The singleton `MinKey` instance.
+     */
+    static instance(): MinKey;
+  }
+
+  /** Represent a "Max Key" type in Firestore documents. */
+  export class MaxKey {
+    private constructor();
+
+    /** A type string to uniquely identify instances of this class. */
+    readonly type = 'MaxKey';
+
+    /**
+     * @return The singleton `MaxKey` instance.
+     */
+    static instance(): MaxKey;
+  }
+
+  /** Represents a regular expression type in Firestore documents. */
+  export class RegexValue {
+    constructor(pattern: string, options: string);
+
+    /** The regular expression pattern */
+    readonly pattern: string;
+
+    /** The regular expression options */
+    readonly options: string;
+
+    /**
+     * Returns true if this `RegexValue` is equal to the provided one.
+     *
+     * @param other The `RegexValue` to compare against.
+     * @return 'true' if this `RegexValue` is equal to the provided one.
+     */
+    isEqual(other: RegexValue): boolean;
+  }
+
+  /** Represents an ObjectId type in Firestore documents. */
+  export class BsonObjectId {
+    constructor(value: string);
+
+    /** The 24-character hex string representation of the ObjectId. */
+    readonly value: string;
+
+    /**
+     * Returns true if this `BsonObjectId` is equal to the provided one.
+     *
+     * @param other The `BsonObjectId` to compare against.
+     * @return 'true' if this `BsonObjectId` is equal to the provided one.
+     */
+    isEqual(other: BsonObjectId): boolean;
+  }
+
+  /** Represents a 32-bit integer type in Firestore documents. */
+  export class Int32Value {
+    /**
+     * Note: values larger than the largest 32-bit signed integer,
+     * or smaller than the smallest 32-bit signed integer are invalid
+     * and will get rejected.
+     */
+    constructor(value: number);
+
+    /** The underlying 32-bit number */
+    readonly value: number;
+
+    /**
+     * Returns true if this `Int32Value` is equal to the provided one.
+     *
+     * @param other The `Int32Value` to compare against.
+     * @return 'true' if this `Int32Value` is equal to the provided one.
+     */
+    isEqual(other: Int32Value): boolean;
+  }
+
+  /** Represents a 128-bit decimal type in Firestore documents. */
+  export class Decimal128Value {
+    constructor(value: string);
+
+    /** The underlying 128-bit decimal number */
+    readonly value: string;
+
+    /**
+     * Returns true if this `Decimal128Value` is equal to the provided one.
+     *
+     * @param other The `Decimal128Value` to compare against.
+     * @return 'true' if this `Decimal128Value` is equal to the provided one.
+     */
+    isEqual(other: Decimal128Value): boolean;
+  }
+
+  /** Represents a BSON Timestamp type in Firestore documents. */
+  export class BsonTimestamp {
+    /**
+     *  Note: negative values and values larger than the largest 32-bit
+     *  unsigned integer are invalid and will get rejected.
+     */
+    constructor(seconds: number, increment: number);
+
+    /** The underlying unsigned 32-bit integer for seconds */
+    readonly seconds: number;
+
+    /** The underlying unsigned 32-bit integer for increment */
+    readonly increment: number;
+
+    /**
+     * Returns true if this `BsonTimestamp` is equal to the provided one.
+     *
+     * @param other The `BsonTimestamp` to compare against.
+     * @return 'true' if this `BsonTimestamp` is equal to the provided one.
+     */
+    isEqual(other: BsonTimestamp): boolean;
+  }
+
+  /** Represents a BSON Binary Data type in Firestore documents. */
+  export class BsonBinaryData {
+    constructor(subtype: number, data: Uint8Array);
+
+    /** The subtype for the data */
+    readonly subtype: number;
+
+    /** The binary data as a byte array */
+    readonly data: Uint8Array;
+
+    /**
+     * Returns true if this `BsonBinaryData` is equal to the provided one.
+     *
+     * @param other The `BsonBinaryData` to compare against.
+     * @return 'true' if this `BsonBinaryData` is equal to the provided one.
+     */
+    isEqual(other: BsonBinaryData): boolean;
+  }
   /**
    * Sentinel values that can be used when writing document fields with set(),
    * create() or update().

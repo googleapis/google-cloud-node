@@ -20,22 +20,45 @@ import {QualifiedResourcePath} from './path';
 import {ApiMapValue} from './types';
 
 import api = google.firestore.v1;
+import {
+  RESERVED_BSON_BINARY_KEY,
+  RESERVED_BSON_OBJECT_ID_KEY,
+  RESERVED_BSON_TIMESTAMP_INCREMENT_KEY,
+  RESERVED_BSON_TIMESTAMP_KEY,
+  RESERVED_BSON_TIMESTAMP_SECONDS_KEY,
+  RESERVED_DECIMAL128_KEY,
+  RESERVED_INT32_KEY,
+  RESERVED_REGEX_KEY,
+  RESERVED_REGEX_OPTIONS_KEY,
+  RESERVED_REGEX_PATTERN_KEY,
+} from './map-type';
+import {Quadruple} from './quadruple';
 
 /*!
  * The type order as defined by the backend.
  */
 enum TypeOrder {
+  // NULL and MIN_KEY sort the same.
   NULL = 0,
-  BOOLEAN = 1,
-  NUMBER = 2,
-  TIMESTAMP = 3,
-  STRING = 4,
-  BLOB = 5,
-  REF = 6,
-  GEO_POINT = 7,
-  ARRAY = 8,
-  VECTOR = 9,
-  OBJECT = 10,
+  MIN_KEY = 1,
+  BOOLEAN = 2,
+  // Note: all numbers (32-bit int, 64-bit int, 64-bit double, 128-bit decimal,
+  // etc.) are sorted together numerically. The `compareNumberProtos` function
+  // distinguishes between different number types and compares them accordingly.
+  NUMBER = 3,
+  TIMESTAMP = 4,
+  BSON_TIMESTAMP = 5,
+  STRING = 6,
+  BLOB = 7,
+  BSON_BINARY = 8,
+  REF = 9,
+  BSON_OBJECT_ID = 10,
+  GEO_POINT = 11,
+  REGEX = 12,
+  ARRAY = 13,
+  VECTOR = 14,
+  OBJECT = 15,
+  MAX_KEY = 16,
 }
 
 /*!
@@ -48,10 +71,15 @@ function typeOrder(val: api.IValue): TypeOrder {
   switch (valueType) {
     case 'nullValue':
       return TypeOrder.NULL;
+    case 'minKeyValue':
+      return TypeOrder.MIN_KEY;
     case 'integerValue':
-      return TypeOrder.NUMBER;
+    case 'int32Value':
+    case 'decimal128Value':
     case 'doubleValue':
       return TypeOrder.NUMBER;
+    case 'bsonTimestampValue':
+      return TypeOrder.BSON_TIMESTAMP;
     case 'stringValue':
       return TypeOrder.STRING;
     case 'booleanValue':
@@ -62,14 +90,22 @@ function typeOrder(val: api.IValue): TypeOrder {
       return TypeOrder.TIMESTAMP;
     case 'geoPointValue':
       return TypeOrder.GEO_POINT;
+    case 'regexValue':
+      return TypeOrder.REGEX;
+    case 'bsonObjectIdValue':
+      return TypeOrder.BSON_OBJECT_ID;
     case 'bytesValue':
       return TypeOrder.BLOB;
+    case 'bsonBinaryValue':
+      return TypeOrder.BSON_BINARY;
     case 'referenceValue':
       return TypeOrder.REF;
     case 'mapValue':
       return TypeOrder.OBJECT;
     case 'vectorValue':
       return TypeOrder.VECTOR;
+    case 'maxKeyValue':
+      return TypeOrder.MAX_KEY;
     default:
       throw new Error('Unexpected value type: ' + valueType);
   }
@@ -119,18 +155,74 @@ function compareNumbers(left: number, right: number): number {
  * @internal
  */
 function compareNumberProtos(left: api.IValue, right: api.IValue): number {
-  let leftValue, rightValue;
-  if (left.integerValue !== undefined) {
-    leftValue = Number(left.integerValue!);
-  } else {
-    leftValue = Number(left.doubleValue!);
+  // If either number is Decimal128, we cast both to wider (128-bit)
+  // representation, and compare those.
+  if (
+    detectValueType(left) === 'decimal128Value' ||
+    detectValueType(right) === 'decimal128Value'
+  ) {
+    const lhs = convertNumberToQuadruple(left);
+    const rhs = convertNumberToQuadruple(right);
+
+    // Firestore sorts `NaN`s smaller than all numbers, but Quadruple considers
+    // `NaN`s bigger than all numbers.
+    if (lhs.isNaN()) {
+      return rhs.isNaN() ? 0 : -1;
+    } else if (rhs.isNaN()) {
+      // lhs is not NaN, and rhs is NaN.
+      return 1;
+    }
+
+    // Firestore considers -0 and +0 to be equal, but Quadruple does not.
+    if (lhs.isZero() && rhs.isZero()) {
+      return 0;
+    }
+
+    return lhs.compareTo(rhs);
   }
-  if (right.integerValue !== undefined) {
-    rightValue = Number(right.integerValue);
-  } else {
-    rightValue = Number(right.doubleValue!);
+
+  return compareNumbers(
+    convertProtoValueToNumber(left),
+    convertProtoValueToNumber(right)
+  );
+}
+
+/*!
+ * Converts the given proto value to a `number`.
+ * Throws an exception if the value is larger than 64-bit value or is not numeric.
+ *
+ * @private
+ * @internal
+ */
+function convertProtoValueToNumber(value: api.IValue): number {
+  if (value.integerValue !== undefined) {
+    return Number(value.integerValue!);
+  } else if (value.doubleValue !== undefined) {
+    return Number(value.doubleValue!);
+  } else if (detectValueType(value) === 'int32Value') {
+    return Number(value.mapValue!.fields?.[RESERVED_INT32_KEY]?.integerValue);
   }
-  return compareNumbers(leftValue, rightValue);
+
+  throw new Error(
+    'convertProtoValueToNumber was called on an unsupported type.'
+  );
+}
+
+/*!
+ * Converts the given proto value to a `Quadruple`.
+ * Throws an exception if the value is not numeric.
+ *
+ * @private
+ * @internal
+ */
+function convertNumberToQuadruple(value: api.IValue): Quadruple {
+  if (detectValueType(value) === 'decimal128Value') {
+    return Quadruple.fromString(
+      value.mapValue!.fields![RESERVED_DECIMAL128_KEY].stringValue!
+    );
+  } else {
+    return Quadruple.fromNumber(convertProtoValueToNumber(value));
+  }
 }
 
 /*!
@@ -146,6 +238,51 @@ function compareTimestamps(
     return seconds;
   }
   return primitiveComparator(left.nanos || 0, right.nanos || 0);
+}
+
+/*!
+ * @private
+ * @internal
+ */
+function compareBsonTimestamps(left: api.IValue, right: api.IValue): number {
+  // First order by seconds, then order by increment values.
+  const leftFields = left.mapValue!.fields?.[RESERVED_BSON_TIMESTAMP_KEY];
+  const leftSeconds = Number(
+    leftFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_SECONDS_KEY]
+      ?.integerValue
+  );
+  const leftIncrement = Number(
+    leftFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_INCREMENT_KEY]
+      ?.integerValue
+  );
+  const rightFields = right.mapValue!.fields?.[RESERVED_BSON_TIMESTAMP_KEY];
+  const rightSeconds = Number(
+    rightFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_SECONDS_KEY]
+      ?.integerValue
+  );
+  const rightIncrement = Number(
+    rightFields?.mapValue?.fields?.[RESERVED_BSON_TIMESTAMP_INCREMENT_KEY]
+      ?.integerValue
+  );
+  const secondsDiff = compareNumbers(leftSeconds, rightSeconds);
+  return secondsDiff !== 0
+    ? secondsDiff
+    : compareNumbers(leftIncrement, rightIncrement);
+}
+
+/*!
+ * @private
+ * @internal
+ */
+function compareBsonBinaryData(left: api.IValue, right: api.IValue): number {
+  const leftBytes =
+    left.mapValue!.fields?.[RESERVED_BSON_BINARY_KEY]?.bytesValue;
+  const rightBytes =
+    right.mapValue!.fields?.[RESERVED_BSON_BINARY_KEY]?.bytesValue;
+  if (!rightBytes || !leftBytes) {
+    throw new Error('Received incorrect bytesValue for BsonBinaryData');
+  }
+  return Buffer.compare(Buffer.from(leftBytes), Buffer.from(rightBytes));
 }
 
 /*!
@@ -249,6 +386,47 @@ function compareVectors(left: ApiMapValue, right: ApiMapValue): number {
 }
 
 /*!
+ * @private
+ * @internal
+ */
+function compareRegex(left: api.IValue, right: api.IValue): number {
+  const lhsPattern =
+    left.mapValue!.fields?.[RESERVED_REGEX_KEY]?.mapValue?.fields?.[
+      RESERVED_REGEX_PATTERN_KEY
+    ]?.stringValue ?? '';
+  const lhsOptions =
+    left.mapValue!.fields?.[RESERVED_REGEX_KEY]?.mapValue?.fields?.[
+      RESERVED_REGEX_OPTIONS_KEY
+    ]?.stringValue ?? '';
+  const rhsPattern =
+    right.mapValue!.fields?.[RESERVED_REGEX_KEY]?.mapValue?.fields?.[
+      RESERVED_REGEX_PATTERN_KEY
+    ]?.stringValue ?? '';
+  const rhsOptions =
+    right.mapValue!.fields?.[RESERVED_REGEX_KEY]?.mapValue?.fields?.[
+      RESERVED_REGEX_OPTIONS_KEY
+    ]?.stringValue ?? '';
+
+  // First order by patterns, and then options.
+  const patternDiff = compareUtf8Strings(lhsPattern, rhsPattern);
+  return patternDiff !== 0
+    ? patternDiff
+    : compareUtf8Strings(lhsOptions, rhsOptions);
+}
+
+/*!
+ * @private
+ * @internal
+ */
+function compareBsonObjectIds(left: api.IValue, right: api.IValue): number {
+  const lhs =
+    left.mapValue!.fields?.[RESERVED_BSON_OBJECT_ID_KEY]?.stringValue ?? '';
+  const rhs =
+    right.mapValue!.fields?.[RESERVED_BSON_OBJECT_ID_KEY]?.stringValue ?? '';
+  return compareUtf8Strings(lhs, rhs);
+}
+
+/*!
  * Compare strings in UTF-8 encoded byte order
  * @private
  * @internal
@@ -330,8 +508,12 @@ export function compare(left: api.IValue, right: api.IValue): number {
 
   // So they are the same type.
   switch (leftType) {
+    // All Nulls are all equal.
+    // All MinKeys are all equal.
+    // All MaxKeys are all equal.
     case TypeOrder.NULL:
-      // Nulls are all equal.
+    case TypeOrder.MIN_KEY:
+    case TypeOrder.MAX_KEY:
       return 0;
     case TypeOrder.BOOLEAN:
       return primitiveComparator(left.booleanValue!, right.booleanValue!);
@@ -341,12 +523,20 @@ export function compare(left: api.IValue, right: api.IValue): number {
       return compareNumberProtos(left, right);
     case TypeOrder.TIMESTAMP:
       return compareTimestamps(left.timestampValue!, right.timestampValue!);
+    case TypeOrder.BSON_TIMESTAMP:
+      return compareBsonTimestamps(left, right);
     case TypeOrder.BLOB:
       return compareBlobs(left.bytesValue!, right.bytesValue!);
+    case TypeOrder.BSON_BINARY:
+      return compareBsonBinaryData(left, right);
     case TypeOrder.REF:
       return compareReferenceProtos(left, right);
     case TypeOrder.GEO_POINT:
       return compareGeoPoints(left.geoPointValue!, right.geoPointValue!);
+    case TypeOrder.REGEX:
+      return compareRegex(left, right);
+    case TypeOrder.BSON_OBJECT_ID:
+      return compareBsonObjectIds(left, right);
     case TypeOrder.ARRAY:
       return compareArrays(
         left.arrayValue!.values || [],

@@ -18,6 +18,12 @@
 
 'use strict';
 
+// BigInt JSON serialization.
+// https://github.com/jsdoc/jsdoc/issues/1918
+BigInt.prototype.toJSON = function() {
+  return this.toString() + 'n';
+};
+
 module.exports = {
   opts: {
     readme: './README.md',

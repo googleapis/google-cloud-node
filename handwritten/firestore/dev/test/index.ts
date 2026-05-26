@@ -21,7 +21,19 @@ import {GoogleError, GrpcClient, Status} from 'google-gax';
 import {google} from '../protos/firestore_v1_proto_api';
 
 import * as Firestore from '../src';
-import {DocumentSnapshot, FieldPath, FieldValue} from '../src';
+import {
+  DocumentSnapshot,
+  FieldPath,
+  FieldValue,
+  BsonBinaryData,
+  BsonObjectId,
+  BsonTimestamp,
+  Decimal128Value,
+  Int32Value,
+  MaxKey,
+  MinKey,
+  RegexValue,
+} from '../src';
 import {setTimeoutHandler} from '../src/backoff';
 import {QualifiedResourcePath} from '../src/path';
 import {
@@ -150,6 +162,104 @@ const allSupportedTypesProtobufJs = document(
       },
     },
   },
+  'minKeyValue',
+  {
+    mapValue: {
+      fields: {
+        __min__: {
+          nullValue: 'NULL_VALUE',
+        },
+      },
+    },
+  },
+  'maxKeyValue',
+  {
+    mapValue: {
+      fields: {
+        __max__: {
+          nullValue: 'NULL_VALUE',
+        },
+      },
+    },
+  },
+  'regexValue',
+  {
+    mapValue: {
+      fields: {
+        __regex__: {
+          mapValue: {
+            fields: {
+              pattern: {
+                stringValue: 'myRegexPattern',
+              },
+              options: {
+                stringValue: 'myRegexOptions',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  'bsonObjectIdValue',
+  {
+    mapValue: {
+      fields: {
+        __oid__: {
+          stringValue: 'my24CharacterHexString',
+        },
+      },
+    },
+  },
+  'int32Value',
+  {
+    mapValue: {
+      fields: {
+        __int__: {
+          integerValue: 789,
+        },
+      },
+    },
+  },
+  'decimal128Value',
+  {
+    mapValue: {
+      fields: {
+        __decimal128__: {
+          stringValue: '1.2e-3',
+        },
+      },
+    },
+  },
+  'bsonTimestampValue',
+  {
+    mapValue: {
+      fields: {
+        __request_timestamp__: {
+          mapValue: {
+            fields: {
+              seconds: {
+                integerValue: 123,
+              },
+              increment: {
+                integerValue: 456,
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  'bsonBinaryValue',
+  {
+    mapValue: {
+      fields: {
+        __binary__: {
+          bytesValue: Buffer.from([155, 7, 90, 250]),
+        },
+      },
+    },
+  },
   'emptyObject',
   {
     mapValue: {},
@@ -260,6 +370,96 @@ const allSupportedTypesJson = {
         },
       },
     },
+    minKeyValue: {
+      mapValue: {
+        fields: {
+          __min__: {
+            nullValue: 'NULL_VALUE',
+          },
+        },
+      },
+    },
+    maxKeyValue: {
+      mapValue: {
+        fields: {
+          __max__: {
+            nullValue: 'NULL_VALUE',
+          },
+        },
+      },
+    },
+    regexValue: {
+      mapValue: {
+        fields: {
+          __regex__: {
+            mapValue: {
+              fields: {
+                pattern: {
+                  stringValue: 'myRegexPattern',
+                },
+                options: {
+                  stringValue: 'myRegexOptions',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    bsonObjectIdValue: {
+      mapValue: {
+        fields: {
+          __oid__: {
+            stringValue: 'my24CharacterHexString',
+          },
+        },
+      },
+    },
+    int32Value: {
+      mapValue: {
+        fields: {
+          __int__: {
+            integerValue: 789,
+          },
+        },
+      },
+    },
+    decimal128Value: {
+      mapValue: {
+        fields: {
+          __decimal128__: {
+            stringValue: '1.2e-3',
+          },
+        },
+      },
+    },
+    bsonTimestampValue: {
+      mapValue: {
+        fields: {
+          __request_timestamp__: {
+            mapValue: {
+              fields: {
+                seconds: {
+                  integerValue: 123,
+                },
+                increment: {
+                  integerValue: 456,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    bsonBinaryValue: {
+      mapValue: {
+        fields: {
+          __binary__: {
+            bytesValue: Buffer.from([155, 7, 90, 250]),
+          },
+        },
+      },
+    },
     pathValue: {
       referenceValue: `${DATABASE_ROOT}/documents/collection/document`,
     },
@@ -289,11 +489,19 @@ const allSupportedTypesInput = {
   falseValue: false,
   integerValue: 0,
   doubleValue: 0.1,
+  int32Value: new Int32Value(789),
+  decimal128Value: new Decimal128Value('1.2e-3'),
   infinityValue: Infinity,
   negativeInfinityValue: -Infinity,
   objectValue: {foo: 'bar'},
   emptyObject: {},
   vectorValue: FieldValue.vector([0.1, 0.2, 0.3]),
+  minKeyValue: MinKey.instance(),
+  maxKeyValue: MaxKey.instance(),
+  regexValue: new RegexValue('myRegexPattern', 'myRegexOptions'),
+  bsonTimestampValue: new BsonTimestamp(123, 456),
+  bsonBinaryValue: new BsonBinaryData(155, Buffer.from([7, 90, 250])),
+  bsonObjectIdValue: new BsonObjectId('my24CharacterHexString'),
   dateValue: new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),
   timestampValue: Firestore.Timestamp.fromDate(
     new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),
@@ -323,11 +531,19 @@ const allSupportedTypesOutput: {[field: string]: unknown} = {
   falseValue: false,
   integerValue: 0,
   doubleValue: 0.1,
+  int32Value: new Int32Value(789),
+  decimal128Value: new Decimal128Value('1.2e-3'),
   infinityValue: Infinity,
   negativeInfinityValue: -Infinity,
   objectValue: {foo: 'bar'},
   emptyObject: {},
   vectorValue: FieldValue.vector([0.1, 0.2, 0.3]),
+  minKeyValue: MinKey.instance(),
+  maxKeyValue: MaxKey.instance(),
+  regexValue: new RegexValue('myRegexPattern', 'myRegexOptions'),
+  bsonTimestampValue: new BsonTimestamp(123, 456),
+  bsonBinaryValue: new BsonBinaryData(155, Buffer.from([7, 90, 250])),
+  bsonObjectIdValue: new BsonObjectId('my24CharacterHexString'),
   dateValue: Firestore.Timestamp.fromDate(
     new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),
   ),
