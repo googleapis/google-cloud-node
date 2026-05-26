@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    npm install
+    npm ci
   dir: 'handwritten/pubsub'
   id: 'install-dependencies'
 
@@ -26,7 +26,7 @@ steps:
     npm run system-test
   dir: 'handwritten/pubsub'
   env:
-  - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
+  - 'GCLOUD_PROJECT=${PROJECT_ID}' # Pass project ID via build variable
   # If you need specific credentials from Secret Manager, uncomment these:
   # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
   id: 'run-system-tests'
@@ -44,8 +44,8 @@ steps:
   - '-c'
   - |
     # Check if nyc is installed and run report
-    if [ -f ./node_modules/nyc/bin/nyc.js ]; then
-      ./node_modules/nyc/bin/nyc.js report || true # `|| true` prevents build failure if nyc report itself exits non-zero
+    if [ -f ./node_modules/.bin/nyc ]; then
+      ./node_modules/.bin/nyc report || true # `|| true` prevents build failure if nyc report itself exits non-zero
     else
       echo "nyc not found, skipping coverage report."
     fi
@@ -65,10 +65,5 @@ steps:
 #   secretManager:
 #   - versionName: projects/${PROJECT_ID}/secrets/YOUR_SERVICE_ACCOUNT_KEY_SECRET_NAME/versions/latest
 #     env: 'SA_KEY' # This env var will hold the secret value. Use it as GOOGLE_APPLICATION_CREDENTIALS in step 3 if needed.
-
-# Define a substitution variable for your project ID
-# Replace 'long-door-651' with the actual GCP Project ID your system tests should run against.
-substitutions:
-  _GCP_PROJECT_ID: 'long-door-651'
 
 timeout: '10800s'
