@@ -484,4 +484,24 @@ describe('GdchClient', () => {
     });
     scope.done();
   });
+
+  describe('base64UrlEncode', () => {
+    it('should correctly encode strings and buffers in base64url format', () => {
+      const client = new GdchClient();
+      const testCases = [
+        {input: 'hello world', expected: 'aGVsbG8gd29ybGQ'},
+        {input: 'foo bar baz', expected: 'Zm9vIGJhciBiYXo'},
+        {input: 'this is a test', expected: 'dGhpcyBpcyBhIHRlc3Q'},
+        {input: 'n>?', expected: 'bj4_'},
+        {input: 'n>~', expected: 'bj5-'},
+      ];
+
+      for (const tc of testCases) {
+        const stringResult = (client as any).base64UrlEncode(tc.input);
+        const bufferResult = (client as any).base64UrlEncode(Buffer.from(tc.input));
+        assert.strictEqual(stringResult, tc.expected);
+        assert.strictEqual(bufferResult, tc.expected);
+      }
+    });
+  });
 });

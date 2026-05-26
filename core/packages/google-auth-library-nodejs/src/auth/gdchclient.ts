@@ -297,10 +297,6 @@ export class GdchClient extends OAuth2Client {
 
   private base64UrlEncode(str: string | Buffer): string {
     const buffer = typeof str === 'string' ? Buffer.from(str) : str;
-    return buffer
-      .toString('base64')
-      .replace(/=/g, '')
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_');
+    return buffer.toString('base64url');
   }
 }
